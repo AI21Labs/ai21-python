@@ -1,0 +1,27 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Quality Checks
+concurrency:
+  group: Quality-Checks-${{ github.head_ref }}
+  cancel-in-progress: true
+on:
+  pull_request:
+jobs:
+  quality-checks:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3.2.0
+        with:
+          fetch-depth: 0
+      - name: Pre-commit
+        uses: pre-commit/action@v3.0.0
+        with:
+          extra_args: --from-ref ${{ github.event.pull_request.base.sha }} --to-ref ${{ github.event.pull_request.head.sha }}
+          # - name: CODEOWNERS validator
+          #   uses: mszostok/codeowners-validator@v0.6.0
+          #   with:
+          #     checks: files,duppatterns,syntax,owners
+          #     experimental_checks: notowned
+          #     github_access_token: ${{ secrets.GH_PAT_RO }}

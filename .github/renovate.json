@@ -1,0 +1,31 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "dependencyDashboard": true,
+  "semanticCommits": "enabled",
+  "labels": [
+    "dependencies"
+  ],
+  "regexManagers": [
+    {
+      "fileMatch": [
+        "(^|/)\\.pre-commit-config\\.yaml$"
+      ],
+      "matchStrings": [
+        "\\nminimum_pre_commit_version: (?<currentValue>.*?)\\n"
+      ],
+      "depNameTemplate": "pre-commit",
+      "datasourceTemplate": "pypi"
+    },
+    {
+      "fileMatch": [
+        "(^|/)\\.pre-commit-config\\.yaml$"
+      ],
+      "matchStrings": [
+        "\\n\\s*entry: (?<depName>[^:]+):(?<currentValue>\\S+)"
+      ],
+      "datasourceTemplate": "docker"
+    }
+  ]
+}

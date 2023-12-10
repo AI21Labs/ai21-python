@@ -1,0 +1,25 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+
+name: Semantic PR
+concurrency:
+  group: Semantic-PR-${{ github.head_ref }}
+  cancel-in-progress: true
+on:
+  pull_request:
+    types:
+      - opened
+      - edited
+      - reopened
+jobs:
+  semantic-pr:
+    runs-on: ubuntu-20.04
+    timeout-minutes: 1
+    steps:
+      - name: Semantic pull-request
+        uses: amannn/action-semantic-pull-request@v5.0.2
+        with:
+          requireScope: false
+          wip: true
+          validateSingleCommit: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -1,0 +1,183 @@
+# yaml-language-server: $schema=https://json.schemastore.org/pre-commit-config.json
+
+minimum_pre_commit_version: 2.20.0
+fail_fast: false
+default_stages:
+  - commit
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.0.1
+    hooks:
+      - id: check-added-large-files
+      - id: check-case-conflict
+      - id: check-executables-have-shebangs
+      - id: check-shebang-scripts-are-executable
+      - id: check-merge-conflict
+      - id: check-symlinks
+      - id: detect-private-key
+        exclude: .gitleaks.toml
+      - id: no-commit-to-branch
+      - id: trailing-whitespace
+      - id: end-of-file-fixer
+      - id: mixed-line-ending
+      - id: check-json
+      - id: check-toml
+      - id: check-xml
+      - id: pretty-format-json
+        args:
+          - --autofix
+          - --no-sort-keys
+  - repo: https://github.com/jumanjihouse/pre-commit-hooks
+    rev: 2.1.5
+    hooks:
+      - id: forbid-binary
+      - id: git-check
+  # - repo: https://github.com/jumanjihouse/pre-commit-hook-yamlfmt
+  #   rev: 0.1.0
+  #   hooks:
+  #     - id: yamlfmt
+  #       args:
+  #         - --mapping
+  #         - '2'
+  #         - --sequence
+  #         - '4'
+  #         - --offset
+  #         - '2'
+  #         - --width
+  #         - '300'
+  #         - --implicit_start
+  - repo: https://github.com/adrienverge/yamllint
+    rev: v1.26.3
+    hooks:
+      - id: yamllint
+        name: Lint YAML files
+        args:
+          - --strict
+  - repo: https://github.com/sirosen/check-jsonschema
+    rev: 0.4.1
+    hooks:
+      - id: check-jsonschema
+        name: Validate GitHub Workflows
+        files: ^\.github/workflows/.*\.yml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/github-workflow.json
+      - id: check-jsonschema
+        name: Validate GitHub Actions
+        files: >
+          (?x)^(
+            .*/action\.(yml|yaml)|
+            \.github/actions/.*
+          )$
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/github-action
+      - id: check-jsonschema
+        name: Validate DependaBot
+        files: ^\.github/dependabot\.yml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/dependabot-2.0.json
+      - id: check-jsonschema
+        name: Validate MarkdownLint
+        files: .*\.markdownlint\.yaml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/markdownlint.json
+      - id: check-jsonschema
+        name: Validate YamlLint
+        files: .*\.yamllint\.yaml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/yamllint.json
+      - id: check-jsonschema
+        name: Validate Pre-commit
+        files: .*\.pre-commit-config\.yaml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://json.schemastore.org/pre-commit-config.json
+      - id: check-jsonschema
+        name: Validate Docker-Compose
+        files: .*docker-compose\.yml
+        types:
+          - yaml
+        args:
+          - --schemafile
+          - https://raw.githubusercontent.com/compose-spec/compose-spec/master/schema/compose-spec.json
+      - id: check-jsonschema
+        name: Validate Renovate
+        files: ^\.github/renovate\.json
+        types:
+          - json
+        args:
+          - --schemafile
+          - https://docs.renovatebot.com/renovate-schema.json
+  - repo: https://github.com/commitizen-tools/commitizen
+    rev: v2.18.0
+    hooks:
+      - id: commitizen
+        name: Lint commit message
+        stages:
+          - commit-msg
+  - repo: https://github.com/shellcheck-py/shellcheck-py
+    rev: v0.7.2.1
+    hooks:
+      - id: shellcheck
+        name: Check sh files (and patch)
+        entry: bash -eo pipefail -c 'shellcheck $@ -f diff | patch -p 1' --
+      - id: shellcheck
+        name: Check sh files (and print violations)
+  - repo: local
+    hooks:
+      - id: list-files
+        name: List files
+        language: system
+        entry: bash -c 'echo $@'
+        stages:
+          - manual
+      - id: shfmt
+        name: Format sh files
+        language: docker_image
+        entry: mvdan/shfmt:v3.4.0
+        args:
+          - -w
+          - -s
+          - -i
+          - '2'
+        types:
+          - shell
+      - id: markdownlint
+        name: Lint Markdown files
+        language: docker_image
+        entry: 06kellyjac/markdownlint-cli:0.28.1
+        args:
+          - --fix
+        types:
+          - markdown
+      - id: hadolint
+        name: Lint Dockerfiles
+        language: docker_image
+        entry: hadolint/hadolint:v2.8.0 hadolint
+        types:
+          - dockerfile
+      - id: gitleaks
+        name: Detect hardcoded secrets
+        language: docker_image
+        entry: zricethezav/gitleaks:v7.6.1
+        args:
+          - --append-repo-config
+          - --config-path
+          - .gitleaks.toml
+          - --verbose
