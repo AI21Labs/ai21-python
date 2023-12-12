@@ -27,7 +27,7 @@ def lint(tsk, fix=False):
     flags = "--fix" if fix else ""
     cmd = " && ".join(
         [
-            f"ruff *.py {flags} ai21_tokenizer/ tests/",
+            f"ruff *.py {flags} ai21/ tests/",
         ]
     )
     tsk.run(cmd, echo=True, pty=True)
@@ -57,7 +57,7 @@ def staticcheck(tsk):
     """
     Run static check on the projects files
     """
-    cmd = "mypy ai21_tokenizer tests"
+    cmd = "mypy ai21 tests"
     tsk.run(cmd, echo=True, pty=True)
 
 
@@ -66,7 +66,7 @@ def isort(tsk):
     """
     Run static check on the projects files
     """
-    cmd = "isort ai21_tokenizer tests"
+    cmd = "isort ai21 tests"
     tsk.run(cmd, echo=True, pty=True)
 
 
