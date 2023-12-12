@@ -3,7 +3,7 @@ name: Test
 on: [push]
 
 env:
-  POETRY_VERSION: "1.4.2"
+  POETRY_VERSION: "1.7.1"
   POETRY_URL: https://install.python-poetry.org
 
 jobs:
