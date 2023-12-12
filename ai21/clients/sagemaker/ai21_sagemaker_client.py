@@ -31,7 +31,7 @@ class AI21SageMakerClient(AI21StudioClient):
     def __init__(
         self,
         endpoint_name: str,
-        region: Optional[str] = "us-east-1",
+        region: Optional[str] = None,
         session: Optional[boto3.Session] = None,
         api_key: str = None,
         api_host: str = None,
@@ -78,8 +78,6 @@ class AI21SageMakerClient(AI21StudioClient):
             )
 
             return json.load(response["Body"])
-
-            # return convert_to_ai21_object(response_body)
         except ClientError as sm_client_error:
             self._handle_client_error(sm_client_error)
         except Exception as exception:
