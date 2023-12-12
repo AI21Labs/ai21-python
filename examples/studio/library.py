@@ -23,7 +23,7 @@ file_name = f"test-file3-{uuid.uuid4()}.txt"
 file_path = os.getcwd()
 
 path = os.path.join(file_path, file_name)
-file_utils.create_file(file_path, file_name)
+file_utils.create_file(file_path, file_name, content="test content" * 100)
 
 
 file_id = client.library.files.upload(
