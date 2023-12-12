@@ -21,4 +21,3 @@ jobs:
         uses: python-semantic-release/python-semantic-release@v8.3.0
         with:
           github_token: ${{ secrets.GH_PAT_SEM_REL_ASAFG }}
-          root_options: "-vv"
