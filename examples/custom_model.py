@@ -15,11 +15,7 @@ if len(my_datasets) > 0:
     )
     my_models = client.custom_model.list()
 
-    for m in my_models:
-        if "-asaf" in m.name:
-            print(m)
-    # print(my_models)
-    # print("-----------------------------------")
-    # print(my_models[0])
-    #
-    # print(client.custom_model.get(my_models[0].id))
+    print(my_models)
+    print(my_models[0])
+
+    print(client.custom_model.get(my_models[0].id))

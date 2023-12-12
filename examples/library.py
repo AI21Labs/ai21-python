@@ -14,7 +14,7 @@ client = AI21Client()
 
 def validate_file_deleted():
     try:
-        uploaded_file = client.library.files.get(file_id)
+        client.library.files.get(file_id)
     except APIError as e:
         print(f"File not found. Exception: {e.details}")
 

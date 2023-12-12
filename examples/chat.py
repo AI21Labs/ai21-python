@@ -2,12 +2,8 @@ import os
 
 os.environ["AI21_LOG_LEVEL"] = "debug"
 
-from ai21.ai21_env_config import AI21EnvConfig
-
-
 from ai21.clients.studio.ai21_client import AI21Client
 
-print(AI21EnvConfig.log_level)
 system = "You're a support engineer in a SaaS company"
 messages = [
     {
