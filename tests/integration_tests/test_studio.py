@@ -1,5 +1,5 @@
 """
-Run this script after setting the environment variable called API_KEY
+Run this script after setting the environment variable called AI21_API_KEY
 """
 
 import os
