@@ -2,7 +2,6 @@
 Run this script after setting the environment variable called AI21_API_KEY
 """
 
-import os
 from pathlib import Path
 
 import pytest

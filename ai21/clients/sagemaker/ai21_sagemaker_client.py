@@ -5,7 +5,6 @@ from typing import Optional, Any, Dict
 import boto3
 from botocore.exceptions import ClientError
 
-import ai21
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_studio_client import AI21StudioClient
 from ai21.clients.sagemaker import resources

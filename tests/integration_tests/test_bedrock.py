@@ -2,7 +2,6 @@
 Run this script after setting the environment variable called AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 """
 
-import os
 from pathlib import Path
 
 import pytest

@@ -73,7 +73,7 @@ def isort(tsk):
 @task
 def build(tsk):
     """
-    generate a package for ai21_tokenizer
+    generate a package for ai21
     """
     cmd = "poetry build"
     tsk.run(cmd, echo=True, pty=True)

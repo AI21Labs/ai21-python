@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Any, overload
+from typing import Optional, List, Dict, Any
 
 from ai21.resources.responses.completion_response import CompletionsResponse
 
