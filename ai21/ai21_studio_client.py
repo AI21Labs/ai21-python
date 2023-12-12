@@ -37,13 +37,9 @@ class AI21StudioClient:
 
         headers = self._build_headers(passed_headers=headers)
 
-        self.http_client = HttpClient(
-            timeout_sec=timeout_sec, num_retries=num_retries, headers=headers
-        )
+        self.http_client = HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
 
-    def _build_headers(
-        self, passed_headers: Optional[Dict[str, Any]]
-    ) -> Dict[str, Any]:
+    def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
             "Content-Type": "application/json",
             "User-Agent": self._build_user_agent(),
@@ -71,12 +67,8 @@ class AI21StudioClient:
 
         return user_agent
 
-    def execute_http_request(
-        self, method: str, url: str, params: Optional[Dict] = None, files=None
-    ):
-        return self.http_client.execute_http_request(
-            method=method, url=url, params=params, files=files
-        )
+    def execute_http_request(self, method: str, url: str, params: Optional[Dict] = None, files=None):
+        return self.http_client.execute_http_request(method=method, url=url, params=params, files=files)
 
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"

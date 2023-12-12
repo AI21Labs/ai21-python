@@ -19,7 +19,5 @@ SAGEMAKER_EXAMPLE_FILES = [
 SAGEMAKER_DIR = "sagemaker"
 
 for example_file_name in SAGEMAKER_EXAMPLE_FILES:
-    if subprocess.call(
-        ["python", Path("..") / "examples" / SAGEMAKER_DIR / example_file_name]
-    ):
+    if subprocess.call(["python", Path("..") / "examples" / SAGEMAKER_DIR / example_file_name]):
         raise Exception(f"failed to run {example_file_name}")

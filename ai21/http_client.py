@@ -55,15 +55,9 @@ def requests_retry_session(session, retries=0):
 
 
 class HttpClient:
-    def __init__(
-        self, timeout_sec: int = None, num_retries: int = None, headers: Dict = None
-    ):
-        self.timeout_sec = (
-            timeout_sec if timeout_sec is not None else DEFAULT_TIMEOUT_SEC
-        )
-        self.num_retries = (
-            num_retries if num_retries is not None else DEFAULT_NUM_RETRIES
-        )
+    def __init__(self, timeout_sec: int = None, num_retries: int = None, headers: Dict = None):
+        self.timeout_sec = timeout_sec if timeout_sec is not None else DEFAULT_TIMEOUT_SEC
+        self.num_retries = num_retries if num_retries is not None else DEFAULT_NUM_RETRIES
         self.headers = headers if headers is not None else {}
         self.apply_retry_policy = self.num_retries > 0
 
@@ -112,27 +106,19 @@ class HttpClient:
                     auth=auth,
                 )
             else:
-                response = session.request(
-                    method, url, headers=headers, data=data, timeout=timeout, auth=auth
-                )
+                response = session.request(method, url, headers=headers, data=data, timeout=timeout, auth=auth)
         except ConnectionError as connection_error:
-            log_error(
-                f"Calling {method} {url} failed with ConnectionError: {connection_error}"
-            )
+            log_error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
         except RetryError as retry_error:
-            log_error(
-                f"Calling {method} {url} failed with RetryError after {self.num_retries} attempts: {retry_error}"
-            )
+            log_error(f"Calling {method} {url} failed with RetryError after {self.num_retries} attempts: {retry_error}")
             raise retry_error
         except Exception as exception:
             log_error(f"Calling {method} {url} failed with Exception: {exception}")
             raise exception
 
         if response.status_code != 200:
-            log_error(
-                f"Calling {method} {url} failed with a non-200 response code: {response.status_code}"
-            )
+            log_error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
             handle_non_success_response(response.status_code, response.text)
 
         return response.json()

@@ -51,11 +51,7 @@ class AI21SageMakerClient(AI21StudioClient):
         )
         self._env_config = env_config
         self._session = (
-            session
-            if session
-            else boto3.client(
-                "sagemaker-runtime", region_name=self._env_config.aws_region
-            )
+            session if session else boto3.client("sagemaker-runtime", region_name=self._env_config.aws_region)
         )
         self._region = region or self._env_config.aws_region
         self._endpoint_name = endpoint_name
@@ -81,25 +77,19 @@ class AI21SageMakerClient(AI21StudioClient):
         except ClientError as sm_client_error:
             self._handle_client_error(sm_client_error)
         except Exception as exception:
-            log_error(
-                f"Calling {self._endpoint_name} failed with Exception: {exception}"
-            )
+            log_error(f"Calling {self._endpoint_name} failed with Exception: {exception}")
             raise exception
 
     def _handle_client_error(self, client_exception: ClientError):
         error_response = client_exception.response
         error_message = error_response.get("Error", {}).get("Message", "")
-        status_code = error_response.get("ResponseMetadata", {}).get(
-            "HTTPStatusCode", None
-        )
+        status_code = error_response.get("ResponseMetadata", {}).get("HTTPStatusCode", None)
         # According to https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_Errors
         if status_code == 400:
             raise BadRequest(details=error_message)
         if status_code == 424:
             error_message_template = re.compile(_ERROR_MSG_TEMPLATE)
-            model_status_code = int(
-                error_message_template.search(error_message).group(1)
-            )
+            model_status_code = int(error_message_template.search(error_message).group(1))
             model_error_message = error_message_template.search(error_message).group(2)
             handle_non_success_response(model_status_code, model_error_message)
         if status_code == 429 or status_code == 503:

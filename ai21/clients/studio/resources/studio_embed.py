@@ -6,9 +6,7 @@ from ai21.resources.studio_resource import StudioResource
 
 
 class StudioEmbed(StudioResource, Embed):
-    def create(
-        self, texts: List[str], type: Optional[str] = None, **kwargs
-    ) -> EmbedResponse:
+    def create(self, texts: List[str], type: Optional[str] = None, **kwargs) -> EmbedResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
         response = self._invoke(url=url, body={"texts": texts, "type": type})
 

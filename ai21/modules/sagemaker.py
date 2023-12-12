@@ -15,9 +15,7 @@ LATEST_VERSION_STR = "latest"
 
 class SageMaker:
     @classmethod
-    def get_model_package_arn(
-        cls, model_name: str, region: str, version: str = LATEST_VERSION_STR
-    ) -> str:
+    def get_model_package_arn(cls, model_name: str, region: str, version: str = LATEST_VERSION_STR) -> str:
         _assert_model_package_exists(model_name=model_name, region=region)
 
         client = AI21StudioClient(auth_required=False)
@@ -35,9 +33,7 @@ class SageMaker:
         arn = response["arn"]
 
         if not arn:
-            raise ModelPackageDoesntExistException(
-                model_name=model_name, region=region, version=version
-            )
+            raise ModelPackageDoesntExistException(model_name=model_name, region=region, version=version)
 
         return arn
 

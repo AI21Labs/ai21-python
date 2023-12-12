@@ -26,9 +26,7 @@ prompt = (
 )
 
 client = AI21Client()
-response = client.completion.create(
-    prompt=prompt, max_tokens=2, model="j2-light", temperature=0
-)
+response = client.completion.create(prompt=prompt, max_tokens=2, model="j2-light", temperature=0)
 
 print(response)
 print(response.completions[0].data.text)

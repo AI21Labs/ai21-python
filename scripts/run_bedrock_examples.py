@@ -12,7 +12,5 @@ SAGEMAKER_EXAMPLE_FILES = [
 BEDROCK_DIR = "bedrock"
 
 for example_file_name in SAGEMAKER_EXAMPLE_FILES:
-    if subprocess.call(
-        ["python", Path("..") / "examples" / BEDROCK_DIR / example_file_name]
-    ):
+    if subprocess.call(["python", Path("..") / "examples" / BEDROCK_DIR / example_file_name]):
         raise Exception(f"failed to run {example_file_name}")

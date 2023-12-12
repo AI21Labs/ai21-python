@@ -9,9 +9,7 @@ prompt = "The following is a conversation between a user of an eCommerce store a
 
 from ai21.clients.sagemaker.ai21_sagemaker_client import AI21SageMakerClient
 
-client = AI21SageMakerClient(
-    session=session, endpoint_name="j2-quantization-mid-reach-dev-cve-version-12-202313"
-)
+client = AI21SageMakerClient(session=session, endpoint_name="j2-quantization-mid-reach-dev-cve-version-12-202313")
 response = client.completion.create(
     prompt=prompt,
     max_tokens=200,
@@ -20,10 +18,6 @@ response = client.completion.create(
 
 print(response)
 
-print(
-    response["prompt"]["tokens"][0]["textRange"]["start"]
-)  # access ai21 response as dictionary
+print(response["prompt"]["tokens"][0]["textRange"]["start"])  # access ai21 response as dictionary
 print(response.prompt.tokens[0].textRange.start)  # access ai21 response as object
-print(
-    response["prompt"].tokens[0]["textRange"].start
-)  # access ai21 response as object & dictionary mix
+print(response["prompt"].tokens[0]["textRange"].start)  # access ai21 response as object & dictionary mix

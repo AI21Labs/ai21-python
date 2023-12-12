@@ -11,9 +11,7 @@ model_name = "model_name"
 content_type = "application/json"
 real_time_inference_instance_type = "ml.g5.48xlarge"
 model_package_arn = "package_arn"
-model = ModelPackage(
-    role=role, model_package_arn=model_package_arn, sagemaker_session=s_session
-)
+model = ModelPackage(role=role, model_package_arn=model_package_arn, sagemaker_session=s_session)
 model.deploy(
     1,
     real_time_inference_instance_type,

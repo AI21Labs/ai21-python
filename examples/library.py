@@ -42,9 +42,7 @@ print(uploaded_file.path)
 print(uploaded_file.labels)
 print(uploaded_file.public_url)
 
-client.library.files.update(
-    file_id, publicUrl="www.example-updated.com", labels=["label3", "label4"]
-)
+client.library.files.update(file_id, publicUrl="www.example-updated.com", labels=["label3", "label4"])
 updated_file = client.library.files.get(file_id)
 print(updated_file.name)
 print(updated_file.public_url)

@@ -38,14 +38,10 @@ class StudioResource(ABC):
         )
 
     def _get(self, url: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
-        return self._client.execute_http_request(
-            method="GET", url=url, params=params or {}
-        )
+        return self._client.execute_http_request(method="GET", url=url, params=params or {})
 
     def _put(self, url: str, body: Dict[str, Any] = None) -> Dict[str, Any]:
-        return self._client.execute_http_request(
-            method="PUT", url=url, params=body or {}
-        )
+        return self._client.execute_http_request(method="PUT", url=url, params=body or {})
 
     def _delete(self, url: str) -> Dict[str, Any]:
         return self._client.execute_http_request(

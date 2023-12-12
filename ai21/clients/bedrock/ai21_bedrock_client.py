@@ -29,9 +29,7 @@ class AI21BedrockClient:
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         self._session = (
-            session.client(RUNTIME_NAME)
-            if session
-            else boto3.client(RUNTIME_NAME, region_name=env_config.aws_region)
+            session.client(RUNTIME_NAME) if session else boto3.client(RUNTIME_NAME, region_name=env_config.aws_region)
         )
         self.completion = resources.BedrockCompletion(self)
 
@@ -55,9 +53,7 @@ class AI21BedrockClient:
     def _handle_client_error(self, client_exception: ClientError) -> None:
         error_response = client_exception.response
         error_message = error_response.get("Error", {}).get("Message", "")
-        status_code = error_response.get("ResponseMetadata", {}).get(
-            "HTTPStatusCode", None
-        )
+        status_code = error_response.get("ResponseMetadata", {}).get("HTTPStatusCode", None)
         # As written in https://docs.aws.amazon.com/bedrock/latest/APIReference/API_runtime_InvokeModel.html
 
         if status_code == 403:
@@ -71,9 +67,7 @@ class AI21BedrockClient:
 
         if status_code == 424:
             error_message_template = re.compile(_ERROR_MSG_TEMPLATE)
-            model_status_code = int(
-                error_message_template.search(error_message).group(1)
-            )
+            model_status_code = int(error_message_template.search(error_message).group(1))
             model_error_message = error_message_template.search(error_message).group(2)
             handle_non_success_response(model_status_code, model_error_message)
 
