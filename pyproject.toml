@@ -59,6 +59,8 @@ packages = [
 [tool.poetry.dependencies]
 python = "^3.10.6"
 boto3 = "^1.33.12"
+requests = "^2.31.0"
+ai21-tokenizer = "^0.3.9"
 
 
 [tool.poetry.group.dev.dependencies]
