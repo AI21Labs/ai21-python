@@ -30,7 +30,7 @@ class _AI21EnvConfig:
             application=os.getenv("AI21_APPLICATION"),
             timeout_sec=os.getenv("AI21_TIMEOUT_SEC"),
             num_retries=os.getenv("AI21_NUM_RETRIES"),
-            aws_region=os.getenv("AI21_AWS_REGION"),
+            aws_region=os.getenv("AI21_AWS_REGION", "us-east-1"),
             log_level=os.getenv("AI21_LOG_LEVEL", "warning"),
         )
 
