@@ -1,6 +1,9 @@
 from .version import VERSION
+from .clients import AI21Client, AI21BedrockClient, AI21SageMakerClient
 
 __version__ = VERSION
+
+__all__ = ["AI21Client", "AI21BedrockClient", "AI21SageMakerClient", "BedrockModelID"]
 
 
 class BedrockModelID:

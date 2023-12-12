@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.errors import MissingApiKeyException
 from ai21.http_client import HttpClient
-from ai21.version import __version__
+from ai21.version import VERSION
 
 
 class AI21StudioClient:
@@ -54,7 +54,7 @@ class AI21StudioClient:
         return headers
 
     def _build_user_agent(self) -> str:
-        user_agent = f"ai21 studio SDK {__version__}"
+        user_agent = f"ai21 studio SDK {VERSION}"
         organization = self._organization
 
         if organization is not None:

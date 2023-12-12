@@ -1,13 +1,12 @@
 import os
 import uuid
 
-os.environ["AI21_LOG_LEVEL"] = "debug"
+import file_utils
+from ai21 import AI21Client
+from ai21.errors import APIError
+
 # Use api_host for testing staging, default is production
 # os.environ["AI21_API_HOST"] = "https://api-stage.ai21.com"
-
-import file_utils
-from ai21.clients.studio.ai21_client import AI21Client
-from ai21.errors import APIError
 
 client = AI21Client()
 

@@ -1,8 +1,4 @@
-import os
-
-os.environ["AI21_LOG_LEVEL"] = "debug"
-
-from ai21.clients.studio.ai21_client import AI21Client
+from ai21 import AI21Client
 
 file_path = "<file_path>"
 
