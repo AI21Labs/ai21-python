@@ -7,9 +7,12 @@ from pathlib import Path
 import pytest
 import subprocess
 
+from tests.integration_tests.skip_helpers import should_skip_studio_integration_tests
+
 STUDIO_PATH = Path(__file__).parent.parent.parent / "examples" / "studio"
 
 
+@pytest.mark.skipif(should_skip_studio_integration_tests(), reason="No key supplied for AI21 Studio. Skipping.")
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
