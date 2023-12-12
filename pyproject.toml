@@ -95,7 +95,7 @@ version_toml = [
     "pyproject.toml:tool.poetry.version"
 ]
 version_variables = [
-    "ai21/version.py:__version__"
+    "ai21/version.py:VERSION"
 ]
 
 match = "(main)"
