@@ -13,12 +13,12 @@ class StudioCompletion(StudioResource, Completion):
         model: str,
         prompt: str,
         *,
-        max_tokens: int = 64,
-        num_results: int = 1,
-        min_tokens=0,
-        temperature=0.7,
-        top_p=1,
-        top_k_return=0,
+        max_tokens: Optional[int] = None,
+        num_results: Optional[int] = 1,
+        min_tokens: Optional[int] = None,
+        temperature: Optional[float] = None,
+        top_p: Optional[int] = None,
+        top_k_return: Optional[int] = None,
         custom_model: Optional[str] = None,
         experimental_mode: bool = False,
         stop_sequences: Optional[List[str]] = None,
@@ -54,4 +54,4 @@ class StudioCompletion(StudioResource, Completion):
             "countPenalty": count_penalty,
             "epoch": epoch,
         }
-        return self._json_to_response(self._invoke(url=url, body=body))
+        return self._json_to_response(self._post(url=url, body=body))

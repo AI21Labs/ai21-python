@@ -10,20 +10,6 @@ class StudioResource(ABC):
     def __init__(self, client: AI21StudioClient):
         self._client = client
 
-    def _invoke(
-        self,
-        url: str,
-        body: Optional[Dict[str, Any]] = None,
-        http_method: str = "POST",
-        files: Optional[Dict[str, Any]] = None,
-    ) -> Dict[str, Any]:
-        return self._client.execute_http_request(
-            method=http_method,
-            url=url,
-            params=body or {},
-            files=files,
-        )
-
     def _post(
         self,
         url: str,

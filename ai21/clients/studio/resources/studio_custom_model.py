@@ -24,14 +24,14 @@ class StudioCustomModel(StudioResource, CustomModel):
             "learning_rate": learning_rate,
             "num_epochs": num_epochs,
         }
-        self._invoke(url=url, body=body)
+        self._post(url=url, body=body)
 
     def list(self) -> List[CustomModelResponse]:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._invoke(url=url, http_method="GET")
+        response = self._get(url=url)
 
         return [self._json_to_response(r) for r in response]
 
     def get(self, resource_id: str) -> CustomModelResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}/{resource_id}"
-        return self._json_to_response(self._invoke(url=url, http_method="GET"))
+        return self._json_to_response(self._get(url=url))

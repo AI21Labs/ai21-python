@@ -15,8 +15,7 @@ class StudioAnswer(StudioResource, Answer):
         mode: Optional[str] = None,
         **kwargs,
     ) -> AnswerResponse:
-        url = self._client.get_base_url()
-        url = f"{url}/{self._MODULE_NAME}"
+        url = f"{self._client.get_base_url()}/{self._MODULE_NAME}"
 
         params = {
             "context": context,
@@ -25,6 +24,6 @@ class StudioAnswer(StudioResource, Answer):
             "mode": mode,
         }
 
-        response = self._invoke(url=url, body=params)
+        response = self._post(url=url, body=params)
 
         return self._json_to_response(response)

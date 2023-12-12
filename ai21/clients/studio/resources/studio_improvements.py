@@ -13,6 +13,6 @@ class StudioImprovements(StudioResource, Improvements):
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        response = self._invoke(url=url, body={"text": text, "types": types})
+        response = self._post(url=url, body={"text": text, "types": types})
 
         return self._json_to_response(response)

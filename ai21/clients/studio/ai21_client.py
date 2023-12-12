@@ -23,6 +23,7 @@ class AI21Client(AI21StudioClient):
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
+        **kwargs,
     ):
         super().__init__(
             api_key=api_key,

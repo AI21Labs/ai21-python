@@ -40,6 +40,7 @@ class AI21SageMakerClient(AI21StudioClient):
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
+        **kwargs,
     ):
         super().__init__(
             api_key=api_key,

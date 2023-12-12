@@ -41,5 +41,5 @@ class StudioChat(StudioResource, Chat):
             "countPenalty": count_penalty,
         }
         url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
-        response = self._invoke(url=url, body=params)
+        response = self._post(url=url, body=params)
         return self._json_to_response(response)

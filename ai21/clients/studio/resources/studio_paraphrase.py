@@ -17,11 +17,11 @@ class StudioParaphrase(StudioResource, Paraphrase):
     ) -> ParaphraseResponse:
         body = {
             "text": text,
-            # 'style': style,  # found a bug in the API where `style` is set to allow_reuse=True
+            "style": style,
             "startIndex": start_index,
             "endIndex": end_index,
         }
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._invoke(url=url, body=body)
+        response = self._post(url=url, body=body)
 
         return self._json_to_response(response)

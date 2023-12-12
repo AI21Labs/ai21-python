@@ -17,5 +17,5 @@ class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
             "focus": focus,
         }
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._invoke(url=url, body=body)
+        response = self._post(url=url, body=body)
         return self._json_to_response(response)
