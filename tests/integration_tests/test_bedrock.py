@@ -10,7 +10,8 @@ import subprocess
 
 BEDROCK_DIR = "bedrock"
 
-BEDROCK_PATH = Path("../../") / "examples" / BEDROCK_DIR
+
+BEDROCK_PATH = Path(__file__).parent.parent.parent / "examples" / BEDROCK_DIR
 
 
 @pytest.mark.parametrize(

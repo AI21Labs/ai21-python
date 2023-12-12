@@ -3,8 +3,12 @@ Run this script after setting the environment variable called AI21_API_KEY
 """
 
 import os
+from pathlib import Path
+
 import pytest
 import subprocess
+
+STUDIO_PATH = Path(__file__).parent.parent.parent / "examples" / "studio"
 
 
 @pytest.mark.parametrize(
@@ -47,8 +51,7 @@ import subprocess
     ],
 )
 def test_studio(test_file_name: str):
-    current_dir = os.getcwd()
-    file_path = os.path.join(current_dir, "../../examples", test_file_name)
+    file_path = STUDIO_PATH / test_file_name
     print(f"About to run: {file_path}")
     exit_code = subprocess.call(["python", file_path])
     assert exit_code == 0, f"failed to run {test_file_name}"
