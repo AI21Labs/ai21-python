@@ -12,6 +12,7 @@ from ai21.errors import BadRequest, ServiceUnavailable, ServerError, APIError
 from ai21.http_client import handle_non_success_response
 from ai21.utils import log_error
 
+__all__ = ["resources", "AI21SageMakerClient"]
 
 # Each one of the clients should be able to implement async/sync interface
 _ERROR_MSG_TEMPLATE = (

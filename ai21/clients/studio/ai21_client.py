@@ -5,6 +5,8 @@ from ai21.clients.studio import resources
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
+__all__ = ["AI21Client", "resources"]
+
 
 class AI21Client(AI21StudioClient):
     """

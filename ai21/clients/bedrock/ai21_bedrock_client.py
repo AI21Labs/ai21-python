@@ -11,6 +11,12 @@ from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client import handle_non_success_response
 from ai21.utils import log_error
 
+__all__ = [
+    "resources",
+    "AI21BedrockClient",
+]
+
+
 RUNTIME_NAME = "bedrock-runtime"
 _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "

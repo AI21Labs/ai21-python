@@ -1,7 +1,4 @@
-import os
-
 import ai21
-import boto3
 from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient
 
 # Bedrock is currently supported only in us-east-1 region.
