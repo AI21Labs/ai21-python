@@ -6,16 +6,10 @@ import boto3
 from botocore.exceptions import ClientError
 
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
-from ai21.clients.bedrock import resources
+from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
 from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client import handle_non_success_response
 from ai21.utils import log_error
-
-__all__ = [
-    "resources",
-    "AI21BedrockClient",
-]
-
 
 RUNTIME_NAME = "bedrock-runtime"
 _ERROR_MSG_TEMPLATE = (
@@ -37,7 +31,7 @@ class AI21BedrockClient:
         self._session = (
             session.client(RUNTIME_NAME) if session else boto3.client(RUNTIME_NAME, region_name=env_config.aws_region)
         )
-        self.completion = resources.BedrockCompletion(self)
+        self.completion = BedrockCompletion(self)
 
     def invoke_model(self, model_id: str, input_json: str) -> Dict[str, Any]:
         try:

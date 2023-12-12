@@ -7,12 +7,14 @@ from botocore.exceptions import ClientError
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_studio_client import AI21StudioClient
-from ai21.clients.sagemaker import resources
+from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
+from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion
+from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC
+from ai21.clients.sagemaker.resources.sagemaker_paraphrase import SageMakerParaphrase
+from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize
 from ai21.errors import BadRequest, ServiceUnavailable, ServerError, APIError
 from ai21.http_client import handle_non_success_response
 from ai21.utils import log_error
-
-__all__ = ["resources", "AI21SageMakerClient"]
 
 # Each one of the clients should be able to implement async/sync interface
 _ERROR_MSG_TEMPLATE = (
@@ -56,11 +58,11 @@ class AI21SageMakerClient(AI21StudioClient):
         )
         self._region = region or self._env_config.aws_region
         self._endpoint_name = endpoint_name
-        self.completion = resources.SageMakerCompletion(self)
-        self.paraphrase = resources.SageMakerParaphrase(self)
-        self.answer = resources.SageMakerAnswer(self)
-        self.gec = resources.SageMakerGEC(self)
-        self.summarize = resources.SageMakerSummarize(self)
+        self.completion = SageMakerCompletion(self)
+        self.paraphrase = SageMakerParaphrase(self)
+        self.answer = SageMakerAnswer(self)
+        self.gec = SageMakerGEC(self)
+        self.summarize = SageMakerSummarize(self)
 
     def invoke_endpoint(
         self,

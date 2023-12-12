@@ -1,11 +1,9 @@
+from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient
+from .clients.bedrock.bedrock_model_id import BedrockModelID
+from .clients.sagemaker.ai21_sagemaker_client import AI21SageMakerClient
+from .clients.studio.ai21_client import AI21Client
 from .version import VERSION
-from .clients import AI21Client, AI21BedrockClient, AI21SageMakerClient
 
 __version__ = VERSION
 
 __all__ = ["AI21Client", "AI21BedrockClient", "AI21SageMakerClient", "BedrockModelID"]
-
-
-class BedrockModelID:
-    J2_MID_V1 = "ai21.j2-mid-v1"
-    J2_ULTRA_V1 = "ai21.j2-ultra-v1"
