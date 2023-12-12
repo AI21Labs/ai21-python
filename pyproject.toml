@@ -71,6 +71,7 @@ mypy = "*"
 safety = "*"
 ruff = "*"
 python-semantic-release = "^8.5.0"
+pytest = "^7.4.3"
 
 [build-system]
 requires = ["poetry-core"]
