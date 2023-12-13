@@ -2,8 +2,6 @@ import json
 import re
 from typing import Optional, Any, Dict
 
-import boto3
-from botocore.exceptions import ClientError
 
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
@@ -11,7 +9,7 @@ from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client import handle_non_success_response
 from ai21.utils import log_error
 
-RUNTIME_NAME = "bedrock-runtime"
+_RUNTIME_NAME = "bedrock-runtime"
 _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
     r"See .* in account .* for more information."
@@ -25,15 +23,19 @@ class AI21BedrockClient:
 
     def __init__(
         self,
-        session: Optional[boto3.Session] = None,
+        session: Optional["boto3.Session"] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
+        import boto3
+
         self._session = (
-            session.client(RUNTIME_NAME) if session else boto3.client(RUNTIME_NAME, region_name=env_config.aws_region)
+            session.client(_RUNTIME_NAME) if session else boto3.client(_RUNTIME_NAME, region_name=env_config.aws_region)
         )
         self.completion = BedrockCompletion(self)
 
     def invoke_model(self, model_id: str, input_json: str) -> Dict[str, Any]:
+        from botocore.exceptions import ClientError
+
         try:
             response = self._session.invoke_model(
                 modelId=model_id,
@@ -50,7 +52,7 @@ class AI21BedrockClient:
             log_error(f"Calling {model_id} failed with Exception: {exception}")
             raise exception
 
-    def _handle_client_error(self, client_exception: ClientError) -> None:
+    def _handle_client_error(self, client_exception: "ClientError") -> None:
         error_response = client_exception.response
         error_message = error_response.get("Error", {}).get("Message", "")
         status_code = error_response.get("ResponseMetadata", {}).get("HTTPStatusCode", None)

@@ -28,7 +28,6 @@ class AI21StudioClient:
 
         self._api_host = api_host or self._env_config.api_host
         self._api_version = api_version or self._env_config.api_version
-        self._auth_required = auth_required
         self._headers = headers
         self._timeout_sec = timeout_sec or self._env_config.timeout_sec
         self._num_retries = num_retries or self._env_config.num_retries

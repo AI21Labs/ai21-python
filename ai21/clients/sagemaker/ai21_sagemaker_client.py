@@ -1,12 +1,8 @@
 import json
 import re
-from typing import Optional, Any, Dict
-
-import boto3
-from botocore.exceptions import ClientError
+from typing import Optional
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.ai21_studio_client import AI21StudioClient
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC
@@ -21,9 +17,10 @@ _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
     r"See .* in account .* for more information."
 )
+_SAGEMAKER_RUNTIME_NAME = "sagemaker-runtime"
 
 
-class AI21SageMakerClient(AI21StudioClient):
+class AI21SageMakerClient:
     """
     :param endpoint_name: The name of the endpoint to use for the client.
     :param region: The AWS region of the endpoint.
@@ -34,27 +31,15 @@ class AI21SageMakerClient(AI21StudioClient):
         self,
         endpoint_name: str,
         region: Optional[str] = None,
-        session: Optional[boto3.Session] = None,
-        api_key: str = None,
-        api_host: str = None,
-        auth_required: bool = False,
-        headers: Optional[Dict[str, Any]] = None,
-        timeout_sec: Optional[float] = None,
-        num_retries: Optional[int] = None,
+        session: Optional["boto3.Session"] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        super().__init__(
-            api_key=api_key,
-            api_host=api_host,
-            auth_required=auth_required,
-            headers=headers,
-            timeout_sec=timeout_sec,
-            num_retries=num_retries,
-        )
+        import boto3
+
         self._env_config = env_config
         self._session = (
-            session if session else boto3.client("sagemaker-runtime", region_name=self._env_config.aws_region)
+            session if session else boto3.client(_SAGEMAKER_RUNTIME_NAME, region_name=self._env_config.aws_region)
         )
         self._region = region or self._env_config.aws_region
         self._endpoint_name = endpoint_name
@@ -68,6 +53,8 @@ class AI21SageMakerClient(AI21StudioClient):
         self,
         input_json: str,
     ):
+        from botocore.exceptions import ClientError
+
         try:
             response = self._session.invoke_endpoint(
                 EndpointName=self._endpoint_name,
@@ -83,7 +70,7 @@ class AI21SageMakerClient(AI21StudioClient):
             log_error(f"Calling {self._endpoint_name} failed with Exception: {exception}")
             raise exception
 
-    def _handle_client_error(self, client_exception: ClientError):
+    def _handle_client_error(self, client_exception: "ClientError"):
         error_response = client_exception.response
         error_message = error_response.get("Error", {}).get("Message", "")
         status_code = error_response.get("ResponseMetadata", {}).get("HTTPStatusCode", None)
