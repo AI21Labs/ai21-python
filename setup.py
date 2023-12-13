@@ -22,5 +22,5 @@ setup(
     install_requires=[
         "requests",
     ],
-    extras_require={"AWS": ["boto3>=1.28.82"]},
+    # extras_require={"AWS": ["boto3>=1.28.82"]},
 )

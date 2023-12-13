@@ -58,9 +58,10 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.7"
-boto3 = "^1.33.12"
 requests = "^2.31.0"
 ai21-tokenizer = "^0.3.9"
+pydantic = "^2.5.2"
+boto3 = { version = "^1.28.82", optional = true }
 
 
 [tool.poetry.group.dev.dependencies]
@@ -72,6 +73,12 @@ safety = "*"
 ruff = "*"
 python-semantic-release = "^8.5.0"
 pytest = "^7.4.3"
+
+[tool.poetry.extras]
+AWS = ["boto3"]
+
+
+[tool.poetry.group.extras.dependencies]
 
 [build-system]
 requires = ["poetry-core"]
