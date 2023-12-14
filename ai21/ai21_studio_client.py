@@ -18,6 +18,7 @@ class AI21StudioClient:
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
         organization: Optional[str] = None,
+        via: Optional[str] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         self._env_config = env_config
@@ -33,6 +34,7 @@ class AI21StudioClient:
         self._num_retries = num_retries or self._env_config.num_retries
         self._organization = organization or self._env_config.organization
         self._application = self._env_config.application
+        self._via = via
 
         headers = self._build_headers(passed_headers=headers)
 
@@ -54,15 +56,15 @@ class AI21StudioClient:
 
     def _build_user_agent(self) -> str:
         user_agent = f"ai21 studio SDK {VERSION}"
-        organization = self._organization
 
-        if organization is not None:
-            user_agent = f"{user_agent} organization: {organization}"
+        if self._organization is not None:
+            user_agent = f"{user_agent} organization: {self._organization}"
 
-        application = self._application
+        if self._application is not None:
+            user_agent = f"{user_agent} application: {self._application}"
 
-        if application is not None:
-            user_agent = f"{user_agent} application: {application}"
+        if self._via is not None:
+            user_agent = f"{user_agent} via: {self._via}"
 
         return user_agent
 

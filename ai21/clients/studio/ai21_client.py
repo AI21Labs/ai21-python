@@ -33,6 +33,7 @@ class AI21Client(AI21StudioClient):
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
+        via: Optional[str] = None,
         **kwargs,
     ):
         super().__init__(
@@ -42,6 +43,7 @@ class AI21Client(AI21StudioClient):
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
+            via=via,
         )
         self.completion = StudioCompletion(self)
         self.chat = StudioChat(self)
