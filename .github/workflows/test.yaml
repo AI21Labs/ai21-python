@@ -30,7 +30,7 @@ jobs:
           poetry env use ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          poetry install --no-root --only dev
+          poetry install --no-root --only dev --extras "AWS"
       - name: Lint Python (Black)
         run: |
           poetry run inv formatter
