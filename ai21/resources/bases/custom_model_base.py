@@ -30,3 +30,21 @@ class CustomModel(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> CustomModelResponse:
         return CustomModelResponse.model_validate(json)
+
+    def _create_body(
+        self,
+        dataset_id: str,
+        model_name: str,
+        model_type: str,
+        learning_rate: Optional[float],
+        num_epochs: Optional[int],
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return {
+            "dataset_id": dataset_id,
+            "model_name": model_name,
+            "model_type": model_type,
+            "learning_rate": learning_rate,
+            "num_epochs": num_epochs,
+            **kwargs,
+        }

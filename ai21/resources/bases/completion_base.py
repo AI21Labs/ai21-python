@@ -33,22 +33,40 @@ class Completion(ABC):
     def _json_to_response(self, json: Dict[str, Any]) -> CompletionsResponse:
         return CompletionsResponse.model_validate(json)
 
-
-class AWSCompletionAdapter:
-    @abstractmethod
-    def create(
+    def _create_body(
         self,
-        model_id: str,
+        model: str,
         prompt: str,
-        max_tokens: int = 64,
-        num_results: int = 1,
-        min_tokens=0,
-        temperature=0.7,
-        top_p=1,
-        top_k_return=0,
-        stop_sequences: Optional[List[str]] = (),
-        frequency_penalty: Optional[Dict[str, Any]] = {},
-        presence_penalty: Optional[Dict[str, Any]] = {},
-        count_penalty: Optional[Dict[str, Any]] = {},
-    ) -> CompletionsResponse:
-        pass
+        max_tokens: Optional[int],
+        num_results: Optional[int],
+        min_tokens: Optional[int],
+        temperature: Optional[float],
+        top_p: Optional[int],
+        top_k_return: Optional[int],
+        custom_model: Optional[str],
+        experimental_mode: bool,
+        stop_sequences: Optional[List[str]],
+        frequency_penalty: Optional[Dict[str, Any]],
+        presence_penalty: Optional[Dict[str, Any]],
+        count_penalty: Optional[Dict[str, Any]],
+        epoch: Optional[int],
+        **kwargs,
+    ):
+        return {
+            "model": model,
+            "customModel": custom_model,
+            "experimentalModel": experimental_mode,
+            "prompt": prompt,
+            "maxTokens": max_tokens,
+            "numResults": num_results,
+            "minTokens": min_tokens,
+            "temperature": temperature,
+            "topP": top_p,
+            "topKReturn": top_k_return,
+            "stopSequences": stop_sequences or [],
+            "frequencyPenalty": frequency_penalty,
+            "presencePenalty": presence_penalty,
+            "countPenalty": count_penalty,
+            "epoch": epoch,
+            **kwargs,
+        }

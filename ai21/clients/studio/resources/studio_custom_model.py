@@ -17,13 +17,14 @@ class StudioCustomModel(StudioResource, CustomModel):
         **kwargs,
     ) -> None:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        body = {
-            "dataset_id": dataset_id,
-            "model_name": model_name,
-            "model_type": model_type,
-            "learning_rate": learning_rate,
-            "num_epochs": num_epochs,
-        }
+        body = self._create_body(
+            dataset_id=dataset_id,
+            model_name=model_name,
+            model_type=model_type,
+            learning_rate=learning_rate,
+            num_epochs=num_epochs,
+            **kwargs,
+        )
         self._post(url=url, body=body)
 
     def list(self) -> List[CustomModelResponse]:

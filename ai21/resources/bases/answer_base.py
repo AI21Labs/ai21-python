@@ -20,3 +20,13 @@ class Answer(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> AnswerResponse:
         return AnswerResponse.model_validate(json)
+
+    def _create_body(
+        self,
+        context: str,
+        question: str,
+        answer_length: Optional[str],
+        mode: Optional[str],
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return {"context": context, "question": question, "answerLength": answer_length, "mode": mode, **kwargs}

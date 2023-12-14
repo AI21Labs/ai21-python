@@ -15,12 +15,13 @@ class StudioParaphrase(StudioResource, Paraphrase):
         end_index: Optional[int] = None,
         **kwargs,
     ) -> ParaphraseResponse:
-        body = {
-            "text": text,
-            "style": style,
-            "startIndex": start_index,
-            "endIndex": end_index,
-        }
+        body = self._create_body(
+            text=text,
+            style=style,
+            start_index=start_index,
+            end_index=end_index,
+            **kwargs,
+        )
         url = f"{self._client.get_base_url()}/{self._module_name}"
         response = self._post(url=url, body=body)
 

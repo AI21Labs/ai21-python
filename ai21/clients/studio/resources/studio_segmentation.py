@@ -4,11 +4,7 @@ from ai21.resources.studio_resource import StudioResource
 
 class StudioSegmentation(StudioResource, Segmentation):
     def create(self, source: str, source_type: str):
-        body = {
-            "source": source,
-            "sourceType": source_type,
-        }
-
+        body = self._create_body(source=source, source_type=source_type)
         url = f"{self._client.get_base_url()}/{self._module_name}"
         raw_response = self._post(url=url, body=body)
 

@@ -15,12 +15,13 @@ class SageMakerParaphrase(SageMakerResource, Paraphrase):
         end_index: Optional[int] = None,
         **kwargs,
     ) -> ParaphraseResponse:
-        body = {
-            "text": text,
-            "style": style,
-            "startIndex": start_index,
-            "endIndex": end_index,
-        }
+        body = self._create_body(
+            text=text,
+            style=style,
+            start_index=start_index,
+            end_index=end_index,
+            **kwargs,
+        )
         response = self._invoke(body=body)
 
         return self._json_to_response(response)

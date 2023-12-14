@@ -19,13 +19,14 @@ class StudioSummarize(StudioResource, Summarize):
         **kwargs,
     ) -> SummarizeResponse:
         # Make a summarize request to the AI21 API. Returns the response either as a string or a AI21Summarize object.
-        params = {
-            "source": source,
-            "sourceType": source_type,
-            "focus": focus,
-            "summaryMethod": summary_method,
-        }
+        body = self._create_body(
+            source=source,
+            source_type=source_type,
+            focus=focus,
+            summary_method=summary_method,
+            **kwargs,
+        )
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._post(url=url, body=params)
+        response = self._post(url=url, body=body)
 
         return self._json_to_response(response)

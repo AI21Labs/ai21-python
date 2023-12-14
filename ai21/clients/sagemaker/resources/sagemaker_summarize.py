@@ -17,13 +17,14 @@ class SageMakerSummarize(SageMakerResource, Summarize):
         summary_method: Optional[str] = None,
         **kwargs,
     ) -> SummarizeResponse:
-        params = {
-            "source": source,
-            "sourceType": source_type,
-            "focus": focus,
-            "summaryMethod": summary_method,
-        }
+        body = self._create_body(
+            source=source,
+            source_type=source_type,
+            focus=focus,
+            summary_method=summary_method,
+            **kwargs,
+        )
 
-        response = self._invoke(params)
+        response = self._invoke(body)
 
         return self._json_to_response(response)

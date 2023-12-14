@@ -31,3 +31,21 @@ class Dataset(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> DatasetResponse:
         return DatasetResponse.model_validate(json)
+
+    def _create_body(
+        self,
+        dataset_name: str,
+        selected_columns: Optional[str],
+        approve_whitespace_correction: Optional[bool],
+        delete_long_rows: Optional[bool],
+        split_ratio: Optional[float],
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return {
+            "dataset_name": dataset_name,
+            "selected_columns": selected_columns,
+            "approve_whitespace_correction": approve_whitespace_correction,
+            "delete_long_rows": delete_long_rows,
+            "split_ratio": split_ratio,
+            **kwargs,
+        }

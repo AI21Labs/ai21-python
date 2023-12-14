@@ -13,3 +13,6 @@ class Improvements(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> ImprovementsResponse:
         return ImprovementsResponse.model_validate(json)
+
+    def _create_body(self, text: str, types: List[str], **kwargs) -> Dict[str, Any]:
+        return {"text": text, "types": types, **kwargs}

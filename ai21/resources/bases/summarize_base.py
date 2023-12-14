@@ -19,3 +19,19 @@ class Summarize(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> SummarizeResponse:
         return SummarizeResponse.model_validate(json)
+
+    def _create_body(
+        self,
+        source: str,
+        source_type: str,
+        focus: Optional[str],
+        summary_method: Optional[str],
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return {
+            "source": source,
+            "sourceType": source_type,
+            "focus": focus,
+            "summaryMethod": summary_method,
+            **kwargs,
+        }

@@ -21,3 +21,19 @@ class Paraphrase(ABC):
 
     def _json_to_response(self, json: Dict[str, Any]) -> ParaphraseResponse:
         return ParaphraseResponse.model_validate(json)
+
+    def _create_body(
+        self,
+        text: str,
+        style: Optional[str],
+        start_index: Optional[int],
+        end_index: Optional[int],
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return {
+            "text": text,
+            "style": style,
+            "startIndex": start_index,
+            "endIndex": end_index,
+            **kwargs,
+        }

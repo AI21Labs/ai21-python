@@ -18,14 +18,14 @@ class StudioDataset(StudioResource, Dataset):
         **kwargs,
     ):
         files = {"dataset_file": open(file_path, "rb")}
-        body = {
-            "dataset_name": dataset_name,
-            "selected_columns": selected_columns,
-            "approve_whitespace_correction": approve_whitespace_correction,
-            "delete_long_rows": delete_long_rows,
-            "split_ratio": split_ratio,
-        }
-
+        body = self._create_body(
+            dataset_name=dataset_name,
+            selected_columns=selected_columns,
+            approve_whitespace_correction=approve_whitespace_correction,
+            delete_long_rows=delete_long_rows,
+            split_ratio=split_ratio,
+            **kwargs,
+        )
         return self._post(
             url=self._base_url(),
             body=body,
