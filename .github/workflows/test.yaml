@@ -62,7 +62,7 @@ jobs:
           poetry env use ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          poetry install
+          poetry install --all-extras
       - name: Run Tests
         env:
           AI21_API_KEY: ${{ secrets.AI21_API_KEY }}

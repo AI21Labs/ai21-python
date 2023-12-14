@@ -77,9 +77,6 @@ pytest = "^7.4.3"
 [tool.poetry.extras]
 AWS = ["boto3"]
 
-
-[tool.poetry.group.extras.dependencies]
-
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
