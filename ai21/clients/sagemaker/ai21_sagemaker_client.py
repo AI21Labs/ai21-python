@@ -1,6 +1,6 @@
 import json
 import re
-from typing import Optional
+from typing import Optional, TYPE_CHECKING
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
@@ -18,6 +18,10 @@ _ERROR_MSG_TEMPLATE = (
     r"See .* in account .* for more information."
 )
 _SAGEMAKER_RUNTIME_NAME = "sagemaker-runtime"
+
+if TYPE_CHECKING:
+    import boto3
+    from botocore.exceptions import ClientError
 
 
 class AI21SageMakerClient:

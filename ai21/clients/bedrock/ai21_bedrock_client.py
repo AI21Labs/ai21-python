@@ -1,7 +1,6 @@
 import json
 import re
-from typing import Optional, Any, Dict
-
+from typing import Optional, Any, Dict, TYPE_CHECKING
 
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
@@ -14,6 +13,9 @@ _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
     r"See .* in account .* for more information."
 )
+if TYPE_CHECKING:
+    import boto3
+    from botocore.exceptions import ClientError
 
 
 class AI21BedrockClient:
