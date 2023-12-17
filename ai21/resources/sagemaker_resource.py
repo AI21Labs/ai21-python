@@ -2,17 +2,16 @@ from __future__ import annotations
 
 import json
 from abc import ABC
-from typing import Any, Dict, TYPE_CHECKING
+from typing import Any, Dict
 
-if TYPE_CHECKING:
-    from ai21.clients.sagemaker.ai21_sagemaker_client import AI21SageMakerClient
+from ai21.clients.sagemaker.sagemaker_session import SageMakerSession
 
 
 class SageMakerResource(ABC):
-    def __init__(self, sagemaker_client: AI21SageMakerClient):
-        self._sagemaker_client = sagemaker_client
+    def __init__(self, sagemaker_session: SageMakerSession):
+        self._sagemaker_session = sagemaker_session
 
     def _invoke(self, body: Dict[str, Any]) -> Dict[str, Any]:
-        return self._sagemaker_client.invoke_endpoint(
+        return self._sagemaker_session.invoke_endpoint(
             input_json=json.dumps(body),
         )

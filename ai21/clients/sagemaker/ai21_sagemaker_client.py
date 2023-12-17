@@ -1,6 +1,6 @@
-import json
-import re
-from typing import Optional, TYPE_CHECKING
+from typing import Optional
+
+import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
@@ -8,20 +8,7 @@ from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompl
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC
 from ai21.clients.sagemaker.resources.sagemaker_paraphrase import SageMakerParaphrase
 from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize
-from ai21.errors import BadRequest, ServiceUnavailable, ServerError, APIError
-from ai21.http_client import handle_non_success_response
-from ai21.utils import log_error
-
-# Each one of the clients should be able to implement async/sync interface
-_ERROR_MSG_TEMPLATE = (
-    r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
-    r"See .* in account .* for more information."
-)
-_SAGEMAKER_RUNTIME_NAME = "sagemaker-runtime"
-
-if TYPE_CHECKING:
-    import boto3
-    from botocore.exceptions import ClientError
+from ai21.clients.sagemaker.sagemaker_session import SageMakerSession
 
 
 class AI21SageMakerClient:
@@ -39,63 +26,14 @@ class AI21SageMakerClient:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        import boto3
 
         self._env_config = env_config
-        self._session = (
-            session if session else boto3.client(_SAGEMAKER_RUNTIME_NAME, region_name=self._env_config.aws_region)
+        _session = ()
+        self._session = SageMakerSession(
+            session=session, region=region or self._env_config.aws_region, endpoint_name=endpoint_name
         )
-        self._region = region or self._env_config.aws_region
-        self._endpoint_name = endpoint_name
-        self.completion = SageMakerCompletion(self)
-        self.paraphrase = SageMakerParaphrase(self)
-        self.answer = SageMakerAnswer(self)
-        self.gec = SageMakerGEC(self)
-        self.summarize = SageMakerSummarize(self)
-
-    def invoke_endpoint(
-        self,
-        input_json: str,
-    ):
-        from botocore.exceptions import ClientError
-
-        try:
-            response = self._session.invoke_endpoint(
-                EndpointName=self._endpoint_name,
-                ContentType="application/json",
-                Accept="application/json",
-                Body=input_json,
-            )
-
-            return json.load(response["Body"])
-        except ClientError as sm_client_error:
-            self._handle_client_error(sm_client_error)
-        except Exception as exception:
-            log_error(f"Calling {self._endpoint_name} failed with Exception: {exception}")
-            raise exception
-
-    def _handle_client_error(self, client_exception: "ClientError"):
-        error_response = client_exception.response
-        error_message = error_response.get("Error", {}).get("Message", "")
-        status_code = error_response.get("ResponseMetadata", {}).get("HTTPStatusCode", None)
-        # According to https://docs.aws.amazon.com/sagemaker/latest/APIReference/API_runtime_InvokeEndpoint.html#API_runtime_InvokeEndpoint_Errors
-        if status_code == 400:
-            raise BadRequest(details=error_message)
-        if status_code == 424:
-            error_message_template = re.compile(_ERROR_MSG_TEMPLATE)
-            model_status_code = int(error_message_template.search(error_message).group(1))
-            model_error_message = error_message_template.search(error_message).group(2)
-            handle_non_success_response(model_status_code, model_error_message)
-        if status_code == 429 or status_code == 503:
-            raise ServiceUnavailable(details=error_message)
-        if status_code == 500:
-            raise ServerError(details=error_message)
-        raise APIError(status_code, details=error_message)
-
-    @property
-    def endpoint_name(self) -> str:
-        return self._endpoint_name
-
-    @property
-    def session(self):
-        return self._session
+        self.completion = SageMakerCompletion(self._session)
+        self.paraphrase = SageMakerParaphrase(self._session)
+        self.answer = SageMakerAnswer(self._session)
+        self.gec = SageMakerGEC(self._session)
+        self.summarize = SageMakerSummarize(self._session)
