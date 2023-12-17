@@ -18,7 +18,7 @@ class SageMaker:
     def get_model_package_arn(cls, model_name: str, region: str, version: str = LATEST_VERSION_STR) -> str:
         _assert_model_package_exists(model_name=model_name, region=region)
 
-        client = AI21StudioClient(auth_required=False)
+        client = AI21StudioClient()
 
         response = client.execute_http_request(
             method="POST",
@@ -40,7 +40,7 @@ class SageMaker:
     @classmethod
     def list_model_package_versions(cls, model_name: str, region: str) -> List[str]:
         _assert_model_package_exists(model_name=model_name, region=region)
-        client = AI21StudioClient(auth_required=False)
+        client = AI21StudioClient()
 
         response = client.execute_http_request(
             method="POST",

@@ -28,7 +28,6 @@ lines_after_imports = 2
 src_paths = [ "ai21", "tests"]
 
 [tool.coverage.run]
-
 branch = true
 source = ["ai21", "tests"]
 omit = ["tests/fixtures/*"]
@@ -101,9 +100,7 @@ version_toml = [
 version_variables = [
     "ai21/version.py:VERSION"
 ]
-
 match = "(main)"
-upload_to_release = true
 build_command = "pip install poetry && poetry build"
 version_source = "tag"
 commit_version_number = true

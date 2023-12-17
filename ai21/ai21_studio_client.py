@@ -13,7 +13,6 @@ class AI21StudioClient:
         api_key: Optional[str] = None,
         api_host: Optional[str] = None,
         api_version: Optional[str] = None,
-        auth_required: bool = True,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
@@ -24,7 +23,7 @@ class AI21StudioClient:
         self._env_config = env_config
         self._api_key = api_key or self._env_config.api_key
 
-        if auth_required and self._api_key is None:
+        if self._api_key is None:
             raise MissingApiKeyException()
 
         self._api_host = api_host or self._env_config.api_host
