@@ -17,7 +17,7 @@ class StudioAnswer(StudioResource, Answer):
     ) -> AnswerResponse:
         url = f"{self._client.get_base_url()}/{self._MODULE_NAME}"
 
-        body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode, **kwargs)
+        body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode)
 
         response = self._post(url=url, body=body)
 

@@ -27,6 +27,5 @@ class Answer(ABC):
         question: str,
         answer_length: Optional[str],
         mode: Optional[str],
-        **kwargs,
     ) -> Dict[str, Any]:
-        return {"context": context, "question": question, "answerLength": answer_length, "mode": mode, **kwargs}
+        return {"context": context, "question": question, "answerLength": answer_length, "mode": mode}

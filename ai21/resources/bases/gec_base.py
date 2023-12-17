@@ -14,5 +14,5 @@ class GEC(ABC):
     def _json_to_response(self, json: Dict[str, Any]) -> GECResponse:
         return GECResponse.from_dict(json)
 
-    def _create_body(self, text: str, **kwargs) -> Dict[str, Any]:
-        return {"text": text, **kwargs}
+    def _create_body(self, text: str) -> Dict[str, Any]:
+        return {"text": text}

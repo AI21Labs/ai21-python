@@ -11,4 +11,4 @@ response = client.completion.create(
     max_tokens=2,
 )
 print(response)
-print(response.prompt.tokens[0].text_range.start)
+print(response.prompt.tokens[0]["textRange"]["start"])

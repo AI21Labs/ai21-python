@@ -5,7 +5,7 @@ from ai21.resources.sagemaker_resource import SageMakerResource
 
 class SageMakerGEC(SageMakerResource, GEC):
     def create(self, text: str, **kwargs) -> GECResponse:
-        body = self._create_body(text=text, **kwargs)
+        body = self._create_body(text=text)
 
         response = self._invoke(body)
 

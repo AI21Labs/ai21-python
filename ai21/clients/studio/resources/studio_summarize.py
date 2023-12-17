@@ -23,7 +23,6 @@ class StudioSummarize(StudioResource, Summarize):
             source_type=source_type,
             focus=focus,
             summary_method=summary_method,
-            **kwargs,
         )
         url = f"{self._client.get_base_url()}/{self._module_name}"
         response = self._post(url=url, body=body)

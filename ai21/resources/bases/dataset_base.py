@@ -39,7 +39,6 @@ class Dataset(ABC):
         approve_whitespace_correction: Optional[bool],
         delete_long_rows: Optional[bool],
         split_ratio: Optional[float],
-        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "dataset_name": dataset_name,
@@ -47,5 +46,4 @@ class Dataset(ABC):
             "approve_whitespace_correction": approve_whitespace_correction,
             "delete_long_rows": delete_long_rows,
             "split_ratio": split_ratio,
-            **kwargs,
         }

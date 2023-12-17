@@ -51,6 +51,5 @@ class StudioCompletion(StudioResource, Completion):
             presence_penalty=presence_penalty,
             count_penalty=count_penalty,
             epoch=epoch,
-            **kwargs,
         )
         return self._json_to_response(self._post(url=url, body=body))

@@ -26,12 +26,10 @@ class Summarize(ABC):
         source_type: str,
         focus: Optional[str],
         summary_method: Optional[str],
-        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "source": source,
             "sourceType": source_type,
             "focus": focus,
             "summaryMethod": summary_method,
-            **kwargs,
         }

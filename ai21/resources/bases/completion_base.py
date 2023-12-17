@@ -50,7 +50,6 @@ class Completion(ABC):
         presence_penalty: Optional[Dict[str, Any]],
         count_penalty: Optional[Dict[str, Any]],
         epoch: Optional[int],
-        **kwargs,
     ):
         return {
             "model": model,
@@ -68,5 +67,4 @@ class Completion(ABC):
             "presencePenalty": presence_penalty,
             "countPenalty": count_penalty,
             "epoch": epoch,
-            **kwargs,
         }

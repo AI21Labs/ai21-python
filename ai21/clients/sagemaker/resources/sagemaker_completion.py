@@ -33,7 +33,6 @@ class SageMakerCompletion(SageMakerResource):
             "frequencyPenalty": frequency_penalty,
             "presencePenalty": presence_penalty,
             "countPenalty": count_penalty,
-            **kwargs,
         }
         raw_response = self._invoke(body)
 

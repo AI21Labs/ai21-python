@@ -15,7 +15,6 @@ class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
             source=source,
             source_type=source_type,
             focus=focus,
-            **kwargs,
         )
         url = f"{self._client.get_base_url()}/{self._module_name}"
         response = self._post(url=url, body=body)

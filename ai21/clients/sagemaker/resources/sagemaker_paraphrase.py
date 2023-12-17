@@ -20,7 +20,6 @@ class SageMakerParaphrase(SageMakerResource, Paraphrase):
             style=style,
             start_index=start_index,
             end_index=end_index,
-            **kwargs,
         )
         response = self._invoke(body=body)
 

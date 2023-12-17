@@ -28,12 +28,10 @@ class Paraphrase(ABC):
         style: Optional[str],
         start_index: Optional[int],
         end_index: Optional[int],
-        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "text": text,
             "style": style,
             "startIndex": start_index,
             "endIndex": end_index,
-            **kwargs,
         }

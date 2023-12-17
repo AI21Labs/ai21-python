@@ -23,7 +23,6 @@ class StudioCustomModel(StudioResource, CustomModel):
             model_type=model_type,
             learning_rate=learning_rate,
             num_epochs=num_epochs,
-            **kwargs,
         )
         self._post(url=url, body=body)
 

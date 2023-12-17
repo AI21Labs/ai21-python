@@ -38,7 +38,6 @@ class CustomModel(ABC):
         model_type: str,
         learning_rate: Optional[float],
         num_epochs: Optional[int],
-        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "dataset_id": dataset_id,
@@ -46,5 +45,4 @@ class CustomModel(ABC):
             "model_type": model_type,
             "learning_rate": learning_rate,
             "num_epochs": num_epochs,
-            **kwargs,
         }

@@ -15,7 +15,7 @@ class SageMakerAnswer(SageMakerResource, Answer):
         mode: Optional[str] = None,
         **kwargs,
     ) -> AnswerResponse:
-        body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode, **kwargs)
+        body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode)
         response = self._invoke(body)
 
         return self._json_to_response(response)
