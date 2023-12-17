@@ -17,7 +17,7 @@ from ai21.resources.responses.segmentation_response import SegmentationResponse
 from ai21.resources.responses.summarize_by_segment_response import SummarizeBySegmentResponse
 from ai21.resources.responses.summarize_response import SummarizeResponse
 from ai21.services.sagemaker import SageMaker
-from ai21.utils import logger
+from ai21.logger import logger
 from ai21.version import VERSION
 
 __version__ = VERSION

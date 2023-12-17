@@ -4,6 +4,7 @@ from typing import Optional, Dict
 import requests
 from requests.adapters import HTTPAdapter, Retry, RetryError
 
+from ai21.logger import logger
 from ai21.errors import (
     BadRequest,
     Unauthorized,
@@ -13,7 +14,6 @@ from ai21.errors import (
     ServiceUnavailable,
     APIError,
 )
-from ai21.utils import log_info, log_error
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
@@ -77,7 +77,7 @@ class HttpClient:
         timeout = self.timeout_sec
         headers = self.headers
         data = json.dumps(params).encode()
-        log_info(f"Calling {method} {url} {headers} {data}")
+        logger.info(f"Calling {method} {url} {headers} {data}")
         try:
             if method == "GET":
                 response = session.request(
@@ -108,17 +108,19 @@ class HttpClient:
             else:
                 response = session.request(method, url, headers=headers, data=data, timeout=timeout, auth=auth)
         except ConnectionError as connection_error:
-            log_error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
+            logger.error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
         except RetryError as retry_error:
-            log_error(f"Calling {method} {url} failed with RetryError after {self.num_retries} attempts: {retry_error}")
+            logger.error(
+                f"Calling {method} {url} failed with RetryError after {self.num_retries} attempts: {retry_error}"
+            )
             raise retry_error
         except Exception as exception:
-            log_error(f"Calling {method} {url} failed with Exception: {exception}")
+            logger.error(f"Calling {method} {url} failed with Exception: {exception}")
             raise exception
 
         if response.status_code != 200:
-            log_error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
+            logger.error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
             handle_non_success_response(response.status_code, response.text)
 
         return response.json()

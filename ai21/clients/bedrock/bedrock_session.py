@@ -5,9 +5,9 @@ from typing import Any, Dict
 import boto3
 from botocore.exceptions import ClientError
 
+from ai21.logger import logger
 from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client import handle_non_success_response
-from ai21.utils import log_error
 
 _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
@@ -36,7 +36,7 @@ class BedrockSession:
         except ClientError as client_error:
             self._handle_client_error(client_error)
         except Exception as exception:
-            log_error(f"Calling {model_id} failed with Exception: {exception}")
+            logger.error(f"Calling {model_id} failed with Exception: {exception}")
             raise exception
 
     def _handle_client_error(self, client_exception: ClientError) -> None:
