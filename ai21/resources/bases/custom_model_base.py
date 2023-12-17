@@ -29,7 +29,7 @@ class CustomModel(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> CustomModelResponse:
-        return CustomModelResponse.model_validate(json)
+        return CustomModelResponse.from_dict(json)
 
     def _create_body(
         self,

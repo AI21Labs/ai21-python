@@ -1,10 +1,13 @@
+from dataclasses import dataclass
 from datetime import date
 from typing import Optional, List
 
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class FileResponse(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class FileResponse:
     file_id: str
     name: str
     file_type: str

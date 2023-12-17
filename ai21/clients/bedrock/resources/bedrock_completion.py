@@ -34,7 +34,6 @@ class BedrockCompletion(BedrockResource):
             "frequencyPenalty": frequency_penalty or {},
             "presencePenalty": presence_penalty or {},
             "countPenalty": count_penalty or {},
-            **kwargs,
         }
         raw_response = self._invoke(model_id=model_id, body=body)
 

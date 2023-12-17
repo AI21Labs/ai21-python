@@ -35,7 +35,7 @@ class Chat(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:
-        return ChatResponse.model_validate(json)
+        return ChatResponse.from_dict(json)
 
     def _create_body(
         self,

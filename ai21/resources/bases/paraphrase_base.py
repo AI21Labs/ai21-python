@@ -20,7 +20,7 @@ class Paraphrase(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ParaphraseResponse:
-        return ParaphraseResponse.model_validate(json)
+        return ParaphraseResponse.from_dict(json)
 
     def _create_body(
         self,

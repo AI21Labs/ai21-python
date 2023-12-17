@@ -1,9 +1,12 @@
+from dataclasses import dataclass
 from typing import Optional
 
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class AnswerResponse(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class AnswerResponse:
     id: str
     answer_in_context: Optional[bool]
     answer: Optional[str]

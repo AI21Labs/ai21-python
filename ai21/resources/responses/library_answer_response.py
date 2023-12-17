@@ -1,16 +1,21 @@
+from dataclasses import dataclass
 from typing import List, Optional
 
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class SourceDocument(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class SourceDocument:
     field_id: str
     name: str
     highlights: List[str]
     public_url: Optional[str] = None
 
 
-class LibraryAnswerResponse(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class LibraryAnswerResponse:
     id: str
     answer_in_context: bool
     answer: Optional[str] = None

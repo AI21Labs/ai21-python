@@ -12,7 +12,7 @@ class GEC(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> GECResponse:
-        return GECResponse.model_validate(json)
+        return GECResponse.from_dict(json)
 
     def _create_body(self, text: str, **kwargs) -> Dict[str, Any]:
         return {"text": text, **kwargs}

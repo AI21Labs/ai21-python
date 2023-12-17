@@ -30,7 +30,7 @@ class Dataset(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> DatasetResponse:
-        return DatasetResponse.model_validate(json)
+        return DatasetResponse.from_dict(json)
 
     def _create_body(
         self,

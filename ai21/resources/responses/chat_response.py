@@ -1,21 +1,26 @@
+from dataclasses import dataclass
 from typing import Optional, List
 
-from pydantic import BaseModel
-
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class FinishReason(BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class FinishReason:
     reason: str
     length: Optional[int] = None
     sequence: Optional[str] = None
 
 
-class ChatOutput(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class ChatOutput:
     text: str
     role: str
     finish_reason: FinishReason
 
 
-class ChatResponse(BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class ChatResponse:
     outputs: List[ChatOutput]

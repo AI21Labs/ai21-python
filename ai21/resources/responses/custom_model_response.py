@@ -1,22 +1,26 @@
+from dataclasses import dataclass
 from typing import Optional
 
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class ModelMetadata(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class ModelMetadata:
     learning_rate: float
+    num_epochs: int
+    default_epoch: int
     cost: Optional[float] = None
     validation_loss: Optional[float] = None
     eval_loss: Optional[float] = None
-    num_epochs: int
-    default_epoch: int
 
 
-class CustomModelResponse(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class CustomModelResponse:
     id: str
     name: str
     tier: str
-    size: Optional[str] = None
     model_type: str
     custom_model_type: Optional[str]
     status: str
@@ -25,3 +29,4 @@ class CustomModelResponse(AI21BaseModel):
     dataset_name: str
     creation_date: str
     current_epoch: Optional[int]
+    size: Optional[str] = None

@@ -1,9 +1,12 @@
+from dataclasses import dataclass
 from datetime import datetime
 
-from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
 
 
-class DatasetResponse(AI21BaseModel):
+@camel_case_dataclass_json
+@dataclass
+class DatasetResponse:
     id: str
     dataset_name: str
     size_bytes: int

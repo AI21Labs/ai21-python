@@ -18,7 +18,7 @@ class Summarize(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> SummarizeResponse:
-        return SummarizeResponse.model_validate(json)
+        return SummarizeResponse.from_dict(json)
 
     def _create_body(
         self,

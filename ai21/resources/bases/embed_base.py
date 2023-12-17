@@ -12,7 +12,7 @@ class Embed(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> EmbedResponse:
-        return EmbedResponse.model_validate(json)
+        return EmbedResponse.from_dict(json)
 
     def _create_body(self, texts: List[str], type: Optional[str], **kwargs) -> Dict[str, Any]:
         return {"texts": texts, "type": type, **kwargs}

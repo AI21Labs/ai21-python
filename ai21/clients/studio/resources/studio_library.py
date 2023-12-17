@@ -41,7 +41,7 @@ class LibraryFiles(StudioResource):
         url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
         raw_response = self._get(url=url)
 
-        return FileResponse.model_validate(raw_response)
+        return FileResponse.from_dict(raw_response)
 
     def list(
         self,
@@ -54,7 +54,7 @@ class LibraryFiles(StudioResource):
         params = {"offset": offset, "limit": limit}
         raw_response = self._get(url=url, params=params)
 
-        return [FileResponse.model_validate(file) for file in raw_response]
+        return [FileResponse.from_dict(file) for file in raw_response]
 
     def update(
         self,
@@ -96,7 +96,7 @@ class LibrarySearch(StudioResource):
             "maxSegments": max_segments,
         }
         raw_response = self._post(url=url, body=body)
-        return LibrarySearchResponse.model_validate(raw_response)
+        return LibrarySearchResponse.from_dict(raw_response)
 
 
 class LibraryAnswer(StudioResource):
@@ -123,4 +123,4 @@ class LibraryAnswer(StudioResource):
             "mode": mode,
         }
         raw_response = self._post(url=url, body=body)
-        return LibraryAnswerResponse.model_validate(raw_response)
+        return LibraryAnswerResponse.from_dict(raw_response)
