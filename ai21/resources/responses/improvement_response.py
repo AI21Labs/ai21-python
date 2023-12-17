@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 from typing import List
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class Improvement:
+class Improvement(AI21BaseModelMixin):
     suggestions: List[str]
     start_index: int
     end_index: int
@@ -14,8 +13,7 @@ class Improvement:
     improvement_type: str
 
 
-@camel_case_dataclass_json
 @dataclass
-class ImprovementsResponse:
+class ImprovementsResponse(AI21BaseModelMixin):
     id: str
     improvements: List[Improvement]

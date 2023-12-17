@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 from typing import Optional
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class ModelMetadata:
+class BaseModelMetadata(AI21BaseModelMixin):
     learning_rate: float
     num_epochs: int
     default_epoch: int
@@ -15,16 +14,15 @@ class ModelMetadata:
     eval_loss: Optional[float] = None
 
 
-@camel_case_dataclass_json
 @dataclass
-class CustomModelResponse:
+class CustomBaseModelResponse(AI21BaseModelMixin):
     id: str
     name: str
     tier: str
     model_type: str
     custom_model_type: Optional[str]
     status: str
-    model_metadata: ModelMetadata
+    model_metadata: BaseModelMetadata
     dataset_id: int
     dataset_name: str
     creation_date: str

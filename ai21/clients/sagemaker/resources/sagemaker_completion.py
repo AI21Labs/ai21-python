@@ -37,4 +37,4 @@ class SageMakerCompletion(SageMakerResource):
         }
         raw_response = self._invoke(body)
 
-        return CompletionsResponse.model_validate(raw_response)
+        return CompletionsResponse.from_dict(raw_response)

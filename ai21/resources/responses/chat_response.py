@@ -1,26 +1,23 @@
 from dataclasses import dataclass
 from typing import Optional, List
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class FinishReason:
+class FinishReason(AI21BaseModelMixin):
     reason: str
     length: Optional[int] = None
     sequence: Optional[str] = None
 
 
-@camel_case_dataclass_json
 @dataclass
-class ChatOutput:
+class ChatOutput(AI21BaseModelMixin):
     text: str
     role: str
     finish_reason: FinishReason
 
 
-@camel_case_dataclass_json
 @dataclass
-class ChatResponse:
+class ChatResponse(AI21BaseModelMixin):
     outputs: List[ChatOutput]

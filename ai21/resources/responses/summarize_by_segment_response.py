@@ -1,20 +1,18 @@
 from dataclasses import dataclass
 from typing import List, Optional
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class Highlight:
+class Highlight(AI21BaseModelMixin):
     text: str
     start_index: int
     end_index: int
 
 
-@camel_case_dataclass_json
 @dataclass
-class SegmentSummary:
+class SegmentSummary(AI21BaseModelMixin):
     summary: Optional[str]
     segment_text: str
     segment_html: Optional[str]
@@ -23,7 +21,6 @@ class SegmentSummary:
     highlights: List[Highlight]
 
 
-@camel_case_dataclass_json
 @dataclass
-class SummarizeBySegmentResponse:
+class SummarizeBySegmentResponse(AI21BaseModelMixin):
     segments: List[SegmentSummary]

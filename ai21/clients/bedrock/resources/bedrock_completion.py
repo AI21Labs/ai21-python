@@ -37,4 +37,4 @@ class BedrockCompletion(BedrockResource):
         }
         raw_response = self._invoke(model_id=model_id, body=body)
 
-        return CompletionsResponse.model_validate(raw_response)
+        return CompletionsResponse.from_dict(raw_response)

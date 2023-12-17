@@ -1,17 +1,15 @@
 from dataclasses import dataclass
 from typing import List
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class Suggestion:
+class Suggestion(AI21BaseModelMixin):
     text: str
 
 
-@camel_case_dataclass_json
 @dataclass
-class ParaphraseResponse:
+class ParaphraseResponse(AI21BaseModelMixin):
     id: str
     suggestions: List[Suggestion]

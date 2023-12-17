@@ -37,4 +37,4 @@ response = client.completion.create(prompt=prompt, max_tokens=2, model="j2-light
 
 print(response)
 print(response.completions[0].data.text)
-print(response.prompt.tokens[0].text_range.start)
+print(response.prompt.tokens[0]["textRange"]["start"])

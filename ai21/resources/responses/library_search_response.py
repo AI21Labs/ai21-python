@@ -1,12 +1,11 @@
 from dataclasses import dataclass
 from typing import Optional, List
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class LibrarySearchResult:
+class LibrarySearchResult(AI21BaseModelMixin):
     text: str
     file_id: str
     file_name: str
@@ -15,8 +14,7 @@ class LibrarySearchResult:
     labels: Optional[List[str]] = None
 
 
-@camel_case_dataclass_json
 @dataclass
-class LibrarySearchResponse:
+class LibrarySearchResponse(AI21BaseModelMixin):
     id: str
     results: List[LibrarySearchResult]

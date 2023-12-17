@@ -5,7 +5,7 @@ from ai21.clients.studio.ai21_client import AI21Client
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.responses.chat_response import ChatResponse
 from ai21.resources.responses.completion_response import CompletionsResponse
-from ai21.resources.responses.custom_model_response import CustomModelResponse
+from ai21.resources.responses.custom_model_response import CustomBaseModelResponse
 from ai21.resources.responses.dataset_response import DatasetResponse
 from ai21.resources.responses.embed_response import EmbedResponse
 from ai21.resources.responses.file_response import FileResponse
@@ -29,7 +29,7 @@ __all__ = [
     "AnswerResponse",
     "ChatResponse",
     "CompletionsResponse",
-    "CustomModelResponse",
+    "CustomBaseModelResponse",
     "DatasetResponse",
     "EmbedResponse",
     "FileResponse",

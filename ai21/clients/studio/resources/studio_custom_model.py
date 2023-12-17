@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from ai21.resources.bases.custom_model_base import CustomModel
-from ai21.resources.responses.custom_model_response import CustomModelResponse
+from ai21.resources.responses.custom_model_response import CustomBaseModelResponse
 from ai21.resources.studio_resource import StudioResource
 
 
@@ -27,12 +27,12 @@ class StudioCustomModel(StudioResource, CustomModel):
         )
         self._post(url=url, body=body)
 
-    def list(self) -> List[CustomModelResponse]:
+    def list(self) -> List[CustomBaseModelResponse]:
         url = f"{self._client.get_base_url()}/{self._module_name}"
         response = self._get(url=url)
 
         return [self._json_to_response(r) for r in response]
 
-    def get(self, resource_id: str) -> CustomModelResponse:
+    def get(self, resource_id: str) -> CustomBaseModelResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}/{resource_id}"
         return self._json_to_response(self._get(url=url))

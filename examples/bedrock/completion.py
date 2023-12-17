@@ -41,4 +41,4 @@ prompt = (
 response = AI21BedrockClient().completion.create(prompt=prompt, max_tokens=1000, model_id=BedrockModelID.J2_MID_V1)
 
 print(response.completions[0].data.text)
-print(response.prompt.tokens[0].text_range.start)
+print(response.prompt.tokens[0]["textRange"]["start"])

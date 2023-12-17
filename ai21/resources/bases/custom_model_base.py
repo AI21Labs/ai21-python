@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Any, Dict
 
-from ai21.resources.responses.custom_model_response import CustomModelResponse
+from ai21.resources.responses.custom_model_response import CustomBaseModelResponse
 
 
 class CustomModel(ABC):
@@ -21,15 +21,15 @@ class CustomModel(ABC):
         pass
 
     @abstractmethod
-    def list(self) -> List[CustomModelResponse]:
+    def list(self) -> List[CustomBaseModelResponse]:
         pass
 
     @abstractmethod
-    def get(self, resource_id: str) -> CustomModelResponse:
+    def get(self, resource_id: str) -> CustomBaseModelResponse:
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> CustomModelResponse:
-        return CustomModelResponse.from_dict(json)
+    def _json_to_response(self, json: Dict[str, Any]) -> CustomBaseModelResponse:
+        return CustomBaseModelResponse.from_dict(json)
 
     def _create_body(
         self,

@@ -1,17 +1,15 @@
 from dataclasses import dataclass
 from typing import List
 
-from ai21.helpers.camel_case_decorator import camel_case_dataclass_json
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-@camel_case_dataclass_json
 @dataclass
-class EmbedResult:
+class EmbedResult(AI21BaseModelMixin):
     embedding: List[float]
 
 
-@camel_case_dataclass_json
 @dataclass
-class EmbedResponse:
+class EmbedResponse(AI21BaseModelMixin):
     id: str
     results: List[EmbedResult]

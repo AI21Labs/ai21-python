@@ -1,48 +1,35 @@
-from typing import List, Optional, Union
+from dataclasses import dataclass
+from typing import List, Optional, Union, Any, Dict
 
-from pydantic import BaseModel
-
-from ai21.models.ai21_base_model import AI21BaseModel
-
-
-class GeneratedToken(BaseModel):
-    token: Optional[str]
-    logprob: Optional[float]
-    raw_logprob: Optional[float]
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
-class TextRange(BaseModel):
-    start: int
-    end: int
-
-
-class Token(AI21BaseModel):
-    generated_token: Optional[GeneratedToken]
-    top_tokens: Optional[List[GeneratedToken]]
-    text_range: Optional[TextRange]
-
-
-class Prompt(AI21BaseModel):
+@dataclass
+class Prompt(AI21BaseModelMixin):
     text: Optional[str]
-    tokens: Optional[List[Token]]
+    tokens: Optional[List[Dict[str, Any]]] = None
 
 
-class CompletionData(AI21BaseModel):
+@dataclass
+class CompletionData(AI21BaseModelMixin):
     text: Optional[str]
-    tokens: Optional[List[Token]]
+    tokens: Optional[List[Dict[str, Any]]] = None
 
 
-class CompletionFinishReason(AI21BaseModel):
+@dataclass
+class CompletionFinishReason(AI21BaseModelMixin):
     reason: Optional[str] = None
     length: Optional[int] = None
 
 
-class Completion(AI21BaseModel):
+@dataclass
+class Completion(AI21BaseModelMixin):
     data: CompletionData
     finish_reason: CompletionFinishReason
 
 
-class CompletionsResponse(AI21BaseModel):
+@dataclass
+class CompletionsResponse(AI21BaseModelMixin):
     id: Union[int, str]
     prompt: Prompt
     completions: List[Completion]

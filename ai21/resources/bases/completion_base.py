@@ -31,7 +31,7 @@ class Completion(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> CompletionsResponse:
-        return CompletionsResponse.model_validate(json)
+        return CompletionsResponse.from_dict(json)
 
     def _create_body(
         self,

@@ -36,4 +36,4 @@ response = client.completion.create(prompt=prompt, max_tokens=2)
 
 print(response)
 
-print(response.prompt.tokens[0].text_range.start)  # access ai21 response as dictionary
+print(response.prompt.tokens[0]["textRange"]["start"])
