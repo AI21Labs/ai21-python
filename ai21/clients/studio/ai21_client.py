@@ -35,7 +35,6 @@ class AI21Client:
         via: Optional[str] = None,
         **kwargs,
     ):
-        super().__init__()
         studio_client = AI21StudioClient(
             api_key=api_key,
             api_host=api_host,
@@ -58,7 +57,7 @@ class AI21Client:
         self.library = StudioLibrary(studio_client)
         self.segmentation = StudioSegmentation(studio_client)
 
-    def count_token(self, text: str, model_id: str = "j2-instruct") -> int:
+    def count_token(self, text: str) -> int:
         # We might want to cache the tokenizer instance within the class
         # and not globally as it might be used by other instances
 

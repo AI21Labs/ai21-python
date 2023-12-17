@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Optional, Dict, Any, List
 
 from ai21.resources.bases.completion_base import Completion

@@ -1,4 +1,3 @@
-from __future__ import annotations
 from typing import Optional
 
 from ai21.resources.bases.summarize_base import Summarize
