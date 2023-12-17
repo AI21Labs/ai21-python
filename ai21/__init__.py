@@ -1,6 +1,5 @@
-from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient
-from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
-from ai21.clients.sagemaker.ai21_sagemaker_client import AI21SageMakerClient
+from typing import Any
+
 from ai21.clients.studio.ai21_client import AI21Client
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.responses.chat_response import ChatResponse
@@ -21,6 +20,38 @@ from ai21.services.sagemaker import SageMaker
 from ai21.version import VERSION
 
 __version__ = VERSION
+
+
+def _import_bedrock_client():
+    from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient
+
+    return AI21BedrockClient
+
+
+def _import_sagemaker_client():
+    from ai21.clients.sagemaker.ai21_sagemaker_client import AI21SageMakerClient
+
+    return AI21SageMakerClient
+
+
+def _import_bedrock_model_id():
+    from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
+
+    return BedrockModelID
+
+
+def __getattr__(name: str) -> Any:
+    if name == "AI21BedrockClient":
+        return _import_bedrock_client()
+
+    if name == "AI21SageMakerClient":
+        return _import_sagemaker_client()
+
+    if name == "BedrockModelID":
+        return _import_bedrock_model_id()
+
+    raise AttributeError(f"Could not import: {name}")
+
 
 __all__ = [
     "AI21Client",
