@@ -6,8 +6,6 @@ from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
 from ai21.clients.bedrock.bedrock_session import BedrockSession
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
 
-_RUNTIME_NAME = "bedrock-runtime"
-
 
 class AI21BedrockClient:
     """
@@ -17,11 +15,9 @@ class AI21BedrockClient:
     def __init__(
         self,
         session: Optional[boto3.Session] = None,
+        region: Optional[str] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
 
-        bedrock_session = (
-            session.client(_RUNTIME_NAME) if session else boto3.client(_RUNTIME_NAME, region_name=env_config.aws_region)
-        )
-        self._bedrock_session = BedrockSession(bedrock_session)
+        self._bedrock_session = BedrockSession(session=session, region=region or env_config.aws_region)
         self.completion = BedrockCompletion(self._bedrock_session)

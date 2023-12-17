@@ -13,11 +13,12 @@ _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
     r"See .* in account .* for more information."
 )
+_RUNTIME_NAME = "bedrock-runtime"
 
 
 class BedrockSession:
-    def __init__(self, session: boto3.Session):
-        self._session = session
+    def __init__(self, session: boto3.Session, region: str):
+        self._session = session.client(_RUNTIME_NAME) if session else boto3.client(_RUNTIME_NAME, region_name=region)
 
     def invoke_model(self, model_id: str, input_json: str) -> Dict[str, Any]:
         from botocore.exceptions import ClientError
