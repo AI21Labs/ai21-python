@@ -1,17 +1,16 @@
 import json
 from abc import ABC
-from typing import Any, Dict, TYPE_CHECKING
+from typing import Any, Dict
 
-if TYPE_CHECKING:
-    from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient
+from ai21.clients.bedrock.bedrock_session import BedrockSession
 
 
 class BedrockResource(ABC):
-    def __init__(self, bedrock_client: AI21BedrockClient):
-        self._bedrock_client = bedrock_client
+    def __init__(self, bedrock_session: BedrockSession):
+        self._bedrock_session = bedrock_session
 
     def _invoke(self, model_id: str, body: Dict[str, Any]) -> Dict[str, Any]:
-        return self._bedrock_client.invoke_model(
+        return self._bedrock_session.invoke_model(
             input_json=json.dumps(body),
             model_id=model_id,
         )
