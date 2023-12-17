@@ -17,7 +17,6 @@ class _AI21EnvConfig:
     timeout_sec: Optional[int] = None
     num_retries: Optional[int] = None
     aws_region: Optional[str] = None
-    log_level: str = "warning"
 
     @classmethod
     def from_env(cls) -> _AI21EnvConfig:
@@ -31,7 +30,6 @@ class _AI21EnvConfig:
             timeout_sec=os.getenv("AI21_TIMEOUT_SEC"),
             num_retries=os.getenv("AI21_NUM_RETRIES"),
             aws_region=os.getenv("AI21_AWS_REGION", "us-east-1"),
-            log_level=os.getenv("AI21_LOG_LEVEL", "warning"),
         )
 
 
