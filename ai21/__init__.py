@@ -17,6 +17,7 @@ from ai21.resources.responses.segmentation_response import SegmentationResponse
 from ai21.resources.responses.summarize_by_segment_response import SummarizeBySegmentResponse
 from ai21.resources.responses.summarize_response import SummarizeResponse
 from ai21.services.sagemaker import SageMaker
+from ai21.utils import logger
 from ai21.version import VERSION
 
 __version__ = VERSION
@@ -41,16 +42,17 @@ def _import_bedrock_model_id():
 
 
 def __getattr__(name: str) -> Any:
-    if name == "AI21BedrockClient":
-        return _import_bedrock_client()
+    try:
+        if name == "AI21BedrockClient":
+            return _import_bedrock_client()
 
-    if name == "AI21SageMakerClient":
-        return _import_sagemaker_client()
+        if name == "AI21SageMakerClient":
+            return _import_sagemaker_client()
 
-    if name == "BedrockModelID":
-        return _import_bedrock_model_id()
-
-    raise AttributeError(f"Could not import: {name}")
+        if name == "BedrockModelID":
+            return _import_bedrock_model_id()
+    except ImportError as e:
+        raise ImportError(f'Please install "ai21[AWS]" in order to use {name}') from e
 
 
 __all__ = [
