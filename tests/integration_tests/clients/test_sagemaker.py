@@ -5,7 +5,7 @@ from pathlib import Path
 
 SAGEMAKER_DIR = "sagemaker"
 
-SAGEMAKER_PATH = Path(__file__).parent.parent.parent / "examples" / SAGEMAKER_DIR
+SAGEMAKER_PATH = Path(__file__).parent.parent.parent.parent / "examples" / SAGEMAKER_DIR
 
 
 @pytest.mark.skip(reason="SageMaker integration tests need endpoints to be running")

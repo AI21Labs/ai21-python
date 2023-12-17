@@ -18,7 +18,7 @@ from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
 
-class AI21Client(AI21StudioClient):
+class AI21Client:
     """
     These class would be sending requests to our REST API using http requests
     """
@@ -29,35 +29,34 @@ class AI21Client(AI21StudioClient):
         self,
         api_key: Optional[str] = None,
         api_host: Optional[str] = None,
-        auth_required: bool = True,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
         **kwargs,
     ):
-        super().__init__(
+        super().__init__()
+        studio_client = AI21StudioClient(
             api_key=api_key,
             api_host=api_host,
-            auth_required=auth_required,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             via=via,
         )
-        self.completion = StudioCompletion(self)
-        self.chat = StudioChat(self)
-        self.summarize = StudioSummarize(self)
-        self.embed = StudioEmbed(self)
-        self.gec = StudioGEC(self)
-        self.improvements = StudioImprovements(self)
-        self.paraphrase = StudioParaphrase(self)
-        self.summarize_by_segment = StudioSummarizeBySegment(self)
-        self.custom_model = StudioCustomModel(self)
-        self.dataset = StudioDataset(self)
-        self.answer = StudioAnswer(self)
-        self.library = StudioLibrary(self)
-        self.segmentation = StudioSegmentation(self)
+        self.completion = StudioCompletion(studio_client)
+        self.chat = StudioChat(studio_client)
+        self.summarize = StudioSummarize(studio_client)
+        self.embed = StudioEmbed(studio_client)
+        self.gec = StudioGEC(studio_client)
+        self.improvements = StudioImprovements(studio_client)
+        self.paraphrase = StudioParaphrase(studio_client)
+        self.summarize_by_segment = StudioSummarizeBySegment(studio_client)
+        self.custom_model = StudioCustomModel(studio_client)
+        self.dataset = StudioDataset(studio_client)
+        self.answer = StudioAnswer(studio_client)
+        self.library = StudioLibrary(studio_client)
+        self.segmentation = StudioSegmentation(studio_client)
 
     def count_token(self, text: str, model_id: str = "j2-instruct") -> int:
         # We might want to cache the tokenizer instance within the class

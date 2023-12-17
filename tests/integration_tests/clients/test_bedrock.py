@@ -11,7 +11,7 @@ from tests.integration_tests.skip_helpers import should_skip_bedrock_integration
 BEDROCK_DIR = "bedrock"
 
 
-BEDROCK_PATH = Path(__file__).parent.parent.parent / "examples" / BEDROCK_DIR
+BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK_DIR
 
 
 @pytest.mark.skipif(should_skip_bedrock_integration_tests(), reason="No keys supplied for AWS. Skipping.")
