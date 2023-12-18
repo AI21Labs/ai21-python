@@ -98,14 +98,14 @@ version_toml = [
 version_variables = [
     "ai21/version.py:VERSION"
 ]
-match = "(bump_2_rc_version_new)"
+match = "(main)"
 build_command = "pip install poetry && poetry build"
 version_source = "tag"
 commit_version_number = true
 commit_message = "chore(release): v{version} [skip ci]"
 
-[tool.semantic_release.branches.bump_2_rc_version_new]
-match = "(bump_2_rc_version_new)"
+[tool.semantic_release.branches.main]
+match = "(main)"
 prerelease_token = "rc"
 prerelease = true
 
