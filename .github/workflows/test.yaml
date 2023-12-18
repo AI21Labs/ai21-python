@@ -40,7 +40,7 @@ jobs:
       - name: Lint Python (isort)
         run: |
           poetry run inv isort
-  test:
+  unittests:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -71,6 +71,47 @@ jobs:
         run: |
           poetry run pytest
       - name: Upload pytest test results
+        uses: actions/upload-artifact@v3
+        with:
+          name: pytest-results-${{ matrix.python-version }}
+          path: junit/test-results-${{ matrix.python-version }}.xml
+        # Use always() to always run this step to publish test results when there are test failures
+        if: ${{ always() }}
+
+  integration-tests:
+    runs-on: ubuntu-latest
+
+    if: github.ref == 'refs/heads/main'
+
+    strategy:
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+      - name: Install Poetry
+        run: |
+          pipx install poetry
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+          cache: poetry
+          cache-dependency-path: poetry.lock
+      - name: Set Poetry environment
+        run: |
+          poetry env use ${{ matrix.python-version }}
+      - name: Install dependencies
+        run: |
+          poetry install --all-extras
+      - name: Run Integration Tests
+        env:
+          AI21_API_KEY: ${{ secrets.AI21_API_KEY }}
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        run: |
+          poetry run pytest tests/integration_tests/
+      - name: Upload pytest integration tests results
         uses: actions/upload-artifact@v3
         with:
           name: pytest-results-${{ matrix.python-version }}
