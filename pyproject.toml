@@ -46,7 +46,7 @@ exclude_lines = [
 
 [tool.poetry]
 name = "ai21"
-version = "2.0.0"
+version = "1.9.0"
 description = ""
 authors = ["AI21 Labs"]
 readme = "README.md"
@@ -100,15 +100,16 @@ version_toml = [
 version_variables = [
     "ai21/version.py:VERSION"
 ]
-match = "(main)"
+match = "(pre_release_publish)"
 build_command = "pip install poetry && poetry build"
 version_source = "tag"
 commit_version_number = true
-major_on_zero = true
 commit_message = "chore(release): v{version} [skip ci]"
 
-[tool.semantic_release.branches.main]
-match = "(main)"
+[tool.semantic_release.branches.pre_release_publish]
+match = "(pre_release_publish)"
+prerelease_token = "rc"
+prerelease = true
 
 [tool.semantic_release.changelog.environment]
 newline_sequence = "\n"
