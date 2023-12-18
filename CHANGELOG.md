@@ -2,33 +2,13 @@
 
 
 
-## v0.1.0-rc.3 (2023-12-18)
-
-### Fix
-
-* fix: test pypi params (#8) ([`ed8fa1f`](https://github.com/AI21Labs/ai21-python/commit/ed8fa1f7b52b0ab6f94ed9815adf0256152dd02e))
-
-
-## v0.1.0-rc.2 (2023-12-18)
+## v1.10.0-rc.1 (2023-12-18)
 
 ### Chore
+
+* chore(release): v0.1.0-rc.3 [skip ci] ([`71ee300`](https://github.com/AI21Labs/ai21-python/commit/71ee3005b92b70e1655e26566d7454c79c5008f9))
 
 * chore(release): v0.1.0-rc.2 [skip ci] ([`46e8eae`](https://github.com/AI21Labs/ai21-python/commit/46e8eaebe8ccacafc6b90172b3c3e3da783c3d6f))
-
-### Feature
-
-* feat: Test pypi (#7)
-
-* feat: release candidate
-
-* ci: test pypi
-
-* fix: version ([`549d044`](https://github.com/AI21Labs/ai21-python/commit/549d0444e09e1af34b29e6d264c61bfe0c091dbe))
-
-
-## v0.1.0-rc.1 (2023-12-18)
-
-### Chore
 
 * chore(release): v0.1.0-rc.1 [skip ci] ([`3d67c2c`](https://github.com/AI21Labs/ai21-python/commit/3d67c2c9165441c09ca9a75f79021f0dba8e9325))
 
@@ -39,6 +19,14 @@
 * ci: add_integration_test_action (#4) ([`f89e082`](https://github.com/AI21Labs/ai21-python/commit/f89e08213fc06b0328987331260368ca248f14ee))
 
 ### Feature
+
+* feat: Test pypi (#7)
+
+* feat: release candidate
+
+* ci: test pypi
+
+* fix: version ([`549d044`](https://github.com/AI21Labs/ai21-python/commit/549d0444e09e1af34b29e6d264c61bfe0c091dbe))
 
 * feat: Pre release publish (#6)
 
@@ -181,6 +169,10 @@
 * ci: Added integration tests only on push to main
 
 * fix: removed unused import ([`0e9b36a`](https://github.com/AI21Labs/ai21-python/commit/0e9b36aca7ab0a3800552c8929c6f4f7d1cd9e1f))
+
+### Fix
+
+* fix: test pypi params (#8) ([`ed8fa1f`](https://github.com/AI21Labs/ai21-python/commit/ed8fa1f7b52b0ab6f94ed9815adf0256152dd02e))
 
 ### Unknown
 
