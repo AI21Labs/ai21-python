@@ -1,6 +1,7 @@
 from typing import Any
 
 from ai21.clients.studio.ai21_client import AI21Client
+from ai21.logger import setup_logger
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.responses.chat_response import ChatResponse
 from ai21.resources.responses.completion_response import CompletionsResponse
@@ -20,6 +21,7 @@ from ai21.services.sagemaker import SageMaker
 from ai21.version import VERSION
 
 __version__ = VERSION
+setup_logger()
 
 
 def _import_bedrock_client():
