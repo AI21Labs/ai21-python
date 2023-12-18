@@ -1,14 +1,15 @@
 #!/usr/bin/python3
 
 import os
+import codecs
 
 from setuptools import setup, find_packages
 from ai21.version import VERSION
 
+readme_path = os.path.abspath(os.path.dirname(__file__))
 
-with codecs.open(os.path.join(here, "README.md"), encoding="utf-8") as fh:
+with codecs.open(os.path.join(readme_path, "README.md"), encoding="utf-8") as fh:
     long_description = "\\n" + fh.read()
-
 
 setup(
     name="ai21",
