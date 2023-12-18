@@ -2,6 +2,13 @@
 
 
 
+## v1.1.0-rc.3 (2023-12-18)
+
+### Breaking
+
+* feat!: readme restart (#11) ([`992dedc`](https://github.com/AI21Labs/ai21-python/commit/992dedc63dd99dbffe78c80343afca1bb0530649))
+
+
 ## v1.1.0-rc.2 (2023-12-18)
 
 ### Breaking
@@ -17,6 +24,10 @@ BREAKING CHANGE:  New SDK version
 * fix: removed CHANGELOG.md
 
 * fix: removed version rc ([`5650abd`](https://github.com/AI21Labs/ai21-python/commit/5650abdac34dd035b80962ce14d173376210193e))
+
+### Chore
+
+* chore(release): v1.1.0-rc.2 [skip ci] ([`d131bfc`](https://github.com/AI21Labs/ai21-python/commit/d131bfc603a3f3d1c2de32e9cd6c436169476db3))
 
 
 ## v1.1.0-rc.1 (2023-12-18)
