@@ -54,7 +54,6 @@ packages = [
     { include = "ai21" }
 ]
 
-
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.31.0"
@@ -92,7 +91,6 @@ name = "cz_customize"
 [tool.commitizen.customize]
 schema_pattern = "(build|ci|docs|feat|fix|perf|refactor|style|test|chore|revert|bump):(\\s.*)"
 
-
 [tool.semantic_release]
 version_toml = [
     "pyproject.toml:tool.poetry.version"
@@ -100,14 +98,14 @@ version_toml = [
 version_variables = [
     "ai21/version.py:VERSION"
 ]
-match = "(main)"
+match = "(bump_2_rc_version_new)"
 build_command = "pip install poetry && poetry build"
 version_source = "tag"
 commit_version_number = true
 commit_message = "chore(release): v{version} [skip ci]"
 
-[tool.semantic_release.branches.main]
-match = "(main)"
+[tool.semantic_release.branches.bump_2_rc_version_new]
+match = "(bump_2_rc_version_new)"
 prerelease_token = "rc"
 prerelease = true
 
