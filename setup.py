@@ -12,7 +12,7 @@ with codecs.open(os.path.join(readme_path, "README.md"), encoding="utf-8") as fh
     long_description = "\\n" + fh.read()
 
 setup(
-    name="ai21",
+    name="ai21_python",
     version=VERSION,
     license="MIT",
     author="AI21 Labs",
