@@ -2,7 +2,22 @@
 
 
 
+## v2.0.0-rc.3 (2023-12-18)
+
+### Fix
+
+* fix: Change main project name in setup (#17)
+
+* ci: precommit
+
+* fix: version name ([`7c68b7f`](https://github.com/AI21Labs/ai21-python/commit/7c68b7f0671681e0faab3720649760b50d05d6c6))
+
+
 ## v2.0.0-rc.2 (2023-12-18)
+
+### Chore
+
+* chore(release): v2.0.0-rc.2 [skip ci] ([`5b83506`](https://github.com/AI21Labs/ai21-python/commit/5b835060bc223bfec907624b2d717418ab51309e))
 
 ### Feature
 
