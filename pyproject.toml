@@ -54,7 +54,6 @@ packages = [
     { include = "ai21" }
 ]
 
-
 [tool.poetry.dependencies]
 python = "^3.7"
 requests = "^2.31.0"
