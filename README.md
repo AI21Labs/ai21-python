@@ -15,8 +15,6 @@
 
 ## Migration from v1.3.3 and below
 
----
-
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
 This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and more.
 
@@ -89,8 +87,6 @@ import ai21
 </details>
 
 ## Installation
-
----
 
 ### pip
 
