@@ -106,8 +106,8 @@ commit_message = "chore(release): v{version} [skip ci]"
 
 [tool.semantic_release.branches.main]
 match = "(main)"
+
+[tool.semantic_release.branches."Release Candidates"]
+match = "(rc_*)"
 prerelease_token = "rc"
 prerelease = true
-
-[tool.semantic_release.changelog.environment]
-newline_sequence = "\n"
