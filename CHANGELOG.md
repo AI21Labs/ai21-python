@@ -2,7 +2,34 @@
 
 
 
+## v2.0.0-rc.4 (2023-12-19)
+
+### Ci
+
+* ci: Change main proj name (#22)
+
+* ci: precommit
+
+* fix: version name
+
+* ci: Added rc pipeline for semantic release
+
+* ci: pypi api keys
+
+* ci: Added rc pipeline for semantic release
+
+* ci: pypi api keys ([`2e87234`](https://github.com/AI21Labs/ai21-python/commit/2e87234e1d8b2c0a992c0a4e4d2b95727bd63209))
+
+### Fix
+
+* fix: readme ([`ef30164`](https://github.com/AI21Labs/ai21-python/commit/ef30164b09497ff8a7134e8868e1df9980104613))
+
+
 ## v2.0.0-rc.3 (2023-12-18)
+
+### Chore
+
+* chore(release): v2.0.0-rc.3 [skip ci] ([`0a9ace7`](https://github.com/AI21Labs/ai21-python/commit/0a9ace7dd8b59eb51b6dcb4e4a1118aaa012b454))
 
 ### Fix
 
