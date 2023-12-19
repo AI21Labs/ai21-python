@@ -13,26 +13,15 @@
 
 ---
 
-## Installation
-
-### pip
-
-```bash
-pip install ai21
-```
-
-AWS Client installation
-
-```bash
-pip install "ai21[AWS]"
-```
-
 ## Migration from v1.3.3 and below
 
 ---
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
 This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and more.
+
+<details>
+<summary>Migration Examples</summary>
 
 ### Instance creation (not available in v1.3.3 and below)
 
@@ -52,7 +41,65 @@ prompt = "some prompt"
 
 import ai21
 
-- ai21.Completion.execute(model="j2-light", prompt=prompt, maxTokens=2)
-+ client = ai21.AI21Client().completion(model="j2-light", prompt=prompt, max_tokens=2)
+- response = ai21.Completion.execute(model="j2-light", prompt=prompt, maxTokens=2)
 
+
++ client = ai21.AI21Client()
++ response = client.completion(model="j2-light", prompt=prompt, max_tokens=2)
+```
+
+### Tokenization and Token counting before/after
+
+```diff
+- response = ai21.Tokenization.execute(text=prompt)
+- print(len(response)) # number of tokens
+
++ client = ai21.AI21Client()
++ token_count = client.count_tokens(text=prompt)
+```
+
+---
+
+### AWS Client Creations
+
+### Bedrock Client creation before/after
+
+```diff
+- import ai21
+- destination = ai21.BedrockDestination(model_id=ai21.BedrockModelID.J2_MID_V1)
+- response = ai21.Completion.execute(prompt=prompt, maxTokens=1000, destination=destination)
+
++ from ai21 import AI21BedrockClient, BedrockModelID
++ client = AI21BedrockClient()
++ response = client.completion.create(prompt=prompt, max_tokens=1000, model_id=BedrockModelID.J2_MID_V1)
+```
+
+### SageMaker Client creation before/after
+
+```diff
+- import ai21
+- destination = ai21.SageMakerDestination("j2-mid-test-endpoint")
+- response = ai21.Completion.execute(prompt=prompt, maxTokens=1000, destination=destination)
+
++ from ai21 import AI21SageMakerClient
++ client = AI21SageMakerClient(endpoint_name="j2-mid-test-endpoint")
++ response = client.completion.create(prompt=prompt, max_tokens=1000)
+```
+
+</details>
+
+## Installation
+
+---
+
+### pip
+
+```bash
+pip install ai21
+```
+
+Install with AWS client support:
+
+```bash
+pip install "ai21[AWS]"
 ```
