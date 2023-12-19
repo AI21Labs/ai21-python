@@ -74,7 +74,7 @@ jobs:
         run: |
           poetry run pytest tests/integration_tests/
       - name: Upload pytest integration tests results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
