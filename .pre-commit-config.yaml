@@ -31,7 +31,7 @@ repos:
       - id: git-check
         files: "CHANGELOG.md"
   - repo: https://github.com/commitizen-tools/commitizen
-    rev: 3.5.3
+    rev: v3.5.3
     hooks:
       - id: commitizen
         name: Lint commit message
@@ -102,7 +102,7 @@ repos:
         exclude: (CHANGELOG.md)
         additional_dependencies:
           - prettier@2.8.8
-          - "prettier-plugin-sh@0.12.8" # https://github.com/un-ts/prettier/tree/master/packages/sh
+          - "prettier-plugin-sh@0.12.8"
         types_or:
           - yaml
           - markdown
