@@ -52,6 +52,8 @@ import ai21
 + response = client.completion(model="j2-light", prompt=prompt, max_tokens=2)
 ```
 
+This applies to all resources. You would now need to create a client instance and use it to call the resource method.
+
 ### Tokenization and Token counting before/after
 
 ```diff
