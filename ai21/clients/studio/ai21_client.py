@@ -32,6 +32,7 @@ class AI21Client:
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
+        via: Optional[str] = None,
         **kwargs,
     ):
         studio_client = AI21StudioClient(
@@ -40,7 +41,7 @@ class AI21Client:
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
-            via=None,
+            via=via,
         )
         self.completion = StudioCompletion(studio_client)
         self.chat = StudioChat(studio_client)
