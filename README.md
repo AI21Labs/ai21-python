@@ -35,6 +35,9 @@ client = AI21Client(api_key='my_api_key')
 client = AI21Client()
 ```
 
+We No longer support static methods for each resource, instead we have a client instance that has a method for each
+allowing for more flexibility and better control.
+
 ### Completion before/after
 
 ```diff
