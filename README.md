@@ -49,7 +49,7 @@ import ai21
 
 
 + client = ai21.AI21Client()
-+ response = client.completion(model="j2-light", prompt=prompt, max_tokens=2)
++ response = client.completion.create(model="j2-light", prompt=prompt, max_tokens=2)
 ```
 
 This applies to all resources. You would now need to create a client instance and use it to call the resource method.
@@ -179,9 +179,8 @@ $ export AI21_LOG_LEVEL=debug
 ### Other Important Environment Variables
 
 - `AI21_API_KEY` - Your API key. If not set, you must pass it to the client constructor.
-- `AI21_API_URL` - The base URL of the API. Defaults to `https://api.ai21.com/v1/`.
 - `AI21_API_VERSION` - The API version. Defaults to `v1`.
-- `AI21_API_HOST` - The API host. Defaults to `api.ai21.com`.
+- `AI21_API_HOST` - The API host. Defaults to `https://api.ai21.com/v1/`.
 - `AI21_TIMEOUT_SEC` - The timeout for API requests.
 - `AI21_NUM_RETRIES` - The maximum number of retries for API requests. Defaults to `3` retries.
 - `AI21_AWS_REGION` - The AWS region to use for AWS clients. Defaults to `us-east-1`.
@@ -235,6 +234,8 @@ AI21 Library provides convenient ways to interact with two AWS clients for use w
 pip install "ai21[AWS]"
 ```
 
+This will make sure you have the required dependencies installed, including `boto3 >= 1.28.82`.
+
 ### Usage
 
 ---
@@ -257,10 +258,10 @@ print(response.summary)
 ```python
 from ai21 import AI21SageMakerClient
 import boto3
-sm_session = boto3.Session(region_name="us-east-1")
+boto_session = boto3.Session(region_name="us-east-1")
 
 client = AI21SageMakerClient(
-    session=sm_session,
+    session=boto_session,
     endpoint_name="j2-endpoint-name",
 )
 ```
@@ -272,7 +273,7 @@ client = AI21SageMakerClient(
 ```python
 from ai21 import AI21BedrockClient, BedrockModelID
 
-client = AI21BedrockClient(region='us-east-2') # region is optional, as you can use the env variable instead
+client = AI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
 response = client.completion.create(
     prompt="Your prompt here",
     model_id=BedrockModelID.J2_MID_V1,
@@ -286,10 +287,10 @@ print(response.completions[0].data.text)
 ```python
 from ai21 import AI21BedrockClient, BedrockModelID
 import boto3
-bedrock_session = boto3.Session(region_name="us-east-2")
+boto_session = boto3.Session(region_name="us-east-1")
 
 client = AI21BedrockClient(
-    session=bedrock_session,
+    session=boto_session,
 )
 
 response = client.completion.create(
