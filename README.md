@@ -16,7 +16,8 @@
 ## Migration from v1.3.3 and below
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
-This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and more.
+This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and
+more.
 
 <details>
 <summary>Migration Examples</summary>
@@ -94,8 +95,199 @@ import ai21
 pip install ai21
 ```
 
-Install with AWS client support:
+## Usage
+
+---
+
+### Client Instance Creation
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client(
+    # defaults to os.enviorn.get('AI21_API_KEY')
+    api_key='my_api_key',
+)
+
+response = client.completion.create(
+    prompt="<your prompt here>",
+    max_tokens=10,
+    model="j2-mid",
+    temperature=0.3,
+    top_p=1,
+)
+
+print(response.completions)
+print(response.prompt)
+```
+
+### Token Counting
+
+---
+
+By using the `count_tokens` method, you can estimate the billing for a given request.
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+client.count_tokens(text="some text")  # returns int
+```
+
+### File Upload
+
+---
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+
+file_id = client.library.files.upload(
+    file_path="path/to/file",
+    path="path/to/file/in/library",
+    labels=["label1", "label2"],
+    public_url="www.example.com",
+)
+
+uploaded_file = client.library.files.get(file_id)
+```
+
+## Environment Variables
+
+---
+
+You can set several environment variables to configure the client.
+
+### Logging
+
+We use the standard library [`logging`](https://docs.python.org/3/library/logging.html) module.
+
+To enable logging, set the `AI21_LOG_LEVEL` environment variable.
+
+```bash
+$ export AI21_LOG_LEVEL=debug
+```
+
+### Other Important Environment Variables
+
+- `AI21_API_KEY` - Your API key. If not set, you must pass it to the client constructor.
+- `AI21_API_URL` - The base URL of the API. Defaults to `https://api.ai21.com/v1/`.
+- `AI21_API_VERSION` - The API version. Defaults to `v1`.
+- `AI21_API_HOST` - The API host. Defaults to `api.ai21.com`.
+- `AI21_TIMEOUT_SEC` - The timeout for API requests.
+- `AI21_NUM_RETRIES` - The maximum number of retries for API requests. Defaults to `3` retries.
+- `AI21_AWS_REGION` - The AWS region to use for AWS clients. Defaults to `us-east-1`.
+
+## Error Handling
+
+---
+
+```python
+from ai21 import errors as ai21_errors
+from ai21 import AI21Client, AI21APIError
+
+client = AI21Client()
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    {
+        "text": "Hello, I need help with a signup process.",
+        "role": "user",
+        "name": "Alice",
+    },
+]
+
+try:
+    chat_completion = client.chat.create(
+        messages=messages,
+        model="j2-ultra",
+        system=system
+    )
+except ai21_errors.AI21ServerError as e:
+    print("Server error and could not be reached")
+    print(e.details)
+except ai21_errors.TooManyRequests as e:
+    print("A 429 status code was returned. Slow down on the requests")
+except AI21APIError as e:
+    print("A non 200 status code error. For more error types see ai21.errors")
+
+```
+
+## AWS Clients
+
+---
+
+AI21 Library provides convenient ways to interact with two AWS clients for use with AWS SageMaker and AWS Bedrock.
+
+### Installation
+
+---
 
 ```bash
 pip install "ai21[AWS]"
+```
+
+### Usage
+
+---
+
+#### SageMaker
+
+```python
+from ai21 import AI21SageMakerClient
+
+client = AI21SageMakerClient(endpoint_name="j2-endpoint-name")
+response = client.summarize.create(
+    source="Text to summarize",
+    source_type="TEXT",
+)
+print(response.summary)
+```
+
+#### With Boto3 Session
+
+```python
+from ai21 import AI21SageMakerClient
+import boto3
+sm_session = boto3.Session(region_name="us-east-1")
+
+client = AI21SageMakerClient(
+    session=sm_session,
+    endpoint_name="j2-endpoint-name",
+)
+```
+
+#### Bedrock
+
+---
+
+```python
+from ai21 import AI21BedrockClient, BedrockModelID
+
+client = AI21BedrockClient(region='us-east-2') # region is optional, as you can use the env variable instead
+response = client.completion.create(
+    prompt="Your prompt here",
+    model_id=BedrockModelID.J2_MID_V1,
+    max_tokens=10,
+)
+print(response.completions[0].data.text)
+```
+
+#### With Boto3 Session
+
+```python
+from ai21 import AI21BedrockClient, BedrockModelID
+import boto3
+bedrock_session = boto3.Session(region_name="us-east-2")
+
+client = AI21BedrockClient(
+    session=bedrock_session,
+)
+
+response = client.completion.create(
+    prompt="Your prompt here",
+    model_id=BedrockModelID.J2_MID_V1,
+    max_tokens=10,
+)
 ```
