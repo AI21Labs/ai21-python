@@ -111,3 +111,6 @@ match = "(main)"
 match = "(rc_*)"
 prerelease_token = "rc"
 prerelease = true
+
+[tool.ruff]
+line-length = 120

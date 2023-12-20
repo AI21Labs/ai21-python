@@ -1,7 +1,7 @@
 from typing import Optional
 
 
-class APIError(Exception):
+class AI21APIError(Exception):
     def __init__(self, status_code: int, details: Optional[str] = None):
         super().__init__(details)
         self.details = details
@@ -11,47 +11,47 @@ class APIError(Exception):
         return f"Failed with http status code: {self.status_code} ({type(self).__name__}). Details: {self.details}"
 
 
-class BadRequest(APIError):
+class BadRequest(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(400, details)
 
 
-class Unauthorized(APIError):
+class Unauthorized(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(401, details)
 
 
-class AccessDenied(APIError):
+class AccessDenied(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(403, details)
 
 
-class NotFound(APIError):
+class NotFound(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(404, details)
 
 
-class APITimeoutError(APIError):
+class AI21APITimeoutError(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(408, details)
 
 
-class UnprocessableEntity(APIError):
+class UnprocessableEntity(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(422, details)
 
 
-class TooManyRequests(APIError):
+class TooManyRequests(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(429, details)
 
 
-class ServerError(APIError):
+class AI21ServerError(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(500, details)
 
 
-class ServiceUnavailable(APIError):
+class ServiceUnavailable(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(500, details)
 

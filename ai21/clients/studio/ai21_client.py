@@ -57,7 +57,7 @@ class AI21Client:
         self.library = StudioLibrary(studio_client)
         self.segmentation = StudioSegmentation(studio_client)
 
-    def count_token(self, text: str) -> int:
+    def count_tokens(self, text: str) -> int:
         # We might want to cache the tokenizer instance within the class
         # and not globally as it might be used by other instances
 

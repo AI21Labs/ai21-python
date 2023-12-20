@@ -10,9 +10,9 @@ from ai21.errors import (
     Unauthorized,
     UnprocessableEntity,
     TooManyRequests,
-    ServerError,
+    AI21ServerError,
     ServiceUnavailable,
-    APIError,
+    AI21APIError,
 )
 
 DEFAULT_TIMEOUT_SEC = 300
@@ -33,10 +33,10 @@ def handle_non_success_response(status_code: int, response_text: str):
     if status_code == 429:
         raise TooManyRequests(details=response_text)
     if status_code == 500:
-        raise ServerError(details=response_text)
+        raise AI21ServerError(details=response_text)
     if status_code == 503:
         raise ServiceUnavailable(details=response_text)
-    raise APIError(status_code, details=response_text)
+    raise AI21APIError(status_code, details=response_text)
 
 
 def requests_retry_session(session, retries=0):
