@@ -35,6 +35,9 @@ client = AI21Client(api_key='my_api_key')
 client = AI21Client()
 ```
 
+We No longer support static methods for each resource, instead we have a client instance that has a method for each
+allowing for more flexibility and better control.
+
 ### Completion before/after
 
 ```diff
@@ -48,6 +51,8 @@ import ai21
 + client = ai21.AI21Client()
 + response = client.completion(model="j2-light", prompt=prompt, max_tokens=2)
 ```
+
+This applies to all resources. You would now need to create a client instance and use it to call the resource method.
 
 ### Tokenization and Token counting before/after
 
