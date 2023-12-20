@@ -55,7 +55,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 requests = "^2.31.0"
 ai21-tokenizer = "^0.3.9"
 boto3 = { version = "^1.28.82", optional = true }
