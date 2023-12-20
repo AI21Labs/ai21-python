@@ -9,7 +9,6 @@ from ai21.constants import DEFAULT_API_VERSION, STUDIO_HOST
 @dataclass(frozen=True)
 class _AI21EnvConfig:
     api_key: Optional[str] = None
-    api_url: Optional[str] = None
     api_version: str = DEFAULT_API_VERSION
     api_host: str = STUDIO_HOST
     organization: Optional[str] = None
@@ -23,7 +22,6 @@ class _AI21EnvConfig:
     def from_env(cls) -> _AI21EnvConfig:
         return cls(
             api_key=os.getenv("AI21_API_KEY"),
-            api_url=os.getenv("AI21_API_URL"),
             api_version=os.getenv("AI21_API_VERSION", DEFAULT_API_VERSION),
             api_host=os.getenv("AI21_API_HOST", STUDIO_HOST),
             organization=os.getenv("AI21_ORGANIZATION"),
