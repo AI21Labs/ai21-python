@@ -56,10 +56,10 @@ def requests_retry_session(session, retries=0):
 
 class HttpClient:
     def __init__(self, timeout_sec: int = None, num_retries: int = None, headers: Dict = None):
-        self.timeout_sec = timeout_sec if timeout_sec is not None else DEFAULT_TIMEOUT_SEC
-        self.num_retries = num_retries if num_retries is not None else DEFAULT_NUM_RETRIES
-        self.headers = headers if headers is not None else {}
-        self.apply_retry_policy = self.num_retries > 0
+        self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
+        self._num_retries = num_retries or DEFAULT_NUM_RETRIES
+        self._headers = headers or {}
+        self._apply_retry_policy = self._num_retries > 0
 
     def execute_http_request(
         self,
@@ -70,12 +70,12 @@ class HttpClient:
         auth=None,
     ):
         session = (
-            requests_retry_session(requests.Session(), retries=self.num_retries)
-            if self.apply_retry_policy
+            requests_retry_session(requests.Session(), retries=self._num_retries)
+            if self._apply_retry_policy
             else requests.Session()
         )
-        timeout = self.timeout_sec
-        headers = self.headers
+        timeout = self._timeout_sec
+        headers = self._headers
         data = json.dumps(params).encode()
         logger.info(f"Calling {method} {url} {headers} {data}")
         try:
@@ -112,7 +112,7 @@ class HttpClient:
             raise connection_error
         except RetryError as retry_error:
             logger.error(
-                f"Calling {method} {url} failed with RetryError after {self.num_retries} attempts: {retry_error}"
+                f"Calling {method} {url} failed with RetryError after {self._num_retries} attempts: {retry_error}"
             )
             raise retry_error
         except Exception as exception:
