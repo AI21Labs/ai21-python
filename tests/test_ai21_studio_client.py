@@ -2,7 +2,7 @@ from typing import Optional
 
 import pytest
 
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from ai21.version import VERSION
 
 _DUMMY_API_KEY = "dummy_key"
@@ -32,15 +32,15 @@ class TestAI21StudioClient:
     def test__build_headers__user_agent(
         self, via: Optional[str], application: Optional[str], organization: Optional[str], expected_user_agent: str
     ):
-        client = AI21StudioClient(api_key=_DUMMY_API_KEY, via=via, application=application, organization=organization)
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via, application=application, organization=organization)
         assert client._http_client._headers["User-Agent"] == expected_user_agent
 
     def test__build_headers__authorization(self):
-        client = AI21StudioClient(api_key=_DUMMY_API_KEY)
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY)
         assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
     def test__build_headers__when_pass_headers__should_append(self):
-        client = AI21StudioClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"})
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"})
         assert client._http_client._headers["foo"] == "bar"
         assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
@@ -56,5 +56,5 @@ class TestAI21StudioClient:
         ],
     )
     def test__get_base_url(self, api_host: Optional[str], expected_api_host: str):
-        client = AI21StudioClient(api_key=_DUMMY_API_KEY, api_host=api_host, api_version="v1")
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=api_host, api_version="v1")
         assert client.get_base_url() == expected_api_host

@@ -3,11 +3,11 @@ from __future__ import annotations
 from abc import ABC
 from typing import Any, Dict, Optional
 
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 
 
 class StudioResource(ABC):
-    def __init__(self, client: AI21StudioClient):
+    def __init__(self, client: AI21HTTPClient):
         self._client = client
 
     def _post(

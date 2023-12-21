@@ -1,6 +1,6 @@
 from typing import Optional, List
 
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from ai21.resources.responses.file_response import FileResponse
 from ai21.resources.responses.library_answer_response import LibraryAnswerResponse
 from ai21.resources.responses.library_search_response import LibrarySearchResponse
@@ -10,7 +10,7 @@ from ai21.resources.studio_resource import StudioResource
 class StudioLibrary(StudioResource):
     _module_name = "library/files"
 
-    def __init__(self, client: AI21StudioClient):
+    def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
         self.files = LibraryFiles(client)
         self.search = LibrarySearch(client)

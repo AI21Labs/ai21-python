@@ -2,14 +2,14 @@ import pytest
 from pytest_mock import MockerFixture
 
 from ai21 import SageMaker
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from unittest.mock import patch
 
 
 @pytest.fixture
 def mock_ai21_studio_client(mocker: MockerFixture):
     return mocker.patch.object(
-        AI21StudioClient,
+        AI21HTTPClient,
         "execute_http_request",
         return_value={
             "arn": "some-model-package-id1",

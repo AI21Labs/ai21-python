@@ -6,7 +6,7 @@ from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
 
-class AI21StudioClient:
+class AI21HTTPClient:
     def __init__(
         self,
         *,

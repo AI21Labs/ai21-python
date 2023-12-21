@@ -2,7 +2,7 @@ import pytest
 from pytest_mock import MockerFixture
 
 from ai21 import AnswerResponse, ChatResponse, CompletionsResponse
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
@@ -11,8 +11,8 @@ from ai21.resources.responses.completion_response import Prompt, Completion, Com
 
 
 @pytest.fixture
-def mock_ai21_studio_client(mocker: MockerFixture) -> AI21StudioClient:
-    return mocker.MagicMock(spec=AI21StudioClient)
+def mock_ai21_studio_client(mocker: MockerFixture) -> AI21HTTPClient:
+    return mocker.MagicMock(spec=AI21HTTPClient)
 
 
 def get_studio_answer():

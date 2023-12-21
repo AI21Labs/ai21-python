@@ -3,7 +3,7 @@ from typing import TypeVar, Callable
 import pytest
 
 from ai21 import AnswerResponse
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.resources.studio_resource import StudioResource
 from tests.unittests.clients.studio.resources.conftest import get_studio_answer, get_studio_chat, get_studio_completion
@@ -31,12 +31,12 @@ class TestStudioResources:
     )
     def test__create__should_return_answer_response(
         self,
-        studio_resource: Callable[[AI21StudioClient], T],
+        studio_resource: Callable[[AI21HTTPClient], T],
         function_body,
         url_suffix: str,
         expected_body,
         expected_response,
-        mock_ai21_studio_client: AI21StudioClient,
+        mock_ai21_studio_client: AI21HTTPClient,
     ):
         mock_ai21_studio_client.execute_http_request.return_value = expected_response.to_dict()
         mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
@@ -55,7 +55,7 @@ class TestStudioResources:
             files=None,
         )
 
-    def test__create__when_pass_kwargs__should_not_pass_to_request(self, mock_ai21_studio_client: AI21StudioClient):
+    def test__create__when_pass_kwargs__should_not_pass_to_request(self, mock_ai21_studio_client: AI21HTTPClient):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
         mock_ai21_studio_client.execute_http_request.return_value = expected_answer.to_dict()
         mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
