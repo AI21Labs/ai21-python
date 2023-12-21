@@ -35,7 +35,7 @@ class AI21Client:
         via: Optional[str] = None,
         **kwargs,
     ):
-        studio_client = AI21StudioClient(
+        self._studio_client = AI21StudioClient(
             api_key=api_key,
             api_host=api_host,
             headers=headers,
@@ -43,19 +43,19 @@ class AI21Client:
             num_retries=num_retries,
             via=via,
         )
-        self.completion = StudioCompletion(studio_client)
-        self.chat = StudioChat(studio_client)
-        self.summarize = StudioSummarize(studio_client)
-        self.embed = StudioEmbed(studio_client)
-        self.gec = StudioGEC(studio_client)
-        self.improvements = StudioImprovements(studio_client)
-        self.paraphrase = StudioParaphrase(studio_client)
-        self.summarize_by_segment = StudioSummarizeBySegment(studio_client)
-        self.custom_model = StudioCustomModel(studio_client)
-        self.dataset = StudioDataset(studio_client)
-        self.answer = StudioAnswer(studio_client)
-        self.library = StudioLibrary(studio_client)
-        self.segmentation = StudioSegmentation(studio_client)
+        self.completion = StudioCompletion(self._studio_client)
+        self.chat = StudioChat(self._studio_client)
+        self.summarize = StudioSummarize(self._studio_client)
+        self.embed = StudioEmbed(self._studio_client)
+        self.gec = StudioGEC(self._studio_client)
+        self.improvements = StudioImprovements(self._studio_client)
+        self.paraphrase = StudioParaphrase(self._studio_client)
+        self.summarize_by_segment = StudioSummarizeBySegment(self._studio_client)
+        self.custom_model = StudioCustomModel(self._studio_client)
+        self.dataset = StudioDataset(self._studio_client)
+        self.answer = StudioAnswer(self._studio_client)
+        self.library = StudioLibrary(self._studio_clienself._studio_clientt)
+        self.segmentation = StudioSegmentation()
 
     def count_tokens(self, text: str) -> int:
         # We might want to cache the tokenizer instance within the class

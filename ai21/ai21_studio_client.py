@@ -17,6 +17,7 @@ class AI21StudioClient:
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
         organization: Optional[str] = None,
+        application: Optional[str] = None,
         via: Optional[str] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
@@ -32,12 +33,11 @@ class AI21StudioClient:
         self._timeout_sec = timeout_sec or self._env_config.timeout_sec
         self._num_retries = num_retries or self._env_config.num_retries
         self._organization = organization or self._env_config.organization
-        self._application = self._env_config.application
+        self._application = application or self._env_config.application
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
-
-        self.http_client = HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
+        self._http_client = HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
@@ -68,7 +68,7 @@ class AI21StudioClient:
         return user_agent
 
     def execute_http_request(self, method: str, url: str, params: Optional[Dict] = None, files=None):
-        return self.http_client.execute_http_request(method=method, url=url, params=params, files=files)
+        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
 
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"
