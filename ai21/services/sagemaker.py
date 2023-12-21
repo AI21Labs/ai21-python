@@ -20,7 +20,7 @@ class SageMaker:
 
         client = cls._create_ai21_http_client()
 
-        response = client.execute_http_request(
+        client.execute_http_request(
             method="POST",
             url=f"{client.get_base_url()}/{_GET_ARN_ENDPOINT}",
             params={
@@ -30,7 +30,7 @@ class SageMaker:
             },
         )
 
-        arn = response["arn"]
+        arn = ["arn"]
 
         if not arn:
             raise ModelPackageDoesntExistException(model_name=model_name, region=region, version=version)
