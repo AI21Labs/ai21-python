@@ -1,6 +1,8 @@
 import io
 from typing import Optional, Dict, Any
 
+import requests
+
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.errors import MissingApiKeyException
 from ai21.http_client import HttpClient
@@ -75,8 +77,11 @@ class AI21HTTPClient:
         url: str,
         params: Optional[Dict] = None,
         files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        session: Optional[requests.Session] = None,
     ):
-        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
+        return self._http_client.execute_http_request(
+            method=method, url=url, params=params, files=files, session=session
+        )
 
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"
