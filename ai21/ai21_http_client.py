@@ -1,3 +1,4 @@
+import io
 from typing import Optional, Dict, Any
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
@@ -19,6 +20,7 @@ class AI21HTTPClient:
         organization: Optional[str] = None,
         application: Optional[str] = None,
         via: Optional[str] = None,
+        http_client: Optional[HttpClient] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         self._env_config = env_config
@@ -37,7 +39,7 @@ class AI21HTTPClient:
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
-        self._http_client = HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
+        self._http_client = http_client or HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
@@ -67,7 +69,13 @@ class AI21HTTPClient:
 
         return user_agent
 
-    def execute_http_request(self, method: str, url: str, params: Optional[Dict] = None, files=None):
+    def execute_http_request(
+        self,
+        method: str,
+        url: str,
+        params: Optional[Dict] = None,
+        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+    ):
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
 
     def get_base_url(self) -> str:

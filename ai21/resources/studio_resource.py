@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import io
 from abc import ABC
 from typing import Any, Dict, Optional
 
@@ -14,7 +15,7 @@ class StudioResource(ABC):
         self,
         url: str,
         body: Dict[str, Any],
-        files: Optional[Dict[str, Any]] = None,
+        files: Optional[Dict[str, io.TextIOWrapper]] = None,
     ) -> Dict[str, Any]:
         return self._client.execute_http_request(
             method="POST",

@@ -14,6 +14,7 @@ from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
+from ai21.http_client import HttpClient
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
@@ -33,6 +34,7 @@ class AI21Client:
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
+        http_client: Optional[HttpClient] = None,
         **kwargs,
     ):
         self._http_client = AI21HTTPClient(
@@ -42,6 +44,7 @@ class AI21Client:
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             via=via,
+            http_client=http_client,
         )
         self.completion = StudioCompletion(self._http_client)
         self.chat = StudioChat(self._http_client)

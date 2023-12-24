@@ -1,5 +1,6 @@
+import io
 import json
-from typing import Optional, Dict
+from typing import Optional, Dict, Callable, Tuple, Union
 
 import requests
 from requests.adapters import HTTPAdapter, Retry, RetryError
@@ -66,8 +67,8 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
-        files=None,
-        auth=None,
+        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        auth: Optional[Union[Tuple, Callable]] = None,
     ):
         session = (
             requests_retry_session(requests.Session(), retries=self._num_retries)
