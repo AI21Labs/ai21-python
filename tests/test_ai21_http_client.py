@@ -1,11 +1,21 @@
 from typing import Optional
 
 import pytest
+import requests
 
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.version import VERSION
 
 _DUMMY_API_KEY = "dummy_key"
+
+
+class MockResponse:
+    def __init__(self, json_data, status_code):
+        self.json_data = json_data
+        self.status_code = status_code
+
+    def json(self):
+        return self.json_data
 
 
 class TestAI21StudioClient:
@@ -58,3 +68,30 @@ class TestAI21StudioClient:
     def test__get_base_url(self, api_host: Optional[str], expected_api_host: str):
         client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=api_host, api_version="v1")
         assert client.get_base_url() == expected_api_host
+
+    def test__execute_http_request__when_making_request__should_send_appropriate_parameters(
+        self,
+        dummy_api_host: str,
+        mock_requests_session: requests.Session,
+    ):
+        method = "GET"
+        url = "test_url"
+        params = {"foo": "bar"}
+        response_json = {"test_key": "test_value"}
+        headers = {
+            "Authorization": "Bearer dummy_key",
+            "Content-Type": "application/json",
+            "User-Agent": f"ai21 studio SDK {VERSION}",
+        }
+
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
+        mock_requests_session.request.return_value = MockResponse(response_json, 200)
+        response = client.execute_http_request(method=method, url=url, params=params, session=mock_requests_session)
+        assert response == response_json
+        mock_requests_session.request.assert_called_once_with(
+            method,
+            url,
+            headers=headers,
+            timeout=300,
+            params=params,
+        )

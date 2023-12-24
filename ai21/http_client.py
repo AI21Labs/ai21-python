@@ -69,12 +69,9 @@ class HttpClient:
         params: Optional[Dict] = None,
         files: Optional[Dict[str, io.TextIOWrapper]] = None,
         auth: Optional[Union[Tuple, Callable]] = None,
+        session: Optional[requests.Session] = None,
     ):
-        session = (
-            requests_retry_session(requests.Session(), retries=self._num_retries)
-            if self._apply_retry_policy
-            else requests.Session()
-        )
+        session = self._init_session(session)
         timeout = self._timeout_sec
         headers = self._headers
         data = json.dumps(params).encode()
@@ -125,3 +122,13 @@ class HttpClient:
             handle_non_success_response(response.status_code, response.text)
 
         return response.json()
+
+    def _init_session(self, session: Optional[requests.Session]) -> requests.Session:
+        if session is not None:
+            return session
+
+        return (
+            requests_retry_session(requests.Session(), retries=self._num_retries)
+            if self._apply_retry_policy
+            else requests.Session()
+        )
