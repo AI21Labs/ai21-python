@@ -1,7 +1,6 @@
 import io
 from typing import Optional, Dict, Any
 
-
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.errors import MissingApiKeyException
 from ai21.http_client import HttpClient
@@ -40,7 +39,7 @@ class AI21HTTPClient:
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
-        self._http_client = self._init_http_client(http_client=http_client, headers=headers)
+        self._http_client = http_client or HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
@@ -55,18 +54,6 @@ class AI21HTTPClient:
             headers.update(passed_headers)
 
         return headers
-
-    def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> HttpClient:
-        if http_client is None:
-            return HttpClient(
-                timeout_sec=self._timeout_sec,
-                num_retries=self._num_retries,
-                headers=headers,
-            )
-
-        http_client.add_headers(headers)
-
-        return http_client
 
     def _build_user_agent(self) -> str:
         user_agent = f"ai21 studio SDK {VERSION}"
