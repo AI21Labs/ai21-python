@@ -1,6 +1,6 @@
 import io
 import json
-from typing import Optional, Dict, Callable, Tuple, Union
+from typing import Optional, Dict
 
 import requests
 from requests.adapters import HTTPAdapter, Retry, RetryError
@@ -68,7 +68,6 @@ class HttpClient:
         url: str,
         params: Optional[Dict] = None,
         files: Optional[Dict[str, io.TextIOWrapper]] = None,
-        auth: Optional[Union[Tuple, Callable]] = None,
         session: Optional[requests.Session] = None,
     ):
         session = self._init_session(session)
@@ -79,8 +78,8 @@ class HttpClient:
         try:
             if method == "GET":
                 response = session.request(
-                    method,
-                    url,
+                    method=method,
+                    url=url,
                     headers=headers,
                     timeout=timeout,
                     params=params,
@@ -95,16 +94,15 @@ class HttpClient:
                         "Content-Type"
                     )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
                 response = session.request(
-                    method,
-                    url,
+                    method=method,
+                    url=url,
                     headers=headers,
                     data=params,
                     files=files,
                     timeout=timeout,
-                    auth=auth,
                 )
             else:
-                response = session.request(method, url, headers=headers, data=data, timeout=timeout, auth=auth)
+                response = session.request(method=method, url=url, headers=headers, data=data, timeout=timeout)
         except ConnectionError as connection_error:
             logger.error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
