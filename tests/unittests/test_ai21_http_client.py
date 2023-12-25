@@ -4,6 +4,7 @@ import pytest
 import requests
 
 from ai21.ai21_http_client import AI21HTTPClient
+from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
 _DUMMY_API_KEY = "dummy_key"
@@ -101,10 +102,14 @@ class TestAI21StudioClient:
         mock_requests_session: requests.Session,
     ):
         response_json = {"test_key": "test_value"}
-
-        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
         mock_requests_session.request.return_value = MockResponse(response_json, 200)
-        response = client.execute_http_request(session=mock_requests_session, **params)
+
+        http_client = HttpClient(session=mock_requests_session)
+        client = AI21HTTPClient(
+            http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1"
+        )
+
+        response = client.execute_http_request(**params)
         assert response == response_json
 
         if "files" in params:
@@ -126,9 +131,12 @@ class TestAI21StudioClient:
         mock_requests_session: requests.Session,
     ):
         response_json = {"test_key": "test_value"}
+        http_client = HttpClient(session=mock_requests_session)
+        client = AI21HTTPClient(
+            http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1"
+        )
 
-        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
         mock_requests_session.request.return_value = MockResponse(response_json, 200)
         with pytest.raises(ValueError):
             params = {"method": "PUT", "url": "test_url", "params": {"foo": "bar"}, "files": {"file": "test_file"}}
-            client.execute_http_request(session=mock_requests_session, **params)
+            client.execute_http_request(**params)
