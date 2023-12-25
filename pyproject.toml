@@ -71,6 +71,7 @@ safety = "*"
 ruff = "*"
 python-semantic-release = "^8.5.0"
 pytest = "^7.4.3"
+pytest-mock = "^3.12.0"
 
 [tool.poetry.extras]
 AWS = ["boto3"]

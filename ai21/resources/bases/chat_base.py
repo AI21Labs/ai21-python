@@ -11,7 +11,7 @@ class Message:
 
 
 class Chat(ABC):
-    _module_name = "chat"
+    _MODULE_NAME = "chat"
 
     @abstractmethod
     def create(

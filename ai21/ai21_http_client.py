@@ -1,4 +1,6 @@
+import io
 from typing import Optional, Dict, Any
+
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.errors import MissingApiKeyException
@@ -6,7 +8,7 @@ from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
 
-class AI21StudioClient:
+class AI21HTTPClient:
     def __init__(
         self,
         *,
@@ -17,7 +19,9 @@ class AI21StudioClient:
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
         organization: Optional[str] = None,
+        application: Optional[str] = None,
         via: Optional[str] = None,
+        http_client: Optional[HttpClient] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         self._env_config = env_config
@@ -32,12 +36,11 @@ class AI21StudioClient:
         self._timeout_sec = timeout_sec or self._env_config.timeout_sec
         self._num_retries = num_retries or self._env_config.num_retries
         self._organization = organization or self._env_config.organization
-        self._application = self._env_config.application
+        self._application = application or self._env_config.application
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
-
-        self.http_client = HttpClient(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
+        self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
@@ -53,6 +56,18 @@ class AI21StudioClient:
 
         return headers
 
+    def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> HttpClient:
+        if http_client is None:
+            return HttpClient(
+                timeout_sec=self._timeout_sec,
+                num_retries=self._num_retries,
+                headers=headers,
+            )
+
+        http_client.add_headers(headers)
+
+        return http_client
+
     def _build_user_agent(self) -> str:
         user_agent = f"ai21 studio SDK {VERSION}"
 
@@ -67,8 +82,14 @@ class AI21StudioClient:
 
         return user_agent
 
-    def execute_http_request(self, method: str, url: str, params: Optional[Dict] = None, files=None):
-        return self.http_client.execute_http_request(method=method, url=url, params=params, files=files)
+    def execute_http_request(
+        self,
+        method: str,
+        url: str,
+        params: Optional[Dict] = None,
+        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+    ):
+        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
 
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"

@@ -1,6 +1,6 @@
 from typing import List
 
-from ai21.ai21_studio_client import AI21StudioClient
+from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.sagemaker.constants import (
     SAGEMAKER_MODEL_PACKAGE_NAMES,
 )
@@ -18,7 +18,7 @@ class SageMaker:
     def get_model_package_arn(cls, model_name: str, region: str, version: str = LATEST_VERSION_STR) -> str:
         _assert_model_package_exists(model_name=model_name, region=region)
 
-        client = AI21StudioClient()
+        client = cls._create_ai21_http_client()
 
         response = client.execute_http_request(
             method="POST",
@@ -40,7 +40,8 @@ class SageMaker:
     @classmethod
     def list_model_package_versions(cls, model_name: str, region: str) -> List[str]:
         _assert_model_package_exists(model_name=model_name, region=region)
-        client = AI21StudioClient()
+
+        client = cls._create_ai21_http_client()
 
         response = client.execute_http_request(
             method="POST",
@@ -52,6 +53,10 @@ class SageMaker:
         )
 
         return response["versions"]
+
+    @classmethod
+    def _create_ai21_http_client(cls) -> AI21HTTPClient:
+        return AI21HTTPClient()
 
 
 def _assert_model_package_exists(model_name, region):

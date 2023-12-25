@@ -15,7 +15,7 @@ class StudioCompletion(StudioResource, Completion):
         num_results: Optional[int] = 1,
         min_tokens: Optional[int] = 0,
         temperature: Optional[float] = 0.7,
-        top_p: Optional[int] = 1,
+        top_p: Optional[float] = 1,
         top_k_return: Optional[int] = 0,
         custom_model: Optional[str] = None,
         experimental_mode: bool = False,
