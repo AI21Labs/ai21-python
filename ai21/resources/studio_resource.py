@@ -1,8 +1,7 @@
 from __future__ import annotations
 
-import io
 from abc import ABC
-from typing import Any, Dict, Optional
+from typing import Any, Dict, Optional, BinaryIO
 
 from ai21.ai21_http_client import AI21HTTPClient
 
@@ -15,7 +14,7 @@ class StudioResource(ABC):
         self,
         url: str,
         body: Dict[str, Any],
-        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        files: Optional[Dict[str, BinaryIO]] = None,
     ) -> Dict[str, Any]:
         return self._client.execute_http_request(
             method="POST",

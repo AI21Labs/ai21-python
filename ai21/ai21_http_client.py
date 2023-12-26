@@ -1,6 +1,4 @@
-import io
-from typing import Optional, Dict, Any
-
+from typing import Optional, Dict, Any, BinaryIO
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.errors import MissingApiKeyError
@@ -87,7 +85,7 @@ class AI21HTTPClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
-        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        files: Optional[Dict[str, BinaryIO]] = None,
     ):
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
 
