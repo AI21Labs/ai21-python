@@ -6,7 +6,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from ai21.logger import logger
-from ai21.errors import AccessDenied, NotFound, AI21APITimeoutError
+from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client import handle_non_success_response
 
 _ERROR_MSG_TEMPLATE = (
@@ -52,7 +52,7 @@ class BedrockSession:
             raise NotFound(details=error_message)
 
         if status_code == 408:
-            raise AI21APITimeoutError(details=error_message)
+            raise APITimeoutError(details=error_message)
 
         if status_code == 424:
             error_message_template = re.compile(_ERROR_MSG_TEMPLATE)

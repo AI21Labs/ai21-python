@@ -10,7 +10,7 @@ from ai21.errors import (
     BadRequest,
     Unauthorized,
     UnprocessableEntity,
-    TooManyRequests,
+    TooManyRequestsError,
     AI21ServerError,
     ServiceUnavailable,
     AI21APIError,
@@ -32,7 +32,7 @@ def handle_non_success_response(status_code: int, response_text: str):
     if status_code == 422:
         raise UnprocessableEntity(details=response_text)
     if status_code == 429:
-        raise TooManyRequests(details=response_text)
+        raise TooManyRequestsError(details=response_text)
     if status_code == 500:
         raise AI21ServerError(details=response_text)
     if status_code == 503:
