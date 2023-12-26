@@ -20,7 +20,7 @@ class StudioLibrary(StudioResource):
 class LibraryFiles(StudioResource):
     _module_name = "library/files"
 
-    def upload(
+    def create(
         self,
         file_path: str,
         *,

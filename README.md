@@ -150,7 +150,7 @@ from ai21 import AI21Client
 
 client = AI21Client()
 
-file_id = client.library.files.upload(
+file_id = client.library.files.create(
     file_path="path/to/file",
     path="path/to/file/in/library",
     labels=["label1", "label2"],
