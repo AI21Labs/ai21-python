@@ -213,7 +213,7 @@ try:
 except ai21_errors.AI21ServerError as e:
     print("Server error and could not be reached")
     print(e.details)
-except ai21_errors.TooManyRequests as e:
+except ai21_errors.TooManyRequestsError as e:
     print("A 429 status code was returned. Slow down on the requests")
 except AI21APIError as e:
     print("A non 200 status code error. For more error types see ai21.errors")
