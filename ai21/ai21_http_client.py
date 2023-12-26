@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any
 
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.errors import MissingApiKeyException
+from ai21.errors import MissingApiKeyError
 from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
@@ -28,7 +28,7 @@ class AI21HTTPClient:
         self._api_key = api_key or self._env_config.api_key
 
         if self._api_key is None:
-            raise MissingApiKeyException()
+            raise MissingApiKeyError()
 
         self._api_host = api_host or self._env_config.api_host
         self._api_version = api_version or self._env_config.api_version

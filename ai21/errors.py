@@ -65,14 +65,14 @@ class AI21Error(Exception):
         return f"{type(self).__name__} {self.message}"
 
 
-class MissingApiKeyException(AI21Error):
+class MissingApiKeyError(AI21Error):
     def __init__(self):
         message = "API key must be supplied either globally in the ai21 namespace, or to be provided in the call args"
         super().__init__(message)
         self.message = message
 
 
-class ModelPackageDoesntExistException(AI21Error):
+class ModelPackageDoesntExistError(AI21Error):
     def __init__(self, model_name: str, region: str, version: Optional[str] = None):
         message = f"model_name: {model_name} doesn't exist in region: {region}"
 
