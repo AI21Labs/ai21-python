@@ -1,11 +1,9 @@
-import io
 import json
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, BinaryIO
 
 import requests
 from requests.adapters import HTTPAdapter, Retry, RetryError
 
-from ai21.logger import logger
 from ai21.errors import (
     BadRequest,
     Unauthorized,
@@ -15,6 +13,7 @@ from ai21.errors import (
     ServiceUnavailable,
     AI21APIError,
 )
+from ai21.logger import logger
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
@@ -74,7 +73,7 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
-        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        files: Optional[Dict[str, BinaryIO]] = None,
     ):
         timeout = self._timeout_sec
         headers = self._headers
