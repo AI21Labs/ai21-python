@@ -4,8 +4,8 @@ from ai21.clients.studio.ai21_client import AI21Client
 from ai21.errors import (
     AI21APIError,
     APITimeoutError,
-    MissingApiKeyException,
-    ModelPackageDoesntExistException,
+    MissingApiKeyError,
+    ModelPackageDoesntExistError,
     AI21Error,
     TooManyRequestsError,
 )
@@ -69,8 +69,8 @@ __all__ = [
     "AI21APIError",
     "APITimeoutError",
     "AI21Error",
-    "MissingApiKeyException",
-    "ModelPackageDoesntExistException",
+    "MissingApiKeyError",
+    "ModelPackageDoesntExistError",
     "TooManyRequestsError",
     "AI21BedrockClient",
     "AI21SageMakerClient",
