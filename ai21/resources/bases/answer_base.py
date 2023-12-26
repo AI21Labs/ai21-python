@@ -5,7 +5,7 @@ from ai21.resources.responses.answer_response import AnswerResponse
 
 
 class Answer(ABC):
-    _MODULE_NAME = "answer"
+    _module_name = "answer"
 
     def create(
         self,
