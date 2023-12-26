@@ -18,7 +18,6 @@ class StudioCompletion(StudioResource, Completion):
         top_p: Optional[float] = 1,
         top_k_return: Optional[int] = 0,
         custom_model: Optional[str] = None,
-        experimental_mode: bool = False,
         stop_sequences: Optional[List[str]] = None,
         frequency_penalty: Optional[Dict[str, Any]] = None,
         presence_penalty: Optional[Dict[str, Any]] = None,
@@ -26,9 +25,6 @@ class StudioCompletion(StudioResource, Completion):
         epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
-        if experimental_mode:
-            model = f"experimental/{model}"
-
         url = f"{self._client.get_base_url()}/{model}"
 
         if custom_model is not None:
@@ -45,7 +41,6 @@ class StudioCompletion(StudioResource, Completion):
             top_p=top_p,
             top_k_return=top_k_return,
             custom_model=custom_model,
-            experimental_mode=experimental_mode,
             stop_sequences=stop_sequences,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
