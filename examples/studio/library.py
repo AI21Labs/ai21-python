@@ -24,7 +24,7 @@ file_path = os.getcwd()
 path = os.path.join(file_path, file_name)
 file_utils.create_file(file_path, file_name, content="test content" * 100)
 
-file_id = client.library.files.upload(
+file_id = client.library.files.create(
     file_path=path,
     path=file_path,
     labels=["label1", "label2"],
