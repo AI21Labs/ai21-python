@@ -1,9 +1,7 @@
-import io
-from typing import Optional, Dict, Any
-
+from typing import Optional, Dict, Any, BinaryIO
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.errors import MissingApiKeyException
+from ai21.errors import MissingApiKeyError
 from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
@@ -28,15 +26,15 @@ class AI21HTTPClient:
         self._api_key = api_key or self._env_config.api_key
 
         if self._api_key is None:
-            raise MissingApiKeyException()
+            raise MissingApiKeyError()
 
         self._api_host = api_host or self._env_config.api_host
         self._api_version = api_version or self._env_config.api_version
         self._headers = headers
         self._timeout_sec = timeout_sec or self._env_config.timeout_sec
         self._num_retries = num_retries or self._env_config.num_retries
-        self._organization = organization or self._env_config.organization
-        self._application = application or self._env_config.application
+        self._organization = organization
+        self._application = application
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
@@ -87,7 +85,7 @@ class AI21HTTPClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
-        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        files: Optional[Dict[str, BinaryIO]] = None,
     ):
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
 

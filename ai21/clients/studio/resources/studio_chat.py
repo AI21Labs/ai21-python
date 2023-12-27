@@ -39,6 +39,6 @@ class StudioChat(StudioResource, Chat):
             presence_penalty=presence_penalty,
             count_penalty=count_penalty,
         )
-        url = f"{self._client.get_base_url()}/{model}/{self._MODULE_NAME}"
+        url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
         response = self._post(url=url, body=body)
         return self._json_to_response(response)

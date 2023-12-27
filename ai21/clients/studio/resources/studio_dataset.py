@@ -6,7 +6,7 @@ from ai21.resources.studio_resource import StudioResource
 
 
 class StudioDataset(StudioResource, Dataset):
-    def upload(
+    def create(
         self,
         file_path: str,
         dataset_name: str,

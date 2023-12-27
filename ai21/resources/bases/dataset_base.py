@@ -8,7 +8,7 @@ class Dataset(ABC):
     _module_name = "dataset"
 
     @abstractmethod
-    def upload(
+    def create(
         self,
         file_path: str,
         dataset_name: str,

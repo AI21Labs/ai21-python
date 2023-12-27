@@ -1,7 +1,14 @@
 from typing import Any
 
 from ai21.clients.studio.ai21_client import AI21Client
-from ai21.errors import AI21APIError, AI21APITimeoutError
+from ai21.errors import (
+    AI21APIError,
+    APITimeoutError,
+    MissingApiKeyError,
+    ModelPackageDoesntExistError,
+    AI21Error,
+    TooManyRequestsError,
+)
 from ai21.logger import setup_logger
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.responses.chat_response import ChatResponse
@@ -60,7 +67,11 @@ def __getattr__(name: str) -> Any:
 __all__ = [
     "AI21Client",
     "AI21APIError",
-    "AI21APITimeoutError",
+    "APITimeoutError",
+    "AI21Error",
+    "MissingApiKeyError",
+    "ModelPackageDoesntExistError",
+    "TooManyRequestsError",
     "AI21BedrockClient",
     "AI21SageMakerClient",
     "BedrockModelID",

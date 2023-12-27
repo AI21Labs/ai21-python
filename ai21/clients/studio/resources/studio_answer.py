@@ -15,7 +15,7 @@ class StudioAnswer(StudioResource, Answer):
         mode: Optional[str] = None,
         **kwargs,
     ) -> AnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._MODULE_NAME}"
+        url = f"{self._client.get_base_url()}/{self._module_name}"
 
         body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode)
 

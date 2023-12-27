@@ -1,20 +1,19 @@
-import io
 import json
-from typing import Optional, Dict, Any
+from typing import Optional, Dict, Any, BinaryIO
 
 import requests
 from requests.adapters import HTTPAdapter, Retry, RetryError
 
-from ai21.logger import logger
 from ai21.errors import (
     BadRequest,
     Unauthorized,
     UnprocessableEntity,
-    TooManyRequests,
+    TooManyRequestsError,
     AI21ServerError,
     ServiceUnavailable,
     AI21APIError,
 )
+from ai21.logger import logger
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
@@ -32,7 +31,7 @@ def handle_non_success_response(status_code: int, response_text: str):
     if status_code == 422:
         raise UnprocessableEntity(details=response_text)
     if status_code == 429:
-        raise TooManyRequests(details=response_text)
+        raise TooManyRequestsError(details=response_text)
     if status_code == 500:
         raise AI21ServerError(details=response_text)
     if status_code == 503:
@@ -74,7 +73,7 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
-        files: Optional[Dict[str, io.TextIOWrapper]] = None,
+        files: Optional[Dict[str, BinaryIO]] = None,
     ):
         timeout = self._timeout_sec
         headers = self._headers

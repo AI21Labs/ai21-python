@@ -20,7 +20,6 @@ class Completion(ABC):
         top_p=1,
         top_k_return=0,
         custom_model: Optional[str] = None,
-        experimental_mode: bool = False,
         stop_sequences: Optional[List[str]] = (),
         frequency_penalty: Optional[Dict[str, Any]] = {},
         presence_penalty: Optional[Dict[str, Any]] = {},
@@ -44,7 +43,6 @@ class Completion(ABC):
         top_p: Optional[int],
         top_k_return: Optional[int],
         custom_model: Optional[str],
-        experimental_mode: bool,
         stop_sequences: Optional[List[str]],
         frequency_penalty: Optional[Dict[str, Any]],
         presence_penalty: Optional[Dict[str, Any]],
@@ -54,7 +52,6 @@ class Completion(ABC):
         return {
             "model": model,
             "customModel": custom_model,
-            "experimentalModel": experimental_mode,
             "prompt": prompt,
             "maxTokens": max_tokens,
             "numResults": num_results,

@@ -150,7 +150,7 @@ from ai21 import AI21Client
 
 client = AI21Client()
 
-file_id = client.library.files.upload(
+file_id = client.library.files.create(
     file_path="path/to/file",
     path="path/to/file/in/library",
     labels=["label1", "label2"],
@@ -213,7 +213,7 @@ try:
 except ai21_errors.AI21ServerError as e:
     print("Server error and could not be reached")
     print(e.details)
-except ai21_errors.TooManyRequests as e:
+except ai21_errors.TooManyRequestsError as e:
     print("A 429 status code was returned. Slow down on the requests")
 except AI21APIError as e:
     print("A non 200 status code error. For more error types see ai21.errors")
