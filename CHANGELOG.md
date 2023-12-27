@@ -2,7 +2,164 @@
 
 
 
+## v2.0.0-rc.5 (2023-12-27)
+
+### Ci
+
+* ci: Remove python 3_7 support (#25)
+
+* ci: python 3.8 &gt;= support
+
+* ci: unittests
+
+* test: dummy test ([`d166253`](https://github.com/AI21Labs/ai21-python/commit/d166253a10456725107e80af9c13f9b360a47b0f))
+
+### Documentation
+
+* docs: Readme additions (#27)
+
+* fix: removed unnecessary url env var
+
+* fix: README.md CR ([`e4bb903`](https://github.com/AI21Labs/ai21-python/commit/e4bb903ef8775d9f755c6053e35176f407386342))
+
+* docs: Readme migration (#24)
+
+* docs: instance text
+
+* docs: client instance explanation ([`53c53cb`](https://github.com/AI21Labs/ai21-python/commit/53c53cbd2f10556b54f41e313ec1cb4485657358))
+
+* docs: README.md (#23)
+
+* ci: updated precommit hooks
+
+* docs: more readme updates
+
+* docs: removed extra lines
+
+* fix: rename
+
+* docs: readme
+
+* docs: full readme
+
+* docs: badges
+
+* ci: commitizen version
+
+* revert: via ([`bbb87d3`](https://github.com/AI21Labs/ai21-python/commit/bbb87d351c6f71ead0616c8bb90b1715285861a6))
+
+### Fix
+
+* fix: Feedback fixes (#29)
+
+* test: get_tokenizer tests
+
+* fix: cases
+
+* test: Added some unittests to resources
+
+* fix: rename var
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* ci: removed unnecessary action
+
+* fix: errors
+
+* fix: error renames
+
+* fix: rename upload
+
+* fix: rename type
+
+* fix: rename variable
+
+* fix: removed experimental
+
+* test: fixed
+
+* test: Added some unittests to resources
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* fix: errors
+
+* fix: error renames
+
+* fix: rename upload
+
+* fix: rename type
+
+* fix: rename variable
+
+* fix: removed experimental
+
+* test: fixed ([`d6f73b5`](https://github.com/AI21Labs/ai21-python/commit/d6f73b5f3db3b234334b8e430d8a33633fb0247c))
+
+### Test
+
+* test: Unittests for 2.0.0 (#28)
+
+* test: get_tokenizer tests
+
+* fix: cases
+
+* test: Added some unittests to resources
+
+* fix: rename var
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* ci: removed unnecessary action ([`c455b77`](https://github.com/AI21Labs/ai21-python/commit/c455b77ce20555c530f02107f1400287e928b371))
+
+
 ## v2.0.0-rc.4 (2023-12-19)
+
+### Chore
+
+* chore(release): v2.0.0-rc.4 [skip ci] ([`2f53ec9`](https://github.com/AI21Labs/ai21-python/commit/2f53ec9abebd580a33c382cd1d544d234c74dbbf))
 
 ### Ci
 
