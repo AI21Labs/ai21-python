@@ -98,7 +98,6 @@ def get_studio_completion():
             "numResults": 1,
             "topP": 1,
             "customModel": None,
-            "experimentalModel": False,
             "topKReturn": 0,
             "stopSequences": [],
             "frequencyPenalty": None,

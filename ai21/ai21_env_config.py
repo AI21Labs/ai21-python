@@ -11,8 +11,6 @@ class _AI21EnvConfig:
     api_key: Optional[str] = None
     api_version: str = DEFAULT_API_VERSION
     api_host: str = STUDIO_HOST
-    organization: Optional[str] = None
-    application: Optional[str] = None
     timeout_sec: Optional[int] = None
     num_retries: Optional[int] = None
     aws_region: Optional[str] = None
@@ -24,8 +22,6 @@ class _AI21EnvConfig:
             api_key=os.getenv("AI21_API_KEY"),
             api_version=os.getenv("AI21_API_VERSION", DEFAULT_API_VERSION),
             api_host=os.getenv("AI21_API_HOST", STUDIO_HOST),
-            organization=os.getenv("AI21_ORGANIZATION"),
-            application=os.getenv("AI21_APPLICATION"),
             timeout_sec=os.getenv("AI21_TIMEOUT_SEC"),
             num_retries=os.getenv("AI21_NUM_RETRIES"),
             aws_region=os.getenv("AI21_AWS_REGION", "us-east-1"),

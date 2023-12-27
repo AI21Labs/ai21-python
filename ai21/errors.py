@@ -81,3 +81,9 @@ class ModelPackageDoesntExistError(AI21Error):
 
         super().__init__(message)
         self.message = message
+
+
+class EmptyMandatoryListError(AI21Error):
+    def __init__(self, key: str):
+        message = f"Supplied {key} is empty. At least one element should be present in the list"
+        super().__init__(message)

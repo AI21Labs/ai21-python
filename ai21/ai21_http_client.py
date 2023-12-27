@@ -33,8 +33,8 @@ class AI21HTTPClient:
         self._headers = headers
         self._timeout_sec = timeout_sec or self._env_config.timeout_sec
         self._num_retries = num_retries or self._env_config.num_retries
-        self._organization = organization or self._env_config.organization
-        self._application = application or self._env_config.application
+        self._organization = organization
+        self._application = application
         self._via = via
 
         headers = self._build_headers(passed_headers=headers)
