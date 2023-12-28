@@ -1,5 +1,6 @@
-from typing import Optional, Dict, Any, List
+from typing import Optional, List
 
+from ai21.resources import Penalty
 from ai21.resources.bases.completion_base import Completion
 from ai21.resources.responses.completion_response import CompletionsResponse
 from ai21.resources.studio_resource import StudioResource
@@ -19,9 +20,9 @@ class StudioCompletion(StudioResource, Completion):
         top_k_return: Optional[int] = 0,
         custom_model: Optional[str] = None,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
