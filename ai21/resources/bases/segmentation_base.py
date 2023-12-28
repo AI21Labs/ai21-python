@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
+from ai21.resources.models.document_type import DocumentType
 from ai21.resources.responses.segmentation_response import SegmentationResponse
 
 
@@ -8,7 +9,7 @@ class Segmentation(ABC):
     _module_name = "segmentation"
 
     @abstractmethod
-    def create(self, source: str, source_type: str):
+    def create(self, source: str, source_type: DocumentType, **kwargs) -> SegmentationResponse:
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> SegmentationResponse:
