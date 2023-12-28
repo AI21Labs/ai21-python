@@ -11,6 +11,11 @@ class AnswerLength(str, Enum):
     LONG = "long"
 
 
+class Mode(str, Enum):
+    FLEXIBLE = "flexible"
+    STRICT = "strict"
+
+
 class Answer(ABC):
     _module_name = "answer"
 
@@ -20,7 +25,7 @@ class Answer(ABC):
         question: str,
         *,
         answer_length: Optional[AnswerLength] = None,
-        mode: Optional[str] = None,
+        mode: Optional[Mode] = None,
         **kwargs,
     ) -> AnswerResponse:
         pass

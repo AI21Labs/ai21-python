@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ai21.resources.bases.answer_base import Answer, AnswerLength
+from ai21.resources.bases.answer_base import Answer, AnswerLength, Mode
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.studio_resource import StudioResource
 
@@ -12,7 +12,7 @@ class StudioAnswer(StudioResource, Answer):
         question: str,
         *,
         answer_length: Optional[AnswerLength] = None,
-        mode: Optional[str] = None,
+        mode: Optional[Mode] = None,
         **kwargs,
     ) -> AnswerResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
