@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
+from ai21.resources.models.summary_method import SummaryMethod
 from ai21.resources.responses.summarize_response import SummarizeResponse
 
 
@@ -12,7 +13,7 @@ class Summarize(ABC):
         source_type: str,
         *,
         focus: Optional[str] = None,
-        summary_method: Optional[str] = None,
+        summary_method: Optional[SummaryMethod] = None,
         **kwargs,
     ) -> SummarizeResponse:
         pass

@@ -7,6 +7,7 @@ from ai21.resources.models.mode import Mode
 from ai21.resources.models.paraphrase_style_type import ParaphraseStyleType
 from ai21.resources.models.penalty import Penalty
 from ai21.resources.models.role_type import RoleType
+from ai21.resources.models.summary_method import SummaryMethod
 
 __all__ = [
     "AnswerLength",
@@ -18,4 +19,5 @@ __all__ = [
     "ImprovementType",
     "ParaphraseStyleType",
     "DocumentType",
+    "SummaryMethod",
 ]
