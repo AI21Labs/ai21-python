@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ai21.resources.bases.answer_base import Answer
+from ai21.resources.bases.answer_base import Answer, AnswerLength
 from ai21.resources.responses.answer_response import AnswerResponse
 from ai21.resources.studio_resource import StudioResource
 
@@ -11,7 +11,7 @@ class StudioAnswer(StudioResource, Answer):
         context: str,
         question: str,
         *,
-        answer_length: Optional[str] = None,
+        answer_length: Optional[AnswerLength] = None,
         mode: Optional[str] = None,
         **kwargs,
     ) -> AnswerResponse:

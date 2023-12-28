@@ -1,7 +1,14 @@
 from abc import ABC
+from enum import Enum
 from typing import Optional, Any, Dict
 
 from ai21.resources.responses.answer_response import AnswerResponse
+
+
+class AnswerLength(str, Enum):
+    SHORT = "short"
+    MEDIUM = "medium"
+    LONG = "long"
 
 
 class Answer(ABC):
@@ -12,7 +19,7 @@ class Answer(ABC):
         context: str,
         question: str,
         *,
-        answer_length: Optional[str] = None,
+        answer_length: Optional[AnswerLength] = None,
         mode: Optional[str] = None,
         **kwargs,
     ) -> AnswerResponse:
