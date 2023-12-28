@@ -1,6 +1,7 @@
 from typing import Optional
 
 from ai21.resources.bases.paraphrase_base import Paraphrase
+from ai21.resources.models.paraphrase_style_type import ParaphraseStyleType
 from ai21.resources.responses.paraphrase_response import ParaphraseResponse
 from ai21.resources.studio_resource import StudioResource
 
@@ -10,7 +11,7 @@ class StudioParaphrase(StudioResource, Paraphrase):
         self,
         text: str,
         *,
-        style: Optional[str] = None,
+        style: Optional[ParaphraseStyleType] = None,
         start_index: Optional[int] = None,
         end_index: Optional[int] = None,
         **kwargs,

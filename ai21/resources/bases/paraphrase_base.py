@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
+from ai21.resources.models.paraphrase_style_type import ParaphraseStyleType
 from ai21.resources.responses.paraphrase_response import ParaphraseResponse
 
 
@@ -12,7 +13,7 @@ class Paraphrase(ABC):
         self,
         text: str,
         *,
-        style: Optional[str] = None,
+        style: Optional[ParaphraseStyleType] = None,
         start_index: Optional[int] = 0,
         end_index: Optional[int] = None,
         **kwargs,
