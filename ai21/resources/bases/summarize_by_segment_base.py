@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
+from ai21.resources.models.document_type import DocumentType
 from ai21.resources.responses.summarize_by_segment_response import (
     SummarizeBySegmentResponse,
 )
@@ -13,7 +14,7 @@ class SummarizeBySegment(ABC):
     def create(
         self,
         source: str,
-        source_type: str,
+        source_type: DocumentType,
         *,
         focus: Optional[str] = None,
         **kwargs,
