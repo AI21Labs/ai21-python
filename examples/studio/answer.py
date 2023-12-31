@@ -1,4 +1,5 @@
 from ai21 import AI21Client
+from ai21.resources import Mode, AnswerLength
 
 
 client = AI21Client()
@@ -9,7 +10,7 @@ response = client.answer.create(
     "ruled by the counts of Holland. By the 17th century, the province of Holland had risen to become a maritime and "
     "economic power, dominating the other provinces of the newly independent Dutch Republic.",
     question="When did Holland become an economic power?",
-    answer_length="long",
-    mode="flexible",
+    answer_length=AnswerLength.LONG,
+    mode=Mode.FLEXIBLE,
 )
 print(response)

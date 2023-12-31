@@ -6,6 +6,7 @@ from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
+from ai21.resources import Message, RoleType
 from ai21.resources.responses.chat_response import ChatOutput, FinishReason
 from ai21.resources.responses.completion_response import Prompt, Completion, CompletionData, CompletionFinishReason
 
@@ -36,16 +37,12 @@ def get_studio_answer():
 def get_studio_chat():
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
-        {
-            "text": "Hello, I need help with a signup process.",
-            "role": "user",
-            "name": "Alice",
-        },
-        {
-            "text": "Hi Alice, I can help you with that. What seems to be the problem?",
-            "role": "assistant",
-            "name": "Bob",
-        },
+        Message(text="Hello, I need help with a signup process.", role=RoleType.USER, name="Alice"),
+        Message(
+            text="Hi Alice, I can help you with that. What seems to be the problem?",
+            role=RoleType.ASSISTANT,
+            name="Bob",
+        ),
     ]
     _DUMMY_SYSTEM = "You're a support engineer in a SaaS company"
 
@@ -56,7 +53,7 @@ def get_studio_chat():
         {
             "model": _DUMMY_MODEL,
             "system": _DUMMY_SYSTEM,
-            "messages": _DUMMY_MESSAGES,
+            "messages": [message.to_dict() for message in _DUMMY_MESSAGES],
             "temperature": 0.7,
             "maxTokens": 300,
             "minTokens": 0,

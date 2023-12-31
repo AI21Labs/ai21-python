@@ -1,6 +1,8 @@
 from abc import ABC
 from typing import Optional, Any, Dict
 
+from ai21.resources.models.answer_length import AnswerLength
+from ai21.resources.models.mode import Mode
 from ai21.resources.responses.answer_response import AnswerResponse
 
 
@@ -12,8 +14,8 @@ class Answer(ABC):
         context: str,
         question: str,
         *,
-        answer_length: Optional[str] = None,
-        mode: Optional[str] = None,
+        answer_length: Optional[AnswerLength] = None,
+        mode: Optional[Mode] = None,
         **kwargs,
     ) -> AnswerResponse:
         pass

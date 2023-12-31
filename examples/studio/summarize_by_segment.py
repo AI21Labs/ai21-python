@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-
+from ai21.resources import DocumentType
 
 client = AI21Client()
 response = client.summarize_by_segment.create(
@@ -9,6 +9,7 @@ response = client.summarize_by_segment.create(
     "county ruled by the counts of Holland. By the 17th century, "
     "the province of Holland had risen to become a maritime and economic power,"
     " dominating the other provinces of the newly independent Dutch Republic.",
-    source_type="TEXT",
+    source_type=DocumentType.TEXT,
+    focus="Holland",
 )
 print(response)

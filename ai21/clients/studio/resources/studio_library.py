@@ -1,6 +1,8 @@
 from typing import Optional, List
 
 from ai21.ai21_http_client import AI21HTTPClient
+from ai21.resources.models.answer_length import AnswerLength
+from ai21.resources.models.mode import Mode
 from ai21.resources.responses.file_response import FileResponse
 from ai21.resources.responses.library_answer_response import LibraryAnswerResponse
 from ai21.resources.responses.library_search_response import LibrarySearchResponse
@@ -109,8 +111,8 @@ class LibraryAnswer(StudioResource):
         path: Optional[str] = None,
         field_ids: Optional[List[str]] = None,
         labels: Optional[List[str]] = None,
-        answer_length: Optional[str] = None,
-        mode: Optional[str] = None,
+        answer_length: Optional[AnswerLength] = None,
+        mode: Optional[Mode] = None,
         **kwargs,
     ) -> LibraryAnswerResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"

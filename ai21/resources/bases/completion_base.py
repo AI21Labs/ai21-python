@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Dict, Any
 
+from ai21.resources import Penalty
 from ai21.resources.responses.completion_response import CompletionsResponse
 
 
@@ -21,9 +22,9 @@ class Completion(ABC):
         top_k_return=0,
         custom_model: Optional[str] = None,
         stop_sequences: Optional[List[str]] = (),
-        frequency_penalty: Optional[Dict[str, Any]] = {},
-        presence_penalty: Optional[Dict[str, Any]] = {},
-        count_penalty: Optional[Dict[str, Any]] = {},
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
@@ -44,9 +45,9 @@ class Completion(ABC):
         top_k_return: Optional[int],
         custom_model: Optional[str],
         stop_sequences: Optional[List[str]],
-        frequency_penalty: Optional[Dict[str, Any]],
-        presence_penalty: Optional[Dict[str, Any]],
-        count_penalty: Optional[Dict[str, Any]],
+        frequency_penalty: Optional[Penalty],
+        presence_penalty: Optional[Penalty],
+        count_penalty: Optional[Penalty],
         epoch: Optional[int],
     ):
         return {
@@ -60,8 +61,8 @@ class Completion(ABC):
             "topP": top_p,
             "topKReturn": top_k_return,
             "stopSequences": stop_sequences or [],
-            "frequencyPenalty": frequency_penalty,
-            "presencePenalty": presence_penalty,
-            "countPenalty": count_penalty,
+            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
+            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
+            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
             "epoch": epoch,
         }

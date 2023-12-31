@@ -1,11 +1,16 @@
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import List, Any, Dict, Optional
 
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.resources.models.penalty import Penalty
+from ai21.resources.models.role_type import RoleType
 from ai21.resources.responses.chat_response import ChatResponse
 
 
-class Message:
-    role: str
+@dataclass
+class Message(AI21BaseModelMixin):
+    role: RoleType
     text: str
     name: Optional[str]
 
@@ -27,9 +32,9 @@ class Chat(ABC):
         top_p: Optional[float] = 1.0,
         top_k_returns: Optional[int] = 0,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
         pass
@@ -49,14 +54,14 @@ class Chat(ABC):
         top_p: Optional[float] = 1.0,
         top_k_returns: Optional[int] = 0,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
     ) -> Dict[str, Any]:
         return {
             "model": model,
             "system": system,
-            "messages": messages,
+            "messages": [message.to_dict() for message in messages],
             "temperature": temperature,
             "maxTokens": max_tokens,
             "minTokens": min_tokens,
@@ -64,7 +69,7 @@ class Chat(ABC):
             "topP": top_p,
             "topKReturn": top_k_returns,
             "stopSequences": stop_sequences,
-            "frequencyPenalty": frequency_penalty,
-            "presencePenalty": presence_penalty,
-            "countPenalty": count_penalty,
+            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
+            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
+            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
         }
