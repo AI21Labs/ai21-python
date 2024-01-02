@@ -1,6 +1,6 @@
 from typing import List, Any, Optional, Dict
 
-from ai21.clients.common.chat_base import Chat, Message
+from ai21.clients.common.chat_base import Chat, ChatMessage
 from ai21.models.responses import ChatResponse
 from ai21.clients.studio.resources.studio_resource import StudioResource
 
@@ -9,7 +9,7 @@ class StudioChat(StudioResource, Chat):
     def create(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         *,
         num_results: Optional[int] = 1,

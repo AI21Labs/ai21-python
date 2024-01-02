@@ -6,7 +6,7 @@ from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 
 @dataclass
-class Message(AI21BaseModelMixin):
+class ChatMessage(AI21BaseModelMixin):
     role: RoleType
     text: str
     name: Optional[str] = None

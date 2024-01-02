@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
-from ai21.models import Message, Penalty
+from ai21.models import ChatMessage, Penalty
 from ai21.models.responses import ChatResponse
 
 
@@ -12,7 +12,7 @@ class Chat(ABC):
     def create(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         *,
         num_results: Optional[int] = 1,
@@ -35,7 +35,7 @@ class Chat(ABC):
     def _create_body(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         num_results: Optional[int] = 1,
         temperature: Optional[float] = 0.7,
