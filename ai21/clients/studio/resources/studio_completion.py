@@ -1,9 +1,9 @@
 from typing import Optional, List
 
 from ai21.resources import Penalty
-from ai21.resources.bases.completion_base import Completion
+from ai21.clients.common.completion_base import Completion
 from ai21.models.responses.completion_response import CompletionsResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.studio.resources.studio_resource import StudioResource
 
 
 class StudioCompletion(StudioResource, Completion):

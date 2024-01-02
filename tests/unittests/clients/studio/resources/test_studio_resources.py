@@ -5,7 +5,7 @@ import pytest
 from ai21 import AnswerResponse
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.studio.resources.studio_resource import StudioResource
 from tests.unittests.clients.studio.resources.conftest import get_studio_answer, get_studio_chat, get_studio_completion
 
 _BASE_URL = "https://test.api.ai21.com/studio/v1"

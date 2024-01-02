@@ -6,7 +6,7 @@ from ai21.models.mode import Mode
 from ai21.models.responses.file_response import FileResponse
 from ai21.models.responses.library_answer_response import LibraryAnswerResponse
 from ai21.models.responses.library_search_response import LibrarySearchResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.studio.resources.studio_resource import StudioResource
 
 
 class StudioLibrary(StudioResource):
