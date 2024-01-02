@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models import SummaryMethod
-from ai21.models.responses import SummarizeResponse
+from ai21.models.responses.summarize_response import SummarizeResponse
+from ai21.models.summary_method import SummaryMethod
 
 
 class Summarize(ABC):

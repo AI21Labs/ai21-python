@@ -1,8 +1,9 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
-from ai21.models import ChatMessage, Penalty
-from ai21.models.responses import ChatResponse
+from ai21.models.chat_message import ChatMessage
+from ai21.models.penalty import Penalty
+from ai21.models.responses.chat_response import ChatResponse
 
 
 class Chat(ABC):
