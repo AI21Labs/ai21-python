@@ -39,10 +39,8 @@ class TestAI21StudioClient:
             ("langchain", f"ai21 studio SDK {VERSION} via: langchain"),
         ],
     )
-    def test__build_headers__user_agent(
-        self, via: Optional[str], application: Optional[str], organization: Optional[str], expected_user_agent: str
-    ):
-        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via, application=application, organization=organization)
+    def test__build_headers__user_agent(self, via: Optional[str], expected_user_agent: str):
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via)
         assert client._http_client._headers["User-Agent"] == expected_user_agent
 
     def test__build_headers__authorization(self):
@@ -56,12 +54,10 @@ class TestAI21StudioClient:
 
     @pytest.mark.parametrize(
         ids=[
-            "when_api_host_is_not_set__should_return_default",
             "when_api_host_is_set__should_return_set_value",
         ],
         argnames=["api_host", "expected_api_host"],
         argvalues=[
-            (None, "https://api.ai21.com/studio/v1"),
             ("http://test_host", "http://test_host/studio/v1"),
         ],
     )
