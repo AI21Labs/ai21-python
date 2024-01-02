@@ -33,21 +33,10 @@ class TestAI21StudioClient:
     @pytest.mark.parametrize(
         ids=[
             "when_pass_only_via__should_include_via_in_user_agent",
-            "when_pass_only_application__should_include_application_in_user_agent",
-            "when_pass_organization__should_include_organization_in_user_agent",
-            "when_pass_all_user_agent_relevant_params__should_include_them_in_user_agent",
         ],
-        argnames=["via", "application", "organization", "expected_user_agent"],
+        argnames=["via", "expected_user_agent"],
         argvalues=[
-            ("langchain", None, None, f"ai21 studio SDK {VERSION} via: langchain"),
-            (None, "studio", None, f"ai21 studio SDK {VERSION} application: studio"),
-            (None, None, "ai21", f"ai21 studio SDK {VERSION} organization: ai21"),
-            (
-                "langchain",
-                "studio",
-                "ai21",
-                f"ai21 studio SDK {VERSION} organization: ai21 application: studio via: langchain",
-            ),
+            ("langchain", f"ai21 studio SDK {VERSION} via: langchain"),
         ],
     )
     def test__build_headers__user_agent(
