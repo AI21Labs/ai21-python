@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
 from ai21.models import DocumentType
-from ai21.resources.responses.summarize_by_segment_response import (
+from ai21.models.responses import (
     SummarizeBySegmentResponse,
 )
 

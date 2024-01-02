@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from ai21.resources.bases.embed_base import Embed
-from ai21.resources.responses.embed_response import EmbedResponse
+from ai21.models.responses import EmbedResponse
 from ai21.resources.studio_resource import StudioResource
 
 

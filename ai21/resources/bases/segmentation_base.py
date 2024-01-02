@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 from ai21.models import DocumentType
-from ai21.resources.responses.segmentation_response import SegmentationResponse
+from ai21.models.responses import SegmentationResponse
 
 
 class Segmentation(ABC):

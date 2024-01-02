@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from ai21.models import ImprovementType
-from ai21.resources.responses.improvement_response import ImprovementsResponse
+from ai21.models.responses.improvement_response import ImprovementsResponse
 
 
 class Improvements(ABC):

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
 from ai21.models import Message, Penalty
-from ai21.resources.responses.chat_response import ChatResponse
+from ai21.models.responses import ChatResponse
 
 
 class Chat(ABC):

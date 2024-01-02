@@ -1,7 +1,7 @@
 from typing import Optional, List
 
 from ai21.resources.bases.dataset_base import Dataset
-from ai21.resources.responses.dataset_response import DatasetResponse
+from ai21.models.responses.dataset_response import DatasetResponse
 from ai21.resources.studio_resource import StudioResource
 
 

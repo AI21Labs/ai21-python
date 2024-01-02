@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from ai21.resources.bases.custom_model_base import CustomModel
-from ai21.resources.responses.custom_model_response import CustomBaseModelResponse
+from ai21.models.responses.custom_model_response import CustomBaseModelResponse
 from ai21.resources.studio_resource import StudioResource
 
 

@@ -1,7 +1,7 @@
 from typing import List, Any, Optional, Dict
 
 from ai21.resources.bases.chat_base import Chat, Message
-from ai21.resources.responses.chat_response import ChatResponse
+from ai21.models.responses import ChatResponse
 from ai21.resources.studio_resource import StudioResource
 
 

@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
 from ai21.models import SummaryMethod
-from ai21.resources.responses.summarize_response import SummarizeResponse
+from ai21.models.responses import SummarizeResponse
 
 
 class Summarize(ABC):

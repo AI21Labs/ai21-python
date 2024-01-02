@@ -2,7 +2,7 @@ from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
 from ai21.models import EmbedType
-from ai21.resources.responses.embed_response import EmbedResponse
+from ai21.models.responses import EmbedResponse
 
 
 class Embed(ABC):
