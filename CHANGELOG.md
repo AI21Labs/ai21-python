@@ -2,7 +2,32 @@
 
 
 
+## v2.0.0-rc.7 (2024-01-02)
+
+### Fix
+
+* fix: Restructure packages (#31)
+
+* refactor: moved classes to models package
+
+* refactor: moved responses = to models package
+
+* refactor: moved resources to common package
+
+* refactor: chat message rename
+
+* refactor: init
+
+* fix: imports
+
+* refactor: added more to imports ([`9e8a1f0`](https://github.com/AI21Labs/ai21-python/commit/9e8a1f05dc4afaecfc525fa22cb76594d6cf0c8d))
+
+
 ## v2.0.0-rc.6 (2024-01-02)
+
+### Chore
+
+* chore(release): v2.0.0-rc.6 [skip ci] ([`1ed334b`](https://github.com/AI21Labs/ai21-python/commit/1ed334b466acca6a8e03c49a387e5918b7a69d45))
 
 ### Fix
 
