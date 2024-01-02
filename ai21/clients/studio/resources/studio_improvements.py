@@ -2,7 +2,7 @@ from typing import List
 
 from ai21.errors import EmptyMandatoryListError
 from ai21.resources.bases.improvements_base import Improvements
-from ai21.resources.models.improvement_type import ImprovementType
+from ai21.models.improvement_type import ImprovementType
 from ai21.resources.responses.improvement_response import ImprovementsResponse
 from ai21.resources.studio_resource import StudioResource
 

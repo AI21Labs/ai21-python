@@ -3,7 +3,7 @@ from __future__ import annotations
 from typing import Optional
 
 from ai21.resources.bases.summarize_base import Summarize
-from ai21.resources.models.summary_method import SummaryMethod
+from ai21.models.summary_method import SummaryMethod
 from ai21.resources.responses.summarize_response import SummarizeResponse
 from ai21.resources.sagemaker_resource import SageMakerResource
 

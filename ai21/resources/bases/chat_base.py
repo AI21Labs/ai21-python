@@ -1,18 +1,8 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import List, Any, Dict, Optional
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
-from ai21.resources.models.penalty import Penalty
-from ai21.resources.models.role_type import RoleType
+from ai21.models import Message, Penalty
 from ai21.resources.responses.chat_response import ChatResponse
-
-
-@dataclass
-class Message(AI21BaseModelMixin):
-    role: RoleType
-    text: str
-    name: Optional[str]
 
 
 class Chat(ABC):

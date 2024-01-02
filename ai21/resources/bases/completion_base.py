@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Dict, Any
 
-from ai21.resources import Penalty
+from ai21.models import Penalty
 from ai21.resources.responses.completion_response import CompletionsResponse
 
 
