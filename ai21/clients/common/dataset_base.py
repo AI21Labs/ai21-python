@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.resources.responses.dataset_response import DatasetResponse
+from ai21.models.responses.dataset_response import DatasetResponse
 
 
 class Dataset(ABC):

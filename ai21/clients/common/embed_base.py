@@ -1,13 +1,8 @@
 from abc import ABC, abstractmethod
-from enum import Enum
 from typing import List, Any, Dict, Optional
 
-from ai21.resources.responses.embed_response import EmbedResponse
-
-
-class EmbedType(str, Enum):
-    QUERY = "query"
-    SEGMENT = "segment"
+from ai21.models.embed_type import EmbedType
+from ai21.models.responses.embed_response import EmbedResponse
 
 
 class Embed(ABC):

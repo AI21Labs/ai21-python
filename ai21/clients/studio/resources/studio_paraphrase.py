@@ -1,9 +1,9 @@
 from typing import Optional
 
-from ai21.resources.bases.paraphrase_base import Paraphrase
-from ai21.resources.models.paraphrase_style_type import ParaphraseStyleType
-from ai21.resources.responses.paraphrase_response import ParaphraseResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.common.paraphrase_base import Paraphrase
+from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import ParaphraseStyleType
+from ai21.models.responses.paraphrase_response import ParaphraseResponse
 
 
 class StudioParaphrase(StudioResource, Paraphrase):

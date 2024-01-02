@@ -25,7 +25,7 @@ class AI21HTTPClient:
         self._env_config = env_config
         self._api_key = api_key or self._env_config.api_key
 
-        if self._api_key is None:
+        if not self._api_key:
             raise MissingApiKeyError()
 
         self._api_host = api_host or self._env_config.api_host

@@ -1,8 +1,8 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict
 
-from ai21.resources.models.document_type import DocumentType
-from ai21.resources.responses.segmentation_response import SegmentationResponse
+from ai21.models.document_type import DocumentType
+from ai21.models.responses.segmentation_response import SegmentationResponse
 
 
 class Segmentation(ABC):

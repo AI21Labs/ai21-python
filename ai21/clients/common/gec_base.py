@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Dict, Any
 
-from ai21.resources.responses.gec_response import GECResponse
+from ai21.models.responses.gec_response import GECResponse
 
 
 class GEC(ABC):

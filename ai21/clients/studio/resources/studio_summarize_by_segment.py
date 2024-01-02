@@ -1,11 +1,11 @@
 from typing import Optional
 
-from ai21.resources.bases.summarize_by_segment_base import SummarizeBySegment
-from ai21.resources.models.document_type import DocumentType
-from ai21.resources.responses.summarize_by_segment_response import (
+from ai21.clients.common.summarize_by_segment_base import SummarizeBySegment
+from ai21.models.document_type import DocumentType
+from ai21.models.responses.summarize_by_segment_response import (
     SummarizeBySegmentResponse,
 )
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.studio.resources.studio_resource import StudioResource
 
 
 class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):

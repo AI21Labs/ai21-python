@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, List, Any, Dict
 
-from ai21.resources.responses.custom_model_response import CustomBaseModelResponse
+from ai21.models.responses.custom_model_response import CustomBaseModelResponse
 
 
 class CustomModel(ABC):

@@ -1,14 +1,19 @@
 import pytest
 from pytest_mock import MockerFixture
 
-from ai21 import AnswerResponse, ChatResponse, CompletionsResponse
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
-from ai21.resources import Message, RoleType
-from ai21.resources.responses.chat_response import ChatOutput, FinishReason
-from ai21.resources.responses.completion_response import Prompt, Completion, CompletionData, CompletionFinishReason
+from ai21.models import AnswerResponse, ChatMessage, RoleType, ChatResponse
+from ai21.models.responses.chat_response import ChatOutput, FinishReason
+from ai21.models.responses.completion_response import (
+    Prompt,
+    Completion,
+    CompletionData,
+    CompletionFinishReason,
+    CompletionsResponse,
+)
 
 
 @pytest.fixture
@@ -37,8 +42,8 @@ def get_studio_answer():
 def get_studio_chat():
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
-        Message(text="Hello, I need help with a signup process.", role=RoleType.USER, name="Alice"),
-        Message(
+        ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER, name="Alice"),
+        ChatMessage(
             text="Hi Alice, I can help you with that. What seems to be the problem?",
             role=RoleType.ASSISTANT,
             name="Bob",

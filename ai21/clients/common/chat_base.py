@@ -1,18 +1,9 @@
 from abc import ABC, abstractmethod
-from dataclasses import dataclass
 from typing import List, Any, Dict, Optional
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
-from ai21.resources.models.penalty import Penalty
-from ai21.resources.models.role_type import RoleType
-from ai21.resources.responses.chat_response import ChatResponse
-
-
-@dataclass
-class Message(AI21BaseModelMixin):
-    role: RoleType
-    text: str
-    name: Optional[str]
+from ai21.models.chat_message import ChatMessage
+from ai21.models.penalty import Penalty
+from ai21.models.responses.chat_response import ChatResponse
 
 
 class Chat(ABC):
@@ -22,7 +13,7 @@ class Chat(ABC):
     def create(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         *,
         num_results: Optional[int] = 1,
@@ -45,7 +36,7 @@ class Chat(ABC):
     def _create_body(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         num_results: Optional[int] = 1,
         temperature: Optional[float] = 0.7,
