@@ -2,7 +2,50 @@
 
 
 
+## v2.0.0-rc.6 (2024-01-02)
+
+### Fix
+
+* fix: bump version ([`92c3f5d`](https://github.com/AI21Labs/ai21-python/commit/92c3f5de0b35510a3271a389160ab06cc064c7ea))
+
+### Refactor
+
+* refactor: Add enums (#30)
+
+* refactor: answer enum
+
+* refactor: answer - mode enum
+
+* refactor: moved imports
+
+* refactor: Added enums to chat requests/response
+
+* refactor: Added enums to completion requests/response
+
+* fix: imports
+
+* refactor: Added embed types enum
+
+* refactor: Added correction type enum
+
+* refactor: Added improvement type enum
+
+* refactor: Added enums to paraphrase and library answer
+
+* refactor: Added enums to segmentation
+
+* refactor: Added enums to summary
+
+* refactor: Added enums to summary by segment
+
+* fix: test ([`f84f86a`](https://github.com/AI21Labs/ai21-python/commit/f84f86ab4992701ba8ff22b262317e1b336ea785))
+
+
 ## v2.0.0-rc.5 (2023-12-27)
+
+### Chore
+
+* chore(release): v2.0.0-rc.5 [skip ci] ([`916c7b4`](https://github.com/AI21Labs/ai21-python/commit/916c7b40395eb2678cf4e66d49206fc94bbe9b73))
 
 ### Ci
 
