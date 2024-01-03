@@ -1,5 +1,6 @@
 from typing import List
 
+from ai21 import AI21EnvConfig
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.sagemaker.constants import (
     SAGEMAKER_MODEL_PACKAGE_NAMES,
@@ -56,7 +57,13 @@ class SageMaker:
 
     @classmethod
     def _create_ai21_http_client(cls) -> AI21HTTPClient:
-        return AI21HTTPClient()
+        return AI21HTTPClient(
+            api_key=AI21EnvConfig.api_key,
+            api_host=AI21EnvConfig.api_host,
+            api_version=AI21EnvConfig.api_version,
+            timeout_sec=AI21EnvConfig.timeout_sec,
+            num_retries=AI21EnvConfig.num_retries,
+        )
 
 
 def _assert_model_package_exists(model_name, region):
