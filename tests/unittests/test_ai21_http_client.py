@@ -33,27 +33,14 @@ class TestAI21StudioClient:
     @pytest.mark.parametrize(
         ids=[
             "when_pass_only_via__should_include_via_in_user_agent",
-            "when_pass_only_application__should_include_application_in_user_agent",
-            "when_pass_organization__should_include_organization_in_user_agent",
-            "when_pass_all_user_agent_relevant_params__should_include_them_in_user_agent",
         ],
-        argnames=["via", "application", "organization", "expected_user_agent"],
+        argnames=["via", "expected_user_agent"],
         argvalues=[
-            ("langchain", None, None, f"ai21 studio SDK {VERSION} via: langchain"),
-            (None, "studio", None, f"ai21 studio SDK {VERSION} application: studio"),
-            (None, None, "ai21", f"ai21 studio SDK {VERSION} organization: ai21"),
-            (
-                "langchain",
-                "studio",
-                "ai21",
-                f"ai21 studio SDK {VERSION} organization: ai21 application: studio via: langchain",
-            ),
+            ("langchain", f"ai21 studio SDK {VERSION} via: langchain"),
         ],
     )
-    def test__build_headers__user_agent(
-        self, via: Optional[str], application: Optional[str], organization: Optional[str], expected_user_agent: str
-    ):
-        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via, application=application, organization=organization)
+    def test__build_headers__user_agent(self, via: Optional[str], expected_user_agent: str):
+        client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via)
         assert client._http_client._headers["User-Agent"] == expected_user_agent
 
     def test__build_headers__authorization(self):
@@ -67,12 +54,10 @@ class TestAI21StudioClient:
 
     @pytest.mark.parametrize(
         ids=[
-            "when_api_host_is_not_set__should_return_default",
             "when_api_host_is_set__should_return_set_value",
         ],
         argnames=["api_host", "expected_api_host"],
         argvalues=[
-            (None, "https://api.ai21.com/studio/v1"),
             ("http://test_host", "http://test_host/studio/v1"),
         ],
     )

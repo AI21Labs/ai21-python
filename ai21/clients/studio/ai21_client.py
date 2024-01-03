@@ -1,5 +1,6 @@
 from typing import Optional, Any, Dict
 
+from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
@@ -35,14 +36,16 @@ class AI21Client:
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
         http_client: Optional[HttpClient] = None,
+        env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
         self._http_client = AI21HTTPClient(
-            api_key=api_key,
-            api_host=api_host,
+            api_key=api_key or env_config.api_key,
+            api_host=api_host or env_config.api_host,
+            api_version=env_config.api_version,
             headers=headers,
-            timeout_sec=timeout_sec,
-            num_retries=num_retries,
+            timeout_sec=timeout_sec or env_config.timeout_sec,
+            num_retries=num_retries or env_config.num_retries,
             via=via,
             http_client=http_client,
         )
