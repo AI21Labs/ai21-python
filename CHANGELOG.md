@@ -2,7 +2,32 @@
 
 
 
+## v2.0.0-rc.8 (2024-01-03)
+
+### Fix
+
+* fix: env vars to http client in sagemaker (#35)
+
+* fix: env vars to http
+
+* fix: env vars to http ([`4336c46`](https://github.com/AI21Labs/ai21-python/commit/4336c46352f61cae80f44e413059250a5fd9c409))
+
+* fix: Pass env config to client ctor (#34)
+
+* fix: removed application and organization
+
+* fix: tests ([`4d4ef71`](https://github.com/AI21Labs/ai21-python/commit/4d4ef7161b156cfed21b010e57140af2c15dc1a4))
+
+* fix: Added py.typed (#33) ([`6c9c0d0`](https://github.com/AI21Labs/ai21-python/commit/6c9c0d02d4df339efac1439a0ef5a0e4e2982587))
+
+* fix: Added env config class to init (#32) ([`fa199c4`](https://github.com/AI21Labs/ai21-python/commit/fa199c4cfb00a2e28a054789801146a09d723fd0))
+
+
 ## v2.0.0-rc.7 (2024-01-02)
+
+### Chore
+
+* chore(release): v2.0.0-rc.7 [skip ci] ([`49a6ee1`](https://github.com/AI21Labs/ai21-python/commit/49a6ee1bd528b529315d101be0c0cd812839df70))
 
 ### Fix
 
