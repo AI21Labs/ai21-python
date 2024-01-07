@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import Mode, AnswerLength
+from ai21.models import Mode, AnswerLength
 
 
 client = AI21Client()

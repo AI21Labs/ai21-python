@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import DocumentType, SummaryMethod
+from ai21.models import DocumentType, SummaryMethod
 
 client = AI21Client()
 response = client.summarize.create(

@@ -42,11 +42,10 @@ def get_studio_answer():
 def get_studio_chat():
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
-        ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER, name="Alice"),
+        ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER),
         ChatMessage(
             text="Hi Alice, I can help you with that. What seems to be the problem?",
             role=RoleType.ASSISTANT,
-            name="Bob",
         ),
     ]
     _DUMMY_SYSTEM = "You're a support engineer in a SaaS company"

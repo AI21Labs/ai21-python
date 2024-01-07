@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import Penalty
+from ai21.models import Penalty
 
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"

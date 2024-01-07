@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import ParaphraseStyleType
+from ai21.models import ParaphraseStyleType
 
 client = AI21Client()
 response = client.paraphrase.create(

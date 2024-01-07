@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import EmbedType
+from ai21.models import EmbedType
 
 client = AI21Client()
 response = client.embed.create(

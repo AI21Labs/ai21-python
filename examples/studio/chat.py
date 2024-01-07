@@ -1,15 +1,11 @@
 from ai21 import AI21Client
-from ai21.resources import Message, RoleType, Penalty
+from ai21.models import ChatMessage, RoleType, Penalty
 
 system = "You're a support engineer in a SaaS company"
 messages = [
-    Message(text="Hello, I need help with a signup process.", role=RoleType.USER, name="Alice"),
-    Message(
-        text="Hi Alice, I can help you with that. What seems to be the problem?", role=RoleType.ASSISTANT, name="Bob"
-    ),
-    Message(
-        text="I am having trouble signing up for your product with my Google account.", role=RoleType.USER, name="Alice"
-    ),
+    ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER),
+    ChatMessage(text="Hi Alice, I can help you with that. What seems to be the problem?", role=RoleType.ASSISTANT),
+    ChatMessage(text="I am having trouble signing up for your product with my Google account.", role=RoleType.USER),
 ]
 
 client = AI21Client()

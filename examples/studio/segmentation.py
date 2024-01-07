@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import DocumentType
+from ai21.models import DocumentType
 
 client = AI21Client()
 
