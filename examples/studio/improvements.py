@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-from ai21.resources import ImprovementType
+from ai21.models import ImprovementType
 
 client = AI21Client()
 response = client.improvements.create(
