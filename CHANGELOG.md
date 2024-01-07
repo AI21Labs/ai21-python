@@ -2,7 +2,22 @@
 
 
 
+## v2.0.0-rc.9 (2024-01-07)
+
+### Fix
+
+* fix: Removed name parameter from chat message (#36)
+
+* fix: removed name parameter from chat message
+
+* fix: imports in integration tests ([`2d0fe72`](https://github.com/AI21Labs/ai21-python/commit/2d0fe725975b5e1c9e817830994cefd91fca0e58))
+
+
 ## v2.0.0-rc.8 (2024-01-03)
+
+### Chore
+
+* chore(release): v2.0.0-rc.8 [skip ci] ([`b766c77`](https://github.com/AI21Labs/ai21-python/commit/b766c770c0540cd70657302cea7cc95b869992d6))
 
 ### Fix
 
