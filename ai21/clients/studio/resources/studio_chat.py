@@ -2,8 +2,8 @@ from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models import Penalty
 from ai21.models.chat_message import ChatMessage
+from ai21.models.penalty import Penalty
 from ai21.models.responses.chat_response import ChatResponse
 
 
