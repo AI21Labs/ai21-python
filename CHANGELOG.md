@@ -2,7 +2,22 @@
 
 
 
+## v2.0.0-rc.10 (2024-01-18)
+
+### Fix
+
+* fix: chat parameters (#39)
+
+* fix: parameters for chat create
+
+* fix: imports ([`bac77e9`](https://github.com/AI21Labs/ai21-python/commit/bac77e9313a8b70ae42c1ec5479a3856ee7f3d91))
+
+
 ## v2.0.0-rc.9 (2024-01-07)
+
+### Chore
+
+* chore(release): v2.0.0-rc.9 [skip ci] ([`c36a0e4`](https://github.com/AI21Labs/ai21-python/commit/c36a0e40b8a4903071af2ca199a7f42ca2859e3d))
 
 ### Fix
 
