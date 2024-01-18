@@ -1,8 +1,9 @@
-from typing import List, Any, Optional, Dict
+from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models.chat_message import ChatMessage
+from ai21.models.penalty import Penalty
 from ai21.models.responses.chat_response import ChatResponse
 
 
@@ -20,9 +21,9 @@ class StudioChat(StudioResource, Chat):
         top_p: Optional[float] = 1.0,
         top_k_returns: Optional[int] = 0,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
         body = self._create_body(
