@@ -2,7 +2,18 @@
 
 
 
+## v2.0.0-rc.11 (2024-01-22)
+
+### Fix
+
+* fix: top_k_returns to top_k_return (#40) ([`fe3765c`](https://github.com/AI21Labs/ai21-python/commit/fe3765c800f82b9bd350a851c875c30c45aa41a8))
+
+
 ## v2.0.0-rc.10 (2024-01-18)
+
+### Chore
+
+* chore(release): v2.0.0-rc.10 [skip ci] ([`11dd4da`](https://github.com/AI21Labs/ai21-python/commit/11dd4daca317e858765cabf7c6056f29ff03b261))
 
 ### Fix
 
