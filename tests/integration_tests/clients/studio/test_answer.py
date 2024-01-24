@@ -1,0 +1,51 @@
+import pytest
+from ai21 import AI21Client
+from ai21.models import AnswerLength, Mode
+
+_CONTEXT = (
+    "Holland is a geographical region[2] and former province on the western coast of"
+    " the Netherlands.[2] From the "
+    "10th to the 16th century, Holland proper was a unified political region within the Holy Roman Empire as a county "
+    "ruled by the counts of Holland. By the 17th century, the province of Holland had risen to become a maritime and "
+    "economic power, dominating the other provinces of the newly independent Dutch Republic."
+)
+
+
+@pytest.mark.parametrize(
+    ids=[
+        "when_answer_is_in_context",
+        "when_answer_not_in_context",
+    ],
+    argnames=["question", "is_answer_in_context", "expected_answer_type"],
+    argvalues=[
+        ("When did Holland become an economic power?", True, str),
+        ("Is the ocean blue?", False, None),
+    ],
+)
+def test_answer(question: str, is_answer_in_context: bool, expected_answer_type: type):
+    client = AI21Client()
+    response = client.answer.create(
+        context=_CONTEXT,
+        question=question,
+        answer_length=AnswerLength.LONG,
+        mode=Mode.FLEXIBLE,
+    )
+
+    assert response.answer_in_context == is_answer_in_context
+    if is_answer_in_context:
+        assert isinstance(response.answer, str)
+    else:
+        assert response.answer is None
+
+
+def test_answer__when_answer_length():
+    client = AI21Client()
+    response = client.answer.create(
+        context=_CONTEXT,
+        question="Can you please tell me everything you know about Holland?",
+        answer_length=AnswerLength.SHORT,
+        mode="flexible",
+    )
+    print("--------\n")
+    print(response.answer)
+    print(len(response.answer))
