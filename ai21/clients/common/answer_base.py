@@ -26,7 +26,7 @@ class Answer(ABC):
         self,
         context: str,
         question: str,
-        answer_length: Optional[str],
+        answer_length: Optional[AnswerLength],
         mode: Optional[str],
     ) -> Dict[str, Any]:
         return {"context": context, "question": question, "answerLength": answer_length, "mode": mode}
