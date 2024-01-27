@@ -18,7 +18,6 @@ class StudioSummarize(StudioResource, Summarize):
         summary_method: Optional[SummaryMethod] = None,
         **kwargs,
     ) -> SummarizeResponse:
-        # Make a summarize request to the AI21 API. Returns the response either as a string or a AI21Summarize object.
         body = self._create_body(
             source=source,
             source_type=source_type,
