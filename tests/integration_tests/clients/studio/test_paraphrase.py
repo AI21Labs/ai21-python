@@ -1,3 +1,5 @@
+import pytest
+
 from ai21 import AI21Client
 from ai21.models import ParaphraseStyleType
 
@@ -24,3 +26,26 @@ def test_paraphrase__when_start_and_end_index_is_small__should_not_return_sugges
         end_index=5,
     )
     assert len(response.suggestions) == 0
+
+
+@pytest.mark.parametrize(
+    ids=["when_general", "when_casual", "when_long", "when_short", "when_formal"],
+    argnames=["style"],
+    argvalues=[
+        (ParaphraseStyleType.GENERAL,),
+        (ParaphraseStyleType.CASUAL,),
+        (ParaphraseStyleType.LONG,),
+        (ParaphraseStyleType.SHORT,),
+        (ParaphraseStyleType.FORMAL,),
+    ],
+)
+def test_paraphrase_styles(style: ParaphraseStyleType):
+    client = AI21Client()
+    response = client.paraphrase.create(
+        text="Today is a beautiful day.",
+        style=style,
+        start_index=0,
+        end_index=25,
+    )
+
+    assert len(response.suggestions) > 0
