@@ -49,7 +49,7 @@ def test_summarize(source: str, source_type: DocumentType):
         (_SOURCE_URL, DocumentType.TEXT),
     ],
 )
-def test_summarize_source_and_source_type_misalignment(source: str, source_type: DocumentType):
+def test_summarize__source_and_source_type_misalignment(source: str, source_type: DocumentType):
     focus = "Holland"
 
     client = AI21Client()
