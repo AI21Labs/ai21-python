@@ -6,7 +6,7 @@ from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 
 @dataclass
 class SourceDocument(AI21BaseModelMixin):
-    field_id: str
+    file_id: str
     name: str
     highlights: List[str]
     public_url: Optional[str] = None
