@@ -22,7 +22,12 @@ file_name = f"test-file3-{uuid.uuid4()}.txt"
 file_path = os.getcwd()
 
 path = os.path.join(file_path, file_name)
-file_utils.create_file(file_path, file_name, content="test content" * 100)
+_SOURCE_TEXT = """Holland is a geographical region and former province on the western coast of the
+Netherlands. From the 10th to the 16th century, Holland proper was  a unified political
+ region within the Holy Roman Empire as a county ruled by the counts of Holland.
+  By the 17th century, the province of Holland had risen to become a maritime and economic power,
+   dominating the other provinces of the newly independent Dutch Republic."""
+file_utils.create_file(file_path, file_name, content=_SOURCE_TEXT)
 
 file_id = client.library.files.create(
     file_path=path,
@@ -31,6 +36,7 @@ file_id = client.library.files.create(
     public_url="www.example.com",
 )
 print(file_id)
+
 files = client.library.files.list()
 print(files)
 uploaded_file = client.library.files.get(file_id)
