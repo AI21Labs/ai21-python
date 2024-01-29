@@ -1,3 +1,4 @@
+import platform
 from typing import Optional, Dict, Any, BinaryIO
 
 from ai21.errors import MissingApiKeyError
@@ -60,7 +61,9 @@ class AI21HTTPClient:
         return http_client
 
     def _build_user_agent(self) -> str:
-        user_agent = f"ai21 studio SDK {VERSION}"
+        user_agent = (
+            f"ai21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
+        )
 
         if self._via is not None:
             user_agent = f"{user_agent} via: {self._via}"

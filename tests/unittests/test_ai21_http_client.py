@@ -1,3 +1,4 @@
+import platform
 from typing import Optional
 
 import pytest
@@ -7,16 +8,20 @@ from ai21.ai21_http_client import AI21HTTPClient
 from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
+_EXPECTED_USER_AGENT = (
+    f"ai21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
+)
+
 _DUMMY_API_KEY = "dummy_key"
 _EXPECTED_GET_HEADERS = {
     "Authorization": "Bearer dummy_key",
     "Content-Type": "application/json",
-    "User-Agent": f"ai21 studio SDK {VERSION}",
+    "User-Agent": _EXPECTED_USER_AGENT,
 }
 
 _EXPECTED_POST_FILE_HEADERS = {
     "Authorization": "Bearer dummy_key",
-    "User-Agent": f"ai21 studio SDK {VERSION}",
+    "User-Agent": _EXPECTED_USER_AGENT,
 }
 
 
@@ -36,7 +41,10 @@ class TestAI21StudioClient:
         ],
         argnames=["via", "expected_user_agent"],
         argvalues=[
-            ("langchain", f"ai21 studio SDK {VERSION} via: langchain"),
+            (
+                "langchain",
+                f"{_EXPECTED_USER_AGENT} via: langchain",
+            ),
         ],
     )
     def test__build_headers__user_agent(self, via: Optional[str], expected_user_agent: str):
