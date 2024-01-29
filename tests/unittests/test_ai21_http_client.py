@@ -9,7 +9,7 @@ from ai21.http_client import HttpClient
 from ai21.version import VERSION
 
 _EXPECTED_USER_AGENT = (
-    f"ai21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
+    f"AI21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
 )
 
 _DUMMY_API_KEY = "dummy_key"

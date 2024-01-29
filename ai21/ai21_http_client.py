@@ -62,7 +62,7 @@ class AI21HTTPClient:
 
     def _build_user_agent(self) -> str:
         user_agent = (
-            f"ai21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
+            f"AI21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
         )
 
         if self._via is not None:
