@@ -4,7 +4,7 @@ import re
 import boto3
 from botocore.exceptions import ClientError
 
-from ai21.errors import BadRequest, ServiceUnavailable, ServerError, APIError
+from ai21.errors import BadRequest, ServiceUnavailable, AI21ServerError, AI21APIError
 from ai21.http_client import handle_non_success_response
 from ai21.logger import logger
 
@@ -25,7 +25,6 @@ class SageMakerSession:
         self,
         input_json: str,
     ):
-
         try:
             response = self._session.invoke_endpoint(
                 EndpointName=self._endpoint_name,
@@ -56,5 +55,5 @@ class SageMakerSession:
         if status_code == 429 or status_code == 503:
             raise ServiceUnavailable(details=error_message)
         if status_code == 500:
-            raise ServerError(details=error_message)
-        raise APIError(status_code, details=error_message)
+            raise AI21ServerError(details=error_message)
+        raise AI21APIError(status_code, details=error_message)
