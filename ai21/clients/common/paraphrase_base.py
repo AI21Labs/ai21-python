@@ -18,6 +18,16 @@ class Paraphrase(ABC):
         end_index: Optional[int] = None,
         **kwargs,
     ) -> ParaphraseResponse:
+        """
+
+        :param text: The input text to be paraphrased.
+        :param style: Controls length and tone
+        :param start_index: Specifies the starting position of the paraphrasing process in the given text
+        :param end_index: specifies the position of the last character to be paraphrased, including the character
+         following it. If the parameter is not provided, the default value is set to the length of the given text.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ParaphraseResponse:

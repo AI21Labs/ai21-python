@@ -19,6 +19,14 @@ class SummarizeBySegment(ABC):
         focus: Optional[str] = None,
         **kwargs,
     ) -> SummarizeBySegmentResponse:
+        """
+
+        :param source: The input text, or URL of a web page to be summarized.
+        :param source_type: Either TEXT or URL
+        :param focus: Summaries focused on a topic of your choice.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> SummarizeBySegmentResponse:

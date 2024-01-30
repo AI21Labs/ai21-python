@@ -19,7 +19,7 @@ class Summarize(ABC):
         """
         :param source: The input text, or URL of a web page to be summarized.
         :param source_type: Either TEXT or URL
-        :param focus: Return only summaries focused on a topic of your choice.
+        :param focus: Summaries focused on a topic of your choice.
         :param summary_method:
         :param kwargs:
         :return:

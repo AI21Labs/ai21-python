@@ -10,6 +10,14 @@ class Embed(ABC):
 
     @abstractmethod
     def create(self, texts: List[str], *, type: Optional[EmbedType] = None, **kwargs) -> EmbedResponse:
+        """
+
+        :param texts: A list of strings, each representing a document or segment of text to be embedded.
+        :param type: For retrieval/search use cases, indicates whether the texts that were
+         sent are segments or the query.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> EmbedResponse:

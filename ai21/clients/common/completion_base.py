@@ -28,6 +28,24 @@ class Completion(ABC):
         epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
+        """
+        :param model: model type you wish to interact with
+        :param prompt: Text for model to complete
+        :param max_tokens: The maximum number of tokens to generate per result
+        :param num_results: Number of completions to sample and return.
+        :param min_tokens: The minimum number of tokens to generate per result.
+        :param temperature: A value controlling the "creativity" of the model's responses.
+        :param top_p: A value controlling the diversity of the model's responses.
+        :param top_k_return: The number of top-scoring tokens to consider for each generation step.
+        :param custom_model:
+        :param stop_sequences: Stops decoding if any of the strings is generated
+        :param frequency_penalty: A penalty applied to tokens that are frequently generated.
+        :param presence_penalty:  A penalty applied to tokens that are already present in the prompt.
+        :param count_penalty: A penalty applied to tokens based on their frequency in the generated responses
+        :param epoch:
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> CompletionsResponse:

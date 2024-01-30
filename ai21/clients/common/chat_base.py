@@ -28,6 +28,25 @@ class Chat(ABC):
         count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
+        """
+
+        :param model: model type you wish to interact with
+        :param messages: A sequence of messages ingested by the model, which then returns the assistant's response
+        :param system: Offers the model overarching guidance on its response approach, encapsulating context, tone,
+         guardrails, and more
+        :param max_tokens: The maximum number of tokens to generate per result
+        :param num_results: Number of completions to sample and return.
+        :param min_tokens: The minimum number of tokens to generate per result.
+        :param temperature: A value controlling the "creativity" of the model's responses.
+        :param top_p: A value controlling the diversity of the model's responses.
+        :param top_k_return: The number of top-scoring tokens to consider for each generation step.
+        :param stop_sequences: Stops decoding if any of the strings is generated
+        :param frequency_penalty: A penalty applied to tokens that are frequently generated.
+        :param presence_penalty:  A penalty applied to tokens that are already present in the prompt.
+        :param count_penalty: A penalty applied to tokens based on their frequency in the generated responses
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:
