@@ -2,7 +2,325 @@
 
 
 
+## v2.0.0-rc.11 (2024-01-22)
+
+### Fix
+
+* fix: top_k_returns to top_k_return (#40) ([`fe3765c`](https://github.com/AI21Labs/ai21-python/commit/fe3765c800f82b9bd350a851c875c30c45aa41a8))
+
+
+## v2.0.0-rc.10 (2024-01-18)
+
+### Chore
+
+* chore(release): v2.0.0-rc.10 [skip ci] ([`11dd4da`](https://github.com/AI21Labs/ai21-python/commit/11dd4daca317e858765cabf7c6056f29ff03b261))
+
+### Fix
+
+* fix: chat parameters (#39)
+
+* fix: parameters for chat create
+
+* fix: imports ([`bac77e9`](https://github.com/AI21Labs/ai21-python/commit/bac77e9313a8b70ae42c1ec5479a3856ee7f3d91))
+
+
+## v2.0.0-rc.9 (2024-01-07)
+
+### Chore
+
+* chore(release): v2.0.0-rc.9 [skip ci] ([`c36a0e4`](https://github.com/AI21Labs/ai21-python/commit/c36a0e40b8a4903071af2ca199a7f42ca2859e3d))
+
+### Fix
+
+* fix: Removed name parameter from chat message (#36)
+
+* fix: removed name parameter from chat message
+
+* fix: imports in integration tests ([`2d0fe72`](https://github.com/AI21Labs/ai21-python/commit/2d0fe725975b5e1c9e817830994cefd91fca0e58))
+
+
+## v2.0.0-rc.8 (2024-01-03)
+
+### Chore
+
+* chore(release): v2.0.0-rc.8 [skip ci] ([`b766c77`](https://github.com/AI21Labs/ai21-python/commit/b766c770c0540cd70657302cea7cc95b869992d6))
+
+### Fix
+
+* fix: env vars to http client in sagemaker (#35)
+
+* fix: env vars to http
+
+* fix: env vars to http ([`4336c46`](https://github.com/AI21Labs/ai21-python/commit/4336c46352f61cae80f44e413059250a5fd9c409))
+
+* fix: Pass env config to client ctor (#34)
+
+* fix: removed application and organization
+
+* fix: tests ([`4d4ef71`](https://github.com/AI21Labs/ai21-python/commit/4d4ef7161b156cfed21b010e57140af2c15dc1a4))
+
+* fix: Added py.typed (#33) ([`6c9c0d0`](https://github.com/AI21Labs/ai21-python/commit/6c9c0d02d4df339efac1439a0ef5a0e4e2982587))
+
+* fix: Added env config class to init (#32) ([`fa199c4`](https://github.com/AI21Labs/ai21-python/commit/fa199c4cfb00a2e28a054789801146a09d723fd0))
+
+
+## v2.0.0-rc.7 (2024-01-02)
+
+### Chore
+
+* chore(release): v2.0.0-rc.7 [skip ci] ([`49a6ee1`](https://github.com/AI21Labs/ai21-python/commit/49a6ee1bd528b529315d101be0c0cd812839df70))
+
+### Fix
+
+* fix: Restructure packages (#31)
+
+* refactor: moved classes to models package
+
+* refactor: moved responses = to models package
+
+* refactor: moved resources to common package
+
+* refactor: chat message rename
+
+* refactor: init
+
+* fix: imports
+
+* refactor: added more to imports ([`9e8a1f0`](https://github.com/AI21Labs/ai21-python/commit/9e8a1f05dc4afaecfc525fa22cb76594d6cf0c8d))
+
+
+## v2.0.0-rc.6 (2024-01-02)
+
+### Chore
+
+* chore(release): v2.0.0-rc.6 [skip ci] ([`1ed334b`](https://github.com/AI21Labs/ai21-python/commit/1ed334b466acca6a8e03c49a387e5918b7a69d45))
+
+### Fix
+
+* fix: bump version ([`92c3f5d`](https://github.com/AI21Labs/ai21-python/commit/92c3f5de0b35510a3271a389160ab06cc064c7ea))
+
+### Refactor
+
+* refactor: Add enums (#30)
+
+* refactor: answer enum
+
+* refactor: answer - mode enum
+
+* refactor: moved imports
+
+* refactor: Added enums to chat requests/response
+
+* refactor: Added enums to completion requests/response
+
+* fix: imports
+
+* refactor: Added embed types enum
+
+* refactor: Added correction type enum
+
+* refactor: Added improvement type enum
+
+* refactor: Added enums to paraphrase and library answer
+
+* refactor: Added enums to segmentation
+
+* refactor: Added enums to summary
+
+* refactor: Added enums to summary by segment
+
+* fix: test ([`f84f86a`](https://github.com/AI21Labs/ai21-python/commit/f84f86ab4992701ba8ff22b262317e1b336ea785))
+
+
+## v2.0.0-rc.5 (2023-12-27)
+
+### Chore
+
+* chore(release): v2.0.0-rc.5 [skip ci] ([`916c7b4`](https://github.com/AI21Labs/ai21-python/commit/916c7b40395eb2678cf4e66d49206fc94bbe9b73))
+
+### Ci
+
+* ci: Remove python 3_7 support (#25)
+
+* ci: python 3.8 &gt;= support
+
+* ci: unittests
+
+* test: dummy test ([`d166253`](https://github.com/AI21Labs/ai21-python/commit/d166253a10456725107e80af9c13f9b360a47b0f))
+
+### Documentation
+
+* docs: Readme additions (#27)
+
+* fix: removed unnecessary url env var
+
+* fix: README.md CR ([`e4bb903`](https://github.com/AI21Labs/ai21-python/commit/e4bb903ef8775d9f755c6053e35176f407386342))
+
+* docs: Readme migration (#24)
+
+* docs: instance text
+
+* docs: client instance explanation ([`53c53cb`](https://github.com/AI21Labs/ai21-python/commit/53c53cbd2f10556b54f41e313ec1cb4485657358))
+
+* docs: README.md (#23)
+
+* ci: updated precommit hooks
+
+* docs: more readme updates
+
+* docs: removed extra lines
+
+* fix: rename
+
+* docs: readme
+
+* docs: full readme
+
+* docs: badges
+
+* ci: commitizen version
+
+* revert: via ([`bbb87d3`](https://github.com/AI21Labs/ai21-python/commit/bbb87d351c6f71ead0616c8bb90b1715285861a6))
+
+### Fix
+
+* fix: Feedback fixes (#29)
+
+* test: get_tokenizer tests
+
+* fix: cases
+
+* test: Added some unittests to resources
+
+* fix: rename var
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* ci: removed unnecessary action
+
+* fix: errors
+
+* fix: error renames
+
+* fix: rename upload
+
+* fix: rename type
+
+* fix: rename variable
+
+* fix: removed experimental
+
+* test: fixed
+
+* test: Added some unittests to resources
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* fix: errors
+
+* fix: error renames
+
+* fix: rename upload
+
+* fix: rename type
+
+* fix: rename variable
+
+* fix: removed experimental
+
+* test: fixed ([`d6f73b5`](https://github.com/AI21Labs/ai21-python/commit/d6f73b5f3db3b234334b8e430d8a33633fb0247c))
+
+### Test
+
+* test: Unittests for 2.0.0 (#28)
+
+* test: get_tokenizer tests
+
+* fix: cases
+
+* test: Added some unittests to resources
+
+* fix: rename var
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* ci: removed unnecessary action ([`c455b77`](https://github.com/AI21Labs/ai21-python/commit/c455b77ce20555c530f02107f1400287e928b371))
+
+
+## v2.0.0-rc.4 (2023-12-19)
+
+### Chore
+
+* chore(release): v2.0.0-rc.4 [skip ci] ([`2f53ec9`](https://github.com/AI21Labs/ai21-python/commit/2f53ec9abebd580a33c382cd1d544d234c74dbbf))
+
+### Ci
+
+* ci: Change main proj name (#22)
+
+* ci: precommit
+
+* fix: version name
+
+* ci: Added rc pipeline for semantic release
+
+* ci: pypi api keys
+
+* ci: Added rc pipeline for semantic release
+
+* ci: pypi api keys ([`2e87234`](https://github.com/AI21Labs/ai21-python/commit/2e87234e1d8b2c0a992c0a4e4d2b95727bd63209))
+
+### Fix
+
+* fix: readme ([`ef30164`](https://github.com/AI21Labs/ai21-python/commit/ef30164b09497ff8a7134e8868e1df9980104613))
+
+
 ## v2.0.0-rc.3 (2023-12-18)
+
+### Chore
+
+* chore(release): v2.0.0-rc.3 [skip ci] ([`0a9ace7`](https://github.com/AI21Labs/ai21-python/commit/0a9ace7dd8b59eb51b6dcb4e4a1118aaa012b454))
 
 ### Fix
 

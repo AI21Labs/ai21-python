@@ -1,6 +1,6 @@
-from ai21.resources.bases.gec_base import GEC
-from ai21.resources.responses.gec_response import GECResponse
-from ai21.resources.sagemaker_resource import SageMakerResource
+from ai21.clients.common.gec_base import GEC
+from ai21.models.responses.gec_response import GECResponse
+from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource
 
 
 class SageMakerGEC(SageMakerResource, GEC):

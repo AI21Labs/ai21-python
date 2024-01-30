@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - "rc_*"
 
 env:
   POETRY_VERSION: "1.7.1"
@@ -33,7 +34,7 @@ jobs:
           poetry env use ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          poetry install --no-root --only dev --all-extras
+          poetry install --only dev --all-extras
       - name: Lint Python (Black)
         run: |
           poetry run inv formatter
