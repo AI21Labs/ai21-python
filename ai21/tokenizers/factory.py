@@ -16,6 +16,6 @@ def get_tokenizer() -> AI21Tokenizer:
     global _cached_tokenizer
 
     if _cached_tokenizer is None:
-        _cached_tokenizer = Tokenizer.get_tokenizer()
+        _cached_tokenizer = AI21Tokenizer(Tokenizer.get_tokenizer())
 
-    return AI21Tokenizer(_cached_tokenizer)
+    return _cached_tokenizer
