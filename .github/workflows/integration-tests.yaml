@@ -5,6 +5,7 @@ on:
     branches:
       - main
       - "rc_*"
+      - "fix_*"
 
 env:
   POETRY_VERSION: "1.7.1"
