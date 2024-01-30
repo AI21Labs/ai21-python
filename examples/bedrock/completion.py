@@ -1,5 +1,5 @@
 from ai21 import AI21BedrockClient, BedrockModelID
-from ai21.resources import Penalty
+from ai21.models import Penalty
 
 # Bedrock is currently supported only in us-east-1 region.
 # Either set your profile's region to us-east-1 or uncomment next line
