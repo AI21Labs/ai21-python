@@ -12,17 +12,17 @@ DEFAULT_LABELS = ["einstein", "science"]
 def _wait_for_file_to_process(client: AI21Client, file_id: str, timeout: float = 20):
     start_time = time.time()
 
-    while True:
+    elapsed_time = time.time() - start_time
+    while elapsed_time < timeout:
         file_response = client.library.files.get(file_id)
 
         if file_response.status == "PROCESSED":
-            break
+            return
 
         elapsed_time = time.time() - start_time
-        if elapsed_time >= timeout:
-            raise TimeoutError(f"Timeout: {timeout} seconds passed. File processing not completed")
-
         time.sleep(0.5)
+
+    raise TimeoutError(f"Timeout: {timeout} seconds passed. File processing not completed")
 
 
 def _delete_file(client: AI21Client, file_id: str):
@@ -31,7 +31,7 @@ def _delete_file(client: AI21Client, file_id: str):
 
 
 @pytest.fixture(scope="module", autouse=True)
-def handled_file():
+def file_in_library():
     """
     Uploads a file to the library and deletes it after the test is done
     This happens in a scope of a module so the file is uploaded only once
