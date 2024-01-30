@@ -2,7 +2,221 @@
 
 
 
+## v2.0.0-rc.12 (2024-01-30)
+
+### Chore
+
+* chore(deps): bump amannn/action-semantic-pull-request (#2)
+
+Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request) from 5.0.2 to 5.4.0.
+- [Release notes](https://github.com/amannn/action-semantic-pull-request/releases)
+- [Changelog](https://github.com/amannn/action-semantic-pull-request/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/amannn/action-semantic-pull-request/compare/v5.0.2...v5.4.0)
+
+---
+updated-dependencies:
+- dependency-name: amannn/action-semantic-pull-request
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`03a36a9`](https://github.com/AI21Labs/ai21-python/commit/03a36a9c9324a157b5aff2ecb11a1d6599ef3dee))
+
+* chore(deps): bump actions/setup-python from 4 to 5 (#19)
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4 to 5.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/v4...v5)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`40d6df8`](https://github.com/AI21Labs/ai21-python/commit/40d6df85cac9832753a1a5f5c218cc0ad0a6d4f6))
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.4.2 to 1.8.11 (#20)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.4.2 to 1.8.11.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/27b31702a0e7fc50959f5ad993c78deac1bdfc29...2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`665c953`](https://github.com/AI21Labs/ai21-python/commit/665c9533711670c358336c6674391f8afcbe8bbb))
+
+* chore(deps): bump actions/upload-artifact from 3 to 4 (#21)
+
+Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 3 to 4.
+- [Release notes](https://github.com/actions/upload-artifact/releases)
+- [Commits](https://github.com/actions/upload-artifact/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/upload-artifact
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`ee75fb5`](https://github.com/AI21Labs/ai21-python/commit/ee75fb5ce411c9a14879adefe9800dbf89486f26))
+
+* chore(deps-dev): bump gitpython from 3.1.40 to 3.1.41 (#37)
+
+Bumps [gitpython](https://github.com/gitpython-developers/GitPython) from 3.1.40 to 3.1.41.
+- [Release notes](https://github.com/gitpython-developers/GitPython/releases)
+- [Changelog](https://github.com/gitpython-developers/GitPython/blob/main/CHANGES)
+- [Commits](https://github.com/gitpython-developers/GitPython/compare/3.1.40...3.1.41)
+
+---
+updated-dependencies:
+- dependency-name: gitpython
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`bf3e740`](https://github.com/AI21Labs/ai21-python/commit/bf3e7409386057e0b6f720594539e0ef5c2823ae))
+
+* chore(deps-dev): bump jinja2 from 3.1.2 to 3.1.3 (#38)
+
+Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3.
+- [Release notes](https://github.com/pallets/jinja/releases)
+- [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
+- [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
+
+---
+updated-dependencies:
+- dependency-name: jinja2
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`347e7f9`](https://github.com/AI21Labs/ai21-python/commit/347e7f98d905027c0b429a5a93ad1fd94cc3b36d))
+
+### Ci
+
+* ci: Add rc branch prefix trigger for integration tests (#43)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes ([`0eacdbb`](https://github.com/AI21Labs/ai21-python/commit/0eacdbb07e62ed415e6c8cfe0cd02b2296c63eb4))
+
+### Fix
+
+* fix: Integration tests (#41)
+
+* fix: types
+
+* test: Added some integration tests
+
+* test: improvements
+
+* test: test_paraphrase.py
+
+* fix: doc
+
+* fix: removed unused comment
+
+* test: test_summarize.py
+
+* test: Added tests for test_summarize_by_segment.py
+
+* test: test_segmentation.py
+
+* fix: file id in library response
+
+* fix: example for library
+
+* ci: Add rc branch prefix trigger for integration tests (#43)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes
+
+* fix: types
+
+* test: Added some integration tests
+
+* test: improvements
+
+* test: test_paraphrase.py
+
+* fix: doc
+
+* fix: removed unused comment
+
+* test: test_summarize.py
+
+* test: Added tests for test_summarize_by_segment.py
+
+* test: test_segmentation.py
+
+* fix: file id in library response
+
+* fix: example for library
+
+* docs: docstrings
+
+* fix: question
+
+* fix: CR
+
+* test: Added tests to segment type in embed ([`78709a7`](https://github.com/AI21Labs/ai21-python/commit/78709a7ab195fe5cf21b03d646e6e7afb6775289))
+
+* fix: aws tests (#44)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes
+
+* fix: AWS tests
+
+* test: ci
+
+* fix: AWS tests
+
+* test: ci
+
+* fix: Removed testing pattern for tests ([`127cef4`](https://github.com/AI21Labs/ai21-python/commit/127cef460d295b7d7a3af83848f30403cf04ba4b))
+
+* fix: added user agent with more details (#42)
+
+* test: added user agent with more details
+
+* test: changed to capital
+
+* test: Removed class into single tests ([`d7208ab`](https://github.com/AI21Labs/ai21-python/commit/d7208ab1b3750f87fcd435fd5018c4866e51f748))
+
+### Test
+
+* test: Added tests for library (#45)
+
+* test: Added tests for library
+
+* fix: CR ([`e7fff80`](https://github.com/AI21Labs/ai21-python/commit/e7fff8081036c9c9316ca45389a8f80cc910314a))
+
+
 ## v2.0.0-rc.11 (2024-01-22)
+
+### Chore
+
+* chore(release): v2.0.0-rc.11 [skip ci] ([`ec1f977`](https://github.com/AI21Labs/ai21-python/commit/ec1f9774924f0f44d7449753d364661f5898ed5e))
 
 ### Fix
 
