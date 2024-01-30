@@ -1,12 +1,12 @@
 from typing import Optional, List
 
-from ai21.resources.bases.dataset_base import Dataset
-from ai21.resources.responses.dataset_response import DatasetResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.common.dataset_base import Dataset
+from ai21.models.responses.dataset_response import DatasetResponse
+from ai21.clients.studio.resources.studio_resource import StudioResource
 
 
 class StudioDataset(StudioResource, Dataset):
-    def upload(
+    def create(
         self,
         file_path: str,
         dataset_name: str,
