@@ -19,6 +19,17 @@ class Dataset(ABC):
         split_ratio: Optional[float] = None,
         **kwargs,
     ):
+        """
+
+        :param file_path: Local path to dataset
+        :param dataset_name: Dataset name. Must be unique
+        :param selected_columns: Mapping of the columns in the dataset file to prompt and completion columns.
+        :param approve_whitespace_correction: Automatically correct examples that violate best practices
+        :param delete_long_rows: Allow removal of examples where prompt + completion lengths exceeds 2047 tokens
+        :param split_ratio:
+        :param kwargs:
+        :return:
+        """
         pass
 
     @abstractmethod

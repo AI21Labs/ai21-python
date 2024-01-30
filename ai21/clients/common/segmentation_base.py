@@ -10,6 +10,13 @@ class Segmentation(ABC):
 
     @abstractmethod
     def create(self, source: str, source_type: DocumentType, **kwargs) -> SegmentationResponse:
+        """
+
+        :param source: Raw input text, or URL of a web page.
+        :param source_type: The type of the source - either TEXT or URL.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> SegmentationResponse:

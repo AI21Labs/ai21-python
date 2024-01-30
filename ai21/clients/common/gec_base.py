@@ -9,6 +9,12 @@ class GEC(ABC):
 
     @abstractmethod
     def create(self, text: str, **kwargs) -> GECResponse:
+        """
+
+        :param text: The input text to be corrected.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> GECResponse:

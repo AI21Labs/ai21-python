@@ -10,6 +10,13 @@ class Improvements(ABC):
 
     @abstractmethod
     def create(self, text: str, types: List[ImprovementType], **kwargs) -> ImprovementsResponse:
+        """
+
+        :param text: The input text to be improved.
+        :param types: Types of improvements to apply.
+        :param kwargs:
+        :return:
+        """
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ImprovementsResponse:

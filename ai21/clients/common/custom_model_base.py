@@ -18,6 +18,16 @@ class CustomModel(ABC):
         num_epochs: Optional[int] = None,
         **kwargs,
     ) -> None:
+        """
+
+        :param dataset_id: The dataset you want to train your model on.
+        :param model_name: The name of your trained model
+        :param model_type: The type of model to train.
+        :param learning_rate: The learning rate used for training.
+        :param num_epochs: Number of epochs for training
+        :param kwargs:
+        :return:
+        """
         pass
 
     @abstractmethod
