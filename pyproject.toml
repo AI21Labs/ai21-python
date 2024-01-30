@@ -1,0 +1,117 @@
+[tool.black]
+line-length = 120
+target_version = ['py310']
+include = '\.pyi?$'
+exclude = '''
+(
+  /(
+      \.eggs          # exclude a few common directories in the
+    | \.git           # root of the project
+    | \.pytest_cache
+    | \.mypy_cache
+    | \.venv
+    | venv
+    | _build
+    | build
+    | dist
+    | pynguin.egg-info
+  )/
+)
+'''
+
+[tool.isort]
+py_version = 310
+profile = "black"
+combine_as_imports = true
+lines_between_types = 1
+lines_after_imports = 2
+src_paths = [ "ai21", "tests"]
+
+[tool.coverage.run]
+branch = true
+source = ["ai21", "tests"]
+omit = ["tests/fixtures/*"]
+
+[tool.coverage.report]
+exclude_lines = [
+  "pragma: no cover",
+  "def __repr__",
+  "def __str__",
+  "raise AssertionError",
+  "raise NotImplementedError",
+  "if __name__ == .__main__.:",
+  "if TYPE_CHECKING:",
+  "if typing.TYPE_CHECKING:"
+]
+
+[tool.poetry]
+name = "ai21"
+version = "2.0.0-rc.11"
+description = ""
+authors = ["AI21 Labs"]
+readme = "README.md"
+packages = [
+    { include = "ai21" }
+]
+
+[tool.poetry.dependencies]
+python = "^3.8"
+requests = "^2.31.0"
+ai21-tokenizer = "^0.3.9"
+boto3 = { version = "^1.28.82", optional = true }
+dataclasses-json = "^0.6.3"
+
+
+[tool.poetry.group.dev.dependencies]
+black = "*"
+invoke = "*"
+isort = "*"
+mypy = "*"
+safety = "*"
+ruff = "*"
+python-semantic-release = "^8.5.0"
+pytest = "^7.4.3"
+pytest-mock = "^3.12.0"
+
+[tool.poetry.extras]
+AWS = ["boto3"]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.coverage.html]
+directory = "cov_html"
+
+[tool.coverage.xml]
+directory = "coverage.xml"
+
+[tool.commitizen]
+name = "cz_customize"
+
+[tool.commitizen.customize]
+schema_pattern = "(build|ci|docs|feat|fix|perf|refactor|style|test|chore|revert|bump):(\\s.*)"
+
+[tool.semantic_release]
+version_toml = [
+    "pyproject.toml:tool.poetry.version"
+]
+version_variables = [
+    "ai21/version.py:VERSION"
+]
+match = "(main)"
+build_command = "pip install poetry && poetry build"
+version_source = "tag"
+commit_version_number = true
+commit_message = "chore(release): v{version} [skip ci]"
+
+[tool.semantic_release.branches.main]
+match = "(main)"
+
+[tool.semantic_release.branches."Release Candidates"]
+match = "(rc_*)"
+prerelease_token = "rc"
+prerelease = true
+
+[tool.ruff]
+line-length = 120
