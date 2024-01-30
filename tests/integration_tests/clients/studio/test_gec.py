@@ -10,7 +10,6 @@ from ai21.models import CorrectionType
         "should_fix_missing_word",
         "should_fix_punctuation",
         "should_fix_wrong_word",
-        # "should_fix_word_repetition",
     ],
     argnames=["text", "correction_type", "expected_suggestion"],
     argvalues=[
@@ -23,11 +22,6 @@ from ai21.models import CorrectionType
         ),
         ("He is a well known author.", CorrectionType.PUNCTUATION, "well-known"),
         ("He is a dog-known author.", CorrectionType.WRONG_WORD, "well-known"),
-        # (
-        #     "The mountain was tall, and the tall mountain could be seen from miles away.",
-        #     CorrectionType.WORD_REPETITION,
-        #     "like",
-        # ),
     ],
 )
 def test_gec(text: str, correction_type: CorrectionType, expected_suggestion: str):

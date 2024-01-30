@@ -3,36 +3,11 @@ import pytest
 from ai21 import AI21Client
 from ai21.models import Penalty
 
-_PROMPT = (
-    "The following is a conversation between a user of an eCommerce store and a user operation"
-    " associate called Max. Max is very kind and keen to help."
-    " The following are important points about the business policies:\n- "
-    "Delivery takes up to 5 days\n- There is no return option\n\nUser gender:"
-    " Male.\n\nConversation:\nUser: Hi, had a question\nMax: "
-    "Hi there, happy to help!\nUser: Is there no way to return a product?"
-    " I got your blue T-Shirt size small but it doesn't fit.\n"
-    "Max: I'm sorry to hear that. Unfortunately we don't have a return policy. \n"
-    "User: That's a shame. \nMax: Is there anything else i can do for you?\n\n"
-    "##\n\nThe following is a conversation between a user of an eCommerce store and a user operation"
-    " associate called Max. Max is very kind and keen to help. The following are important points about"
-    " the business policies:\n- Delivery takes up to 5 days\n- There is no return option\n\n"
-    'User gender: Female.\n\nConversation:\nUser: Hi, I was wondering when you\'ll have the "Blue & White" '
-    "t-shirt back in stock?\nMax: Hi, happy to assist! We currently don't have it in stock. Do you want me"
-    " to send you an email once we do?\nUser: Yes!\nMax: Awesome. What's your email?\nUser: anc@gmail.com\n"
-    "Max: Great. I'll send you an email as soon as we get it.\n\n##\n\nThe following is a conversation between"
-    " a user of an eCommerce store and a user operation associate called Max. Max is very kind and keen to help."
-    " The following are important points about the business policies:\n- Delivery takes up to 5 days\n"
-    "- There is no return option\n\nUser gender: Female.\n\nConversation:\nUser: Hi, how much time does it"
-    " take for the product to reach me?\nMax: Hi, happy to assist! It usually takes 5 working"
-    " days to reach you.\nUser: Got it! thanks. Is there a way to shorten that delivery time if i pay extra?\n"
-    "Max: I'm sorry, no.\nUser: Got it. How do i know if the White Crisp t-shirt will fit my size?\n"
-    "Max: The size charts are available on the website.\nUser: Can you tell me what will fit a young women.\n"
-    "Max: Sure. Can you share her exact size?\n\n##\n\nThe following is a conversation between a user of an"
-    " eCommerce store and a user operation associate called Max. Max is very kind and keen to help. The following"
-    " are important points about the business policies:\n- Delivery takes up to 5 days\n"
-    "- There is no return option\n\nUser gender: Female.\n\nConversation:\n"
-    "User: Hi, I have a question for you"
-)
+_PROMPT = """
+User: Haven't received a confirmation email for my order #12345.
+Assistant: I'm sorry to hear that. I'll look into it right away.
+User: Can you please let me know when I can expect to receive it?
+"""
 
 
 def test_completion():
@@ -43,9 +18,9 @@ def test_completion():
         prompt=_PROMPT,
         max_tokens=64,
         model="j2-ultra",
-        temperature=1,
+        temperature=0.7,
         top_p=0.2,
-        top_k_return=0,
+        top_k_return=0.2,
         stop_sequences=["##"],
         num_results=num_results,
         custom_model=None,
@@ -79,7 +54,7 @@ def test_completion():
     assert response.prompt.text == _PROMPT
     assert len(response.completions) == num_results
     # Check the results aren't all the same
-    assert len(set([completion.data.text for completion in response.completions])) == num_results
+    assert len([completion.data.text for completion in response.completions]) == num_results
     for completion in response.completions:
         assert isinstance(completion.data.text, str)
 
