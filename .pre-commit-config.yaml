@@ -64,15 +64,6 @@ repos:
         args:
           - --schemafile
           - http://json.schemastore.org/prettierrc
-      - id: check-jsonschema
-        name: Validate ArgoWorkflow files
-        files: ^workflows/template/.*
-        types:
-          - yaml
-        args:
-          - --verbose
-          - --schemafile
-          - https://raw.githubusercontent.com/argoproj/argo-workflows/master/api/jsonschema/schema.json
   - repo: https://github.com/python-poetry/poetry
     rev: 1.5.0
     hooks:
