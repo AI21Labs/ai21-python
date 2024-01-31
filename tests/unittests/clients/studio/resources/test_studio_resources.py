@@ -6,7 +6,18 @@ from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import AnswerResponse
-from tests.unittests.clients.studio.resources.conftest import get_studio_answer, get_studio_chat, get_studio_completion
+from tests.unittests.clients.studio.resources.conftest import (
+    get_studio_answer,
+    get_studio_chat,
+    get_studio_completion,
+    get_studio_embed,
+    get_studio_gec,
+    get_studio_improvements,
+    get_studio_paraphrase,
+    get_studio_segmentation,
+    get_studio_summarization,
+    get_studio_summarize_by_segment,
+)
 
 _BASE_URL = "https://test.api.ai21.com/studio/v1"
 _DUMMY_CONTEXT = "What is the answer to life, the universe and everything?"
@@ -21,12 +32,26 @@ class TestStudioResources:
             "studio_answer",
             "studio_chat",
             "studio_completion",
+            "studio_embed",
+            "studio_gec",
+            "studio_improvements",
+            "studio_paraphrase",
+            "studio_segmentation",
+            "studio_summarization",
+            "studio_summarize_by_segment",
         ],
         argnames=["studio_resource", "function_body", "url_suffix", "expected_body", "expected_response"],
         argvalues=[
             (get_studio_answer()),
             (get_studio_chat()),
             (get_studio_completion()),
+            (get_studio_embed()),
+            (get_studio_gec()),
+            (get_studio_improvements()),
+            (get_studio_paraphrase()),
+            (get_studio_segmentation()),
+            (get_studio_summarization()),
+            (get_studio_summarize_by_segment()),
         ],
     )
     def test__create__should_return_answer_response(

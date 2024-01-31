@@ -12,4 +12,5 @@ class Segment(AI21BaseModelMixin):
 
 @dataclass
 class SegmentationResponse(AI21BaseModelMixin):
+    id: str
     segments: List[Segment]

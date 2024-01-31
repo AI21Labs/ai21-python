@@ -23,4 +23,5 @@ class SegmentSummary(AI21BaseModelMixin):
 
 @dataclass
 class SummarizeBySegmentResponse(AI21BaseModelMixin):
+    id: str
     segments: List[SegmentSummary]

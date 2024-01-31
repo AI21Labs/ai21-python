@@ -5,6 +5,13 @@ from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
+from ai21.clients.studio.resources.studio_embed import StudioEmbed
+from ai21.clients.studio.resources.studio_gec import StudioGEC
+from ai21.clients.studio.resources.studio_improvements import StudioImprovements
+from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
+from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
+from ai21.clients.studio.resources.studio_summarize import StudioSummarize
+from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
 from ai21.models import (
     AnswerResponse,
     ChatMessage,
@@ -17,7 +24,26 @@ from ai21.models import (
     CompletionData,
     CompletionFinishReason,
     CompletionsResponse,
+    EmbedType,
+    EmbedResponse,
+    EmbedResult,
+    GECResponse,
+    Correction,
+    CorrectionType,
+    ImprovementType,
+    ImprovementsResponse,
+    Improvement,
+    ParaphraseStyleType,
+    ParaphraseResponse,
+    Suggestion,
+    DocumentType,
+    SegmentationResponse,
+    SummaryMethod,
+    SummarizeResponse,
+    SummarizeBySegmentResponse,
+    SegmentSummary,
 )
+from ai21.models.responses.segmentation_response import Segment
 
 
 @pytest.fixture
@@ -122,5 +148,157 @@ def get_studio_completion():
     )
 
 
-def get_studio_custom_model():
-    pass
+def get_studio_embed():
+    return (
+        StudioEmbed,
+        {"texts": ["text0", "text1"], "type": EmbedType.QUERY},
+        "embed",
+        {
+            "texts": ["text0", "text1"],
+            "type": EmbedType.QUERY.value,
+        },
+        EmbedResponse(
+            id="some-id",
+            results=[
+                EmbedResult([1.0, 2.0, 3.0]),
+                EmbedResult([4.0, 5.0, 6.0]),
+            ],
+        ),
+    )
+
+
+def get_studio_gec():
+    text = "text to fi"
+    return (
+        StudioGEC,
+        {"text": text},
+        "gec",
+        {
+            "text": text,
+        },
+        GECResponse(
+            id="some-id",
+            corrections=[
+                Correction(
+                    suggestion="text to fix",
+                    start_index=9,
+                    end_index=10,
+                    original_text=text,
+                    correction_type=CorrectionType.SPELLING,
+                )
+            ],
+        ),
+    )
+
+
+def get_studio_improvements():
+    text = "text to improve"
+    types = [ImprovementType.FLUENCY]
+    return (
+        StudioImprovements,
+        {"text": text, "types": types},
+        "improvements",
+        {
+            "text": text,
+            "types": types,
+        },
+        ImprovementsResponse(
+            id="some-id",
+            improvements=[
+                Improvement(
+                    suggestions=["This text is improved"],
+                    start_index=0,
+                    end_index=15,
+                    original_text=text,
+                    improvement_type=ImprovementType.FLUENCY,
+                )
+            ],
+        ),
+    )
+
+
+def get_studio_paraphrase():
+    text = "text to paraphrase"
+    style = ParaphraseStyleType.CASUAL
+    start_index = 0
+    end_index = 10
+    return (
+        StudioParaphrase,
+        {"text": text, "style": style, "start_index": start_index, "end_index": end_index},
+        "paraphrase",
+        {
+            "text": text,
+            "style": style,
+            "startIndex": start_index,
+            "endIndex": end_index,
+        },
+        ParaphraseResponse(id="some-id", suggestions=[Suggestion(text="This text is paraphrased")]),
+    )
+
+
+def get_studio_segmentation():
+    source = "segmentation text"
+    source_type = DocumentType.TEXT
+    return (
+        StudioSegmentation,
+        {"source": source, "source_type": source_type},
+        "segmentation",
+        {
+            "source": source,
+            "sourceType": source_type,
+        },
+        SegmentationResponse(
+            id="some-id", segments=[Segment(segment_text="This text is segmented", segment_type="segment_type")]
+        ),
+    )
+
+
+def get_studio_summarization():
+    source = "text to summarize"
+    source_type = "TEXT"
+    focus = "text"
+    summary_method = SummaryMethod.FULL_DOCUMENT
+    return (
+        StudioSummarize,
+        {"source": source, "source_type": source_type, "focus": focus, "summary_method": summary_method},
+        "summarize",
+        {
+            "source": source,
+            "sourceType": source_type,
+            "focus": focus,
+            "summaryMethod": summary_method,
+        },
+        SummarizeResponse(
+            id="some-id",
+            summary="This text is summarized",
+        ),
+    )
+
+
+def get_studio_summarize_by_segment():
+    source = "text to summarize"
+    source_type = "TEXT"
+    focus = "text"
+    return (
+        StudioSummarizeBySegment,
+        {"source": source, "source_type": source_type, "focus": focus},
+        "summarize-by-segment",
+        {
+            "source": source,
+            "sourceType": source_type,
+            "focus": focus,
+        },
+        SummarizeBySegmentResponse(
+            id="some-id",
+            segments=[
+                SegmentSummary(
+                    summary="This text is summarized",
+                    segment_text="This text is segmented",
+                    segment_type="segment_type",
+                    segment_html=None,
+                    has_summary=True,
+                    highlights=[],
+                )
+            ],
+        ),
+    )
