@@ -14,7 +14,6 @@ with codecs.open(os.path.join(readme_path, "README.md"), encoding="utf-8") as fh
 setup(
     name="ai21",
     version=VERSION,
-    license="MIT",
     author="AI21 Labs",
     author_email="support@ai21.com",
     long_description_content_type="text/markdown",
