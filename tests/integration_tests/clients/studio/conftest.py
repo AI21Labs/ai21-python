@@ -30,7 +30,7 @@ def _delete_file(client: AI21Client, file_id: str):
     client.library.files.delete(file_id)
 
 
-@pytest.fixture(scope="module", autouse=True)
+@pytest.fixture(scope="module")
 def file_in_library():
     """
     Uploads a file to the library and deletes it after the test is done
