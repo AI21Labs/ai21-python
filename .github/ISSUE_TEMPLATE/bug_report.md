@@ -3,7 +3,7 @@ name: Bug report
 about: Create a report to help us improve
 title: ''
 labels: bug
-assignees: etang-ai21, asafgardin
+assignees: asafgardin, etang-ai21
 
 ---
 
