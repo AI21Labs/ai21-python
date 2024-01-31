@@ -2,9 +2,20 @@
 
 
 
+## v2.0.0 (2024-01-31)
+
+### Breaking
+
+* feat: bump version (#53)
+
+BREAKING CHANGE: 2.0.0 to SDK ([`77cfb85`](https://github.com/AI21Labs/ai21-python/commit/77cfb85d4b422ff217c511edfdf0782fce65c3b3))
+
+
 ## v1.0.0 (2024-01-31)
 
 ### Chore
+
+* chore(release): v1.0.0 [skip ci] ([`34efede`](https://github.com/AI21Labs/ai21-python/commit/34efedeb9a181bce86f8cbf0458dcd6b54538415))
 
 * chore(release): v1.0.0 [skip ci] ([`66a0086`](https://github.com/AI21Labs/ai21-python/commit/66a008632304265914acb25a6eb8c6dfd8476911))
 
