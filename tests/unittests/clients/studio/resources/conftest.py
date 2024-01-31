@@ -5,9 +5,13 @@ from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
-from ai21.models import AnswerResponse, ChatMessage, RoleType, ChatResponse
-from ai21.models.responses.chat_response import ChatOutput, FinishReason
-from ai21.models.responses.completion_response import (
+from ai21.models import (
+    AnswerResponse,
+    ChatMessage,
+    RoleType,
+    ChatResponse,
+    ChatOutput,
+    FinishReason,
     Prompt,
     Completion,
     CompletionData,

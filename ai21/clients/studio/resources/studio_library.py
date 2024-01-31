@@ -1,11 +1,8 @@
 from typing import Optional, List
 
 from ai21.ai21_http_client import AI21HTTPClient
-from ai21.models import Mode, AnswerLength
-from ai21.models.responses.file_response import FileResponse
-from ai21.models.responses.library_answer_response import LibraryAnswerResponse
-from ai21.models.responses.library_search_response import LibrarySearchResponse
 from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import Mode, AnswerLength, FileResponse, LibraryAnswerResponse, LibrarySearchResponse
 
 
 class StudioLibrary(StudioResource):

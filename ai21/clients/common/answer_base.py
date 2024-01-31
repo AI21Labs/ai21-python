@@ -1,8 +1,7 @@
 from abc import ABC
 from typing import Optional, Any, Dict
 
-from ai21.models import Mode, AnswerLength
-from ai21.models.responses.answer_response import AnswerResponse
+from ai21.models import Mode, AnswerLength, AnswerResponse
 
 
 class Answer(ABC):

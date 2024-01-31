@@ -1,8 +1,7 @@
 from typing import Optional, List
 
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource
-from ai21.models import Penalty
-from ai21.models.responses.completion_response import CompletionsResponse
+from ai21.models import Penalty, CompletionsResponse
 
 
 class SageMakerCompletion(SageMakerResource):

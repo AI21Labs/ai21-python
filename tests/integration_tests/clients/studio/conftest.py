@@ -25,7 +25,7 @@ def _wait_for_file_to_process(client: AI21Client, file_id: str, timeout: float =
     raise TimeoutError(f"Timeout: {timeout} seconds passed. File processing not completed")
 
 
-def _delete_file(client: AI21Client, file_id: str):
+def _delete_uploaded_file(client: AI21Client, file_id: str):
     _wait_for_file_to_process(client, file_id)
     client.library.files.delete(file_id)
 
@@ -39,7 +39,12 @@ def file_in_library():
     """
     client = AI21Client()
 
+    # Delete any file that might be in the library due to failed tests
+    files = client.library.files.list()
+    for file in files:
+        client.library.files.delete(file.file_id)
+
     file_id = client.library.files.create(file_path=LIBRARY_FILE_TO_UPLOAD, labels=DEFAULT_LABELS)
     _wait_for_file_to_process(client, file_id)
     yield file_id
-    _delete_file(client, file_id=file_id)
+    _delete_uploaded_file(client, file_id=file_id)

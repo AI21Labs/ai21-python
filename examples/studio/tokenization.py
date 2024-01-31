@@ -1,6 +1,5 @@
 from ai21 import AI21Client
 
-
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
     " associate called Max. Max is very kind and keen to help."

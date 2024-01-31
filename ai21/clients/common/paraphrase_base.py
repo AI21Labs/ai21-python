@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models import ParaphraseStyleType
-from ai21.models.responses.paraphrase_response import ParaphraseResponse
+from ai21.models import ParaphraseStyleType, ParaphraseResponse
 
 
 class Paraphrase(ABC):

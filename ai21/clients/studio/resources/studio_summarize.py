@@ -2,8 +2,7 @@ from typing import Optional
 
 from ai21.clients.common.summarize_base import Summarize
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models.responses.summarize_response import SummarizeResponse
-from ai21.models.summary_method import SummaryMethod
+from ai21.models import SummarizeResponse, SummaryMethod
 
 
 class StudioSummarize(StudioResource, Summarize):

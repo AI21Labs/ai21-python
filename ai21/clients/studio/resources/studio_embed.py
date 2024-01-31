@@ -2,8 +2,7 @@ from typing import List, Optional
 
 from ai21.clients.common.embed_base import Embed
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models.embed_type import EmbedType
-from ai21.models.responses.embed_response import EmbedResponse
+from ai21.models import EmbedType, EmbedResponse
 
 
 class StudioEmbed(StudioResource, Embed):

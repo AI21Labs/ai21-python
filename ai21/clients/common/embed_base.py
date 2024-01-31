@@ -1,8 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
-from ai21.models.embed_type import EmbedType
-from ai21.models.responses.embed_response import EmbedResponse
+from ai21.models import EmbedType, EmbedResponse
 
 
 class Embed(ABC):

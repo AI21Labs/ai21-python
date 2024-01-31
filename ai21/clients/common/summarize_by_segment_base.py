@@ -1,10 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models.document_type import DocumentType
-from ai21.models.responses.summarize_by_segment_response import (
-    SummarizeBySegmentResponse,
-)
+from ai21.models import DocumentType, SummarizeBySegmentResponse
 
 
 class SummarizeBySegment(ABC):

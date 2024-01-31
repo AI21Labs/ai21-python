@@ -1,6 +1,6 @@
 import pytest
 
-from ai21.errors import ModelPackageDoesntExistError
+from ai21 import ModelPackageDoesntExistError
 from tests.unittests.services.sagemaker_stub import SageMakerStub
 
 _DUMMY_ARN = "some-model-package-id1"

@@ -1,9 +1,8 @@
 from typing import Optional
 
 from ai21.clients.common.answer_base import Answer
-from ai21.models import AnswerLength, Mode
-from ai21.models.responses.answer_response import AnswerResponse
 from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import AnswerLength, Mode, AnswerResponse
 
 
 class StudioAnswer(StudioResource, Answer):
