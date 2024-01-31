@@ -107,7 +107,6 @@ commit_message = "chore(release): v{version} [skip ci]"
 
 [tool.semantic_release.branches.main]
 match = "(main)"
-version = "2.0.0"
 
 [tool.semantic_release.branches."Release Candidates"]
 match = "(rc_*)"
