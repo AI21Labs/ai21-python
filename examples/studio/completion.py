@@ -1,5 +1,5 @@
 from ai21 import AI21Client
-
+from ai21.models import Penalty
 
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
@@ -33,7 +33,42 @@ prompt = (
 )
 
 client = AI21Client()
-response = client.completion.create(prompt=prompt, max_tokens=2, model="j2-light", temperature=0)
+response = client.completion.create(
+    prompt=prompt,
+    max_tokens=2,
+    model="j2-light",
+    temperature=0,
+    top_p=1,
+    top_k_return=0,
+    stop_sequences=["##"],
+    num_results=1,
+    custom_model=None,
+    epoch=1,
+    count_penalty=Penalty(
+        scale=0,
+        apply_to_emojis=False,
+        apply_to_numbers=False,
+        apply_to_stopwords=False,
+        apply_to_punctuation=False,
+        apply_to_whitespaces=False,
+    ),
+    frequency_penalty=Penalty(
+        scale=0,
+        apply_to_emojis=False,
+        apply_to_numbers=False,
+        apply_to_stopwords=False,
+        apply_to_punctuation=False,
+        apply_to_whitespaces=False,
+    ),
+    presence_penalty=Penalty(
+        scale=0,
+        apply_to_emojis=False,
+        apply_to_numbers=False,
+        apply_to_stopwords=False,
+        apply_to_punctuation=False,
+        apply_to_whitespaces=False,
+    ),
+)
 
 print(response)
 print(response.completions[0].data.text)

@@ -1,6 +1,5 @@
 from ai21 import AI21Client
 
-
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
     " associate called Max. Max is very kind and keen to help."
@@ -33,5 +32,5 @@ prompt = (
 )
 client = AI21Client()
 # This is the new and recommended way to use the Tokenization module. The old "execute" method is deprecated.
-response = client.count_token(prompt)
+response = client.count_tokens(prompt)
 print(response)

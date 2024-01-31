@@ -1,6 +1,6 @@
-from ai21.resources.bases.gec_base import GEC
-from ai21.resources.responses.gec_response import GECResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.common.gec_base import GEC
+from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import GECResponse
 
 
 class StudioGEC(StudioResource, GEC):
