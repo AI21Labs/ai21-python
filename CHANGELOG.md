@@ -2,379 +2,35 @@
 
 
 
-## v2.0.0-rc.12 (2024-01-30)
+## v1.0.0 (2024-01-31)
 
 ### Chore
 
-* chore(deps): bump amannn/action-semantic-pull-request (#2)
+* chore(release): v1.0.0 [skip ci] ([`66a0086`](https://github.com/AI21Labs/ai21-python/commit/66a008632304265914acb25a6eb8c6dfd8476911))
 
-Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request) from 5.0.2 to 5.4.0.
-- [Release notes](https://github.com/amannn/action-semantic-pull-request/releases)
-- [Changelog](https://github.com/amannn/action-semantic-pull-request/blob/main/CHANGELOG.md)
-- [Commits](https://github.com/amannn/action-semantic-pull-request/compare/v5.0.2...v5.4.0)
+### Feature
 
----
-updated-dependencies:
-- dependency-name: amannn/action-semantic-pull-request
-  dependency-type: direct:production
-  update-type: version-update:semver-minor
-...
+* feat: bump to 2.0.0 (#52) ([`5e61e29`](https://github.com/AI21Labs/ai21-python/commit/5e61e29ec74c6c508969301c949e5b2bf72ad85b))
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`03a36a9`](https://github.com/AI21Labs/ai21-python/commit/03a36a9c9324a157b5aff2ecb11a1d6599ef3dee))
+* feat: Release Candidate v2.0.0 (#26)
 
-* chore(deps): bump actions/setup-python from 4 to 5 (#19)
+* ci: Change main proj name (#22)
 
-Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4 to 5.
-- [Release notes](https://github.com/actions/setup-python/releases)
-- [Commits](https://github.com/actions/setup-python/compare/v4...v5)
+* ci: precommit
 
----
-updated-dependencies:
-- dependency-name: actions/setup-python
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
+* fix: version name
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`40d6df8`](https://github.com/AI21Labs/ai21-python/commit/40d6df85cac9832753a1a5f5c218cc0ad0a6d4f6))
+* ci: Added rc pipeline for semantic release
 
-* chore(deps): bump pypa/gh-action-pypi-publish from 1.4.2 to 1.8.11 (#20)
+* ci: pypi api keys
 
-Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.4.2 to 1.8.11.
-- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
-- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/27b31702a0e7fc50959f5ad993c78deac1bdfc29...2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf)
+* ci: Added rc pipeline for semantic release
 
----
-updated-dependencies:
-- dependency-name: pypa/gh-action-pypi-publish
-  dependency-type: direct:production
-  update-type: version-update:semver-minor
-...
+* ci: pypi api keys
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`665c953`](https://github.com/AI21Labs/ai21-python/commit/665c9533711670c358336c6674391f8afcbe8bbb))
+* fix: readme
 
-* chore(deps): bump actions/upload-artifact from 3 to 4 (#21)
-
-Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 3 to 4.
-- [Release notes](https://github.com/actions/upload-artifact/releases)
-- [Commits](https://github.com/actions/upload-artifact/compare/v3...v4)
-
----
-updated-dependencies:
-- dependency-name: actions/upload-artifact
-  dependency-type: direct:production
-  update-type: version-update:semver-major
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`ee75fb5`](https://github.com/AI21Labs/ai21-python/commit/ee75fb5ce411c9a14879adefe9800dbf89486f26))
-
-* chore(deps-dev): bump gitpython from 3.1.40 to 3.1.41 (#37)
-
-Bumps [gitpython](https://github.com/gitpython-developers/GitPython) from 3.1.40 to 3.1.41.
-- [Release notes](https://github.com/gitpython-developers/GitPython/releases)
-- [Changelog](https://github.com/gitpython-developers/GitPython/blob/main/CHANGES)
-- [Commits](https://github.com/gitpython-developers/GitPython/compare/3.1.40...3.1.41)
-
----
-updated-dependencies:
-- dependency-name: gitpython
-  dependency-type: indirect
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`bf3e740`](https://github.com/AI21Labs/ai21-python/commit/bf3e7409386057e0b6f720594539e0ef5c2823ae))
-
-* chore(deps-dev): bump jinja2 from 3.1.2 to 3.1.3 (#38)
-
-Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3.
-- [Release notes](https://github.com/pallets/jinja/releases)
-- [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
-- [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
-
----
-updated-dependencies:
-- dependency-name: jinja2
-  dependency-type: indirect
-...
-
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`347e7f9`](https://github.com/AI21Labs/ai21-python/commit/347e7f98d905027c0b429a5a93ad1fd94cc3b36d))
-
-### Ci
-
-* ci: Add rc branch prefix trigger for integration tests (#43)
-
-* ci: rc branch trigger for integration test
-
-* fix: wrapped in quotes ([`0eacdbb`](https://github.com/AI21Labs/ai21-python/commit/0eacdbb07e62ed415e6c8cfe0cd02b2296c63eb4))
-
-### Fix
-
-* fix: Integration tests (#41)
-
-* fix: types
-
-* test: Added some integration tests
-
-* test: improvements
-
-* test: test_paraphrase.py
-
-* fix: doc
-
-* fix: removed unused comment
-
-* test: test_summarize.py
-
-* test: Added tests for test_summarize_by_segment.py
-
-* test: test_segmentation.py
-
-* fix: file id in library response
-
-* fix: example for library
-
-* ci: Add rc branch prefix trigger for integration tests (#43)
-
-* ci: rc branch trigger for integration test
-
-* fix: wrapped in quotes
-
-* fix: types
-
-* test: Added some integration tests
-
-* test: improvements
-
-* test: test_paraphrase.py
-
-* fix: doc
-
-* fix: removed unused comment
-
-* test: test_summarize.py
-
-* test: Added tests for test_summarize_by_segment.py
-
-* test: test_segmentation.py
-
-* fix: file id in library response
-
-* fix: example for library
-
-* docs: docstrings
-
-* fix: question
-
-* fix: CR
-
-* test: Added tests to segment type in embed ([`78709a7`](https://github.com/AI21Labs/ai21-python/commit/78709a7ab195fe5cf21b03d646e6e7afb6775289))
-
-* fix: aws tests (#44)
-
-* ci: rc branch trigger for integration test
-
-* fix: wrapped in quotes
-
-* fix: AWS tests
-
-* test: ci
-
-* fix: AWS tests
-
-* test: ci
-
-* fix: Removed testing pattern for tests ([`127cef4`](https://github.com/AI21Labs/ai21-python/commit/127cef460d295b7d7a3af83848f30403cf04ba4b))
-
-* fix: added user agent with more details (#42)
-
-* test: added user agent with more details
-
-* test: changed to capital
-
-* test: Removed class into single tests ([`d7208ab`](https://github.com/AI21Labs/ai21-python/commit/d7208ab1b3750f87fcd435fd5018c4866e51f748))
-
-### Test
-
-* test: Added tests for library (#45)
-
-* test: Added tests for library
-
-* fix: CR ([`e7fff80`](https://github.com/AI21Labs/ai21-python/commit/e7fff8081036c9c9316ca45389a8f80cc910314a))
-
-
-## v2.0.0-rc.11 (2024-01-22)
-
-### Chore
-
-* chore(release): v2.0.0-rc.11 [skip ci] ([`ec1f977`](https://github.com/AI21Labs/ai21-python/commit/ec1f9774924f0f44d7449753d364661f5898ed5e))
-
-### Fix
-
-* fix: top_k_returns to top_k_return (#40) ([`fe3765c`](https://github.com/AI21Labs/ai21-python/commit/fe3765c800f82b9bd350a851c875c30c45aa41a8))
-
-
-## v2.0.0-rc.10 (2024-01-18)
-
-### Chore
-
-* chore(release): v2.0.0-rc.10 [skip ci] ([`11dd4da`](https://github.com/AI21Labs/ai21-python/commit/11dd4daca317e858765cabf7c6056f29ff03b261))
-
-### Fix
-
-* fix: chat parameters (#39)
-
-* fix: parameters for chat create
-
-* fix: imports ([`bac77e9`](https://github.com/AI21Labs/ai21-python/commit/bac77e9313a8b70ae42c1ec5479a3856ee7f3d91))
-
-
-## v2.0.0-rc.9 (2024-01-07)
-
-### Chore
-
-* chore(release): v2.0.0-rc.9 [skip ci] ([`c36a0e4`](https://github.com/AI21Labs/ai21-python/commit/c36a0e40b8a4903071af2ca199a7f42ca2859e3d))
-
-### Fix
-
-* fix: Removed name parameter from chat message (#36)
-
-* fix: removed name parameter from chat message
-
-* fix: imports in integration tests ([`2d0fe72`](https://github.com/AI21Labs/ai21-python/commit/2d0fe725975b5e1c9e817830994cefd91fca0e58))
-
-
-## v2.0.0-rc.8 (2024-01-03)
-
-### Chore
-
-* chore(release): v2.0.0-rc.8 [skip ci] ([`b766c77`](https://github.com/AI21Labs/ai21-python/commit/b766c770c0540cd70657302cea7cc95b869992d6))
-
-### Fix
-
-* fix: env vars to http client in sagemaker (#35)
-
-* fix: env vars to http
-
-* fix: env vars to http ([`4336c46`](https://github.com/AI21Labs/ai21-python/commit/4336c46352f61cae80f44e413059250a5fd9c409))
-
-* fix: Pass env config to client ctor (#34)
-
-* fix: removed application and organization
-
-* fix: tests ([`4d4ef71`](https://github.com/AI21Labs/ai21-python/commit/4d4ef7161b156cfed21b010e57140af2c15dc1a4))
-
-* fix: Added py.typed (#33) ([`6c9c0d0`](https://github.com/AI21Labs/ai21-python/commit/6c9c0d02d4df339efac1439a0ef5a0e4e2982587))
-
-* fix: Added env config class to init (#32) ([`fa199c4`](https://github.com/AI21Labs/ai21-python/commit/fa199c4cfb00a2e28a054789801146a09d723fd0))
-
-
-## v2.0.0-rc.7 (2024-01-02)
-
-### Chore
-
-* chore(release): v2.0.0-rc.7 [skip ci] ([`49a6ee1`](https://github.com/AI21Labs/ai21-python/commit/49a6ee1bd528b529315d101be0c0cd812839df70))
-
-### Fix
-
-* fix: Restructure packages (#31)
-
-* refactor: moved classes to models package
-
-* refactor: moved responses = to models package
-
-* refactor: moved resources to common package
-
-* refactor: chat message rename
-
-* refactor: init
-
-* fix: imports
-
-* refactor: added more to imports ([`9e8a1f0`](https://github.com/AI21Labs/ai21-python/commit/9e8a1f05dc4afaecfc525fa22cb76594d6cf0c8d))
-
-
-## v2.0.0-rc.6 (2024-01-02)
-
-### Chore
-
-* chore(release): v2.0.0-rc.6 [skip ci] ([`1ed334b`](https://github.com/AI21Labs/ai21-python/commit/1ed334b466acca6a8e03c49a387e5918b7a69d45))
-
-### Fix
-
-* fix: bump version ([`92c3f5d`](https://github.com/AI21Labs/ai21-python/commit/92c3f5de0b35510a3271a389160ab06cc064c7ea))
-
-### Refactor
-
-* refactor: Add enums (#30)
-
-* refactor: answer enum
-
-* refactor: answer - mode enum
-
-* refactor: moved imports
-
-* refactor: Added enums to chat requests/response
-
-* refactor: Added enums to completion requests/response
-
-* fix: imports
-
-* refactor: Added embed types enum
-
-* refactor: Added correction type enum
-
-* refactor: Added improvement type enum
-
-* refactor: Added enums to paraphrase and library answer
-
-* refactor: Added enums to segmentation
-
-* refactor: Added enums to summary
-
-* refactor: Added enums to summary by segment
-
-* fix: test ([`f84f86a`](https://github.com/AI21Labs/ai21-python/commit/f84f86ab4992701ba8ff22b262317e1b336ea785))
-
-
-## v2.0.0-rc.5 (2023-12-27)
-
-### Chore
-
-* chore(release): v2.0.0-rc.5 [skip ci] ([`916c7b4`](https://github.com/AI21Labs/ai21-python/commit/916c7b40395eb2678cf4e66d49206fc94bbe9b73))
-
-### Ci
-
-* ci: Remove python 3_7 support (#25)
-
-* ci: python 3.8 &gt;= support
-
-* ci: unittests
-
-* test: dummy test ([`d166253`](https://github.com/AI21Labs/ai21-python/commit/d166253a10456725107e80af9c13f9b360a47b0f))
-
-### Documentation
-
-* docs: Readme additions (#27)
-
-* fix: removed unnecessary url env var
-
-* fix: README.md CR ([`e4bb903`](https://github.com/AI21Labs/ai21-python/commit/e4bb903ef8775d9f755c6053e35176f407386342))
-
-* docs: Readme migration (#24)
-
-* docs: instance text
-
-* docs: client instance explanation ([`53c53cb`](https://github.com/AI21Labs/ai21-python/commit/53c53cbd2f10556b54f41e313ec1cb4485657358))
+* chore(release): v2.0.0-rc.4 [skip ci]
 
 * docs: README.md (#23)
 
@@ -394,9 +50,55 @@ Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
 
 * ci: commitizen version
 
-* revert: via ([`bbb87d3`](https://github.com/AI21Labs/ai21-python/commit/bbb87d351c6f71ead0616c8bb90b1715285861a6))
+* revert: via
 
-### Fix
+* docs: Readme migration (#24)
+
+* docs: instance text
+
+* docs: client instance explanation
+
+* ci: Remove python 3_7 support (#25)
+
+* ci: python 3.8 &gt;= support
+
+* ci: unittests
+
+* test: dummy test
+
+* docs: Readme additions (#27)
+
+* fix: removed unnecessary url env var
+
+* fix: README.md CR
+
+* test: Unittests for 2.0.0 (#28)
+
+* test: get_tokenizer tests
+
+* fix: cases
+
+* test: Added some unittests to resources
+
+* fix: rename var
+
+* test: Added ai21 studio client tsts
+
+* fix: rename files
+
+* fix: Added types
+
+* test: added test to http
+
+* fix: removed unnecessary auth param
+
+* test: Added tests
+
+* test: Added sagemaker
+
+* test: Created a single session per instance
+
+* ci: removed unnecessary action
 
 * fix: Feedback fixes (#29)
 
@@ -470,64 +172,331 @@ Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
 
 * fix: removed experimental
 
-* test: fixed ([`d6f73b5`](https://github.com/AI21Labs/ai21-python/commit/d6f73b5f3db3b234334b8e430d8a33633fb0247c))
+* test: fixed
 
-### Test
+* chore(release): v2.0.0-rc.5 [skip ci]
 
-* test: Unittests for 2.0.0 (#28)
+* refactor: Add enums (#30)
 
-* test: get_tokenizer tests
+* refactor: answer enum
 
-* fix: cases
+* refactor: answer - mode enum
 
-* test: Added some unittests to resources
+* refactor: moved imports
 
-* fix: rename var
+* refactor: Added enums to chat requests/response
 
-* test: Added ai21 studio client tsts
+* refactor: Added enums to completion requests/response
 
-* fix: rename files
+* fix: imports
 
-* fix: Added types
+* refactor: Added embed types enum
 
-* test: added test to http
+* refactor: Added correction type enum
 
-* fix: removed unnecessary auth param
+* refactor: Added improvement type enum
 
-* test: Added tests
+* refactor: Added enums to paraphrase and library answer
 
-* test: Added sagemaker
+* refactor: Added enums to segmentation
 
-* test: Created a single session per instance
+* refactor: Added enums to summary
 
-* ci: removed unnecessary action ([`c455b77`](https://github.com/AI21Labs/ai21-python/commit/c455b77ce20555c530f02107f1400287e928b371))
+* refactor: Added enums to summary by segment
 
+* fix: test
 
-## v2.0.0-rc.4 (2023-12-19)
+* fix: bump version
 
-### Chore
+* chore(release): v2.0.0-rc.6 [skip ci]
 
-* chore(release): v2.0.0-rc.4 [skip ci] ([`2f53ec9`](https://github.com/AI21Labs/ai21-python/commit/2f53ec9abebd580a33c382cd1d544d234c74dbbf))
+* fix: Restructure packages (#31)
 
-### Ci
+* refactor: moved classes to models package
 
-* ci: Change main proj name (#22)
+* refactor: moved responses = to models package
 
-* ci: precommit
+* refactor: moved resources to common package
 
-* fix: version name
+* refactor: chat message rename
 
-* ci: Added rc pipeline for semantic release
+* refactor: init
 
-* ci: pypi api keys
+* fix: imports
 
-* ci: Added rc pipeline for semantic release
+* refactor: added more to imports
 
-* ci: pypi api keys ([`2e87234`](https://github.com/AI21Labs/ai21-python/commit/2e87234e1d8b2c0a992c0a4e4d2b95727bd63209))
+* chore(release): v2.0.0-rc.7 [skip ci]
 
-### Fix
+* fix: Added env config class to init (#32)
 
-* fix: readme ([`ef30164`](https://github.com/AI21Labs/ai21-python/commit/ef30164b09497ff8a7134e8868e1df9980104613))
+* fix: Added py.typed (#33)
+
+* fix: Pass env config to client ctor (#34)
+
+* fix: removed application and organization
+
+* fix: tests
+
+* fix: env vars to http client in sagemaker (#35)
+
+* fix: env vars to http
+
+* fix: env vars to http
+
+* chore(release): v2.0.0-rc.8 [skip ci]
+
+* fix: Removed name parameter from chat message (#36)
+
+* fix: removed name parameter from chat message
+
+* fix: imports in integration tests
+
+* chore(release): v2.0.0-rc.9 [skip ci]
+
+* fix: chat parameters (#39)
+
+* fix: parameters for chat create
+
+* fix: imports
+
+* chore(release): v2.0.0-rc.10 [skip ci]
+
+* fix: top_k_returns to top_k_return (#40)
+
+* chore(release): v2.0.0-rc.11 [skip ci]
+
+* fix: added user agent with more details (#42)
+
+* test: added user agent with more details
+
+* test: changed to capital
+
+* test: Removed class into single tests
+
+* ci: Add rc branch prefix trigger for integration tests (#43)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes
+
+* fix: aws tests (#44)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes
+
+* fix: AWS tests
+
+* test: ci
+
+* fix: AWS tests
+
+* test: ci
+
+* fix: Removed testing pattern for tests
+
+* fix: Integration tests (#41)
+
+* fix: types
+
+* test: Added some integration tests
+
+* test: improvements
+
+* test: test_paraphrase.py
+
+* fix: doc
+
+* fix: removed unused comment
+
+* test: test_summarize.py
+
+* test: Added tests for test_summarize_by_segment.py
+
+* test: test_segmentation.py
+
+* fix: file id in library response
+
+* fix: example for library
+
+* ci: Add rc branch prefix trigger for integration tests (#43)
+
+* ci: rc branch trigger for integration test
+
+* fix: wrapped in quotes
+
+* fix: types
+
+* test: Added some integration tests
+
+* test: improvements
+
+* test: test_paraphrase.py
+
+* fix: doc
+
+* fix: removed unused comment
+
+* test: test_summarize.py
+
+* test: Added tests for test_summarize_by_segment.py
+
+* test: test_segmentation.py
+
+* fix: file id in library response
+
+* fix: example for library
+
+* docs: docstrings
+
+* fix: question
+
+* fix: CR
+
+* test: Added tests to segment type in embed
+
+* chore(deps-dev): bump jinja2 from 3.1.2 to 3.1.3 (#38)
+
+Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3.
+- [Release notes](https://github.com/pallets/jinja/releases)
+- [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst)
+- [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
+
+---
+updated-dependencies:
+- dependency-name: jinja2
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* chore(deps-dev): bump gitpython from 3.1.40 to 3.1.41 (#37)
+
+Bumps [gitpython](https://github.com/gitpython-developers/GitPython) from 3.1.40 to 3.1.41.
+- [Release notes](https://github.com/gitpython-developers/GitPython/releases)
+- [Changelog](https://github.com/gitpython-developers/GitPython/blob/main/CHANGES)
+- [Commits](https://github.com/gitpython-developers/GitPython/compare/3.1.40...3.1.41)
+
+---
+updated-dependencies:
+- dependency-name: gitpython
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* chore(deps): bump actions/upload-artifact from 3 to 4 (#21)
+
+Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from 3 to 4.
+- [Release notes](https://github.com/actions/upload-artifact/releases)
+- [Commits](https://github.com/actions/upload-artifact/compare/v3...v4)
+
+---
+updated-dependencies:
+- dependency-name: actions/upload-artifact
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.4.2 to 1.8.11 (#20)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.4.2 to 1.8.11.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/27b31702a0e7fc50959f5ad993c78deac1bdfc29...2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* chore(deps): bump actions/setup-python from 4 to 5 (#19)
+
+Bumps [actions/setup-python](https://github.com/actions/setup-python) from 4 to 5.
+- [Release notes](https://github.com/actions/setup-python/releases)
+- [Commits](https://github.com/actions/setup-python/compare/v4...v5)
+
+---
+updated-dependencies:
+- dependency-name: actions/setup-python
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* chore(deps): bump amannn/action-semantic-pull-request (#2)
+
+Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request) from 5.0.2 to 5.4.0.
+- [Release notes](https://github.com/amannn/action-semantic-pull-request/releases)
+- [Changelog](https://github.com/amannn/action-semantic-pull-request/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/amannn/action-semantic-pull-request/compare/v5.0.2...v5.4.0)
+
+---
+updated-dependencies:
+- dependency-name: amannn/action-semantic-pull-request
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+
+* test: Added tests for library (#45)
+
+* test: Added tests for library
+
+* fix: CR
+
+* chore(release): v2.0.0-rc.12 [skip ci]
+
+* fix: Removed unnecessary pre commit hook
+
+* fix: Removed autouse
+
+* fix: CR
+
+* docs: CONTRIBUTING.md
+
+* docs: LICENSE
+
+* fix: removed license
+
+* test: Added some more unittests
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: github-actions &lt;action@github.com&gt;
+Co-authored-by: etang &lt;etang@ai21.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`60e3f4d`](https://github.com/AI21Labs/ai21-python/commit/60e3f4dc93f83c11ad1c1bc1f51cb64ec6036520))
+
+### Unknown
+
+* Revert &#34;chore(release): v1.0.0 [skip ci]&#34; (#51)
+
+This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https://github.com/AI21Labs/ai21-python/commit/6bab55101e3b17800c435442ae2a762ec39ce0f8))
+
+* Update issue templates ([`c30302f`](https://github.com/AI21Labs/ai21-python/commit/c30302fd9d6dc2b0b83cea10b5a677699ea2b8a2))
+
+* Update issue templates ([`2590685`](https://github.com/AI21Labs/ai21-python/commit/2590685fed8ea63204dcfdd47e27cb340a79cfb8))
 
 
 ## v2.0.0-rc.3 (2023-12-18)
