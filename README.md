@@ -15,7 +15,7 @@
 
 ---
 
-## Migration from v1.3.3 and below
+## Migration from v1.3.4 and below
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
 This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and
@@ -24,7 +24,7 @@ more.
 <details>
 <summary>Migration Examples</summary>
 
-### Instance creation (not available in v1.3.3 and below)
+### Instance creation (not available in v1.3.4 and below)
 
 ```python
 from ai21 import AI21Client
@@ -43,11 +43,10 @@ allowing for more flexibility and better control.
 ```diff
 prompt = "some prompt"
 
-import ai21
-
+- import ai21
 - response = ai21.Completion.execute(model="j2-light", prompt=prompt, maxTokens=2)
 
-
++ from ai21 import AI21Client
 + client = ai21.AI21Client()
 + response = client.completion.create(model="j2-light", prompt=prompt, max_tokens=2)
 ```
@@ -60,8 +59,24 @@ This applies to all resources. You would now need to create a client instance an
 - response = ai21.Tokenization.execute(text=prompt)
 - print(len(response)) # number of tokens
 
-+ client = ai21.AI21Client()
++ from ai21 import AI21Client
++ client = AI21Client()
 + token_count = client.count_tokens(text=prompt)
+```
+
+### Key Access in Response Objects before/after
+
+It is no longer possible to access the response object as a dictionary. Instead, you can access the response object as an object with attributes.
+
+```diff
+- import ai21
+- response = ai21.Summarize.execute(source="some text", sourceType="TEXT")
+- response["summary"]
+
++ from ai21 import AI21Client
++ client = AI21Client()
++ response = client.summarize.create(source="some text", source_type="TEXT")
++ response.summary
 ```
 
 ---
