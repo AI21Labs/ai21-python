@@ -2,6 +2,21 @@
 
 
 
+## v2.0.1 (2024-02-01)
+
+### Documentation
+
+* docs: updated migration (#54)
+
+* docs: updated migration
+
+* fix: example ([`bca0424`](https://github.com/AI21Labs/ai21-python/commit/bca0424f44ffb2c5e5a3b9f292eb08649a844f53))
+
+### Fix
+
+* fix: Added badges (#55) ([`96d716d`](https://github.com/AI21Labs/ai21-python/commit/96d716de7a49868c20461bc2dc34c142da36070b))
+
+
 ## v2.0.0 (2024-01-31)
 
 ### Breaking
@@ -9,6 +24,10 @@
 * feat: bump version (#53)
 
 BREAKING CHANGE: 2.0.0 to SDK ([`77cfb85`](https://github.com/AI21Labs/ai21-python/commit/77cfb85d4b422ff217c511edfdf0782fce65c3b3))
+
+### Chore
+
+* chore(release): v2.0.0 [skip ci] ([`2a65f23`](https://github.com/AI21Labs/ai21-python/commit/2a65f23b487d7d64c09ea69f87daf1cd80a42146))
 
 
 ## v1.0.0 (2024-01-31)
