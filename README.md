@@ -74,8 +74,9 @@ It is no longer possible to access the response object as a dictionary. Instead,
 - response["summary"]
 
 + from ai21 import AI21Client
++ from ai21.models import DocumentType
 + client = AI21Client()
-+ response = client.summarize.create(source="some text", source_type="TEXT")
++ response = client.summarize.create(source="some text", source_type=DocumentType.TEXT)
 + response.summary
 ```
 
