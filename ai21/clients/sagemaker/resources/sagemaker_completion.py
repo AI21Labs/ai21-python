@@ -1,7 +1,7 @@
-from typing import Optional, Dict, Any, List
+from typing import Optional, List
 
-from ai21.resources.responses.completion_response import CompletionsResponse
-from ai21.resources.sagemaker_resource import SageMakerResource
+from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource
+from ai21.models import Penalty, CompletionsResponse
 
 
 class SageMakerCompletion(SageMakerResource):
@@ -16,9 +16,9 @@ class SageMakerCompletion(SageMakerResource):
         top_p: Optional[int] = 1,
         top_k_return: Optional[int] = 0,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> CompletionsResponse:
         body = {
@@ -30,9 +30,9 @@ class SageMakerCompletion(SageMakerResource):
             "topP": top_p,
             "topKReturn": top_k_return,
             "stopSequences": stop_sequences or [],
-            "frequencyPenalty": frequency_penalty,
-            "presencePenalty": presence_penalty,
-            "countPenalty": count_penalty,
+            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
+            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
+            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
         }
         raw_response = self._invoke(body)
 

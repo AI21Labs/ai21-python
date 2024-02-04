@@ -1,15 +1,13 @@
 from typing import Optional
 
-from ai21.resources.responses.summarize_by_segment_response import (
-    SummarizeBySegmentResponse,
-)
-from ai21.resources.studio_resource import StudioResource
-from ai21.resources.bases.summarize_by_segment_base import SummarizeBySegment
+from ai21.clients.common.summarize_by_segment_base import SummarizeBySegment
+from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import SummarizeBySegmentResponse, DocumentType
 
 
 class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
     def create(
-        self, source: str, source_type: str, *, focus: Optional[str] = None, **kwargs
+        self, source: str, source_type: DocumentType, *, focus: Optional[str] = None, **kwargs
     ) -> SummarizeBySegmentResponse:
         body = self._create_body(
             source=source,

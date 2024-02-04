@@ -1,15 +1,15 @@
-from typing import List, Any, Optional, Dict
+from typing import List, Optional
 
-from ai21.resources.bases.chat_base import Chat, Message
-from ai21.resources.responses.chat_response import ChatResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.common.chat_base import Chat
+from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import ChatMessage, Penalty, ChatResponse
 
 
 class StudioChat(StudioResource, Chat):
     def create(
         self,
         model: str,
-        messages: List[Message],
+        messages: List[ChatMessage],
         system: str,
         *,
         num_results: Optional[int] = 1,
@@ -17,11 +17,11 @@ class StudioChat(StudioResource, Chat):
         max_tokens: Optional[int] = 300,
         min_tokens: Optional[int] = 0,
         top_p: Optional[float] = 1.0,
-        top_k_returns: Optional[int] = 0,
+        top_k_return: Optional[int] = 0,
         stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Dict[str, Any]] = None,
-        presence_penalty: Optional[Dict[str, Any]] = None,
-        count_penalty: Optional[Dict[str, Any]] = None,
+        frequency_penalty: Optional[Penalty] = None,
+        presence_penalty: Optional[Penalty] = None,
+        count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
         body = self._create_body(
@@ -33,7 +33,7 @@ class StudioChat(StudioResource, Chat):
             max_tokens=max_tokens,
             min_tokens=min_tokens,
             top_p=top_p,
-            top_k_returns=top_k_returns,
+            top_k_return=top_k_return,
             stop_sequences=stop_sequences,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
