@@ -46,7 +46,7 @@ exclude_lines = [
 
 [tool.poetry]
 name = "ai21"
-version = "2.0.0-rc.3"
+version = "2.0.1"
 description = ""
 authors = ["AI21 Labs"]
 readme = "README.md"
@@ -55,7 +55,7 @@ packages = [
 ]
 
 [tool.poetry.dependencies]
-python = "^3.7"
+python = "^3.8"
 requests = "^2.31.0"
 ai21-tokenizer = "^0.3.9"
 boto3 = { version = "^1.28.82", optional = true }
@@ -71,6 +71,7 @@ safety = "*"
 ruff = "*"
 python-semantic-release = "^8.5.0"
 pytest = "^7.4.3"
+pytest-mock = "^3.12.0"
 
 [tool.poetry.extras]
 AWS = ["boto3"]
@@ -106,8 +107,11 @@ commit_message = "chore(release): v{version} [skip ci]"
 
 [tool.semantic_release.branches.main]
 match = "(main)"
+
+[tool.semantic_release.branches."Release Candidates"]
+match = "(rc_*)"
 prerelease_token = "rc"
 prerelease = true
 
-[tool.semantic_release.changelog.environment]
-newline_sequence = "\n"
+[tool.ruff]
+line-length = 120

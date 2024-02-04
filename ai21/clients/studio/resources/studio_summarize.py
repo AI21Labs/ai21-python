@@ -1,8 +1,8 @@
 from typing import Optional
 
-from ai21.resources.bases.summarize_base import Summarize
-from ai21.resources.responses.summarize_response import SummarizeResponse
-from ai21.resources.studio_resource import StudioResource
+from ai21.clients.common.summarize_base import Summarize
+from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.models import SummarizeResponse, SummaryMethod
 
 
 class StudioSummarize(StudioResource, Summarize):
@@ -14,10 +14,9 @@ class StudioSummarize(StudioResource, Summarize):
         source_type: str,
         *,
         focus: Optional[str] = None,
-        summary_method: Optional[str] = None,
+        summary_method: Optional[SummaryMethod] = None,
         **kwargs,
     ) -> SummarizeResponse:
-        # Make a summarize request to the AI21 API. Returns the response either as a string or a AI21Summarize object.
         body = self._create_body(
             source=source,
             source_type=source_type,

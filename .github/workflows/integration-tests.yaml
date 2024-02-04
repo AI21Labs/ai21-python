@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - "rc_*"
 
 env:
   POETRY_VERSION: "1.7.1"
@@ -23,7 +24,7 @@ jobs:
         run: |
           pipx install poetry
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
@@ -33,7 +34,7 @@ jobs:
           poetry env use ${{ matrix.python-version }}
       - name: Install dependencies
         run: |
-          poetry install --no-root --only dev --all-extras
+          poetry install --only dev --all-extras
       - name: Lint Python (Black)
         run: |
           poetry run inv formatter
@@ -55,7 +56,7 @@ jobs:
         run: |
           pipx install poetry
       - name: Set up Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
@@ -74,7 +75,7 @@ jobs:
         run: |
           poetry run pytest tests/integration_tests/
       - name: Upload pytest integration tests results
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: pytest-results-${{ matrix.python-version }}
           path: junit/test-results-${{ matrix.python-version }}.xml
