@@ -2,7 +2,38 @@
 
 
 
+## v2.0.2 (2024-02-04)
+
+### Chore
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#49)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 8.3.0 to 8.7.2.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v8.3.0...v8.7.2)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`aac9932`](https://github.com/AI21Labs/ai21-python/commit/aac993213edfe2ee889d5d12e899fe32e0ba702a))
+
+### Fix
+
+* fix: Changed log level (#56) ([`8db493c`](https://github.com/AI21Labs/ai21-python/commit/8db493c9ccd98e2421ff65a583e5e43773dc4bb1))
+
+
 ## v2.0.1 (2024-02-01)
+
+### Chore
+
+* chore(release): v2.0.1 [skip ci] ([`2af2f2b`](https://github.com/AI21Labs/ai21-python/commit/2af2f2b3153a486a8df33b4266f54cf28f0da049))
 
 ### Documentation
 
