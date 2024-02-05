@@ -78,7 +78,8 @@ class HttpClient:
         timeout = self._timeout_sec
         headers = self._headers
         data = json.dumps(params).encode()
-        logger.info(f"Calling {method} {url} {headers} {data}")
+        logger.debug(f"Calling {method} {url} {headers} {data}")
+
         try:
             if method == "GET":
                 response = self._session.request(
