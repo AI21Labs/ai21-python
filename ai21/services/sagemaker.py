@@ -60,6 +60,7 @@ class SageMaker:
         return AI21HTTPClient(
             api_key=AI21EnvConfig.api_key,
             api_host=AI21EnvConfig.api_host,
+            requires_api_key=False,
             api_version=AI21EnvConfig.api_version,
             timeout_sec=AI21EnvConfig.timeout_sec,
             num_retries=AI21EnvConfig.num_retries,

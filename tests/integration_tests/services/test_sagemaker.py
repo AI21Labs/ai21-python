@@ -1,18 +1,34 @@
 import pytest
 
-from ai21 import SageMaker
-from tests.integration_tests.skip_helpers import should_skip_studio_integration_tests
+from ai21 import SageMaker, AI21EnvConfig
 
 
-@pytest.mark.skipif(should_skip_studio_integration_tests(), reason="No key supplied for AI21 Studio. Skipping.")
-def test_sagemker__get_model_package_arn():
+def _add_or_remove_api_key(use_api_key: bool):
+    if use_api_key:
+        AI21EnvConfig.api_key = "test"
+    else:
+        AI21EnvConfig.api_key = None
+
+
+@pytest.mark.parametrize(
+    argnames="use_api_key",
+    argvalues=[True, False],
+    ids=["with_api_key", "without_api_key"],
+)
+def test_sagemaker__get_model_package_arn(use_api_key: bool):
+    _add_or_remove_api_key(use_api_key)
     model_packages_arn = SageMaker.get_model_package_arn(model_name="j2-mid", region="us-east-1")
     assert isinstance(model_packages_arn, str)
     assert len(model_packages_arn) > 0
 
 
-@pytest.mark.skipif(should_skip_studio_integration_tests(), reason="No key supplied for AI21 Studio. Skipping.")
-def test_sagemker__list_model_package_versions():
+@pytest.mark.parametrize(
+    argnames="use_api_key",
+    argvalues=[True, False],
+    ids=["with_api_key", "without_api_key"],
+)
+def test_sagemaker__list_model_package_versions(use_api_key: bool):
+    _add_or_remove_api_key(use_api_key)
     model_packages_arn = SageMaker.list_model_package_versions(model_name="j2-mid", region="us-east-1")
     assert isinstance(model_packages_arn, list)
     assert len(model_packages_arn) > 0

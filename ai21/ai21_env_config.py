@@ -6,7 +6,7 @@ from typing import Optional
 from ai21.constants import DEFAULT_API_VERSION, STUDIO_HOST
 
 
-@dataclass(frozen=True)
+@dataclass
 class _AI21EnvConfig:
     api_key: Optional[str] = None
     api_version: str = DEFAULT_API_VERSION

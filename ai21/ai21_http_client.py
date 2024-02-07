@@ -11,6 +11,7 @@ class AI21HTTPClient:
         self,
         *,
         api_key: Optional[str] = None,
+        requires_api_key: bool = True,
         api_host: Optional[str] = None,
         api_version: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
@@ -21,7 +22,7 @@ class AI21HTTPClient:
     ):
         self._api_key = api_key
 
-        if not self._api_key:
+        if requires_api_key and not self._api_key:
             raise MissingApiKeyError()
 
         self._api_host = api_host

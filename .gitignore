@@ -118,3 +118,4 @@ fabric.properties
 # https://github.com/github/gitignore/blob/master/Global/Patch.gitignore
 *.orig
 *.rej
+__pycache__
