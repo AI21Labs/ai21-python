@@ -2,9 +2,31 @@
 
 
 
+## v2.0.3 (2024-02-07)
+
+### Documentation
+
+* docs: add code snippet notebook (#58)
+
+* add code snippet notebook
+
+* docs: add code snippet notebook
+
+---------
+
+Co-authored-by: Joshua Broyde &lt;joshuabroyde@Joshua-Broyde-PMGQ73FQ16.local&gt;
+Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`139d05f`](https://github.com/AI21Labs/ai21-python/commit/139d05f919d7c89da031dd50bf7bc1f080dc2d31))
+
+### Fix
+
+* fix: skip passing API key to ARN endpoint (#60) ([`8fd72f0`](https://github.com/AI21Labs/ai21-python/commit/8fd72f0ebe23bc23244e8453744b46bd093bccb3))
+
+
 ## v2.0.2 (2024-02-04)
 
 ### Chore
+
+* chore(release): v2.0.2 [skip ci] ([`2db1816`](https://github.com/AI21Labs/ai21-python/commit/2db1816a152a20d18cbd397183512f479d4fec90))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#49)
 
