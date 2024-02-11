@@ -123,6 +123,8 @@ pip install ai21
 
 ## Usage
 
+### Model Types
+
 Wherever you are required to pass a model name as a parameter, you can use any of the available AI21
 state-of-the-art models:
 
