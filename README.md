@@ -123,6 +123,17 @@ pip install ai21
 
 ## Usage
 
+### Model Types
+
+Wherever you are required to pass a model name as a parameter, you can use any of the available AI21
+state-of-the-art models:
+
+- j2-light
+- j2-mid
+- j2-ultra
+
+you can read more about the models [here](https://docs.ai21.com/reference/j2-complete-api-ref#jurassic-2-models).
+
 ---
 
 ### Client Instance Creation
