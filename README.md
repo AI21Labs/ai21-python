@@ -222,17 +222,15 @@ $ export AI21_LOG_LEVEL=debug
 ```python
 from ai21 import errors as ai21_errors
 from ai21 import AI21Client, AI21APIError
+from ai21.models import ChatMessage
 
 client = AI21Client()
 
 system = "You're a support engineer in a SaaS company"
 messages = [
-    {
-        "text": "Hello, I need help with a signup process.",
-        "role": "user",
-        "name": "Alice",
-    },
-]
+        # Notice the given role does not exist and will be the reason for the raised error
+        ChatMessage(text="Hello, I need help with a signup process.", role="Non-Existent-Role"),
+    ]
 
 try:
     chat_completion = client.chat.create(
