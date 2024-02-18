@@ -1,3 +1,5 @@
+import mimetypes
+import os
 from typing import Optional, List
 
 from ai21.ai21_http_client import AI21HTTPClient
@@ -28,7 +30,13 @@ class LibraryFiles(StudioResource):
         **kwargs,
     ) -> str:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        files = {"file": open(file_path, "rb")}
+
+        file_name = os.path.basename(file_path)
+        content_type, _ = mimetypes.guess_type(file_path)
+        if content_type is None:
+            raise ValueError(f"Failed to derive content type for file: {file_name}")
+        files = {"file": (file_name, open(file_path, "rb"), content_type)}
+
         body = {"path": path, "labels": labels, "publicUrl": public_url}
 
         raw_response = self._post(url=url, files=files, body=body)
