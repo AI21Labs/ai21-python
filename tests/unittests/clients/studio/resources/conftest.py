@@ -60,9 +60,7 @@ def get_studio_answer():
         {"context": _DUMMY_CONTEXT, "question": _DUMMY_QUESTION},
         "answer",
         {
-            "answerLength": None,
             "context": _DUMMY_CONTEXT,
-            "mode": None,
             "question": _DUMMY_QUESTION,
         },
         AnswerResponse(id="some-id", answer_in_context=True, answer="42"),
