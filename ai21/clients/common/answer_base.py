@@ -1,7 +1,7 @@
 from abc import ABC
-from typing import Optional, Any, Dict
+from typing import Any, Dict
 
-from ai21.models import Mode, AnswerLength, AnswerResponse
+from ai21.models import AnswerResponse
 
 
 class Answer(ABC):
@@ -11,17 +11,12 @@ class Answer(ABC):
         self,
         context: str,
         question: str,
-        *,
-        answer_length: Optional[AnswerLength] = None,
-        mode: Optional[Mode] = None,
         **kwargs,
     ) -> AnswerResponse:
         """
 
         :param context: A string containing the document context for which the question will be answered
         :param question: A string containing the question to be answered based on the provided context.
-        :param answer_length: Approximate length of the answer in words.
-        :param mode:
         :param kwargs:
         :return:
         """
@@ -34,7 +29,5 @@ class Answer(ABC):
         self,
         context: str,
         question: str,
-        answer_length: Optional[AnswerLength],
-        mode: Optional[str],
     ) -> Dict[str, Any]:
-        return {"context": context, "question": question, "answerLength": answer_length, "mode": mode}
+        return {"context": context, "question": question}

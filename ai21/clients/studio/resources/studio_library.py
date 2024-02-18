@@ -2,7 +2,7 @@ from typing import Optional, List
 
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models import Mode, AnswerLength, FileResponse, LibraryAnswerResponse, LibrarySearchResponse
+from ai21.models import FileResponse, LibraryAnswerResponse, LibrarySearchResponse
 
 
 class StudioLibrary(StudioResource):
@@ -107,8 +107,6 @@ class LibraryAnswer(StudioResource):
         path: Optional[str] = None,
         field_ids: Optional[List[str]] = None,
         labels: Optional[List[str]] = None,
-        answer_length: Optional[AnswerLength] = None,
-        mode: Optional[Mode] = None,
         **kwargs,
     ) -> LibraryAnswerResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
@@ -117,8 +115,6 @@ class LibraryAnswer(StudioResource):
             "path": path,
             "fieldIds": field_ids,
             "labels": labels,
-            "answerLength": answer_length,
-            "mode": mode,
         }
         raw_response = self._post(url=url, body=body)
         return LibraryAnswerResponse.from_dict(raw_response)

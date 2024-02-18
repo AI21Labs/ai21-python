@@ -1,8 +1,6 @@
-from typing import Optional
-
 from ai21.clients.common.answer_base import Answer
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models import AnswerLength, Mode, AnswerResponse
+from ai21.models import AnswerResponse
 
 
 class StudioAnswer(StudioResource, Answer):
@@ -10,14 +8,11 @@ class StudioAnswer(StudioResource, Answer):
         self,
         context: str,
         question: str,
-        *,
-        answer_length: Optional[AnswerLength] = None,
-        mode: Optional[Mode] = None,
         **kwargs,
     ) -> AnswerResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        body = self._create_body(context=context, question=question, answer_length=answer_length, mode=mode)
+        body = self._create_body(context=context, question=question)
 
         response = self._post(url=url, body=body)
 
