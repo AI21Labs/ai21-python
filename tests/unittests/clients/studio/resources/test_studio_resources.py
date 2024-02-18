@@ -96,9 +96,7 @@ class TestStudioResources:
             method="POST",
             url=_BASE_URL + "/answer",
             params={
-                "answerLength": None,
                 "context": _DUMMY_CONTEXT,
-                "mode": None,
                 "question": _DUMMY_QUESTION,
             },
             files=None,
