@@ -2,7 +2,32 @@
 
 
 
+## v2.0.4 (2024-02-18)
+
+### Documentation
+
+* docs: fix error handling example (#63) ([`fcd2746`](https://github.com/AI21Labs/ai21-python/commit/fcd2746ffd5839932628a10c0292fc766fef8963))
+
+### Fix
+
+* fix: Removed answer_length and mode from answer (#65)
+
+* fix: Removed answer_length and mode from answer
+
+* test: Fixed test ([`3814e57`](https://github.com/AI21Labs/ai21-python/commit/3814e57c7a90a026cfb4ee4f97b7edb0de937f16))
+
+* fix: Add model types to docs (#62)
+
+* fix: Added model names in readme
+
+* fix: Added header ([`ca5c3ca`](https://github.com/AI21Labs/ai21-python/commit/ca5c3ca4127fa3393c1d29f069120b3896da8beb))
+
+
 ## v2.0.3 (2024-02-07)
+
+### Chore
+
+* chore(release): v2.0.3 [skip ci] ([`d0ccc5d`](https://github.com/AI21Labs/ai21-python/commit/d0ccc5d9f3a14a61fca788496afc65e02d9dca4f))
 
 ### Documentation
 
