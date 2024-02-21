@@ -25,6 +25,7 @@ class Completion(ABC):
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
         epoch: Optional[int] = None,
+        logit_bias: Optional[Dict[str, float]] = None,
         **kwargs,
     ) -> CompletionsResponse:
         """
@@ -42,6 +43,9 @@ class Completion(ABC):
         :param presence_penalty:  A penalty applied to tokens that are already present in the prompt.
         :param count_penalty: A penalty applied to tokens based on their frequency in the generated responses
         :param epoch:
+        :param logit_bias: A dictionary which contains mapping from strings to floats, where the strings are text
+        representations of the tokens and the floats are the biases themselves. A positive bias increases generation
+        probability for a given token and a negative bias decreases it.
         :param kwargs:
         :return:
         """
@@ -66,6 +70,7 @@ class Completion(ABC):
         presence_penalty: Optional[Penalty],
         count_penalty: Optional[Penalty],
         epoch: Optional[int],
+        logit_bias: Optional[Dict[str, float]],
     ):
         return {
             "model": model,
@@ -82,4 +87,5 @@ class Completion(ABC):
             "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
             "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
             "epoch": epoch,
+            "logitBias": logit_bias,
         }
