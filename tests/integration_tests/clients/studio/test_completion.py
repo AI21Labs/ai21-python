@@ -25,6 +25,7 @@ def test_completion():
         num_results=num_results,
         custom_model=None,
         epoch=1,
+        logit_bias={"▁a▁box▁of": -100.0},
         count_penalty=Penalty(
             scale=0,
             apply_to_emojis=False,
