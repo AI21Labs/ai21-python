@@ -1,5 +1,4 @@
 from ai21 import AI21BedrockClient, BedrockModelID
-from ai21.models import Penalty
 
 # Bedrock is currently supported only in us-east-1 region.
 # Either set your profile's region to us-east-1 or uncomment next line
@@ -46,34 +45,6 @@ response = AI21BedrockClient().completion.create(
     temperature=0,
     top_p=1,
     top_k_return=0,
-    stop_sequences=["##"],
-    num_results=1,
-    custom_model=None,
-    epoch=1,
-    count_penalty=Penalty(
-        scale=0,
-        apply_to_emojis=False,
-        apply_to_numbers=False,
-        apply_to_stopwords=False,
-        apply_to_punctuation=False,
-        apply_to_whitespaces=False,
-    ),
-    frequency_penalty=Penalty(
-        scale=0,
-        apply_to_emojis=False,
-        apply_to_numbers=False,
-        apply_to_stopwords=False,
-        apply_to_punctuation=False,
-        apply_to_whitespaces=False,
-    ),
-    presence_penalty=Penalty(
-        scale=0,
-        apply_to_emojis=False,
-        apply_to_numbers=False,
-        apply_to_stopwords=False,
-        apply_to_punctuation=False,
-        apply_to_whitespaces=False,
-    ),
 )
 
 print(response.completions[0].data.text)
