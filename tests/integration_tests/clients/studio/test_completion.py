@@ -1,5 +1,6 @@
 import pytest
 
+from typing import Dict
 from ai21 import AI21Client
 from ai21.models import Penalty
 
@@ -111,3 +112,24 @@ def test_completion_when_finish_reason_defined__should_halt_on_expected_reason(
     )
 
     assert response.completions[0].finish_reason.reason == reason
+
+
+@pytest.mark.parametrize(
+    ids=[
+        "no_logit_bias",
+        "logit_bias_negative",
+    ],
+    argnames=["expected_result", "logit_bias"],
+    argvalues=[(" a box of chocolates", None), (" riding a bicycle", {"▁a▁box▁of": -100.0})],
+)
+def test_completion_logit_bias__should_impact_on_response(expected_result: str, logit_bias: Dict[str, float]):
+    client = AI21Client()
+    response = client.completion.create(
+        prompt="Life is like",
+        max_tokens=3,
+        model="j2-ultra",
+        temperature=0,
+        logit_bias=logit_bias,
+    )
+
+    assert response.completions[0].data.text.strip() == expected_result.strip()
