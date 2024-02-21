@@ -124,6 +124,7 @@ def get_studio_completion():
             "maxTokens": None,
             "minTokens": 0,
             "epoch": None,
+            "logitBias": None,
             "numResults": 1,
             "topP": 1,
             "customModel": None,
