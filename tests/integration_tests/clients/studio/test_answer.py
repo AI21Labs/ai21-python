@@ -1,6 +1,5 @@
 import pytest
 from ai21 import AI21Client
-from ai21.models import AnswerLength, Mode
 
 _CONTEXT = (
     "Holland is a geographical region[2] and former province on the western coast of"
@@ -27,8 +26,6 @@ def test_answer(question: str, is_answer_in_context: bool, expected_answer_type:
     response = client.answer.create(
         context=_CONTEXT,
         question=question,
-        answer_length=AnswerLength.LONG,
-        mode=Mode.FLEXIBLE,
     )
 
     assert response.answer_in_context == is_answer_in_context
