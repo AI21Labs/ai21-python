@@ -2,7 +2,34 @@
 
 
 
+## v2.0.5 (2024-02-21)
+
+### Fix
+
+* fix: penalties in Sagemaker and Bedrock (#67)
+
+* fix: penalties in sagemaker
+
+* fix: don&#39;t pass None penalties to Bedrock
+
+* fix: remove some default arge, and some unused args from bedrock model
+
+* test: Added bedrock integration tests for penalties check
+
+* ci: Integration tests on push
+
+* fix: answer test
+
+---------
+
+Co-authored-by: etang &lt;etang@ai21.com&gt; ([`d7c912f`](https://github.com/AI21Labs/ai21-python/commit/d7c912f0ef86d8ca18a7225cdf8da6b79de8b415))
+
+
 ## v2.0.4 (2024-02-18)
+
+### Chore
+
+* chore(release): v2.0.4 [skip ci] ([`8b0f217`](https://github.com/AI21Labs/ai21-python/commit/8b0f217dd14aa820b5e404ed564e099d214d882f))
 
 ### Documentation
 
