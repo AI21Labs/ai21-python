@@ -24,7 +24,6 @@ def test_completion():
         stop_sequences=["##"],
         num_results=num_results,
         custom_model=None,
-        epoch=1,
         count_penalty=Penalty(
             scale=0,
             apply_to_emojis=False,
@@ -71,7 +70,6 @@ def test_completion_when_temperature_1_and_top_p_is_0__should_return_same_respon
         top_p=0,
         top_k_return=0,
         num_results=num_results,
-        epoch=1,
     )
 
     assert response.prompt.text == _PROMPT
@@ -106,7 +104,6 @@ def test_completion_when_finish_reason_defined__should_halt_on_expected_reason(
         num_results=1,
         stop_sequences=[stop_sequences],
         top_k_return=0,
-        epoch=1,
     )
 
     assert response.completions[0].finish_reason.reason == reason

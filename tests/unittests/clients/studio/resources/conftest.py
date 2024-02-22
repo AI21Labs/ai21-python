@@ -123,7 +123,6 @@ def get_studio_completion():
             "temperature": 0.7,
             "maxTokens": None,
             "minTokens": 0,
-            "epoch": None,
             "numResults": 1,
             "topP": 1,
             "customModel": None,
