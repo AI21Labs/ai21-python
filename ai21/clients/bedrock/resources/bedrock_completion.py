@@ -32,11 +32,18 @@ class BedrockCompletion(BedrockResource):
             "topP": top_p,
             "topKReturn": top_k_return,
             "stopSequences": stop_sequences or [],
-            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
-            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
-            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
             "logitBias": logit_bias,
         }
+
+        if frequency_penalty is not None:
+            body["frequencyPenalty"] = frequency_penalty.to_dict()
+
+        if presence_penalty is not None:
+            body["presencePenalty"] = presence_penalty.to_dict()
+
+        if count_penalty is not None:
+            body["countPenalty"] = count_penalty.to_dict()
+
         raw_response = self._invoke(model_id=model_id, body=body)
 
         return CompletionsResponse.from_dict(raw_response)
