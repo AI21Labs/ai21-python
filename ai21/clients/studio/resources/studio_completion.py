@@ -11,18 +11,17 @@ class StudioCompletion(StudioResource, Completion):
         model: str,
         prompt: str,
         *,
-        max_tokens: Optional[int] = None,
-        num_results: Optional[int] = 1,
-        min_tokens: Optional[int] = 0,
-        temperature: Optional[float] = 0.7,
-        top_p: Optional[float] = 1,
-        top_k_return: Optional[int] = 0,
+        max_tokens: int = 64,
+        num_results: int = 1,
+        min_tokens: int = 0,
+        temperature: float = 0.7,
+        top_p: float = 1,
+        top_k_return: int = 0,
         custom_model: Optional[str] = None,
         stop_sequences: Optional[List[str]] = None,
         frequency_penalty: Optional[Penalty] = None,
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
-        epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
         url = f"{self._client.get_base_url()}/{model}"
@@ -45,6 +44,5 @@ class StudioCompletion(StudioResource, Completion):
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
             count_penalty=count_penalty,
-            epoch=epoch,
         )
         return self._json_to_response(self._post(url=url, body=body))

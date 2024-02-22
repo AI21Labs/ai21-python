@@ -15,16 +15,15 @@ class Completion(ABC):
         *,
         max_tokens: int = 64,
         num_results: int = 1,
-        min_tokens=0,
-        temperature=0.7,
-        top_p=1,
-        top_k_return=0,
+        min_tokens: int = 0,
+        temperature: float = 0.7,
+        top_p: float = 1,
+        top_k_return: int = 0,
         custom_model: Optional[str] = None,
         stop_sequences: Optional[List[str]] = (),
         frequency_penalty: Optional[Penalty] = None,
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
-        epoch: Optional[int] = None,
         **kwargs,
     ) -> CompletionsResponse:
         """
@@ -41,7 +40,6 @@ class Completion(ABC):
         :param frequency_penalty: A penalty applied to tokens that are frequently generated.
         :param presence_penalty:  A penalty applied to tokens that are already present in the prompt.
         :param count_penalty: A penalty applied to tokens based on their frequency in the generated responses
-        :param epoch:
         :param kwargs:
         :return:
         """
@@ -54,18 +52,17 @@ class Completion(ABC):
         self,
         model: str,
         prompt: str,
-        max_tokens: Optional[int],
-        num_results: Optional[int],
-        min_tokens: Optional[int],
-        temperature: Optional[float],
-        top_p: Optional[int],
-        top_k_return: Optional[int],
+        max_tokens: int,
+        num_results: int,
+        min_tokens: int,
+        temperature: float,
+        top_p: float,
+        top_k_return: int,
         custom_model: Optional[str],
         stop_sequences: Optional[List[str]],
         frequency_penalty: Optional[Penalty],
         presence_penalty: Optional[Penalty],
         count_penalty: Optional[Penalty],
-        epoch: Optional[int],
     ):
         return {
             "model": model,
@@ -81,5 +78,4 @@ class Completion(ABC):
             "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
             "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
             "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
-            "epoch": epoch,
         }
