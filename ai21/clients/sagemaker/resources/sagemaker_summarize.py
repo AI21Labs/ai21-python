@@ -4,14 +4,14 @@ from typing import Optional
 
 from ai21.clients.common.summarize_base import Summarize
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource
-from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.models import SummarizeResponse, SummaryMethod, DocumentType
 
 
 class SageMakerSummarize(SageMakerResource, Summarize):
     def create(
         self,
         source: str,
-        source_type: str,
+        source_type: DocumentType,
         *,
         focus: Optional[str] = None,
         summary_method: Optional[SummaryMethod] = None,

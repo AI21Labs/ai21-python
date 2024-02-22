@@ -2,7 +2,7 @@ from typing import Optional
 
 from ai21.clients.common.summarize_base import Summarize
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.models import SummarizeResponse, SummaryMethod, DocumentType
 
 
 class StudioSummarize(StudioResource, Summarize):
@@ -11,7 +11,7 @@ class StudioSummarize(StudioResource, Summarize):
     def create(
         self,
         source: str,
-        source_type: str,
+        source_type: DocumentType,
         *,
         focus: Optional[str] = None,
         summary_method: Optional[SummaryMethod] = None,

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.models import SummarizeResponse, SummaryMethod, DocumentType
 
 
 class Summarize(ABC):
@@ -9,7 +9,7 @@ class Summarize(ABC):
     def create(
         self,
         source: str,
-        source_type: str,
+        source_type: DocumentType,
         *,
         focus: Optional[str] = None,
         summary_method: Optional[SummaryMethod] = None,
@@ -31,7 +31,7 @@ class Summarize(ABC):
     def _create_body(
         self,
         source: str,
-        source_type: str,
+        source_type: DocumentType,
         focus: Optional[str],
         summary_method: Optional[str],
     ) -> Dict[str, Any]:
