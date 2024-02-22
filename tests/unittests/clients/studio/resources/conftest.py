@@ -44,6 +44,7 @@ from ai21.models import (
     SegmentSummary,
 )
 from ai21.models.responses.segmentation_response import Segment
+from ai21.utils.typing import to_lower_camel_case
 
 
 @pytest.fixture
@@ -109,29 +110,18 @@ def get_studio_chat():
     )
 
 
-def get_studio_completion():
+def get_studio_completion(**kwargs):
     _DUMMY_MODEL = "dummy-completion-model"
     _DUMMY_PROMPT = "dummy-prompt"
 
     return (
         StudioCompletion,
-        {"model": _DUMMY_MODEL, "prompt": _DUMMY_PROMPT},
+        {"model": _DUMMY_MODEL, "prompt": _DUMMY_PROMPT, **kwargs},
         f"{_DUMMY_MODEL}/complete",
         {
             "model": _DUMMY_MODEL,
             "prompt": _DUMMY_PROMPT,
-            "temperature": 0.7,
-            "maxTokens": None,
-            "minTokens": 0,
-            "epoch": None,
-            "numResults": 1,
-            "topP": 1,
-            "customModel": None,
-            "topKReturn": 0,
-            "stopSequences": [],
-            "frequencyPenalty": None,
-            "presencePenalty": None,
-            "countPenalty": None,
+            **{to_lower_camel_case(k): v for k, v in kwargs.items()},
         },
         CompletionsResponse(
             id="some-id",
