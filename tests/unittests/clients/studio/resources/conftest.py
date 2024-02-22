@@ -121,7 +121,7 @@ def get_studio_completion():
             "model": _DUMMY_MODEL,
             "prompt": _DUMMY_PROMPT,
             "temperature": 0.7,
-            "maxTokens": None,
+            "maxTokens": 64,
             "minTokens": 0,
             "numResults": 1,
             "topP": 1,
