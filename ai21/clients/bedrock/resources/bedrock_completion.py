@@ -1,4 +1,4 @@
-from typing import Optional, List
+from typing import Optional, List, Dict
 
 from ai21.clients.bedrock.resources.bedrock_resource import BedrockResource
 from ai21.models import Penalty, CompletionsResponse
@@ -20,6 +20,7 @@ class BedrockCompletion(BedrockResource):
         frequency_penalty: Optional[Penalty] = None,
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
+        logit_bias: Optional[Dict[str, float]] = None,
         **kwargs,
     ) -> CompletionsResponse:
         body = {
@@ -34,6 +35,7 @@ class BedrockCompletion(BedrockResource):
             "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
             "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
             "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
+            "logitBias": logit_bias,
         }
         raw_response = self._invoke(model_id=model_id, body=body)
 

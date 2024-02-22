@@ -50,6 +50,7 @@ response = AI21BedrockClient().completion.create(
     num_results=1,
     custom_model=None,
     epoch=1,
+    logit_bias={"▁I'm▁sorry": -100.0},
     count_penalty=Penalty(
         scale=0,
         apply_to_emojis=False,
