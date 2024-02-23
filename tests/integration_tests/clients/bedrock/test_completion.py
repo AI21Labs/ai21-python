@@ -50,11 +50,10 @@ _PROMPT = "Once upon a time, in a land far, far away, there was a"
 def test_completion__when_no_penalties__should_return_response(
     frequency_penalty: Optional[Penalty], presence_penalty: Optional[Penalty], count_penalty: Optional[Penalty]
 ):
-    client = AI21BedrockClient()
+    client = AI21BedrockClient(model_id=BedrockModelID.J2_MID_V1)
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_MID_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
