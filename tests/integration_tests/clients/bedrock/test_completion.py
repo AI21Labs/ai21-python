@@ -20,21 +20,10 @@ _PROMPT = "Once upon a time, in a land far, far away, there was a"
     argvalues=[
         (None, None, None),
         (
+            Penalty(scale=0.5),
             Penalty(
                 scale=0.5,
                 apply_to_emojis=True,
-                apply_to_numbers=True,
-                apply_to_stopwords=True,
-                apply_to_punctuation=True,
-                apply_to_whitespaces=True,
-            ),
-            Penalty(
-                scale=0.5,
-                apply_to_emojis=True,
-                apply_to_numbers=True,
-                apply_to_stopwords=True,
-                apply_to_punctuation=True,
-                apply_to_whitespaces=True,
             ),
             Penalty(
                 scale=0.5,
@@ -76,6 +65,7 @@ def test_completion__when_no_penalties__should_return_response(
 
     assert response.prompt.text == _PROMPT
     assert len(response.completions) == 1
+
     # Check the results aren't all the same
     assert len([completion.data.text for completion in response.completions]) == 1
     for completion in response.completions:
