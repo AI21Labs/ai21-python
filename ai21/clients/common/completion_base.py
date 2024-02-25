@@ -1,7 +1,11 @@
+from __future__ import annotations
+
 from abc import ABC, abstractmethod
-from typing import Optional, List, Dict, Any
+from typing import List, Dict, Any
 
 from ai21.models import Penalty, CompletionsResponse
+from ai21.types import NOT_GIVEN, NotGiven
+from ai21.utils.typing import remove_not_given
 
 
 class Completion(ABC):
@@ -13,18 +17,18 @@ class Completion(ABC):
         model: str,
         prompt: str,
         *,
-        max_tokens: int = 64,
-        num_results: int = 1,
-        min_tokens=0,
-        temperature=0.7,
-        top_p=1,
-        top_k_return=0,
-        custom_model: Optional[str] = None,
-        stop_sequences: Optional[List[str]] = (),
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
-        epoch: Optional[int] = None,
+        max_tokens: int | NotGiven = NOT_GIVEN,
+        num_results: int | NotGiven = NOT_GIVEN,
+        min_tokens: int | NotGiven = NOT_GIVEN,
+        temperature: float | NOT_GIVEN = NOT_GIVEN,
+        top_p: float | NotGiven = NOT_GIVEN,
+        top_k_return: int | NotGiven = NOT_GIVEN,
+        custom_model: str | NotGiven = NOT_GIVEN,
+        stop_sequences: List[str] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Penalty | NotGiven = NOT_GIVEN,
+        presence_penalty: Penalty | NotGiven = NOT_GIVEN,
+        count_penalty: Penalty | NotGiven = NOT_GIVEN,
+        epoch: int | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
         """
@@ -54,32 +58,34 @@ class Completion(ABC):
         self,
         model: str,
         prompt: str,
-        max_tokens: Optional[int],
-        num_results: Optional[int],
-        min_tokens: Optional[int],
-        temperature: Optional[float],
-        top_p: Optional[int],
-        top_k_return: Optional[int],
-        custom_model: Optional[str],
-        stop_sequences: Optional[List[str]],
-        frequency_penalty: Optional[Penalty],
-        presence_penalty: Optional[Penalty],
-        count_penalty: Optional[Penalty],
-        epoch: Optional[int],
+        max_tokens: int | NotGiven,
+        num_results: int | NotGiven,
+        min_tokens: int | NotGiven,
+        temperature: float | NotGiven,
+        top_p: float | NotGiven,
+        top_k_return: int | NotGiven,
+        custom_model: str | NotGiven,
+        stop_sequences: List[str] | NotGiven,
+        frequency_penalty: Penalty | NotGiven,
+        presence_penalty: Penalty | NotGiven,
+        count_penalty: Penalty | NotGiven,
+        epoch: int | NotGiven,
     ):
-        return {
-            "model": model,
-            "customModel": custom_model,
-            "prompt": prompt,
-            "maxTokens": max_tokens,
-            "numResults": num_results,
-            "minTokens": min_tokens,
-            "temperature": temperature,
-            "topP": top_p,
-            "topKReturn": top_k_return,
-            "stopSequences": stop_sequences or [],
-            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
-            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
-            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
-            "epoch": epoch,
-        }
+        return remove_not_given(
+            {
+                "model": model,
+                "customModel": custom_model,
+                "prompt": prompt,
+                "maxTokens": max_tokens,
+                "numResults": num_results,
+                "minTokens": min_tokens,
+                "temperature": temperature,
+                "topP": top_p,
+                "topKReturn": top_k_return,
+                "stopSequences": stop_sequences,
+                "frequencyPenalty": NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.to_dict(),
+                "presencePenalty": NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.to_dict(),
+                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
+                "epoch": epoch,
+            }
+        )

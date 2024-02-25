@@ -1,8 +1,11 @@
-from typing import Optional, List
+from __future__ import annotations
+
+from typing import List
 
 from ai21.clients.common.completion_base import Completion
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import Penalty, CompletionsResponse
+from ai21.types import NOT_GIVEN, NotGiven
 
 
 class StudioCompletion(StudioResource, Completion):
@@ -11,23 +14,23 @@ class StudioCompletion(StudioResource, Completion):
         model: str,
         prompt: str,
         *,
-        max_tokens: Optional[int] = None,
-        num_results: Optional[int] = 1,
-        min_tokens: Optional[int] = 0,
-        temperature: Optional[float] = 0.7,
-        top_p: Optional[float] = 1,
-        top_k_return: Optional[int] = 0,
-        custom_model: Optional[str] = None,
-        stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
-        epoch: Optional[int] = None,
+        max_tokens: int | NotGiven = NOT_GIVEN,
+        num_results: int | NotGiven = NOT_GIVEN,
+        min_tokens: int | NotGiven = NOT_GIVEN,
+        temperature: float | NotGiven = NOT_GIVEN,
+        top_p: float | NotGiven = NOT_GIVEN,
+        top_k_return: int | NotGiven = NOT_GIVEN,
+        custom_model: str | NotGiven = NOT_GIVEN,
+        stop_sequences: List[str] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Penalty | NotGiven = NOT_GIVEN,
+        presence_penalty: Penalty | NotGiven = NOT_GIVEN,
+        count_penalty: Penalty | NotGiven = NOT_GIVEN,
+        epoch: int | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
         url = f"{self._client.get_base_url()}/{model}"
 
-        if custom_model is not None:
+        if custom_model:
             url = f"{url}/{custom_model}"
 
         url = f"{url}/{self._module_name}"

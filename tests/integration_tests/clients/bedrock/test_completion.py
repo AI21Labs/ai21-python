@@ -20,21 +20,10 @@ _PROMPT = "Once upon a time, in a land far, far away, there was a"
     argvalues=[
         (None, None, None),
         (
+            Penalty(scale=0.5),
             Penalty(
                 scale=0.5,
                 apply_to_emojis=True,
-                apply_to_numbers=True,
-                apply_to_stopwords=True,
-                apply_to_punctuation=True,
-                apply_to_whitespaces=True,
-            ),
-            Penalty(
-                scale=0.5,
-                apply_to_emojis=True,
-                apply_to_numbers=True,
-                apply_to_stopwords=True,
-                apply_to_punctuation=True,
-                apply_to_whitespaces=True,
             ),
             Penalty(
                 scale=0.5,
@@ -50,20 +39,29 @@ _PROMPT = "Once upon a time, in a land far, far away, there was a"
 def test_completion__when_no_penalties__should_return_response(
     frequency_penalty: Optional[Penalty], presence_penalty: Optional[Penalty], count_penalty: Optional[Penalty]
 ):
-    client = AI21BedrockClient(model_id=BedrockModelID.J2_MID_V1)
-    response = client.completion.create(
+    client = AI21BedrockClient()
+    completion_args = dict(
         prompt=_PROMPT,
         max_tokens=64,
+        model_id=BedrockModelID.J2_MID_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
-        frequency_penalty=frequency_penalty,
-        presence_penalty=presence_penalty,
-        count_penalty=count_penalty,
     )
+
+    for arg_name, penalty in [
+        ("frequency_penalty", frequency_penalty),
+        ("presence_penalty", presence_penalty),
+        ("count_penalty", count_penalty),
+    ]:
+        if penalty:
+            completion_args[arg_name] = penalty
+
+    response = client.completion.create(**completion_args)
 
     assert response.prompt.text == _PROMPT
     assert len(response.completions) == 1
+
     # Check the results aren't all the same
     assert len([completion.data.text for completion in response.completions]) == 1
     for completion in response.completions:
