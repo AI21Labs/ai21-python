@@ -15,7 +15,7 @@ class AI21BedrockClient:
 
     def __init__(
         self,
-        model_id: str,
+        model_id: Optional[str] = None,
         session: Optional[boto3.Session] = None,
         region: Optional[str] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
