@@ -43,6 +43,9 @@ class BedrockCompletion(BedrockResource):
 
         model_id = kwargs.get("model_id", self._model_id)
 
+        if model_id is None:
+            raise ValueError("model_id is required in either the constructor or the 'create' call")
+
         raw_response = self._invoke(model_id=model_id, body=body)
 
         return CompletionsResponse.from_dict(raw_response)
