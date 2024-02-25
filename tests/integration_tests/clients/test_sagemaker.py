@@ -8,7 +8,7 @@ SAGEMAKER_DIR = "sagemaker"
 SAGEMAKER_PATH = Path(__file__).parent.parent.parent.parent / "examples" / SAGEMAKER_DIR
 
 
-# @pytest.mark.skip(reason="SageMaker integration tests need endpoints to be running")
+@pytest.mark.skip(reason="SageMaker integration tests need endpoints to be running")
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
