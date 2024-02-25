@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List
+from typing import List, Dict
 
 from ai21.clients.common.completion_base import Completion
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -26,6 +26,7 @@ class StudioCompletion(StudioResource, Completion):
         presence_penalty: Penalty | NotGiven = NOT_GIVEN,
         count_penalty: Penalty | NotGiven = NOT_GIVEN,
         epoch: int | NotGiven = NOT_GIVEN,
+        logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
         url = f"{self._client.get_base_url()}/{model}"
@@ -49,5 +50,6 @@ class StudioCompletion(StudioResource, Completion):
             presence_penalty=presence_penalty,
             count_penalty=count_penalty,
             epoch=epoch,
+            logit_bias=logit_bias,
         )
         return self._json_to_response(self._post(url=url, body=body))
