@@ -76,4 +76,4 @@ def test_completion__when_no_model_id__should_raise_exception():
         client = AI21BedrockClient()
         client.completion.create(prompt=_PROMPT)
 
-    assert e.value.args[0] == "model_id is required in either the constructor or the 'create' call"
+    assert e.value.args[0] == "model_id should be provided in either the constructor or the 'create' method call"
