@@ -50,11 +50,10 @@ _PROMPT = "Once upon a time, in a land far, far away, there was a"
 def test_completion__when_no_penalties__should_return_response(
     frequency_penalty: Optional[Penalty], presence_penalty: Optional[Penalty], count_penalty: Optional[Penalty]
 ):
-    client = AI21BedrockClient()
+    client = AI21BedrockClient(model_id=BedrockModelID.J2_MID_V1)
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_MID_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
@@ -69,3 +68,12 @@ def test_completion__when_no_penalties__should_return_response(
     assert len([completion.data.text for completion in response.completions]) == 1
     for completion in response.completions:
         assert isinstance(completion.data.text, str)
+
+
+@pytest.mark.skipif(should_skip_bedrock_integration_tests(), reason="No keys supplied for AWS. Skipping.")
+def test_completion__when_no_model_id__should_raise_exception():
+    with pytest.raises(ValueError) as e:
+        client = AI21BedrockClient()
+        client.completion.create(prompt=_PROMPT)
+
+    assert e.value.args[0] == "model_id should be provided in either the constructor or the 'create' method call"
