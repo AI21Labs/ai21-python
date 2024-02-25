@@ -2,7 +2,44 @@
 
 
 
+## v2.1.1 (2024-02-25)
+
+### Fix
+
+* fix: add logit bias to studio, sagemaker (#70)
+
+* fix: add logit bias, fix studio completion
+
+* fix: adjust tests
+
+* fix: add logit bias integration test
+
+* fix: update studio completion example
+
+* fix: fix studio completion example
+
+* fix: fix studio completion example
+
+* fix: remove logit bias from bedrock
+
+* fix: add logit bias to sagemaker completion, add params string
+
+* fix: adjust tests
+
+* fix: add logit bias integration test
+
+* fix: update studio completion example
+
+* fix: fix studio completion example
+
+* fix: update code with new not_giving approach ([`b0b5bc1`](https://github.com/AI21Labs/ai21-python/commit/b0b5bc152d61944313b53f39cd314a621568e6e0))
+
+
 ## v2.1.0 (2024-02-25)
+
+### Chore
+
+* chore(release): v2.1.0 [skip ci] ([`5e9a768`](https://github.com/AI21Labs/ai21-python/commit/5e9a7681e4ab1ffcdcff1c07e0cb94452eb2632c))
 
 ### Feature
 
