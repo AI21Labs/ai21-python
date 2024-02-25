@@ -7,7 +7,6 @@ from ai21.models import Penalty, CompletionsResponse
 class BedrockCompletion(BedrockResource):
     def create(
         self,
-        model_id: str,
         prompt: str,
         *,
         max_tokens: Optional[int] = None,
@@ -41,6 +40,8 @@ class BedrockCompletion(BedrockResource):
 
         if count_penalty is not None:
             body["countPenalty"] = count_penalty.to_dict()
+
+        model_id = kwargs.get("model_id", self._model_id)
 
         raw_response = self._invoke(model_id=model_id, body=body)
 
