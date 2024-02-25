@@ -3,6 +3,7 @@ from typing import Optional
 import boto3
 
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
+from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
 from ai21.clients.bedrock.bedrock_session import BedrockSession
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
 
@@ -15,7 +16,7 @@ class AI21BedrockClient:
 
     def __init__(
         self,
-        model_id: str,
+        model_id: str = BedrockModelID.J2_MID_V1,
         session: Optional[boto3.Session] = None,
         region: Optional[str] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
