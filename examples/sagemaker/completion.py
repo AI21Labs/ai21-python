@@ -31,7 +31,7 @@ prompt = (
     "User: Hi, I have a question for you"
 )
 
-client = AI21SageMakerClient(endpoint_name="j2-quantization-mid-reach-dev-cve-version-12-202313")
+client = AI21SageMakerClient(endpoint_name="sm_endpoint_name")
 response = client.completion.create(prompt=prompt, max_tokens=2)
 
 print(response)

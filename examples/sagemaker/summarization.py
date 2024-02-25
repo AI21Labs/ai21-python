@@ -1,6 +1,6 @@
 from ai21 import AI21SageMakerClient
 
-client = AI21SageMakerClient(endpoint_name="j2-quantization-mid-reach-dev-cve-version-12-202313")
+client = AI21SageMakerClient(endpoint_name="sm_endpoint_name")
 response = client.summarize.create(
     source="Holland is a geographical region[2] and former province on the western coast of the Netherlands.[2]"
     " From the 10th to the 16th century, "
