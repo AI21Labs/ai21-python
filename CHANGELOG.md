@@ -2,7 +2,54 @@
 
 
 
+## v2.1.0 (2024-02-25)
+
+### Feature
+
+* feat: support NOT_GIVEN type (#69)
+
+* feat: support NOT_GIVEN type
+
+* fix: test when penalty is not passed
+
+* fix: fix import, make more variants of penalty
+
+* refactor: completion test refactor
+
+* fix: rename endpoints
+
+* fix: uncomment skip
+
+---------
+
+Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`c7fd28a`](https://github.com/AI21Labs/ai21-python/commit/c7fd28a124c4971a9d9b85ad0d5fc5bd187535b0))
+
+### Fix
+
+* fix: Pass default model_id in bedrock client (#72)
+
+* fix: Pass default model_id in bedrock client
+
+* fix: Added validation for model_id
+
+* fix: Added validation for model_id ([`e849d78`](https://github.com/AI21Labs/ai21-python/commit/e849d78dfa9990492dcd7836d2f5df3f1ade3451))
+
+* fix: Pass model id in Bedrock client init (#71)
+
+* feat: Moved model_id in bedrock to init
+
+* test: Added tests to check model id
+
+* fix: bedrock example
+
+* refactor: rename test params ([`409e818`](https://github.com/AI21Labs/ai21-python/commit/409e818b751c261b93befedad968d6533860296c))
+
+
 ## v2.0.5 (2024-02-21)
+
+### Chore
+
+* chore(release): v2.0.5 [skip ci] ([`8965828`](https://github.com/AI21Labs/ai21-python/commit/896582839dd298121210187572adc178351f8d58))
 
 ### Fix
 
