@@ -2,7 +2,18 @@
 
 
 
+## v2.1.2 (2024-02-27)
+
+### Fix
+
+* fix: Added future type annotation to sagemaker (#74) ([`f561dd8`](https://github.com/AI21Labs/ai21-python/commit/f561dd8ce2a2bd4e532f46fe96211486f9b8cc39))
+
+
 ## v2.1.1 (2024-02-25)
+
+### Chore
+
+* chore(release): v2.1.1 [skip ci] ([`69dc136`](https://github.com/AI21Labs/ai21-python/commit/69dc1361e47cdc60dde3c366dffe89b364fdce26))
 
 ### Fix
 
