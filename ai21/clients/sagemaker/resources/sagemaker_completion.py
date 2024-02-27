@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import List, Dict
 
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource
