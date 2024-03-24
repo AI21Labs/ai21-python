@@ -1,6 +1,7 @@
 from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
+from ai21.clients.studio.resources.studio_chat_completion import ChatCompletions
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import ChatMessage, Penalty, ChatResponse
 
@@ -42,3 +43,7 @@ class StudioChat(StudioResource, Chat):
         url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
         response = self._post(url=url, body=body)
         return self._json_to_response(response)
+
+    @property
+    def completions(self) -> ChatCompletions:
+        return ChatCompletions(self._client)
