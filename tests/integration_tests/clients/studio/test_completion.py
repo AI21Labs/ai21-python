@@ -18,7 +18,7 @@ def test_completion():
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model="j2-ultra",
+        model="j2-mid",
         temperature=0.7,
         top_p=0.2,
         top_k_return=0.2,
@@ -68,7 +68,7 @@ def test_completion_when_temperature_1_and_top_p_is_0__should_return_same_respon
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model="j2-ultra",
+        model="j2-mid",
         temperature=1,
         top_p=0,
         top_k_return=0,
@@ -102,7 +102,7 @@ def test_completion_when_finish_reason_defined__should_halt_on_expected_reason(
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=max_tokens,
-        model="j2-ultra",
+        model="j2-mid",
         temperature=1,
         top_p=0,
         num_results=1,
@@ -127,7 +127,7 @@ def test_completion_logit_bias__should_impact_on_response(expected_result: str, 
     response = client.completion.create(
         prompt="Life is like",
         max_tokens=3,
-        model="j2-ultra",
+        model="j2-mid",
         temperature=0,
         logit_bias=logit_bias,
     )
