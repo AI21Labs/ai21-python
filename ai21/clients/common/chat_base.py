@@ -75,7 +75,7 @@ class Chat(ABC):
         return {
             "model": model,
             "system": system,
-            "messages": [{"role": message.role, "text": message.content} for message in messages],
+            "messages": [message.to_dict() for message in messages],
             "temperature": temperature,
             "maxTokens": max_tokens,
             "minTokens": min_tokens,
