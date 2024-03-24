@@ -9,7 +9,7 @@ LIBRARY_FILE_TO_UPLOAD = str(Path(__file__).parent.parent / "resources" / "libra
 DEFAULT_LABELS = ["einstein", "science"]
 
 
-def _wait_for_file_to_process(client: AI21Client, file_id: str, timeout: float = 20):
+def _wait_for_file_to_process(client: AI21Client, file_id: str, timeout: float = 60):
     start_time = time.time()
 
     elapsed_time = time.time() - start_time
@@ -42,7 +42,8 @@ def file_in_library():
     # Delete any file that might be in the library due to failed tests
     files = client.library.files.list()
     for file in files:
-        client.library.files.delete(file.file_id)
+        if file.status == "PROCESSED":
+            client.library.files.delete(file.file_id)
 
     file_id = client.library.files.create(file_path=LIBRARY_FILE_TO_UPLOAD, labels=DEFAULT_LABELS)
     _wait_for_file_to_process(client, file_id)
