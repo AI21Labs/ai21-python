@@ -1,8 +1,9 @@
-from ai21 import AI21Client, AI21EnvConfig
+import pytest
+
+from ai21 import AI21Client
 from ai21.models import ChatMessage, RoleType
 from ai21.models.responses.chat_completion_response import ChatCompletionResponse
 
-AI21EnvConfig.api_host = "https://api-stage.ai21.com"
 
 _MODEL = "gaia-small"
 _MESSAGES = [
@@ -14,6 +15,7 @@ _MESSAGES = [
 
 
 # TODO: When the api is officially released, update the test to assert the response
+@pytest.mark.skip(reason="API is not officially released")
 def test_chat_completion():
     num_results = 5
     messages = _MESSAGES
