@@ -12,7 +12,7 @@ class ChatMessage(AI21BaseModelMixin):
     text: Optional[str] = None
     content: Optional[str] = None
 
-    def __call__(self, *args, **kwargs):
+    def __post_init__(self):
         if self.text is None and self.content is not None:
             raise ValueError("'content' field or 'text' field must be provided")
 
