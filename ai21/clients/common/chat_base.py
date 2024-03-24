@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
+from ai21.clients.studio.resources.studio_chat_completion import ChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
 
 
@@ -47,6 +48,11 @@ class Chat(ABC):
         """
         pass
 
+    @property
+    @abstractmethod
+    def completions(self) -> ChatCompletions:
+        pass
+
     def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:
         return ChatResponse.from_dict(json)
 
@@ -69,7 +75,7 @@ class Chat(ABC):
         return {
             "model": model,
             "system": system,
-            "messages": [message.to_dict() for message in messages],
+            "messages": [{"role": message.role, "text": message.content} for message in messages],
             "temperature": temperature,
             "maxTokens": max_tokens,
             "minTokens": min_tokens,
