@@ -71,9 +71,9 @@ def get_studio_answer():
 def get_studio_chat():
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
-        ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER),
+        ChatMessage(content="Hello, I need help with a signup process.", role=RoleType.USER),
         ChatMessage(
-            text="Hi Alice, I can help you with that. What seems to be the problem?",
+            content="Hi Alice, I can help you with that. What seems to be the problem?",
             role=RoleType.ASSISTANT,
         ),
     ]
@@ -86,7 +86,7 @@ def get_studio_chat():
         {
             "model": _DUMMY_MODEL,
             "system": _DUMMY_SYSTEM,
-            "messages": [message.to_dict() for message in _DUMMY_MESSAGES],
+            "messages": [{"text": message.content, "role": message.role} for message in _DUMMY_MESSAGES],
             "temperature": 0.7,
             "maxTokens": 300,
             "minTokens": 0,
