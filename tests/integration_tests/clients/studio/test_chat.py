@@ -3,7 +3,7 @@ import pytest
 from ai21 import AI21Client
 from ai21.models import ChatMessage, RoleType, Penalty, FinishReason
 
-_MODEL = "j2-ultra"
+_MODEL = "j2-mid"
 _MESSAGES = [
     ChatMessage(
         text="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",
@@ -57,7 +57,7 @@ def test_chat():
 
     assert response.outputs[0].role == RoleType.ASSISTANT
     assert isinstance(response.outputs[0].text, str)
-    assert response.outputs[0].finish_reason == FinishReason(reason="endoftext")
+    assert response.outputs[0].finish_reason == FinishReason(reason="stop", sequence="\n")
 
     assert len(response.outputs) == num_results
 
@@ -71,7 +71,7 @@ def test_chat():
     argnames=["max_tokens", "stop_sequences", "reason"],
     argvalues=[
         (2, "##", "length"),
-        (100, "##", "endoftext"),
+        (1000, "##", "endoftext"),
         (20, ".", "stop"),
     ],
 )
@@ -83,7 +83,7 @@ def test_chat_when_finish_reason_defined__should_halt_on_expected_reason(
         messages=_MESSAGES,
         system=_SYSTEM,
         max_tokens=max_tokens,
-        model="j2-ultra",
+        model="j2-mid",
         temperature=1,
         top_p=0,
         num_results=1,
