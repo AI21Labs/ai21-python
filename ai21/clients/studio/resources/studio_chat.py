@@ -1,3 +1,4 @@
+import warnings
 from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
@@ -25,6 +26,11 @@ class StudioChat(StudioResource, Chat):
         count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
+        warnings.warn(
+            "This method is deprecated. Please use the `chat.completions.create` method in the client instead.",
+            DeprecationWarning,
+            stacklevel=2,
+        )
         body = self._create_body(
             model=model,
             messages=messages,
