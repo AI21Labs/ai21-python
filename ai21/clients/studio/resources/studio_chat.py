@@ -1,7 +1,7 @@
 from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
-from ai21.clients.studio.resources.studio_chat_completion import ChatCompletions
+from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import ChatMessage, Penalty, ChatResponse
 

@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
-from ai21.clients.studio.resources.studio_chat_completion import ChatCompletions
+from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
 
 
