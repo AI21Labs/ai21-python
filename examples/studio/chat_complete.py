@@ -1,5 +1,6 @@
-from ai21 import AI21Client, AI21EnvConfig
-from ai21.models import ChatMessage, RoleType
+from ai21 import AI21Client
+from ai21.models import RoleType
+from ai21.models.chat import ChatMessage
 
 system = "You're a support engineer in a SaaS company"
 messages = [
@@ -8,7 +9,6 @@ messages = [
     ChatMessage(content="I am having trouble signing up for your product with my Google account.", role=RoleType.USER),
 ]
 
-AI21EnvConfig.api_host = "https://api-stage.ai21.com"
 client = AI21Client()
 
 response = client.chat.completions.create(
