@@ -1,6 +1,7 @@
 """
 Run this script after setting the environment variable called AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 """
+
 import subprocess
 from pathlib import Path
 
@@ -9,7 +10,6 @@ import pytest
 from tests.integration_tests.skip_helpers import should_skip_bedrock_integration_tests
 
 BEDROCK_DIR = "bedrock"
-
 
 BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK_DIR
 
