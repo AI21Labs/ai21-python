@@ -7,6 +7,8 @@ from ai21.models.chat import ChatMessage, ChatCompletionResponse
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
+__all__ = ["ChatCompletions"]
+
 
 class ChatCompletions(StudioResource):
     _module_name = "chat/complete"
