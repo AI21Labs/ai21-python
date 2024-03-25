@@ -15,7 +15,7 @@ _MESSAGES = [
 ]
 
 
-# TODO: When the api is officially released, update the test to assert the response
+# TODO: When the api is officially released, update the test to assert the actual response
 @pytest.mark.skip(reason="API is not officially released")
 def test_chat_completion():
     num_results = 5
