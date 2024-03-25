@@ -108,8 +108,6 @@ repos:
     rev: v0.0.280
     hooks:
       - id: ruff
-        args:
-          - --fix
   - repo: local
     hooks:
       - id: hadolint
