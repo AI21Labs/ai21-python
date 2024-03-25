@@ -1,3 +1,7 @@
+"""
+This examples uses a deprecated method client.chat.create and instead
+should be replaced with the `client.chat.completions.create`
+"""
 from ai21 import AI21Client
 from ai21.models import RoleType, Penalty
 from ai21.models import ChatMessage
