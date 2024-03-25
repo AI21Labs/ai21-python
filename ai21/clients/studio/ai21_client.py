@@ -50,7 +50,7 @@ class AI21Client:
             http_client=http_client,
         )
         self.completion = StudioCompletion(self._http_client)
-        self.chat = StudioChat(self._http_client)
+        self.chat: StudioChat = StudioChat(self._http_client)
         self.summarize = StudioSummarize(self._http_client)
         self.embed = StudioEmbed(self._http_client)
         self.gec = StudioGEC(self._http_client)
