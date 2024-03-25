@@ -3,8 +3,7 @@ from __future__ import annotations
 from typing import List, Optional, Union, Any, Dict
 
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models.chat import ChatMessage
-from ai21.models.responses.chat_completion_response import ChatCompletionResponse
+from ai21.models.chat import ChatMessage, ChatCompletionResponse
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
