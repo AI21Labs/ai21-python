@@ -3,7 +3,7 @@ import pytest
 from ai21 import AI21Client
 from ai21.models.chat import ChatMessage
 from ai21.models import RoleType
-from ai21.models.responses.chat_completion_response import ChatCompletionResponse
+from ai21.models.chat.chat_completion_response import ChatCompletionResponse
 
 
 _MODEL = "gaia-small"

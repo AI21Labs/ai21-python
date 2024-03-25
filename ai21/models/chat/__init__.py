@@ -1,3 +1,5 @@
 from __future__ import annotations
 
 from .chat_message import ChatMessage as ChatMessage
+from .chat_completion_response import ChatCompletionResponse as ChatCompletionResponse
+from .chat_completion_response import ChatCompletionResponseChoice as ChatCompletionResponseChoice
