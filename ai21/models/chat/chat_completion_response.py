@@ -2,9 +2,9 @@ from dataclasses import dataclass
 from typing import Optional, List
 
 from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
-from ai21.models.chat import ChatMessage
 from ai21.models.logprobs import Logprobs
 from ai21.models.usage_info import UsageInfo
+from .chat_message import ChatMessage
 
 __all__ = ["ChatCompletionResponse", "ChatCompletionResponseChoice"]
 
