@@ -1,6 +1,7 @@
 """
 Run this script after setting the environment variable called AWS_ACCESS_KEY_ID, AWS_SECRET_ACCESS_KEY
 """
+
 import subprocess
 from pathlib import Path
 

@@ -17,15 +17,15 @@ class ChatCompletions(StudioResource):
         self,
         model: str,
         messages: List[ChatMessage],
-        n: Optional[int] | NotGiven = NOT_GIVEN,
-        logprobs: Optional[bool] | NotGiven = NOT_GIVEN,
-        top_logprobs: Optional[int] | NotGiven = NOT_GIVEN,
-        max_tokens: Optional[int] | NotGiven = NOT_GIVEN,
-        temperature: Optional[float] | NotGiven = NOT_GIVEN,
-        top_p: Optional[float] | NotGiven = NOT_GIVEN,
-        stop: Optional[Union[str, List[str]]] | NotGiven = NOT_GIVEN,
-        frequency_penalty: Optional[float] | NotGiven = NOT_GIVEN,
-        presence_penalty: Optional[float] | NotGiven = NOT_GIVEN,
+        n: int | NotGiven = NOT_GIVEN,
+        logprobs: bool | NotGiven = NOT_GIVEN,
+        top_logprobs: int | NotGiven = NOT_GIVEN,
+        max_tokens: int | NotGiven = NOT_GIVEN,
+        temperature: float | NotGiven = NOT_GIVEN,
+        top_p: float | NotGiven = NOT_GIVEN,
+        stop: str | List[str] | NotGiven = NOT_GIVEN,
+        frequency_penalty: float | NotGiven = NOT_GIVEN,
+        presence_penalty: float | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         body = self._create_body(
@@ -40,6 +40,7 @@ class ChatCompletions(StudioResource):
             top_p=top_p,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
+            **kwargs,
         )
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
@@ -59,6 +60,7 @@ class ChatCompletions(StudioResource):
         stop: Optional[Union[str, List[str]]] | NotGiven,
         frequency_penalty: Optional[float] | NotGiven,
         presence_penalty: Optional[float] | NotGiven,
+        **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(
             {
@@ -73,6 +75,7 @@ class ChatCompletions(StudioResource):
                 "stop": stop,
                 "frequencyPenalty": frequency_penalty,
                 "presencePenalty": presence_penalty,
+                **kwargs,
             }
         )
 
