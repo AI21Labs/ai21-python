@@ -6,7 +6,7 @@ from ai21.models import RoleType
 from ai21.models.chat.chat_completion_response import ChatCompletionResponse
 
 
-_MODEL = "gaia-small"
+_MODEL = "new-model-name"
 _MESSAGES = [
     ChatMessage(
         content="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",

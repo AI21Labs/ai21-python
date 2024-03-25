@@ -13,7 +13,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="gaia-small",
+    model="new-model-name",
     n=2,
     logprobs=True,
     top_logprobs=2,
