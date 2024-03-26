@@ -17,6 +17,7 @@ from tests.unittests.clients.studio.resources.conftest import (
     get_studio_segmentation,
     get_studio_summarization,
     get_studio_summarize_by_segment,
+    get_chat_completions,
 )
 
 _BASE_URL = "https://test.api.ai21.com/studio/v1"
@@ -31,6 +32,7 @@ class TestStudioResources:
         ids=[
             "studio_answer",
             "studio_chat",
+            "chat_completions",
             "studio_completion",
             "studio_completion_with_extra_args",
             "studio_embed",
@@ -45,6 +47,7 @@ class TestStudioResources:
         argvalues=[
             (get_studio_answer()),
             (get_studio_chat()),
+            (get_chat_completions()),
             (get_studio_completion()),
             (get_studio_completion(temperature=0.5, max_tokens=50)),
             (get_studio_embed()),

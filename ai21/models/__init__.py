@@ -1,3 +1,4 @@
+from ai21.models.chat.role_type import RoleType
 from ai21.models.chat_message import ChatMessage
 from ai21.models.document_type import DocumentType
 from ai21.models.embed_type import EmbedType
@@ -25,9 +26,7 @@ from ai21.models.responses.paraphrase_response import ParaphraseResponse, Sugges
 from ai21.models.responses.segmentation_response import SegmentationResponse
 from ai21.models.responses.summarize_by_segment_response import SummarizeBySegmentResponse, SegmentSummary, Highlight
 from ai21.models.responses.summarize_response import SummarizeResponse
-from ai21.models.role_type import RoleType
 from ai21.models.summary_method import SummaryMethod
-
 
 __all__ = [
     "ChatMessage",

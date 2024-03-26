@@ -1,5 +1,11 @@
+"""
+This examples uses a deprecated method client.chat.create and instead
+should be replaced with the `client.chat.completions.create`
+"""
+
 from ai21 import AI21Client
-from ai21.models import ChatMessage, RoleType, Penalty
+from ai21.models import RoleType, Penalty
+from ai21.models import ChatMessage
 
 system = "You're a support engineer in a SaaS company"
 messages = [
@@ -8,11 +14,12 @@ messages = [
     ChatMessage(text="I am having trouble signing up for your product with my Google account.", role=RoleType.USER),
 ]
 
+
 client = AI21Client()
 response = client.chat.create(
     system=system,
     messages=messages,
-    model="j2-ultra",
+    model="j2-mid",
     count_penalty=Penalty(
         scale=0,
         apply_to_emojis=False,
