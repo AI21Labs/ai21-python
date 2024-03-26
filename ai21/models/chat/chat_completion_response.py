@@ -6,8 +6,6 @@ from ai21.models.logprobs import Logprobs
 from ai21.models.usage_info import UsageInfo
 from .chat_message import ChatMessage
 
-__all__ = ["ChatCompletionResponse", "ChatCompletionResponseChoice"]
-
 
 @dataclass
 class ChatCompletionResponseChoice(AI21BaseModelMixin):
