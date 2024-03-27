@@ -2,9 +2,52 @@
 
 
 
-## v2.2.0-rc.1 (2024-03-27)
+## v2.1.3 (2024-03-27)
 
 ### Chore
+
+* chore(deps-dev): bump black from 22.12.0 to 24.3.0 (#80)
+
+* chore(deps-dev): bump black from 22.12.0 to 24.3.0
+
+Bumps [black](https://github.com/psf/black) from 22.12.0 to 24.3.0.
+- [Release notes](https://github.com/psf/black/releases)
+- [Changelog](https://github.com/psf/black/blob/main/CHANGES.md)
+- [Commits](https://github.com/psf/black/compare/22.12.0...24.3.0)
+
+---
+updated-dependencies:
+- dependency-name: black
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+* refactor: lint fixes
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`5986522`](https://github.com/AI21Labs/ai21-python/commit/59865220571bbdb19edf69aee16b21dbe7582d85))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#85)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.3.0 to 9.3.1.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.3.0...v9.3.1)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`aea5963`](https://github.com/AI21Labs/ai21-python/commit/aea5963943ad6220a41386acc5adbf23a8f0bf3e))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#81)
 
@@ -41,47 +84,17 @@ Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
 Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
 Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`7f3ea4a`](https://github.com/AI21Labs/ai21-python/commit/7f3ea4ab5ff87f92312e6fd873a17cbab010ed4e))
 
-### Documentation
-
-* docs: Updated todo ([`05e4f67`](https://github.com/AI21Labs/ai21-python/commit/05e4f67be3fad8ba27adcb7b2e3ec62006d402c5))
-
-### Feature
-
-* feat: Merge pull request #84 from AI21Labs/feat_chat_completion_support
-
-feat: support chat completion in studio SDK ([`428ad98`](https://github.com/AI21Labs/ai21-python/commit/428ad9899abe9fd7461781c675e256736c74eb2e))
-
-* feat: support chat completion in studio SDK ([`debb61a`](https://github.com/AI21Labs/ai21-python/commit/debb61ab02b0a5d2590aff5a6f43910504776e88))
-
 ### Fix
 
-* fix: all import ([`d200d0e`](https://github.com/AI21Labs/ai21-python/commit/d200d0edff8d3d441829c45f534b25927dbd7a4f))
+* fix: Fix readme gaps (#87)
 
-* fix: circualr imports ([`debe0de`](https://github.com/AI21Labs/ai21-python/commit/debe0de4a088cbb9d8f14c677cad5088440486c4))
+* docs: Added contextual answers examples and shared a link to our examples folder
 
-* fix: alias ([`e7aac37`](https://github.com/AI21Labs/ai21-python/commit/e7aac373422ebe79608d7f08f1f31372747ef4f8))
+* fix: Fixed main link in our readme
 
-* fix: model name ([`ad2e205`](https://github.com/AI21Labs/ai21-python/commit/ad2e20509c7d8e1b226d7855fdf43f95c8c7e744))
-
-* fix: CR ([`2a2e1d3`](https://github.com/AI21Labs/ai21-python/commit/2a2e1d31f1d04e5e760284a2a7e321bab8413f75))
-
-* fix: CR ([`2e7b836`](https://github.com/AI21Labs/ai21-python/commit/2e7b83633872e396ed53de78b70f2cf8b1cc2e04))
-
-* fix: Added deprecation warning ([`21d3da8`](https://github.com/AI21Labs/ai21-python/commit/21d3da8a191916651b9789929b5ab9571b07bde0))
-
-* fix: imports ([`4f4a291`](https://github.com/AI21Labs/ai21-python/commit/4f4a291ea6a87781f7b5ace51f6f53968026097a))
-
-* fix: Added __all__ ([`76d2fad`](https://github.com/AI21Labs/ai21-python/commit/76d2fadf1983766f22505eec514f4fc34fab26b6))
-
-### Refactor
-
-* refactor: imports and file structure ([`a59e503`](https://github.com/AI21Labs/ai21-python/commit/a59e503e551a3a816db45935f6206ee7aa95946b))
-
-* refactor: Moved chat message to different packages ([`ca5499f`](https://github.com/AI21Labs/ai21-python/commit/ca5499f4addd0497f7380fa36085509c257f0f03))
+* docs: Examples section ([`da3afed`](https://github.com/AI21Labs/ai21-python/commit/da3afed67b806a35638ad804172183f8029619ea))
 
 ### Test
-
-* test: Added a unittest ([`4bf975e`](https://github.com/AI21Labs/ai21-python/commit/4bf975e869d019e55ef573aefd74fbbfdad3aa76))
 
 * test: integration test for library files (#83)
 
@@ -92,10 +105,6 @@ feat: support chat completion in studio SDK ([`428ad98`](https://github.com/AI21
 * fix: chat tests ([`3a50669`](https://github.com/AI21Labs/ai21-python/commit/3a50669db9351223ca971908eaa6e4842011d259))
 
 * test: check imports (#76) ([`a72e23b`](https://github.com/AI21Labs/ai21-python/commit/a72e23b063ad3c1db076ced932bf0f4e6703c576))
-
-### Unknown
-
-* revert: ruff ([`27911dd`](https://github.com/AI21Labs/ai21-python/commit/27911dd505f0f60a4f860e533779de96ebfb7852))
 
 
 ## v2.1.2 (2024-02-27)
