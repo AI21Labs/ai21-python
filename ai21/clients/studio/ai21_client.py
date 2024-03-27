@@ -1,3 +1,4 @@
+import warnings
 from typing import Optional, Any, Dict
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
@@ -63,9 +64,13 @@ class AI21Client:
         self.library = StudioLibrary(self._http_client)
         self.segmentation = StudioSegmentation(self._http_client)
 
-    def count_tokens(self, text: str) -> int:
+    def count_tokens(self, text: str, tokenizer_name: str = "j2-tokenizer") -> int:
+        warnings.warn(
+            "Please use the global get_tokenizer() method directly instead" " of the AI21Client.count_tokens() method.",
+            DeprecationWarning,
+        )
         # We might want to cache the tokenizer instance within the class
         # and not globally as it might be used by other instances
 
-        tokenizer = get_tokenizer()
+        tokenizer = get_tokenizer(tokenizer_name)
         return tokenizer.count_tokens(text)
