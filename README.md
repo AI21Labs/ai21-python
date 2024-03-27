@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="https://github.com/AI21Labs/ai21">AI21 Labs Python SDK</a>
+    <a href="https://github.com/AI21Labs/ai21-python">AI21 Labs Python SDK</a>
 </h1>
 
 [//]: # "Add when public"
@@ -157,6 +157,27 @@ response = client.completion.create(
 print(response.completions)
 print(response.prompt)
 ```
+
+### TSMs
+
+AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
+The full documentation and guides can be found [here](https://docs.ai21.com/docs/task-specific).
+
+### Contextual Answers
+
+The `answer` API allows you to access our high-quality question answering model.
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+response = client.answer.create(
+    context="This is a text is for testing purposes",
+    question="Question about context",
+)
+```
+
+A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
 
 ### Token Counting
 
@@ -327,3 +348,13 @@ response = client.completion.create(
     max_tokens=10,
 )
 ```
+
+## Examples
+
+Explore our examples to see our models in action! We've put together a variety of use cases and demonstrations to showcase the capabilities and functionality of our models.
+
+### [Check out the Examples](examples/)
+
+Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
+
+Happy prompting! 🚀
