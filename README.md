@@ -158,6 +158,27 @@ print(response.completions)
 print(response.prompt)
 ```
 
+### TSMs
+
+AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
+The full documenation and guides can be found [here](https://docs.ai21.com/docs/task-specific-models).
+
+### Contextual Answers
+
+The `answer` API allows you to access our high-quality question answering model.
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+response = client.answer.create(
+    context="This is a text is for testing purposes",
+    question="Question about context",
+)
+```
+
+For more examples on how to use our different FMs and TSMs, please check out our [examples](examples/) directory.
+
 ### Token Counting
 
 ---
