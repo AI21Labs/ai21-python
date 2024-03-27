@@ -161,7 +161,7 @@ print(response.prompt)
 ### TSMs
 
 AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
-The full documenation and guides can be found [here](https://docs.ai21.com/docs/task-specific-models).
+The full documentation and guides can be found [here](https://docs.ai21.com/docs/task-specific).
 
 ### Contextual Answers
 
@@ -177,7 +177,7 @@ response = client.answer.create(
 )
 ```
 
-For more examples on how to use our different FMs and TSMs, please check out our [examples](examples/) directory.
+A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
 
 ### Token Counting
 
@@ -348,3 +348,13 @@ response = client.completion.create(
     max_tokens=10,
 )
 ```
+
+## Examples
+
+Explore our examples to see our models in action! We've put together a variety of use cases and demonstrations to showcase the capabilities and functionality of our models.
+
+### [Check out the Examples](examples/)
+
+Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
+
+Happy prompting! 🚀
