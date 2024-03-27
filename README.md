@@ -1,5 +1,5 @@
 <h1 align="center">
-    <a href="https://github.com/AI21Labs/ai21">AI21 Labs Python SDK</a>
+    <a href="https://github.com/AI21Labs/ai21-python">AI21 Labs Python SDK</a>
 </h1>
 
 [//]: # "Add when public"
