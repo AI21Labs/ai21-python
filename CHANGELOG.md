@@ -2,7 +2,116 @@
 
 
 
+## v2.1.3 (2024-03-27)
+
+### Chore
+
+* chore(deps-dev): bump black from 22.12.0 to 24.3.0 (#80)
+
+* chore(deps-dev): bump black from 22.12.0 to 24.3.0
+
+Bumps [black](https://github.com/psf/black) from 22.12.0 to 24.3.0.
+- [Release notes](https://github.com/psf/black/releases)
+- [Changelog](https://github.com/psf/black/blob/main/CHANGES.md)
+- [Commits](https://github.com/psf/black/compare/22.12.0...24.3.0)
+
+---
+updated-dependencies:
+- dependency-name: black
+  dependency-type: direct:development
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+
+* refactor: lint fixes
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`5986522`](https://github.com/AI21Labs/ai21-python/commit/59865220571bbdb19edf69aee16b21dbe7582d85))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#85)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.3.0 to 9.3.1.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.3.0...v9.3.1)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`aea5963`](https://github.com/AI21Labs/ai21-python/commit/aea5963943ad6220a41386acc5adbf23a8f0bf3e))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#81)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 8.7.2 to 9.3.0.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v8.7.2...v9.3.0)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`c94966b`](https://github.com/AI21Labs/ai21-python/commit/c94966b4b05eec93a44e828800f043233b1fe5f4))
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.14 (#77)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.8.11 to 1.8.14.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf...81e9d935c883d0b210363ab89cf05f3894778450)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`7f3ea4a`](https://github.com/AI21Labs/ai21-python/commit/7f3ea4ab5ff87f92312e6fd873a17cbab010ed4e))
+
+### Fix
+
+* fix: Fix readme gaps (#87)
+
+* docs: Added contextual answers examples and shared a link to our examples folder
+
+* fix: Fixed main link in our readme
+
+* docs: Examples section ([`da3afed`](https://github.com/AI21Labs/ai21-python/commit/da3afed67b806a35638ad804172183f8029619ea))
+
+### Test
+
+* test: integration test for library files (#83)
+
+* fix: integration test for file
+
+* refactor: Simplified
+
+* fix: chat tests ([`3a50669`](https://github.com/AI21Labs/ai21-python/commit/3a50669db9351223ca971908eaa6e4842011d259))
+
+* test: check imports (#76) ([`a72e23b`](https://github.com/AI21Labs/ai21-python/commit/a72e23b063ad3c1db076ced932bf0f4e6703c576))
+
+
 ## v2.1.2 (2024-02-27)
+
+### Chore
+
+* chore(release): v2.1.2 [skip ci] ([`9551776`](https://github.com/AI21Labs/ai21-python/commit/9551776a9f6c4c3a1671e308dad37a900e786b0f))
 
 ### Fix
 
