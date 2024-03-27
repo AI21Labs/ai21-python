@@ -2,7 +2,107 @@
 
 
 
+## v2.2.0-rc.1 (2024-03-27)
+
+### Chore
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#81)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 8.7.2 to 9.3.0.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v8.7.2...v9.3.0)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`c94966b`](https://github.com/AI21Labs/ai21-python/commit/c94966b4b05eec93a44e828800f043233b1fe5f4))
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.14 (#77)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.8.11 to 1.8.14.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/2f6f737ca5f74c637829c0f5c3acd0e29ea5e8bf...81e9d935c883d0b210363ab89cf05f3894778450)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`7f3ea4a`](https://github.com/AI21Labs/ai21-python/commit/7f3ea4ab5ff87f92312e6fd873a17cbab010ed4e))
+
+### Documentation
+
+* docs: Updated todo ([`05e4f67`](https://github.com/AI21Labs/ai21-python/commit/05e4f67be3fad8ba27adcb7b2e3ec62006d402c5))
+
+### Feature
+
+* feat: Merge pull request #84 from AI21Labs/feat_chat_completion_support
+
+feat: support chat completion in studio SDK ([`428ad98`](https://github.com/AI21Labs/ai21-python/commit/428ad9899abe9fd7461781c675e256736c74eb2e))
+
+* feat: support chat completion in studio SDK ([`debb61a`](https://github.com/AI21Labs/ai21-python/commit/debb61ab02b0a5d2590aff5a6f43910504776e88))
+
+### Fix
+
+* fix: all import ([`d200d0e`](https://github.com/AI21Labs/ai21-python/commit/d200d0edff8d3d441829c45f534b25927dbd7a4f))
+
+* fix: circualr imports ([`debe0de`](https://github.com/AI21Labs/ai21-python/commit/debe0de4a088cbb9d8f14c677cad5088440486c4))
+
+* fix: alias ([`e7aac37`](https://github.com/AI21Labs/ai21-python/commit/e7aac373422ebe79608d7f08f1f31372747ef4f8))
+
+* fix: model name ([`ad2e205`](https://github.com/AI21Labs/ai21-python/commit/ad2e20509c7d8e1b226d7855fdf43f95c8c7e744))
+
+* fix: CR ([`2a2e1d3`](https://github.com/AI21Labs/ai21-python/commit/2a2e1d31f1d04e5e760284a2a7e321bab8413f75))
+
+* fix: CR ([`2e7b836`](https://github.com/AI21Labs/ai21-python/commit/2e7b83633872e396ed53de78b70f2cf8b1cc2e04))
+
+* fix: Added deprecation warning ([`21d3da8`](https://github.com/AI21Labs/ai21-python/commit/21d3da8a191916651b9789929b5ab9571b07bde0))
+
+* fix: imports ([`4f4a291`](https://github.com/AI21Labs/ai21-python/commit/4f4a291ea6a87781f7b5ace51f6f53968026097a))
+
+* fix: Added __all__ ([`76d2fad`](https://github.com/AI21Labs/ai21-python/commit/76d2fadf1983766f22505eec514f4fc34fab26b6))
+
+### Refactor
+
+* refactor: imports and file structure ([`a59e503`](https://github.com/AI21Labs/ai21-python/commit/a59e503e551a3a816db45935f6206ee7aa95946b))
+
+* refactor: Moved chat message to different packages ([`ca5499f`](https://github.com/AI21Labs/ai21-python/commit/ca5499f4addd0497f7380fa36085509c257f0f03))
+
+### Test
+
+* test: Added a unittest ([`4bf975e`](https://github.com/AI21Labs/ai21-python/commit/4bf975e869d019e55ef573aefd74fbbfdad3aa76))
+
+* test: integration test for library files (#83)
+
+* fix: integration test for file
+
+* refactor: Simplified
+
+* fix: chat tests ([`3a50669`](https://github.com/AI21Labs/ai21-python/commit/3a50669db9351223ca971908eaa6e4842011d259))
+
+* test: check imports (#76) ([`a72e23b`](https://github.com/AI21Labs/ai21-python/commit/a72e23b063ad3c1db076ced932bf0f4e6703c576))
+
+### Unknown
+
+* revert: ruff ([`27911dd`](https://github.com/AI21Labs/ai21-python/commit/27911dd505f0f60a4f860e533779de96ebfb7852))
+
+
 ## v2.1.2 (2024-02-27)
+
+### Chore
+
+* chore(release): v2.1.2 [skip ci] ([`9551776`](https://github.com/AI21Labs/ai21-python/commit/9551776a9f6c4c3a1671e308dad37a900e786b0f))
 
 ### Fix
 
