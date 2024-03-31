@@ -1,3 +1,4 @@
+import pytest
 from ai21.tokenizers.factory import get_tokenizer
 
 
@@ -23,3 +24,13 @@ class TestAI21Tokenizer:
         tokenizer2 = get_tokenizer()
 
         assert tokenizer1 is tokenizer2
+
+    def test__get_tokenizer__when_called_with_different_tokenizer_name__should_return_different_tokenizer(self):
+        tokenizer1 = get_tokenizer("j2-tokenizer")
+        tokenizer2 = get_tokenizer("jamba-instruct-tokenizer")
+
+        assert tokenizer1._tokenizer is not tokenizer2._tokenizer
+
+    def test__get_tokenizer__when_tokenizer_name_not_supported__should_raise_error(self):
+        with pytest.raises(ValueError):
+            get_tokenizer("some-tokenizer")
