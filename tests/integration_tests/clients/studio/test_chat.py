@@ -3,7 +3,7 @@ import pytest
 from ai21 import AI21Client
 from ai21.models import ChatMessage, RoleType, Penalty, FinishReason
 
-_MODEL = "j2-mid"
+_MODEL = "j2-ultra"
 _MESSAGES = [
     ChatMessage(
         text="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",
@@ -83,7 +83,7 @@ def test_chat_when_finish_reason_defined__should_halt_on_expected_reason(
         messages=_MESSAGES,
         system=_SYSTEM,
         max_tokens=max_tokens,
-        model="j2-mid",
+        model="j2-ultra",
         temperature=1,
         top_p=0,
         num_results=1,

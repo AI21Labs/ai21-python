@@ -1,18 +1,44 @@
+from typing import List
+
+import pytest
 from ai21.tokenizers.factory import get_tokenizer
 
 
 class TestAI21Tokenizer:
-    def test__count_tokens__should_return_number_of_tokens(self):
-        expected_number_of_tokens = 8
-        tokenizer = get_tokenizer()
+    @pytest.mark.parametrize(
+        ids=[
+            "when_j2_tokenizer",
+            "when_jamba_instruct_tokenizer",
+        ],
+        argnames=["tokenizer_name", "expected_tokens"],
+        argvalues=[
+            ("j2-tokenizer", 8),
+            ("jamba-instruct-tokenizer", 9),
+        ],
+    )
+    def test__count_tokens__should_return_number_of_tokens(self, tokenizer_name: str, expected_tokens: int):
+        tokenizer = get_tokenizer(tokenizer_name)
 
         actual_number_of_tokens = tokenizer.count_tokens("Text to Tokenize - Hello world!")
 
-        assert actual_number_of_tokens == expected_number_of_tokens
+        assert actual_number_of_tokens == expected_tokens
 
-    def test__tokenize__should_return_list_of_tokens(self):
-        expected_tokens = ["▁Text", "▁to", "▁Token", "ize", "▁-", "▁Hello", "▁world", "!"]
-        tokenizer = get_tokenizer()
+    @pytest.mark.parametrize(
+        ids=[
+            "when_j2_tokenizer",
+            "when_jamba_instruct_tokenizer",
+        ],
+        argnames=["tokenizer_name", "expected_tokens"],
+        argvalues=[
+            ("j2-tokenizer", ["▁Text", "▁to", "▁Token", "ize", "▁-", "▁Hello", "▁world", "!"]),
+            (
+                "jamba-instruct-tokenizer",
+                ["<|startoftext|>", "Text", "▁to", "▁Token", "ize", "▁-", "▁Hello", "▁world", "!"],
+            ),
+        ],
+    )
+    def test__tokenize__should_return_list_of_tokens(self, tokenizer_name: str, expected_tokens: List[str]):
+        tokenizer = get_tokenizer(tokenizer_name)
 
         actual_tokens = tokenizer.tokenize("Text to Tokenize - Hello world!")
 
@@ -23,3 +49,13 @@ class TestAI21Tokenizer:
         tokenizer2 = get_tokenizer()
 
         assert tokenizer1 is tokenizer2
+
+    def test__get_tokenizer__when_called_with_different_tokenizer_name__should_return_different_tokenizer(self):
+        tokenizer1 = get_tokenizer("j2-tokenizer")
+        tokenizer2 = get_tokenizer("jamba-instruct-tokenizer")
+
+        assert tokenizer1._tokenizer is not tokenizer2._tokenizer
+
+    def test__get_tokenizer__when_tokenizer_name_not_supported__should_raise_error(self):
+        with pytest.raises(ValueError):
+            get_tokenizer("some-tokenizer")
