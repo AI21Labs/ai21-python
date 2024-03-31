@@ -1,6 +1,7 @@
 """
 Run this script after setting the environment variable called AI21_API_KEY
 """
+
 import subprocess
 from pathlib import Path
 
