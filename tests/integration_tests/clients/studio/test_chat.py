@@ -3,7 +3,7 @@ import pytest
 from ai21 import AI21Client
 from ai21.models import ChatMessage, RoleType, Penalty, FinishReason
 
-_MODEL = "j2-mid"
+_MODEL = "j2-ultra"
 _MESSAGES = [
     ChatMessage(
         text="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",
