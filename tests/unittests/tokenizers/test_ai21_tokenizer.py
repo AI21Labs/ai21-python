@@ -1,3 +1,5 @@
+from typing import List
+
 import pytest
 from ai21.tokenizers.factory import get_tokenizer
 
@@ -35,7 +37,7 @@ class TestAI21Tokenizer:
             ),
         ],
     )
-    def test__tokenize__should_return_list_of_tokens(self, tokenizer_name: str, expected_tokens: list[str]):
+    def test__tokenize__should_return_list_of_tokens(self, tokenizer_name: str, expected_tokens: List[str]):
         tokenizer = get_tokenizer(tokenizer_name)
 
         actual_tokens = tokenizer.tokenize("Text to Tokenize - Hello world!")
