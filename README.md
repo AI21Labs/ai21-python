@@ -186,11 +186,19 @@ A detailed explanation on Contextual Answers, can be found [here](https://docs.a
 By using the `count_tokens` method, you can estimate the billing for a given request.
 
 ```python
-from ai21 import AI21Client
+from ai21.tokenizers import get_tokenizer
 
-client = AI21Client()
-client.count_tokens(text="some text")  # returns int
+tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
+total_tokens = tokenizer.count_tokens(text="some text")  # returns int
+print(total_tokens)
 ```
+
+Available tokenizers are:
+
+- `jamba-instruct-tokenizer`
+- `j2-tokenizer`
+
+For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
 
 ### File Upload
 
