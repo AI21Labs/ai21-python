@@ -1,13 +1,13 @@
 from typing import Dict
 
-from ai21_tokenizer import Tokenizer
+from ai21_tokenizer import Tokenizer, PreTrainedTokenizers
 
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 
 _cached_tokenizers: Dict[str, AI21Tokenizer] = {}
 
 
-def get_tokenizer(tokenizer_name: str = "j2-tokenizer") -> AI21Tokenizer:
+def get_tokenizer(tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> AI21Tokenizer:
     """
     Get the tokenizer instance.
 
