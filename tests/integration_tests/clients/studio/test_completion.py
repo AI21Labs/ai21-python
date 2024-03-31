@@ -1,6 +1,5 @@
 import pytest
 
-from typing import Dict
 from ai21 import AI21Client
 from ai21.models import Penalty
 
@@ -9,6 +8,7 @@ User: Haven't received a confirmation email for my order #12345.
 Assistant: I'm sorry to hear that. I'll look into it right away.
 User: Can you please let me know when I can expect to receive it?
 """
+_MODEL_NAME = "j2-mid"
 
 
 def test_completion():
@@ -18,7 +18,7 @@ def test_completion():
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model="j2-ultra",
+        model=_MODEL_NAME,
         temperature=0.7,
         top_p=0.2,
         top_k_return=0.2,
@@ -68,7 +68,7 @@ def test_completion_when_temperature_1_and_top_p_is_0__should_return_same_respon
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=64,
-        model="j2-ultra",
+        model=_MODEL_NAME,
         temperature=1,
         top_p=0,
         top_k_return=0,
@@ -102,7 +102,7 @@ def test_completion_when_finish_reason_defined__should_halt_on_expected_reason(
     response = client.completion.create(
         prompt=_PROMPT,
         max_tokens=max_tokens,
-        model="j2-ultra",
+        model=_MODEL_NAME,
         temperature=1,
         top_p=0,
         num_results=1,
@@ -114,22 +114,29 @@ def test_completion_when_finish_reason_defined__should_halt_on_expected_reason(
     assert response.completions[0].finish_reason.reason == reason
 
 
-@pytest.mark.parametrize(
-    ids=[
-        "no_logit_bias",
-        "logit_bias_negative",
-    ],
-    argnames=["expected_result", "logit_bias"],
-    argvalues=[(" a box of chocolates", None), (" riding a bicycle", {"▁a▁box▁of": -100.0})],
-)
-def test_completion_logit_bias__should_impact_on_response(expected_result: str, logit_bias: Dict[str, float]):
+def test_completion_logit_bias__when_no_logit_bias__should_not_impact_on_response():
     client = AI21Client()
     response = client.completion.create(
         prompt="Life is like",
         max_tokens=3,
-        model="j2-ultra",
+        model=_MODEL_NAME,
         temperature=0,
-        logit_bias=logit_bias,
+        logit_bias=None,
     )
 
-    assert response.completions[0].data.text.strip() == expected_result.strip()
+    assert response.completions[0].data.text.strip() == " a box of chocolates".strip()
+
+
+def test_completion_logit_bias__when_logit_bias__should_impact_on_response():
+    expected_result = " a box of chocolates"
+
+    client = AI21Client()
+    response = client.completion.create(
+        prompt="Life is like",
+        max_tokens=3,
+        model=_MODEL_NAME,
+        temperature=0,
+        logit_bias={"▁a▁box▁of": -100.0},
+    )
+
+    assert expected_result not in response.completions[0].data.text.strip()

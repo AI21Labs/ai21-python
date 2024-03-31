@@ -66,6 +66,7 @@ jobs:
       - name: Run Integration Tests
         env:
           AI21_API_KEY: ${{ secrets.AI21_API_KEY }}
+          AI21_API_HOST: https://api-stage.ai21.com
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
         run: |

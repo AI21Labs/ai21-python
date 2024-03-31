@@ -1,11 +1,10 @@
 """
 Run this script after setting the environment variable called AI21_API_KEY
 """
-
+import subprocess
 from pathlib import Path
 
 import pytest
-import subprocess
 
 from tests.integration_tests.skip_helpers import should_skip_studio_integration_tests
 

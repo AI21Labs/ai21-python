@@ -83,7 +83,7 @@ def test_chat_when_finish_reason_defined__should_halt_on_expected_reason(
         messages=_MESSAGES,
         system=_SYSTEM,
         max_tokens=max_tokens,
-        model="j2-mid",
+        model=_MODEL,
         temperature=1,
         top_p=0,
         num_results=1,
