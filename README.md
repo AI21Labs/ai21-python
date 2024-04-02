@@ -149,7 +149,7 @@ messages = [
 
 chat_completions = client.chat.completions.create(
     messages=messages,
-    model="jamba",
+    model="jamba-instruct",
 )
 ```
 
