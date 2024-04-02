@@ -143,8 +143,8 @@ client = AI21Client(
 
 messages = [
     # Could be a dict or a ChatMessage object
-    ChatMessage(content="Hello, this is a readme", role=RoleType.USER),
-    ChatMessage(content="You are correct, how can I help you?", role=RoleType.ASSISTANT),
+    ChatMessage(content="Hello, this is a readme", role="user"),
+    ChatMessage(content="You are correct, how can I help you?", role="assistant"),
 ]
 
 chat_completions = client.chat.completions.create(
