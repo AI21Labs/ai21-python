@@ -1,10 +1,10 @@
-from dataclasses import dataclass
+from __future__ import annotations
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from typing_extensions import TypedDict, Literal
+
 from .role_type import RoleType
 
 
-@dataclass
-class ChatMessage(AI21BaseModelMixin):
-    role: RoleType
+class ChatMessage(TypedDict):
+    role: RoleType | Literal["user", "assistant"]
     content: str
