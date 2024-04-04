@@ -11,7 +11,7 @@ __all__ = ["ChatCompletions"]
 
 
 class ChatCompletions(StudioResource):
-    _module_name = "chat/complete"
+    _module_name = "chat/completions"
 
     def create(
         self,
