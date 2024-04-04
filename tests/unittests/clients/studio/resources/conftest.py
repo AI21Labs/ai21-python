@@ -130,7 +130,7 @@ def get_chat_completions():
     return (
         ChatCompletions,
         {"model": _DUMMY_MODEL, "messages": _DUMMY_MESSAGES},
-        "chat/complete",
+        "chat/completions",
         {
             "model": _DUMMY_MODEL,
             "messages": _DUMMY_MESSAGES,
