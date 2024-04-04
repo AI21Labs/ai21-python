@@ -21,7 +21,7 @@
 ## Migration from v1.3.4 and below
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
-This version allows for Non static instances of the client, defined parameters to each resource, modelized responses and
+This version allows for non-static instances of the client, defined parameters to each resource, modelized responses and
 more.
 
 <details>
@@ -113,9 +113,15 @@ It is no longer possible to access the response object as a dictionary. Instead,
 
 </details>
 
+## Documentation
+
+---
+
+The full documentation for the REST API can be found on [docs.ai21.com](https://docs.ai21.com/).
+
 ## Installation
 
-### pip
+---
 
 ```bash
 pip install ai21
@@ -123,10 +129,38 @@ pip install ai21
 
 ## Usage
 
-### Model Types
+---
 
-Wherever you are required to pass a model name as a parameter, you can use any of the available AI21
-state-of-the-art models:
+```python
+from ai21 import AI21Client
+from ai21.models import RoleType
+from ai21.models.chat import ChatMessage
+
+client = AI21Client(
+    # defaults to os.enviorn.get('AI21_API_KEY')
+    api_key='my_api_key',
+)
+
+messages = [
+    # Could be a dict or a ChatMessage object
+    ChatMessage(content="Hello, this is a readme", role="user"),
+    ChatMessage(content="You are correct, how can I help you?", role="assistant"),
+]
+
+chat_completions = client.chat.completions.create(
+    messages=messages,
+    model="jamba-instruct",
+)
+```
+
+A more detailed example can be found [here](examples/studio/chat/chat_completions.py).
+
+## Older Models Support Usage
+
+<details>
+<summary>Examples</summary>
+
+### Supported Models:
 
 - j2-light
 - j2-mid
@@ -134,31 +168,51 @@ state-of-the-art models:
 
 you can read more about the models [here](https://docs.ai21.com/reference/j2-complete-api-ref#jurassic-2-models).
 
----
+### Chat
 
-### Client Instance Creation
+```python
+from ai21 import AI21Client
+from ai21.models import RoleType
+from ai21.models import ChatMessage
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER),
+    ChatMessage(text="Hi Alice, I can help you with that. What seems to be the problem?", role=RoleType.ASSISTANT),
+    ChatMessage(text="I am having trouble signing up for your product with my Google account.", role=RoleType.USER),
+]
+
+
+client = AI21Client()
+chat_response = client.chat.create(
+    system=system,
+    messages=messages,
+    model="j2-ultra",
+)
+```
+
+For a more detailed example, see the chat [examples](examples/studio/chat.py).
+
+### Completion
 
 ```python
 from ai21 import AI21Client
 
-client = AI21Client(
-    # defaults to os.enviorn.get('AI21_API_KEY')
-    api_key='my_api_key',
-)
 
-response = client.completion.create(
-    prompt="<your prompt here>",
-    max_tokens=10,
+client = AI21Client()
+completion_response = client.completion.create(
+    prompt="This is a test prompt",
     model="j2-mid",
-    temperature=0.3,
-    top_p=1,
 )
-
-print(response.completions)
-print(response.prompt)
 ```
 
-### TSMs
+</details>
+
+For a more detailed example, see the completion [examples](examples/studio/completion.py).
+
+---
+
+## TSMs
 
 AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
 The full documentation and guides can be found [here](https://docs.ai21.com/docs/task-specific).

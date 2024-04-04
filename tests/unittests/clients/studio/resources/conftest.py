@@ -120,20 +120,20 @@ def get_studio_chat():
 def get_chat_completions():
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
-        ChatCompletionChatMessage(content="Hello, I need help with a signup process.", role=RoleType.USER),
+        ChatCompletionChatMessage(content="Hello, I need help with a signup process.", role="user"),
         ChatCompletionChatMessage(
             content="Hi Alice, I can help you with that. What seems to be the problem?",
-            role=RoleType.ASSISTANT,
+            role="assistant",
         ),
     ]
 
     return (
         ChatCompletions,
         {"model": _DUMMY_MODEL, "messages": _DUMMY_MESSAGES},
-        "chat/complete",
+        "chat/completions",
         {
             "model": _DUMMY_MODEL,
-            "messages": [message.to_dict() for message in _DUMMY_MESSAGES],
+            "messages": _DUMMY_MESSAGES,
         },
         ChatCompletionResponse(
             id="some-id",
