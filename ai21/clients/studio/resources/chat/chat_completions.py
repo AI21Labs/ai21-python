@@ -18,28 +18,20 @@ class ChatCompletions(StudioResource):
         model: str,
         messages: List[ChatMessage],
         n: int | NotGiven = NOT_GIVEN,
-        logprobs: bool | NotGiven = NOT_GIVEN,
-        top_logprobs: int | NotGiven = NOT_GIVEN,
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
-        frequency_penalty: float | NotGiven = NOT_GIVEN,
-        presence_penalty: float | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         body = self._create_body(
             model=model,
             messages=messages,
             n=n,
-            logprobs=logprobs,
-            top_logprobs=top_logprobs,
             stop=stop,
             temperature=temperature,
             max_tokens=max_tokens,
             top_p=top_p,
-            frequency_penalty=frequency_penalty,
-            presence_penalty=presence_penalty,
             **kwargs,
         )
 
@@ -52,14 +44,10 @@ class ChatCompletions(StudioResource):
         model: str,
         messages: List[ChatMessage],
         n: Optional[int] | NotGiven,
-        logprobs: Optional[bool] | NotGiven,
-        top_logprobs: Optional[int] | NotGiven,
         max_tokens: Optional[int] | NotGiven,
         temperature: Optional[float] | NotGiven,
         top_p: Optional[float] | NotGiven,
         stop: Optional[Union[str, List[str]]] | NotGiven,
-        frequency_penalty: Optional[float] | NotGiven,
-        presence_penalty: Optional[float] | NotGiven,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(
@@ -70,11 +58,7 @@ class ChatCompletions(StudioResource):
                 "maxTokens": max_tokens,
                 "n": n,
                 "topP": top_p,
-                "logprobs": logprobs,
-                "topLogprobs": top_logprobs,
                 "stop": stop,
-                "frequencyPenalty": frequency_penalty,
-                "presencePenalty": presence_penalty,
                 **kwargs,
             }
         )
