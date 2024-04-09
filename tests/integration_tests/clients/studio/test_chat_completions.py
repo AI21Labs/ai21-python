@@ -6,7 +6,7 @@ from ai21.models import RoleType
 from ai21.models.chat.chat_completion_response import ChatCompletionResponse
 
 
-_MODEL = "new-model-name"
+_MODEL = "jamba-instruct-preview"
 _MESSAGES = [
     ChatMessage(
         content="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",
@@ -27,13 +27,9 @@ def test_chat_completion():
         messages=messages,
         num_results=num_results,
         max_tokens=64,
-        logprobs=True,
-        top_logprobs=0.6,
         temperature=0.7,
         stop=["\n"],
         top_p=0.3,
-        frequency_penalty=0.2,
-        presence_penalty=0.4,
     )
 
     assert isinstance(response, ChatCompletionResponse)
