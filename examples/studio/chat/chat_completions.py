@@ -13,7 +13,6 @@ client = AI21Client()
 response = client.chat.completions.create(
     messages=messages,
     model="new-model-name",
-    n=2,
     max_tokens=100,
     temperature=0.7,
     top_p=1.0,
