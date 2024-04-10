@@ -18,14 +18,12 @@ _MESSAGES = [
 # TODO: When the api is officially released, update the test to assert the actual response
 @pytest.mark.skip(reason="API is not officially released")
 def test_chat_completion():
-    num_results = 5
     messages = _MESSAGES
 
     client = AI21Client()
     response = client.chat.completions.create(
         model=_MODEL,
         messages=messages,
-        num_results=num_results,
         max_tokens=64,
         temperature=0.7,
         stop=["\n"],
@@ -33,3 +31,5 @@ def test_chat_completion():
     )
 
     assert isinstance(response, ChatCompletionResponse)
+    assert response.choices[0].message.content
+    assert response.choices[0].message.role
