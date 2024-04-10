@@ -1,4 +1,4 @@
-from ai21 import AI21Client
+from ai21.tokenizers import get_tokenizer
 
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
@@ -30,7 +30,6 @@ prompt = (
     "- There is no return option\n\nUser gender: Female.\n\nConversation:\n"
     "User: Hi, I have a question for you"
 )
-client = AI21Client()
-# This is the new and recommended way to use the Tokenization module. The old "execute" method is deprecated.
-response = client.count_tokens(prompt)
+tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
+response = tokenizer.count_tokens(prompt)
 print(response)

@@ -1,6 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional
 
+from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
 
 
@@ -45,6 +46,11 @@ class Chat(ABC):
         :param kwargs:
         :return:
         """
+        pass
+
+    @property
+    @abstractmethod
+    def completions(self) -> ChatCompletions:
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:

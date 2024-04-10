@@ -2,6 +2,7 @@ import pytest
 from pytest_mock import MockerFixture
 
 from ai21.ai21_http_client import AI21HTTPClient
+from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
@@ -43,7 +44,13 @@ from ai21.models import (
     SummarizeBySegmentResponse,
     SegmentSummary,
 )
+from ai21.models.chat import (
+    ChatMessage as ChatCompletionChatMessage,
+    ChatCompletionResponse,
+    ChatCompletionResponseChoice,
+)
 from ai21.models.responses.segmentation_response import Segment
+from ai21.models.usage_info import UsageInfo
 from ai21.utils.typing import to_lower_camel_case
 
 
@@ -106,6 +113,46 @@ def get_studio_chat():
                     finish_reason=FinishReason(reason="dummy_reason", length=1, sequence="1"),
                 )
             ]
+        ),
+    )
+
+
+def get_chat_completions():
+    _DUMMY_MODEL = "dummy-chat-model"
+    _DUMMY_MESSAGES = [
+        ChatCompletionChatMessage(content="Hello, I need help with a signup process.", role="user"),
+        ChatCompletionChatMessage(
+            content="Hi Alice, I can help you with that. What seems to be the problem?",
+            role="assistant",
+        ),
+    ]
+    _EXPECTED_SERIALIZED_MESSAGES = [message.to_dict() for message in _DUMMY_MESSAGES]
+
+    return (
+        ChatCompletions,
+        {"model": _DUMMY_MODEL, "messages": _DUMMY_MESSAGES},
+        "chat/completions",
+        {
+            "model": _DUMMY_MODEL,
+            "messages": _EXPECTED_SERIALIZED_MESSAGES,
+        },
+        ChatCompletionResponse(
+            id="some-id",
+            choices=[
+                ChatCompletionResponseChoice(
+                    index=0,
+                    message=ChatCompletionChatMessage(
+                        content="Hello, I need help with a signup process.", role=RoleType.USER
+                    ),
+                    finish_reason="dummy_reason",
+                    logprobs=None,
+                )
+            ],
+            usage=UsageInfo(
+                prompt_tokens=10,
+                completion_tokens=20,
+                total_tokens=30,
+            ),
         ),
     )
 
