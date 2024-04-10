@@ -126,6 +126,7 @@ def get_chat_completions():
             role="assistant",
         ),
     ]
+    _EXPECTED_SERIALIZED_MESSAGES = [message.to_dict() for message in _DUMMY_MESSAGES]
 
     return (
         ChatCompletions,
@@ -133,7 +134,7 @@ def get_chat_completions():
         "chat/completions",
         {
             "model": _DUMMY_MODEL,
-            "messages": _DUMMY_MESSAGES,
+            "messages": _EXPECTED_SERIALIZED_MESSAGES,
         },
         ChatCompletionResponse(
             id="some-id",
