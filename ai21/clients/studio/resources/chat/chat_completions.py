@@ -50,7 +50,7 @@ class ChatCompletions(StudioResource):
         return remove_not_given(
             {
                 "model": model,
-                "messages": messages,
+                "messages": [message.to_dict() for message in messages],
                 "temperature": temperature,
                 "maxTokens": max_tokens,
                 "topP": top_p,
