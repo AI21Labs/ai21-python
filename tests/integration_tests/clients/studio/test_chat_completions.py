@@ -31,4 +31,5 @@ def test_chat_completion():
     )
 
     assert isinstance(response, ChatCompletionResponse)
-    assert response.choices[0]
+    assert response.choices[0].message.content
+    assert response.choices[0].message.role
