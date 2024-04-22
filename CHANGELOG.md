@@ -2,7 +2,30 @@
 
 
 
+## v2.2.1 (2024-04-22)
+
+### Chore
+
+* chore: update chat example (#95) ([`7dd83b1`](https://github.com/AI21Labs/ai21-python/commit/7dd83b184a21fe3d94a8a8b90f9bfe04c6e30e2e))
+
+### Fix
+
+* fix: Add support for n param to chat completion in studio (#98)
+
+* fix: add n param support
+
+* test: add integration test
+
+* revert: wrong file
+
+* fix: add n param support, add integration test ([`5459323`](https://github.com/AI21Labs/ai21-python/commit/54593235b590c35f5bfd391b3b195d294a65237b))
+
+
 ## v2.2.0 (2024-04-10)
+
+### Chore
+
+* chore(release): v2.2.0 [skip ci] ([`52a0fa3`](https://github.com/AI21Labs/ai21-python/commit/52a0fa3fe71f9491c89b12f183758eb9491a929d))
 
 ### Feature
 
