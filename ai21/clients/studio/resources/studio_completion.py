@@ -27,6 +27,7 @@ class StudioCompletion(StudioResource, Completion):
         count_penalty: Penalty | NotGiven = NOT_GIVEN,
         epoch: int | NotGiven = NOT_GIVEN,
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
+        n: int | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
         url = f"{self._client.get_base_url()}/{model}"
@@ -51,5 +52,6 @@ class StudioCompletion(StudioResource, Completion):
             count_penalty=count_penalty,
             epoch=epoch,
             logit_bias=logit_bias,
+            n=n,
         )
         return self._json_to_response(self._post(url=url, body=body))
