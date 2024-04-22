@@ -30,7 +30,6 @@ class Completion(ABC):
         count_penalty: Penalty | NotGiven = NOT_GIVEN,
         epoch: int | NotGiven = NOT_GIVEN,
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
         """
@@ -51,7 +50,6 @@ class Completion(ABC):
         :param logit_bias: A dictionary which contains mapping from strings to floats, where the strings are text
         representations of the tokens and the floats are the biases themselves. A positive bias increases generation
         probability for a given token and a negative bias decreases it.
-        :param n: Number of completions to generate.
         :param kwargs:
         :return:
         """
@@ -77,7 +75,6 @@ class Completion(ABC):
         count_penalty: Penalty | NotGiven,
         epoch: int | NotGiven,
         logit_bias: Dict[str, float] | NotGiven,
-        n: int | NotGiven = NOT_GIVEN,
     ):
         return remove_not_given(
             {
@@ -96,6 +93,5 @@ class Completion(ABC):
                 "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
                 "epoch": epoch,
                 "logitBias": logit_bias,
-                "n": n,
             }
         )

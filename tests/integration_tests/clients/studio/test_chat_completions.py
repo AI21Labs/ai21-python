@@ -28,25 +28,3 @@ def test_chat_completion():
     assert isinstance(response, ChatCompletionResponse)
     assert response.choices[0].message.content
     assert response.choices[0].message.role
-
-
-def test_chat_completion__with_n_param__should_return_n_choices():
-    messages = _MESSAGES
-    n = 3
-
-    client = AI21Client()
-    response = client.chat.completions.create(
-        model=_MODEL,
-        messages=messages,
-        max_tokens=64,
-        temperature=0.7,
-        stop=["\n"],
-        top_p=0.3,
-        n=n,
-    )
-
-    assert isinstance(response, ChatCompletionResponse)
-    assert len(response.choices) == n
-    for choice in response.choices:
-        assert choice.message.content
-        assert choice.message.role
