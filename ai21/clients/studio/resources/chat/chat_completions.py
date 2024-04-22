@@ -21,6 +21,7 @@ class ChatCompletions(StudioResource):
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
+        n: int | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         body = self._create_body(
@@ -30,6 +31,7 @@ class ChatCompletions(StudioResource):
             temperature=temperature,
             max_tokens=max_tokens,
             top_p=top_p,
+            n=n,
             **kwargs,
         )
 
@@ -45,6 +47,7 @@ class ChatCompletions(StudioResource):
         temperature: Optional[float] | NotGiven,
         top_p: Optional[float] | NotGiven,
         stop: Optional[Union[str, List[str]]] | NotGiven,
+        n: Optional[int] | NotGiven,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(
@@ -55,6 +58,7 @@ class ChatCompletions(StudioResource):
                 "maxTokens": max_tokens,
                 "topP": top_p,
                 "stop": stop,
+                "n": n,
                 **kwargs,
             }
         )
