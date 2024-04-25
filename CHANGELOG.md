@@ -2,7 +2,22 @@
 
 
 
+## v2.2.3 (2024-04-25)
+
+### Fix
+
+* fix: Support num_retries (#104)
+
+* fix: num_retries method
+
+* fix: Added 408 for retries ([`94c3254`](https://github.com/AI21Labs/ai21-python/commit/94c32542be3d4af6e80aae156b074055b9e5c34a))
+
+
 ## v2.2.2 (2024-04-24)
+
+### Chore
+
+* chore(release): v2.2.2 [skip ci] ([`f3daeba`](https://github.com/AI21Labs/ai21-python/commit/f3daebaeafd168090c7a9b06485c49ebfe4f1b87))
 
 ### Fix
 
