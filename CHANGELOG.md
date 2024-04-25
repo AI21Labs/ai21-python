@@ -2,9 +2,18 @@
 
 
 
+## v2.2.2 (2024-04-24)
+
+### Fix
+
+* fix: Added raise error on wrong use of chat message (#102) ([`4efbea6`](https://github.com/AI21Labs/ai21-python/commit/4efbea6d85cd70f77650e4c4d96a3395eb60517b))
+
+
 ## v2.2.1 (2024-04-22)
 
 ### Chore
+
+* chore(release): v2.2.1 [skip ci] ([`4fbfe00`](https://github.com/AI21Labs/ai21-python/commit/4fbfe0002bdf1e28bdfc611f1e9b9b99012f77c7))
 
 * chore: update chat example (#95) ([`7dd83b1`](https://github.com/AI21Labs/ai21-python/commit/7dd83b184a21fe3d94a8a8b90f9bfe04c6e30e2e))
 

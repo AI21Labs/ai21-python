@@ -4,6 +4,7 @@ from typing import List, Optional, Union, Any, Dict
 
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models.chat import ChatMessage, ChatCompletionResponse
+from ai21.models import ChatMessage as J2ChatMessage
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -24,6 +25,12 @@ class ChatCompletions(StudioResource):
         n: int | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
+        if any(isinstance(item, J2ChatMessage) for item in messages):
+            raise ValueError(
+                "Please use the ChatMessage class from ai21.models.chat"
+                " instead of ai21.models when working with chat completions."
+            )
+
         body = self._create_body(
             model=model,
             messages=messages,
