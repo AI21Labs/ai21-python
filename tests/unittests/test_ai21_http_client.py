@@ -99,7 +99,7 @@ def test__execute_http_request__(
     response_json = {"test_key": "test_value"}
     mock_httpx_client.request.return_value = MockResponse(response_json, 200)
 
-    http_client = HttpClient(session=mock_httpx_client)
+    http_client = HttpClient(client=mock_httpx_client)
     client = AI21HTTPClient(http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
 
     response = client.execute_http_request(**params)
@@ -124,7 +124,7 @@ def test__execute_http_request__when_files_with_put_method__should_raise_value_e
     mock_httpx_client: httpx.Client,
 ):
     response_json = {"test_key": "test_value"}
-    http_client = HttpClient(session=mock_httpx_client)
+    http_client = HttpClient(client=mock_httpx_client)
     client = AI21HTTPClient(http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
 
     mock_httpx_client.request.return_value = MockResponse(response_json, 200)

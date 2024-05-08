@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any, BinaryIO
 
 import httpx
 from httpx import ConnectError
-from tenacity import retry, retry_if_result, stop_after_attempt, wait_fixed
+from tenacity import retry, retry_if_result, stop_after_attempt, wait_fixed, RetryError
 
 from ai21.errors import (
     BadRequest,
@@ -18,7 +18,7 @@ from ai21.logger import logger
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
-TIME_BETWEEN_RETRIES = 1000
+TIME_BETWEEN_RETRIES = 1
 RETRY_ERROR_CODES = (408, 429, 500, 503)
 RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
 
@@ -48,7 +48,7 @@ def _requests_retry_session(retries: int) -> httpx.HTTPTransport:
 class HttpClient:
     def __init__(
         self,
-        session: Optional[httpx.Client] = None,
+        client: Optional[httpx.Client] = None,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
@@ -57,7 +57,7 @@ class HttpClient:
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
         self._headers = headers or {}
         self._apply_retry_policy = self._num_retries > 0
-        self._client = self._init_client(session)
+        self._client = self._init_client(client)
 
         # Since we can't use the retry decorator on a method of a class as we can't access class attributes,
         # we have to wrap the method in a function
@@ -79,6 +79,14 @@ class HttpClient:
     ):
         try:
             response = self._request(files=files, method=method, params=params, url=url)
+        except RetryError as retry_error:
+            last_attempt = retry_error.last_attempt
+
+            if last_attempt.failed:
+                raise last_attempt.exception()
+            else:
+                response = last_attempt.result()
+
         except ConnectError as connection_error:
             logger.error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
