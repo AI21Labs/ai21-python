@@ -1,8 +1,8 @@
 import json
 from typing import Optional, Dict, Any, BinaryIO
 
-import requests
-from requests.adapters import HTTPAdapter, Retry, RetryError
+import httpx
+from httpx import ConnectError
 
 from ai21.errors import (
     BadRequest,
@@ -39,25 +39,16 @@ def handle_non_success_response(status_code: int, response_text: str):
     raise AI21APIError(status_code, details=response_text)
 
 
-def requests_retry_session(session, retries=0):
-    retry = Retry(
-        total=retries,
-        read=retries,
-        connect=retries,
-        backoff_factor=RETRY_BACK_OFF_FACTOR,
-        status_forcelist=RETRY_ERROR_CODES,
-        allowed_methods=frozenset(RETRY_METHOD_WHITELIST),
+def requests_retry_session(retries: int) -> httpx.HTTPTransport:
+    return httpx.HTTPTransport(
+        retries=retries,
     )
-    adapter = HTTPAdapter(max_retries=retry)
-    session.mount("https://", adapter)
-    session.mount("http://", adapter)
-    return session
 
 
 class HttpClient:
     def __init__(
         self,
-        session: Optional[requests.Session] = None,
+        session: Optional[httpx.Client] = None,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
@@ -66,7 +57,7 @@ class HttpClient:
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
         self._headers = headers or {}
         self._apply_retry_policy = self._num_retries > 0
-        self._session = self._init_session(session)
+        self._client = self._init_client(session)
 
     def execute_http_request(
         self,
@@ -82,7 +73,7 @@ class HttpClient:
 
         try:
             if method == "GET":
-                response = self._session.request(
+                response = self._client.request(
                     method=method,
                     url=url,
                     headers=headers,
@@ -98,7 +89,7 @@ class HttpClient:
                     headers.pop(
                         "Content-Type"
                     )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
-                response = self._session.request(
+                response = self._client.request(
                     method=method,
                     url=url,
                     headers=headers,
@@ -107,34 +98,25 @@ class HttpClient:
                     timeout=timeout,
                 )
             else:
-                response = self._session.request(method=method, url=url, headers=headers, data=data, timeout=timeout)
-        except ConnectionError as connection_error:
+                response = self._client.request(method=method, url=url, headers=headers, data=data, timeout=timeout)
+        except ConnectError as connection_error:
             logger.error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
-        except RetryError as retry_error:
-            logger.error(
-                f"Calling {method} {url} failed with RetryError after {self._num_retries} attempts: {retry_error}"
-            )
-            raise retry_error
         except Exception as exception:
             logger.error(f"Calling {method} {url} failed with Exception: {exception}")
             raise exception
 
-        if response.status_code != 200:
+        if response.status_code != httpx.codes.OK:
             logger.error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
             handle_non_success_response(response.status_code, response.text)
 
         return response.json()
 
-    def _init_session(self, session: Optional[requests.Session]) -> requests.Session:
-        if session is not None:
-            return session
+    def _init_client(self, client: Optional[httpx.Client]) -> httpx.Client:
+        if client is not None:
+            return client
 
-        return (
-            requests_retry_session(requests.Session(), retries=self._num_retries)
-            if self._apply_retry_policy
-            else requests.Session()
-        )
+        return requests_retry_session(retries=self._num_retries) if self._apply_retry_policy else httpx.Client()
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)
