@@ -19,7 +19,7 @@ from ai21.logger import logger
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
 RETRY_BACK_OFF_FACTOR = 0.5
-TIME_BETWEEN_RETRIES = 1000
+TIME_BETWEEN_RETRIES = 1
 RETRY_ERROR_CODES = (408, 429, 500, 503)
 RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
 
@@ -64,17 +64,6 @@ class HttpClient:
         # we have to wrap the method in a function
         self._request = retry(
             wait=wait_exponential(multiplier=RETRY_BACK_OFF_FACTOR, min=TIME_BETWEEN_RETRIES),
-            retry=retry_if_result(self._should_retry),
-            stop=stop_after_attempt(self._num_retries),
-        )(self._request)
-
-    def _should_retry(self, response: httpx.Response) -> bool:
-        return response.status_code in RETRY_ERROR_CODES and response.request.method in RETRY_METHOD_WHITELIST
-
-        # Since we can't use the retry decorator on a method of a class as we can't access class attributes,
-        # we have to wrap the method in a function
-        self._request = retry(
-            wait=wait_fixed(TIME_BETWEEN_RETRIES),
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
         )(self._request)
