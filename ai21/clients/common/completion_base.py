@@ -75,6 +75,7 @@ class Completion(ABC):
         count_penalty: Penalty | NotGiven,
         epoch: int | NotGiven,
         logit_bias: Dict[str, float] | NotGiven,
+        **kwargs,
     ):
         return remove_not_given(
             {
@@ -93,5 +94,6 @@ class Completion(ABC):
                 "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
                 "epoch": epoch,
                 "logitBias": logit_bias,
+                **kwargs,
             }
         )

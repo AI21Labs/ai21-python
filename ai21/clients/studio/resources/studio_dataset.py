@@ -24,6 +24,7 @@ class StudioDataset(StudioResource, Dataset):
             approve_whitespace_correction=approve_whitespace_correction,
             delete_long_rows=delete_long_rows,
             split_ratio=split_ratio,
+            **kwargs,
         )
         return self._post(
             url=self._base_url(),

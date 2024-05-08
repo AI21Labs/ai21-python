@@ -34,9 +34,11 @@ class SummarizeBySegment(ABC):
         source: str,
         source_type: str,
         focus: Optional[str],
+        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "source": source,
             "sourceType": source_type,
             "focus": focus,
+            **kwargs,
         }

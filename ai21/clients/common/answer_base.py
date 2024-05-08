@@ -29,5 +29,6 @@ class Answer(ABC):
         self,
         context: str,
         question: str,
+        **kwargs,
     ) -> Dict[str, Any]:
-        return {"context": context, "question": question}
+        return {"context": context, "question": question, **kwargs}

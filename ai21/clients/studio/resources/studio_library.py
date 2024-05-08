@@ -29,7 +29,7 @@ class LibraryFiles(StudioResource):
     ) -> str:
         url = f"{self._client.get_base_url()}/{self._module_name}"
         files = {"file": open(file_path, "rb")}
-        body = {"path": path, "labels": labels, "publicUrl": public_url}
+        body = {"path": path, "labels": labels, "publicUrl": public_url, **kwargs}
 
         raw_response = self._post(url=url, files=files, body=body)
 
@@ -66,6 +66,7 @@ class LibraryFiles(StudioResource):
         body = {
             "publicUrl": public_url,
             "labels": labels,
+            **kwargs,
         }
         self._put(url=url, body=body)
 
@@ -92,6 +93,7 @@ class LibrarySearch(StudioResource):
             "path": path,
             "fieldIds": field_ids,
             "maxSegments": max_segments,
+            **kwargs,
         }
         raw_response = self._post(url=url, body=body)
         return LibrarySearchResponse.from_dict(raw_response)
@@ -115,6 +117,7 @@ class LibraryAnswer(StudioResource):
             "path": path,
             "fieldIds": field_ids,
             "labels": labels,
+            **kwargs,
         }
         raw_response = self._post(url=url, body=body)
         return LibraryAnswerResponse.from_dict(raw_response)
