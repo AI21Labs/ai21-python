@@ -71,6 +71,7 @@ class Chat(ABC):
         frequency_penalty: Optional[Penalty] = None,
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
+        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "model": model,
@@ -86,4 +87,5 @@ class Chat(ABC):
             "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
             "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
             "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
+            **kwargs,
         }

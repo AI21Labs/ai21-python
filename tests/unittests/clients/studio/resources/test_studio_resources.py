@@ -85,7 +85,7 @@ class TestStudioResources:
             files=None,
         )
 
-    def test__create__when_pass_kwargs__should_not_pass_to_request(self, mock_ai21_studio_client: AI21HTTPClient):
+    def test__create__when_pass_kwargs__should_pass_to_request(self, mock_ai21_studio_client: AI21HTTPClient):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
         mock_ai21_studio_client.execute_http_request.return_value = expected_answer.to_dict()
         mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
@@ -103,6 +103,7 @@ class TestStudioResources:
             params={
                 "context": _DUMMY_CONTEXT,
                 "question": _DUMMY_QUESTION,
+                "some_dummy_kwargs": "some_dummy_value",
             },
             files=None,
         )
