@@ -1,5 +1,5 @@
 import pytest
-import requests
+import httpx
 
 
 @pytest.fixture
@@ -8,5 +8,5 @@ def dummy_api_host() -> str:
 
 
 @pytest.fixture
-def mock_requests_session(mocker) -> requests.Session:
-    return mocker.Mock(spec=requests.Session)
+def mock_httpx_client(mocker) -> httpx.Client:
+    return mocker.Mock(spec=httpx.Client)
