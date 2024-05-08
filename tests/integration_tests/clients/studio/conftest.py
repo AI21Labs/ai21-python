@@ -42,7 +42,7 @@ def file_in_library():
     # Delete any file that might be in the library due to failed tests
     files = client.library.files.list()
     for file in files:
-        _delete_uploaded_file(file.file_id)
+        _delete_uploaded_file(client, file.file_id)
 
     file_id = client.library.files.create(file_path=LIBRARY_FILE_TO_UPLOAD, labels=DEFAULT_LABELS)
     _wait_for_file_to_process(client, file_id)
