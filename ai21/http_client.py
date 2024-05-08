@@ -3,6 +3,7 @@ from typing import Optional, Dict, Any, BinaryIO
 
 import httpx
 from httpx import ConnectError
+from tenacity import retry, retry_if_result, stop_after_attempt, wait_fixed
 
 from ai21.errors import (
     BadRequest,
@@ -17,7 +18,6 @@ from ai21.logger import logger
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
-RETRY_BACK_OFF_FACTOR = 0.5
 TIME_BETWEEN_RETRIES = 1000
 RETRY_ERROR_CODES = (408, 429, 500, 503)
 RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
@@ -39,7 +39,7 @@ def handle_non_success_response(status_code: int, response_text: str):
     raise AI21APIError(status_code, details=response_text)
 
 
-def requests_retry_session(retries: int) -> httpx.HTTPTransport:
+def _requests_retry_session(retries: int) -> httpx.HTTPTransport:
     return httpx.HTTPTransport(
         retries=retries,
     )
@@ -59,6 +59,17 @@ class HttpClient:
         self._apply_retry_policy = self._num_retries > 0
         self._client = self._init_client(session)
 
+        # Since we can't use the retry decorator on a method of a class as we can't access class attributes,
+        # we have to wrap the method in a function
+        self._request = retry(
+            wait=wait_fixed(TIME_BETWEEN_RETRIES),
+            retry=retry_if_result(self._should_retry),
+            stop=stop_after_attempt(self._num_retries),
+        )(self._request)
+
+    def _should_retry(self, response: httpx.Response) -> bool:
+        return response.status_code in RETRY_ERROR_CODES and response.request.method in RETRY_METHOD_WHITELIST
+
     def execute_http_request(
         self,
         method: str,
@@ -66,39 +77,8 @@ class HttpClient:
         params: Optional[Dict] = None,
         files: Optional[Dict[str, BinaryIO]] = None,
     ):
-        timeout = self._timeout_sec
-        headers = self._headers
-        data = json.dumps(params).encode()
-        logger.debug(f"Calling {method} {url} {headers} {data}")
-
         try:
-            if method == "GET":
-                response = self._client.request(
-                    method=method,
-                    url=url,
-                    headers=headers,
-                    timeout=timeout,
-                    params=params,
-                )
-            elif files is not None:
-                if method != "POST":
-                    raise ValueError(
-                        f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
-                    )
-                if "Content-Type" in headers:
-                    headers.pop(
-                        "Content-Type"
-                    )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
-                response = self._client.request(
-                    method=method,
-                    url=url,
-                    headers=headers,
-                    data=params,
-                    files=files,
-                    timeout=timeout,
-                )
-            else:
-                response = self._client.request(method=method, url=url, headers=headers, data=data, timeout=timeout)
+            response = self._request(files=files, method=method, params=params, url=url)
         except ConnectError as connection_error:
             logger.error(f"Calling {method} {url} failed with ConnectionError: {connection_error}")
             raise connection_error
@@ -112,11 +92,48 @@ class HttpClient:
 
         return response.json()
 
+    def _request(
+        self, files: Optional[Dict[str, BinaryIO]], method: str, params: Optional[Dict], url: str
+    ) -> httpx.Response:
+        timeout = self._timeout_sec
+        headers = self._headers
+        data = json.dumps(params).encode()
+        logger.debug(f"Calling {method} {url} {headers} {data}")
+
+        if method == "GET":
+            return self._client.request(
+                method=method,
+                url=url,
+                headers=headers,
+                timeout=timeout,
+                params=params,
+            )
+
+        if files is not None:
+            if method != "POST":
+                raise ValueError(
+                    f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
+                )
+            if "Content-Type" in headers:
+                headers.pop(
+                    "Content-Type"
+                )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
+            return self._client.request(
+                method=method,
+                url=url,
+                headers=headers,
+                data=params,
+                files=files,
+                timeout=timeout,
+            )
+
+        return self._client.request(method=method, url=url, headers=headers, data=data, timeout=timeout)
+
     def _init_client(self, client: Optional[httpx.Client]) -> httpx.Client:
         if client is not None:
             return client
 
-        return requests_retry_session(retries=self._num_retries) if self._apply_retry_policy else httpx.Client()
+        return _requests_retry_session(retries=self._num_retries) if self._apply_retry_policy else httpx.Client()
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)
