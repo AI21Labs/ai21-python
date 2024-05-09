@@ -2,7 +2,22 @@
 
 
 
+## v2.2.4 (2024-05-09)
+
+### Fix
+
+* fix: pass kwargs to endpoints (#110)
+
+* feat: pass kwargs to endpoints
+
+* fix: test when passing kwargs ([`0d895e4`](https://github.com/AI21Labs/ai21-python/commit/0d895e49330400e938d87ef5eaa75f8c34fe36d1))
+
+
 ## v2.2.3 (2024-04-25)
+
+### Chore
+
+* chore(release): v2.2.3 [skip ci] ([`58c0166`](https://github.com/AI21Labs/ai21-python/commit/58c01660400fe54c0034447e903a843bc92ffcd5))
 
 ### Fix
 
