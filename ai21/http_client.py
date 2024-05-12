@@ -76,10 +76,11 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
+        stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
-    ):
+    ) -> httpx.Response:
         try:
-            response = self._request(files=files, method=method, params=params, url=url)
+            response = self._request(files=files, method=method, params=params, url=url, stream=stream)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -99,25 +100,33 @@ class HttpClient:
             logger.error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
             handle_non_success_response(response.status_code, response.text)
 
-        return response.json()
+        return response
 
     def _request(
-        self, files: Optional[Dict[str, BinaryIO]], method: str, params: Optional[Dict], url: str
+        self,
+        files: Optional[Dict[str, BinaryIO]],
+        method: str,
+        params: Optional[Dict],
+        url: str,
+        stream: bool,
     ) -> httpx.Response:
         timeout = self._timeout_sec
         headers = self._headers
         logger.debug(f"Calling {method} {url} {headers} {params}")
 
         if method == "GET":
-            return self._client.request(
-                method=method,
-                url=url,
-                headers=headers,
-                timeout=timeout,
-                params=params,
+            request = self._client.build_request(
+                method=method, url=url, headers=headers, timeout=timeout, params=params
             )
+            return self._client.send(request, stream=stream)
 
         if files is not None:
+            # data = json.dumps(params).encode()
+            # logger.debug(f"Calling {method} {url} {headers} {data}")
+            request = self._client.build_request(
+                method=method, url=url, headers=headers, timeout=timeout, data=params, files=files
+            )
+
             if method != "POST":
                 raise ValueError(
                     f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
@@ -130,7 +139,7 @@ class HttpClient:
         else:
             data = json.dumps(params).encode() if params else None
 
-        return self._client.request(
+        request = self._client.build_request(
             method=method,
             url=url,
             headers=headers,
@@ -138,6 +147,7 @@ class HttpClient:
             timeout=timeout,
             files=files,
         )
+        return self._client.send(request, stream=stream)
 
     def _init_client(self, client: Optional[httpx.Client]) -> httpx.Client:
         if client is not None:

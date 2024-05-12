@@ -76,9 +76,10 @@ class AI21HTTPClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
+        stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ):
-        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files)
+        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files, stream=stream)
 
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"

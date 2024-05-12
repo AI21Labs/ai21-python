@@ -3,6 +3,7 @@ from __future__ import annotations
 from abc import ABC
 from typing import Any, Dict, Optional, BinaryIO
 
+
 from ai21.ai21_http_client import AI21HTTPClient
 
 
@@ -14,14 +15,18 @@ class StudioResource(ABC):
         self,
         url: str,
         body: Dict[str, Any],
+        stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> Dict[str, Any]:
-        return self._client.execute_http_request(
+        response = self._client.execute_http_request(
             method="POST",
             url=url,
+            stream=stream,
             params=body or {},
             files=files,
         )
+        return response
+        # return self._process_response(response=response, stream=stream)
 
     def _get(self, url: str, params: Optional[Dict[str, Any]] = None) -> Dict[str, Any]:
         return self._client.execute_http_request(method="GET", url=url, params=params or {})

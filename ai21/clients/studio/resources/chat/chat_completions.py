@@ -1,10 +1,12 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union, Any, Dict
+from typing import List, Optional, Union, Any, Dict, Literal, overload
 
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models.chat import ChatMessage, ChatCompletionResponse
 from ai21.models import ChatMessage as J2ChatMessage
+from ai21.models.chat import ChatMessage, ChatCompletionResponse
+from ai21.models.chat.chat_completion_chunk import ChatCompletionChunk
+from ai21.models.chat.stream import Stream
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -13,6 +15,36 @@ __all__ = ["ChatCompletions"]
 
 class ChatCompletions(StudioResource):
     _module_name = "chat/completions"
+
+    @overload
+    def create(
+        self,
+        model: str,
+        messages: List[ChatMessage],
+        max_tokens: int | NotGiven = NOT_GIVEN,
+        temperature: float | NotGiven = NOT_GIVEN,
+        top_p: float | NotGiven = NOT_GIVEN,
+        stop: str | List[str] | NotGiven = NOT_GIVEN,
+        n: int | NotGiven = NOT_GIVEN,
+        stream: Literal[False] | NotGiven = NOT_GIVEN,
+        **kwargs: Any,
+    ) -> ChatCompletionResponse:
+        pass
+
+    @overload
+    def create(
+        self,
+        model: str,
+        messages: List[ChatMessage],
+        stream: Literal[True],
+        max_tokens: int | NotGiven = NOT_GIVEN,
+        temperature: float | NotGiven = NOT_GIVEN,
+        top_p: float | NotGiven = NOT_GIVEN,
+        stop: str | List[str] | NotGiven = NOT_GIVEN,
+        n: int | NotGiven = NOT_GIVEN,
+        **kwargs: Any,
+    ) -> Stream[ChatCompletionChunk]:
+        pass
 
     def create(
         self,
@@ -23,8 +55,9 @@ class ChatCompletions(StudioResource):
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
+        stream: Literal[False] | Literal[True] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
-    ) -> ChatCompletionResponse:
+    ) -> ChatCompletionResponse | Stream[ChatCompletionChunk]:
         if any(isinstance(item, J2ChatMessage) for item in messages):
             raise ValueError(
                 "Please use the ChatMessage class from ai21.models.chat"
@@ -39,11 +72,20 @@ class ChatCompletions(StudioResource):
             max_tokens=max_tokens,
             top_p=top_p,
             n=n,
+            stream=stream,
             **kwargs,
         )
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._post(url=url, body=body)
+        response = self._post(url=url, body=body, stream=stream)
+
+        if stream:
+            return Stream[ChatCompletionChunk](
+                cast_to=ChatCompletionChunk,
+                response=response,
+                client=self._client,
+            )
+
         return self._json_to_response(response)
 
     def _create_body(
@@ -55,6 +97,7 @@ class ChatCompletions(StudioResource):
         top_p: Optional[float] | NotGiven,
         stop: Optional[Union[str, List[str]]] | NotGiven,
         n: Optional[int] | NotGiven,
+        stream: Literal[False] | Literal[True] | NotGiven,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(
@@ -66,6 +109,7 @@ class ChatCompletions(StudioResource):
                 "topP": top_p,
                 "stop": stop,
                 "n": n,
+                "stream": stream,
                 **kwargs,
             }
         )
