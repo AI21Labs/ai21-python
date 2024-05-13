@@ -121,12 +121,6 @@ class HttpClient:
             return self._client.send(request, stream=stream)
 
         if files is not None:
-            # data = json.dumps(params).encode()
-            # logger.debug(f"Calling {method} {url} {headers} {data}")
-            request = self._client.build_request(
-                method=method, url=url, headers=headers, timeout=timeout, data=params, files=files
-            )
-
             if method != "POST":
                 raise ValueError(
                     f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
