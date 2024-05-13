@@ -1,3 +1,4 @@
+import json
 from typing import Optional, Dict, Any, BinaryIO
 
 import httpx
@@ -125,12 +126,15 @@ class HttpClient:
                 headers.pop(
                     "Content-Type"
                 )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
+            data = params
+        else:
+            data = json.dumps(params).encode() if params else None
 
         return self._client.request(
             method=method,
             url=url,
             headers=headers,
-            json=params,
+            data=data,
             timeout=timeout,
             files=files,
         )
