@@ -2,7 +2,22 @@
 
 
 
+## v2.2.5 (2024-05-14)
+
+### Fix
+
+* fix: upgrade ai21-tokenizer to latest version with less restrictive deps (#113)
+
+* fix: upgrade ai21-tokenizer with latest version which has less restrictive deps
+
+* fix: upgrade deps in general ([`022d60c`](https://github.com/AI21Labs/ai21-python/commit/022d60c78a1342fbe6a30a7a4d95c05b656a03bb))
+
+
 ## v2.2.4 (2024-05-09)
+
+### Chore
+
+* chore(release): v2.2.4 [skip ci] ([`aa2e8e2`](https://github.com/AI21Labs/ai21-python/commit/aa2e8e2fc4ca28728ed3f6b59abcbce398a04228))
 
 ### Fix
 
