@@ -15,10 +15,8 @@ class Stream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
-        client,
     ):
         self.response = response
-        self.client = client
         self.cast_to = cast_to
         self._decoder = SSEDecoder()
         self._iterator = self.__stream__()

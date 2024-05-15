@@ -1,6 +1,8 @@
 import platform
 from typing import Optional, Dict, Any, BinaryIO
 
+import httpx
+
 from ai21.errors import MissingApiKeyError
 from ai21.http_client import HttpClient
 from ai21.version import VERSION
@@ -78,7 +80,7 @@ class AI21HTTPClient:
         params: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
-    ):
+    ) -> httpx.Response:
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files, stream=stream)
 
     def get_base_url(self) -> str:

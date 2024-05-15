@@ -110,6 +110,3 @@ class ChatCompletions(StudioResource):
                 **kwargs,
             }
         )
-
-    def _json_to_response(self, json: Dict[str, Any]) -> ChatCompletionResponse:
-        return ChatCompletionResponse.from_dict(json)
