@@ -1,12 +1,13 @@
 from dataclasses import dataclass
 from typing import Optional, List
 
+from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 from ai21.models.logprobs import Logprobs
 from ai21.models.usage_info import UsageInfo
 
 
 @dataclass
-class ChoicesChunk:
+class ChoicesChunk(AI21BaseModelMixin):
     index: int
     delta: dict
     logprobs: Optional[Logprobs] = None
@@ -14,7 +15,7 @@ class ChoicesChunk:
 
 
 @dataclass
-class ChatCompletionChunk:
+class ChatCompletionChunk(AI21BaseModelMixin):
     id: str
     choices: List[ChoicesChunk]
     usage: Optional[UsageInfo] = None

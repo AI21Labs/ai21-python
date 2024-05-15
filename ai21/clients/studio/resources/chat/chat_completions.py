@@ -26,7 +26,7 @@ class ChatCompletions(StudioResource):
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
-        stream: Literal[False] | NotGiven = NOT_GIVEN,
+        stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         pass
@@ -55,7 +55,7 @@ class ChatCompletions(StudioResource):
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
-        stream: Literal[False] | Literal[True] | NotGiven = NOT_GIVEN,
+        stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse | Stream[ChatCompletionChunk]:
         if any(isinstance(item, J2ChatMessage) for item in messages):
@@ -72,21 +72,18 @@ class ChatCompletions(StudioResource):
             max_tokens=max_tokens,
             top_p=top_p,
             n=n,
-            stream=stream,
+            stream=stream or False,
             **kwargs,
         )
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._post(url=url, body=body, stream=stream)
-
-        if stream:
-            return Stream[ChatCompletionChunk](
-                cast_to=ChatCompletionChunk,
-                response=response,
-                client=self._client,
-            )
-
-        return self._json_to_response(response)
+        return self._post(
+            url=url,
+            body=body,
+            stream=stream or False,
+            stream_cls=Stream[ChatCompletionChunk],
+            response_cls=ChatCompletionResponse,
+        )
 
     def _create_body(
         self,
