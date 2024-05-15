@@ -2,7 +2,7 @@ from typing import Any, Union, List
 
 import httpx
 from typing_extensions import Literal, TypeVar, TYPE_CHECKING
-from ai21.models.stream import Stream
+from ai21.stream import Stream
 
 if TYPE_CHECKING:
     from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin  # noqa

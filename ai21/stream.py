@@ -1,11 +1,15 @@
 from __future__ import annotations
+
 import json
 from typing import TypeVar, Generic, Iterator
 
 import httpx
 
+from ai21.errors import StreamingDecodeError
+
 _T = TypeVar("_T")
 _SSE_DATA_PREFIX = "data: "
+_SSE_DONE_MSG = "[DONE]"
 
 
 class Stream(Generic[_T]):
@@ -19,7 +23,7 @@ class Stream(Generic[_T]):
     ):
         self.response = response
         self.cast_to = cast_to
-        self._decoder = SSEDecoder()
+        self._decoder = _SSEDecoder()
         self._iterator = self.__stream__()
 
     def __next__(self) -> _T:
@@ -31,21 +35,27 @@ class Stream(Generic[_T]):
 
     def __stream__(self):
         for chunk in self._decoder.iter(self.response.iter_lines()):
-            if chunk.endswith("[DONE]"):
+            if chunk.endswith(_SSE_DONE_MSG):
                 break
 
-            chunk = json.loads(chunk)
-            yield self.cast_to(**chunk)
+            try:
+                chunk = json.loads(chunk)
+                yield self.cast_to(**chunk)
+            except json.JSONDecodeError:
+                raise StreamingDecodeError(chunk)
 
 
-class SSEDecoder:
+class _SSEDecoder:
     def iter(self, iterator: Iterator[str]):
         for line in iterator:
             line = line.strip()
             decoded_line = self._decode(line)
+
             if decoded_line is not None:
                 yield decoded_line
 
     def _decode(self, line: str) -> str:
         if line.startswith(_SSE_DATA_PREFIX):
             return line.strip(_SSE_DATA_PREFIX)
+
+        raise StreamingDecodeError(f"Invalid SSE line: {line}")

@@ -87,3 +87,9 @@ class EmptyMandatoryListError(AI21Error):
     def __init__(self, key: str):
         message = f"Supplied {key} is empty. At least one element should be present in the list"
         super().__init__(message)
+
+
+class StreamingDecodeError(AI21Error):
+    def __init__(self, chunk: str):
+        message = f"Failed to decode chunk: {chunk} in stream. Please check the stream format"
+        super().__init__(message)
