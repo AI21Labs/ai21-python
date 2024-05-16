@@ -220,10 +220,7 @@ We currently support streaming for the Chat Completions API in Jamba.
 from ai21 import AI21Client
 from ai21.models.chat import ChatMessage
 
-system = "You're a support engineer in a SaaS company"
-messages = [
-    ChatMessage(content="Hello, this is AI21 Labs stream", role="user")
-]
+messages = [ChatMessage(content="What is the meaning of life?", role="user")]
 
 client = AI21Client()
 
