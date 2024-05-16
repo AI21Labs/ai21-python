@@ -1,4 +1,14 @@
-from typing_extensions import Literal
+from typing import Any, Union, List
+
+import httpx
+from typing_extensions import Literal, TypeVar, TYPE_CHECKING
+from ai21.stream import Stream
+
+if TYPE_CHECKING:
+    from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin  # noqa
+
+ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModelMixin", str, httpx.Response, List[Any]])
+StreamT = TypeVar("_StreamT", bound=Stream[Any])
 
 
 # Sentinel class used until PEP 0661 is accepted

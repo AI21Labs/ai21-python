@@ -13,6 +13,5 @@ class StudioImprovements(StudioResource, Improvements):
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(text=text, types=types, **kwargs)
-        response = self._post(url=url, body=body)
 
-        return self._json_to_response(response)
+        return self._post(url=url, body=body, response_cls=ImprovementsResponse)

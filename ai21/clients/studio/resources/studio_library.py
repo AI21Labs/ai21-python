@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import Optional, List
 
+
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import FileResponse, LibraryAnswerResponse, LibrarySearchResponse
@@ -34,15 +35,14 @@ class LibraryFiles(StudioResource):
         files = {"file": open(file_path, "rb")}
         body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
 
-        raw_response = self._post(url=url, files=files, body=body)
+        raw_response = self._post(url=url, files=files, body=body, response_cls=dict)
 
         return raw_response["fileId"]
 
     def get(self, file_id: str) -> FileResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
-        raw_response = self._get(url=url)
 
-        return FileResponse.from_dict(raw_response)
+        return self._get(url=url, response_cls=FileResponse)
 
     def list(
         self,
@@ -53,9 +53,8 @@ class LibraryFiles(StudioResource):
     ) -> List[FileResponse]:
         url = f"{self._client.get_base_url()}/{self._module_name}"
         params = remove_not_given({"offset": offset, "limit": limit})
-        raw_response = self._get(url=url, params=params)
 
-        return [FileResponse.from_dict(file) for file in raw_response]
+        return self._get(url=url, params=params, response_cls=List[FileResponse])
 
     def update(
         self,
@@ -102,8 +101,8 @@ class LibrarySearch(StudioResource):
                 **kwargs,
             }
         )
-        raw_response = self._post(url=url, body=body)
-        return LibrarySearchResponse.from_dict(raw_response)
+
+        return self._post(url=url, body=body, response_cls=LibrarySearchResponse)
 
 
 class LibraryAnswer(StudioResource):
@@ -128,5 +127,5 @@ class LibraryAnswer(StudioResource):
                 **kwargs,
             }
         )
-        raw_response = self._post(url=url, body=body)
-        return LibraryAnswerResponse.from_dict(raw_response)
+
+        return self._post(url=url, body=body, response_cls=LibraryAnswerResponse)

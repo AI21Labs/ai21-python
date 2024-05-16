@@ -14,6 +14,4 @@ class StudioAnswer(StudioResource, Answer):
 
         body = self._create_body(context=context, question=question, **kwargs)
 
-        response = self._post(url=url, body=body)
-
-        return self._json_to_response(response)
+        return self._post(url=url, body=body, response_cls=AnswerResponse)
