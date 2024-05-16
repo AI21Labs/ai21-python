@@ -212,6 +212,33 @@ For a more detailed example, see the completion [examples](examples/studio/compl
 
 ---
 
+## Streaming
+
+We currently support streaming for the Chat Completions API in Jamba.
+
+```python
+from ai21 import AI21Client
+from ai21.models.chat import ChatMessage
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    ChatMessage(content="Hello, this is AI21 Labs stream", role="user")
+]
+
+client = AI21Client()
+
+response = client.chat.completions.create(
+    messages=messages,
+    model="jamba-instruct-preview",
+    stream=True,
+)
+for chunk in response:
+    print(chunk.choices[0].delta.content, end="")
+
+```
+
+---
+
 ## TSMs
 
 AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
