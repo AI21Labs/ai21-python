@@ -2,7 +2,52 @@
 
 
 
+## v2.2.5 (2024-05-14)
+
+### Fix
+
+* fix: upgrade ai21-tokenizer to latest version with less restrictive deps (#113)
+
+* fix: upgrade ai21-tokenizer with latest version which has less restrictive deps
+
+* fix: upgrade deps in general ([`022d60c`](https://github.com/AI21Labs/ai21-python/commit/022d60c78a1342fbe6a30a7a4d95c05b656a03bb))
+
+
+## v2.2.4 (2024-05-09)
+
+### Chore
+
+* chore(release): v2.2.4 [skip ci] ([`aa2e8e2`](https://github.com/AI21Labs/ai21-python/commit/aa2e8e2fc4ca28728ed3f6b59abcbce398a04228))
+
+### Fix
+
+* fix: pass kwargs to endpoints (#110)
+
+* feat: pass kwargs to endpoints
+
+* fix: test when passing kwargs ([`0d895e4`](https://github.com/AI21Labs/ai21-python/commit/0d895e49330400e938d87ef5eaa75f8c34fe36d1))
+
+
+## v2.2.3 (2024-04-25)
+
+### Chore
+
+* chore(release): v2.2.3 [skip ci] ([`58c0166`](https://github.com/AI21Labs/ai21-python/commit/58c01660400fe54c0034447e903a843bc92ffcd5))
+
+### Fix
+
+* fix: Support num_retries (#104)
+
+* fix: num_retries method
+
+* fix: Added 408 for retries ([`94c3254`](https://github.com/AI21Labs/ai21-python/commit/94c32542be3d4af6e80aae156b074055b9e5c34a))
+
+
 ## v2.2.2 (2024-04-24)
+
+### Chore
+
+* chore(release): v2.2.2 [skip ci] ([`f3daeba`](https://github.com/AI21Labs/ai21-python/commit/f3daebaeafd168090c7a9b06485c49ebfe4f1b87))
 
 ### Fix
 

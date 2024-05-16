@@ -19,7 +19,7 @@ DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
 RETRY_BACK_OFF_FACTOR = 0.5
 TIME_BETWEEN_RETRIES = 1000
-RETRY_ERROR_CODES = (429, 500, 503)
+RETRY_ERROR_CODES = (408, 429, 500, 503)
 RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
 
 
@@ -46,7 +46,7 @@ def requests_retry_session(session, retries=0):
         connect=retries,
         backoff_factor=RETRY_BACK_OFF_FACTOR,
         status_forcelist=RETRY_ERROR_CODES,
-        method_whitelist=frozenset(RETRY_METHOD_WHITELIST),
+        allowed_methods=frozenset(RETRY_METHOD_WHITELIST),
     )
     adapter = HTTPAdapter(max_retries=retry)
     session.mount("https://", adapter)
