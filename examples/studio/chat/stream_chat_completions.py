@@ -1,6 +1,8 @@
 from ai21 import AI21Client
 from ai21.models.chat import ChatMessage
+from anthropic import Anthropic
 
+Anthropic().messages.stream()
 system = "You're a support engineer in a SaaS company"
 messages = [
     ChatMessage(content=system, role="system"),
@@ -17,6 +19,5 @@ response = client.chat.completions.create(
     max_tokens=100,
     stream=True,
 )
-
 for chunk in response:
-    print(chunk)
+    print(chunk.choices[0].delta.content, end="")

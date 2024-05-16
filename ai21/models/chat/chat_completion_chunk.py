@@ -7,9 +7,15 @@ from ai21.models.usage_info import UsageInfo
 
 
 @dataclass
+class ChoiceDelta(AI21BaseModelMixin):
+    content: Optional[str] = None
+    role: Optional[str] = None
+
+
+@dataclass
 class ChoicesChunk(AI21BaseModelMixin):
     index: int
-    delta: dict
+    delta: ChoiceDelta
     logprobs: Optional[Logprobs] = None
     finish_reason: Optional[str] = None
 

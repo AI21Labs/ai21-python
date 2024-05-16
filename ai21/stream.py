@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from typing import TypeVar, Generic, Iterator
+from typing import TypeVar, Generic, Iterator, Optional
 
 import httpx
 
@@ -29,18 +29,21 @@ class Stream(Generic[_T]):
     def __next__(self) -> _T:
         return self._iterator.__next__()
 
-    def __iter__(self):
+    def __iter__(self) -> Iterator[_T]:
         for item in self._iterator:
             yield item
 
-    def __stream__(self):
+    def __stream__(self) -> Iterator[_T]:
         for chunk in self._decoder.iter(self.response.iter_lines()):
             if chunk.endswith(_SSE_DONE_MSG):
                 break
 
             try:
                 chunk = json.loads(chunk)
-                yield self.cast_to(**chunk)
+                if hasattr(self.cast_to, "from_dict"):
+                    yield self.cast_to.from_dict(chunk)
+                else:
+                    yield self.cast_to(**chunk)
             except json.JSONDecodeError:
                 raise StreamingDecodeError(chunk)
 
@@ -54,8 +57,8 @@ class _SSEDecoder:
             if decoded_line is not None:
                 yield decoded_line
 
-    def _decode(self, line: str) -> str:
+    def _decode(self, line: str) -> Optional[str]:
         if line.startswith(_SSE_DATA_PREFIX):
             return line.strip(_SSE_DATA_PREFIX)
 
-        raise StreamingDecodeError(f"Invalid SSE line: {line}")
+        return None

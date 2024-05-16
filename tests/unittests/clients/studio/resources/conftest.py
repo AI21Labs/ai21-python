@@ -195,6 +195,7 @@ def get_studio_embed():
             {"embedding": [4.0, 5.0, 6.0]},
         ],
     }
+
     return (
         StudioEmbed,
         {"texts": ["text0", "text1"], "type": EmbedType.QUERY},
@@ -222,6 +223,7 @@ def get_studio_gec():
         ],
     }
     text = "text to fi"
+
     return (
         StudioGEC,
         {"text": text},
@@ -249,6 +251,7 @@ def get_studio_improvements():
     }
     text = "text to improve"
     types = [ImprovementType.FLUENCY]
+
     return (
         StudioImprovements,
         {"text": text, "types": types},
@@ -275,6 +278,7 @@ def get_studio_paraphrase():
             }
         ],
     }
+
     return (
         StudioParaphrase,
         {"text": text, "style": style, "start_index": start_index, "end_index": end_index},

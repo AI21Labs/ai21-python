@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from abc import ABC
 from typing import Any, Dict, Optional, BinaryIO, get_origin
 
@@ -62,23 +63,21 @@ class StudioResource(ABC):
     ) -> ResponseT | StreamT | None:
         if stream and stream_cls is not None:
             cast_to = extract_type(stream_cls)
+            return stream_cls(cast_to=cast_to, response=response)
 
-            return stream_cls(
-                cast_to=cast_to,
-                response=response,
-            )
+        if response_cls is None:
+            return None
 
-        if response_cls is not None:
-            if response_cls == dict:
-                return response.json()
+        if response_cls == dict:
+            return response.json()
 
-            origin_type = get_origin(response_cls)
+        if response_cls == str:
+            return json.loads(response.json())
 
-            if origin_type is not None and origin_type == list:
-                subtype = extract_type(response_cls)
+        origin_type = get_origin(response_cls)
 
-                return [subtype.from_dict(item) for item in response.json()]
+        if origin_type is not None and origin_type == list:
+            subtype = extract_type(response_cls)
+            return [subtype.from_dict(item) for item in response.json()]
 
-            return response_cls.from_dict(response.json())
-
-        return None
+        return response_cls.from_dict(response.json())

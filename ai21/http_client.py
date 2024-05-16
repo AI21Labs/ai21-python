@@ -118,6 +118,7 @@ class HttpClient:
             request = self._client.build_request(
                 method=method, url=url, headers=headers, timeout=timeout, params=params
             )
+
             return self._client.send(request=request, stream=stream)
 
         if files is not None:
@@ -141,6 +142,7 @@ class HttpClient:
             timeout=timeout,
             files=files,
         )
+
         return self._client.send(request=request, stream=stream)
 
     def _init_client(self, client: Optional[httpx.Client]) -> httpx.Client:
