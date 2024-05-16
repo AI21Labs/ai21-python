@@ -58,7 +58,10 @@ class _SSEDecoder:
                 yield decoded_line
 
     def _decode(self, line: str) -> Optional[str]:
+        if not line:
+            return None
+
         if line.startswith(_SSE_DATA_PREFIX):
             return line.strip(_SSE_DATA_PREFIX)
 
-        return None
+        raise StreamingDecodeError(f"Invalid SSE line: {line}")
