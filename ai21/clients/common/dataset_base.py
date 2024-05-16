@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models import DatasetResponse
-
 
 class Dataset(ABC):
     _module_name = "dataset"
@@ -39,9 +37,6 @@ class Dataset(ABC):
     @abstractmethod
     def get(self, dataset_pid: str):
         pass
-
-    def _json_to_response(self, json: Dict[str, Any]) -> DatasetResponse:
-        return DatasetResponse.from_dict(json)
 
     def _create_body(
         self,

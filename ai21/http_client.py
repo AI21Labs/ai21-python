@@ -18,8 +18,8 @@ from ai21.logger import logger
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
-TIME_BETWEEN_RETRIES = 1
 RETRY_BACK_OFF_FACTOR = 0.5
+TIME_BETWEEN_RETRIES = 1
 RETRY_ERROR_CODES = (408, 429, 500, 503)
 RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
 
@@ -76,10 +76,11 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
+        stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
-    ):
+    ) -> httpx.Response:
         try:
-            response = self._request(files=files, method=method, params=params, url=url)
+            response = self._request(files=files, method=method, params=params, url=url, stream=stream)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -99,23 +100,26 @@ class HttpClient:
             logger.error(f"Calling {method} {url} failed with a non-200 response code: {response.status_code}")
             handle_non_success_response(response.status_code, response.text)
 
-        return response.json()
+        return response
 
     def _request(
-        self, files: Optional[Dict[str, BinaryIO]], method: str, params: Optional[Dict], url: str
+        self,
+        files: Optional[Dict[str, BinaryIO]],
+        method: str,
+        params: Optional[Dict],
+        url: str,
+        stream: bool,
     ) -> httpx.Response:
         timeout = self._timeout_sec
         headers = self._headers
         logger.debug(f"Calling {method} {url} {headers} {params}")
 
         if method == "GET":
-            return self._client.request(
-                method=method,
-                url=url,
-                headers=headers,
-                timeout=timeout,
-                params=params,
+            request = self._client.build_request(
+                method=method, url=url, headers=headers, timeout=timeout, params=params
             )
+
+            return self._client.send(request=request, stream=stream)
 
         if files is not None:
             if method != "POST":
@@ -130,7 +134,7 @@ class HttpClient:
         else:
             data = json.dumps(params).encode() if params else None
 
-        return self._client.request(
+        request = self._client.build_request(
             method=method,
             url=url,
             headers=headers,
@@ -138,6 +142,8 @@ class HttpClient:
             timeout=timeout,
             files=files,
         )
+
+        return self._client.send(request=request, stream=stream)
 
     def _init_client(self, client: Optional[httpx.Client]) -> httpx.Client:
         if client is not None:

@@ -31,7 +31,7 @@ class SageMaker:
             },
         )
 
-        arn = response["arn"]
+        arn = response.json()["arn"]
 
         if not arn:
             raise ModelPackageDoesntExistError(model_name=model_name, region=region, version=version)
@@ -53,7 +53,7 @@ class SageMaker:
             },
         )
 
-        return response["versions"]
+        return response.json()["versions"]
 
     @classmethod
     def _create_ai21_http_client(cls) -> AI21HTTPClient:

@@ -1,5 +1,7 @@
 import platform
 from typing import Optional
+from unittest.mock import Mock
+from urllib.request import Request
 
 import httpx
 import pytest
@@ -85,7 +87,13 @@ def test__get_base_url(api_host: Optional[str], expected_api_host: str):
     argvalues=[
         ({"method": "GET", "url": "test_url", "params": {"foo": "bar"}}, _EXPECTED_GET_HEADERS),
         (
-            {"method": "POST", "url": "test_url", "params": {"foo": "bar"}, "files": {"file": "test_file"}},
+            {
+                "method": "POST",
+                "url": "test_url",
+                "params": {"foo": "bar"},
+                "stream": False,
+                "files": {"file": "test_file"},
+            },
             _EXPECTED_POST_FILE_HEADERS,
         ),
     ],
@@ -97,17 +105,19 @@ def test__execute_http_request__(
     mock_httpx_client: httpx.Client,
 ):
     response_json = {"test_key": "test_value"}
-    mock_httpx_client.request.return_value = MockResponse(response_json, 200)
+    mock_response = Mock(spec=Request)
+    mock_httpx_client.build_request.return_value = mock_response
+    mock_httpx_client.send.return_value = MockResponse(response_json, 200)
 
     http_client = HttpClient(client=mock_httpx_client)
     client = AI21HTTPClient(http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1")
 
     response = client.execute_http_request(**params)
-    assert response == response_json
+    assert response.json() == response_json
 
     if "files" in params:
         # We split it because when calling requests with "files", "params" is turned into "data"
-        mock_httpx_client.request.assert_called_once_with(
+        mock_httpx_client.build_request.assert_called_once_with(
             timeout=300,
             headers=headers,
             files=params["files"],
@@ -116,7 +126,9 @@ def test__execute_http_request__(
             method=params["method"],
         )
     else:
-        mock_httpx_client.request.assert_called_once_with(timeout=300, headers=headers, **params)
+        mock_httpx_client.build_request.assert_called_once_with(timeout=300, headers=headers, **params)
+
+    mock_httpx_client.send.assert_called_once_with(request=mock_response, stream=False)
 
 
 def test__execute_http_request__when_files_with_put_method__should_raise_value_error(
