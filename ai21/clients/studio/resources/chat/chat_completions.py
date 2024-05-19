@@ -4,8 +4,7 @@ from typing import List, Optional, Union, Any, Dict, Literal, overload
 
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import ChatMessage as J2ChatMessage
-from ai21.models.chat import ChatMessage, ChatCompletionResponse
-from ai21.models.chat.chat_completion_chunk import ChatCompletionChunk
+from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk
 from ai21.stream import Stream
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
