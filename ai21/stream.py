@@ -1,9 +1,11 @@
 from __future__ import annotations
 
 import json
+from types import TracebackType
 from typing import TypeVar, Generic, Iterator, Optional
 
 import httpx
+from typing_extensions import Self
 
 from ai21.errors import StreamingDecodeError
 
@@ -46,6 +48,20 @@ class Stream(Generic[_T]):
                     yield self.cast_to(**chunk)
             except json.JSONDecodeError:
                 raise StreamingDecodeError(chunk)
+
+    def __enter__(self) -> Self:
+        return self
+
+    def __exit__(
+        self,
+        exc_type: type[BaseException] | None,
+        exc: BaseException | None,
+        exc_tb: TracebackType | None,
+    ) -> None:
+        self.close()
+
+    def close(self):
+        self.response.close()
 
 
 class _SSEDecoder:
