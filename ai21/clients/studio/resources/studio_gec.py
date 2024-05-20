@@ -5,8 +5,7 @@ from ai21.models import GECResponse
 
 class StudioGEC(StudioResource, GEC):
     def create(self, text: str, **kwargs) -> GECResponse:
-        body = self._create_body(text=text)
+        body = self._create_body(text=text, **kwargs)
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._post(url=url, body=body)
 
-        return self._json_to_response(response)
+        return self._post(url=url, body=body, response_cls=GECResponse)

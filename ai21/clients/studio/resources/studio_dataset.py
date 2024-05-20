@@ -24,6 +24,7 @@ class StudioDataset(StudioResource, Dataset):
             approve_whitespace_correction=approve_whitespace_correction,
             delete_long_rows=delete_long_rows,
             split_ratio=split_ratio,
+            **kwargs,
         )
         return self._post(
             url=self._base_url(),
@@ -32,14 +33,11 @@ class StudioDataset(StudioResource, Dataset):
         )
 
     def list(self) -> List[DatasetResponse]:
-        response = self._get(url=self._base_url())
-        return [self._json_to_response(r) for r in response]
+        return self._get(url=self._base_url(), response_cls=List[DatasetResponse])
 
     def get(self, dataset_pid: str) -> DatasetResponse:
         url = f"{self._base_url()}/{dataset_pid}"
-        response = self._get(url=url)
-
-        return self._json_to_response(response)
+        return self._get(url=url, response_cls=DatasetResponse)
 
     def _base_url(self) -> str:
         return f"{self._client.get_base_url()}/{self._module_name}"

@@ -15,9 +15,7 @@ response = client.chat.completions.create(
     messages=messages,
     model="jamba-instruct-preview",
     max_tokens=100,
-    temperature=0.7,
-    top_p=1.0,
-    stop=["\n"],
+    stream=True,
 )
-
-print(response)
+for chunk in response:
+    print(chunk.choices[0].delta.content, end="")

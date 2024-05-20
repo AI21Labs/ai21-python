@@ -12,7 +12,6 @@ class StudioImprovements(StudioResource, Improvements):
             raise EmptyMandatoryListError("types")
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        body = self._create_body(text=text, types=types)
-        response = self._post(url=url, body=body)
+        body = self._create_body(text=text, types=types, **kwargs)
 
-        return self._json_to_response(response)
+        return self._post(url=url, body=body, response_cls=ImprovementsResponse)

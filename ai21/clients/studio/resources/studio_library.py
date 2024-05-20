@@ -1,8 +1,12 @@
+from __future__ import annotations
 from typing import Optional, List
+
 
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import FileResponse, LibraryAnswerResponse, LibrarySearchResponse
+from ai21.types import NotGiven, NOT_GIVEN
+from ai21.utils.typing import remove_not_given
 
 
 class StudioLibrary(StudioResource):
@@ -22,51 +26,52 @@ class LibraryFiles(StudioResource):
         self,
         file_path: str,
         *,
-        path: Optional[str] = None,
-        labels: Optional[List[str]] = None,
-        public_url: Optional[str] = None,
+        path: Optional[str] | NotGiven = NOT_GIVEN,
+        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        public_url: Optional[str] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
         url = f"{self._client.get_base_url()}/{self._module_name}"
         files = {"file": open(file_path, "rb")}
-        body = {"path": path, "labels": labels, "publicUrl": public_url}
+        body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
 
-        raw_response = self._post(url=url, files=files, body=body)
+        raw_response = self._post(url=url, files=files, body=body, response_cls=dict)
 
         return raw_response["fileId"]
 
     def get(self, file_id: str) -> FileResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
-        raw_response = self._get(url=url)
 
-        return FileResponse.from_dict(raw_response)
+        return self._get(url=url, response_cls=FileResponse)
 
     def list(
         self,
         *,
-        offset: Optional[int] = None,
-        limit: Optional[int] = None,
+        offset: Optional[int] | NotGiven = NOT_GIVEN,
+        limit: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> List[FileResponse]:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        params = {"offset": offset, "limit": limit}
-        raw_response = self._get(url=url, params=params)
+        params = remove_not_given({"offset": offset, "limit": limit})
 
-        return [FileResponse.from_dict(file) for file in raw_response]
+        return self._get(url=url, params=params, response_cls=List[FileResponse])
 
     def update(
         self,
         file_id: str,
         *,
-        public_url: Optional[str] = None,
-        labels: Optional[List[str]] = None,
+        public_url: Optional[str] | NotGiven = NOT_GIVEN,
+        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> None:
         url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
-        body = {
-            "publicUrl": public_url,
-            "labels": labels,
-        }
+        body = remove_not_given(
+            {
+                "publicUrl": public_url,
+                "labels": labels,
+                **kwargs,
+            }
+        )
         self._put(url=url, body=body)
 
     def delete(self, file_id: str) -> None:
@@ -81,20 +86,23 @@ class LibrarySearch(StudioResource):
         self,
         query: str,
         *,
-        path: Optional[str] = None,
-        field_ids: Optional[List[str]] = None,
-        max_segments: Optional[int] = None,
+        path: Optional[str] | NotGiven = NOT_GIVEN,
+        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        max_segments: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibrarySearchResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        body = {
-            "query": query,
-            "path": path,
-            "fieldIds": field_ids,
-            "maxSegments": max_segments,
-        }
-        raw_response = self._post(url=url, body=body)
-        return LibrarySearchResponse.from_dict(raw_response)
+        body = remove_not_given(
+            {
+                "query": query,
+                "path": path,
+                "fieldIds": field_ids,
+                "maxSegments": max_segments,
+                **kwargs,
+            }
+        )
+
+        return self._post(url=url, body=body, response_cls=LibrarySearchResponse)
 
 
 class LibraryAnswer(StudioResource):
@@ -104,17 +112,20 @@ class LibraryAnswer(StudioResource):
         self,
         question: str,
         *,
-        path: Optional[str] = None,
-        field_ids: Optional[List[str]] = None,
-        labels: Optional[List[str]] = None,
+        path: Optional[str] | NotGiven = NOT_GIVEN,
+        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibraryAnswerResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        body = {
-            "question": question,
-            "path": path,
-            "fieldIds": field_ids,
-            "labels": labels,
-        }
-        raw_response = self._post(url=url, body=body)
-        return LibraryAnswerResponse.from_dict(raw_response)
+        body = remove_not_given(
+            {
+                "question": question,
+                "path": path,
+                "fieldIds": field_ids,
+                "labels": labels,
+                **kwargs,
+            }
+        )
+
+        return self._post(url=url, body=body, response_cls=LibraryAnswerResponse)

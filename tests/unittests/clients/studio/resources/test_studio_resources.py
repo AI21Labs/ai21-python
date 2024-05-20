@@ -1,7 +1,7 @@
 from typing import TypeVar, Callable
 
 import pytest
-
+import httpx
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -43,7 +43,14 @@ class TestStudioResources:
             "studio_summarization",
             "studio_summarize_by_segment",
         ],
-        argnames=["studio_resource", "function_body", "url_suffix", "expected_body", "expected_response"],
+        argnames=[
+            "studio_resource",
+            "function_body",
+            "url_suffix",
+            "expected_body",
+            "expected_httpx_response",
+            "expected_response",
+        ],
         argvalues=[
             (get_studio_answer()),
             (get_studio_chat()),
@@ -59,16 +66,17 @@ class TestStudioResources:
             (get_studio_summarize_by_segment()),
         ],
     )
-    def test__create__should_return_answer_response(
+    def test__create__should_return_response(
         self,
         studio_resource: Callable[[AI21HTTPClient], T],
         function_body,
         url_suffix: str,
         expected_body,
-        expected_response,
+        expected_httpx_response,
+        expected_response: AnswerResponse,
         mock_ai21_studio_client: AI21HTTPClient,
     ):
-        mock_ai21_studio_client.execute_http_request.return_value = expected_response.to_dict()
+        mock_ai21_studio_client.execute_http_request.return_value = expected_httpx_response
         mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
 
         resource = studio_resource(mock_ai21_studio_client)
@@ -82,12 +90,19 @@ class TestStudioResources:
             method="POST",
             url=f"{_BASE_URL}/{url_suffix}",
             params=expected_body,
+            stream=False,
             files=None,
         )
 
-    def test__create__when_pass_kwargs__should_not_pass_to_request(self, mock_ai21_studio_client: AI21HTTPClient):
+    def test__create__when_pass_kwargs__should_pass_to_request(
+        self,
+        mock_ai21_studio_client: AI21HTTPClient,
+        mock_successful_httpx_response: httpx.Response,
+    ):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
-        mock_ai21_studio_client.execute_http_request.return_value = expected_answer.to_dict()
+        mock_successful_httpx_response.json.return_value = expected_answer.to_dict()
+
+        mock_ai21_studio_client.execute_http_request.return_value = mock_successful_httpx_response
         mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
         studio_answer = StudioAnswer(mock_ai21_studio_client)
 
@@ -103,6 +118,8 @@ class TestStudioResources:
             params={
                 "context": _DUMMY_CONTEXT,
                 "question": _DUMMY_QUESTION,
+                "some_dummy_kwargs": "some_dummy_value",
             },
+            stream=False,
             files=None,
         )

@@ -26,17 +26,16 @@ class SummarizeBySegment(ABC):
         """
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> SummarizeBySegmentResponse:
-        return SummarizeBySegmentResponse.from_dict(json)
-
     def _create_body(
         self,
         source: str,
         source_type: str,
         focus: Optional[str],
+        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "source": source,
             "sourceType": source_type,
             "focus": focus,
+            **kwargs,
         }

@@ -21,6 +21,6 @@ setup(
     packages=find_packages(exclude=["tests", "tests.*"]),
     keywords=["python", "sdk", "ai", "ai21", "jurassic", "ai21-python", "llm"],
     install_requires=[
-        "requests",
+        "httpx",
     ],
 )

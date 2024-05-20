@@ -18,8 +18,5 @@ class Improvements(ABC):
         """
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> ImprovementsResponse:
-        return ImprovementsResponse.from_dict(json)
-
-    def _create_body(self, text: str, types: List[str]) -> Dict[str, Any]:
-        return {"text": text, "types": types}
+    def _create_body(self, text: str, types: List[str], **kwargs) -> Dict[str, Any]:
+        return {"text": text, "types": types, **kwargs}

@@ -1,8 +1,6 @@
 from abc import ABC, abstractmethod
 from typing import Optional, Any, Dict
 
-from ai21.models import DatasetResponse
-
 
 class Dataset(ABC):
     _module_name = "dataset"
@@ -40,9 +38,6 @@ class Dataset(ABC):
     def get(self, dataset_pid: str):
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> DatasetResponse:
-        return DatasetResponse.from_dict(json)
-
     def _create_body(
         self,
         dataset_name: str,
@@ -50,6 +45,7 @@ class Dataset(ABC):
         approve_whitespace_correction: Optional[bool],
         delete_long_rows: Optional[bool],
         split_ratio: Optional[float],
+        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "dataset_name": dataset_name,
@@ -57,4 +53,5 @@ class Dataset(ABC):
             "approve_whitespace_correction": approve_whitespace_correction,
             "delete_long_rows": delete_long_rows,
             "split_ratio": split_ratio,
+            **kwargs,
         }

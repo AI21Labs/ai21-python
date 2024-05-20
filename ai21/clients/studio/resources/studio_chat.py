@@ -2,6 +2,7 @@ from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
 from ai21.clients.studio.resources.chat import ChatCompletions
+from ai21.models.chat import ChatMessage as JambaChatMessage
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import ChatMessage, Penalty, ChatResponse
 
@@ -25,6 +26,12 @@ class StudioChat(StudioResource, Chat):
         count_penalty: Optional[Penalty] = None,
         **kwargs,
     ) -> ChatResponse:
+        if any(isinstance(item, JambaChatMessage) for item in messages):
+            raise ValueError(
+                "Please use the ChatMessage class from ai21.models"
+                " instead of ai21.models.chat when working with chat"
+            )
+
         body = self._create_body(
             model=model,
             messages=messages,
@@ -39,10 +46,10 @@ class StudioChat(StudioResource, Chat):
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
             count_penalty=count_penalty,
+            **kwargs,
         )
         url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
-        response = self._post(url=url, body=body)
-        return self._json_to_response(response)
+        return self._post(url=url, body=body, response_cls=ChatResponse)
 
     @property
     def completions(self) -> ChatCompletions:

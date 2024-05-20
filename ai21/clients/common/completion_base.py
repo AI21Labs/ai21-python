@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict
 
 from ai21.models import Penalty, CompletionsResponse
 from ai21.types import NOT_GIVEN, NotGiven
@@ -55,9 +55,6 @@ class Completion(ABC):
         """
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> CompletionsResponse:
-        return CompletionsResponse.from_dict(json)
-
     def _create_body(
         self,
         model: str,
@@ -75,6 +72,7 @@ class Completion(ABC):
         count_penalty: Penalty | NotGiven,
         epoch: int | NotGiven,
         logit_bias: Dict[str, float] | NotGiven,
+        **kwargs,
     ):
         return remove_not_given(
             {
@@ -93,5 +91,6 @@ class Completion(ABC):
                 "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
                 "epoch": epoch,
                 "logitBias": logit_bias,
+                **kwargs,
             }
         )

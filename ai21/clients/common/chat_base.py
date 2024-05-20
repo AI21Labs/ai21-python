@@ -53,9 +53,6 @@ class Chat(ABC):
     def completions(self) -> ChatCompletions:
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:
-        return ChatResponse.from_dict(json)
-
     def _create_body(
         self,
         model: str,
@@ -71,6 +68,7 @@ class Chat(ABC):
         frequency_penalty: Optional[Penalty] = None,
         presence_penalty: Optional[Penalty] = None,
         count_penalty: Optional[Penalty] = None,
+        **kwargs,
     ) -> Dict[str, Any]:
         return {
             "model": model,
@@ -86,4 +84,5 @@ class Chat(ABC):
             "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
             "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
             "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
+            **kwargs,
         }

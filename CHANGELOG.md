@@ -2,7 +2,341 @@
 
 
 
+## v2.3.0 (2024-05-20)
+
+### Chore
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#115)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.3.1 to 9.7.3.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.3.1...v9.7.3)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`2ff5912`](https://github.com/AI21Labs/ai21-python/commit/2ff5912c38be61ea3c06b52037109eb7504ae1a2))
+
+* chore(deps): bump amannn/action-semantic-pull-request (#103)
+
+Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request) from 5.4.0 to 5.5.2.
+- [Release notes](https://github.com/amannn/action-semantic-pull-request/releases)
+- [Changelog](https://github.com/amannn/action-semantic-pull-request/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/amannn/action-semantic-pull-request/compare/v5.4.0...v5.5.2)
+
+---
+updated-dependencies:
+- dependency-name: amannn/action-semantic-pull-request
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5dd95ac`](https://github.com/AI21Labs/ai21-python/commit/5dd95acdeb73967377ada7ba3da98002df58398f))
+
+### Feature
+
+* feat: Jamba Stream Support (#117)
+
+* feat: Add httpx support (#111)
+
+* feat: Added httpx to pyproject
+
+* feat: httpx instead of requests
+
+* feat: Removed requests
+
+* fix: not given
+
+* fix: setup
+
+* feat: Added tenacity for retry
+
+* fix: conftest
+
+* test: Added tests
+
+* fix: Rename
+
+* fix: Modified test
+
+* fix: CR
+
+* fix: request
+
+* feat: Stream support jamba (#114)
+
+* feat: Added httpx to pyproject
+
+* feat: httpx instead of requests
+
+* feat: Removed requests
+
+* fix: not given
+
+* fix: setup
+
+* feat: Added tenacity for retry
+
+* fix: conftest
+
+* test: Added tests
+
+* fix: Rename
+
+* fix: Modified test
+
+* feat: stream support (unfinished)
+
+* feat: Added tenacity for retry
+
+* test: Added tests
+
+* fix: Rename
+
+* feat: stream support (unfinished)
+
+* fix: single request creation
+
+* feat: Support stream_cls
+
+* fix: passed response_cls
+
+* fix: Removed unnecessary json_to_response
+
+* fix: imports
+
+* fix: tests
+
+* fix: imports
+
+* fix: reponse parse
+
+* fix: Added two examples to tests
+
+* fix: sagemaker tests
+
+* test: Added stream tests
+
+* fix: comment out failing test
+
+* fix: CR
+
+* fix: Removed code
+
+* docs: Added readme for streaming
+
+* fix: condition
+
+* docs: readme
+
+* test: Added integration test for streaming
+
+* fix: Added enter and close to stream
+
+* fix: Uncomment chat completions test
+
+* feat: Add httpx support (#111)
+
+* feat: Added httpx to pyproject
+
+* feat: httpx instead of requests
+
+* feat: Removed requests
+
+* fix: not given
+
+* fix: setup
+
+* feat: Added tenacity for retry
+
+* fix: conftest
+
+* test: Added tests
+
+* fix: Rename
+
+* fix: Modified test
+
+* fix: CR
+
+* fix: request
+
+* feat: Stream support jamba (#114)
+
+* feat: Added httpx to pyproject
+
+* feat: httpx instead of requests
+
+* feat: Removed requests
+
+* fix: not given
+
+* fix: setup
+
+* feat: Added tenacity for retry
+
+* fix: conftest
+
+* test: Added tests
+
+* fix: Rename
+
+* fix: Modified test
+
+* feat: stream support (unfinished)
+
+* feat: Added tenacity for retry
+
+* test: Added tests
+
+* fix: Rename
+
+* feat: stream support (unfinished)
+
+* fix: single request creation
+
+* feat: Support stream_cls
+
+* fix: passed response_cls
+
+* fix: Removed unnecessary json_to_response
+
+* fix: imports
+
+* fix: tests
+
+* fix: imports
+
+* fix: reponse parse
+
+* fix: Added two examples to tests
+
+* fix: sagemaker tests
+
+* test: Added stream tests
+
+* fix: comment out failing test
+
+* fix: CR
+
+* fix: Removed code
+
+* docs: Added readme for streaming
+
+* fix: condition
+
+* docs: readme
+
+* test: Added integration test for streaming
+
+* fix: Added enter and close to stream
+
+* fix: Uncomment chat completions test
+
+* fix: poetry.lock
+
+* fix: poetry.lock
+
+* fix: Uncomment test case
+
+* fix: Removed unused json_to_response ([`ae0d12b`](https://github.com/AI21Labs/ai21-python/commit/ae0d12b4e4fbb9cdf8e2fac20ec370e7f91215b4))
+
+### Fix
+
+* fix: delete file fixture (#116) ([`9d9a9ba`](https://github.com/AI21Labs/ai21-python/commit/9d9a9ba7a00a6efeb1fedb936633e5d35cec3527))
+
+
+## v2.2.5 (2024-05-14)
+
+### Chore
+
+* chore(release): v2.2.5 [skip ci] ([`6d1502f`](https://github.com/AI21Labs/ai21-python/commit/6d1502f75457906f156503d9bbd63daf87665e54))
+
+### Fix
+
+* fix: upgrade ai21-tokenizer to latest version with less restrictive deps (#113)
+
+* fix: upgrade ai21-tokenizer with latest version which has less restrictive deps
+
+* fix: upgrade deps in general ([`022d60c`](https://github.com/AI21Labs/ai21-python/commit/022d60c78a1342fbe6a30a7a4d95c05b656a03bb))
+
+
+## v2.2.4 (2024-05-09)
+
+### Chore
+
+* chore(release): v2.2.4 [skip ci] ([`aa2e8e2`](https://github.com/AI21Labs/ai21-python/commit/aa2e8e2fc4ca28728ed3f6b59abcbce398a04228))
+
+### Fix
+
+* fix: pass kwargs to endpoints (#110)
+
+* feat: pass kwargs to endpoints
+
+* fix: test when passing kwargs ([`0d895e4`](https://github.com/AI21Labs/ai21-python/commit/0d895e49330400e938d87ef5eaa75f8c34fe36d1))
+
+
+## v2.2.3 (2024-04-25)
+
+### Chore
+
+* chore(release): v2.2.3 [skip ci] ([`58c0166`](https://github.com/AI21Labs/ai21-python/commit/58c01660400fe54c0034447e903a843bc92ffcd5))
+
+### Fix
+
+* fix: Support num_retries (#104)
+
+* fix: num_retries method
+
+* fix: Added 408 for retries ([`94c3254`](https://github.com/AI21Labs/ai21-python/commit/94c32542be3d4af6e80aae156b074055b9e5c34a))
+
+
+## v2.2.2 (2024-04-24)
+
+### Chore
+
+* chore(release): v2.2.2 [skip ci] ([`f3daeba`](https://github.com/AI21Labs/ai21-python/commit/f3daebaeafd168090c7a9b06485c49ebfe4f1b87))
+
+### Fix
+
+* fix: Added raise error on wrong use of chat message (#102) ([`4efbea6`](https://github.com/AI21Labs/ai21-python/commit/4efbea6d85cd70f77650e4c4d96a3395eb60517b))
+
+
+## v2.2.1 (2024-04-22)
+
+### Chore
+
+* chore(release): v2.2.1 [skip ci] ([`4fbfe00`](https://github.com/AI21Labs/ai21-python/commit/4fbfe0002bdf1e28bdfc611f1e9b9b99012f77c7))
+
+* chore: update chat example (#95) ([`7dd83b1`](https://github.com/AI21Labs/ai21-python/commit/7dd83b184a21fe3d94a8a8b90f9bfe04c6e30e2e))
+
+### Fix
+
+* fix: Add support for n param to chat completion in studio (#98)
+
+* fix: add n param support
+
+* test: add integration test
+
+* revert: wrong file
+
+* fix: add n param support, add integration test ([`5459323`](https://github.com/AI21Labs/ai21-python/commit/54593235b590c35f5bfd391b3b195d294a65237b))
+
+
 ## v2.2.0 (2024-04-10)
+
+### Chore
+
+* chore(release): v2.2.0 [skip ci] ([`52a0fa3`](https://github.com/AI21Labs/ai21-python/commit/52a0fa3fe71f9491c89b12f183758eb9491a929d))
 
 ### Feature
 
