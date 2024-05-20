@@ -48,7 +48,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         "when_summarize_by_segment__should_return_ok",
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
-        # "when_stream_chat_completions__should_return_ok",
+        "when_stream_chat_completions__should_return_ok",
         # "when_custom_model__should_return_ok",
         # "when_custom_model_completion__should_return_ok",
         # "when_dataset__should_return_ok",
