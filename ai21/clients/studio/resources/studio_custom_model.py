@@ -25,14 +25,12 @@ class StudioCustomModel(StudioResource, CustomModel):
             num_epochs=num_epochs,
             **kwargs,
         )
-        self._post(url=url, body=body)
+        self._post(url=url, body=body, response_cls=None)
 
     def list(self) -> List[CustomBaseModelResponse]:
         url = f"{self._client.get_base_url()}/{self._module_name}"
-        response = self._get(url=url)
-
-        return [self._json_to_response(r) for r in response]
+        return self._get(url=url, response_cls=List[CustomBaseModelResponse])
 
     def get(self, resource_id: str) -> CustomBaseModelResponse:
         url = f"{self._client.get_base_url()}/{self._module_name}/{resource_id}"
-        return self._json_to_response(self._get(url=url))
+        return self._get(url=url, response_cls=CustomBaseModelResponse)

@@ -53,9 +53,6 @@ class Chat(ABC):
     def completions(self) -> ChatCompletions:
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> ChatResponse:
-        return ChatResponse.from_dict(json)
-
     def _create_body(
         self,
         model: str,

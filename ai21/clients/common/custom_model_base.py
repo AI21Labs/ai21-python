@@ -38,9 +38,6 @@ class CustomModel(ABC):
     def get(self, resource_id: str) -> CustomBaseModelResponse:
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> CustomBaseModelResponse:
-        return CustomBaseModelResponse.from_dict(json)
-
     def _create_body(
         self,
         dataset_id: str,

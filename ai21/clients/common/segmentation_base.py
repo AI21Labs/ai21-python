@@ -18,8 +18,5 @@ class Segmentation(ABC):
         """
         pass
 
-    def _json_to_response(self, json: Dict[str, Any]) -> SegmentationResponse:
-        return SegmentationResponse.from_dict(json)
-
     def _create_body(self, source: str, source_type: str, **kwargs) -> Dict[str, Any]:
         return {"source": source, "sourceType": source_type, **kwargs}
