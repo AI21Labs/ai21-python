@@ -28,7 +28,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("summarize_by_segment.py",),
         ("tokenization.py",),
         ("chat/chat_completions.py",),
-        # ("chat/stream_chat_completions.py",),  # Uncomment when streaming is supported in production
+        ("chat/stream_chat_completions.py",),
         # ("custom_model.py", ),
         # ('custom_model_completion.py', ),
         # ("dataset.py", ),
