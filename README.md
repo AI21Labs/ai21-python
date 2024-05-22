@@ -20,10 +20,10 @@
 
 ## Table of Contents
 
-- [Examples](#examples-tldr)
+- [Examples](#examples-tldr) 🗂️
 - [Migration from v1.3.4 and below](#migration-from-v134-and-below)
 - [AI21 Official Documentation](#Documentation)
-- [Installation](#Installation)
+- [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
