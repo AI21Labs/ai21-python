@@ -18,6 +18,31 @@
 
 ---
 
+## Table of Contents
+
+- [Examples](#Examples)
+- [Migration from v1.3.4 and below](#Migration from v1.3.4 and below)
+- [AI21 Official Documentation](#Documentation)
+- [Installation](#Installation)
+- [Usage](#Usage)
+- [Older Models Support Usage](#Older Models Support Usage)
+- Models
+  - [Streaming](#Streaming)
+  - [TSMs](#TSMs)
+- [Token Counting](#Token Counting)
+- [Environment Variables](#Environment Variables)
+- [Cloud Providers](#Cloud Providers)
+  - [SageMaker](#SageMaker)
+  - [Bedrock](#Bedrock)
+
+## Examples (tl;dr)
+
+If you want to quickly get a glance how to use the AI21 Python SDK and jump straight to business, you can check out the examples. Take a look at our models and see them in action! Several examples and demonstrations have been put together to show our models' functionality and capabilities.
+
+### [Check out the Examples](examples/)
+
+Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
+
 ## Migration from v1.3.4 and below
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
@@ -133,7 +158,6 @@ pip install ai21
 
 ```python
 from ai21 import AI21Client
-from ai21.models import RoleType
 from ai21.models.chat import ChatMessage
 
 client = AI21Client(
@@ -257,20 +281,6 @@ response = client.answer.create(
 
 A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
 
-### Token Counting
-
----
-
-By using the `count_tokens` method, you can estimate the billing for a given request.
-
-```python
-from ai21.tokenizers import get_tokenizer
-
-tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
-total_tokens = tokenizer.count_tokens(text="some text")  # returns int
-print(total_tokens)
-```
-
 Available tokenizers are:
 
 - `jamba-instruct-tokenizer`
@@ -295,6 +305,20 @@ file_id = client.library.files.create(
 )
 
 uploaded_file = client.library.files.get(file_id)
+```
+
+## Token Counting
+
+---
+
+By using the `count_tokens` method, you can estimate the billing for a given request.
+
+```python
+from ai21.tokenizers import get_tokenizer
+
+tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
+total_tokens = tokenizer.count_tokens(text="some text")  # returns int
+print(total_tokens)
 ```
 
 ## Environment Variables
@@ -355,9 +379,11 @@ except AI21APIError as e:
 
 ```
 
-## AWS Clients
+## Cloud Providers
 
 ---
+
+### AWS
 
 AI21 Library provides convenient ways to interact with two AWS clients for use with AWS SageMaker and AWS Bedrock.
 
@@ -434,13 +460,5 @@ response = client.completion.create(
     max_tokens=10,
 )
 ```
-
-## Examples
-
-Explore our examples to see our models in action! We've put together a variety of use cases and demonstrations to showcase the capabilities and functionality of our models.
-
-### [Check out the Examples](examples/)
-
-Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
 
 Happy prompting! 🚀
