@@ -1,13 +1,15 @@
+import os
+
 import pytest
 
-from ai21 import SageMaker, AI21EnvConfig
+from ai21 import SageMaker
 
 
 def _add_or_remove_api_key(use_api_key: bool):
     if use_api_key:
-        AI21EnvConfig.api_key = "test"
+        os.environ["AI21_API_KEY"] = "test"
     else:
-        AI21EnvConfig.api_key = None
+        del os.environ["AI21_API_KEY"]
 
 
 @pytest.mark.parametrize(
