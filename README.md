@@ -18,6 +18,33 @@
 
 ---
 
+## Table of Contents
+
+- [Examples](#examples-tldr) 🗂️
+- [Migration from v1.3.4 and below](#migration-from-v134-and-below)
+- [AI21 Official Documentation](#Documentation)
+- [Installation](#Installation) 💿
+- [Usage - Chat Completions](#Usage)
+- [Older Models Support Usage](#Older-Models-Support-Usage)
+- [More Models](#More-Models)
+  - [Streaming](#Streaming)
+  - [TSMs](#TSMs)
+- [Token Counting](#Token-Counting)
+- [Environment Variables](#Environment-Variables)
+- [Error Handling](#Error-Handling)
+- [Cloud Providers](#Cloud-Providers) ☁️
+  - [AWS](#AWS)
+    - [SageMaker](#SageMaker)
+    - [Bedrock](#Bedrock)
+
+## Examples (tl;dr)
+
+If you want to quickly get a glance how to use the AI21 Python SDK and jump straight to business, you can check out the examples. Take a look at our models and see them in action! Several examples and demonstrations have been put together to show our models' functionality and capabilities.
+
+### [Check out the Examples](examples/)
+
+Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
+
 ## Migration from v1.3.4 and below
 
 In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
@@ -133,7 +160,6 @@ pip install ai21
 
 ```python
 from ai21 import AI21Client
-from ai21.models import RoleType
 from ai21.models.chat import ChatMessage
 
 client = AI21Client(
@@ -236,6 +262,8 @@ for chunk in response:
 
 ---
 
+## More Models
+
 ## TSMs
 
 AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
@@ -257,7 +285,28 @@ response = client.answer.create(
 
 A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
 
-### Token Counting
+### File Upload
+
+---
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+
+file_id = client.library.files.create(
+    file_path="path/to/file",
+    path="path/to/file/in/library",
+    labels=["label1", "label2"],
+    public_url="www.example.com",
+)
+
+uploaded_file = client.library.files.get(file_id)
+```
+
+For more information on more Task Specific Models, see the [documentation](https://docs.ai21.com/reference/paraphrase-api-ref).
+
+## Token Counting
 
 ---
 
@@ -277,25 +326,6 @@ Available tokenizers are:
 - `j2-tokenizer`
 
 For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
-
-### File Upload
-
----
-
-```python
-from ai21 import AI21Client
-
-client = AI21Client()
-
-file_id = client.library.files.create(
-    file_path="path/to/file",
-    path="path/to/file/in/library",
-    labels=["label1", "label2"],
-    public_url="www.example.com",
-)
-
-uploaded_file = client.library.files.get(file_id)
-```
 
 ## Environment Variables
 
@@ -355,9 +385,11 @@ except AI21APIError as e:
 
 ```
 
-## AWS Clients
+## Cloud Providers
 
 ---
+
+### AWS
 
 AI21 Library provides convenient ways to interact with two AWS clients for use with AWS SageMaker and AWS Bedrock.
 
@@ -434,13 +466,5 @@ response = client.completion.create(
     max_tokens=10,
 )
 ```
-
-## Examples
-
-Explore our examples to see our models in action! We've put together a variety of use cases and demonstrations to showcase the capabilities and functionality of our models.
-
-### [Check out the Examples](examples/)
-
-Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
 
 Happy prompting! 🚀
