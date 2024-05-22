@@ -26,7 +26,7 @@
 - [Installation](#Installation)
 - [Usage - Chat Completions](#Usage)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
-- Models
+- [More Models](#More-Models)
   - [Streaming](#Streaming)
   - [TSMs](#TSMs)
 - [Token Counting](#Token-Counting)
@@ -262,7 +262,7 @@ for chunk in response:
 
 ---
 
-## Other Models
+## More Models
 
 ## TSMs
 
@@ -285,13 +285,6 @@ response = client.answer.create(
 
 A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
 
-Available tokenizers are:
-
-- `jamba-instruct-tokenizer`
-- `j2-tokenizer`
-
-For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
-
 ### File Upload
 
 ---
@@ -311,6 +304,8 @@ file_id = client.library.files.create(
 uploaded_file = client.library.files.get(file_id)
 ```
 
+For more information on more Task Specific Models, see the [documentation](https://docs.ai21.com/reference/paraphrase-api-ref).
+
 ## Token Counting
 
 ---
@@ -324,6 +319,13 @@ tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
 total_tokens = tokenizer.count_tokens(text="some text")  # returns int
 print(total_tokens)
 ```
+
+Available tokenizers are:
+
+- `jamba-instruct-tokenizer`
+- `j2-tokenizer`
+
+For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
 
 ## Environment Variables
 
