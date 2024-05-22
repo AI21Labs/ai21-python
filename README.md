@@ -32,7 +32,7 @@
 - [Token Counting](#Token-Counting)
 - [Environment Variables](#Environment-Variables)
 - [Error Handling](#Error-Handling)
-- [Cloud Providers](#Cloud-Providers)
+- [Cloud Providers](#Cloud-Providers) ☁️
   - [AWS](#AWS)
     - [SageMaker](#SageMaker)
     - [Bedrock](#Bedrock)
