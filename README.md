@@ -20,20 +20,22 @@
 
 ## Table of Contents
 
-- [Examples](#Examples)
-- [Migration from v1.3.4 and below](#Migration from v1.3.4 and below)
+- [Examples](#examples-tldr)
+- [Migration from v1.3.4 and below](#migration-from-v134-and-below)
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation)
-- [Usage](#Usage)
-- [Older Models Support Usage](#Older Models Support Usage)
+- [Usage - Chat Completions](#Usage)
+- [Older Models Support Usage](#Older-Models-Support-Usage)
 - Models
   - [Streaming](#Streaming)
   - [TSMs](#TSMs)
-- [Token Counting](#Token Counting)
-- [Environment Variables](#Environment Variables)
-- [Cloud Providers](#Cloud Providers)
-  - [SageMaker](#SageMaker)
-  - [Bedrock](#Bedrock)
+- [Token Counting](#Token-Counting)
+- [Environment Variables](#Environment-Variables)
+- [Error Handling](#Error-Handling)
+- [Cloud Providers](#Cloud-Providers)
+  - [AWS](#AWS)
+    - [SageMaker](#SageMaker)
+    - [Bedrock](#Bedrock)
 
 ## Examples (tl;dr)
 
@@ -259,6 +261,8 @@ for chunk in response:
 ```
 
 ---
+
+## Other Models
 
 ## TSMs
 
