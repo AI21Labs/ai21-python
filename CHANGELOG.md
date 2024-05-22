@@ -2,9 +2,51 @@
 
 
 
+## v2.3.1 (2024-05-22)
+
+### Chore
+
+* chore(deps): bump idna from 3.6 to 3.7 (#96)
+
+Bumps [idna](https://github.com/kjd/idna) from 3.6 to 3.7.
+- [Release notes](https://github.com/kjd/idna/releases)
+- [Changelog](https://github.com/kjd/idna/blob/master/HISTORY.rst)
+- [Commits](https://github.com/kjd/idna/compare/v3.6...v3.7)
+
+---
+updated-dependencies:
+- dependency-name: idna
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`7c52f19`](https://github.com/AI21Labs/ai21-python/commit/7c52f19012d400a23e38f5e41191d5f865c7d0a6))
+
+### Documentation
+
+* docs: Table of contents in readme (#119)
+
+* docs: Updated docs with table of contents
+
+* fix: docs
+
+* fix: more docs stuff
+
+* fix: emoji
+
+* fix: cloud emoji ([`aca280e`](https://github.com/AI21Labs/ai21-python/commit/aca280e3d57f70c054491fbcaee45a905dda6b6b))
+
+### Fix
+
+* fix: updated env var in real time (#120) ([`d19332d`](https://github.com/AI21Labs/ai21-python/commit/d19332d43d138b2060670561abbac292ece76826))
+
+
 ## v2.3.0 (2024-05-20)
 
 ### Chore
+
+* chore(release): v2.3.0 [skip ci] ([`d2d416a`](https://github.com/AI21Labs/ai21-python/commit/d2d416aaaf018c9905ad947fe70e30dfd951b5e6))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#115)
 
