@@ -2,9 +2,26 @@
 
 
 
+## v2.4.0 (2024-05-28)
+
+### Feature
+
+* feat: Added beta to client (#123) ([`e3bfb27`](https://github.com/AI21Labs/ai21-python/commit/e3bfb272fc2d5f4341dff55d90e34da319b464f1))
+
+### Fix
+
+* fix: Update library_search_response.py (#122)
+
+feat: adding new field: order to library-search api response
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c8b57a8`](https://github.com/AI21Labs/ai21-python/commit/c8b57a8177754a376d2f53e2f730682832e76f04))
+
+
 ## v2.3.1 (2024-05-22)
 
 ### Chore
+
+* chore(release): v2.3.1 [skip ci] ([`b6d3186`](https://github.com/AI21Labs/ai21-python/commit/b6d3186a3854a2f04366558f17f5b2d81cd88fdc))
 
 * chore(deps): bump idna from 3.6 to 3.7 (#96)
 
