@@ -1,8 +1,10 @@
 from abc import ABC, abstractmethod
-from typing import List, Any, Dict, Optional
+from typing import List, Any, Dict, Optional, TypeVar, Union
 
-from ai21.clients.studio.resources.chat import ChatCompletions
+from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
+
+_ChatCompletionsT = TypeVar("_ChatCompletionsT", bound=Union[ChatCompletions, AsyncChatCompletions])
 
 
 class Chat(ABC):
@@ -50,7 +52,7 @@ class Chat(ABC):
 
     @property
     @abstractmethod
-    def completions(self) -> ChatCompletions:
+    def completions(self) -> _ChatCompletionsT:
         pass
 
     def _create_body(

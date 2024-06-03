@@ -105,3 +105,50 @@ class AsyncStudioResource(ABC):
         )
 
         return self._cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
+
+    async def _get(
+        self, url: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
+    ) -> ResponseT | AsyncStreamT:
+        response = await self._client.execute_http_request(method="GET", url=url, params=params or {})
+        return self._cast_response(response=response, response_cls=response_cls)
+
+    async def _put(
+        self, url: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
+    ) -> ResponseT | AsyncStreamT:
+        response = await self._client.execute_http_request(method="PUT", url=url, params=body or {})
+        return self._cast_response(response=response, response_cls=response_cls)
+
+    async def _delete(self, url: str, response_cls: Optional[ResponseT] = None) -> ResponseT | AsyncStreamT:
+        response = await self._client.execute_http_request(
+            method="DELETE",
+            url=url,
+        )
+        return self._cast_response(response=response, response_cls=response_cls)
+
+    def _cast_response(
+        self,
+        response: httpx.Response,
+        response_cls: Optional[ResponseT],
+        stream_cls: Optional[AsyncStreamT] = None,
+        stream: bool = False,
+    ) -> ResponseT | AsyncStreamT | None:
+        if stream and stream_cls is not None:
+            cast_to = extract_type(stream_cls)
+            return stream_cls(cast_to=cast_to, response=response)
+
+        if response_cls is None:
+            return None
+
+        if response_cls == dict:
+            return response.json()
+
+        if response_cls == str:
+            return json.loads(response.json())
+
+        origin_type = get_origin(response_cls)
+
+        if origin_type is not None and origin_type == list:
+            subtype = extract_type(response_cls)
+            return [subtype.from_dict(item) for item in response.json()]
+
+        return response_cls.from_dict(response.json())
