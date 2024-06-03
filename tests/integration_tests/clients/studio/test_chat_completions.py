@@ -1,3 +1,8 @@
+import json
+from unittest.mock import patch
+
+import httpx
+
 from ai21 import AI21Client
 from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk, ChoicesChunk, ChoiceDelta
 from ai21.models import RoleType
@@ -9,6 +14,16 @@ _MESSAGES = [
         role=RoleType.USER,
     ),
 ]
+
+_BAD_HTTPX_REQUEST = httpx.Request(method="POST", url="http://test_url")
+_BAD_HTTPX_RESPONSE = httpx.Response(status_code=500, request=_BAD_HTTPX_REQUEST)
+_EXPECTED_MESSAGE_CONTENT = {
+    "id": "test",
+    "choices": [
+        {"index": 0, "message": {"content": "test", "role": "assistant"}, "finish_reason": None, "logprobs": None}
+    ],
+    "usage": {"prompt_tokens": 1, "total_tokens": 2, "completion_tokens": 1},
+}
 
 
 def test_chat_completion():
@@ -27,6 +42,30 @@ def test_chat_completion():
     assert isinstance(response, ChatCompletionResponse)
     assert response.choices[0].message.content
     assert response.choices[0].message.role
+
+
+def test_chat_completion_when_num_retries_is_over_1__should_retry():
+    num_retries = 3
+
+    with patch.object(
+        httpx.Client,
+        "send",
+        side_effect=[
+            _BAD_HTTPX_RESPONSE,
+            _BAD_HTTPX_RESPONSE,
+            httpx.Response(status_code=200, content=json.dumps(_EXPECTED_MESSAGE_CONTENT)),
+        ],
+    ) as mock_send:
+        messages = _MESSAGES
+
+        client = AI21Client(num_retries=num_retries)
+        response = client.chat.completions.create(
+            model=_MODEL,
+            messages=messages,
+        )
+
+        assert isinstance(response, ChatCompletionResponse)
+        assert mock_send.call_count == num_retries
 
 
 def test_chat_completion__with_n_param__should_return_n_choices():

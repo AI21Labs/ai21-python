@@ -2,9 +2,74 @@
 
 
 
+## v2.4.1 (2024-06-03)
+
+### Chore
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#121)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.7.3 to 9.8.0.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.7.3...v9.8.0)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c8ade60`](https://github.com/AI21Labs/ai21-python/commit/c8ade60602661e0193e33371e942dd7a4600915a))
+
+### Ci
+
+* ci: Added reach for auto assign (#124) ([`3f3aed0`](https://github.com/AI21Labs/ai21-python/commit/3f3aed0a653aef7a5addc005e96323c5f8874108))
+
+### Fix
+
+* fix: num_retries (#125) ([`cbbc213`](https://github.com/AI21Labs/ai21-python/commit/cbbc213bd840158797d3b5cfbcbc11200bd12f06))
+
+### Unknown
+
+* --- (#118)
+
+updated-dependencies:
+- dependency-name: requests
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`30e1e58`](https://github.com/AI21Labs/ai21-python/commit/30e1e589e050958d277af00dd2aadbc493b9c56d))
+
+
+## v2.4.0 (2024-05-28)
+
+### Chore
+
+* chore(release): v2.4.0 [skip ci] ([`b4062d2`](https://github.com/AI21Labs/ai21-python/commit/b4062d250f04b89b0f9ddd6762d61dd1363f0dc5))
+
+### Feature
+
+* feat: Added beta to client (#123) ([`e3bfb27`](https://github.com/AI21Labs/ai21-python/commit/e3bfb272fc2d5f4341dff55d90e34da319b464f1))
+
+### Fix
+
+* fix: Update library_search_response.py (#122)
+
+feat: adding new field: order to library-search api response
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c8b57a8`](https://github.com/AI21Labs/ai21-python/commit/c8b57a8177754a376d2f53e2f730682832e76f04))
+
+
 ## v2.3.1 (2024-05-22)
 
 ### Chore
+
+* chore(release): v2.3.1 [skip ci] ([`b6d3186`](https://github.com/AI21Labs/ai21-python/commit/b6d3186a3854a2f04366558f17f5b2d81cd88fdc))
 
 * chore(deps): bump idna from 3.6 to 3.7 (#96)
 

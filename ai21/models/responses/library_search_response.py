@@ -10,6 +10,7 @@ class LibrarySearchResult(AI21BaseModelMixin):
     file_id: str
     file_name: str
     score: float
+    order: Optional[int] = None
     public_url: Optional[str] = None
     labels: Optional[List[str]] = None
 
