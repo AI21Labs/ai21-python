@@ -1,5 +1,6 @@
 import json
 from typing import Optional, Dict, Any, BinaryIO, TypeVar, Union, Generic
+from abc import ABC, abstractmethod
 
 import httpx
 from httpx import ConnectError
@@ -57,7 +58,7 @@ def _requests_retry_async_session(retries: int) -> httpx.AsyncHTTPTransport:
     )
 
 
-class BaseHttpClient(Generic[_HttpxClientT, _DefaultStreamT]):
+class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     _client: Optional[_HttpxClientT] = None
     _request: Any
 
@@ -98,6 +99,7 @@ class BaseHttpClient(Generic[_HttpxClientT, _DefaultStreamT]):
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)
 
+    @abstractmethod
     def execute_http_request(
         self,
         method: str,
@@ -106,8 +108,9 @@ class BaseHttpClient(Generic[_HttpxClientT, _DefaultStreamT]):
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
-        raise NotImplementedError("Subclasses must implement this method")
+        pass
 
+    @abstractmethod
     def _request(
         self,
         files: Optional[Dict[str, BinaryIO]],
@@ -116,10 +119,11 @@ class BaseHttpClient(Generic[_HttpxClientT, _DefaultStreamT]):
         url: str,
         stream: bool,
     ) -> httpx.Response:
-        raise NotImplementedError("Subclasses must implement this method")
+        pass
 
+    @abstractmethod
     def _init_client(self, client: Optional[_HttpxClientT]) -> _HttpxClientT:
-        raise NotImplementedError("Subclasses must implement this method")
+        pass
 
 
 class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):

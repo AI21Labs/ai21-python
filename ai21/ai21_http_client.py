@@ -1,5 +1,6 @@
 import platform
 from typing import Optional, Dict, Any, BinaryIO, TypeVar, Union
+from abc import ABC, abstractmethod
 
 import httpx
 
@@ -10,7 +11,7 @@ from ai21.version import VERSION
 _HttpClientT = TypeVar("_HttpClientT", bound=Union[HttpClient, AsyncHttpClient])
 
 
-class BaseAI21HTTPClient:
+class BaseAI21HTTPClient(ABC):
     _http_client: Optional[_HttpClientT] = None
 
     def __init__(
@@ -36,9 +37,6 @@ class BaseAI21HTTPClient:
         self._timeout_sec = timeout_sec
         self._num_retries = num_retries
         self._via = via
-
-        # headers = self._build_headers(passed_headers=headers)
-        # self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
@@ -67,9 +65,11 @@ class BaseAI21HTTPClient:
     def get_base_url(self) -> str:
         return f"{self._api_host}/studio/{self._api_version}"
 
+    @abstractmethod
     def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> _HttpClientT:
-        raise NotImplementedError("Subclasses must implement this method")
+        pass
 
+    @abstractmethod
     def execute_http_request(
         self,
         method: str,
@@ -78,7 +78,7 @@ class BaseAI21HTTPClient:
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
-        raise NotImplementedError("Subclasses must implement this method")
+        pass
 
 
 class AI21HTTPClient(BaseAI21HTTPClient):
@@ -164,7 +164,7 @@ class AsyncAI21HTTPClient(BaseAI21HTTPClient):
         )
 
         headers = self._build_headers(passed_headers=headers)
-        self._http_client = self._init_http_client(http_client=http_client, headers=self._headers)
+        self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
     def _init_http_client(self, http_client: Optional[AsyncHttpClient], headers: Dict[str, Any]) -> AsyncHttpClient:
         if http_client is None:
