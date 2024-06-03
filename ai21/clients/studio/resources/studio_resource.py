@@ -6,9 +6,9 @@ from typing import Any, Dict, Optional, BinaryIO, get_origin
 
 import httpx
 
-from ai21.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client import AI21HTTPClient, AsyncAI21HTTPClient
 
-from ai21.types import ResponseT, StreamT
+from ai21.types import ResponseT, StreamT, AsyncStreamT
 from ai21.utils.typing import extract_type
 
 
@@ -81,3 +81,27 @@ class StudioResource(ABC):
             return [subtype.from_dict(item) for item in response.json()]
 
         return response_cls.from_dict(response.json())
+
+
+class AsyncStudioResource(ABC):
+    def __init__(self, client: AsyncAI21HTTPClient):
+        self._client = client
+
+    async def _post(
+        self,
+        url: str,
+        body: Dict[str, Any],
+        response_cls: Optional[ResponseT] = None,
+        stream_cls: Optional[AsyncStreamT] = None,
+        stream: bool = False,
+        files: Optional[Dict[str, BinaryIO]] = None,
+    ) -> ResponseT | AsyncStreamT:
+        response = await self._client.execute_http_request(
+            method="POST",
+            url=url,
+            stream=stream,
+            params=body or {},
+            files=files,
+        )
+
+        return self._cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
