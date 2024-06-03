@@ -55,3 +55,6 @@ class Dataset(ABC):
             "split_ratio": split_ratio,
             **kwargs,
         }
+
+    def _base_url(self, base_url: str) -> str:
+        return f"{base_url}/{self._module_name}"
