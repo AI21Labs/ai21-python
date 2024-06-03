@@ -149,7 +149,10 @@ class HttpClient:
         if client is not None:
             return client
 
-        return _requests_retry_session(retries=self._num_retries) if self._apply_retry_policy else httpx.Client()
+        if self._apply_retry_policy:
+            return httpx.Client(transport=_requests_retry_session(retries=self._num_retries))
+
+        return httpx.Client()
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)
