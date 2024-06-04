@@ -2,19 +2,19 @@ from __future__ import annotations
 
 from typing import List, Optional, Any, Literal, overload
 
-from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
 from ai21.models import ChatMessage as J2ChatMessage
 from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk
-from ai21.stream.stream import Stream
+from ai21.stream.async_stream import AsyncStream
 from ai21.types import NotGiven, NOT_GIVEN
 
-__all__ = ["ChatCompletions"]
+__all__ = ["AsyncChatCompletions"]
 
 
-class ChatCompletions(StudioResource, BaseChatCompletions):
+class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
     @overload
-    def create(
+    async def create(
         self,
         model: str,
         messages: List[ChatMessage],
@@ -29,7 +29,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         pass
 
     @overload
-    def create(
+    async def create(
         self,
         model: str,
         messages: List[ChatMessage],
@@ -40,10 +40,10 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
         **kwargs: Any,
-    ) -> Stream[ChatCompletionChunk]:
+    ) -> AsyncStream[ChatCompletionChunk]:
         pass
 
-    def create(
+    async def create(
         self,
         model: str,
         messages: List[ChatMessage],
@@ -54,7 +54,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         n: int | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
-    ) -> ChatCompletionResponse | Stream[ChatCompletionChunk]:
+    ) -> ChatCompletionResponse | AsyncStream[ChatCompletionChunk]:
         if any(isinstance(item, J2ChatMessage) for item in messages):
             raise ValueError(
                 "Please use the ChatMessage class from ai21.models.chat"
@@ -75,10 +75,10 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
 
         url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        return self._post(
+        return await self._post(
             url=url,
             body=body,
             stream=stream or False,
-            stream_cls=Stream[ChatCompletionChunk],
+            stream_cls=AsyncStream[ChatCompletionChunk],
             response_cls=ChatCompletionResponse,
         )

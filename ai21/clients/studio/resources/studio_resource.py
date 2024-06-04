@@ -6,7 +6,8 @@ from typing import Any, Dict, Optional, BinaryIO, get_origin
 
 import httpx
 
-from ai21.ai21_http_client import AI21HTTPClient, AsyncAI21HTTPClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 
 from ai21.types import ResponseT, StreamT, AsyncStreamT
 from ai21.utils.typing import extract_type
