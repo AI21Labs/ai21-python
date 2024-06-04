@@ -1,9 +1,5 @@
-from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
+from ai21.clients.studio.resources.studio_resource import StudioResource
 
 
 class Beta(StudioResource):
-    pass
-
-
-class AsyncBeta(AsyncStudioResource):
     pass

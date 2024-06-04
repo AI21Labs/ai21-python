@@ -2,7 +2,8 @@ from __future__ import annotations
 from typing import Optional, List
 
 
-from ai21.ai21_http_client import AI21HTTPClient, AsyncAI21HTTPClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import FileResponse, LibraryAnswerResponse, LibrarySearchResponse
 from ai21.types import NotGiven, NOT_GIVEN

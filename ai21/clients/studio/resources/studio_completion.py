@@ -53,6 +53,7 @@ class StudioCompletion(StudioResource, Completion):
             logit_bias=logit_bias,
             **kwargs,
         )
+
         return self._post(url=url, body=body, response_cls=CompletionsResponse)
 
 
@@ -101,4 +102,5 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
             logit_bias=logit_bias,
             **kwargs,
         )
+
         return await self._post(url=url, body=body, response_cls=CompletionsResponse)

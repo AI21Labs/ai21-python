@@ -5,7 +5,7 @@ import boto3
 from botocore.exceptions import ClientError
 
 from ai21.errors import BadRequest, ServiceUnavailable, AI21ServerError, AI21APIError
-from ai21.http_client import handle_non_success_response
+from ai21.http_client.base_http_client import handle_non_success_response
 from ai21.logger import logger
 
 _ERROR_MSG_TEMPLATE = (
