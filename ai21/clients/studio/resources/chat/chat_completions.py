@@ -108,11 +108,3 @@ class ChatCompletions(StudioResource):
                 **kwargs,
             }
         )
-
-    def _get_url(self, model: str) -> str:
-        base_url = self._client.get_base_url()
-
-        if self._module_name not in base_url:
-            return f"{base_url}/{self._module_name}"
-
-        return base_url.format(model_name=model, module_name=self._module_name)

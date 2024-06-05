@@ -34,7 +34,7 @@ class AI21HTTPClient:
         self._num_retries = num_retries
         self._via = via
 
-        headers = self._build_headers(passed_headers=headers)
+        headers = self._build_headers(passed_headers=headers or {})
         self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
     def _build_headers(self, passed_headers: Dict[str, Any]) -> Dict[str, Any]:
