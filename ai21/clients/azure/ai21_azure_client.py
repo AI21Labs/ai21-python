@@ -37,7 +37,10 @@ class AI21AzureClient(AI21HTTPClient):
             num_retries=num_retries,
         )
 
-        self.chat: StudioChat = StudioChat(self)
+        self.chat = StudioChat(self)
+        # Override the chat.create method to match the completions endpoint,
+        # so it wouldn't get to the old J2 completion endpoint
+        self.chat.create = self.chat.completions.create
 
     def _prepare_headers(self, headers: Dict[str, str]) -> Dict[str, str]:
         azure_ad_token = self._get_azure_ad_token()
