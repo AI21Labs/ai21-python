@@ -34,7 +34,7 @@ class AI21HTTPClient:
         self._num_retries = num_retries
         self._via = via
 
-        headers = self._build_headers(passed_headers=headers)
+        headers = self._build_headers(passed_headers=headers or {})
         self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
     def _build_headers(self, passed_headers: Dict[str, Any]) -> Dict[str, Any]:
@@ -84,4 +84,6 @@ class AI21HTTPClient:
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files, stream=stream)
 
     def get_base_url(self, module_name: str, model: Optional[str] = None) -> str:
-        return f"{self._api_host}/studio/{self._api_version}/{module_name}"
+        base_url = f"{self._api_host}/studio/{self._api_version}"
+
+        return f"{base_url}/{module_name}"

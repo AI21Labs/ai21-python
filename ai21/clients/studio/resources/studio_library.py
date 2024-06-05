@@ -31,7 +31,7 @@ class LibraryFiles(StudioResource):
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
         files = {"file": open(file_path, "rb")}
         body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
 
@@ -40,7 +40,7 @@ class LibraryFiles(StudioResource):
         return raw_response["fileId"]
 
     def get(self, file_id: str) -> FileResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
+        url = self._client.get_base_url(module_name=f"{self._module_name}/{file_id}")
 
         return self._get(url=url, response_cls=FileResponse)
 
@@ -51,7 +51,7 @@ class LibraryFiles(StudioResource):
         limit: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> List[FileResponse]:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
         params = remove_not_given({"offset": offset, "limit": limit})
 
         return self._get(url=url, params=params, response_cls=List[FileResponse])
@@ -64,7 +64,7 @@ class LibraryFiles(StudioResource):
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> None:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
+        url = self._client.get_base_url(module_name=f"{self._module_name}/{file_id}")
         body = remove_not_given(
             {
                 "publicUrl": public_url,
@@ -75,7 +75,7 @@ class LibraryFiles(StudioResource):
         self._put(url=url, body=body)
 
     def delete(self, file_id: str) -> None:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
+        url = self._client.get_base_url(module_name=f"{self._module_name}/{file_id}")
         self._delete(url=url)
 
 
@@ -91,7 +91,7 @@ class LibrarySearch(StudioResource):
         max_segments: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibrarySearchResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
         body = remove_not_given(
             {
                 "query": query,
@@ -117,7 +117,7 @@ class LibraryAnswer(StudioResource):
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibraryAnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
         body = remove_not_given(
             {
                 "question": question,

@@ -29,12 +29,14 @@ class StudioCompletion(StudioResource, Completion):
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
-        url = f"{self._client.get_base_url()}/{model}"
+        url_suffix = f"{model}"
 
         if custom_model:
-            url = f"{url}/{custom_model}"
+            url_suffix += f"/{custom_model}"
 
-        url = f"{url}/{self._module_name}"
+        url_suffix += f"/{self._module_name}"
+
+        url = self._client.get_base_url(module_name=url_suffix)
         body = self._create_body(
             model=model,
             prompt=prompt,

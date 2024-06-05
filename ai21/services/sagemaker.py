@@ -23,7 +23,7 @@ class SageMaker:
 
         response = client.execute_http_request(
             method="POST",
-            url=f"{client.get_base_url()}/{_GET_ARN_ENDPOINT}",
+            url=client.get_base_url(module_name=_GET_ARN_ENDPOINT),
             params={
                 "modelName": model_name,
                 "region": region,
@@ -46,7 +46,7 @@ class SageMaker:
 
         response = client.execute_http_request(
             method="POST",
-            url=f"{client.get_base_url()}/{_LIST_VERSIONS_ENDPOINT}",
+            url=client.get_base_url(module_name=_LIST_VERSIONS_ENDPOINT),
             params={
                 "modelName": model_name,
                 "region": region,

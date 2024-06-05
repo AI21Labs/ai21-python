@@ -22,6 +22,6 @@ class StudioParaphrase(StudioResource, Paraphrase):
             end_index=end_index,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
 
         return self._post(url=url, body=body, response_cls=ParaphraseResponse)

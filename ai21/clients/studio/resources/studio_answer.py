@@ -10,7 +10,7 @@ class StudioAnswer(StudioResource, Answer):
         question: str,
         **kwargs,
     ) -> AnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
+        url = self._client.get_base_url(module_name=self._module_name)
 
         body = self._create_body(context=context, question=question, **kwargs)
 

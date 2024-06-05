@@ -40,4 +40,4 @@ class StudioDataset(StudioResource, Dataset):
         return self._get(url=url, response_cls=DatasetResponse)
 
     def _base_url(self) -> str:
-        return f"{self._client.get_base_url()}/{self._module_name}"
+        return self._client.get_base_url(module_name=self._module_name)
