@@ -49,7 +49,7 @@ class AI21Client:
             api_key=api_key or env_config.api_key,
             base_url=f"{base_url}/studio/v1",
             api_version=env_config.api_version,
-            headers=headers,
+            headers=headers or {},
             timeout_sec=timeout_sec or env_config.timeout_sec,
             num_retries=num_retries or env_config.num_retries,
             via=via,

@@ -13,6 +13,8 @@ from ai21.utils.typing import extract_type
 
 
 class StudioResource(ABC):
+    _module_name: str
+
     def __init__(self, client: AI21HTTPClient):
         self._client = client
 
