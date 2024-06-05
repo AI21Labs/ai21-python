@@ -21,7 +21,7 @@ class AI21AzureClient(AI21HTTPClient):
         self._api_key = api_key
         self._azure_ad_token_provider = azure_ad_token_provider
 
-        headers = self._preapre_headers(headers=default_headers or {})
+        headers = self._prepare_headers(headers=default_headers or {})
         super().__init__(
             api_key=api_key,
             api_version=api_version,
@@ -32,7 +32,7 @@ class AI21AzureClient(AI21HTTPClient):
 
         self.chat: StudioChat = StudioChat(self)
 
-    def _preapre_headers(self, headers: Dict[str, str]) -> Dict[str, str]:
+    def _prepare_headers(self, headers: Dict[str, str]) -> Dict[str, str]:
         if "Authorization" not in headers:
             if self._api_key is not None:
                 headers["api-key"] = self._api_key
