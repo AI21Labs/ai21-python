@@ -83,5 +83,5 @@ class AI21HTTPClient:
     ) -> httpx.Response:
         return self._http_client.execute_http_request(method=method, url=url, params=params, files=files, stream=stream)
 
-    def get_base_url(self) -> str:
-        return f"{self._api_host}/studio/{self._api_version}"
+    def get_base_url(self, module_name: str, model: Optional[str] = None) -> str:
+        return f"{self._api_host}/studio/{self._api_version}/{module_name}"

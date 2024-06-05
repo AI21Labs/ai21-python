@@ -64,10 +64,15 @@ class AI21AzureClient(AI21HTTPClient):
 
         return None
 
-    def get_base_url(self) -> str:
-        base_url_format = self._api_host + "/deployments/{model_name}/{module_name}"
+    def get_base_url(self, module_name: str, model: Optional[str] = None) -> str:
+        base_url = self._api_host + "/deployments"
+
+        if model is not None:
+            base_url += f"/{model}"
+
+        base_url += f"/{module_name}"
 
         if self._api_version is None:
-            return base_url_format
+            return base_url
 
-        return base_url_format + f"?api-version={self._api_version}"
+        return f"{base_url}?api-version={self._api_version}"
