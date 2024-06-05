@@ -28,6 +28,8 @@ class AI21AzureClient(AI21HTTPClient):
             raise ValueError("Must provide either api_key or azure_ad_token_provider or azure_ad_token")
 
         headers = self._prepare_headers(headers=default_headers or {})
+
+        # TODO: Change - The "/openai" suffix will probably change to "/ai21" once we have a working endpoint in Azure.
         super().__init__(
             api_key=api_key,
             api_version=api_version,
@@ -63,4 +65,9 @@ class AI21AzureClient(AI21HTTPClient):
         return None
 
     def get_base_url(self) -> str:
-        return self._api_host + "/deployments/{model_name}/chat/completions?api-version=" + self._api_version
+        base_url_format = self._api_host + "/deployments/{model_name}/{module_name}"
+
+        if self._api_version is None:
+            return base_url_format
+
+        return base_url_format + f"?api-version={self._api_version}"
