@@ -1,6 +1,6 @@
 import pytest
 
-from ai21 import AI21Client
+from ai21 import AI21Client, AsyncAI21Client
 from ai21.models import ParaphraseStyleType
 
 
@@ -49,3 +49,29 @@ def test_paraphrase_styles(style: ParaphraseStyleType):
     )
 
     assert len(response.suggestions) > 0
+
+
+@pytest.mark.asyncio
+async def test_async_paraphrase():
+    client = AsyncAI21Client()
+    response = await client.paraphrase.create(
+        text="The cat (Felis catus) is a domestic species of small carnivorous mammal",
+        style=ParaphraseStyleType.FORMAL,
+        start_index=0,
+        end_index=20,
+    )
+    for suggestion in response.suggestions:
+        print(suggestion.text)
+    assert len(response.suggestions) > 0
+
+
+@pytest.mark.asyncio
+async def test_async_paraphrase__when_start_and_end_index_is_small__should_not_return_suggestions():
+    client = AsyncAI21Client()
+    response = await client.paraphrase.create(
+        text="The cat (Felis catus) is a domestic species of small carnivorous mammal",
+        style=ParaphraseStyleType.GENERAL,
+        start_index=0,
+        end_index=5,
+    )
+    assert len(response.suggestions) == 0

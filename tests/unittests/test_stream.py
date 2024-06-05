@@ -7,7 +7,7 @@ import pytest
 
 from ai21.errors import StreamingDecodeError
 from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
-from ai21.stream import Stream
+from ai21.stream.stream import Stream
 
 
 @dataclass
