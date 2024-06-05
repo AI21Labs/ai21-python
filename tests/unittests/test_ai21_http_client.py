@@ -6,8 +6,10 @@ from urllib.request import Request
 import httpx
 import pytest
 
-from ai21.ai21_http_client import AI21HTTPClient
-from ai21.http_client import HttpClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import HttpClient
+from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.version import VERSION
 
 _EXPECTED_USER_AGENT = (
@@ -143,3 +145,118 @@ def test__execute_http_request__when_files_with_put_method__should_raise_value_e
     with pytest.raises(ValueError):
         params = {"method": "PUT", "url": "test_url", "params": {"foo": "bar"}, "files": {"file": "test_file"}}
         client.execute_http_request(**params)
+
+
+@pytest.mark.parametrize(
+    ids=[
+        "when_pass_only_via__should_include_via_in_user_agent",
+    ],
+    argnames=["via", "expected_user_agent"],
+    argvalues=[
+        (
+            "langchain",
+            f"{_EXPECTED_USER_AGENT} via: langchain",
+        ),
+    ],
+)
+def test__async_build_headers__user_agent(via: Optional[str], expected_user_agent: str):
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, via=via)
+    assert client._http_client._headers["User-Agent"] == expected_user_agent
+
+
+def test__async_build_headers__authorization():
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY)
+    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+
+
+def test__async_build_headers__when_pass_headers__should_append():
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"})
+    assert client._http_client._headers["foo"] == "bar"
+    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+
+
+@pytest.mark.parametrize(
+    ids=[
+        "when_api_host_is_set__should_return_set_value",
+    ],
+    argnames=["api_host", "expected_api_host"],
+    argvalues=[
+        ("http://test_host", "http://test_host/studio/v1"),
+    ],
+)
+def test__async_get_base_url(api_host: Optional[str], expected_api_host: str):
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=api_host, api_version="v1")
+    assert client.get_base_url() == expected_api_host
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_making_request__should_send_appropriate_parameters",
+        "when_making_request_with_files__should_send_appropriate_post_request",
+    ],
+    argnames=["params", "headers"],
+    argvalues=[
+        ({"method": "GET", "url": "test_url", "params": {"foo": "bar"}}, _EXPECTED_GET_HEADERS),
+        (
+            {
+                "method": "POST",
+                "url": "test_url",
+                "params": {"foo": "bar"},
+                "stream": False,
+                "files": {"file": "test_file"},
+            },
+            _EXPECTED_POST_FILE_HEADERS,
+        ),
+    ],
+)
+async def test__async_execute_http_request__(
+    params,
+    headers,
+    dummy_api_host: str,
+    mock_httpx_async_client: httpx.AsyncClient,
+):
+    response_json = {"test_key": "test_value"}
+    mock_response = Mock(spec=Request)
+    mock_httpx_async_client.build_request.return_value = mock_response
+    mock_httpx_async_client.send.return_value = MockResponse(response_json, 200)
+
+    http_client = AsyncHttpClient(client=mock_httpx_async_client)
+    client = AsyncAI21HTTPClient(
+        http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1"
+    )
+
+    response = await client.execute_http_request(**params)
+    assert response.json() == response_json
+
+    if "files" in params:
+        # We split it because when calling requests with "files", "params" is turned into "data"
+        mock_httpx_async_client.build_request.assert_called_once_with(
+            timeout=300,
+            headers=headers,
+            files=params["files"],
+            data=params["params"],
+            url=params["url"],
+            method=params["method"],
+        )
+    else:
+        mock_httpx_async_client.build_request.assert_called_once_with(timeout=300, headers=headers, **params)
+
+    mock_httpx_async_client.send.assert_called_once_with(request=mock_response, stream=False)
+
+
+@pytest.mark.asyncio
+async def test__async_execute_http_request__when_files_with_put_method__should_raise_value_error(
+    dummy_api_host: str,
+    mock_httpx_async_client: httpx.AsyncClient,
+):
+    response_json = {"test_key": "test_value"}
+    http_client = AsyncHttpClient(client=mock_httpx_async_client)
+    client = AsyncAI21HTTPClient(
+        http_client=http_client, api_key=_DUMMY_API_KEY, api_host=dummy_api_host, api_version="v1"
+    )
+
+    mock_httpx_async_client.request.return_value = MockResponse(response_json, 200)
+    with pytest.raises(ValueError):
+        params = {"method": "PUT", "url": "test_url", "params": {"foo": "bar"}, "files": {"file": "test_file"}}
+        await client.execute_http_request(**params)

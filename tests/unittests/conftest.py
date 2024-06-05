@@ -13,5 +13,10 @@ def mock_httpx_client(mocker) -> httpx.Client:
 
 
 @pytest.fixture
+def mock_httpx_async_client(mocker) -> httpx.AsyncClient:
+    return mocker.AsyncMock(spec=httpx.AsyncClient)
+
+
+@pytest.fixture
 def mock_httpx_response(mocker) -> httpx.Response:
     return mocker.Mock(spec=httpx.Response)

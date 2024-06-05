@@ -6,6 +6,7 @@ from ai21 import __all__
 EXPECTED_ALL = [
     "AI21EnvConfig",
     "AI21Client",
+    "AsyncAI21Client",
     "AI21APIError",
     "APITimeoutError",
     "AI21Error",
