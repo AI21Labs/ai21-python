@@ -70,12 +70,12 @@ def test__build_headers__when_pass_headers__should_append():
     ],
     argnames=["api_host", "expected_api_host"],
     argvalues=[
-        ("http://test_host", "http://test_host/studio/v1"),
+        ("http://test_host", "http://test_host/studio/v1//chat/completions"),
     ],
 )
 def test__get_base_url(api_host: Optional[str], expected_api_host: str):
     client = AI21HTTPClient(api_key=_DUMMY_API_KEY, api_host=api_host, api_version="v1")
-    assert client.get_base_url() == expected_api_host
+    assert client.get_base_url(module_name="/chat/completions") == expected_api_host
 
 
 @pytest.mark.parametrize(
