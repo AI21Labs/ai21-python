@@ -197,6 +197,10 @@ class AsyncLibraryFiles(AsyncStudioResource):
         )
         await self._put(url=url, body=body)
 
+    async def delete(self, file_id: str) -> None:
+        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
+        await self._delete(url=url)
+
 
 class AsyncLibrarySearch(AsyncStudioResource):
     _module_name = "library/search"
