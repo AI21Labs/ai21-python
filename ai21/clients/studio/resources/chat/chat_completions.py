@@ -115,4 +115,4 @@ class ChatCompletions(StudioResource):
         if self._module_name not in base_url:
             return f"{base_url}/{self._module_name}"
 
-        return base_url.format(model_name=model)
+        return base_url.format(model_name=model, module_name=self._module_name)
