@@ -37,16 +37,16 @@ class AI21HTTPClient:
         headers = self._build_headers(passed_headers=headers)
         self._http_client = self._init_http_client(http_client=http_client, headers=headers)
 
-    def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+    def _build_headers(self, passed_headers: Dict[str, Any]) -> Dict[str, Any]:
         headers = {
             "Content-Type": "application/json",
             "User-Agent": self._build_user_agent(),
         }
 
-        if self._api_key:
+        if self._api_key and "Authorization" not in passed_headers:
             headers["Authorization"] = f"Bearer {self._api_key}"
 
-        if passed_headers is not None:
+        if passed_headers:
             headers.update(passed_headers)
 
         return headers

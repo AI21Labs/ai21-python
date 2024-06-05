@@ -47,7 +47,7 @@ class AI21Client:
             api_key=api_key or env_config.api_key,
             api_host=api_host or env_config.api_host,
             api_version=env_config.api_version,
-            headers=headers,
+            headers=headers or {},
             timeout_sec=timeout_sec or env_config.timeout_sec,
             num_retries=num_retries or env_config.num_retries,
             via=via,
