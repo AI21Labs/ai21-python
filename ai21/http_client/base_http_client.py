@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 import json
 
 from typing import Generic, TypeVar, Union, Any, Optional, Dict, BinaryIO
