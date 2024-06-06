@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import AsyncIterable, AsyncIterator
+from typing import AsyncIterable
 
 import httpx
 import pytest
@@ -17,25 +17,42 @@ class StubStreamObject(AI21BaseModelMixin):
     name: str
 
 
-def async_byte_stream() -> AsyncIterable[bytes]:
+def byte_stream() -> AsyncIterable[bytes]:
     for i in range(10):
         data = {"id": f"some-{i}", "name": f"some-name-{i}"}
         msg = f"data: {json.dumps(data)}\r\n"
         yield msg.encode("utf-8")
 
 
-def async_byte_bad_stream_prefix() -> AsyncIterable[bytes]:
+async def async_byte_stream() -> AsyncIterable[bytes]:
+    for i in range(10):
+        data = {"id": f"some-{i}", "name": f"some-name-{i}"}
+        msg = f"data: {json.dumps(data)}\r\n"
+        yield msg.encode("utf-8")
+
+
+async def async_byte_bad_stream_prefix() -> AsyncIterable[bytes]:
     msg = "bad_stream: {}\r\n"
     yield msg.encode("utf-8")
 
 
-def async_byte_bad_stream_json_format() -> AsyncIterable[bytes]:
+def byte_bad_stream_prefix() -> AsyncIterable[bytes]:
+    msg = "bad_stream: {}\r\n"
+    yield msg.encode("utf-8")
+
+
+def byte_bad_stream_json_format() -> AsyncIterable[bytes]:
+    msg = "data: not a json format\r\n"
+    yield msg.encode("utf-8")
+
+
+async def async_byte_bad_stream_json_format() -> AsyncIterable[bytes]:
     msg = "data: not a json format\r\n"
     yield msg.encode("utf-8")
 
 
 def test_stream_object_when_json_string_ok__should_be_ok():
-    stream = async_byte_stream()
+    stream = byte_stream()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = Stream[StubStreamObject](response=response, cast_to=StubStreamObject)
 
@@ -52,8 +69,8 @@ def test_stream_object_when_json_string_ok__should_be_ok():
     ],
     argnames=["stream"],
     argvalues=[
-        (async_byte_bad_stream_prefix(),),
-        (async_byte_bad_stream_json_format(),),
+        (byte_bad_stream_prefix(),),
+        (byte_bad_stream_json_format(),),
     ],
 )
 def test_stream_object_when_bad_json__should_raise_error(stream):
@@ -65,17 +82,36 @@ def test_stream_object_when_bad_json__should_raise_error(stream):
             pass
 
 
-async def iter_next(iter: AsyncIterator[StubStreamObject]) -> StubStreamObject:
-    return await iter.__anext__()
-
-
 @pytest.mark.asyncio
 async def test_async_stream_object_when_json_string_ok__should_be_ok():
     stream = async_byte_stream()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = AsyncStream[StubStreamObject](response=response, cast_to=StubStreamObject)
 
-    async for i, chunk in stream_obj:
+    index = 0
+    async for chunk in stream_obj:
         assert isinstance(chunk, StubStreamObject)
-        assert chunk.name == f"some-name-{i}"
-        assert chunk.id == f"some-{i}"
+        assert chunk.name == f"some-name-{index}"
+        assert chunk.id == f"some-{index}"
+        index += 1
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "bad_stream_data_prefix",
+        "bad_stream_json_format",
+    ],
+    argnames=["stream"],
+    argvalues=[
+        (async_byte_bad_stream_prefix(),),
+        (async_byte_bad_stream_json_format(),),
+    ],
+)
+async def test_async_stream_object_when_bad_json__should_raise_error(stream):
+    response = httpx.Response(status_code=200, content=stream)
+    stream_obj = AsyncStream[StubStreamObject](response=response, cast_to=StubStreamObject)
+
+    with pytest.raises(StreamingDecodeError):
+        async for _ in stream_obj:
+            pass
