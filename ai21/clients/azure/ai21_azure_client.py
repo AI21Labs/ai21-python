@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Callable, Dict
+from typing import Optional, Callable, Dict, Any
 
 from ai21.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_chat import StudioChat
@@ -30,10 +30,11 @@ class AI21AzureClient(AI21HTTPClient):
         headers = self._prepare_headers(headers=default_headers or {})
 
         # TODO: Change - The "/openai" suffix will probably change to "/ai21" once we have a working endpoint in Azure.
+        base_url = f"{azure_endpoint}/openai/deployments"
         super().__init__(
             api_key=api_key,
             api_version=api_version,
-            api_host=f"{azure_endpoint}/openai",
+            base_url=base_url,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
@@ -64,15 +65,15 @@ class AI21AzureClient(AI21HTTPClient):
 
         return None
 
-    def get_base_url(self, module_name: str, model: Optional[str] = None) -> str:
-        base_url = self._api_host + "/deployments"
+    def _prepare_url(self, path: str, body: Dict[str, Any]) -> str:
+        model = body.get("model")
 
         if model is not None:
-            base_url += f"/{model}"
+            self._base_url += f"/{model}"
 
-        base_url += f"/{module_name}"
+        self._base_url += f"/{path}"
 
-        if self._api_version is None:
-            return base_url
+        if self._api_version is not None:
+            self._base_url += f"?api-version={self._api_version}"
 
-        return f"{base_url}?api-version={self._api_version}"
+        return self._base_url
