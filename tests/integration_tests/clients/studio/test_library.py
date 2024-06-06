@@ -58,12 +58,13 @@ async def test_async_library__when_get__should_match_file_id(file_in_library: st
 @pytest.mark.asyncio
 async def test_async_library__when_update__should_update_labels_successfully(file_in_library: str):
     client = AsyncAI21Client()
-
+    curr_labels = DEFAULT_LABELS + ["new_label"]
     file_response = await client.library.files.get(file_in_library)
-    assert set(file_response.labels) == set(DEFAULT_LABELS)
+    assert set(file_response.labels) == set(curr_labels)
     sleep(2)
 
-    new_labels = DEFAULT_LABELS + ["new_label"]
+    new_labels = curr_labels + ["new_label2"]
     await client.library.files.update(file_in_library, labels=new_labels)
     file_response = await client.library.files.get(file_in_library)
+    print(file_response.labels)
     assert set(file_response.labels) == set(new_labels)

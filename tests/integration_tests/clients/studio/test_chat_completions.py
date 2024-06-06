@@ -152,7 +152,7 @@ async def test_async_chat_completion_when_num_retries_is_over_1__should_retry():
     num_retries = 3
 
     with patch.object(
-        httpx.Client,
+        httpx.AsyncClient,
         "send",
         side_effect=[
             _BAD_HTTPX_RESPONSE,
