@@ -85,8 +85,8 @@ class AI21HTTPClient:
         return self._http_client.execute_http_request(
             method=method,
             url=f"{self._base_url}{path}",
-            params=params,
+            params=params or {},
             files=files,
             stream=stream,
-            body=body,
+            body=body or {},
         )
