@@ -11,7 +11,6 @@ class StudioImprovements(StudioResource, Improvements):
         if len(types) == 0:
             raise EmptyMandatoryListError("types")
 
-        url = self._client.get_base_url(module_name=self._module_name)
         body = self._create_body(text=text, types=types, **kwargs)
 
-        return self._post(url=url, body=body, response_cls=ImprovementsResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=ImprovementsResponse)

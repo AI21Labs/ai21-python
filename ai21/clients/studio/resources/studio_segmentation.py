@@ -6,6 +6,5 @@ from ai21.models import DocumentType, SegmentationResponse
 class StudioSegmentation(StudioResource, Segmentation):
     def create(self, source: str, source_type: DocumentType, **kwargs) -> SegmentationResponse:
         body = self._create_body(source=source, source_type=source_type.value, **kwargs)
-        url = self._client.get_base_url(module_name=self._module_name)
 
-        return self._post(url=url, body=body, response_cls=SegmentationResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=SegmentationResponse)

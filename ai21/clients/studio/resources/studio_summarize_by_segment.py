@@ -15,6 +15,5 @@ class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
             focus=focus,
             **kwargs,
         )
-        url = self._client.get_base_url(module_name=self._module_name)
 
-        return self._post(url=url, body=body, response_cls=SummarizeBySegmentResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=SummarizeBySegmentResponse)

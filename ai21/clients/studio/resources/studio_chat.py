@@ -48,9 +48,8 @@ class StudioChat(StudioResource, Chat):
             count_penalty=count_penalty,
             **kwargs,
         )
-        url_suffix = f"{model}/{self._module_name}"
-        url = self._client.get_base_url(module_name=url_suffix)
-        return self._post(url=url, body=body, response_cls=ChatResponse)
+
+        return self._post(path=f"/{model}/{self._module_name}", body=body, response_cls=ChatResponse)
 
     @property
     def completions(self) -> ChatCompletions:

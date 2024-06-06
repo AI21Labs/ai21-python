@@ -27,17 +27,13 @@ class StudioDataset(StudioResource, Dataset):
             **kwargs,
         )
         return self._post(
-            url=self._base_url(),
+            path=f"/{self._module_name}",
             body=body,
             files=files,
         )
 
     def list(self) -> List[DatasetResponse]:
-        return self._get(url=self._base_url(), response_cls=List[DatasetResponse])
+        return self._get(path=f"/{self._module_name}", response_cls=List[DatasetResponse])
 
     def get(self, dataset_pid: str) -> DatasetResponse:
-        url = f"{self._base_url()}/{dataset_pid}"
-        return self._get(url=url, response_cls=DatasetResponse)
-
-    def _base_url(self) -> str:
-        return self._client.get_base_url(module_name=self._module_name)
+        return self._get(path=f"/{self._module_name}/{dataset_pid}", response_cls=DatasetResponse)
