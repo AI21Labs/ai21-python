@@ -1,6 +1,6 @@
 import json
 from dataclasses import dataclass
-from typing import AsyncIterable
+from typing import AsyncIterable, AsyncIterator
 
 import httpx
 import pytest
@@ -8,6 +8,7 @@ import pytest
 from ai21.errors import StreamingDecodeError
 from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
 from ai21.stream.stream import Stream
+from ai21.stream.async_stream import AsyncStream
 
 
 @dataclass
@@ -62,3 +63,19 @@ def test_stream_object_when_bad_json__should_raise_error(stream):
     with pytest.raises(StreamingDecodeError):
         for _ in stream_obj:
             pass
+
+
+async def iter_next(iter: AsyncIterator[StubStreamObject]) -> StubStreamObject:
+    return await iter.__anext__()
+
+
+@pytest.mark.asyncio
+async def test_async_stream_object_when_json_string_ok__should_be_ok():
+    stream = async_byte_stream()
+    response = httpx.Response(status_code=200, content=stream)
+    stream_obj = AsyncStream[StubStreamObject](response=response, cast_to=StubStreamObject)
+
+    async for i, chunk in stream_obj:
+        assert isinstance(chunk, StubStreamObject)
+        assert chunk.name == f"some-name-{i}"
+        assert chunk.id == f"some-{i}"
