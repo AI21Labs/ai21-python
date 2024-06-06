@@ -77,7 +77,6 @@ class TestStudioResources:
         mock_ai21_studio_client: AI21HTTPClient,
     ):
         mock_ai21_studio_client.execute_http_request.return_value = expected_httpx_response
-        mock_ai21_studio_client.get_base_url.return_value = f"{_BASE_URL}/{url_suffix}"
 
         resource = studio_resource(mock_ai21_studio_client)
 
@@ -88,8 +87,9 @@ class TestStudioResources:
         assert actual_response == expected_response
         mock_ai21_studio_client.execute_http_request.assert_called_with(
             method="POST",
-            url=f"{_BASE_URL}/{url_suffix}",
-            params=expected_body,
+            path=f"/{url_suffix}",
+            body=expected_body,
+            params={},
             stream=False,
             files=None,
         )
@@ -104,7 +104,6 @@ class TestStudioResources:
         mock_successful_httpx_response.json.return_value = expected_answer.to_dict()
 
         mock_ai21_studio_client.execute_http_request.return_value = mock_successful_httpx_response
-        mock_ai21_studio_client.get_base_url.return_value = expected_url
         studio_answer = StudioAnswer(mock_ai21_studio_client)
 
         studio_answer.create(
@@ -115,12 +114,13 @@ class TestStudioResources:
 
         mock_ai21_studio_client.execute_http_request.assert_called_with(
             method="POST",
-            url=expected_url,
-            params={
+            path="/answer",
+            body={
                 "context": _DUMMY_CONTEXT,
                 "question": _DUMMY_QUESTION,
                 "some_dummy_kwargs": "some_dummy_value",
             },
+            params={},
             stream=False,
             files=None,
         )
