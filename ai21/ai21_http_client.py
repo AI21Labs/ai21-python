@@ -14,7 +14,7 @@ class AI21HTTPClient:
         *,
         api_key: Optional[str] = None,
         requires_api_key: bool = True,
-        api_host: Optional[str] = None,
+        base_url: Optional[str] = None,
         api_version: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[int] = None,
@@ -27,7 +27,7 @@ class AI21HTTPClient:
         if requires_api_key and not self._api_key:
             raise MissingApiKeyError()
 
-        self._api_host = api_host
+        self._base_url = base_url
         self._api_version = api_version
         self._headers = headers
         self._timeout_sec = timeout_sec
@@ -76,12 +76,17 @@ class AI21HTTPClient:
     def execute_http_request(
         self,
         method: str,
-        url: str,
+        path: str,
         params: Optional[Dict] = None,
+        body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
-        return self._http_client.execute_http_request(method=method, url=url, params=params, files=files, stream=stream)
-
-    def get_base_url(self) -> str:
-        return f"{self._api_host}/studio/{self._api_version}"
+        return self._http_client.execute_http_request(
+            method=method,
+            url=f"{self._base_url}{path}",
+            params=params,
+            files=files,
+            stream=stream,
+            body=body,
+        )

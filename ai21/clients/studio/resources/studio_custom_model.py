@@ -16,7 +16,6 @@ class StudioCustomModel(StudioResource, CustomModel):
         num_epochs: Optional[int] = None,
         **kwargs,
     ) -> None:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(
             dataset_id=dataset_id,
             model_name=model_name,
@@ -25,12 +24,10 @@ class StudioCustomModel(StudioResource, CustomModel):
             num_epochs=num_epochs,
             **kwargs,
         )
-        self._post(url=url, body=body, response_cls=None)
+        self._post(path=f"/{self._module_name}", body=body, response_cls=None)
 
     def list(self) -> List[CustomBaseModelResponse]:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
-        return self._get(url=url, response_cls=List[CustomBaseModelResponse])
+        return self._get(path=f"/{self._module_name}", response_cls=List[CustomBaseModelResponse])
 
     def get(self, resource_id: str) -> CustomBaseModelResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{resource_id}"
-        return self._get(url=url, response_cls=CustomBaseModelResponse)
+        return self._get(path=f"/{self._module_name}/{resource_id}", response_cls=CustomBaseModelResponse)
