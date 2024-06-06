@@ -31,18 +31,15 @@ class LibraryFiles(StudioResource):
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         files = {"file": open(file_path, "rb")}
         body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
 
-        raw_response = self._post(url=url, files=files, body=body, response_cls=dict)
+        raw_response = self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
         return raw_response["fileId"]
 
     def get(self, file_id: str) -> FileResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
-
-        return self._get(url=url, response_cls=FileResponse)
+        return self._get(path=f"/{self._module_name}/{file_id}", response_cls=FileResponse)
 
     def list(
         self,
@@ -51,10 +48,9 @@ class LibraryFiles(StudioResource):
         limit: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> List[FileResponse]:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         params = remove_not_given({"offset": offset, "limit": limit})
 
-        return self._get(url=url, params=params, response_cls=List[FileResponse])
+        return self._get(path=f"/{self._module_name}", params=params, response_cls=List[FileResponse])
 
     def update(
         self,
@@ -64,7 +60,6 @@ class LibraryFiles(StudioResource):
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> None:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
         body = remove_not_given(
             {
                 "publicUrl": public_url,
@@ -72,11 +67,10 @@ class LibraryFiles(StudioResource):
                 **kwargs,
             }
         )
-        self._put(url=url, body=body)
+        self._put(path=f"/{self._module_name}/{file_id}", body=body)
 
     def delete(self, file_id: str) -> None:
-        url = f"{self._client.get_base_url()}/{self._module_name}/{file_id}"
-        self._delete(url=url)
+        self._delete(path=f"/{self._module_name}/{file_id}")
 
 
 class LibrarySearch(StudioResource):
@@ -91,7 +85,6 @@ class LibrarySearch(StudioResource):
         max_segments: Optional[int] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibrarySearchResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = remove_not_given(
             {
                 "query": query,
@@ -102,7 +95,7 @@ class LibrarySearch(StudioResource):
             }
         )
 
-        return self._post(url=url, body=body, response_cls=LibrarySearchResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=LibrarySearchResponse)
 
 
 class LibraryAnswer(StudioResource):
@@ -117,7 +110,6 @@ class LibraryAnswer(StudioResource):
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> LibraryAnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = remove_not_given(
             {
                 "question": question,
@@ -128,4 +120,4 @@ class LibraryAnswer(StudioResource):
             }
         )
 
-        return self._post(url=url, body=body, response_cls=LibraryAnswerResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=LibraryAnswerResponse)

@@ -76,11 +76,12 @@ class HttpClient:
         method: str,
         url: str,
         params: Optional[Dict] = None,
+        body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
         try:
-            response = self._request(files=files, method=method, params=params, url=url, stream=stream)
+            response = self._request(files=files, method=method, params=params, url=url, stream=stream, body=body)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -107,6 +108,7 @@ class HttpClient:
         files: Optional[Dict[str, BinaryIO]],
         method: str,
         params: Optional[Dict],
+        body: Optional[Dict],
         url: str,
         stream: bool,
     ) -> httpx.Response:
@@ -130,14 +132,15 @@ class HttpClient:
                 headers.pop(
                     "Content-Type"
                 )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
-            data = params
+            data = body
         else:
-            data = json.dumps(params).encode() if params else None
+            data = json.dumps(body).encode() if body else None
 
         request = self._client.build_request(
             method=method,
             url=url,
             headers=headers,
+            params=params,
             data=data,
             timeout=timeout,
             files=files,
