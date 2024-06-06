@@ -1,7 +1,7 @@
 from unittest.mock import Mock
 
 from ai21 import SageMaker
-from ai21.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
 
 
 class SageMakerStub(SageMaker):
