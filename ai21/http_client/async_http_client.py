@@ -112,16 +112,6 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
 
         return await self._client.send(request=request, stream=stream)
 
-    # def _init_client(self, client: Optional[httpx.AsyncClient]) -> httpx.AsyncClient:
-    #     if client is not None:
-    #         return client
-    #
-    #     return (
-    #         _requests_retry_async_session(retries=self._num_retries)
-    #         if self._apply_retry_policy
-    #         else httpx.AsyncClient()
-    #     )
-
     def _init_client(self, client: Optional[httpx.AsyncClient]) -> httpx.AsyncClient:
         if client is not None:
             return client
