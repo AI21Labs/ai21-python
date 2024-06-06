@@ -63,12 +63,12 @@ def mock_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
     return mock_httpx_response
 
 
-# @pytest.fixture
-# def mock_async_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
-#     mock_httpx_response = mocker.AsyncMock(spec=httpx.Response)
-#     mock_httpx_response.status_code = 200
-#
-#     return mock_httpx_response
+@pytest.fixture
+def mock_async_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
+    async_mock_httpx_response = mocker.AsyncMock(spec=httpx.Response)
+    async_mock_httpx_response.status_code = 200
+
+    return async_mock_httpx_response
 
 
 def get_studio_answer(is_async: bool = False):

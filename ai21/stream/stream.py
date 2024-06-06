@@ -32,7 +32,8 @@ class Stream(Generic[_T]):
             yield item
 
     def __stream__(self) -> Iterator[_T]:
-        for chunk in self._decoder.iter(self.response.iter_lines()):
+        iterator = self._decoder.iter(self.response.iter_lines())
+        for chunk in iterator:
             if chunk.endswith(_SSE_DONE_MSG):
                 break
 
@@ -44,6 +45,10 @@ class Stream(Generic[_T]):
                     yield self.cast_to(**chunk)
             except json.JSONDecodeError:
                 raise StreamingDecodeError(chunk)
+
+        # Ensure the entire stream is consumed
+        for _chunk in iterator:
+            ...
 
     def __enter__(self) -> Self:
         return self

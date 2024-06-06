@@ -167,16 +167,49 @@ client = AI21Client(
     api_key='my_api_key',
 )
 
+system = "You're a support engineer in a SaaS company"
 messages = [
-    # Could be a dict or a ChatMessage object
-    ChatMessage(content="Hello, this is a readme", role="user"),
-    ChatMessage(content="You are correct, how can I help you?", role="assistant"),
+    ChatMessage(content=system, role="system"),
+    ChatMessage(content="Hello, I need help with a signup process.", role="user"),
 ]
 
 chat_completions = client.chat.completions.create(
     messages=messages,
     model="jamba-instruct-preview",
 )
+```
+
+### Async Usage
+
+```python
+import asyncio
+
+from ai21 import AsyncAI21Client
+from ai21.models.chat import ChatMessage
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    ChatMessage(content=system, role="system"),
+    ChatMessage(content="Hello, I need help with a signup process.", role="user"),
+]
+
+client = AsyncAI21Client(
+   # defaults to os.enviorn.get('AI21_API_KEY')
+    api_key='my_api_key',
+)
+
+
+async def main():
+    response = await client.chat.completions.create(
+        messages=messages,
+        model="jamba-instruct-preview",
+    )
+
+    print(response)
+
+
+asyncio.run(main())
+
 ```
 
 A more detailed example can be found [here](examples/studio/chat/chat_completions.py).

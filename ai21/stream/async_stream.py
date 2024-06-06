@@ -32,7 +32,8 @@ class AsyncStream(Generic[_T]):
             yield item
 
     async def __stream__(self) -> AsyncIterator[_T]:
-        async for chunk in self._decoder.aiter(self.response.aiter_lines()):
+        iterator = self._decoder.aiter(self.response.aiter_lines())
+        async for chunk in iterator:
             if chunk.endswith(_SSE_DONE_MSG):
                 break
 
@@ -44,6 +45,10 @@ class AsyncStream(Generic[_T]):
                     yield self.cast_to(**chunk)
             except json.JSONDecodeError:
                 raise StreamingDecodeError(chunk)
+
+        # Ensure the entire stream is consumed
+        async for _chunk in iterator:
+            ...
 
     async def __aenter__(self) -> Self:
         return self

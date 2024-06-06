@@ -98,15 +98,15 @@ class TestAsyncStudioResources:
     @pytest.mark.asyncio
     async def test__create__when_pass_kwargs__should_pass_to_request(
         self,
-        mock_ai21_studio_client: AsyncAI21HTTPClient,
-        mock_successful_httpx_response: httpx.Response,
+        mock_async_ai21_studio_client: AsyncAI21HTTPClient,
+        mock_async_successful_httpx_response: httpx.Response,
     ):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
-        mock_successful_httpx_response.json.return_value = expected_answer.to_dict()
+        mock_async_successful_httpx_response.json.return_value = expected_answer.to_dict()
 
-        mock_ai21_studio_client.execute_http_request.return_value = mock_successful_httpx_response
-        mock_ai21_studio_client.get_base_url.return_value = _BASE_URL
-        studio_answer = AsyncStudioAnswer(mock_ai21_studio_client)
+        mock_async_ai21_studio_client.execute_http_request.return_value = mock_async_successful_httpx_response
+        mock_async_ai21_studio_client.get_base_url.return_value = _BASE_URL
+        studio_answer = AsyncStudioAnswer(mock_async_ai21_studio_client)
 
         await studio_answer.create(
             context=_DUMMY_CONTEXT,
@@ -114,7 +114,7 @@ class TestAsyncStudioResources:
             some_dummy_kwargs="some_dummy_value",
         )
 
-        mock_ai21_studio_client.execute_http_request.assert_called_with(
+        mock_async_ai21_studio_client.execute_http_request.assert_called_with(
             method="POST",
             url=_BASE_URL + "/answer",
             params={

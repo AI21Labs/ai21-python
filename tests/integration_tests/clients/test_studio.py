@@ -80,7 +80,7 @@ def test_studio(test_file_name: str):
         ("async_summarize_by_segment.py",),
         # ("async_tokenization.py",),
         ("chat/async_chat_completions.py",),
-        # ("chat/stream_chat_completions.py",), # TODO
+        ("chat/async_stream_chat_completions.py",),
         # ("async_custom_model.py", ),
         # ("async_custom_model_completion.py", ),
         # ("async_dataset.py", ),
@@ -100,7 +100,7 @@ def test_studio(test_file_name: str):
         "when_summarize_by_segment__should_return_ok",
         # "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
-        # "when_stream_chat_completions__should_return_ok", # TODO
+        "when_stream_chat_completions__should_return_ok",
         # "when_custom_model__should_return_ok",
         # "when_custom_model_completion__should_return_ok",
         # "when_dataset__should_return_ok",
