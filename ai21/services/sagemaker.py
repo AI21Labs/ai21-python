@@ -23,8 +23,8 @@ class SageMaker:
 
         response = client.execute_http_request(
             method="POST",
-            url=f"{client.get_base_url()}/{_GET_ARN_ENDPOINT}",
-            params={
+            path=f"/{_GET_ARN_ENDPOINT}",
+            body={
                 "modelName": model_name,
                 "region": region,
                 "version": version,
@@ -46,8 +46,8 @@ class SageMaker:
 
         response = client.execute_http_request(
             method="POST",
-            url=f"{client.get_base_url()}/{_LIST_VERSIONS_ENDPOINT}",
-            params={
+            path=f"/{_LIST_VERSIONS_ENDPOINT}",
+            body={
                 "modelName": model_name,
                 "region": region,
             },
@@ -59,7 +59,7 @@ class SageMaker:
     def _create_ai21_http_client(cls) -> AI21HTTPClient:
         return AI21HTTPClient(
             api_key=AI21EnvConfig.api_key,
-            api_host=AI21EnvConfig.api_host,
+            base_url=f"{AI21EnvConfig.api_host}/studio/v1",
             requires_api_key=False,
             api_version=AI21EnvConfig.api_version,
             timeout_sec=AI21EnvConfig.timeout_sec,

@@ -78,7 +78,6 @@ class TestAsyncStudioResources:
         mock_async_ai21_studio_client: AsyncAI21HTTPClient,
     ):
         mock_async_ai21_studio_client.execute_http_request.return_value = expected_httpx_response
-        mock_async_ai21_studio_client.get_base_url.return_value = _BASE_URL
 
         resource = studio_resource(mock_async_ai21_studio_client)
 
@@ -89,8 +88,9 @@ class TestAsyncStudioResources:
         assert actual_response == expected_response
         mock_async_ai21_studio_client.execute_http_request.assert_called_with(
             method="POST",
-            url=f"{_BASE_URL}/{url_suffix}",
-            params=expected_body,
+            path=f"/{url_suffix}",
+            body=expected_body,
+            params={},
             stream=False,
             files=None,
         )
@@ -105,7 +105,6 @@ class TestAsyncStudioResources:
         mock_async_successful_httpx_response.json.return_value = expected_answer.to_dict()
 
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_async_successful_httpx_response
-        mock_async_ai21_studio_client.get_base_url.return_value = _BASE_URL
         studio_answer = AsyncStudioAnswer(mock_async_ai21_studio_client)
 
         await studio_answer.create(
@@ -116,12 +115,13 @@ class TestAsyncStudioResources:
 
         mock_async_ai21_studio_client.execute_http_request.assert_called_with(
             method="POST",
-            url=_BASE_URL + "/answer",
-            params={
+            path="/answer",
+            body={
                 "context": _DUMMY_CONTEXT,
                 "question": _DUMMY_QUESTION,
                 "some_dummy_kwargs": "some_dummy_value",
             },
+            params={},
             stream=False,
             files=None,
         )

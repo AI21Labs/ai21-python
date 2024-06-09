@@ -26,23 +26,17 @@ class StudioDataset(StudioResource, Dataset):
             split_ratio=split_ratio,
             **kwargs,
         )
-
-        client_base_url = self._client.get_base_url()
-
         return self._post(
-            url=self._base_url(client_base_url),
+            path=f"/{self._module_name}",
             body=body,
             files=files,
         )
 
     def list(self) -> List[DatasetResponse]:
-        client_base_url = self._client.get_base_url()
-        return self._get(url=self._base_url(client_base_url), response_cls=List[DatasetResponse])
+        return self._get(path=f"/{self._module_name}", response_cls=List[DatasetResponse])
 
     def get(self, dataset_pid: str) -> DatasetResponse:
-        client_base_url = self._client.get_base_url()
-        url = f"{self._base_url(client_base_url)}/{dataset_pid}"
-        return self._get(url=url, response_cls=DatasetResponse)
+        return self._get(path=f"/{self._module_name}/{dataset_pid}", response_cls=DatasetResponse)
 
 
 class AsyncStudioDataset(AsyncStudioResource, Dataset):
@@ -67,19 +61,14 @@ class AsyncStudioDataset(AsyncStudioResource, Dataset):
             **kwargs,
         )
 
-        client_base_url = self._client.get_base_url()
-
         return await self._post(
-            url=self._base_url(client_base_url),
+            path=f"/{self._module_name}",
             body=body,
             files=files,
         )
 
     async def list(self) -> List[DatasetResponse]:
-        client_base_url = self._client.get_base_url()
-        return await self._get(url=self._base_url(client_base_url), response_cls=List[DatasetResponse])
+        return await self._get(path=f"/{self._module_name}", response_cls=List[DatasetResponse])
 
     async def get(self, dataset_pid: str) -> DatasetResponse:
-        client_base_url = self._client.get_base_url()
-        url = f"{self._base_url(client_base_url)}/{dataset_pid}"
-        return await self._get(url=url, response_cls=DatasetResponse)
+        return await self._get(path=f"/{self._module_name}/{dataset_pid}", response_cls=DatasetResponse)

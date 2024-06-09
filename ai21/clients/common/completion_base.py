@@ -94,3 +94,13 @@ class Completion(ABC):
                 **kwargs,
             }
         )
+
+    def _get_completion_path(self, model: str, custom_model: str | NotGiven = NOT_GIVEN):
+        path = f"/{model}"
+
+        if custom_model:
+            path = f"{path}/{custom_model}"
+
+        path = f"{path}/{self._module_name}"
+
+        return path

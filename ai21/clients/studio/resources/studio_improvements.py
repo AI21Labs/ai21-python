@@ -9,17 +9,15 @@ class StudioImprovements(StudioResource, Improvements):
     def create(self, text: str, types: List[ImprovementType], **kwargs) -> ImprovementsResponse:
         self._validate_types(types)
 
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(text=text, types=types, **kwargs)
 
-        return self._post(url=url, body=body, response_cls=ImprovementsResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=ImprovementsResponse)
 
 
 class AsyncStudioImprovements(AsyncStudioResource, Improvements):
     async def create(self, text: str, types: List[ImprovementType], **kwargs) -> ImprovementsResponse:
         self._validate_types(types)
 
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(text=text, types=types, **kwargs)
 
-        return await self._post(url=url, body=body, response_cls=ImprovementsResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=ImprovementsResponse)

@@ -44,17 +44,12 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         method: str,
         url: str,
         params: Optional[Dict] = None,
+        body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
         try:
-            response = await self._request(
-                files=files,
-                method=method,
-                params=params,
-                url=url,
-                stream=stream,
-            )
+            response = await self._request(files=files, method=method, params=params, url=url, stream=stream, body=body)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -81,6 +76,7 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         files: Optional[Dict[str, BinaryIO]],
         method: str,
         params: Optional[Dict],
+        body: Optional[Dict],
         url: str,
         stream: bool,
     ) -> httpx.Response:
@@ -99,12 +95,14 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
 
             return await self._client.send(request=request, stream=stream)
 
-        data = self._get_data(files=files, method=method, params=params)
+        data = self._get_request_data(files=files, method=method, body=body)
+        headers = self._get_request_headers(files=files)
 
         request = self._client.build_request(
             method=method,
             url=url,
             headers=headers,
+            params=params,
             data=data,
             timeout=timeout,
             files=files,

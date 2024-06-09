@@ -12,7 +12,7 @@ class AI21HTTPClient(BaseAI21HTTPClient):
         *,
         api_key: Optional[str] = None,
         requires_api_key: bool = True,
-        api_host: Optional[str] = None,
+        base_url: Optional[str] = None,
         api_version: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[int] = None,
@@ -23,7 +23,7 @@ class AI21HTTPClient(BaseAI21HTTPClient):
         super().__init__(
             api_key=api_key,
             requires_api_key=requires_api_key,
-            api_host=api_host,
+            base_url=base_url,
             api_version=api_version,
             headers=headers,
             timeout_sec=timeout_sec,
@@ -49,15 +49,17 @@ class AI21HTTPClient(BaseAI21HTTPClient):
     def execute_http_request(
         self,
         method: str,
-        url: str,
+        path: str,
         params: Optional[Dict] = None,
+        body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
         return self._http_client.execute_http_request(
             method=method,
-            url=url,
-            params=params,
+            url=f"{self._base_url}{path}",
+            params=params or {},
             files=files,
             stream=stream,
+            body=body or {},
         )

@@ -10,11 +10,9 @@ class StudioAnswer(StudioResource, Answer):
         question: str,
         **kwargs,
     ) -> AnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
-
         body = self._create_body(context=context, question=question, **kwargs)
 
-        return self._post(url=url, body=body, response_cls=AnswerResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=AnswerResponse)
 
 
 class AsyncStudioAnswer(AsyncStudioResource, Answer):
@@ -24,8 +22,6 @@ class AsyncStudioAnswer(AsyncStudioResource, Answer):
         question: str,
         **kwargs,
     ) -> AnswerResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
-
         body = self._create_body(context=context, question=question, **kwargs)
 
-        return await self._post(url=url, body=body, response_cls=AnswerResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=AnswerResponse)

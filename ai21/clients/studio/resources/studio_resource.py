@@ -47,8 +47,9 @@ class StudioResource(ABC):
 
     def _post(
         self,
-        url: str,
-        body: Dict[str, Any],
+        path: str,
+        body: Optional[Dict[str, Any]] = None,
+        params: Optional[Dict[str, Any]] = None,
         response_cls: Optional[ResponseT] = None,
         stream_cls: Optional[StreamT] = None,
         stream: bool = False,
@@ -56,30 +57,31 @@ class StudioResource(ABC):
     ) -> ResponseT | StreamT:
         response = self._client.execute_http_request(
             method="POST",
-            url=url,
+            path=path,
             stream=stream,
-            params=body or {},
+            body=body or {},
+            params=params or {},
             files=files,
         )
 
         return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
 
     def _get(
-        self, url: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
+        self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
     ) -> ResponseT | StreamT:
-        response = self._client.execute_http_request(method="GET", url=url, params=params or {})
+        response = self._client.execute_http_request(method="GET", path=path, params=params or {})
         return _cast_response(response=response, response_cls=response_cls)
 
     def _put(
-        self, url: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
+        self, path: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
     ) -> ResponseT | StreamT:
-        response = self._client.execute_http_request(method="PUT", url=url, params=body or {})
+        response = self._client.execute_http_request(method="PUT", path=path, body=body or {})
         return _cast_response(response=response, response_cls=response_cls)
 
-    def _delete(self, url: str, response_cls: Optional[ResponseT] = None) -> ResponseT | StreamT:
+    def _delete(self, path: str, response_cls: Optional[ResponseT] = None) -> ResponseT | StreamT:
         response = self._client.execute_http_request(
             method="DELETE",
-            url=url,
+            path=path,
         )
         return _cast_response(response=response, response_cls=response_cls)
 
@@ -90,8 +92,9 @@ class AsyncStudioResource(ABC):
 
     async def _post(
         self,
-        url: str,
-        body: Dict[str, Any],
+        path: str,
+        body: Optional[Dict[str, Any]] = None,
+        params: Optional[Dict[str, Any]] = None,
         response_cls: Optional[ResponseT] = None,
         stream_cls: Optional[AsyncStreamT] = None,
         stream: bool = False,
@@ -99,29 +102,30 @@ class AsyncStudioResource(ABC):
     ) -> ResponseT | AsyncStreamT:
         response = await self._client.execute_http_request(
             method="POST",
-            url=url,
+            path=path,
             stream=stream,
-            params=body or {},
+            body=body or {},
+            params=params or {},
             files=files,
         )
 
         return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
 
     async def _get(
-        self, url: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
+        self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
     ) -> ResponseT | AsyncStreamT:
-        response = await self._client.execute_http_request(method="GET", url=url, params=params or {})
+        response = await self._client.execute_http_request(method="GET", path=path, params=params or {})
         return _cast_response(response=response, response_cls=response_cls)
 
     async def _put(
-        self, url: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
+        self, path: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
     ) -> ResponseT | AsyncStreamT:
-        response = await self._client.execute_http_request(method="PUT", url=url, params=body or {})
+        response = await self._client.execute_http_request(method="PUT", path=path, body=body or {})
         return _cast_response(response=response, response_cls=response_cls)
 
-    async def _delete(self, url: str, response_cls: Optional[ResponseT] = None) -> ResponseT | AsyncStreamT:
+    async def _delete(self, path: str, response_cls: Optional[ResponseT] = None) -> ResponseT | AsyncStreamT:
         response = await self._client.execute_http_request(
             method="DELETE",
-            url=url,
+            path=path,
         )
         return _cast_response(response=response, response_cls=response_cls)

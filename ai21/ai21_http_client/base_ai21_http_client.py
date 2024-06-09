@@ -21,19 +21,20 @@ class BaseAI21HTTPClient(ABC):
         *,
         api_key: Optional[str] = None,
         requires_api_key: bool = True,
-        api_host: Optional[str] = None,
+        base_url: Optional[str] = None,
         api_version: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
+        http_client: Optional[HttpClient] = None,
     ):
         self._api_key = api_key
 
         if requires_api_key and not self._api_key:
             raise MissingApiKeyError()
 
-        self._api_host = api_host
+        self._base_url = base_url
         self._api_version = api_version
         self._headers = headers
         self._timeout_sec = timeout_sec
@@ -64,9 +65,6 @@ class BaseAI21HTTPClient(ABC):
 
         return user_agent
 
-    def get_base_url(self) -> str:
-        return f"{self._api_host}/studio/{self._api_version}"
-
     @abstractmethod
     def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> _HttpClientT:
         pass
@@ -75,8 +73,9 @@ class BaseAI21HTTPClient(ABC):
     def execute_http_request(
         self,
         method: str,
-        url: str,
+        path: str,
         params: Optional[Dict] = None,
+        body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:

@@ -59,8 +59,8 @@ class StudioChat(StudioResource, Chat):
             count_penalty=count_penalty,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
-        return self._post(url=url, body=body, response_cls=ChatResponse)
+
+        return self._post(path=f"/{model}/{self._module_name}", body=body, response_cls=ChatResponse)
 
     @property
     def completions(self) -> ChatCompletions:
@@ -108,8 +108,7 @@ class AsyncStudioChat(AsyncStudioResource, Chat):
             count_penalty=count_penalty,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{model}/{self._module_name}"
-        return await self._post(url=url, body=body, response_cls=ChatResponse)
+        return await self._post(path=f"/{model}/{self._module_name}", body=body, response_cls=ChatResponse)
 
     @property
     def completions(self) -> AsyncChatCompletions:

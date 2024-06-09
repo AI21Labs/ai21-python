@@ -73,10 +73,8 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
             **kwargs,
         )
 
-        url = f"{self._client.get_base_url()}/{self._module_name}"
-
         return self._post(
-            url=url,
+            path=f"/{self._module_name}",
             body=body,
             stream=stream or False,
             stream_cls=Stream[ChatCompletionChunk],

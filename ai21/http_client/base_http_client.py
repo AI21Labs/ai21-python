@@ -65,25 +65,27 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     def _should_retry(self, response: httpx.Response) -> bool:
         return response.status_code in RETRY_ERROR_CODES and response.request.method in RETRY_METHOD_WHITELIST
 
-    def _get_data(
+    def _get_request_data(
         self,
         files: Optional[Dict[str, BinaryIO]],
         method: str,
-        params: Optional[Dict],
+        body=Optional[Dict],
     ) -> Dict[str, Any] | bytes:
-        headers = self._headers
         if files is not None:
             if method != "POST":
                 raise ValueError(
                     f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
                 )
-            if "Content-Type" in headers:
-                headers.pop(
-                    "Content-Type"
-                )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
-            return params
+
+            return body
         else:
-            return json.dumps(params).encode() if params else None
+            return json.dumps(body).encode() if body else None
+
+    def _get_request_headers(self, files: Optional[Dict[str, BinaryIO]]) -> Dict[str, Any]:
+        headers = self._headers.copy()
+        if files is not None and "Content-Type" in headers:
+            headers.pop("Content-Type", None)
+        return headers
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)
@@ -105,6 +107,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         files: Optional[Dict[str, BinaryIO]],
         method: str,
         params: Optional[Dict],
+        body: Optional[Dict],
         url: str,
         stream: bool,
     ) -> httpx.Response:

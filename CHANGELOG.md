@@ -2,9 +2,18 @@
 
 
 
+## v2.4.2 (2024-06-06)
+
+### Fix
+
+* fix: parameters (#130) ([`dfcc567`](https://github.com/AI21Labs/ai21-python/commit/dfcc5675dc22fc3aafe7624b7e8ebd8cbd021146))
+
+
 ## v2.4.1 (2024-06-03)
 
 ### Chore
+
+* chore(release): v2.4.1 [skip ci] ([`f708889`](https://github.com/AI21Labs/ai21-python/commit/f708889469a022a26df4dcd2dc29636cebc5f581))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#121)
 

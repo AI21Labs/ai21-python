@@ -7,15 +7,13 @@ from ai21.models import EmbedType, EmbedResponse
 
 class StudioEmbed(StudioResource, Embed):
     def create(self, texts: List[str], type: Optional[EmbedType] = None, **kwargs) -> EmbedResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(texts=texts, type=type, **kwargs)
 
-        return self._post(url=url, body=body, response_cls=EmbedResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=EmbedResponse)
 
 
 class AsyncStudioEmbed(AsyncStudioResource, Embed):
     async def create(self, texts: List[str], type: Optional[EmbedType] = None, **kwargs) -> EmbedResponse:
-        url = f"{self._client.get_base_url()}/{self._module_name}"
         body = self._create_body(texts=texts, type=type, **kwargs)
 
-        return await self._post(url=url, body=body, response_cls=EmbedResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=EmbedResponse)

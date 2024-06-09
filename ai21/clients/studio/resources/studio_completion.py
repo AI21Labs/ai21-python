@@ -29,12 +29,7 @@ class StudioCompletion(StudioResource, Completion):
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
-        url = f"{self._client.get_base_url()}/{model}"
-
-        if custom_model:
-            url = f"{url}/{custom_model}"
-
-        url = f"{url}/{self._module_name}"
+        path = self._get_completion_path(model=model, custom_model=custom_model)
         body = self._create_body(
             model=model,
             prompt=prompt,
@@ -53,8 +48,7 @@ class StudioCompletion(StudioResource, Completion):
             logit_bias=logit_bias,
             **kwargs,
         )
-
-        return self._post(url=url, body=body, response_cls=CompletionsResponse)
+        return self._post(path=path, body=body, response_cls=CompletionsResponse)
 
 
 class AsyncStudioCompletion(AsyncStudioResource, Completion):
@@ -78,12 +72,7 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
-        url = f"{self._client.get_base_url()}/{model}"
-
-        if custom_model:
-            url = f"{url}/{custom_model}"
-
-        url = f"{url}/{self._module_name}"
+        path = self._get_completion_path(model=model, custom_model=custom_model)
         body = self._create_body(
             model=model,
             prompt=prompt,
@@ -103,4 +92,4 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
             **kwargs,
         )
 
-        return await self._post(url=url, body=body, response_cls=CompletionsResponse)
+        return await self._post(path=path, body=body, response_cls=CompletionsResponse)

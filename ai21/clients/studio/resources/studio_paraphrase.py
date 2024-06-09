@@ -22,9 +22,8 @@ class StudioParaphrase(StudioResource, Paraphrase):
             end_index=end_index,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        return self._post(url=url, body=body, response_cls=ParaphraseResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=ParaphraseResponse)
 
 
 class AsyncStudioParaphrase(AsyncStudioResource, Paraphrase):
@@ -44,6 +43,5 @@ class AsyncStudioParaphrase(AsyncStudioResource, Paraphrase):
             end_index=end_index,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        return await self._post(url=url, body=body, response_cls=ParaphraseResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=ParaphraseResponse)

@@ -20,9 +20,8 @@ class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
             focus=focus,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        return self._post(url=url, body=body, response_cls=SummarizeBySegmentResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=SummarizeBySegmentResponse)
 
 
 class AsyncStudioSummarizeBySegment(AsyncStudioResource, SummarizeBySegment):
@@ -40,6 +39,5 @@ class AsyncStudioSummarizeBySegment(AsyncStudioResource, SummarizeBySegment):
             focus=focus,
             **kwargs,
         )
-        url = f"{self._client.get_base_url()}/{self._module_name}"
 
-        return await self._post(url=url, body=body, response_cls=SummarizeBySegmentResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=SummarizeBySegmentResponse)
