@@ -181,6 +181,9 @@ chat_completions = client.chat.completions.create(
 
 ### Async Usage
 
+You can use the `AsyncAI21Client` to make asynchronous requests.
+There is no difference between the sync and the async client in terms of usage.
+
 ```python
 import asyncio
 
@@ -290,6 +293,33 @@ response = client.chat.completions.create(
 )
 for chunk in response:
     print(chunk.choices[0].delta.content, end="")
+
+```
+
+### Async Streaming
+
+```python
+import asyncio
+
+from ai21 import AsyncAI21Client
+from ai21.models.chat import ChatMessage
+
+messages = [ChatMessage(content="What is the meaning of life?", role="user")]
+
+client = AsyncAI21Client()
+
+
+async def main():
+    response = await client.chat.completions.create(
+        messages=messages,
+        model="jamba-instruct-preview",
+        stream=True,
+    )
+    async for chunk in response:
+        print(chunk.choices[0].delta.content, end="")
+
+
+asyncio.run(main())
 
 ```
 

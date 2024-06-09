@@ -4,10 +4,9 @@ from typing import Generic, AsyncIterator
 from typing_extensions import Self
 from types import TracebackType
 
-from ai21.stream.stream_commons import _T, _SSEDecoder, _SSE_DONE_MSG, StreamingDecodeError
+from ai21.stream.stream_commons import _T, _SSEDecoder, _SSE_DONE_MSG, get_stream_message
 
 import httpx
-import json
 
 
 class AsyncStream(Generic[_T]):
@@ -37,14 +36,7 @@ class AsyncStream(Generic[_T]):
             if chunk.endswith(_SSE_DONE_MSG):
                 break
 
-            try:
-                chunk = json.loads(chunk)
-                if hasattr(self.cast_to, "from_dict"):
-                    yield self.cast_to.from_dict(chunk)
-                else:
-                    yield self.cast_to(**chunk)
-            except json.JSONDecodeError:
-                raise StreamingDecodeError(chunk)
+            yield get_stream_message(chunk, self.cast_to)
 
         # Ensure the entire stream is consumed
         async for _chunk in iterator:

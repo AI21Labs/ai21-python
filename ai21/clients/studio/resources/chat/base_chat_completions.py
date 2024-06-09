@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from abc import ABC
 from typing import List, Optional, Union, Any, Dict, Literal
 
 from ai21.models.chat import ChatMessage
@@ -7,7 +8,7 @@ from ai21.types import NotGiven
 from ai21.utils.typing import remove_not_given
 
 
-class BaseChatCompletions:
+class BaseChatCompletions(ABC):
     _module_name = "chat/completions"
 
     def _create_body(

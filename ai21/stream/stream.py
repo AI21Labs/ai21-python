@@ -1,13 +1,12 @@
 from __future__ import annotations
 
-import json
 from types import TracebackType
 from typing import Generic, Iterator
 
 import httpx
 from typing_extensions import Self
 
-from ai21.stream.stream_commons import _T, _SSEDecoder, _SSE_DONE_MSG, StreamingDecodeError
+from ai21.stream.stream_commons import _T, _SSEDecoder, _SSE_DONE_MSG, get_stream_message
 
 
 class Stream(Generic[_T]):
@@ -37,14 +36,7 @@ class Stream(Generic[_T]):
             if chunk.endswith(_SSE_DONE_MSG):
                 break
 
-            try:
-                chunk = json.loads(chunk)
-                if hasattr(self.cast_to, "from_dict"):
-                    yield self.cast_to.from_dict(chunk)
-                else:
-                    yield self.cast_to(**chunk)
-            except json.JSONDecodeError:
-                raise StreamingDecodeError(chunk)
+            yield get_stream_message(chunk, self.cast_to)
 
         # Ensure the entire stream is consumed
         for _chunk in iterator:

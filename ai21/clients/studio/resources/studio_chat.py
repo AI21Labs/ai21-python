@@ -5,6 +5,15 @@ from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatComplet
 from ai21.models.chat import ChatMessage as JambaChatMessage
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import ChatMessage, Penalty, ChatResponse
+from ai21.types import NotGiven, NOT_GIVEN
+from ai21.clients.studio.resources.studio_constants import (
+    CHAT_DEFAULT_NUM_RESULTS,
+    CHAT_DEFAULT_TEMPERATURE,
+    CHAT_DEFAULT_MAX_TOKENS,
+    CHAT_DEFAULT_MIN_TOKENS,
+    CHAT_DEFAULT_TOP_P,
+    CHAT_DEFAULT_TOP_K_RETURN,
+)
 
 
 class StudioChat(StudioResource, Chat):
@@ -14,16 +23,16 @@ class StudioChat(StudioResource, Chat):
         messages: List[ChatMessage],
         system: str,
         *,
-        num_results: Optional[int] = 1,
-        temperature: Optional[float] = 0.7,
-        max_tokens: Optional[int] = 300,
-        min_tokens: Optional[int] = 0,
-        top_p: Optional[float] = 1.0,
-        top_k_return: Optional[int] = 0,
-        stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
+        num_results: Optional[int] = CHAT_DEFAULT_NUM_RESULTS,
+        temperature: Optional[float] = CHAT_DEFAULT_TEMPERATURE,
+        max_tokens: Optional[int] = CHAT_DEFAULT_MAX_TOKENS,
+        min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
+        top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
+        top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ChatResponse:
         if any(isinstance(item, JambaChatMessage) for item in messages):
@@ -63,16 +72,16 @@ class AsyncStudioChat(AsyncStudioResource, Chat):
         messages: List[ChatMessage],
         system: str,
         *,
-        num_results: Optional[int] = 1,
-        temperature: Optional[float] = 0.7,
-        max_tokens: Optional[int] = 300,
-        min_tokens: Optional[int] = 0,
-        top_p: Optional[float] = 1.0,
-        top_k_return: Optional[int] = 0,
-        stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
+        num_results: Optional[int] = CHAT_DEFAULT_NUM_RESULTS,
+        temperature: Optional[float] = CHAT_DEFAULT_TEMPERATURE,
+        max_tokens: Optional[int] = CHAT_DEFAULT_MAX_TOKENS,
+        min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
+        top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
+        top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ChatResponse:
         if any(isinstance(item, JambaChatMessage) for item in messages):

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from typing import TypeVar, Iterator, AsyncIterator, Optional
 from ai21.errors import StreamingDecodeError
 
@@ -7,6 +8,17 @@ from ai21.errors import StreamingDecodeError
 _T = TypeVar("_T")
 _SSE_DATA_PREFIX = "data: "
 _SSE_DONE_MSG = "[DONE]"
+
+
+def get_stream_message(chunk: str, cast_to: type[_T]) -> Iterator[_T] | AsyncIterator[_T]:
+    try:
+        chunk = json.loads(chunk)
+        if hasattr(cast_to, "from_dict"):
+            return cast_to.from_dict(chunk)
+        else:
+            return cast_to(**chunk)
+    except json.JSONDecodeError:
+        raise StreamingDecodeError(chunk)
 
 
 class _SSEDecoder:
