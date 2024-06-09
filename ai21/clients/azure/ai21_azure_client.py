@@ -49,10 +49,16 @@ class AI21AzureClient(AI21HTTPClient):
         azure_ad_token = self._get_azure_ad_token()
 
         if azure_ad_token is not None and "Authorization" not in headers:
-            return headers.update({"Authorization": f"Bearer {azure_ad_token}"}) or headers
+            return {
+                "Authorization": f"Bearer {azure_ad_token}",
+                **headers,
+            }
 
         if self._api_key is not None:
-            return headers.update({"api-key": self._api_key}) or headers
+            return {
+                "api-key": self._api_key,
+                **headers,
+            }
 
         return headers
 
