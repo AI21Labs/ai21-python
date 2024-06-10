@@ -6,7 +6,7 @@ from typing import List, Any, Dict, Optional, TypeVar, Union
 from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
 from ai21.types import NotGiven, NOT_GIVEN
-from ai21.clients.studio.resources.studio_constants import (
+from ai21.clients.studio.resources.constants import (
     CHAT_DEFAULT_NUM_RESULTS,
     CHAT_DEFAULT_TEMPERATURE,
     CHAT_DEFAULT_MAX_TOKENS,

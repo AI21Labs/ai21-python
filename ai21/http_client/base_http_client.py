@@ -82,10 +82,10 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
             return json.dumps(body).encode() if body else None
 
     def _get_request_headers(self, files: Optional[Dict[str, BinaryIO]]) -> Dict[str, Any]:
-        headers = self._headers.copy()
-        if files is not None and "Content-Type" in headers:
-            headers.pop("Content-Type", None)
-        return headers
+        if files is not None and "Content-Type" in self._headers:
+            return {key: value for key, value in self._headers.items() if key != "Content-Type"}
+
+        return self._headers
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
         self._headers.update(headers)

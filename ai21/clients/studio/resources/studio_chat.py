@@ -8,7 +8,7 @@ from ai21.models.chat import ChatMessage as JambaChatMessage
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import ChatMessage, Penalty, ChatResponse
 from ai21.types import NotGiven, NOT_GIVEN
-from ai21.clients.studio.resources.studio_constants import (
+from ai21.clients.studio.resources.constants import (
     CHAT_DEFAULT_NUM_RESULTS,
     CHAT_DEFAULT_TEMPERATURE,
     CHAT_DEFAULT_MAX_TOKENS,
