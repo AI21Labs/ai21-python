@@ -2,7 +2,7 @@ from typing import TypeVar, Callable
 
 import pytest
 import httpx
-from ai21.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import AnswerResponse
@@ -55,8 +55,8 @@ class TestStudioResources:
             (get_studio_answer()),
             (get_studio_chat()),
             (get_chat_completions()),
-            (get_studio_completion()),
-            (get_studio_completion(temperature=0.5, max_tokens=50)),
+            (get_studio_completion(is_async=False)),
+            (get_studio_completion(is_async=False, temperature=0.5, max_tokens=50)),
             (get_studio_embed()),
             (get_studio_gec()),
             (get_studio_improvements()),

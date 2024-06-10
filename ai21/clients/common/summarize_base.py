@@ -5,6 +5,8 @@ from ai21.models import SummarizeResponse, SummaryMethod
 
 
 class Summarize(ABC):
+    _module_name = "summarize"
+
     @abstractmethod
     def create(
         self,

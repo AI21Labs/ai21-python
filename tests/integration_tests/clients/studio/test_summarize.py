@@ -1,6 +1,6 @@
 import pytest
 
-from ai21 import AI21Client
+from ai21 import AI21Client, AsyncAI21Client
 from ai21.errors import UnprocessableEntity
 from ai21.models import DocumentType, SummaryMethod
 
@@ -55,6 +55,57 @@ def test_summarize__source_and_source_type_misalignment(source: str, source_type
     client = AI21Client()
     with pytest.raises(UnprocessableEntity):
         client.summarize.create(
+            source=source,
+            source_type=source_type,
+            summary_method=SummaryMethod.SEGMENTS,
+            focus=focus,
+        )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_source_is_text__should_return_a_suggestion",
+        "when_source_is_url__should_return_a_suggestion",
+    ],
+    argnames=["source", "source_type"],
+    argvalues=[
+        (_SOURCE_TEXT, DocumentType.TEXT),
+        (_SOURCE_URL, DocumentType.URL),
+    ],
+)
+async def test_async_summarize(source: str, source_type: DocumentType):
+    focus = "Holland"
+
+    client = AsyncAI21Client()
+    response = await client.summarize.create(
+        source=source,
+        source_type=source_type,
+        summary_method=SummaryMethod.SEGMENTS,
+        focus=focus,
+    )
+    assert response.summary is not None
+    assert focus in response.summary
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_source_is_text_and_source_type_is_url__should_raise_error",
+        "when_source_is_url_and_source_type_is_text__should_raise_error",
+    ],
+    argnames=["source", "source_type"],
+    argvalues=[
+        (_SOURCE_TEXT, DocumentType.URL),
+        (_SOURCE_URL, DocumentType.TEXT),
+    ],
+)
+async def test_async_summarize__source_and_source_type_misalignment(source: str, source_type: DocumentType):
+    focus = "Holland"
+
+    client = AsyncAI21Client()
+    with pytest.raises(UnprocessableEntity):
+        await client.summarize.create(
             source=source,
             source_type=source_type,
             summary_method=SummaryMethod.SEGMENTS,

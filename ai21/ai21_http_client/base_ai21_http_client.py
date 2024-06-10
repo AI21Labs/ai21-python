@@ -1,14 +1,21 @@
 import platform
-from typing import Optional, Dict, Any, BinaryIO
+from typing import Optional, Dict, Any, BinaryIO, TypeVar, Union
+from abc import ABC, abstractmethod
 
 import httpx
 
 from ai21.errors import MissingApiKeyError
-from ai21.http_client import HttpClient
+from ai21.http_client.http_client import HttpClient
+from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.version import VERSION
 
 
-class AI21HTTPClient:
+_HttpClientT = TypeVar("_HttpClientT", bound=Union[HttpClient, AsyncHttpClient])
+
+
+class BaseAI21HTTPClient(ABC):
+    _http_client: Optional[_HttpClientT] = None
+
     def __init__(
         self,
         *,
@@ -34,9 +41,6 @@ class AI21HTTPClient:
         self._num_retries = num_retries
         self._via = via
 
-        headers = self._build_headers(passed_headers=headers)
-        self._http_client = self._init_http_client(http_client=http_client, headers=headers)
-
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
             "Content-Type": "application/json",
@@ -51,18 +55,6 @@ class AI21HTTPClient:
 
         return headers
 
-    def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> HttpClient:
-        if http_client is None:
-            return HttpClient(
-                timeout_sec=self._timeout_sec,
-                num_retries=self._num_retries,
-                headers=headers,
-            )
-
-        http_client.add_headers(headers)
-
-        return http_client
-
     def _build_user_agent(self) -> str:
         user_agent = (
             f"AI21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
@@ -73,6 +65,11 @@ class AI21HTTPClient:
 
         return user_agent
 
+    @abstractmethod
+    def _init_http_client(self, http_client: Optional[HttpClient], headers: Dict[str, Any]) -> _HttpClientT:
+        pass
+
+    @abstractmethod
     def execute_http_request(
         self,
         method: str,
@@ -82,11 +79,4 @@ class AI21HTTPClient:
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
-        return self._http_client.execute_http_request(
-            method=method,
-            url=f"{self._base_url}{path}",
-            params=params or {},
-            files=files,
-            stream=stream,
-            body=body or {},
-        )
+        pass

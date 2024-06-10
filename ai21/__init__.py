@@ -2,6 +2,7 @@ from typing import Any
 
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.studio.ai21_client import AI21Client
+from ai21.clients.studio.async_ai21_client import AsyncAI21Client
 from ai21.errors import (
     AI21APIError,
     APITimeoutError,
@@ -53,6 +54,7 @@ def __getattr__(name: str) -> Any:
 __all__ = [
     "AI21EnvConfig",
     "AI21Client",
+    "AsyncAI21Client",
     "AI21APIError",
     "APITimeoutError",
     "AI21Error",

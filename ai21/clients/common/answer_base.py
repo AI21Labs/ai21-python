@@ -1,4 +1,4 @@
-from abc import ABC
+from abc import ABC, abstractmethod
 from typing import Any, Dict
 
 from ai21.models import AnswerResponse
@@ -7,6 +7,7 @@ from ai21.models import AnswerResponse
 class Answer(ABC):
     _module_name = "answer"
 
+    @abstractmethod
     def create(
         self,
         context: str,

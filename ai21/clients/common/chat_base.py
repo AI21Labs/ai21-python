@@ -1,8 +1,23 @@
-from abc import ABC, abstractmethod
-from typing import List, Any, Dict, Optional
+from __future__ import annotations
 
-from ai21.clients.studio.resources.chat import ChatCompletions
+from abc import ABC, abstractmethod
+from typing import List, Any, Dict, Optional, TypeVar, Union
+
+from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatCompletions
 from ai21.models import Penalty, ChatResponse, ChatMessage
+from ai21.types import NotGiven, NOT_GIVEN
+from ai21.clients.studio.resources.constants import (
+    CHAT_DEFAULT_NUM_RESULTS,
+    CHAT_DEFAULT_TEMPERATURE,
+    CHAT_DEFAULT_MAX_TOKENS,
+    CHAT_DEFAULT_MIN_TOKENS,
+    CHAT_DEFAULT_TOP_P,
+    CHAT_DEFAULT_TOP_K_RETURN,
+)
+from ai21.utils.typing import remove_not_given
+
+
+_ChatCompletionsT = TypeVar("_ChatCompletionsT", bound=Union[ChatCompletions, AsyncChatCompletions])
 
 
 class Chat(ABC):
@@ -15,16 +30,16 @@ class Chat(ABC):
         messages: List[ChatMessage],
         system: str,
         *,
-        num_results: Optional[int] = 1,
-        temperature: Optional[float] = 0.7,
-        max_tokens: Optional[int] = 300,
-        min_tokens: Optional[int] = 0,
-        top_p: Optional[float] = 1.0,
-        top_k_return: Optional[int] = 0,
-        stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
+        num_results: Optional[int] = CHAT_DEFAULT_NUM_RESULTS,
+        temperature: Optional[float] = CHAT_DEFAULT_TEMPERATURE,
+        max_tokens: Optional[int] = CHAT_DEFAULT_MAX_TOKENS,
+        min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
+        top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
+        top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ChatResponse:
         """
@@ -50,7 +65,7 @@ class Chat(ABC):
 
     @property
     @abstractmethod
-    def completions(self) -> ChatCompletions:
+    def completions(self) -> _ChatCompletionsT:
         pass
 
     def _create_body(
@@ -58,31 +73,33 @@ class Chat(ABC):
         model: str,
         messages: List[ChatMessage],
         system: str,
-        num_results: Optional[int] = 1,
-        temperature: Optional[float] = 0.7,
-        max_tokens: Optional[int] = 300,
-        min_tokens: Optional[int] = 0,
-        top_p: Optional[float] = 1.0,
-        top_k_return: Optional[int] = 0,
-        stop_sequences: Optional[List[str]] = None,
-        frequency_penalty: Optional[Penalty] = None,
-        presence_penalty: Optional[Penalty] = None,
-        count_penalty: Optional[Penalty] = None,
+        num_results: Optional[int] = CHAT_DEFAULT_NUM_RESULTS,
+        temperature: Optional[float] = CHAT_DEFAULT_TEMPERATURE,
+        max_tokens: Optional[int] = CHAT_DEFAULT_MAX_TOKENS,
+        min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
+        top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
+        top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Dict[str, Any]:
-        return {
-            "model": model,
-            "system": system,
-            "messages": [message.to_dict() for message in messages],
-            "temperature": temperature,
-            "maxTokens": max_tokens,
-            "minTokens": min_tokens,
-            "numResults": num_results,
-            "topP": top_p,
-            "topKReturn": top_k_return,
-            "stopSequences": stop_sequences,
-            "frequencyPenalty": None if frequency_penalty is None else frequency_penalty.to_dict(),
-            "presencePenalty": None if presence_penalty is None else presence_penalty.to_dict(),
-            "countPenalty": None if count_penalty is None else count_penalty.to_dict(),
-            **kwargs,
-        }
+        return remove_not_given(
+            {
+                "model": model,
+                "system": system,
+                "messages": [message.to_dict() for message in messages],
+                "temperature": temperature,
+                "maxTokens": max_tokens,
+                "minTokens": min_tokens,
+                "numResults": num_results,
+                "topP": top_p,
+                "topKReturn": top_k_return,
+                "stopSequences": stop_sequences,
+                "frequencyPenalty": NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.to_dict(),
+                "presencePenalty": NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.to_dict(),
+                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
+                **kwargs,
+            }
+        )

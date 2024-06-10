@@ -2,18 +2,23 @@ import pytest
 import httpx
 from pytest_mock import MockerFixture
 
-from ai21.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.resources.chat import ChatCompletions
-from ai21.clients.studio.resources.studio_answer import StudioAnswer
-from ai21.clients.studio.resources.studio_chat import StudioChat
-from ai21.clients.studio.resources.studio_completion import StudioCompletion
-from ai21.clients.studio.resources.studio_embed import StudioEmbed
-from ai21.clients.studio.resources.studio_gec import StudioGEC
-from ai21.clients.studio.resources.studio_improvements import StudioImprovements
-from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
-from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
-from ai21.clients.studio.resources.studio_summarize import StudioSummarize
-from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
+from ai21.clients.studio.resources.chat import AsyncChatCompletions
+from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
+from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
+from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
+from ai21.clients.studio.resources.studio_embed import StudioEmbed, AsyncStudioEmbed
+from ai21.clients.studio.resources.studio_gec import StudioGEC, AsyncStudioGEC
+from ai21.clients.studio.resources.studio_improvements import StudioImprovements, AsyncStudioImprovements
+from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase, AsyncStudioParaphrase
+from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
+from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
+from ai21.clients.studio.resources.studio_summarize_by_segment import (
+    StudioSummarizeBySegment,
+    AsyncStudioSummarizeBySegment,
+)
 from ai21.models import (
     AnswerResponse,
     ChatMessage,
@@ -46,6 +51,11 @@ def mock_ai21_studio_client(mocker: MockerFixture) -> AI21HTTPClient:
 
 
 @pytest.fixture
+def mock_async_ai21_studio_client(mocker: MockerFixture) -> AsyncAI21HTTPClient:
+    return mocker.MagicMock(spec=AsyncAI21HTTPClient)
+
+
+@pytest.fixture
 def mock_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
     mock_httpx_response = mocker.Mock(spec=httpx.Response)
     mock_httpx_response.status_code = 200
@@ -53,13 +63,22 @@ def mock_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
     return mock_httpx_response
 
 
-def get_studio_answer():
+@pytest.fixture
+def mock_async_successful_httpx_response(mocker: MockerFixture) -> httpx.Response:
+    async_mock_httpx_response = mocker.AsyncMock(spec=httpx.Response)
+    async_mock_httpx_response.status_code = 200
+
+    return async_mock_httpx_response
+
+
+def get_studio_answer(is_async: bool = False):
     _DUMMY_CONTEXT = "What is the answer to life, the universe and everything?"
     _DUMMY_QUESTION = "What is the answer?"
     json_response = {"id": "some-id", "answer_in_context": True, "answer": "42"}
+    resource = AsyncStudioAnswer if is_async else StudioAnswer
 
     return (
-        StudioAnswer,
+        resource,
         {"context": _DUMMY_CONTEXT, "question": _DUMMY_QUESTION},
         "answer",
         {
@@ -71,7 +90,7 @@ def get_studio_answer():
     )
 
 
-def get_studio_chat():
+def get_studio_chat(is_async: bool = False):
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
         ChatMessage(text="Hello, I need help with a signup process.", role=RoleType.USER),
@@ -91,8 +110,10 @@ def get_studio_chat():
         ]
     }
 
+    resource = AsyncStudioChat if is_async else StudioChat
+
     return (
-        StudioChat,
+        resource,
         {"model": _DUMMY_MODEL, "messages": _DUMMY_MESSAGES, "system": _DUMMY_SYSTEM},
         f"{_DUMMY_MODEL}/chat",
         {
@@ -105,17 +126,13 @@ def get_studio_chat():
             "numResults": 1,
             "topP": 1.0,
             "topKReturn": 0,
-            "stopSequences": None,
-            "frequencyPenalty": None,
-            "presencePenalty": None,
-            "countPenalty": None,
         },
         httpx.Response(status_code=200, json=json_response),
         ChatResponse.from_dict(json_response),
     )
 
 
-def get_chat_completions():
+def get_chat_completions(is_async: bool = False):
     _DUMMY_MODEL = "dummy-chat-model"
     _DUMMY_MESSAGES = [
         ChatCompletionChatMessage(content="Hello, I need help with a signup process.", role="user"),
@@ -145,8 +162,10 @@ def get_chat_completions():
         },
     }
 
+    resource = AsyncChatCompletions if is_async else ChatCompletions
+
     return (
-        ChatCompletions,
+        resource,
         {"model": _DUMMY_MODEL, "messages": _DUMMY_MESSAGES},
         "chat/completions",
         {
@@ -159,7 +178,7 @@ def get_chat_completions():
     )
 
 
-def get_studio_completion(**kwargs):
+def get_studio_completion(is_async: bool = True, **kwargs):
     _DUMMY_MODEL = "dummy-completion-model"
     _DUMMY_PROMPT = "dummy-prompt"
     json_response = {
@@ -173,8 +192,10 @@ def get_studio_completion(**kwargs):
         "prompt": {"text": "dummy-prompt"},
     }
 
+    resource = AsyncStudioCompletion if is_async else StudioCompletion
+
     return (
-        StudioCompletion,
+        resource,
         {"model": _DUMMY_MODEL, "prompt": _DUMMY_PROMPT, **kwargs},
         f"{_DUMMY_MODEL}/complete",
         {
@@ -187,7 +208,7 @@ def get_studio_completion(**kwargs):
     )
 
 
-def get_studio_embed():
+def get_studio_embed(is_async: bool = False):
     json_response = {
         "id": "some-id",
         "results": [
@@ -196,8 +217,10 @@ def get_studio_embed():
         ],
     }
 
+    resource = AsyncStudioEmbed if is_async else StudioEmbed
+
     return (
-        StudioEmbed,
+        resource,
         {"texts": ["text0", "text1"], "type": EmbedType.QUERY},
         "embed",
         {
@@ -209,7 +232,7 @@ def get_studio_embed():
     )
 
 
-def get_studio_gec():
+def get_studio_gec(is_async: bool = False):
     json_response = {
         "id": "some-id",
         "corrections": [
@@ -224,8 +247,10 @@ def get_studio_gec():
     }
     text = "text to fi"
 
+    resource = AsyncStudioGEC if is_async else StudioGEC
+
     return (
-        StudioGEC,
+        resource,
         {"text": text},
         "gec",
         {
@@ -236,7 +261,7 @@ def get_studio_gec():
     )
 
 
-def get_studio_improvements():
+def get_studio_improvements(is_async: bool = False):
     json_response = {
         "id": "some-id",
         "improvements": [
@@ -252,8 +277,10 @@ def get_studio_improvements():
     text = "text to improve"
     types = [ImprovementType.FLUENCY]
 
+    resource = AsyncStudioImprovements if is_async else StudioImprovements
+
     return (
-        StudioImprovements,
+        resource,
         {"text": text, "types": types},
         "improvements",
         {
@@ -265,7 +292,7 @@ def get_studio_improvements():
     )
 
 
-def get_studio_paraphrase():
+def get_studio_paraphrase(is_async: bool = False):
     text = "text to paraphrase"
     style = ParaphraseStyleType.CASUAL
     start_index = 0
@@ -279,8 +306,10 @@ def get_studio_paraphrase():
         ],
     }
 
+    resource = AsyncStudioParaphrase if is_async else StudioParaphrase
+
     return (
-        StudioParaphrase,
+        resource,
         {"text": text, "style": style, "start_index": start_index, "end_index": end_index},
         "paraphrase",
         {
@@ -294,7 +323,7 @@ def get_studio_paraphrase():
     )
 
 
-def get_studio_segmentation():
+def get_studio_segmentation(is_async: bool = False):
     source = "segmentation text"
     source_type = DocumentType.TEXT
     json_response = {
@@ -307,8 +336,10 @@ def get_studio_segmentation():
         ],
     }
 
+    resource = AsyncStudioSegmentation if is_async else StudioSegmentation
+
     return (
-        StudioSegmentation,
+        resource,
         {"source": source, "source_type": source_type},
         "segmentation",
         {
@@ -320,7 +351,7 @@ def get_studio_segmentation():
     )
 
 
-def get_studio_summarization():
+def get_studio_summarization(is_async: bool = False):
     source = "text to summarize"
     source_type = "TEXT"
     focus = "text"
@@ -330,8 +361,10 @@ def get_studio_summarization():
         "summary": "This text is summarized",
     }
 
+    resource = AsyncStudioSummarize if is_async else StudioSummarize
+
     return (
-        StudioSummarize,
+        resource,
         {"source": source, "source_type": source_type, "focus": focus, "summary_method": summary_method},
         "summarize",
         {
@@ -345,7 +378,7 @@ def get_studio_summarization():
     )
 
 
-def get_studio_summarize_by_segment():
+def get_studio_summarize_by_segment(is_async: bool = False):
     source = "text to summarize"
     source_type = "TEXT"
     focus = "text"
@@ -363,8 +396,10 @@ def get_studio_summarize_by_segment():
         ],
     }
 
+    resource = AsyncStudioSummarizeBySegment if is_async else StudioSummarizeBySegment
+
     return (
-        StudioSummarizeBySegment,
+        resource,
         {"source": source, "source_type": source_type, "focus": focus},
         "summarize-by-segment",
         {

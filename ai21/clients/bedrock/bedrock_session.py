@@ -7,7 +7,7 @@ from botocore.exceptions import ClientError
 
 from ai21.logger import logger
 from ai21.errors import AccessDenied, NotFound, APITimeoutError
-from ai21.http_client import handle_non_success_response
+from ai21.http_client.base_http_client import handle_non_success_response
 
 _ERROR_MSG_TEMPLATE = (
     r"Received client error \((.*?)\) from primary with message \"(.*?)\". "

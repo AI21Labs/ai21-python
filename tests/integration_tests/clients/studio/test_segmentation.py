@@ -1,5 +1,5 @@
 import pytest
-from ai21 import AI21Client
+from ai21 import AI21Client, AsyncAI21Client
 from ai21.errors import UnprocessableEntity
 from ai21.models import DocumentType
 
@@ -50,6 +50,51 @@ def test_segmentation__source_and_source_type_misalignment(source: str, source_t
     client = AI21Client()
     with pytest.raises(UnprocessableEntity):
         client.segmentation.create(
+            source=source,
+            source_type=source_type,
+        )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_source_is_text__should_return_a_segments",
+        "when_source_is_url__should_return_a_segments",
+    ],
+    argnames=["source", "source_type"],
+    argvalues=[
+        (_SOURCE_TEXT, DocumentType.TEXT),
+        (_SOURCE_URL, DocumentType.URL),
+    ],
+)
+async def test_async_segmentation(source: str, source_type: DocumentType):
+    client = AsyncAI21Client()
+
+    response = await client.segmentation.create(
+        source=source,
+        source_type=source_type,
+    )
+
+    assert isinstance(response.segments[0].segment_text, str)
+    assert response.segments[0].segment_type is not None
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_source_is_text_and_source_type_is_url__should_raise_error",
+        # "when_source_is_url_and_source_type_is_text__should_raise_error",
+    ],
+    argnames=["source", "source_type"],
+    argvalues=[
+        (_SOURCE_TEXT, DocumentType.URL),
+        # (_SOURCE_URL, DocumentType.TEXT),
+    ],
+)
+async def test_async_segmentation__source_and_source_type_misalignment(source: str, source_type: DocumentType):
+    client = AsyncAI21Client()
+    with pytest.raises(UnprocessableEntity):
+        await client.segmentation.create(
             source=source,
             source_type=source_type,
         )

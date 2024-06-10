@@ -1,43 +1,17 @@
-import json
 from typing import Optional, Dict, Any, BinaryIO
 
 import httpx
 from httpx import ConnectError
 from tenacity import retry, retry_if_result, stop_after_attempt, wait_exponential, RetryError
 
-from ai21.errors import (
-    BadRequest,
-    Unauthorized,
-    UnprocessableEntity,
-    TooManyRequestsError,
-    AI21ServerError,
-    ServiceUnavailable,
-    AI21APIError,
-)
 from ai21.logger import logger
-
-DEFAULT_TIMEOUT_SEC = 300
-DEFAULT_NUM_RETRIES = 0
-RETRY_BACK_OFF_FACTOR = 0.5
-TIME_BETWEEN_RETRIES = 1
-RETRY_ERROR_CODES = (408, 429, 500, 503)
-RETRY_METHOD_WHITELIST = ["GET", "POST", "PUT"]
-
-
-def handle_non_success_response(status_code: int, response_text: str):
-    if status_code == 400:
-        raise BadRequest(details=response_text)
-    if status_code == 401:
-        raise Unauthorized(details=response_text)
-    if status_code == 422:
-        raise UnprocessableEntity(details=response_text)
-    if status_code == 429:
-        raise TooManyRequestsError(details=response_text)
-    if status_code == 500:
-        raise AI21ServerError(details=response_text)
-    if status_code == 503:
-        raise ServiceUnavailable(details=response_text)
-    raise AI21APIError(status_code, details=response_text)
+from ai21.stream.stream import Stream
+from ai21.http_client.base_http_client import (
+    BaseHttpClient,
+    handle_non_success_response,
+    RETRY_BACK_OFF_FACTOR,
+    TIME_BETWEEN_RETRIES,
+)
 
 
 def _requests_retry_session(retries: int) -> httpx.HTTPTransport:
@@ -46,7 +20,7 @@ def _requests_retry_session(retries: int) -> httpx.HTTPTransport:
     )
 
 
-class HttpClient:
+class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):
     def __init__(
         self,
         client: Optional[httpx.Client] = None,
@@ -54,10 +28,7 @@ class HttpClient:
         num_retries: int = None,
         headers: Dict = None,
     ):
-        self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
-        self._num_retries = num_retries or DEFAULT_NUM_RETRIES
-        self._headers = headers or {}
-        self._apply_retry_policy = self._num_retries > 0
+        super().__init__(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers)
         self._client = self._init_client(client)
 
         # Since we can't use the retry decorator on a method of a class as we can't access class attributes,
@@ -67,9 +38,6 @@ class HttpClient:
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
         )(self._request)
-
-    def _should_retry(self, response: httpx.Response) -> bool:
-        return response.status_code in RETRY_ERROR_CODES and response.request.method in RETRY_METHOD_WHITELIST
 
     def execute_http_request(
         self,
@@ -118,23 +86,17 @@ class HttpClient:
 
         if method == "GET":
             request = self._client.build_request(
-                method=method, url=url, headers=headers, timeout=timeout, params=params
+                method=method,
+                url=url,
+                headers=headers,
+                timeout=timeout,
+                params=params,
             )
 
             return self._client.send(request=request, stream=stream)
 
-        if files is not None:
-            if method != "POST":
-                raise ValueError(
-                    f"execute_http_request supports only POST for files upload, but {method} was supplied instead"
-                )
-            if "Content-Type" in headers:
-                headers.pop(
-                    "Content-Type"
-                )  # multipart/form-data 'Content-Type' is being added when passing rb files and payload
-            data = body
-        else:
-            data = json.dumps(body).encode() if body else None
+        data = self._get_request_data(files=files, method=method, body=body)
+        headers = self._get_request_headers(files=files)
 
         request = self._client.build_request(
             method=method,
@@ -156,6 +118,3 @@ class HttpClient:
             return httpx.Client(transport=_requests_retry_session(retries=self._num_retries))
 
         return httpx.Client()
-
-    def add_headers(self, headers: Dict[str, Any]) -> None:
-        self._headers.update(headers)
