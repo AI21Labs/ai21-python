@@ -2,7 +2,110 @@
 
 
 
+## v2.5.0 (2024-06-10)
+
+### Feature
+
+* feat: add support for studio async client (#129)
+
+* feat: async support - stream, http, ai21 http
+
+* fix: commit changes
+
+* feat: studio resource, chat, chat completions, answer
+
+* feat: beta, dataset, completion, custom model
+
+* feat: embed, gec, improvements
+
+* feat: paraphrase, segmentation, summarize, by segment
+
+* feat: library
+
+* feat: client
+
+* refactor: sync and async http, ai21 http, ai21 client, resources
+
+* test: update imports, create tests for async
+
+* fix: base client
+
+* fix: add pytest marker asyncio
+
+* fix: add pytest asyncio to poetry
+
+* fix: add delete to lib files, add examples, test examples
+
+* fix: tests
+
+* fix: fix stream, add stream tests, add readme
+
+* fix: fix import on sm stub
+
+* feat: async support - stream, http, ai21 http
+
+* fix: commit changes
+
+* feat: studio resource, chat, chat completions, answer
+
+* feat: beta, dataset, completion, custom model
+
+* feat: embed, gec, improvements
+
+* feat: paraphrase, segmentation, summarize, by segment
+
+* feat: library
+
+* feat: client
+
+* refactor: sync and async http, ai21 http, ai21 client, resources
+
+* test: update imports, create tests for async
+
+* fix: base client
+
+* fix: add pytest marker asyncio
+
+* fix: add pytest asyncio to poetry
+
+* fix: add delete to lib files, add examples, test examples
+
+* fix: tests
+
+* fix: fix stream, add stream tests, add readme
+
+* fix: fix import on sm stub
+
+* fix: fix async http client, fix tests
+
+* fix: remove commented out code
+
+* fix: CR comments
+
+* fix: fix failing test
+
+* fix: fix failing test
+
+* fix: fix failing test
+
+* fix: fix library test
+
+* fix: cr comments ([`d1933e4`](https://github.com/AI21Labs/ai21-python/commit/d1933e4f4ba5964c4622b737504fbd0f0f77353a))
+
+### Fix
+
+* fix: Pass Base URL to HTTP Client (#128)
+
+* fix: Support base urls
+
+* fix: tests ([`8b91187`](https://github.com/AI21Labs/ai21-python/commit/8b9118746bc30c9ba91fbca80ca6c6a9256d2876))
+
+
 ## v2.4.2 (2024-06-06)
+
+### Chore
+
+* chore(release): v2.4.2 [skip ci] ([`15109d6`](https://github.com/AI21Labs/ai21-python/commit/15109d6d1747c939612fa1a546818d011283e6ea))
 
 ### Fix
 
