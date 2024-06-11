@@ -79,3 +79,6 @@ class BaseAI21HTTPClient(ABC):
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
         pass
+
+    def _prepare_url(self, path: str, body: Dict[str, Any]) -> str:
+        return f"{self._base_url}{path}"
