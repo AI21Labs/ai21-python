@@ -64,6 +64,3 @@ class AI21HTTPClient(BaseAI21HTTPClient):
             stream=stream,
             body=body or {},
         )
-
-    def _prepare_url(self, path: str, body: Dict[str, Any]) -> str:
-        return f"{self._base_url}{path}"
