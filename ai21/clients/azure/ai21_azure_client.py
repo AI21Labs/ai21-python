@@ -11,11 +11,10 @@ AzureADTokenProvider = Callable[[], str]
 
 
 class BaseAzureClient(ABC):
+    _azure_endpoint: str
     _api_key: Optional[str]
     _azure_ad_token: Optional[str]
     _azure_ad_token_provider: Optional[AzureADTokenProvider]
-    _base_url: str
-    _api_version: Optional[str]
 
     def _prepare_headers(self, headers: Dict[str, str]) -> Dict[str, str]:
         azure_ad_token = self._get_azure_ad_token()
@@ -48,7 +47,6 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
     def __init__(
         self,
         azure_endpoint: str,
-        api_version: Optional[str] = None,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -67,7 +65,6 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
 
         super().__init__(
             api_key=api_key,
-            api_version=api_version,
             base_url=azure_endpoint,
             headers=headers,
             timeout_sec=timeout_sec,
@@ -84,7 +81,6 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
     def __init__(
         self,
         azure_endpoint: str,
-        api_version: Optional[str] = None,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -103,7 +99,6 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
 
         super().__init__(
             api_key=api_key,
-            api_version=api_version,
             base_url=azure_endpoint,
             headers=headers,
             timeout_sec=timeout_sec,
