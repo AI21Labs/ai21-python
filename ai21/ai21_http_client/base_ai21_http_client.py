@@ -27,7 +27,6 @@ class BaseAI21HTTPClient(ABC):
         timeout_sec: Optional[int] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
-        http_client: Optional[HttpClient] = None,
     ):
         self._api_key = api_key
 
