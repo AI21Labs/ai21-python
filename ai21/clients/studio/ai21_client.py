@@ -5,6 +5,7 @@ from ai21_tokenizer import PreTrainedTokenizers
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
@@ -43,11 +44,11 @@ class AI21Client:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = api_host or env_config.api_host
+        base_url = create_client_url(api_host or env_config.api_host)
 
         self._http_client = AI21HTTPClient(
             api_key=api_key or env_config.api_key,
-            base_url=f"{base_url}/studio/v1",
+            base_url=base_url,
             api_version=env_config.api_version,
             headers=headers,
             timeout_sec=timeout_sec or env_config.timeout_sec,

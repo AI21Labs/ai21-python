@@ -2,7 +2,39 @@
 
 
 
+## v2.5.2 (2024-06-13)
+
+### Fix
+
+* fix: camel case (#136) ([`e2b8466`](https://github.com/AI21Labs/ai21-python/commit/e2b846666bf5b2b8617cc26214fa5f36d65f5e35))
+
+
+## v2.5.1 (2024-06-13)
+
+### Chore
+
+* chore(release): v2.5.1 [skip ci] ([`e2a43b8`](https://github.com/AI21Labs/ai21-python/commit/e2a43b82cf891d8858d8927be77e696ff9ace4b3))
+
+### Fix
+
+* fix: Chain /studio/v1 to default url (#134)
+
+* fix: Chain /studio/v1
+
+* fix: Async Client
+
+* fix: Support urls
+
+* fix: Extra line
+
+* fix: Moved to external function ([`8d305c5`](https://github.com/AI21Labs/ai21-python/commit/8d305c537df846be8f6c12ba0e165c6d8ae3c06d))
+
+
 ## v2.5.0 (2024-06-10)
+
+### Chore
+
+* chore(release): v2.5.0 [skip ci] ([`f829c8f`](https://github.com/AI21Labs/ai21-python/commit/f829c8fc5430d65e771931c8c1f0af09bd75f94e))
 
 ### Feature
 
