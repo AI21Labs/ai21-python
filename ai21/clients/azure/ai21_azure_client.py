@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Optional, Callable, Dict, Any
+from typing import Optional, Callable, Dict
 
 from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
 from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
@@ -43,19 +43,6 @@ class BaseAzureClient(ABC):
 
         return None
 
-    def _prepare_url(self, path: str, body: Dict[str, Any]) -> str:
-        model = body.get("model")
-
-        if model is not None:
-            self._base_url += f"/{model}"
-
-        self._base_url += f"/{path}"
-
-        if self._api_version is not None:
-            self._base_url += f"?api-version={self._api_version}"
-
-        return self._base_url
-
 
 class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
     def __init__(
@@ -78,12 +65,10 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
 
         headers = self._prepare_headers(headers=default_headers or {})
 
-        # TODO: Change - The "/openai" suffix will probably change to "/ai21" once we have a working endpoint in Azure.
-        base_url = f"{azure_endpoint}/openai/deployments"
         super().__init__(
             api_key=api_key,
             api_version=api_version,
-            base_url=base_url,
+            base_url=azure_endpoint,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
@@ -116,12 +101,10 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
 
         headers = self._prepare_headers(headers=default_headers or {})
 
-        # TODO: Change - The "/openai" suffix will probably change to "/ai21" once we have a working endpoint in Azure.
-        base_url = f"{azure_endpoint}/openai/deployments"
         super().__init__(
             api_key=api_key,
             api_version=api_version,
-            base_url=base_url,
+            base_url=azure_endpoint,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
