@@ -11,7 +11,7 @@ messages = ChatMessage(content="What is the meaning of life?", role="user")
 
 completion = client.chat.completions.create(
     model="jamba-instruct",
-    messages=[messages],
+    messages= messages,
 )
 
 print(completion.to_json())
