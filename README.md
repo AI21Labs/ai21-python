@@ -36,6 +36,7 @@
   - [AWS](#AWS)
     - [SageMaker](#SageMaker)
     - [Bedrock](#Bedrock)
+  - [Azure](#Azure)
 
 ## Examples (tl;dr)
 
@@ -527,6 +528,35 @@ response = client.completion.create(
     prompt="Your prompt here",
     model_id=BedrockModelID.J2_MID_V1,
     max_tokens=10,
+)
+```
+
+### Azure
+
+If you wish to interact with your Azure endpoint on Azure AI Studio, you can use the `AI21AzureClient`
+and `AsyncAI21AzureClient`.
+
+The following models are supported on Azure:
+
+- `jamba-instruct`
+
+```python
+from ai21 import AI21AzureClient
+from ai21.models.chat import ChatMessage
+
+client = AI21AzureClient(
+  base_url="https://your-endpoint.inference.ai.azure.com/v1/chat/completions",
+  api_key="<your api key>",
+)
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+response = client.chat.completions.create(
+  model="jamba-instruct",
+  messages=[messages],
 )
 ```
 
