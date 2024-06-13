@@ -43,7 +43,7 @@ class AI21Client:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = api_host or f"{env_config.api_host}/studio/v1"
+        base_url = self._create_url(api_host or env_config.api_host)
 
         self._http_client = AI21HTTPClient(
             api_key=api_key or env_config.api_key,
@@ -69,6 +69,14 @@ class AI21Client:
         self.library = StudioLibrary(self._http_client)
         self.segmentation = StudioSegmentation(self._http_client)
         self.beta = Beta(self._http_client)
+
+    def _create_url(self, base_url: str) -> str:
+        allowed_urls = ["https://api-stage.ai21.com", "https://api.ai21.com"]
+
+        if base_url in allowed_urls:
+            return f"{base_url}/studio/v1"
+
+        return base_url
 
     def count_tokens(self, text: str, tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> int:
         warnings.warn(
