@@ -2,6 +2,7 @@ from typing import Optional, Any, Dict
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
+from ai21.constants import STUDIO_HOST
 from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
@@ -65,7 +66,7 @@ class AsyncAI21Client:
         self.beta = AsyncBeta(self._http_client)
 
     def _create_url(self, base_url: str) -> str:
-        allowed_urls = ["https://api-stage.ai21.com", "https://api.ai21.com"]
+        allowed_urls = ["https://api-stage.ai21.com", STUDIO_HOST]
 
         if base_url in allowed_urls:
             return f"{base_url}/studio/v1"
