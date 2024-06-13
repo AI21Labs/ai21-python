@@ -55,10 +55,9 @@ class AsyncAI21HTTPClient(BaseAI21HTTPClient):
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
     ) -> httpx.Response:
-        url = self._prepare_url(path=path, body=body or {})
         return await self._http_client.execute_http_request(
             method=method,
-            url=url,
+            url=f"{self._base_url}{path}",
             params=params or {},
             files=files,
             stream=stream,
