@@ -36,11 +36,11 @@ class AsyncAI21Client:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = api_host or env_config.api_host
+        base_url = api_host or f"{env_config.api_host}/studio/v1"
 
         self._http_client = AsyncAI21HTTPClient(
             api_key=api_key or env_config.api_key,
-            base_url=f"{base_url}/studio/v1",
+            base_url=base_url,
             api_version=env_config.api_version,
             headers=headers,
             timeout_sec=timeout_sec or env_config.timeout_sec,
