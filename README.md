@@ -545,8 +545,8 @@ from ai21 import AI21AzureClient
 from ai21.models.chat import ChatMessage
 
 client = AI21AzureClient(
-    azure_endpoint="https://your-endpoint.inference.ai.azure.com/v1/chat/completions",
-    api_key="<your api key>",
+  base_url="https://your-endpoint.inference.ai.azure.com/v1/chat/completions",
+  api_key="<your api key>",
 )
 
 messages = [
@@ -555,8 +555,8 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-    model="jamba-instruct",
-    messages=[messages],
+  model="jamba-instruct",
+  messages=[messages],
 )
 ```
 
