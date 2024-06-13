@@ -4,19 +4,21 @@ from ai21 import *  # noqa: F403
 from ai21 import __all__
 
 EXPECTED_ALL = [
-    "AI21EnvConfig",
-    "AI21Client",
-    "AsyncAI21Client",
     "AI21APIError",
-    "APITimeoutError",
+    "AI21AzureClient",
+    "AI21BedrockClient",
+    "AI21Client",
+    "AI21EnvConfig",
     "AI21Error",
+    "AI21SageMakerClient",
+    "APITimeoutError",
+    "AsyncAI21AzureClient",
+    "AsyncAI21Client",
+    "BedrockModelID",
     "MissingApiKeyError",
     "ModelPackageDoesntExistError",
-    "TooManyRequestsError",
-    "AI21BedrockClient",
-    "AI21SageMakerClient",
-    "BedrockModelID",
     "SageMaker",
+    "TooManyRequestsError",
 ]
 
 
