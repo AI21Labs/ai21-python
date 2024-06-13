@@ -3,7 +3,7 @@ from ai21 import AI21AzureClient
 from ai21.models.chat import ChatMessage
 
 client = AI21AzureClient(
-    azure_endpoint="<Your endpoint>",
+    base_url="<Your endpoint>",
     api_key="<your api key>",
 )
 

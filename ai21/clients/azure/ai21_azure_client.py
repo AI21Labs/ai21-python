@@ -46,7 +46,7 @@ class BaseAzureClient(ABC):
 class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
     def __init__(
         self,
-        azure_endpoint: str,
+        base_url: str,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -65,7 +65,7 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
 
         super().__init__(
             api_key=api_key,
-            base_url=azure_endpoint,
+            base_url=base_url,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
@@ -80,7 +80,7 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
 class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
     def __init__(
         self,
-        azure_endpoint: str,
+        base_url: str,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -99,7 +99,7 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
 
         super().__init__(
             api_key=api_key,
-            base_url=azure_endpoint,
+            base_url=base_url,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
