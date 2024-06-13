@@ -6,7 +6,7 @@ from ai21.models.chat import ChatMessage
 
 async def chat_completions():
     client = AsyncAI21AzureClient(
-        base_url="<Your endpoint>",
+        azure_endpoint="<Your endpoint>",
         api_key="<your api key>",
     )
 
