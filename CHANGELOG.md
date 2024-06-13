@@ -2,7 +2,18 @@
 
 
 
+## v2.5.2 (2024-06-13)
+
+### Fix
+
+* fix: camel case (#136) ([`e2b8466`](https://github.com/AI21Labs/ai21-python/commit/e2b846666bf5b2b8617cc26214fa5f36d65f5e35))
+
+
 ## v2.5.1 (2024-06-13)
+
+### Chore
+
+* chore(release): v2.5.1 [skip ci] ([`e2a43b8`](https://github.com/AI21Labs/ai21-python/commit/e2a43b82cf891d8858d8927be77e696ff9ace4b3))
 
 ### Fix
 
