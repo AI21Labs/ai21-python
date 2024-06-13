@@ -5,6 +5,7 @@ from ai21_tokenizer import PreTrainedTokenizers
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
+from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
@@ -19,7 +20,6 @@ from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
-from ai21.constants import STUDIO_HOST
 from ai21.http_client.http_client import HttpClient
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
@@ -44,7 +44,7 @@ class AI21Client:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = self._create_url(api_host or env_config.api_host)
+        base_url = create_client_url(api_host or env_config.api_host)
 
         self._http_client = AI21HTTPClient(
             api_key=api_key or env_config.api_key,
@@ -70,14 +70,6 @@ class AI21Client:
         self.library = StudioLibrary(self._http_client)
         self.segmentation = StudioSegmentation(self._http_client)
         self.beta = Beta(self._http_client)
-
-    def _create_url(self, base_url: str) -> str:
-        allowed_urls = ["https://api-stage.ai21.com", STUDIO_HOST]
-
-        if base_url in allowed_urls:
-            return f"{base_url}/studio/v1"
-
-        return base_url
 
     def count_tokens(self, text: str, tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> int:
         warnings.warn(

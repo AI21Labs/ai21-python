@@ -2,8 +2,8 @@ from typing import Optional, Any, Dict
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
-from ai21.constants import STUDIO_HOST
-from ai21.http_client.async_http_client import AsyncHttpClient
+from ai21.clients.studio.client_url_parser import create_client_url
+from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
@@ -17,7 +17,7 @@ from ai21.clients.studio.resources.studio_paraphrase import AsyncStudioParaphras
 from ai21.clients.studio.resources.studio_segmentation import AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudioSummarizeBySegment
-from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
+from ai21.http_client.async_http_client import AsyncHttpClient
 
 
 class AsyncAI21Client:
@@ -37,7 +37,7 @@ class AsyncAI21Client:
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = self._create_url(api_host or env_config.api_host)
+        base_url = create_client_url(api_host or env_config.api_host)
 
         self._http_client = AsyncAI21HTTPClient(
             api_key=api_key or env_config.api_key,
@@ -64,11 +64,3 @@ class AsyncAI21Client:
         self.library = AsyncStudioLibrary(self._http_client)
         self.segmentation = AsyncStudioSegmentation(self._http_client)
         self.beta = AsyncBeta(self._http_client)
-
-    def _create_url(self, base_url: str) -> str:
-        allowed_urls = ["https://api-stage.ai21.com", STUDIO_HOST]
-
-        if base_url in allowed_urls:
-            return f"{base_url}/studio/v1"
-
-        return base_url
