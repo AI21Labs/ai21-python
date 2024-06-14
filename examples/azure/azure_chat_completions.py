@@ -7,7 +7,9 @@ client = AI21AzureClient(
     api_key="<your api key>",
 )
 
-messages = ChatMessage(content="What is the meaning of life?", role="user")
+messages = ChatMessage(content=
+                       "What is the meaning of life? Write a short poem inspired by Shakespeare. There should be 4 stanzas, each stanza has 6 lines. Iambic pentameter is used with a rhyme scheme of ABABCC and a reflective and descriptive tone.", 
+                       role="user")
 
 completion = client.chat.completions.create(
     model="jamba-instruct",
