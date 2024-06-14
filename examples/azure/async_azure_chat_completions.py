@@ -17,6 +17,8 @@ async def chat_completions():
     completion = await client.chat.completions.create(
         model="jamba-instruct",
         messages=messages,
+        temperature = 1.0, # Setting =1 allows for greater variability per API call.
+        top_p = 1.0 # Setting =1 allows full sample of tokens to be considered per API call.
     )
 
     print(completion.to_json())
