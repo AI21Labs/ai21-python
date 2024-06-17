@@ -533,8 +533,8 @@ response = client.completion.create(
 
 ### Azure
 
-If you wish to interact with your Azure endpoint on Azure AI Studio, you can use the `AI21AzureClient`
-and `AsyncAI21AzureClient`.
+If you wish to interact with your Azure endpoint on Azure AI Studio, use the the `AI21AzureClient`
+and `AsyncAI21AzureClient` clients.
 
 The following models are supported on Azure:
 
@@ -545,8 +545,8 @@ from ai21 import AI21AzureClient
 from ai21.models.chat import ChatMessage
 
 client = AI21AzureClient(
-  base_url="https://your-endpoint.inference.ai.azure.com/v1/chat/completions",
-  api_key="<your api key>",
+  base_url="https://<YOUR-ENDPOINT>.inference.ai.azure.com/v1/chat/completions",
+  api_key="<your Azure api key>",
 )
 
 messages = [
