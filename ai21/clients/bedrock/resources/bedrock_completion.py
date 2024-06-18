@@ -46,6 +46,5 @@ class BedrockCompletion(BedrockResource):
         if model_id is None:
             raise ValueError("model_id should be provided in either the constructor or the 'create' method call")
 
-        raw_response = self._invoke(model_id=model_id, body=body)
-
-        return CompletionsResponse.from_dict(raw_response)
+        raw_response = self._post(body=body, model_id=model_id)
+        return CompletionsResponse.from_dict(raw_response.json())

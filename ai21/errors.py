@@ -41,6 +41,11 @@ class UnprocessableEntity(AI21APIError):
         super().__init__(422, details)
 
 
+class ModelStreamError(AI21APIError):
+    def __init__(self, details: Optional[str] = None):
+        super().__init__(424, details)
+
+
 class TooManyRequestsError(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(429, details)

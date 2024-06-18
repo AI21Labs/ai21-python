@@ -47,9 +47,18 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
+        extra_headers: Optional[Dict] = None,
     ) -> httpx.Response:
         try:
-            response = await self._request(files=files, method=method, params=params, url=url, stream=stream, body=body)
+            response = await self._request(
+                files=files,
+                method=method,
+                params=params,
+                url=url,
+                stream=stream,
+                body=body,
+                extra_headers=extra_headers,
+            )
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -79,9 +88,10 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         body: Optional[Dict],
         url: str,
         stream: bool,
+        extra_headers: Optional[Dict],
     ) -> httpx.Response:
         timeout = self._timeout_sec
-        headers = self._headers
+        headers = {**self._headers, **extra_headers} if extra_headers is not None else self._headers
         logger.debug(f"Calling {method} {url} {headers} {params}")
 
         if method == "GET":

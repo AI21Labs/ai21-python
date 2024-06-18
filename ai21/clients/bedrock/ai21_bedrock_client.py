@@ -1,24 +1,27 @@
-from typing import Optional
+from typing import Optional, Dict, Any
 
-import boto3
-
-from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
-from ai21.clients.bedrock.bedrock_session import BedrockSession
+from ai21.clients.bedrock.bedrock_http_client import BedrockHttpClient
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
+from ai21.http_client.http_client import HttpClient
 
 
 class AI21BedrockClient:
-    """
-    :param model_id: The model ID to use for the client.
-    :param session: An optional boto3 session to use for the client.
-    """
-
     def __init__(
         self,
         model_id: Optional[str] = None,
-        session: Optional[boto3.Session] = None,
         region: Optional[str] = None,
-        env_config: _AI21EnvConfig = AI21EnvConfig,
+        headers: Optional[Dict[str, Any]] = None,
+        timeout_sec: Optional[float] = None,
+        num_retries: Optional[int] = None,
+        http_client: Optional[HttpClient] = None,
     ):
-        self._bedrock_session = BedrockSession(session=session, region=region or env_config.aws_region)
-        self.completion = BedrockCompletion(model_id=model_id, bedrock_session=self._bedrock_session)
+        self._http_client = BedrockHttpClient(
+            model_id=model_id,
+            aws_region=region,
+            headers=headers,
+            timeout_sec=timeout_sec,
+            num_retries=num_retries,
+            http_client=http_client,
+        )
+
+        self.completion = BedrockCompletion(self._http_client)

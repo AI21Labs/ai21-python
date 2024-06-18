@@ -38,9 +38,10 @@ prompt = (
     "User: Hi, I have a question for you"
 )
 
-response = AI21BedrockClient(model_id=BedrockModelID.J2_MID_V1).completion.create(
+response = AI21BedrockClient(BedrockModelID.J2_MID_V1).completion.create(
+    model_id=BedrockModelID.J2_MID_V1,
     prompt=prompt,
-    max_tokens=1000,
+    max_tokens=50,
     temperature=0,
     top_p=1,
     top_k_return=0,

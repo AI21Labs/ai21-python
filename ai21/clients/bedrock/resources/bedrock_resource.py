@@ -1,17 +1,24 @@
-import json
-from abc import ABC
-from typing import Any, Dict
+from __future__ import annotations
 
-from ai21.clients.bedrock.bedrock_session import BedrockSession
+from abc import ABC
+from typing import Any, Dict, Optional
+
+import httpx
+
+from ai21.clients.bedrock.bedrock_http_client import BedrockHttpClient
 
 
 class BedrockResource(ABC):
-    def __init__(self, model_id: str, bedrock_session: BedrockSession):
+    def __init__(self, client: BedrockHttpClient, model_id: Optional[str] = None):
+        self._client = client
         self._model_id = model_id
-        self._bedrock_session = bedrock_session
 
-    def _invoke(self, model_id: str, body: Dict[str, Any]) -> Dict[str, Any]:
-        return self._bedrock_session.invoke_model(
-            input_json=json.dumps(body),
+    def _post(
+        self,
+        model_id: str,
+        body: Optional[Dict[str, Any]] = None,
+    ) -> httpx.Response:
+        return self._client.execute_http_request(
             model_id=model_id,
+            body=body,
         )

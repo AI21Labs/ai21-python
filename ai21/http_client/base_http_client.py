@@ -81,10 +81,13 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         else:
             return json.dumps(body).encode() if body else None
 
-    def _get_request_headers(self, files: Optional[Dict[str, BinaryIO]]) -> Dict[str, Any]:
+    def _get_request_headers(
+        self, files: Optional[Dict[str, BinaryIO]], headers: Optional[Dict[str, Any]] = None
+    ) -> Dict[str, Any]:
         if files is not None and "Content-Type" in self._headers:
             return {key: value for key, value in self._headers.items() if key != "Content-Type"}
-
+        if headers is not None:
+            return {**self._headers, **headers}
         return self._headers
 
     def add_headers(self, headers: Dict[str, Any]) -> None:
@@ -98,6 +101,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         params: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
+        extra_headers: Optional[Dict] = None,
     ) -> httpx.Response:
         pass
 
@@ -110,6 +114,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         body: Optional[Dict],
         url: str,
         stream: bool,
+        extra_headers: Optional[Dict],
     ) -> httpx.Response:
         pass
 
