@@ -12,7 +12,10 @@ jobs:
       - name: Check if review is approved
         id: review_check
         run: |
-          if [[ "${{ github.event.review.state }}" != "approved" ]]; then
+          if [[ "${{ github.event.review.state }}" == "approved" ]]; then
+            echo "::set-output name=review_approved::true"
+          else
+            echo "::set-output name=review_approved::false"
             echo "This review is not an approval. Exiting."
             exit 0
           fi
