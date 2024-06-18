@@ -26,8 +26,9 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
+            const { context, github } = require('@actions/github');
             const { owner, repo } = context.repo;
-            const pr_number = context.payload.pull_request.number;
+            const issue_number = context.payload.pull_request.number;
 
             await github.issues.addLabels({
               owner,
