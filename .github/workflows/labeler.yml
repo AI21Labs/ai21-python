@@ -77,7 +77,7 @@ jobs:
 
   add_lgtm_label:
     runs-on: ubuntu-latest
-    if: github.event.review.state == 'approved'
+    if: github.event.review.state == 'APPROVED'
 
     steps:
       - name: Checkout repository
