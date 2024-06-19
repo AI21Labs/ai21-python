@@ -11,6 +11,6 @@ class SageMakerAnswer(SageMakerResource, Answer):
         **kwargs,
     ) -> AnswerResponse:
         body = self._create_body(context=context, question=question)
-        response = self._invoke(body)
+        response = self._post(body)
 
-        return self._json_to_response(response)
+        return self._json_to_response(response.json())

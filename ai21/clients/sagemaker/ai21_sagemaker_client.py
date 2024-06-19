@@ -1,14 +1,15 @@
-from typing import Optional
+from typing import Optional, Dict, Any
 
 import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
+from ai21.clients.aws_http_client.aws_http_client import AWSHttpClient, DEFAULT_AWS_REGION
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC
 from ai21.clients.sagemaker.resources.sagemaker_paraphrase import SageMakerParaphrase
 from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize
-from ai21.clients.sagemaker.sagemaker_session import SageMakerSession
+from ai21.http_client.http_client import HttpClient
 
 
 class AI21SageMakerClient:
@@ -24,16 +25,23 @@ class AI21SageMakerClient:
         region: Optional[str] = None,
         session: Optional["boto3.Session"] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
+        headers: Optional[Dict[str, Any]] = None,
+        timeout_sec: Optional[float] = None,
+        num_retries: Optional[int] = None,
+        http_client: Optional[HttpClient] = None,
         **kwargs,
     ):
-
-        self._env_config = env_config
-        _session = ()
-        self._session = SageMakerSession(
-            session=session, region=region or self._env_config.aws_region, endpoint_name=endpoint_name
+        region = session.region_name if session is not None else region or env_config.aws_region or DEFAULT_AWS_REGION
+        self._http_client = AWSHttpClient(
+            aws_region=region,
+            headers=headers,
+            timeout_sec=timeout_sec,
+            num_retries=num_retries,
+            http_client=http_client,
+            aws_session=session,
         )
-        self.completion = SageMakerCompletion(self._session)
-        self.paraphrase = SageMakerParaphrase(self._session)
-        self.answer = SageMakerAnswer(self._session)
-        self.gec = SageMakerGEC(self._session)
-        self.summarize = SageMakerSummarize(self._session)
+        self.completion = SageMakerCompletion(endpoint_name=endpoint_name, region=region, client=self._http_client)
+        self.paraphrase = SageMakerParaphrase(endpoint_name=endpoint_name, region=region, client=self._http_client)
+        self.answer = SageMakerAnswer(endpoint_name=endpoint_name, region=region, client=self._http_client)
+        self.gec = SageMakerGEC(endpoint_name=endpoint_name, region=region, client=self._http_client)
+        self.summarize = SageMakerSummarize(endpoint_name=endpoint_name, region=region, client=self._http_client)

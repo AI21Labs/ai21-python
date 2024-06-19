@@ -24,6 +24,6 @@ class SageMakerSummarize(SageMakerResource, Summarize):
             summary_method=summary_method,
         )
 
-        response = self._invoke(body)
+        response = self._post(body)
 
-        return self._json_to_response(response)
+        return self._json_to_response(response.json())

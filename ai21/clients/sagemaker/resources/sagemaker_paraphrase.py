@@ -21,6 +21,6 @@ class SageMakerParaphrase(SageMakerResource, Paraphrase):
             start_index=start_index,
             end_index=end_index,
         )
-        response = self._invoke(body=body)
+        response = self._post(body=body)
 
-        return self._json_to_response(response)
+        return self._json_to_response(response.json())

@@ -61,6 +61,6 @@ class SageMakerCompletion(SageMakerResource):
             }
         )
 
-        raw_response = self._invoke(body)
+        raw_response = self._post(body=body)
 
-        return CompletionsResponse.from_dict(raw_response)
+        return CompletionsResponse.from_dict(raw_response.json())

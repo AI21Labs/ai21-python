@@ -7,6 +7,6 @@ class SageMakerGEC(SageMakerResource, GEC):
     def create(self, text: str, **kwargs) -> GECResponse:
         body = self._create_body(text=text)
 
-        response = self._invoke(body)
+        response = self._post(body)
 
-        return self._json_to_response(response)
+        return self._json_to_response(response.json())

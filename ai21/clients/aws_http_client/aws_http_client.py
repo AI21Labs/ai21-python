@@ -10,7 +10,14 @@ from botocore.awsrequest import AWSRequest
 import boto3
 
 from ai21 import AI21APIError
-from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelStreamError
+from ai21.errors import (
+    AccessDenied,
+    NotFound,
+    APITimeoutError,
+    ModelStreamError,
+    BadRequest,
+    AI21ServerError,
+)
 from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.http_client.http_client import HttpClient
 
@@ -71,17 +78,19 @@ class BaseAWSHttpClient(ABC):
 
     def _handle_aws_error(self, aws_error: AI21APIError) -> None:
         status_code = aws_error.status_code
+        if status_code == 400:
+            raise BadRequest(details=aws_error.details)
         if status_code == 403:
             raise AccessDenied(details=aws_error.details)
-
         if status_code == 404:
             raise NotFound(details=aws_error.details)
-
         if status_code == 408:
             raise APITimeoutError(details=aws_error.details)
-
         if status_code == 424:
             raise ModelStreamError(details=aws_error.details)
+        if status_code == 500:
+            raise AI21ServerError(details=aws_error.details)
+        raise AI21APIError(status_code, details=aws_error.details)
 
     def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
         headers = {
