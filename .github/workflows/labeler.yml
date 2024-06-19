@@ -24,8 +24,6 @@ jobs:
 
       - name: Fetch all branches
         run: git fetch --all
-        with:
-          fetch-depth: 0
 
       - name: Calculate diff size
         id: diff
