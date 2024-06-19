@@ -1,38 +1,14 @@
-name: Label PR with LGTM on approval
-
+name: "Pull Request Labeler"
 on:
-  pull_request_review:
-    types: [submitted]
+  - pull_request_target
 
 jobs:
-  label_on_approve:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
     runs-on: ubuntu-latest
-
     steps:
-      - name: Check if review is approved
-        id: review_check
-        run: |
-          if [[ "${{ github.event.review.state }}" == "approved" ]]; then
-            echo "::set-output name=review_approved::true"
-          else
-            echo "::set-output name=review_approved::false"
-            echo "This review is not an approval. Exiting."
-            exit 0
-          fi
-
-      - name: Add LGTM label
-        if: steps.review_check.outputs.review_approved == 'true'
-        uses: actions/github-script@v6
+      - uses: actions/labeler@v5
         with:
-          github-token: ${{ secrets.GITHUB_TOKEN }}
-          script: |
-            const { context, github } = require('@actions/github');
-            const { owner, repo } = context.repo;
-            const issue_number = context.payload.pull_request.number;
-
-            await github.issues.addLabels({
-              owner,
-              repo,
-              issue_number: pr_number,
-              labels: ['lgtm']
-            });
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
