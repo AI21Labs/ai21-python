@@ -1,4 +1,5 @@
-from ai21.tokenizers import get_tokenizer
+from ai21.tokenizers import get_async_tokenizer
+import asyncio
 
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
@@ -30,6 +31,12 @@ prompt = (
     "- There is no return option\n\nUser gender: Female.\n\nConversation:\n"
     "User: Hi, I have a question for you"
 )
-tokenizer = get_tokenizer(name="jamba-tokenizer")
-response = tokenizer.count_tokens(prompt)
-print(response)
+
+
+async def main():
+    tokenizer = await get_async_tokenizer(name="jamba-tokenizer")
+    response = await tokenizer.count_tokens(prompt)
+    print(response)
+
+
+asyncio.run(main())
