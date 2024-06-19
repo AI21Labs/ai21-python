@@ -42,7 +42,13 @@ jobs:
           head_branch=${{ env.head_branch }}
           echo $base_branch
           echo $head_branch
-          insertions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $4 || 0}')
+          git checkout $head_branch
+          git fetch origin $base_branch
+          diff_output=$(git diff --shortstat origin/$base_branch...$head_branch)
+          echo $diff_output
+
+
+          insertions=$(git diff --stat origin/$base_branch...HEAD | tail -n1 | awk '{print $4 || 0}')
           deletions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $6 || 0}')
           changed_lines=$((insertions + deletions))
           echo "changed_lines=$changed_lines" >> $GITHUB_ENV
