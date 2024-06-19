@@ -14,6 +14,36 @@ jobs:
       pull-requests: write
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/labeler@v5
+      - name: Labeler
+        uses: actions/labeler@v5
         with:
           repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Calculate diff size
+        id: diff
+        run: |
+          lines=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $1}')
+          echo "changed_lines=$lines" >> $GITHUB_ENV
+
+      - name: Determine label
+        id: label
+        run: |
+          changed_lines=${{ env.changed_lines }}
+          if [ "$changed_lines" -le 9 ]; then
+            label="size:s"
+          elif [ "$changed_lines" -le 50 ]; then
+            label="size:m"
+          elif [ "$changed_lines" -le 100 ]; then
+            label="size:l"
+          elif [ "$changed_lines" -le 500 ]; then
+            label="size:xl"
+          else
+            label="size:xxl"
+          fi
+          echo "label=$label" >> $GITHUB_ENV
+
+      - name: Add label to PR
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ${{ env.label }}
