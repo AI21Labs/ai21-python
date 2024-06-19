@@ -46,8 +46,8 @@ jobs:
           git fetch origin $base_branch
           diff_output=$(git diff --shortstat origin/$base_branch...$head_branch)
 
-          insertions=$(diff_output | awk '{print $4 || 0}')
-          deletions=$(diff_output | awk '{print $6 || 0}')
+          insertions=$(echo $diff_output | awk '{print $4 || 0}')
+          deletions=$(echo $diff_output | awk '{print $6 || 0}')
           changed_lines=$((insertions + deletions))
           echo "changed_lines=$changed_lines" >> $GITHUB_ENV
 
