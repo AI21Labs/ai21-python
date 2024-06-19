@@ -46,11 +46,11 @@ jobs:
           git fetch origin $base_branch
           diff_output=$(git diff --shortstat origin/$base_branch...$head_branch)
           echo $diff_output
-          insertions=$(echo $diff_output | awk '{print $4 || 0}')
+          insertions=$(echo $diff_output | awk '{print $4 || echo 0}')
           insertions1=$(echo $diff_output | awk '{print $4}')
           echo $insertions
           echo $insertions1
-          deletions=$(echo $diff_output | awk '{print $6 || 0}')
+          deletions=$(echo $diff_output | awk '{print $6 || echo 0}')
           deletions=$(echo $diff_output | awk '{print $6}')
           echo $deletions
           echo $deletions1
