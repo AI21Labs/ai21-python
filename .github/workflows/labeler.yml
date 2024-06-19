@@ -1,0 +1,90 @@
+name: "Pull Request Labeler"
+on:
+  pull_request_review:
+    types: [submitted]
+  pull_request_review_comment:
+    types: [created, deleted]
+  pull_request:
+    types: [opened, edited, reopened, synchronize]
+
+jobs:
+  labeler:
+    permissions:
+      contents: read
+      pull-requests: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Labeler
+        uses: actions/labeler@v5
+        with:
+          repo-token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Fetch all branches
+        run: git fetch --all
+
+      - name: Determine base and head branches
+        id: branches
+        run: |
+          base_branch=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+          head_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          echo $base_branch
+          echo $head_branch
+          echo "base_branch=$base_branch" >> $GITHUB_ENV
+          echo "head_branch=$head_branch" >> $GITHUB_ENV
+
+      - name: Calculate diff size
+        id: diff
+        run: |
+          base_branch=${{ env.base_branch }}
+          head_branch=${{ env.head_branch }}
+          echo $base_branch
+          echo $head_branch
+          git checkout $head_branch
+          git fetch origin $base_branch
+          diff_output=$(git diff --shortstat origin/$base_branch...$head_branch)
+          echo $diff_output
+          insertions=$(echo $diff_output | awk '{print ($4 == "" ? 0 : $4)}')
+          deletions=$(echo $diff_output | awk '{print ($6 == "" ? 0 : $6)}')
+          changed_lines=$((insertions + deletions))
+          echo $changed_lines
+          echo "changed_lines=$changed_lines" >> $GITHUB_ENV
+
+      - name: Determine label
+        id: label
+        run: |
+          changed_lines=${{ env.changed_lines }}
+          if [ "$changed_lines" -le 9 ]; then
+            label="size:s"
+          elif [ "$changed_lines" -le 50 ]; then
+            label="size:m"
+          elif [ "$changed_lines" -le 100 ]; then
+            label="size:l"
+          elif [ "$changed_lines" -le 500 ]; then
+            label="size:xl"
+          else
+            label="size:xxl"
+          fi
+          echo "label=$label" >> $GITHUB_ENV
+
+      - name: Add label to PR
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: ${{ env.label }}
+
+  add_lgtm_label:
+    runs-on: ubuntu-latest
+    if: github.event.review.state == 'APPROVED'
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Add LGTM label
+        uses: actions-ecosystem/action-add-labels@v1
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          labels: lgtm
