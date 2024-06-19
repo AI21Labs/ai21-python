@@ -1,6 +1,6 @@
 import json
 from abc import ABC
-from functools import cache
+from functools import lru_cache
 from typing import Dict, Optional, TypeVar, Union, Any
 
 import httpx
@@ -38,7 +38,7 @@ class BaseAWSHttpClient(ABC):
 
         self._aws_region = aws_region or DEFAULT_AWS_REGION
 
-    @cache
+    @lru_cache(maxsize=None)
     def _get_session(self) -> boto3.Session:
         return boto3.Session(
             region_name=self._aws_region,
