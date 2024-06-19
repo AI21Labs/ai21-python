@@ -25,9 +25,23 @@ jobs:
       - name: Fetch all branches
         run: git fetch --all
 
+      - name: Determine base and head branches
+        id: branches
+        run: |
+          base_branch=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
+          head_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
+          echo $base_branch
+          echo $head_branch
+          echo "base_branch=$base_branch" >> $GITHUB_ENV
+          echo "head_branch=$head_branch" >> $GITHUB_ENV
+
       - name: Calculate diff size
         id: diff
         run: |
+          base_branch=${{ env.base_branch }}
+          head_branch=${{ env.head_branch }}
+          echo $base_branch
+          echo $head_branch
           insertions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $4 || 0}')
           deletions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $6 || 0}')
           changed_lines=$((insertions + deletions))
