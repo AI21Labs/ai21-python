@@ -30,8 +30,8 @@ jobs:
       - name: Calculate diff size
         id: diff
         run: |
-          insertions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $4}')
-          deletions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $6}')
+          insertions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $4 || 0}')
+          deletions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $6 || 0}')
           changed_lines=$((insertions + deletions))
           echo "changed_lines=$changed_lines" >> $GITHUB_ENV
 
