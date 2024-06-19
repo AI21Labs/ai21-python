@@ -379,14 +379,26 @@ By using the `count_tokens` method, you can estimate the billing for a given req
 ```python
 from ai21.tokenizers import get_tokenizer
 
-tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
+tokenizer = get_tokenizer(name="jamba-tokenizer")
 total_tokens = tokenizer.count_tokens(text="some text")  # returns int
+print(total_tokens)
+```
+
+### Async Usage
+
+```python
+from ai21.tokenizers import get_async_tokenizer
+
+## Your async function code
+#...
+tokenizer = await get_async_tokenizer(name="jamba-tokenizer")
+total_tokens = await tokenizer.count_tokens(text="some text")  # returns int
 print(total_tokens)
 ```
 
 Available tokenizers are:
 
-- `jamba-instruct-tokenizer`
+- `jamba-tokenizer`
 - `j2-tokenizer`
 
 For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
