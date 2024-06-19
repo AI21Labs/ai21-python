@@ -106,7 +106,7 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             return await self._client.send(request=request, stream=stream)
 
         data = self._get_request_data(files=files, method=method, body=body)
-        headers = self._get_request_headers(files=files)
+        headers = self._get_request_headers(files=files, headers=headers)
 
         request = self._client.build_request(
             method=method,

@@ -159,3 +159,70 @@ class AWSHttpClient(BaseAWSHttpClient):
             )
         except AI21APIError as aws_error:
             self._handle_aws_error(aws_error)
+
+
+class AsyncAWSHttpClient(BaseAWSHttpClient):
+    def __init__(
+        self,
+        aws_secret_key: Optional[str] = None,
+        aws_access_key: Optional[str] = None,
+        aws_region: Optional[str] = None,
+        aws_session_token: Optional[str] = None,
+        headers: Optional[Dict[str, str]] = None,
+        timeout_sec: Optional[int] = None,
+        num_retries: Optional[int] = None,
+        http_client: Optional[AsyncHttpClient] = None,
+        aws_session: Optional[boto3.Session] = None,
+    ):
+        BaseAWSHttpClient.__init__(
+            self,
+            aws_secret_key=aws_secret_key,
+            aws_access_key=aws_access_key,
+            aws_region=aws_region,
+            aws_session_token=aws_session_token,
+            aws_session=aws_session,
+        )
+
+        headers = self._build_headers(passed_headers=headers)
+        self._http_client = self._init_http_client(
+            http_client=http_client, headers=headers, timeout_sec=timeout_sec, num_retries=num_retries
+        )
+
+    def _init_http_client(
+        self,
+        http_client: Optional[AsyncHttpClient],
+        headers: Dict[str, Any],
+        timeout_sec: Optional[int],
+        num_retries: Optional[int],
+    ) -> AsyncHttpClient:
+        if http_client is None:
+            return AsyncHttpClient(
+                timeout_sec=timeout_sec,
+                num_retries=num_retries,
+                headers=headers,
+            )
+
+        http_client.add_headers(headers)
+
+        return http_client
+
+    async def execute_http_request(
+        self,
+        method: str,
+        service_name: str,
+        url: str,
+        body: Optional[Dict] = None,
+    ) -> httpx.Response:
+        auth_headers = self._prepare_auth_headers(
+            url=url, data=json.dumps(body), service_name=service_name, method=method
+        )
+
+        try:
+            return await self._http_client.execute_http_request(
+                method=method,
+                url=url,
+                body=body,
+                extra_headers=auth_headers,
+            )
+        except AI21APIError as aws_error:
+            self._handle_aws_error(aws_error)
