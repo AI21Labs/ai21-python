@@ -6,3 +6,5 @@ rules:
   line-length:
     max: 300
   document-start: disable
+  truthy:
+    check-keys: false

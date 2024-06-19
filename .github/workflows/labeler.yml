@@ -24,14 +24,16 @@ jobs:
 
       - name: Fetch all branches
         run: git fetch --all
+        with:
+          fetch-depth: 0
 
       - name: Calculate diff size
         id: diff
         run: |
-          base_branch=$(jq -r '.pull_request.base.ref' "$GITHUB_EVENT_PATH")
-          head_branch=$(jq -r '.pull_request.head.ref' "$GITHUB_EVENT_PATH")
-          lines=$(git diff --stat origin/$base_branch...$head_branch | tail -n1 | awk '{print $1}')
-          echo "changed_lines=$lines" >> $GITHUB_ENV
+          insertions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $4}')
+          deletions=$(git diff --stat origin/main...HEAD | tail -n1 | awk '{print $6}')
+          changed_lines=$((insertions + deletions))
+          echo "changed_lines=$changed_lines" >> $GITHUB_ENV
 
       - name: Determine label
         id: label
