@@ -5,7 +5,7 @@ documentation:
 
 # Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
 feature:
-  - head-branch: ["^feature", "feat:"]
+  - head-branch: ["^feat", "feat:"]
 
 # Add 'release' label to any PR that is opened against the `main` branch
 fix:
