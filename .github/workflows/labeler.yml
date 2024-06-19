@@ -48,8 +48,6 @@ jobs:
           echo $diff_output
           insertions=$(echo $diff_output | awk '{print ($4 == "" ? 0 : $4)}')
           deletions=$(echo $diff_output | awk '{print ($6 == "" ? 0 : $6)}')
-          echo $deletions
-          echo $deletions1
           changed_lines=$((insertions + deletions))
           echo $changed_lines
           echo "changed_lines=$changed_lines" >> $GITHUB_ENV
