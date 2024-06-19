@@ -39,7 +39,6 @@ prompt = (
 )
 
 response = AI21BedrockClient(BedrockModelID.J2_MID_V1).completion.create(
-    model_id=BedrockModelID.J2_MID_V1,
     prompt=prompt,
     max_tokens=50,
     temperature=0,
