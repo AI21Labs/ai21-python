@@ -46,7 +46,7 @@ exclude_lines = [
 
 [tool.poetry]
 name = "ai21"
-version = "2.5.2"
+version = "2.6.0"
 description = ""
 authors = ["AI21 Labs"]
 readme = "README.md"
@@ -56,7 +56,7 @@ packages = [
 
 [tool.poetry.dependencies]
 python = "^3.8"
-ai21-tokenizer = ">=0.9.1,<1.0.0"
+ai21-tokenizer = ">=0.11.0,<1.0.0"
 boto3 = { version = "^1.28.82", optional = true }
 dataclasses-json = "^0.6.3"
 typing-extensions = "^4.9.0"

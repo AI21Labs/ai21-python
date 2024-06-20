@@ -2,7 +2,18 @@
 
 
 
+## v2.6.0 (2024-06-13)
+
+### Feature
+
+* feat: Azure Client Support (#135) ([`6115632`](https://github.com/AI21Labs/ai21-python/commit/611563279999168703e49dbbf288190ee0ae262d))
+
+
 ## v2.5.2 (2024-06-13)
+
+### Chore
+
+* chore(release): v2.5.2 [skip ci] ([`3eae31e`](https://github.com/AI21Labs/ai21-python/commit/3eae31e1f82cec6bcf208d1ed614daa0fd6ddad1))
 
 ### Fix
 
