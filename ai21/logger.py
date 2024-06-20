@@ -3,6 +3,7 @@ import logging
 from ai21.ai21_env_config import AI21EnvConfig
 
 logger = logging.getLogger("ai21")
+httpx_logger = logging.getLogger("httpx")
 
 
 def _basic_config() -> None:
@@ -17,5 +18,7 @@ def setup_logger() -> None:
 
     if AI21EnvConfig.log_level == "debug":
         logger.setLevel(logging.DEBUG)
+        httpx_logger.setLevel(logging.DEBUG)
     elif AI21EnvConfig.log_level == "info":
         logger.setLevel(logging.INFO)
+        httpx_logger.setLevel(logging.INFO)
