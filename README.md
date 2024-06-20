@@ -379,14 +379,26 @@ By using the `count_tokens` method, you can estimate the billing for a given req
 ```python
 from ai21.tokenizers import get_tokenizer
 
-tokenizer = get_tokenizer(name="jamba-instruct-tokenizer")
+tokenizer = get_tokenizer(name="jamba-tokenizer")
 total_tokens = tokenizer.count_tokens(text="some text")  # returns int
+print(total_tokens)
+```
+
+### Async Usage
+
+```python
+from ai21.tokenizers import get_async_tokenizer
+
+## Your async function code
+#...
+tokenizer = await get_async_tokenizer(name="jamba-tokenizer")
+total_tokens = await tokenizer.count_tokens(text="some text")  # returns int
 print(total_tokens)
 ```
 
 Available tokenizers are:
 
-- `jamba-instruct-tokenizer`
+- `jamba-tokenizer`
 - `j2-tokenizer`
 
 For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
@@ -533,8 +545,8 @@ response = client.completion.create(
 
 ### Azure
 
-If you wish to interact with your Azure endpoint on Azure AI Studio, you can use the `AI21AzureClient`
-and `AsyncAI21AzureClient`.
+If you wish to interact with your Azure endpoint on Azure AI Studio, use the the `AI21AzureClient`
+and `AsyncAI21AzureClient` clients.
 
 The following models are supported on Azure:
 
@@ -545,8 +557,8 @@ from ai21 import AI21AzureClient
 from ai21.models.chat import ChatMessage
 
 client = AI21AzureClient(
-  base_url="https://your-endpoint.inference.ai.azure.com/v1/chat/completions",
-  api_key="<your api key>",
+  base_url="https://<YOUR-ENDPOINT>.inference.ai.azure.com/v1/chat/completions",
+  api_key="<your Azure api key>",
 )
 
 messages = [
