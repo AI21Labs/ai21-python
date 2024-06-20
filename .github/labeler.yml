@@ -16,3 +16,19 @@ ci:
   - changed-files:
       - any-glob-to-any-file:
           - .github/*
+
+aws:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/bedrock/*
+          - ai21/clients/sagemaker/*
+
+azure:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/azure/*
+
+vertex:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/vertex/*
