@@ -3,13 +3,12 @@ from abc import ABC
 from functools import lru_cache
 from typing import Dict, Optional, TypeVar, Union, Any
 
+import boto3
 import httpx
 
-from botocore.auth import SigV4Auth
-from botocore.awsrequest import AWSRequest
-import boto3
 
 from ai21 import AI21APIError
+from ai21.clients.aws_http_client.aws_authorization import AWSAuthorization
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelStreamError
 from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.http_client.http_client import HttpClient
@@ -25,6 +24,7 @@ class BaseAWSHttpClient(ABC):
 
     def __init__(
         self,
+        aws_auth: Optional[AWSAuthorization] = None,
         aws_secret_key: Optional[str] = None,
         aws_access_key: Optional[str] = None,
         aws_region: Optional[str] = None,
@@ -37,6 +37,7 @@ class BaseAWSHttpClient(ABC):
         self._aws_session = aws_session
 
         self._aws_region = aws_region or DEFAULT_AWS_REGION
+        self._aws_auth = aws_auth or AWSAuthorization(aws_session=aws_session)
 
     @lru_cache(maxsize=None)
     def _get_session(self) -> boto3.Session:
@@ -47,27 +48,30 @@ class BaseAWSHttpClient(ABC):
             aws_session_token=self._aws_session_token,
         )
 
-    def _prepare_auth_headers(
-        self,
-        *,
-        url: str,
-        service_name: str,
-        method: str,
-        data: Optional[str],
-    ) -> Dict[str, str]:
-        if self._aws_session is None:
-            self._aws_session = self._get_session()
-        request = AWSRequest(method=method, url=url, data=data)
-        credentials = self._aws_session.get_credentials()
-
-        signer = SigV4Auth(
-            credentials=credentials, service_name=service_name, region_name=self._aws_session.region_name
-        )
-        signer.add_auth(request)
-
-        prepped = request.prepare()
-
-        return {key: value for key, value in dict(prepped.headers).items() if value is not None}
+    # def _prepare_auth_headers(
+    #     self,
+    #     *,
+    #     url: str,
+    #     service_name: str,
+    #     method: str,
+    #     data: Optional[str],
+    # ) -> Dict[str, str]:
+    #     if self._aws_session is None:
+    #         self._aws_session = self._get_session()
+    #     return self._aws_auth.prepare_auth_headers(
+    #         url=url, service_name=service_name, method=method, data=data, aws_session=self._aws_session
+    #     )
+    # request = AWSRequest(method=method, url=url, data=data)
+    # credentials = self._aws_session.get_credentials()
+    #
+    # signer = SigV4Auth(
+    #     credentials=credentials, service_name=service_name, region_name=self._aws_session.region_name
+    # )
+    # signer.add_auth(request)
+    #
+    # prepped = request.prepare()
+    #
+    # return {key: value for key, value in dict(prepped.headers).items() if value is not None}
 
     def _handle_aws_error(self, aws_error: AI21APIError) -> None:
         status_code = aws_error.status_code
@@ -106,6 +110,7 @@ class AWSHttpClient(BaseAWSHttpClient):
         num_retries: Optional[int] = None,
         http_client: Optional[HttpClient] = None,
         aws_session: Optional[boto3.Session] = None,
+        aws_auth: Optional[AWSAuthorization] = None,
     ):
         BaseAWSHttpClient.__init__(
             self,
@@ -114,6 +119,7 @@ class AWSHttpClient(BaseAWSHttpClient):
             aws_region=aws_region,
             aws_session_token=aws_session_token,
             aws_session=aws_session,
+            aws_auth=aws_auth,
         )
 
         headers = self._build_headers(passed_headers=headers)
@@ -146,8 +152,10 @@ class AWSHttpClient(BaseAWSHttpClient):
         url: str,
         body: Optional[Dict] = None,
     ) -> httpx.Response:
-        auth_headers = self._prepare_auth_headers(
-            url=url, data=json.dumps(body), service_name=service_name, method=method
+        if self._aws_session is None:
+            self._aws_session = self._get_session()
+        auth_headers = self._aws_auth.prepare_auth_headers(
+            url=url, service_name=service_name, method=method, data=json.dumps(body), aws_session=self._aws_session
         )
 
         try:
@@ -173,6 +181,7 @@ class AsyncAWSHttpClient(BaseAWSHttpClient):
         num_retries: Optional[int] = None,
         http_client: Optional[AsyncHttpClient] = None,
         aws_session: Optional[boto3.Session] = None,
+        aws_auth: Optional[AWSAuthorization] = None,
     ):
         BaseAWSHttpClient.__init__(
             self,
@@ -181,6 +190,7 @@ class AsyncAWSHttpClient(BaseAWSHttpClient):
             aws_region=aws_region,
             aws_session_token=aws_session_token,
             aws_session=aws_session,
+            aws_auth=aws_auth,
         )
 
         headers = self._build_headers(passed_headers=headers)
@@ -213,8 +223,10 @@ class AsyncAWSHttpClient(BaseAWSHttpClient):
         url: str,
         body: Optional[Dict] = None,
     ) -> httpx.Response:
-        auth_headers = self._prepare_auth_headers(
-            url=url, data=json.dumps(body), service_name=service_name, method=method
+        if self._aws_session is None:
+            self._aws_session = self._get_session()
+        auth_headers = self._aws_auth.prepare_auth_headers(
+            url=url, service_name=service_name, method=method, data=json.dumps(body), aws_session=self._aws_session
         )
 
         try:
