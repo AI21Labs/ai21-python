@@ -43,6 +43,12 @@ class BaseAzureClient(ABC):
 
         return None
 
+    def _add_version_to_url(self, base_url: str, api_version: str) -> str:
+        if api_version:
+            return f"{base_url}/{api_version}"
+
+        return f"{base_url}/{_DEFAULT_AZURE_VERSION}"
+
 
 class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
     def __init__(
@@ -64,9 +70,7 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
             raise ValueError("Must provide either api_key or azure_ad_token_provider or azure_ad_token")
 
         headers = self._prepare_headers(headers=default_headers or {})
-
-        if api_version:
-            base_url += f"/{api_version}"
+        base_url = self._add_version_to_url(base_url=base_url, api_version=api_version)
 
         super().__init__(
             api_key=api_key,
@@ -102,9 +106,7 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
             raise ValueError("Must provide either api_key or azure_ad_token_provider or azure_ad_token")
 
         headers = self._prepare_headers(headers=default_headers or {})
-
-        if api_version:
-            base_url += f"/{api_version}"
+        base_url = self._add_version_to_url(base_url=base_url, api_version=api_version)
 
         super().__init__(
             api_key=api_key,
