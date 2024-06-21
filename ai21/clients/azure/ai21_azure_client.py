@@ -8,6 +8,7 @@ from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 
 AzureADTokenProvider = Callable[[], str]
+_DEFAULT_AZURE_VERSION = "v1"
 
 
 class BaseAzureClient(ABC):
@@ -47,6 +48,7 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
     def __init__(
         self,
         base_url: str,
+        api_version: str = _DEFAULT_AZURE_VERSION,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -62,6 +64,9 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
             raise ValueError("Must provide either api_key or azure_ad_token_provider or azure_ad_token")
 
         headers = self._prepare_headers(headers=default_headers or {})
+
+        if api_version:
+            base_url += f"/{api_version}"
 
         super().__init__(
             api_key=api_key,
@@ -81,6 +86,7 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
     def __init__(
         self,
         base_url: str,
+        api_version: str = _DEFAULT_AZURE_VERSION,
         api_key: Optional[str] = None,
         azure_ad_token: str | None = None,
         azure_ad_token_provider: AzureADTokenProvider | None = None,
@@ -96,6 +102,9 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
             raise ValueError("Must provide either api_key or azure_ad_token_provider or azure_ad_token")
 
         headers = self._prepare_headers(headers=default_headers or {})
+
+        if api_version:
+            base_url += f"/{api_version}"
 
         super().__init__(
             api_key=api_key,
