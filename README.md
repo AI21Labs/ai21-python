@@ -545,7 +545,7 @@ response = client.completion.create(
 
 ### Azure
 
-If you wish to interact with your Azure endpoint on Azure AI Studio, use the the `AI21AzureClient`
+If you wish to interact with your Azure endpoint on Azure AI Studio, use the `AI21AzureClient`
 and `AsyncAI21AzureClient` clients.
 
 The following models are supported on Azure:
@@ -568,7 +568,7 @@ messages = [
 
 response = client.chat.completions.create(
   model="jamba-instruct",
-  messages=[messages],
+  messages=messages,
 )
 ```
 
