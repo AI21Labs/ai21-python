@@ -568,7 +568,7 @@ messages = [
 
 response = client.chat.completions.create(
   model="jamba-instruct",
-  messages=[messages],
+  messages=messages,
 )
 ```
 
