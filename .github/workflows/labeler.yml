@@ -4,7 +4,7 @@ on:
     types: [submitted]
   pull_request_review_comment:
     types: [created, deleted]
-  pull_request:
+  pull_request_target:
     types: [opened, edited, reopened, synchronize]
 
 jobs:
