@@ -2,7 +2,130 @@
 
 
 
+## v2.7.0 (2024-06-21)
+
+### Chore
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 (#138)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.8.14 to 1.9.0.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/81e9d935c883d0b210363ab89cf05f3894778450...ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c509b7e`](https://github.com/AI21Labs/ai21-python/commit/c509b7e59aa984cc9948db1362162eaa52eeb1d7))
+
+* chore(deps-dev): bump authlib from 1.3.0 to 1.3.1 (#131)
+
+Bumps [authlib](https://github.com/lepture/authlib) from 1.3.0 to 1.3.1.
+- [Release notes](https://github.com/lepture/authlib/releases)
+- [Changelog](https://github.com/lepture/authlib/blob/master/docs/changelog.rst)
+- [Commits](https://github.com/lepture/authlib/compare/v1.3.0...v1.3.1)
+
+---
+updated-dependencies:
+- dependency-name: authlib
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5eeaf52`](https://github.com/AI21Labs/ai21-python/commit/5eeaf52af19eee54d19fb9430b6caadf972e5f9c))
+
+### Ci
+
+* ci: Added parter labels (#147) ([`737d98f`](https://github.com/AI21Labs/ai21-python/commit/737d98f0b28d6e335b747dbae44fc68929cf39d6))
+
+* ci: Auto Label (#142)
+
+* ci: Auto lgtm
+
+* fix: script
+
+* fix: consts
+
+* ci: Auto labeler action
+
+* fix: on
+
+* fix: Added more triggers
+
+* fix: feat trigger
+
+* ci: size labels
+
+* fix: More tests
+
+* docs: remove to add
+
+* docs: Updated labeler
+
+* fix: Added default
+
+* fix: Removed line
+
+* fix: labeler
+
+* fix: prints
+
+* fix: Script
+
+* fix: scri[pt
+
+* ci: Added prints
+
+* ci: More prints
+
+* ci: Added echo 0
+
+* ci: Fixed condition
+
+* fix: condition
+
+* fix: Removed unused lines
+
+* fix: Removed more prints
+
+* ci: Lgtm
+
+* fix: condition ([`b59407c`](https://github.com/AI21Labs/ai21-python/commit/b59407cb44e0f13ddc85cb07e721126df5acccfb))
+
+### Documentation
+
+* docs: Azure README (#139) ([`5b0eadb`](https://github.com/AI21Labs/ai21-python/commit/5b0eadbe88702e2ca28de608191d9a17b8c0b4b0))
+
+### Feature
+
+* feat: Add async tokenizer, add detokenize method (#144)
+
+* feat: add detokenize method, add async tokenizer
+
+* chore: update pyproject and poetry.lock
+
+* fix: fix tokenizer name in examples and readme, add example ([`f2d06fc`](https://github.com/AI21Labs/ai21-python/commit/f2d06fc7d2bc155beeaec72c0481f9a239656c07))
+
+### Fix
+
+* fix: Add default version to azure url (#148)
+
+* fix: Added azure api version in the url
+
+* fix: Added _create_base_url ([`cbea1d1`](https://github.com/AI21Labs/ai21-python/commit/cbea1d19197bf48c26679f8f97d37013333994f6))
+
+
 ## v2.6.0 (2024-06-13)
+
+### Chore
+
+* chore(release): v2.6.0 [skip ci] ([`3a6de49`](https://github.com/AI21Labs/ai21-python/commit/3a6de495aa88dc98577b8b27fff94cb88d7662ba))
 
 ### Feature
 
