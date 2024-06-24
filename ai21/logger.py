@@ -11,15 +11,23 @@ httpx_logger = logging.getLogger("httpx")
 
 def set_verbose(value: bool) -> None:
     """ "
-    Use this function if you want to log additional, more sensitive data like - secrets and environment variables
+    Use this function if you want to log additional, more sensitive data like - secrets and environment variables.
+    Log level will be set to DEBUG if verbose is set to True.
     """
     global _verbose
     _verbose = value
 
-    if _verbose:
-        os.environ["AI21_LOG_LEVEL"] = "DEBUG"
+    set_debug(_verbose)
+
+
+def set_debug(value: bool) -> None:
+    """
+    Additional way to set log level to DEBUG.
+    """
+    if value:
+        os.environ["AI21_LOG_LEVEL"] = "debug"
     else:
-        os.environ["AI21_LOG_LEVEL"] = "INFO"
+        os.environ["AI21_LOG_LEVEL"] = "info"
 
     setup_logger()
 

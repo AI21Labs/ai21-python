@@ -18,7 +18,6 @@ from ai21.services.sagemaker import SageMaker
 from ai21.version import VERSION
 
 __version__ = VERSION
-setup_logger()
 
 
 def _import_bedrock_client():
@@ -70,3 +69,5 @@ __all__ = [
     "AI21AzureClient",
     "AsyncAI21AzureClient",
 ]
+
+setup_logger()
