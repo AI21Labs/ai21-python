@@ -120,6 +120,6 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         self, method: str, url: str, headers: Dict[str, Any], params: Dict[str, Any], body: Dict[str, Any]
     ) -> None:
         if not get_verbose():
-            headers = {key: value for key, value in headers.items() if key != "api_key" and key != "Authorization"}
+            headers = {key: value for key, value in headers.items() if key != "api-key" and key != "Authorization"}
 
         logger.debug(f"Calling {method} {url} {headers} {params} {body}")
