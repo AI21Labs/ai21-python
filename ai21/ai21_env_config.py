@@ -1,4 +1,6 @@
 from __future__ import annotations
+
+import logging
 import os
 from dataclasses import dataclass
 from typing import Optional
@@ -13,6 +15,8 @@ _ENV_TIMEOUT_SEC = "AI21_TIMEOUT_SEC"
 _ENV_NUM_RETRIES = "AI21_NUM_RETRIES"
 _ENV_AWS_REGION = "AI21_AWS_REGION"
 _ENV_LOG_LEVEL = "AI21_LOG_LEVEL"
+
+_logger = logging.getLogger(__name__)
 
 
 @dataclass
@@ -79,6 +83,21 @@ class _AI21EnvConfig:
     def log_level(self) -> Optional[str]:
         self._log_level = os.getenv(_ENV_LOG_LEVEL, self._log_level)
         return self._log_level
+
+    def log(self, with_secrets: bool = False) -> None:
+        env_vars = {
+            _ENV_API_VERSION: self.api_version,
+            _ENV_API_HOST: self.api_host,
+            _ENV_TIMEOUT_SEC: self.timeout_sec,
+            _ENV_NUM_RETRIES: self.num_retries,
+            _ENV_AWS_REGION: self.aws_region,
+            _ENV_LOG_LEVEL: self.log_level,
+        }
+
+        if with_secrets:
+            env_vars[_ENV_API_KEY] = self.api_key
+
+        _logger.debug(f"AI21 environment configuration: {env_vars}")
 
 
 AI21EnvConfig = _AI21EnvConfig.from_env()
