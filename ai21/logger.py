@@ -44,11 +44,6 @@ def _basic_config() -> None:
     )
 
 
-def log_verbose(text: str) -> None:
-    if get_verbose():
-        logger.info(text)
-
-
 def setup_logger() -> None:
     _basic_config()
 
