@@ -1,14 +1,11 @@
 from __future__ import annotations
 
 import json
-
-from typing import Generic, TypeVar, Union, Any, Optional, Dict, BinaryIO
 from abc import ABC, abstractmethod
+from typing import Generic, TypeVar, Union, Any, Optional, Dict, BinaryIO
 
 import httpx
 
-from ai21.stream.stream import Stream
-from ai21.stream.async_stream import AsyncStream
 from ai21.errors import (
     BadRequest,
     Unauthorized,
@@ -18,10 +15,12 @@ from ai21.errors import (
     ServiceUnavailable,
     AI21APIError,
 )
+from ai21.logger import logger, get_verbose
+from ai21.stream.async_stream import AsyncStream
+from ai21.stream.stream import Stream
 
 _HttpxClientT = TypeVar("_HttpxClientT", bound=Union[httpx.Client, httpx.AsyncClient])
 _DefaultStreamT = TypeVar("_DefaultStreamT", bound=Union[Stream[Any], AsyncStream[Any]])
-
 
 DEFAULT_TIMEOUT_SEC = 300
 DEFAULT_NUM_RETRIES = 0
@@ -116,3 +115,11 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     @abstractmethod
     def _init_client(self, client: Optional[_HttpxClientT]) -> _HttpxClientT:
         pass
+
+    def _log_request(
+        self, method: str, url: str, headers: Dict[str, Any], params: Dict[str, Any], body: Dict[str, Any]
+    ) -> None:
+        if not get_verbose():
+            headers = {key: value for key, value in headers.items() if key != "api_key" and key != "Authorization"}
+
+        logger.debug(f"Calling {method} {url} {headers} {params} {body}")
