@@ -46,7 +46,7 @@ exclude_lines = [
 
 [tool.poetry]
 name = "ai21"
-version = "2.7.0"
+version = "2.8.0"
 description = ""
 authors = ["AI21 Labs"]
 readme = "README.md"
