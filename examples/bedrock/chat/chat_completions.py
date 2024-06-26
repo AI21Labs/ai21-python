@@ -16,11 +16,6 @@ messages = [
     ChatMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
 ]
 
-messages = [
-    ChatMessage(content="You're a support engineer in a SaaS company", role="system"),
-    ChatMessage(content="your message here", role="user"),
-]
-
 response = AI21BedrockClient(model_id=BedrockModelID.JAMBA_INSTRUCT_V1).chat.completions.create(
     messages=messages, max_tokens=1000, temperature=0
 )

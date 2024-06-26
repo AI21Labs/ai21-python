@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import List, Any
 
 from ai21.clients.bedrock.bedrock_session import BedrockSession
@@ -10,11 +11,11 @@ from ai21.types import NotGiven, NOT_GIVEN
 
 class BedrockChat(BedrockResource):
     def __init__(self, model_id: str, bedrock_session: BedrockSession):
-        super().__init__(model_id, bedrock_session)
+        super().__init__(model_id=model_id, bedrock_session=bedrock_session)
         self._chat_completions = BedrockChatCompletions(model_id=model_id, bedrock_session=bedrock_session)
 
     @property
-    def completions(self):
+    def completions(self) -> BedrockChatCompletions:
         return self._chat_completions
 
     def create(

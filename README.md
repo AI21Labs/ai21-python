@@ -506,14 +506,13 @@ response = client.chat.completions.create(
 
 ```python
 import boto3
+
 from ai21 import AI21BedrockClient, BedrockModelID
 from ai21.models.chat import ChatMessage
 
 boto_session = boto3.Session(region_name="us-east-1")
 
-client = AI21BedrockClient(
-    session=boto_session,
-)
+client = AI21BedrockClient(session=boto_session)
 
 messages = [
   ChatMessage(content="You are a helpful assistant", role="system"),
