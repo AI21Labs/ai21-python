@@ -483,6 +483,49 @@ This will make sure you have the required dependencies installed, including `bot
 
 ---
 
+#### Bedrock
+
+```python
+from ai21 import AI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+client = AI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+response = client.chat.completions.create(
+    messages=messages,
+    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+)
+```
+
+#### With Boto3 Session
+
+```python
+import boto3
+from ai21 import AI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+boto_session = boto3.Session(region_name="us-east-1")
+
+client = AI21BedrockClient(
+    session=boto_session,
+)
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+response = client.chat.completions.create(
+    messages=messages,
+    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+)
+```
+
 #### SageMaker
 
 ```python
@@ -506,40 +549,6 @@ boto_session = boto3.Session(region_name="us-east-1")
 client = AI21SageMakerClient(
     session=boto_session,
     endpoint_name="j2-endpoint-name",
-)
-```
-
-#### Bedrock
-
----
-
-```python
-from ai21 import AI21BedrockClient, BedrockModelID
-
-client = AI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
-response = client.completion.create(
-    prompt="Your prompt here",
-    model_id=BedrockModelID.J2_MID_V1,
-    max_tokens=10,
-)
-print(response.completions[0].data.text)
-```
-
-#### With Boto3 Session
-
-```python
-from ai21 import AI21BedrockClient, BedrockModelID
-import boto3
-boto_session = boto3.Session(region_name="us-east-1")
-
-client = AI21BedrockClient(
-    session=boto_session,
-)
-
-response = client.completion.create(
-    prompt="Your prompt here",
-    model_id=BedrockModelID.J2_MID_V1,
-    max_tokens=10,
 )
 ```
 

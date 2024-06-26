@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import List, Any
 
 from ai21.clients.bedrock.resources.bedrock_resource import BedrockResource
