@@ -5,6 +5,7 @@ import boto3
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
 from ai21.clients.bedrock.bedrock_session import BedrockSession
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion
+from ai21.clients.bedrock.resources.chat.bedrock_chat import BedrockChat
 
 
 class AI21BedrockClient:
@@ -22,3 +23,4 @@ class AI21BedrockClient:
     ):
         self._bedrock_session = BedrockSession(session=session, region=region or env_config.aws_region)
         self.completion = BedrockCompletion(model_id=model_id, bedrock_session=self._bedrock_session)
+        self.chat = BedrockChat(model_id=model_id, bedrock_session=self._bedrock_session)
