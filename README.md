@@ -467,7 +467,7 @@ except AI21APIError as e:
 
 ### AWS
 
-AI21 Library provides convenient ways to interact with two AWS clients for use with AWS SageMaker and AWS Bedrock.
+AI21 Library provides convenient ways to interact with two AWS clients for use with [AWS Bedrock](https://aws.amazon.com/bedrock/ai21/) and AWS SageMaker.
 
 ### Installation
 
@@ -483,7 +483,7 @@ This will make sure you have the required dependencies installed, including `bot
 
 ---
 
-#### Bedrock
+### Bedrock
 
 ```python
 from ai21 import AI21BedrockClient, BedrockModelID
@@ -502,7 +502,7 @@ response = client.chat.completions.create(
 )
 ```
 
-#### With Boto3 Session
+### With Boto3 Session
 
 ```python
 import boto3
@@ -525,7 +525,7 @@ response = client.chat.completions.create(
 )
 ```
 
-#### SageMaker
+### SageMaker
 
 ```python
 from ai21 import AI21SageMakerClient
@@ -538,7 +538,7 @@ response = client.summarize.create(
 print(response.summary)
 ```
 
-#### With Boto3 Session
+### With Boto3 Session
 
 ```python
 from ai21 import AI21SageMakerClient
