@@ -474,7 +474,7 @@ AI21 Library provides convenient ways to interact with two AWS clients for use w
 ---
 
 ```bash
-pip install "ai21[AWS]"
+pip install -U "ai21[AWS]"
 ```
 
 This will make sure you have the required dependencies installed, including `boto3 >= 1.28.82`.
