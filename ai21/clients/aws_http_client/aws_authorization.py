@@ -6,20 +6,17 @@ import boto3
 
 
 class AWSAuthorization:
-    def __init__(self, aws_session: Optional[boto3.Session] = None):
+    def __init__(self, aws_session: boto3.Session):
         self._aws_session = aws_session
 
-    def prepare_auth_headers(
+    def get_auth_headers(
         self,
         *,
         url: str,
         service_name: str,
         method: str,
         data: Optional[str],
-        aws_session: Optional[boto3.Session] = None,
     ) -> Dict[str, str]:
-        if self._aws_session is None:
-            self._aws_session = aws_session
         request = AWSRequest(method=method, url=url, data=data)
         credentials = self._aws_session.get_credentials()
 

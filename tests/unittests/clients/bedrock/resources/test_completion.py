@@ -48,7 +48,7 @@ def test__when_model_id_create_and_init__should_use_one_from_create(
         client.create(model_id=invocation_model_id, prompt="test")
 
     mock_http_client.execute_http_request.assert_called_once_with(
-        url=f"https://bedrock-runtime.some-region.amazonaws.com/model/{expected_model_id}/invoke",
+        url=f"https://bedrock-runtime.{_AWS_REGION}.amazonaws.com/model/{expected_model_id}/invoke",
         method="POST",
         body=ANY,
         extra_headers=ANY,
@@ -93,7 +93,7 @@ async def test_async__when_model_id_create_and_init__should_use_one_from_create(
         await client.create(model_id=invocation_model_id, prompt="test")
 
     mock_async_http_client.execute_http_request.assert_called_once_with(
-        url=f"https://bedrock-runtime.some-region.amazonaws.com/model/{expected_model_id}/invoke",
+        url=f"https://bedrock-runtime.{_AWS_REGION}.amazonaws.com/model/{expected_model_id}/invoke",
         method="POST",
         body=ANY,
         extra_headers=ANY,

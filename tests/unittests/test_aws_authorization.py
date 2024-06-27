@@ -17,7 +17,7 @@ def test_prepare_auth_headers__(mock_boto_session: boto3.Session):
         access_key="some-key", secret_key="some-secret", token="some-token"
     )
     aws_authorization = AWSAuthorization(aws_session=mock_boto_session)
-    headers = aws_authorization.prepare_auth_headers(
+    headers = aws_authorization.get_auth_headers(
         url="https://dummy.com",
         service_name="bedrock",
         method="POST",

@@ -8,7 +8,16 @@ from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion,
 from ai21.http_client.http_client import HttpClient
 from ai21.http_client.async_http_client import AsyncHttpClient
 
-DEFAULT_AWS_REGION = "us-east-1"
+
+def _get_aws_region(
+    env_config: _AI21EnvConfig,
+    session: Optional[boto3.Session] = None,
+    region: Optional[str] = None,
+) -> str:
+    if session is not None:
+        return session.region_name
+
+    return region or env_config.aws_region
 
 
 class AI21BedrockClient:
@@ -23,9 +32,7 @@ class AI21BedrockClient:
         session: Optional[boto3.Session] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
-        self._model_id = model_id
-        self._bedrock_session = session
-        region = session.region_name if session is not None else region or env_config.aws_region or DEFAULT_AWS_REGION
+        region = _get_aws_region(env_config=env_config, session=session, region=region)
 
         self._http_client = http_client or HttpClient(
             timeout_sec=timeout_sec,
@@ -49,10 +56,10 @@ class AsyncAI21BedrockClient:
         num_retries: Optional[int] = None,
         http_client: Optional[AsyncHttpClient] = None,
         session: Optional[boto3.Session] = None,
+        env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
-        self._model_id = model_id
-        self._bedrock_session = session
-        region = session.region_name if session is not None else region or DEFAULT_AWS_REGION
+        region = _get_aws_region(env_config=env_config, session=session, region=region)
+
         self._http_client = http_client or AsyncHttpClient(
             timeout_sec=timeout_sec,
             num_retries=num_retries,
