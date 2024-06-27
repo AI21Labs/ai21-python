@@ -25,9 +25,9 @@ _AWS_REGION = "some-region"
 def test__when_model_id_create_and_init__should_use_one_from_create(
     invocation_model_id: Optional[str],
     expected_model_id: str,
-    mock_aws_http_client: Mock,
+    mock_http_client: Mock,
 ):
-    mock_aws_http_client.execute_http_request.return_value = httpx.Response(
+    mock_http_client.execute_http_request.return_value = httpx.Response(
         status_code=200,
         json={
             "id": expected_model_id,
@@ -39,7 +39,7 @@ def test__when_model_id_create_and_init__should_use_one_from_create(
         },
     )
 
-    client = BedrockCompletion(model_id=_CTOR_PROVIDED_MODEL_ID, client=mock_aws_http_client, region=_AWS_REGION)
+    client = BedrockCompletion(model_id=_CTOR_PROVIDED_MODEL_ID, client=mock_http_client, region=_AWS_REGION)
 
     # We can not pass "None" explicitly to the create method, so we have to use the if else statement
     if invocation_model_id is None:
@@ -47,11 +47,11 @@ def test__when_model_id_create_and_init__should_use_one_from_create(
     else:
         client.create(model_id=invocation_model_id, prompt="test")
 
-    mock_aws_http_client.execute_http_request.assert_called_once_with(
+    mock_http_client.execute_http_request.assert_called_once_with(
         url=f"https://bedrock-runtime.some-region.amazonaws.com/model/{expected_model_id}/invoke",
-        service_name=ANY,
-        method=ANY,
+        method="POST",
         body=ANY,
+        extra_headers=ANY,
     )
 
 
@@ -70,9 +70,9 @@ def test__when_model_id_create_and_init__should_use_one_from_create(
 async def test_async__when_model_id_create_and_init__should_use_one_from_create(
     invocation_model_id: Optional[str],
     expected_model_id: str,
-    mock_async_aws_http_client: Mock,
+    mock_async_http_client: Mock,
 ):
-    mock_async_aws_http_client.execute_http_request.return_value = httpx.Response(
+    mock_async_http_client.execute_http_request.return_value = httpx.Response(
         status_code=200,
         json={
             "id": expected_model_id,
@@ -84,9 +84,7 @@ async def test_async__when_model_id_create_and_init__should_use_one_from_create(
         },
     )
 
-    client = AsyncBedrockCompletion(
-        model_id=_CTOR_PROVIDED_MODEL_ID, client=mock_async_aws_http_client, region=_AWS_REGION
-    )
+    client = AsyncBedrockCompletion(model_id=_CTOR_PROVIDED_MODEL_ID, client=mock_async_http_client, region=_AWS_REGION)
 
     # We can not pass "None" explicitly to the create method, so we have to use the if else statement
     if invocation_model_id is None:
@@ -94,9 +92,9 @@ async def test_async__when_model_id_create_and_init__should_use_one_from_create(
     else:
         await client.create(model_id=invocation_model_id, prompt="test")
 
-    mock_async_aws_http_client.execute_http_request.assert_called_once_with(
+    mock_async_http_client.execute_http_request.assert_called_once_with(
         url=f"https://bedrock-runtime.some-region.amazonaws.com/model/{expected_model_id}/invoke",
-        service_name=ANY,
-        method=ANY,
+        method="POST",
         body=ANY,
+        extra_headers=ANY,
     )
