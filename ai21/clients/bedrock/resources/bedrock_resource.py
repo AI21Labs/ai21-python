@@ -8,7 +8,7 @@ import boto3
 import httpx
 
 from ai21 import AI21APIError
-from ai21.clients.aws_http_client.aws_authorization import AWSAuthorization
+from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelStreamError
 from ai21.http_client.async_http_client import AsyncHttpClient
 from ai21.http_client.http_client import HttpClient

@@ -1,6 +1,6 @@
 import boto3
 
-from ai21.clients.aws_http_client.aws_authorization import AWSAuthorization
+from ai21.clients.aws.aws_authorization import AWSAuthorization
 
 
 class MockCredentials:
