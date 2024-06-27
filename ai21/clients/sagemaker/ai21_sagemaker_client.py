@@ -3,7 +3,8 @@ from typing import Optional, Dict, Any
 import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.clients.aws_http_client.aws_http_client import AWSHttpClient, DEFAULT_AWS_REGION
+
+from ai21.clients.aws.utils import get_aws_region
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC
@@ -31,14 +32,11 @@ class AI21SageMakerClient:
         http_client: Optional[HttpClient] = None,
         **kwargs,
     ):
-        region = session.region_name if session is not None else region or env_config.aws_region or DEFAULT_AWS_REGION
-        self._http_client = AWSHttpClient(
-            aws_region=region,
+        region = get_aws_region(env_config=env_config, session=session, region=region)
+        self._http_client = http_client or HttpClient(
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
-            http_client=http_client,
-            aws_session=session,
         )
         self.completion = SageMakerCompletion(endpoint_name=endpoint_name, region=region, client=self._http_client)
         self.paraphrase = SageMakerParaphrase(endpoint_name=endpoint_name, region=region, client=self._http_client)
