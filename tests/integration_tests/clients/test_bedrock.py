@@ -19,9 +19,15 @@ BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK
     argnames=["test_file_name"],
     argvalues=[
         ("completion.py",),
+        ("async_completion.py",),
+        ("chat/chat_completions.py",),
+        ("chat/async_chat_completions.py",),
     ],
     ids=[
         "when_completion__should_return_ok",
+        "when_async_completion__should_return_ok",
+        "when_chat_completions__should_return_ok",
+        "when_async_chat_completions__should_return_ok",
     ],
 )
 def test_bedrock(test_file_name: str):

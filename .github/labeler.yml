@@ -1,0 +1,34 @@
+# Add 'Documentation' label to any change to .md files within the entire repository
+documentation:
+  - changed-files:
+      - any-glob-to-any-file: "**/*.md"
+
+# Add 'feature' label to any PR where the head branch name starts with `feature` or has a `feature` section in the name
+feature:
+  - head-branch: ["^feat", "feat:"]
+
+# Add 'release' label to any PR that is opened against the `main` branch
+fix:
+  - head-branch: ["^bugfix", "fix:"]
+
+ci:
+  - head-branch: ["^ci", "ci:"]
+  - changed-files:
+      - any-glob-to-any-file:
+          - .github/*
+
+aws:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/bedrock/*
+          - ai21/clients/sagemaker/*
+
+azure:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/azure/*
+
+vertex:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/vertex/*
