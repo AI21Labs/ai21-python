@@ -5,7 +5,7 @@ from typing import List, Any, Optional
 import boto3
 
 from ai21.clients.bedrock.resources.bedrock_resource import BedrockResource, AsyncBedrockResource
-from ai21.clients.bedrock.resources.chat.becrock_chat_completions import (
+from ai21.clients.bedrock.resources.chat.bedrock_chat_completions import (
     BedrockChatCompletions,
     AsyncBedrockChatCompletions,
 )
