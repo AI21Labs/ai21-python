@@ -34,8 +34,8 @@
 - [Error Handling](#Error-Handling)
 - [Cloud Providers](#Cloud-Providers) ☁️
   - [AWS](#AWS)
-    - [SageMaker](#SageMaker)
     - [Bedrock](#Bedrock)
+    - [SageMaker](#SageMaker)
   - [Azure](#Azure)
 
 ## Examples (tl;dr)
@@ -467,14 +467,14 @@ except AI21APIError as e:
 
 ### AWS
 
-AI21 Library provides convenient ways to interact with two AWS clients for use with AWS SageMaker and AWS Bedrock.
+AI21 Library provides convenient ways to interact with two AWS clients for use with [AWS Bedrock](https://aws.amazon.com/bedrock/ai21/) and AWS SageMaker.
 
 ### Installation
 
 ---
 
 ```bash
-pip install "ai21[AWS]"
+pip install -U "ai21[AWS]"
 ```
 
 This will make sure you have the required dependencies installed, including `boto3 >= 1.28.82`.
@@ -483,7 +483,49 @@ This will make sure you have the required dependencies installed, including `bot
 
 ---
 
-#### SageMaker
+### Bedrock
+
+```python
+from ai21 import AI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+client = AI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+response = client.chat.completions.create(
+    messages=messages,
+    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+)
+```
+
+### With Boto3 Session
+
+```python
+import boto3
+
+from ai21 import AI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+boto_session = boto3.Session(region_name="us-east-1")
+
+client = AI21BedrockClient(session=boto_session)
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+response = client.chat.completions.create(
+    messages=messages,
+    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+)
+```
+
+### SageMaker
 
 ```python
 from ai21 import AI21SageMakerClient
@@ -496,7 +538,7 @@ response = client.summarize.create(
 print(response.summary)
 ```
 
-#### With Boto3 Session
+### With Boto3 Session
 
 ```python
 from ai21 import AI21SageMakerClient
@@ -506,40 +548,6 @@ boto_session = boto3.Session(region_name="us-east-1")
 client = AI21SageMakerClient(
     session=boto_session,
     endpoint_name="j2-endpoint-name",
-)
-```
-
-#### Bedrock
-
----
-
-```python
-from ai21 import AI21BedrockClient, BedrockModelID
-
-client = AI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
-response = client.completion.create(
-    prompt="Your prompt here",
-    model_id=BedrockModelID.J2_MID_V1,
-    max_tokens=10,
-)
-print(response.completions[0].data.text)
-```
-
-#### With Boto3 Session
-
-```python
-from ai21 import AI21BedrockClient, BedrockModelID
-import boto3
-boto_session = boto3.Session(region_name="us-east-1")
-
-client = AI21BedrockClient(
-    session=boto_session,
-)
-
-response = client.completion.create(
-    prompt="Your prompt here",
-    model_id=BedrockModelID.J2_MID_V1,
-    max_tokens=10,
 )
 ```
 

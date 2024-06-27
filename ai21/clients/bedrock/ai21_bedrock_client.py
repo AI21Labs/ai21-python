@@ -3,7 +3,7 @@ from typing import Optional, Dict, Any
 import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-
+from ai21.clients.bedrock.resources.chat.bedrock_chat import BedrockChat
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion, AsyncBedrockCompletion
 from ai21.http_client.http_client import HttpClient
 from ai21.http_client.async_http_client import AsyncHttpClient
@@ -36,6 +36,7 @@ class AI21BedrockClient:
         self.completion = BedrockCompletion(
             model_id=model_id, region=region, client=self._http_client, aws_session=session
         )
+        self.chat = BedrockChat(model_id=model_id, bedrock_session=self._bedrock_session)
 
 
 class AsyncAI21BedrockClient:
