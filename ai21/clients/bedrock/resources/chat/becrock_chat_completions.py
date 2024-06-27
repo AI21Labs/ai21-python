@@ -35,6 +35,6 @@ class BedrockChatCompletions(BedrockResource):
         if model_id is None:
             raise ValueError("model_id should be provided in either the constructor or the 'create' method call")
 
-        raw_response = self._invoke(model_id=model_id, body=body)
+        raw_response = self._post(model_id=model_id, body=body)
 
-        return ChatCompletionResponse.from_dict(raw_response)
+        return ChatCompletionResponse.from_dict(raw_response.json())

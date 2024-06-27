@@ -36,7 +36,7 @@ class AI21BedrockClient:
         self.completion = BedrockCompletion(
             model_id=model_id, region=region, client=self._http_client, aws_session=session
         )
-        self.chat = BedrockChat(model_id=model_id, bedrock_session=self._bedrock_session)
+        self.chat = BedrockChat(model_id=model_id, region=region, client=self._http_client, aws_session=session)
 
 
 class AsyncAI21BedrockClient:
