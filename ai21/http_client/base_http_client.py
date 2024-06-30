@@ -6,7 +6,6 @@ from typing import Generic, TypeVar, Union, Any, Optional, Dict, BinaryIO
 
 import httpx
 
-from ai21 import AI21EnvConfig
 from ai21.errors import (
     BadRequest,
     Unauthorized,
@@ -16,7 +15,6 @@ from ai21.errors import (
     ServiceUnavailable,
     AI21APIError,
 )
-from ai21.logger import logger, get_verbose
 from ai21.stream.async_stream import AsyncStream
 from ai21.stream.stream import Stream
 
@@ -116,14 +114,3 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     @abstractmethod
     def _init_client(self, client: Optional[_HttpxClientT]) -> _HttpxClientT:
         pass
-
-    def _log_request(
-        self, method: str, url: str, headers: Dict[str, Any], params: Dict[str, Any], body: Dict[str, Any]
-    ) -> None:
-        is_verbose = get_verbose()
-
-        if not is_verbose:
-            headers = {key: value for key, value in headers.items() if key != "api-key" and key != "Authorization"}
-
-        logger.debug(f"Calling {method} {url} {headers} {params} {body}")
-        AI21EnvConfig.log(with_secrets=is_verbose)

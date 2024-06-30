@@ -82,7 +82,7 @@ class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):
     ) -> httpx.Response:
         timeout = self._timeout_sec
         headers = self._headers
-        self._log_request(method=method, url=url, headers=headers, params=params, body=body)
+        logger.debug(f"Calling {method} {url} {headers} {params} {body}")
 
         if method == "GET":
             request = self._client.build_request(
