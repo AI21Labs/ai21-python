@@ -1,6 +1,7 @@
 from __future__ import annotations
 from typing import List, Any
 
+from ai21.logger import logger
 from ai21.clients.bedrock.resources.bedrock_resource import BedrockResource, AsyncBedrockResource
 from ai21.models.chat import ChatMessage, ChatCompletionResponse
 from ai21.types import NotGiven, NOT_GIVEN
@@ -19,6 +20,10 @@ class BedrockChatCompletions(BedrockResource):
         n: int | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
+        stream_field = kwargs.get("stream", NOT_GIVEN)
+        if stream_field is not NOT_GIVEN:
+            logger.warning("Field stream is not supported. Ignoring it.")
+
         body = remove_not_given(
             {
                 "messages": [message.to_dict() for message in messages],
@@ -52,6 +57,10 @@ class AsyncBedrockChatCompletions(AsyncBedrockResource):
         n: int | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
+        stream_field = kwargs.get("stream", NOT_GIVEN)
+        if stream_field is not NOT_GIVEN:
+            logger.warning("Field stream is not supported. Ignoring it.")
+
         body = remove_not_given(
             {
                 "messages": [message.to_dict() for message in messages],

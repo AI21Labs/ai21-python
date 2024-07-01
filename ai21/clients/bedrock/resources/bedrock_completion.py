@@ -6,6 +6,7 @@ from ai21.clients.bedrock.resources.bedrock_resource import BedrockResource, Asy
 from ai21.models import Penalty, CompletionsResponse
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
+from ai21.logger import logger
 
 
 class BedrockCompletion(BedrockResource):
@@ -25,6 +26,10 @@ class BedrockCompletion(BedrockResource):
         count_penalty: Penalty | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
+        stream_field = kwargs.get("stream", NOT_GIVEN)
+        if stream_field is not NOT_GIVEN:
+            logger.warning("Field stream is not supported. Ignoring it.")
+
         body = remove_not_given(
             {
                 "prompt": prompt,
@@ -67,6 +72,10 @@ class AsyncBedrockCompletion(AsyncBedrockResource):
         count_penalty: Penalty | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
+        stream_field = kwargs.get("stream", NOT_GIVEN)
+        if stream_field is not NOT_GIVEN:
+            logger.warning("Field stream is not supported. Ignoring it.")
+
         body = remove_not_given(
             {
                 "prompt": prompt,
