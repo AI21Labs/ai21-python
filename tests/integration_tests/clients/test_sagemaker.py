@@ -13,17 +13,27 @@ SAGEMAKER_PATH = Path(__file__).parent.parent.parent.parent / "examples" / SAGEM
     argnames=["test_file_name"],
     argvalues=[
         ("answer.py",),
+        ("async_answer.py",),
         ("completion.py",),
+        ("async_completion.py",),
         ("gec.py",),
+        ("async_gec.py",),
         ("paraphrase.py",),
+        ("async_paraphrase.py",),
         ("summarization.py",),
+        ("async_summarization.py",),
     ],
     ids=[
         "when_answer__should_return_ok",
+        "when_async_answer__should_return_ok",
         "when_completion__should_return_ok",
+        "when_async_completion__should_return_ok",
         "when_gec__should_return_ok",
+        "when_async_gec__should_return_ok",
         "when_paraphrase__should_return_ok",
+        "when_async_paraphrase__should_return_ok",
         "when_summarization__should_return_ok",
+        "when_async_summarization__should_return_ok",
     ],
 )
 def test_sagemaker(test_file_name: str):

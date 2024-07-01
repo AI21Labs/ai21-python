@@ -589,6 +589,24 @@ response = client.summarize.create(
 print(response.summary)
 ```
 
+#### Async
+
+```python
+import asyncio
+from ai21 import AsyncAI21SageMakerClient
+
+client = AsyncAI21SageMakerClient(endpoint_name="j2-endpoint-name")
+
+async def main():
+  response = await client.summarize.create(
+      source="Text to summarize",
+      source_type="TEXT",
+  )
+  print(response.summary)
+
+asyncio.run(main())
+```
+
 ### With Boto3 Session
 
 ```python

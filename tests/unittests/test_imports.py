@@ -20,6 +20,7 @@ EXPECTED_ALL = [
     "SageMaker",
     "TooManyRequestsError",
     "AsyncAI21BedrockClient",
+    "AsyncAI21SageMakerClient",
 ]
 
 

@@ -45,6 +45,12 @@ def _import_async_bedrock_client():
     return AsyncAI21BedrockClient
 
 
+def _import_async_sagemaker_client():
+    from ai21.clients.sagemaker.ai21_sagemaker_client import AsyncAI21SageMakerClient
+
+    return AsyncAI21SageMakerClient
+
+
 def __getattr__(name: str) -> Any:
     try:
         if name == "AI21BedrockClient":
@@ -58,6 +64,9 @@ def __getattr__(name: str) -> Any:
 
         if name == "AsyncAI21BedrockClient":
             return _import_async_bedrock_client()
+
+        if name == "AsyncAI21SageMakerClient":
+            return _import_async_sagemaker_client()
     except ImportError as e:
         raise ImportError(f'Please install "ai21[AWS]" in order to use {name}') from e
 
@@ -79,4 +88,5 @@ __all__ = [
     "AI21AzureClient",
     "AsyncAI21AzureClient",
     "AsyncAI21BedrockClient",
+    "AsyncAI21SageMakerClient",
 ]
