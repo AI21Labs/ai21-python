@@ -1,3 +1,4 @@
+import warnings
 from typing import Optional, Dict, Any
 
 import boto3
@@ -32,6 +33,13 @@ class AI21BedrockClient:
         session: Optional[boto3.Session] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
+        if model_id is not None:
+            warnings.warn(
+                "Please consider using the 'model_id' parameter in the "
+                "'create' method calls instead of the constructor.",
+                DeprecationWarning,
+            )
+
         region = _get_aws_region(env_config=env_config, session=session, region=region)
 
         self._http_client = http_client or HttpClient(
