@@ -4,21 +4,11 @@ from typing import Optional, Dict, Any
 import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
+from ai21.clients.aws.utils import get_aws_region
 from ai21.clients.bedrock.resources.chat.bedrock_chat import BedrockChat, AsyncBedrockChat
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion, AsyncBedrockCompletion
 from ai21.http_client.http_client import HttpClient
 from ai21.http_client.async_http_client import AsyncHttpClient
-
-
-def _get_aws_region(
-    env_config: _AI21EnvConfig,
-    session: Optional[boto3.Session] = None,
-    region: Optional[str] = None,
-) -> str:
-    if session is not None:
-        return session.region_name
-
-    return region or env_config.aws_region
 
 
 class AI21BedrockClient:
@@ -40,7 +30,7 @@ class AI21BedrockClient:
                 DeprecationWarning,
             )
 
-        region = _get_aws_region(env_config=env_config, session=session, region=region)
+        region = get_aws_region(env_config=env_config, session=session, region=region)
 
         self._http_client = http_client or HttpClient(
             timeout_sec=timeout_sec,
@@ -73,7 +63,7 @@ class AsyncAI21BedrockClient:
                 DeprecationWarning,
             )
 
-        region = _get_aws_region(env_config=env_config, session=session, region=region)
+        region = get_aws_region(env_config=env_config, session=session, region=region)
 
         self._http_client = http_client or AsyncHttpClient(
             timeout_sec=timeout_sec,
