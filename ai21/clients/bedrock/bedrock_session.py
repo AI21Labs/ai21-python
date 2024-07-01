@@ -1,18 +1,13 @@
 import json
-import re
 from typing import Any, Dict
 
 import boto3
 from botocore.exceptions import ClientError
 
-from ai21.logger import logger
 from ai21.errors import AccessDenied, NotFound, APITimeoutError
 from ai21.http_client.base_http_client import handle_non_success_response
+from ai21.logger import logger
 
-_ERROR_MSG_TEMPLATE = (
-    r"Received client error \((.*?)\) from primary with message \"(.*?)\". "
-    r"See .* in account .* for more information."
-)
 _RUNTIME_NAME = "bedrock-runtime"
 
 
@@ -55,9 +50,6 @@ class BedrockSession:
             raise APITimeoutError(details=error_message)
 
         if status_code == 424:
-            error_message_template = re.compile(_ERROR_MSG_TEMPLATE)
-            model_status_code = int(error_message_template.search(error_message).group(1))
-            model_error_message = error_message_template.search(error_message).group(2)
-            handle_non_success_response(model_status_code, model_error_message)
+            handle_non_success_response(status_code, error_message)
 
         handle_non_success_response(status_code, error_message)
