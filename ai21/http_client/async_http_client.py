@@ -82,7 +82,7 @@ class AsyncHttpClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
     ) -> httpx.Response:
         timeout = self._timeout_sec
         headers = self._headers
-        logger.debug(f"Calling {method} {url} {headers} {params}")
+        logger.debug(f"Calling {method} {url} {headers} {params} {body}")
 
         if method == "GET":
             request = self._client.build_request(
