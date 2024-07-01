@@ -22,7 +22,7 @@ class CensorSecretsFormatter(logging.Formatter):
 
     def _censor_secrets(self, message: str) -> str:
         # Regular expression to find the Authorization key and its value
-        pattern = r"('Authorization':\s*'[^']*'|'api-key':\s*'[^']*')"
+        pattern = r"('Authorization':\s*'[^']*'|'api-key':\s*'[^']*'|'X-Amz-Security-Token':\s*'[^']*')"
 
         def replacement(match):
             return match.group(0).split(":")[0] + ": '**************'"
