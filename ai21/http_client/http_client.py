@@ -47,9 +47,18 @@ class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):
         body: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
+        extra_headers: Optional[Dict] = None,
     ) -> httpx.Response:
         try:
-            response = self._request(files=files, method=method, params=params, url=url, stream=stream, body=body)
+            response = self._request(
+                files=files,
+                method=method,
+                params=params,
+                url=url,
+                stream=stream,
+                body=body,
+                extra_headers=extra_headers,
+            )
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -79,9 +88,10 @@ class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):
         body: Optional[Dict],
         url: str,
         stream: bool,
+        extra_headers: Optional[Dict],
     ) -> httpx.Response:
         timeout = self._timeout_sec
-        headers = self._headers
+        headers = {**self._headers, **extra_headers} if extra_headers is not None else self._headers
         logger.debug(f"Calling {method} {url} {headers} {params} {body}")
 
         if method == "GET":
@@ -96,7 +106,7 @@ class HttpClient(BaseHttpClient[httpx.Client, Stream[Any]]):
             return self._client.send(request=request, stream=stream)
 
         data = self._get_request_data(files=files, method=method, body=body)
-        headers = self._get_request_headers(files=files)
+        headers = self._get_request_headers(files=files, headers=headers)
 
         request = self._client.build_request(
             method=method,
