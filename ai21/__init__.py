@@ -64,7 +64,7 @@ def __getattr__(name: str) -> Any:
 
         if name == "AsyncAI21BedrockClient":
             return _import_async_bedrock_client()
-
+          
         if name == "AsyncAI21SageMakerClient":
             return _import_async_sagemaker_client()
     except ImportError as e:
