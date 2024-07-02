@@ -1,6 +1,6 @@
 name: Integration Tests
 
-on: [push]
+on: [workflow_dispatch]
 
 env:
   POETRY_VERSION: "1.7.1"
