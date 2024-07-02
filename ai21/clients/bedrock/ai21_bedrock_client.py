@@ -14,6 +14,7 @@ from ai21.clients.studio.resources.studio_completion import StudioCompletion, As
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelErrorException
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
+from ai21.models.request_options import RequestOptions
 
 _logger = logging.getLogger(__name__)
 
@@ -42,26 +43,27 @@ class BaseBedrockClient:
     def __init__(self, session, region):
         self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
 
-    def _prepare_options(self, options: Dict[str, Any]) -> Dict[str, Any]:
-        body = options.pop("body")
+    def _prepare_options(self, options: RequestOptions) -> RequestOptions:
+        body = options.body
+
         model = body.pop("model", None)
         stream = body.pop("stream", False)
-        url = options["url"]
 
         if stream:
             _logger.warning("Field stream is not supported. Ignoring it.")
 
         # When stream is supported we would need to update this section and the URL
-        options["url"] = f"{url}/model/{model}/invoke"
-        options["body"] = body
-        options["headers"] = self._prepare_headers(options)
-        return options
+        url = f"{options.url}/model/{model}/invoke"
+        headers = self._prepare_headers(url=url, body=body)
 
-    def _prepare_headers(self, options: dict) -> dict:
-        body = options.get("body")
-        return self._aws_auth.get_auth_headers(
-            service_name="bedrock", method="POST", url=options.get("url"), data=json.dumps(body)
+        return RequestOptions(
+            body=body,
+            url=url,
+            headers=headers,
         )
+
+    def _prepare_headers(self, url: str, body: Dict[str, Any]) -> dict:
+        return self._aws_auth.get_auth_headers(service_name="bedrock", method="POST", url=url, data=json.dumps(body))
 
 
 class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
@@ -101,7 +103,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
         self.chat.create = self.chat.completions.create
         self.completion = StudioCompletion(self)
 
-    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
+    def _build_request(self, options: RequestOptions) -> httpx.Request:
         options = self._prepare_options(options)
 
         return super()._build_request(options)
@@ -144,7 +146,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         self.chat.create = self.chat.completions.create
         self.completion = AsyncStudioCompletion(self)
 
-    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
+    def _build_request(self, options: RequestOptions) -> httpx.Request:
         options = self._prepare_options(options)
 
         return super()._build_request(options)

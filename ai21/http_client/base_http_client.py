@@ -16,6 +16,7 @@ from ai21.errors import (
     ServiceUnavailable,
     AI21APIError,
 )
+from ai21.models.request_options import RequestOptions
 from ai21.stream.async_stream import AsyncStream
 from ai21.stream.stream import Stream
 from ai21.version import VERSION
@@ -53,11 +54,13 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
 
     def __init__(
         self,
+        api_key: Optional[str] = None,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
         via: Optional[str] = None,
     ):
+        self._api_key = api_key
         self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
         self._headers = headers or {}
@@ -110,8 +113,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     @abstractmethod
     def _request(
         self,
-        options: Dict[str, Any],
-        extra_headers: Optional[Dict],
+        options: RequestOptions,
     ) -> httpx.Response:
         pass
 
@@ -143,16 +145,16 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
 
         return user_agent
 
-    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
-        data = self._get_request_data(files=options["files"], method=options["method"], body=options["body"])
-        headers = self._get_request_headers(files=options["files"], headers=options["headers"])
+    def _build_request(self, options: RequestOptions) -> httpx.Request:
+        data = self._get_request_data(files=options.files, method=options.method, body=options.body)
+        headers = self._get_request_headers(files=options.files, headers=options.headers)
 
         return self._client.build_request(
-            method=options["method"],
-            url=options["url"],
+            method=options.method,
+            url=options.url,
             headers=headers,
-            timeout=options["timeout"],
-            params=options["params"],
+            timeout=options.timeout,
+            params=options.params,
             data=data,
-            files=options["files"],
+            files=options.files,
         )
