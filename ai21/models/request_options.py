@@ -11,12 +11,12 @@ class RequestOptions:
     method: str
     headers: Dict[str, Any]
     timeout: float
-    path: str
+    path: Optional[str] = None
     params: Optional[Dict[str, Any]] = None
     stream: bool = False
     files: Optional[Dict[str, BinaryIO]] = None
 
-    def update(
+    def replace(
         self,
         url: Optional[str] = None,
         body: Optional[Dict[str, Any]] = None,

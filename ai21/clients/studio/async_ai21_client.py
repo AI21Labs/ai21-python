@@ -67,5 +67,7 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.beta = AsyncBeta(self)
 
     def _build_request(self, options: RequestOptions) -> httpx.Request:
-        options = options.update(url=f"{options.url}{options.path}")
+        if options.path:
+            options = options.replace(url=f"{options.url}{options.path}")
+
         return super()._build_request(options)

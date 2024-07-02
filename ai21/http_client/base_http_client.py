@@ -56,12 +56,13 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     def __init__(
         self,
         api_key: Optional[str] = None,
+        requires_api_key: bool = False,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
         via: Optional[str] = None,
     ):
-        if api_key is None:
+        if requires_api_key and api_key is None:
             raise MissingApiKeyError()
 
         self._api_key = api_key

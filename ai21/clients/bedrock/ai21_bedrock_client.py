@@ -56,7 +56,7 @@ class BaseBedrockClient:
         url = f"{options.url}/model/{model}/invoke"
         headers = self._prepare_headers(url=url, body=body)
 
-        return RequestOptions(
+        return options.replace(
             body=body,
             url=url,
             headers=headers,
