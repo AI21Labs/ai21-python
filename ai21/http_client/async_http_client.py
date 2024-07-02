@@ -6,6 +6,7 @@ from httpx import ConnectError
 import httpx
 
 from ai21.logger import logger
+from ai21.models.request_options import RequestOptions
 from ai21.stream.async_stream import AsyncStream
 from ai21.http_client.base_http_client import (
     BaseHttpClient,
@@ -34,8 +35,7 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         client: Optional[httpx.AsyncClient] = None,
         via: Optional[str] = None,
     ):
-        super().__init__(timeout_sec=timeout_sec, num_retries=num_retries, headers=headers, via=via)
-        self._api_key = api_key
+        super().__init__(api_key=api_key, timeout_sec=timeout_sec, num_retries=num_retries, headers=headers, via=via)
         self._base_url = base_url
         self._client = self._init_client(client)
         self._headers = self._build_headers(passed_headers=headers)
@@ -58,13 +58,22 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
         files: Optional[Dict[str, BinaryIO]] = None,
         extra_headers: Optional[Dict] = None,
     ) -> httpx.Response:
-        options = {"path": path, "body": body, "params": params, "stream": stream, "files": files, "method": method}
+        headers = {**self._headers, **extra_headers} if extra_headers is not None else self._headers
+
+        options = RequestOptions(
+            path=path,
+            body=body,
+            method=method,
+            stream=stream,
+            params=params,
+            files=files,
+            headers=headers,
+            timeout=self._timeout_sec,
+            url=self._base_url,
+        )
 
         try:
-            response = await self._request(
-                options=options,
-                extra_headers=extra_headers,
-            )
+            response = await self._request(options=options)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -88,21 +97,11 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
 
         return response
 
-    async def _request(
-        self,
-        options: Dict[str, Any],
-        extra_headers: Optional[Dict],
-    ) -> httpx.Response:
-        timeout = self._timeout_sec
-        headers = {**self._headers, **extra_headers} if extra_headers is not None else self._headers
-
-        options["url"] = self._base_url
-        options["headers"] = headers
-        options["timeout"] = timeout
+    async def _request(self, options: RequestOptions) -> httpx.Response:
         request = self._build_request(options)
 
-        _logger.debug(f"Calling {request.method} {request.url} {request.headers}, {options.get('body')}")
-        return await self._client.send(request=request, stream=options["stream"])
+        _logger.debug(f"Calling {request.method} {request.url} {request.headers}, {options.body}")
+        return await self._client.send(request=request, stream=options.stream)
 
     def _init_client(self, client: Optional[httpx.AsyncClient]) -> httpx.AsyncClient:
         if client is not None:

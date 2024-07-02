@@ -21,6 +21,7 @@ from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
 from ai21.http_client.http_client import AI21HTTPClient
+from ai21.models.request_options import RequestOptions
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
@@ -78,8 +79,6 @@ class AI21Client(AI21HTTPClient):
         tokenizer = get_tokenizer(tokenizer_name)
         return tokenizer.count_tokens(text)
 
-    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
-        url = options["url"]
-        options["url"] = f"{url}{options['path']}"
-
+    def _build_request(self, options: RequestOptions) -> httpx.Request:
+        options = options.update(url=f"{options.url}{options.path}")
         return super()._build_request(options)
