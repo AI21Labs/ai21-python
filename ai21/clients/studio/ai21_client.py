@@ -1,10 +1,10 @@
 import warnings
 from typing import Optional, Any, Dict
 
+import httpx
 from ai21_tokenizer import PreTrainedTokenizers
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
@@ -20,7 +20,7 @@ from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
-from ai21.http_client.http_client import HttpClient
+from ai21.http_client.http_client import AI21HTTPClient
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
@@ -40,7 +40,7 @@ class AI21Client:
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
-        http_client: Optional[HttpClient] = None,
+        http_client: Optional[httpx.Client] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
@@ -49,12 +49,11 @@ class AI21Client:
         self._http_client = AI21HTTPClient(
             api_key=api_key or env_config.api_key,
             base_url=base_url,
-            api_version=env_config.api_version,
             headers=headers,
             timeout_sec=timeout_sec or env_config.timeout_sec,
             num_retries=num_retries or env_config.num_retries,
             via=via,
-            http_client=http_client,
+            client=http_client,
         )
         self.completion = StudioCompletion(self._http_client)
         self.chat: StudioChat = StudioChat(self._http_client)

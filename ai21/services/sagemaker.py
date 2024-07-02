@@ -1,11 +1,11 @@
 from typing import List
 
 from ai21 import AI21EnvConfig
-from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
 from ai21.clients.sagemaker.constants import (
     SAGEMAKER_MODEL_PACKAGE_NAMES,
 )
 from ai21.errors import ModelPackageDoesntExistError
+from ai21.http_client.http_client import AI21HTTPClient
 
 _JUMPSTART_ENDPOINT = "jumpstart"
 _LIST_VERSIONS_ENDPOINT = f"{_JUMPSTART_ENDPOINT}/list_versions"

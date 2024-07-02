@@ -1,7 +1,8 @@
 from typing import Optional, Any, Dict
 
+import httpx
+
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
@@ -17,7 +18,7 @@ from ai21.clients.studio.resources.studio_paraphrase import AsyncStudioParaphras
 from ai21.clients.studio.resources.studio_segmentation import AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudioSummarizeBySegment
-from ai21.http_client.async_http_client import AsyncHttpClient
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 
 
 class AsyncAI21Client:
@@ -33,7 +34,7 @@ class AsyncAI21Client:
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         via: Optional[str] = None,
-        http_client: Optional[AsyncHttpClient] = None,
+        http_client: Optional[httpx.AsyncClient] = None,
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
@@ -42,12 +43,11 @@ class AsyncAI21Client:
         self._http_client = AsyncAI21HTTPClient(
             api_key=api_key or env_config.api_key,
             base_url=base_url,
-            api_version=env_config.api_version,
             headers=headers,
             timeout_sec=timeout_sec or env_config.timeout_sec,
             num_retries=num_retries or env_config.num_retries,
             via=via,
-            http_client=http_client,
+            client=http_client,
         )
 
         self.completion = AsyncStudioCompletion(self._http_client)

@@ -3,9 +3,9 @@ from __future__ import annotations
 from abc import ABC
 from typing import Optional, Callable, Dict
 
-from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
-from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import AI21HTTPClient
 
 AzureADTokenProvider = Callable[[], str]
 _DEFAULT_AZURE_VERSION = "v1"
