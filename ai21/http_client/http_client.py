@@ -94,10 +94,10 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
     ) -> httpx.Response:
         timeout = self._timeout_sec
         headers = {**self._headers, **extra_headers} if extra_headers is not None else self._headers
-        url = f"{self._base_url}{options['path']}"
+
+        options["url"] = self._base_url
         options["headers"] = headers
         options["timeout"] = timeout
-        options["url"] = url
         request = self._build_request(options)
 
         _logger.debug(f"Calling {request.method} {request.url} {request.headers}, {options.get('body')}")

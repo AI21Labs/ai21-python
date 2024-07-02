@@ -29,8 +29,7 @@ def _get_aws_region(
     return region or env_config.aws_region
 
 
-def _build_url(model_id: str, region: str) -> str:
-    return f"https://bedrock-runtime.{region}.amazonaws.com/model/{model_id}/invoke"
+_BEDROCK_URL_FORMAT = "https://bedrock-runtime.{region}.amazonaws.com"
 
 
 def _handle_bedrock_error(aws_error: AI21APIError) -> None:
@@ -50,7 +49,33 @@ def _handle_bedrock_error(aws_error: AI21APIError) -> None:
     raise aws_error
 
 
-class AI21BedrockClient(AI21HTTPClient):
+class BaseBedrockClient:
+    def __init__(self, session, region):
+        self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
+
+    def _prepare_options(self, options: Dict[str, Any]) -> Dict[str, Any]:
+        body = options.pop("body")
+        model = body.pop("model", None)
+        stream = body.pop("stream", False)
+        url = options["url"]
+
+        if stream:
+            _logger.warning("Field stream is not supported. Ignoring it.")
+
+        # When stream is supported we would need to update this section and the URL
+        options["url"] = f"{url}/model/{model}/invoke"
+        options["body"] = body
+        options["headers"] = self._prepare_headers(options)
+        return options
+
+    def _prepare_headers(self, options: dict) -> dict:
+        body = options.get("body")
+        return self._aws_auth.get_auth_headers(
+            service_name="bedrock", method="POST", url=options.get("url"), data=json.dumps(body)
+        )
+
+
+class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
     def __init__(
         self,
         model_id: Optional[str] = None,
@@ -69,17 +94,17 @@ class AI21BedrockClient(AI21HTTPClient):
             )
         self._region = region or AI21EnvConfig.aws_region
         if base_url is None:
-            base_url = f"https://bedrock-runtime.{self._region}.amazonaws.com"
+            base_url = _BEDROCK_URL_FORMAT.format(region=self._region)
 
-        super().__init__(
+        AI21HTTPClient.__init__(
+            self,
             base_url=base_url,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
         )
 
-        self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
-        self._region = region
+        BaseBedrockClient.__init__(self, session=session, region=self._region)
 
         self.chat = StudioChat(self)
         # Override the chat.create method to match the completions endpoint,
@@ -88,28 +113,12 @@ class AI21BedrockClient(AI21HTTPClient):
         self.completion = StudioCompletion(self)
 
     def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
-        body = options.pop("body")
-        model = body.pop("model", None)
-        stream = body.pop("stream", False)
-
-        if stream:
-            _logger.warning("Field stream is not supported. Ignoring it.")
-
-        # When stream is supported we would need to update this section and the URL
-        options["url"] = f"{self._base_url}/model/{model}/invoke"
-        options["body"] = body
-        options["headers"] = self._prepare_headers(options)
+        options = self._prepare_options(options)
 
         return super()._build_request(options)
 
-    def _prepare_headers(self, options: dict) -> dict:
-        body = options.get("body")
-        return self._aws_auth.get_auth_headers(
-            service_name="bedrock", method="POST", url=options.get("url"), data=json.dumps(body)
-        )
 
-
-class AsyncAI21BedrockClient(AsyncAI21HTTPClient):
+class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     def __init__(
         self,
         model_id: Optional[str] = None,
@@ -128,17 +137,17 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient):
             )
         self._region = region or AI21EnvConfig.aws_region
         if base_url is None:
-            base_url = f"https://bedrock-runtime.{self._region}.amazonaws.com"
+            base_url = _BEDROCK_URL_FORMAT.format(region=self._region)
 
-        super().__init__(
+        AsyncAI21HTTPClient.__init__(
+            self,
             base_url=base_url,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
         )
 
-        self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
-        self._region = region
+        BaseBedrockClient.__init__(self, session=session, region=self._region)
 
         self.chat = AsyncStudioChat(self)
         # Override the chat.create method to match the completions endpoint,
@@ -147,22 +156,6 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient):
         self.completion = AsyncStudioCompletion(self)
 
     def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
-        body = options.pop("body")
-        model = body.pop("model", None)
-        stream = body.pop("stream", False)
-
-        if stream:
-            _logger.warning("Field stream is not supported. Ignoring it.")
-
-        # When stream is supported we would need to update this section and the URL
-        options["url"] = f"{self._base_url}/model/{model}/invoke"
-        options["body"] = body
-        options["headers"] = self._prepare_headers(options)
+        options = self._prepare_options(options)
 
         return super()._build_request(options)
-
-    def _prepare_headers(self, options: dict) -> dict:
-        body = options.get("body")
-        return self._aws_auth.get_auth_headers(
-            service_name="bedrock", method="POST", url=options.get("url"), data=json.dumps(body)
-        )
