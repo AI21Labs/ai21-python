@@ -5,6 +5,10 @@ on:
     branches:
       - main
   workflow_dispatch:
+    input:
+      commit-to-test:
+        description: "Commit SHA to test"
+        required: true
 
 env:
   POETRY_VERSION: "1.7.1"
@@ -20,6 +24,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
+        with:
+          ref: ${{ inputs.commit-to-test }}
       - name: Install Poetry
         run: |
           pipx install poetry
