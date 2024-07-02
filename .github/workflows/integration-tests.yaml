@@ -5,10 +5,11 @@ on:
     branches:
       - main
   workflow_dispatch:
-    input:
+    inputs:
       commit-to-test:
         description: "Commit SHA to test"
         required: true
+        type: string
 
 env:
   POETRY_VERSION: "1.7.1"
