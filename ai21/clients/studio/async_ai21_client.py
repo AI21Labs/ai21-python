@@ -21,7 +21,7 @@ from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudi
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 
 
-class AsyncAI21Client:
+class AsyncAI21Client(AsyncAI21HTTPClient):
     """
     This class would be sending requests to our REST API using http requests asynchronously
     """
@@ -40,7 +40,7 @@ class AsyncAI21Client:
     ):
         base_url = create_client_url(api_host or env_config.api_host)
 
-        self._http_client = AsyncAI21HTTPClient(
+        super().__init__(
             api_key=api_key or env_config.api_key,
             base_url=base_url,
             headers=headers,
@@ -50,17 +50,23 @@ class AsyncAI21Client:
             client=http_client,
         )
 
-        self.completion = AsyncStudioCompletion(self._http_client)
-        self.chat: AsyncStudioChat = AsyncStudioChat(self._http_client)
-        self.summarize = AsyncStudioSummarize(self._http_client)
-        self.embed = AsyncStudioEmbed(self._http_client)
-        self.gec = AsyncStudioGEC(self._http_client)
-        self.improvements = AsyncStudioImprovements(self._http_client)
-        self.paraphrase = AsyncStudioParaphrase(self._http_client)
-        self.summarize_by_segment = AsyncStudioSummarizeBySegment(self._http_client)
-        self.custom_model = AsyncStudioCustomModel(self._http_client)
-        self.dataset = AsyncStudioDataset(self._http_client)
-        self.answer = AsyncStudioAnswer(self._http_client)
-        self.library = AsyncStudioLibrary(self._http_client)
-        self.segmentation = AsyncStudioSegmentation(self._http_client)
-        self.beta = AsyncBeta(self._http_client)
+        self.completion = AsyncStudioCompletion(self)
+        self.chat: AsyncStudioChat = AsyncStudioChat(self)
+        self.summarize = AsyncStudioSummarize(self)
+        self.embed = AsyncStudioEmbed(self)
+        self.gec = AsyncStudioGEC(self)
+        self.improvements = AsyncStudioImprovements(self)
+        self.paraphrase = AsyncStudioParaphrase(self)
+        self.summarize_by_segment = AsyncStudioSummarizeBySegment(self)
+        self.custom_model = AsyncStudioCustomModel(self)
+        self.dataset = AsyncStudioDataset(self)
+        self.answer = AsyncStudioAnswer(self)
+        self.library = AsyncStudioLibrary(self)
+        self.segmentation = AsyncStudioSegmentation(self)
+        self.beta = AsyncBeta(self)
+
+    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
+        url = options["url"]
+        options["url"] = f"{url}{options['path']}"
+
+        return super()._build_request(options)

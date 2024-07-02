@@ -25,7 +25,7 @@ from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
 
 
-class AI21Client:
+class AI21Client(AI21HTTPClient):
     """
     This class would be sending requests to our REST API using http requests
     """
@@ -45,8 +45,7 @@ class AI21Client:
         **kwargs,
     ):
         base_url = create_client_url(api_host or env_config.api_host)
-
-        self._http_client = AI21HTTPClient(
+        super().__init__(
             api_key=api_key or env_config.api_key,
             base_url=base_url,
             headers=headers,
@@ -55,20 +54,20 @@ class AI21Client:
             via=via,
             client=http_client,
         )
-        self.completion = StudioCompletion(self._http_client)
-        self.chat: StudioChat = StudioChat(self._http_client)
-        self.summarize = StudioSummarize(self._http_client)
-        self.embed = StudioEmbed(self._http_client)
-        self.gec = StudioGEC(self._http_client)
-        self.improvements = StudioImprovements(self._http_client)
-        self.paraphrase = StudioParaphrase(self._http_client)
-        self.summarize_by_segment = StudioSummarizeBySegment(self._http_client)
-        self.custom_model = StudioCustomModel(self._http_client)
-        self.dataset = StudioDataset(self._http_client)
-        self.answer = StudioAnswer(self._http_client)
-        self.library = StudioLibrary(self._http_client)
-        self.segmentation = StudioSegmentation(self._http_client)
-        self.beta = Beta(self._http_client)
+        self.completion = StudioCompletion(self)
+        self.chat: StudioChat = StudioChat(self)
+        self.summarize = StudioSummarize(self)
+        self.embed = StudioEmbed(self)
+        self.gec = StudioGEC(self)
+        self.improvements = StudioImprovements(self)
+        self.paraphrase = StudioParaphrase(self)
+        self.summarize_by_segment = StudioSummarizeBySegment(self)
+        self.custom_model = StudioCustomModel(self)
+        self.dataset = StudioDataset(self)
+        self.answer = StudioAnswer(self)
+        self.library = StudioLibrary(self)
+        self.segmentation = StudioSegmentation(self)
+        self.beta = Beta(self)
 
     def count_tokens(self, text: str, tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> int:
         warnings.warn(
@@ -78,3 +77,9 @@ class AI21Client:
 
         tokenizer = get_tokenizer(tokenizer_name)
         return tokenizer.count_tokens(text)
+
+    def _build_request(self, options: Dict[str, Any]) -> httpx.Request:
+        url = options["url"]
+        options["url"] = f"{url}{options['path']}"
+
+        return super()._build_request(options)
