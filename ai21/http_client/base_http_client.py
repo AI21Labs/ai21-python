@@ -15,6 +15,7 @@ from ai21.errors import (
     AI21ServerError,
     ServiceUnavailable,
     AI21APIError,
+    MissingApiKeyError,
 )
 from ai21.models.request_options import RequestOptions
 from ai21.stream.async_stream import AsyncStream
@@ -60,6 +61,9 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         headers: Dict = None,
         via: Optional[str] = None,
     ):
+        if api_key is None:
+            raise MissingApiKeyError()
+
         self._api_key = api_key
         self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
