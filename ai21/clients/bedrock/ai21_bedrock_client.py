@@ -40,7 +40,7 @@ def _handle_bedrock_error(aws_error: AI21APIError) -> None:
 
 
 class BaseBedrockClient:
-    def __init__(self, session, region):
+    def __init__(self, region: str, session: Optional[boto3.Session]):
         self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
 
     def _prepare_options(self, options: RequestOptions) -> RequestOptions:
@@ -63,7 +63,12 @@ class BaseBedrockClient:
         )
 
     def _prepare_headers(self, url: str, body: Dict[str, Any]) -> dict:
-        return self._aws_auth.get_auth_headers(service_name="bedrock", method="POST", url=url, data=json.dumps(body))
+        return self._aws_auth.get_auth_headers(
+            service_name="bedrock",
+            method="POST",
+            url=url,
+            data=json.dumps(body),
+        )
 
 
 class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
@@ -76,6 +81,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         session: Optional[boto3.Session] = None,
+        http_client: Optional[httpx.Client] = None,
     ):
         if model_id is not None:
             warnings.warn(
@@ -93,6 +99,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
+            client=http_client,
         )
 
         BaseBedrockClient.__init__(self, session=session, region=self._region)
@@ -108,6 +115,9 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
 
         return super()._build_request(options)
 
+    def _prepare_url(self, options: RequestOptions) -> str:
+        return options.url
+
 
 class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     def __init__(
@@ -119,6 +129,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         session: Optional[boto3.Session] = None,
+        http_client: Optional[httpx.AsyncClient] = None,
     ):
         if model_id is not None:
             warnings.warn(
@@ -136,6 +147,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
+            client=http_client,
         )
 
         BaseBedrockClient.__init__(self, session=session, region=self._region)
