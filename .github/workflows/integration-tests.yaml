@@ -16,41 +16,6 @@ env:
   POETRY_URL: https://install.python-poetry.org
 
 jobs:
-  lint:
-    runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        python-version: ["3.10"]
-
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.commit-to-test }}
-      - name: Install Poetry
-        run: |
-          pipx install poetry
-      - name: Set up Python
-        uses: actions/setup-python@v5
-        with:
-          python-version: ${{ matrix.python-version }}
-          cache: poetry
-          cache-dependency-path: poetry.lock
-      - name: Set Poetry environment
-        run: |
-          poetry env use ${{ matrix.python-version }}
-      - name: Install dependencies
-        run: |
-          poetry install --only dev --all-extras
-      - name: Lint Python (Black)
-        run: |
-          poetry run inv formatter
-      - name: Lint Python (Ruff)
-        run: |
-          poetry run inv lint
-      - name: Lint Python (isort)
-        run: |
-          poetry run inv isort
   integration-tests:
     runs-on: ubuntu-latest
     strategy:
@@ -61,6 +26,19 @@ jobs:
         uses: actions/checkout@v3
         with:
           ref: ${{ inputs.commit-to-test }}
+      - name: Set status to pending
+        if: ${{ github.event_name == 'workflow_dispatch' }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: '${{ inputs.commit-to-test }}',
+              state: 'pending',
+              context: 'Integration Tests',
+              description: 'Integration tests are in progress'
+            })
       - name: Install Poetry
         run: |
           pipx install poetry
@@ -90,3 +68,29 @@ jobs:
           path: junit/test-results-${{ matrix.python-version }}.xml
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
+      - name: Set status to success
+        if: ${{ github.event_name == 'workflow_dispatch' && success() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: '${{ inputs.commit-to-test }}',
+              state: 'success',
+              context: 'Integration Tests',
+              description: 'Integration tests passed'
+            })
+      - name: Set status to failure
+        if: ${{ github.event_name == 'workflow_dispatch' && failure() }}
+        uses: actions/github-script@v6
+        with:
+          script: |
+            github.rest.repos.createCommitStatus({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              sha: '${{ inputs.commit-to-test }}',
+              state: 'failure',
+              context: 'Integration Tests',
+              description: 'Integration tests failed'
+            })
