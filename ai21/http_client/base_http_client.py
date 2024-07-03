@@ -55,6 +55,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
 
     def __init__(
         self,
+        base_url: str,
         api_key: Optional[str] = None,
         requires_api_key: bool = False,
         timeout_sec: int = None,
@@ -65,6 +66,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         if requires_api_key and api_key is None:
             raise MissingApiKeyError()
 
+        self._base_url = base_url
         self._api_key = api_key
         self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
@@ -156,10 +158,16 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
 
         return self._client.build_request(
             method=options.method,
-            url=options.url,
+            url=self._prepare_url(options),
             headers=headers,
             timeout=options.timeout,
             params=options.params,
             data=data,
             files=options.files,
         )
+
+    def _prepare_url(self, options: RequestOptions) -> str:
+        if options.path:
+            return f"{options.url}{options.path}"
+
+        return options.url

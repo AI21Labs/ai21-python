@@ -37,13 +37,13 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
     ):
         super().__init__(
             api_key=api_key,
+            base_url=base_url,
             requires_api_key=requires_api_key,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
             via=via,
         )
-        self._base_url = base_url
         self._client = self._init_client(client)
         self._headers = self._build_headers(passed_headers=headers)
 

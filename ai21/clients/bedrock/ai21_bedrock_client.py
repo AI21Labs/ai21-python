@@ -150,3 +150,6 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         options = self._prepare_options(options)
 
         return super()._build_request(options)
+
+    def _prepare_url(self, options: RequestOptions) -> str:
+        return options.url
