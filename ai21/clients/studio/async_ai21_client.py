@@ -19,7 +19,6 @@ from ai21.clients.studio.resources.studio_segmentation import AsyncStudioSegment
 from ai21.clients.studio.resources.studio_summarize import AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudioSummarizeBySegment
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
-from ai21.models.request_options import RequestOptions
 
 
 class AsyncAI21Client(AsyncAI21HTTPClient):
@@ -65,9 +64,3 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.library = AsyncStudioLibrary(self)
         self.segmentation = AsyncStudioSegmentation(self)
         self.beta = AsyncBeta(self)
-
-    def _build_request(self, options: RequestOptions) -> httpx.Request:
-        if options.path:
-            options = options.replace(url=f"{options.url}{options.path}")
-
-        return super()._build_request(options)
