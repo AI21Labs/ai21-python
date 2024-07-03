@@ -85,7 +85,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
     ):
         if model_id is not None:
             warnings.warn(
-                "Please consider using the 'model_id' parameter in the "
+                "Please consider using the 'model' parameter in the "
                 "'create' method calls instead of the constructor.",
                 DeprecationWarning,
             )
@@ -133,7 +133,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     ):
         if model_id is not None:
             warnings.warn(
-                "Please consider using the 'model_id' parameter in the "
+                "Please consider using the 'model' parameter in the "
                 "'create' method calls instead of the constructor.",
                 DeprecationWarning,
             )
