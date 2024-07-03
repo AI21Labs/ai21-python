@@ -11,6 +11,15 @@ from ai21.utils.typing import remove_not_given
 class BaseChatCompletions(ABC):
     _module_name = "chat/completions"
 
+    def _get_model(self, model: Optional[str], model_id: Optional[str]) -> str:
+        if model_id and model:
+            raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
+
+        if not model and not model_id:
+            raise ValueError("Please provide 'model'")
+
+        return model or model_id
+
     def _create_body(
         self,
         model: str,

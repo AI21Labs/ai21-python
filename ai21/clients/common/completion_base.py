@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Dict
+from typing import List, Dict, Optional
 
 from ai21.models import Penalty, CompletionsResponse
 from ai21.types import NOT_GIVEN, NotGiven
@@ -10,6 +10,17 @@ from ai21.utils.typing import remove_not_given
 
 class Completion(ABC):
     _module_name = "complete"
+
+    def _get_model(self, model: Optional[str], **kwargs) -> str:
+        model_id = kwargs.get("model_id", None)
+
+        if model_id and model:
+            raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
+
+        if not model and not model_id:
+            raise ValueError("Please provide 'model'")
+
+        return model or model_id
 
     @abstractmethod
     def create(

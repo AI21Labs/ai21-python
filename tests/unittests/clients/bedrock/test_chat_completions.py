@@ -1,5 +1,5 @@
 import json
-from typing import Optional
+from typing import Optional, Union
 from unittest.mock import Mock, patch
 
 import httpx
@@ -111,3 +111,39 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
         data=json.dumps({"messages": [message.to_dict()]}).encode("utf-8"),
         files=None,
     )
+
+
+@pytest.mark.asyncio
+@pytest.mark.parametrize(
+    ids=[
+        "when_sync_client__model_and_model_id__should_raise_error",
+        "when_sync_client__no_model_and_no_model_id__should_raise_error",
+        "when_async_client__no_model_and_no_model_id__should_raise_error",
+        "when_async_client__no_model_and_no_model_id__should_raise_error",
+    ],
+    argvalues=[
+        (BedrockModelID.JAMBA_INSTRUCT_V1, BedrockModelID.JAMBA_INSTRUCT_V1, AI21BedrockClient()),
+        (None, None, AI21BedrockClient()),
+        (BedrockModelID.JAMBA_INSTRUCT_V1, BedrockModelID.JAMBA_INSTRUCT_V1, AsyncAI21BedrockClient()),
+        (None, None, AsyncAI21BedrockClient()),
+    ],
+    argnames=["model", "model_id", "client"],
+)
+async def test_model_id_and_model_supported_params(
+    model: Optional[BedrockModelID],
+    model_id: Optional[BedrockModelID],
+    client: Union[AI21BedrockClient, AsyncAI21BedrockClient],
+):
+    with pytest.raises(ValueError):
+        if isinstance(client, AsyncAI21BedrockClient):
+            await client.chat.completions.create(
+                model=model,
+                messages=[ChatMessage(content="This is a test", role="user")],
+                model_id=model_id,
+            )
+        else:
+            client.chat.completions.create(
+                model=model,
+                messages=[ChatMessage(content="This is a test", role="user")],
+                model_id=model_id,
+            )

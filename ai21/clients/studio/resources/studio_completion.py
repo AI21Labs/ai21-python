@@ -31,7 +31,7 @@ class StudioCompletion(StudioResource, Completion):
     ) -> CompletionsResponse:
         path = self._get_completion_path(model=model, custom_model=custom_model)
         body = self._create_body(
-            model=model,
+            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
             prompt=prompt,
             max_tokens=max_tokens,
             num_results=num_results,
@@ -74,7 +74,7 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
     ) -> CompletionsResponse:
         path = self._get_completion_path(model=model, custom_model=custom_model)
         body = self._create_body(
-            model=model,
+            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
             prompt=prompt,
             max_tokens=max_tokens,
             num_results=num_results,
