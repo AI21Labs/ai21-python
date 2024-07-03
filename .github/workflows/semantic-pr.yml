@@ -11,9 +11,6 @@ on:
       - edited
       - reopened
 
-permissions:
-  pull-requests: read
-
 jobs:
   semantic-pr:
     runs-on: ubuntu-20.04
