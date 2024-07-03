@@ -113,3 +113,6 @@ async def test_async_studio(test_file_name: str):
     print(f"About to run: {file_path}")
     exit_code = subprocess.call(["python", file_path])
     assert exit_code == 0, f"failed to run {test_file_name}"
+
+def dummy_test_for_validation():
+    assert 1==1
