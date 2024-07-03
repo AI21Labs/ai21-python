@@ -1,6 +1,6 @@
 import json
 from typing import Optional, Union
-from unittest.mock import Mock, patch
+from unittest.mock import Mock, patch, ANY
 
 import httpx
 import pytest
@@ -75,7 +75,7 @@ def test__options_in_request(mock_httpx_client: Mock):
         url=_FULL_BEDROCK_URL,
         headers={
             "Content-Type": "application/json",
-            "User-Agent": "AI21 studio SDK 2.8.0 Python 3.12.4 Operating System macOS-14.5-arm64-arm-64bit",
+            "User-Agent": ANY,
             **_FAKE_AUTH_HEADERS,
         },
         timeout=300,
@@ -103,7 +103,7 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
         url=_FULL_BEDROCK_URL,
         headers={
             "Content-Type": "application/json",
-            "User-Agent": "AI21 studio SDK 2.8.0 Python 3.12.4 Operating System macOS-14.5-arm64-arm-64bit",
+            "User-Agent": ANY,
             **_FAKE_AUTH_HEADERS,
         },
         timeout=300,
