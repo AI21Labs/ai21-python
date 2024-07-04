@@ -98,3 +98,8 @@ class StreamingDecodeError(AI21Error):
     def __init__(self, chunk: str):
         message = f"Failed to decode chunk: {chunk} in stream. Please check the stream format"
         super().__init__(message)
+
+
+class InternalDependencyException(AI21APIError):
+    def __init__(self, details: Optional[str] = None):
+        super().__init__(530, details)
