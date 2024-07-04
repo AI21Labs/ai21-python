@@ -3,8 +3,7 @@ from typing import Optional, Dict, Any
 
 import boto3
 
-from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-from ai21.clients.aws.utils import get_aws_region
+from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.bedrock.resources.chat.bedrock_chat import BedrockChat, AsyncBedrockChat
 from ai21.clients.bedrock.resources.bedrock_completion import BedrockCompletion, AsyncBedrockCompletion
 from ai21.http_client.http_client import HttpClient
@@ -21,7 +20,6 @@ class AI21BedrockClient:
         num_retries: Optional[int] = None,
         http_client: Optional[HttpClient] = None,
         session: Optional[boto3.Session] = None,
-        env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         if model_id is not None:
             warnings.warn(
@@ -30,7 +28,7 @@ class AI21BedrockClient:
                 DeprecationWarning,
             )
 
-        region = get_aws_region(env_config=env_config, session=session, region=region)
+        region = region or AI21EnvConfig.aws_region
 
         self._http_client = http_client or HttpClient(
             timeout_sec=timeout_sec,
@@ -54,7 +52,6 @@ class AsyncAI21BedrockClient:
         num_retries: Optional[int] = None,
         http_client: Optional[AsyncHttpClient] = None,
         session: Optional[boto3.Session] = None,
-        env_config: _AI21EnvConfig = AI21EnvConfig,
     ):
         if model_id is not None:
             warnings.warn(
@@ -63,7 +60,7 @@ class AsyncAI21BedrockClient:
                 DeprecationWarning,
             )
 
-        region = get_aws_region(env_config=env_config, session=session, region=region)
+        region = region or AI21EnvConfig.aws_region
 
         self._http_client = http_client or AsyncHttpClient(
             timeout_sec=timeout_sec,

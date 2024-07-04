@@ -4,7 +4,6 @@ import boto3
 
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 
-from ai21.clients.aws.utils import get_aws_region
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer, AsyncSageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion, AsyncSageMakerCompletion
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC, AsyncSageMakerGEC
@@ -26,14 +25,13 @@ class AI21SageMakerClient:
         endpoint_name: str,
         region: Optional[str] = None,
         session: Optional["boto3.Session"] = None,
-        env_config: _AI21EnvConfig = AI21EnvConfig,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
         http_client: Optional[HttpClient] = None,
         **kwargs,
     ):
-        region = get_aws_region(env_config=env_config, session=session, region=region)
+        region = region or AI21EnvConfig.aws_region
         self._http_client = http_client or HttpClient(
             headers=headers,
             timeout_sec=timeout_sec,
@@ -76,7 +74,8 @@ class AsyncAI21SageMakerClient:
         http_client: Optional[AsyncHttpClient] = None,
         **kwargs,
     ):
-        region = get_aws_region(env_config=env_config, session=session, region=region)
+        region = region or AI21EnvConfig.aws_region
+
         self._http_client = http_client or AsyncHttpClient(
             headers=headers,
             timeout_sec=timeout_sec,
