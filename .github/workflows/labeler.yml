@@ -75,7 +75,7 @@ jobs:
         with:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
-            const { data: labels } = await github.issues.listLabelsOnIssue({
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
               owner: context.repo.owner,
               repo: context.repo.repo,
               issue_number: context.issue.number,
@@ -92,7 +92,7 @@ jobs:
             const currentLabels = '${{ steps.fetch_labels.outputs.result }}'.split(',');
             const labelsToRemove = currentLabels.filter(label => sizeLabels.includes(label));
             for (const label of labelsToRemove) {
-              await github.issues.removeLabel({
+              await github.rest.issues.removeLabel({
                 owner: context.repo.owner,
                 repo: context.repo.repo,
                 issue_number: context.issue.number,
