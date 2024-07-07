@@ -76,7 +76,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            return JSON.stringify(labels.map(label => label.name));
+            return labels.map(label => label.name);
 
       - name: Remove old size labels
         id: remove_labels
@@ -85,7 +85,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const sizeLabels = ['size:s', 'size:m', 'size:l', 'size:xl', 'size:xxl'];
-            const currentLabels = JSON.parse('${{ steps.fetch_labels.outputs.result }}');
+            const currentLabels = ${{ steps.fetch_labels.outputs.result }};
             const labelsToRemove = currentLabels.filter(label => sizeLabels.includes(label));
             console.log("Current labels:", currentLabels);
             console.log("Labels to remove:", labelsToRemove);
