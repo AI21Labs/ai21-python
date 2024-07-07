@@ -1,11 +1,7 @@
 name: "Pull Request Labeler"
 on:
-  pull_request_review:
-    types: [submitted]
-  pull_request_review_comment:
-    types: [created, deleted]
-  pull_request_target:
-    types: [opened, edited, reopened, synchronize]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   labeler:
@@ -16,6 +12,12 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
+
+      - name: Install Act dependencies
+        if: ${{ env.ACT }}
+        run: |
+          echo "Installing act dependencies"
+          apt-get update && apt-get install sudo git -y
 
       - name: Labeler
         uses: actions/labeler@v5
@@ -80,6 +82,7 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
+            echo "::set-output name=result::" + labels.map(label => label.name).join(',');
             return labels.map(label => label.name).join(',');
 
       - name: Remove old size labels
