@@ -69,6 +69,37 @@ jobs:
           fi
           echo "label=$label" >> $GITHUB_ENV
 
+      - name: Fetch current labels
+        id: fetch_labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const { data: labels } = await github.rest.issues.listLabelsOnIssue({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+            });
+            return labels.map(label => label.name);
+
+      - name: Remove old size labels
+        id: remove_labels
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            const sizeLabels = ['size:s', 'size:m', 'size:l', 'size:xl', 'size:xxl'];
+            const currentLabels = ${{ steps.fetch_labels.outputs.result }};
+            const labelsToRemove = currentLabels.filter(label => sizeLabels.includes(label));
+            for (const label of labelsToRemove) {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                name: label,
+              });
+            }
+
       - name: Add label to PR
         uses: actions-ecosystem/action-add-labels@v1
         with:

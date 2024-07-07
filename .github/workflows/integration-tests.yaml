@@ -28,7 +28,7 @@ jobs:
           ref: ${{ inputs.commit-to-test }}
       - name: Set status to pending
         if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -70,7 +70,7 @@ jobs:
         if: ${{ always() }}
       - name: Set status to success
         if: ${{ github.event_name == 'workflow_dispatch' && success() }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.repos.createCommitStatus({
@@ -83,7 +83,7 @@ jobs:
             })
       - name: Set status to failure
         if: ${{ github.event_name == 'workflow_dispatch' && failure() }}
-        uses: actions/github-script@v6
+        uses: actions/github-script@v7
         with:
           script: |
             github.rest.repos.createCommitStatus({
