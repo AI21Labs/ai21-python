@@ -91,6 +91,8 @@ jobs:
             const sizeLabels = ['size:s', 'size:m', 'size:l', 'size:xl', 'size:xxl'];
             const currentLabels = '${{ steps.fetch_labels.outputs.result }}'.split(',');
             const labelsToRemove = currentLabels.filter(label => sizeLabels.includes(label));
+            echo "Current labels: ${{ currentLabels }}"
+            echo "Labels to remove: ${{ labelsToRemove }}"
             for (const label of labelsToRemove) {
               await github.rest.issues.removeLabel({
                 owner: context.repo.owner,
