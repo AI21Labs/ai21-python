@@ -1,8 +1,351 @@
 # CHANGELOG
 
+## v2.9.0 (2024-07-07)
+
+### Chore
+
+* chore(deps): bump actions/github-script from 6 to 7 (#169)
+
+Bumps [actions/github-script](https://github.com/actions/github-script) from 6 to 7.
+- [Release notes](https://github.com/actions/github-script/releases)
+- [Commits](https://github.com/actions/github-script/compare/v6...v7)
+
+---
+updated-dependencies:
+- dependency-name: actions/github-script
+  dependency-type: direct:production
+  update-type: version-update:semver-major
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`de4b1af`](https://github.com/AI21Labs/ai21-python/commit/de4b1af5654b30fbf01d7258a9174eb091362b1d))
+
+* chore: semantic pr - allow running on external prs (#164) ([`032fd5d`](https://github.com/AI21Labs/ai21-python/commit/032fd5d3a384f8dba26568c0b618e7c5f59a0431))
+
+* chore: add status report to integration workflow (#161)
+
+* chore: add status report to integration workflow
+
+* chore: add status report to integration workflow lint
+
+* chore: export lint to separate workflow ([`0a3a1e0`](https://github.com/AI21Labs/ai21-python/commit/0a3a1e02a6e44ac6589ff18e19c03c8cf5d94c19))
+
+* chore: integration-tests.yaml update inputs (#160) ([`b3f7728`](https://github.com/AI21Labs/ai21-python/commit/b3f772859374303efc130083d0f0aba0b1743398))
+
+* chore: integration-tests.yaml update inputs (#159) ([`f61c905`](https://github.com/AI21Labs/ai21-python/commit/f61c9059ecb6cc8c4fafdec7f86205a768976f32))
+
+* chore: integration-tests.yaml update checkout to specific commit (#158) ([`1c01663`](https://github.com/AI21Labs/ai21-python/commit/1c016630428085c44a6b1437fa87831a6b684fcb))
+
+* chore: Update testing workflows (#156)
+
+* chore: change triggers for workflows tests, integration-tests
+
+* chore: integration-tests.yaml - add trigger for push on main ([`4c170b8`](https://github.com/AI21Labs/ai21-python/commit/4c170b8378e6bfe06a1bc342d612ad1711792fca))
+
+### Ci
+
+* ci: Update size label When PR size changes (#171) (#172)
+
+* ci: Update size label
+
+* test: File to test label
+
+* fix: Remove file ([`6dd535a`](https://github.com/AI21Labs/ai21-python/commit/6dd535a4da3959ea258a2d316be7c145961b6875))
+
+* ci: remove explicit permissions from semantic-pr.yml (#167) ([`3674efc`](https://github.com/AI21Labs/ai21-python/commit/3674efc106959f9b5b9b35c6eacc19db413c80cf))
+
+### Feature
+
+* feat: Async Support AWS (#180)
+
+* feat: Add bedrock async support (#146)
+
+* refactor: migrate from boto3 to custom http client
+
+* refactor: create an aws http client, and switch bedrock client to use it
+
+* test: rename test, add async tests
+
+* feat: add async client, remove bedrock_session class
+
+* docs: Azure README (#139)
+
+* feat: Add async tokenizer, add detokenize method (#144)
+
+* feat: add detokenize method, add async tokenizer
+
+* chore: update pyproject and poetry.lock
+
+* fix: fix tokenizer name in examples and readme, add example
+
+* test: adjust unittest + add unittest for async
+
+* chore: cache -&gt; lru_cache to support python 3.8
+
+* test: fix test_imports test
+
+* chore: add env_config to bedrock client to avoid breaking changes
+
+* refactor: export aws auth logic to new class
+
+* refactor: remove aws_http_client, use http_client instead, add aws auth test
+
+* test: fix tests
+
+* refactor: remove aws_http_client
+
+* chore(deps-dev): bump authlib from 1.3.0 to 1.3.1 (#131)
+
+Bumps [authlib](https://github.com/lepture/authlib) from 1.3.0 to 1.3.1.
+- [Release notes](https://github.com/lepture/authlib/releases)
+- [Changelog](https://github.com/lepture/authlib/blob/master/docs/changelog.rst)
+- [Commits](https://github.com/lepture/authlib/compare/v1.3.0...v1.3.1)
+
+---
+updated-dependencies:
+- dependency-name: authlib
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 (#138)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.8.14 to 1.9.0.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/81e9d935c883d0b210363ab89cf05f3894778450...ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+
+* chore: rebase code
+
+* refactor: chat + chat completions - migrate to new client
+
+* refactor: cr comments
+
+* chore: add async to new bedrock components
+
+* refactor: rename aws folder
+
+* chore: fix typo on file name bedrock_chat_completions
+
+* fix: fix errors
+
+* chore: fix typo
+
+* fix: Added deprecation warning
+
+* fix: Added deprecation warning to async
+
+* chore: add log for ignoring stream
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+
+* Add sagemaker async support (#155)
+
+* refactor: migrate from boto3 to custom http client
+
+* refactor: create an aws http client, and switch bedrock client to use it
+
+* test: rename test, add async tests
+
+* feat: add async client, remove bedrock_session class
+
+* docs: Azure README (#139)
+
+* feat: Add async tokenizer, add detokenize method (#144)
+
+* feat: add detokenize method, add async tokenizer
+
+* chore: update pyproject and poetry.lock
+
+* fix: fix tokenizer name in examples and readme, add example
+
+* test: adjust unittest + add unittest for async
+
+* chore: cache -&gt; lru_cache to support python 3.8
+
+* test: fix test_imports test
+
+* chore: add env_config to bedrock client to avoid breaking changes
+
+* refactor: sagemaker client, boto-&gt;aws http client
+
+* refactor: export aws auth logic to new class
+
+* refactor: remove aws_http_client, use http_client instead, add aws auth test
+
+* test: fix tests
+
+* refactor: remove aws_http_client
+
+* chore(deps-dev): bump authlib from 1.3.0 to 1.3.1 (#131)
+
+Bumps [authlib](https://github.com/lepture/authlib) from 1.3.0 to 1.3.1.
+- [Release notes](https://github.com/lepture/authlib/releases)
+- [Changelog](https://github.com/lepture/authlib/blob/master/docs/changelog.rst)
+- [Commits](https://github.com/lepture/authlib/compare/v1.3.0...v1.3.1)
+
+---
+updated-dependencies:
+- dependency-name: authlib
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 (#138)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.8.14 to 1.9.0.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/81e9d935c883d0b210363ab89cf05f3894778450...ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+
+* chore: rebase code
+
+* refactor: chat + chat completions - migrate to new client
+
+* refactor: cr comments
+
+* chore: add async to new bedrock components
+
+* refactor: rename aws folder
+
+* chore: refactor to use http client
+
+* chore: fix typo on file name bedrock_chat_completions
+
+* fix: fix errors
+
+* chore: fix typo
+
+* chore: add async to sm resources
+
+* test: fix imports test
+
+* fix: Added deprecation warning
+
+* fix: Added deprecation warning to async
+
+* chore: add log for ignoring stream
+
+* chore: fix lint
+
+* refactor: export get_aws_region, add async sm to readme, add async examples
+
+* test: add async test files to test_sagemaker.py
+
+* refactor: remove get_aws_region func
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+
+* feat: Use the same http client for all Clients (#163)
+
+* fix: Merge
+
+* feat: AI21Client to inherit from AI21HTTPClient
+
+* feat: Used RequestOptions class
+
+* fix: api error
+
+* fix: Rename update to replace
+
+* fix: Tests
+
+* test: Added bedrock tests
+
+* fix: Added support for model and model_id for backwards compatibility
+
+* fix: Deprecation warning message
+
+* fix: Added ANY to dict
+
+* fix: Removed redundant code
+
+* fix: base_url
+
+* fix: Added deprecation warning
+
+* fix: Moved &#39;model&#39; extract
+
+* test: Added a tests to validate model_id and model cant be together
+
+* fix: Test
+
+* fix: Bedrock integration tests
+
+---------
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: miri-bar &lt;160584887+miri-bar@users.noreply.github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`5248d96`](https://github.com/AI21Labs/ai21-python/commit/5248d96a783b5ffab7cb7c9f6de383a1eba4df11))
+
+* feat: Added Log Verbosity (#152)
+
+* fix: Added logger to httpx
+
+* feat: Added set_verbose
+
+* feat: Added set_debug
+
+* fix: api-key header
+
+* fix: Removed unused function
+
+* feat: Logged env variables
+
+* fix: Changed call location
+
+* fix: CR
+
+* fix: Added amazon header to secrets ([`57b1ea9`](https://github.com/AI21Labs/ai21-python/commit/57b1ea9aa172fdef7723199fe77ca50a15d6427c))
+
+### Fix
+
+* fix: label parse (#178) ([`1ea52f5`](https://github.com/AI21Labs/ai21-python/commit/1ea52f5b7b842edcb6f61e40edc9c8c58e49d9ac))
+
+* fix: rest call (#174) ([`24caf96`](https://github.com/AI21Labs/ai21-python/commit/24caf96a291a33b51df77a1ca1223eca639d741b))
+
+* fix: Version of action and json parser (#173) ([`8a270ec`](https://github.com/AI21Labs/ai21-python/commit/8a270ecfc3e8b5d312dbe49d2a47a41c31be9be3))
+
 ## v2.8.0 (2024-06-26)
 
 ### Chore
+
+* chore(release): v2.8.0 [skip ci] ([`c5087cf`](https://github.com/AI21Labs/ai21-python/commit/c5087cf6f20accdeba57d7630e1cd780de36e435))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#143)
 
