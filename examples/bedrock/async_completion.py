@@ -1,4 +1,5 @@
-from ai21 import AI21BedrockClient, BedrockModelID
+import asyncio
+from ai21 import AsyncAI21BedrockClient, BedrockModelID
 
 # Bedrock is currently supported only in us-east-1 region.
 # Either set your profile's region to us-east-1 or uncomment next line
@@ -38,9 +39,19 @@ prompt = (
     "User: Hi, I have a question for you"
 )
 
-response = AI21BedrockClient().completion.create(
-    prompt=prompt, max_tokens=50, temperature=0, top_p=1, top_k_return=0, model=BedrockModelID.J2_MID_V1
-)
 
-print(response.completions[0].data.text)
-print(response.prompt.tokens[0]["textRange"]["start"])
+async def main():
+    response = await AsyncAI21BedrockClient().completion.create(
+        prompt=prompt,
+        max_tokens=50,
+        temperature=0,
+        top_p=1,
+        top_k_return=0,
+        model=BedrockModelID.J2_MID_V1,
+    )
+
+    print(response.completions[0].data.text)
+    print(response.prompt.tokens[0]["textRange"]["start"])
+
+
+asyncio.run(main())

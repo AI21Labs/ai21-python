@@ -2,7 +2,7 @@ from typing import TypeVar, Callable
 
 import pytest
 import httpx
-from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.models import AnswerResponse
