@@ -1,11 +1,6 @@
-from ai21 import AI21BedrockClient, BedrockModelID
+import asyncio
 
-# Bedrock is currently supported only in us-east-1 region.
-# Either set your profile's region to us-east-1 or uncomment next line
-# ai21.aws_region = 'us-east-1'
-# Or create a boto session and pass it:
-# import boto3
-# session = boto3.Session(region_name="us-east-1")
+from ai21 import AsyncAI21SageMakerClient
 
 prompt = (
     "The following is a conversation between a user of an eCommerce store and a user operation"
@@ -38,9 +33,15 @@ prompt = (
     "User: Hi, I have a question for you"
 )
 
-response = AI21BedrockClient().completion.create(
-    prompt=prompt, max_tokens=50, temperature=0, top_p=1, top_k_return=0, model=BedrockModelID.J2_MID_V1
-)
+client = AsyncAI21SageMakerClient(endpoint_name="sm_endpoint_name")
 
-print(response.completions[0].data.text)
-print(response.prompt.tokens[0]["textRange"]["start"])
+
+async def main():
+    response = await client.completion.create(prompt=prompt, max_tokens=2)
+
+    print(response.completions[0].data.text)
+
+    print(response.prompt.tokens[0]["textRange"]["start"])
+
+
+asyncio.run(main())

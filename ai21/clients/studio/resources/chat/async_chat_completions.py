@@ -62,7 +62,7 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
             )
 
         body = self._create_body(
-            model=model,
+            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
             messages=messages,
             stop=stop,
             temperature=temperature,

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import warnings
 from abc import ABC
 from typing import List, Optional, Union, Any, Dict, Literal
 
@@ -10,6 +11,23 @@ from ai21.utils.typing import remove_not_given
 
 class BaseChatCompletions(ABC):
     _module_name = "chat/completions"
+
+    def _get_model(self, model: Optional[str], model_id: Optional[str]) -> str:
+        if model_id is not None:
+            warnings.warn(
+                "The 'model_id' parameter is deprecated and will be removed in a future version."
+                " Please use 'model' instead.",
+                DeprecationWarning,
+                stacklevel=2,
+            )
+
+        if model_id and model:
+            raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
+
+        if not model and not model_id:
+            raise ValueError("model should be provided 'create' method call")
+
+        return model or model_id
 
     def _create_body(
         self,

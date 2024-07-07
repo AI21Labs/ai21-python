@@ -502,6 +502,30 @@ response = client.chat.completions.create(
 )
 ```
 
+#### Async
+
+```python
+import asyncio
+from ai21 import AsyncAI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+client = AsyncAI21BedrockClient(region='us-east-1') # region is optional, as you can use the env variable instead
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+async def main():
+    response = await client.chat.completions.create(
+        messages=messages,
+        model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+    )
+
+
+asyncio.run(main())
+```
+
 ### With Boto3 Session
 
 ```python
@@ -525,6 +549,33 @@ response = client.chat.completions.create(
 )
 ```
 
+### Async
+
+```python
+import boto3
+import asyncio
+
+from ai21 import AsyncAI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+boto_session = boto3.Session(region_name="us-east-1")
+
+client = AsyncAI21BedrockClient(session=boto_session)
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+async def main():
+  response = await client.chat.completions.create(
+      messages=messages,
+      model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+  )
+
+asyncio.run(main())
+```
+
 ### SageMaker
 
 ```python
@@ -536,6 +587,24 @@ response = client.summarize.create(
     source_type="TEXT",
 )
 print(response.summary)
+```
+
+#### Async
+
+```python
+import asyncio
+from ai21 import AsyncAI21SageMakerClient
+
+client = AsyncAI21SageMakerClient(endpoint_name="j2-endpoint-name")
+
+async def main():
+  response = await client.summarize.create(
+      source="Text to summarize",
+      source_type="TEXT",
+  )
+  print(response.summary)
+
+asyncio.run(main())
 ```
 
 ### With Boto3 Session

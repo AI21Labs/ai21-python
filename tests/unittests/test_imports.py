@@ -19,6 +19,8 @@ EXPECTED_ALL = [
     "ModelPackageDoesntExistError",
     "SageMaker",
     "TooManyRequestsError",
+    "AsyncAI21BedrockClient",
+    "AsyncAI21SageMakerClient",
 ]
 
 
