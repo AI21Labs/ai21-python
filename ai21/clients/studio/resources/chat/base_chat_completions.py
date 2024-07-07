@@ -18,6 +18,7 @@ class BaseChatCompletions(ABC):
                 "The 'model_id' parameter is deprecated and will be removed in a future version."
                 " Please use 'model' instead.",
                 DeprecationWarning,
+                stacklevel=2,
             )
 
         if model_id and model:
