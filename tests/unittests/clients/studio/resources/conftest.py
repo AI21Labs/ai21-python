@@ -1,11 +1,9 @@
-import pytest
 import httpx
+import pytest
 from pytest_mock import MockerFixture
 
-from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
-from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
-from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.chat import AsyncChatCompletions
+from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
@@ -19,6 +17,8 @@ from ai21.clients.studio.resources.studio_summarize_by_segment import (
     StudioSummarizeBySegment,
     AsyncStudioSummarizeBySegment,
 )
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models import (
     AnswerResponse,
     ChatMessage,

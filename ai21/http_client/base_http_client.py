@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import platform
 from abc import ABC, abstractmethod
 from typing import Generic, TypeVar, Union, Any, Optional, Dict, BinaryIO
 
@@ -14,9 +15,12 @@ from ai21.errors import (
     AI21ServerError,
     ServiceUnavailable,
     AI21APIError,
+    MissingApiKeyError,
 )
+from ai21.models.request_options import RequestOptions
 from ai21.stream.async_stream import AsyncStream
 from ai21.stream.stream import Stream
+from ai21.version import VERSION
 
 _HttpxClientT = TypeVar("_HttpxClientT", bound=Union[httpx.Client, httpx.AsyncClient])
 _DefaultStreamT = TypeVar("_DefaultStreamT", bound=Union[Stream[Any], AsyncStream[Any]])
@@ -51,14 +55,24 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
 
     def __init__(
         self,
+        base_url: str,
+        api_key: Optional[str] = None,
+        requires_api_key: bool = False,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
+        via: Optional[str] = None,
     ):
+        if requires_api_key and api_key is None:
+            raise MissingApiKeyError()
+
+        self._base_url = base_url
+        self._api_key = api_key
         self._timeout_sec = timeout_sec or DEFAULT_TIMEOUT_SEC
         self._num_retries = num_retries or DEFAULT_NUM_RETRIES
         self._headers = headers or {}
         self._apply_retry_policy = self._num_retries > 0
+        self._via = via
 
     def _should_retry(self, response: httpx.Response) -> bool:
         return response.status_code in RETRY_ERROR_CODES and response.request.method in RETRY_METHOD_WHITELIST
@@ -95,7 +109,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     def execute_http_request(
         self,
         method: str,
-        url: str,
+        path: str,
         params: Optional[Dict] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
@@ -106,16 +120,54 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
     @abstractmethod
     def _request(
         self,
-        files: Optional[Dict[str, BinaryIO]],
-        method: str,
-        params: Optional[Dict],
-        body: Optional[Dict],
-        url: str,
-        stream: bool,
-        extra_headers: Optional[Dict],
+        options: RequestOptions,
     ) -> httpx.Response:
         pass
 
     @abstractmethod
     def _init_client(self, client: Optional[_HttpxClientT]) -> _HttpxClientT:
         pass
+
+    def _build_headers(self, passed_headers: Optional[Dict[str, Any]]) -> Dict[str, Any]:
+        headers = {
+            "Content-Type": "application/json",
+            "User-Agent": self._build_user_agent(),
+        }
+
+        if self._api_key:
+            headers["Authorization"] = f"Bearer {self._api_key}"
+
+        if passed_headers is not None:
+            headers.update(passed_headers)
+
+        return headers
+
+    def _build_user_agent(self) -> str:
+        user_agent = (
+            f"AI21 studio SDK {VERSION} Python {platform.python_version()} Operating System {platform.platform()}"
+        )
+
+        if self._via is not None:
+            user_agent = f"{user_agent} via: {self._via}"
+
+        return user_agent
+
+    def _build_request(self, options: RequestOptions) -> httpx.Request:
+        data = self._get_request_data(files=options.files, method=options.method, body=options.body)
+        headers = self._get_request_headers(files=options.files, headers=options.headers)
+
+        return self._client.build_request(
+            method=options.method,
+            url=self._prepare_url(options),
+            headers=headers,
+            timeout=options.timeout,
+            params=options.params,
+            data=data,
+            files=options.files,
+        )
+
+    def _prepare_url(self, options: RequestOptions) -> str:
+        if options.path:
+            return f"{options.url}{options.path}"
+
+        return options.url

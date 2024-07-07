@@ -10,8 +10,8 @@ import httpx
 from ai21 import AI21APIError
 from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelErrorException, InternalDependencyException
-from ai21.http_client.async_http_client import AsyncHttpClient
-from ai21.http_client.http_client import HttpClient
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import AI21HTTPClient
 
 
 def _handle_sagemaker_error(aws_error: AI21APIError) -> None:
@@ -37,28 +37,26 @@ def _handle_sagemaker_error(aws_error: AI21APIError) -> None:
 class SageMakerResource(ABC):
     def __init__(
         self,
-        endpoint_name: str,
         region: str,
-        client: HttpClient,
+        base_url: str,
+        client: AI21HTTPClient,
         aws_session: Optional[boto3.Session] = None,
     ):
         self._client = client
         self._aws_session = aws_session or boto3.Session(region_name=region)
-        self._url = f"https://runtime.sagemaker.{region}.amazonaws.com/endpoints/{endpoint_name}/invocations"
         self._aws_auth = AWSAuthorization(aws_session=self._aws_session)
+        self._base_url = base_url
 
     def _post(
         self,
         body: Dict[str, Any],
     ) -> httpx.Response:
         auth_headers = self._aws_auth.get_auth_headers(
-            service_name="sagemaker", url=self._url, method="POST", data=json.dumps(body)
+            service_name="sagemaker", url=self._base_url, method="POST", data=json.dumps(body)
         )
 
         try:
-            return self._client.execute_http_request(
-                url=self._url, body=body, method="POST", extra_headers=auth_headers
-            )
+            return self._client.execute_http_request(body=body, method="POST", extra_headers=auth_headers)
         except AI21APIError as aws_error:
             _handle_sagemaker_error(aws_error)
 
@@ -66,14 +64,14 @@ class SageMakerResource(ABC):
 class AsyncSageMakerResource(ABC):
     def __init__(
         self,
-        endpoint_name: str,
+        base_url: str,
         region: str,
-        client: AsyncHttpClient,
+        client: AsyncAI21HTTPClient,
         aws_session: Optional[boto3.Session] = None,
     ):
         self._client = client
         self._aws_session = aws_session or boto3.Session(region_name=region)
-        self._url = f"https://runtime.sagemaker.{region}.amazonaws.com/endpoints/{endpoint_name}/invocations"
+        self._base_url = base_url
         self._aws_auth = AWSAuthorization(aws_session=self._aws_session)
 
     async def _post(
@@ -81,12 +79,10 @@ class AsyncSageMakerResource(ABC):
         body: Dict[str, Any],
     ) -> httpx.Response:
         auth_headers = self._aws_auth.get_auth_headers(
-            service_name="sagemaker", url=self._url, method="POST", data=json.dumps(body)
+            service_name="sagemaker", url=self._base_url, method="POST", data=json.dumps(body)
         )
 
         try:
-            return await self._client.execute_http_request(
-                url=self._url, body=body, method="POST", extra_headers=auth_headers
-            )
+            return await self._client.execute_http_request(body=body, method="POST", extra_headers=auth_headers)
         except AI21APIError as aws_error:
             _handle_sagemaker_error(aws_error)

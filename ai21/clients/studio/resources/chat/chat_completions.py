@@ -45,8 +45,8 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
 
     def create(
         self,
-        model: str,
         messages: List[ChatMessage],
+        model: Optional[str] = None,
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
@@ -62,7 +62,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
             )
 
         body = self._create_body(
-            model=model,
+            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
             messages=messages,
             stop=stop,
             temperature=temperature,

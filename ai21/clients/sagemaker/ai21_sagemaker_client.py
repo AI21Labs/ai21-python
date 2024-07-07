@@ -2,15 +2,14 @@ from typing import Optional, Dict, Any
 
 import boto3
 
-from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
-
+from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer, AsyncSageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion, AsyncSageMakerCompletion
 from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC, AsyncSageMakerGEC
 from ai21.clients.sagemaker.resources.sagemaker_paraphrase import SageMakerParaphrase, AsyncSageMakerParaphrase
 from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize, AsyncSageMakerSummarize
-from ai21.http_client.async_http_client import AsyncHttpClient
-from ai21.http_client.http_client import HttpClient
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import AI21HTTPClient
 
 
 class AI21SageMakerClient:
@@ -28,30 +27,28 @@ class AI21SageMakerClient:
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
-        http_client: Optional[HttpClient] = None,
+        http_client: Optional[AI21HTTPClient] = None,
         **kwargs,
     ):
         region = region or AI21EnvConfig.aws_region
-        self._http_client = http_client or HttpClient(
+        base_url = f"https://runtime.sagemaker.{region}.amazonaws.com/endpoints/{endpoint_name}/invocations"
+        self._http_client = http_client or AI21HTTPClient(
+            base_url=base_url,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
         )
 
         self.completion = SageMakerCompletion(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
         self.paraphrase = SageMakerParaphrase(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
-        self.answer = SageMakerAnswer(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
-        )
-        self.gec = SageMakerGEC(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
-        )
+        self.answer = SageMakerAnswer(base_url=base_url, region=region, client=self._http_client, aws_session=session)
+        self.gec = SageMakerGEC(base_url=base_url, region=region, client=self._http_client, aws_session=session)
         self.summarize = SageMakerSummarize(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
 
 
@@ -67,33 +64,31 @@ class AsyncAI21SageMakerClient:
         endpoint_name: str,
         region: Optional[str] = None,
         session: Optional["boto3.Session"] = None,
-        env_config: _AI21EnvConfig = AI21EnvConfig,
         headers: Optional[Dict[str, Any]] = None,
         timeout_sec: Optional[float] = None,
         num_retries: Optional[int] = None,
-        http_client: Optional[AsyncHttpClient] = None,
+        http_client: Optional[AsyncAI21HTTPClient] = None,
         **kwargs,
     ):
         region = region or AI21EnvConfig.aws_region
-
-        self._http_client = http_client or AsyncHttpClient(
+        base_url = f"https://runtime.sagemaker.{region}.amazonaws.com/endpoints/{endpoint_name}/invocations"
+        self._http_client = http_client or AsyncAI21HTTPClient(
+            base_url=base_url,
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
         )
 
         self.completion = AsyncSageMakerCompletion(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
         self.paraphrase = AsyncSageMakerParaphrase(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
         self.answer = AsyncSageMakerAnswer(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
-        self.gec = AsyncSageMakerGEC(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
-        )
+        self.gec = AsyncSageMakerGEC(base_url=base_url, region=region, client=self._http_client, aws_session=session)
         self.summarize = AsyncSageMakerSummarize(
-            endpoint_name=endpoint_name, region=region, client=self._http_client, aws_session=session
+            base_url=base_url, region=region, client=self._http_client, aws_session=session
         )

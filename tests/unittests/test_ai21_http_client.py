@@ -6,10 +6,8 @@ from urllib.request import Request
 import httpx
 import pytest
 
-from ai21.ai21_http_client.ai21_http_client import AI21HTTPClient
-from ai21.ai21_http_client.async_ai21_http_client import AsyncAI21HTTPClient
-from ai21.http_client.http_client import HttpClient
-from ai21.http_client.async_http_client import AsyncHttpClient
+from ai21.http_client.http_client import AI21HTTPClient
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.version import VERSION
 
 _EXPECTED_USER_AGENT = (
@@ -27,6 +25,8 @@ _EXPECTED_POST_FILE_HEADERS = {
     "Authorization": "Bearer dummy_key",
     "User-Agent": _EXPECTED_USER_AGENT,
 }
+
+_FAKE_URL = "http://fake-url"
 
 
 class MockResponse:
@@ -52,18 +52,18 @@ class MockResponse:
 )
 def test__build_headers__user_agent(via: Optional[str], expected_user_agent: str):
     client = AI21HTTPClient(api_key=_DUMMY_API_KEY, via=via)
-    assert client._http_client._headers["User-Agent"] == expected_user_agent
+    assert client._headers["User-Agent"] == expected_user_agent
 
 
 def test__build_headers__authorization():
     client = AI21HTTPClient(api_key=_DUMMY_API_KEY)
-    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+    assert client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
 
 def test__build_headers__when_pass_headers__should_append():
     client = AI21HTTPClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"})
-    assert client._http_client._headers["foo"] == "bar"
-    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+    assert client._headers["foo"] == "bar"
+    assert client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
 
 @pytest.mark.parametrize(
@@ -95,11 +95,14 @@ def test__execute_http_request__(
 ):
     response_json = {"test_key": "test_value"}
     mock_response = Mock(spec=Request)
+    mock_response.method = params["method"]
+    mock_response.url = f"{dummy_api_host}{params['path']}"
+    mock_response.body = params["body"]
+    mock_response.headers = headers
     mock_httpx_client.build_request.return_value = mock_response
     mock_httpx_client.send.return_value = MockResponse(response_json, 200)
 
-    http_client = HttpClient(client=mock_httpx_client)
-    client = AI21HTTPClient(http_client=http_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host, api_version="v1")
+    client = AI21HTTPClient(client=mock_httpx_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host)
 
     response = client.execute_http_request(**params)
     assert response.json() == response_json
@@ -122,6 +125,8 @@ def test__execute_http_request__(
             url=f"{dummy_api_host}{params['path']}",
             params=params["params"],
             method=params["method"],
+            data=None,
+            files=None,
         )
 
     mock_httpx_client.send.assert_called_once_with(request=mock_response, stream=False)
@@ -132,8 +137,7 @@ def test__execute_http_request__when_files_with_put_method__should_raise_value_e
     mock_httpx_client: httpx.Client,
 ):
     response_json = {"test_key": "test_value"}
-    http_client = HttpClient(client=mock_httpx_client)
-    client = AI21HTTPClient(http_client=http_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host, api_version="v1")
+    client = AI21HTTPClient(client=mock_httpx_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host)
 
     mock_httpx_client.request.return_value = MockResponse(response_json, 200)
     with pytest.raises(ValueError):
@@ -154,19 +158,19 @@ def test__execute_http_request__when_files_with_put_method__should_raise_value_e
     ],
 )
 def test__async_build_headers__user_agent(via: Optional[str], expected_user_agent: str):
-    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, via=via)
-    assert client._http_client._headers["User-Agent"] == expected_user_agent
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, via=via, base_url=_FAKE_URL)
+    assert client._headers["User-Agent"] == expected_user_agent
 
 
 def test__async_build_headers__authorization():
-    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY)
-    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, base_url=_FAKE_URL)
+    assert client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
 
 def test__async_build_headers__when_pass_headers__should_append():
-    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"})
-    assert client._http_client._headers["foo"] == "bar"
-    assert client._http_client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
+    client = AsyncAI21HTTPClient(api_key=_DUMMY_API_KEY, headers={"foo": "bar"}, base_url=_FAKE_URL)
+    assert client._headers["foo"] == "bar"
+    assert client._headers["Authorization"] == f"Bearer {_DUMMY_API_KEY}"
 
 
 @pytest.mark.asyncio
@@ -199,12 +203,18 @@ async def test__async_execute_http_request__(
 ):
     response_json = {"test_key": "test_value"}
     mock_response = Mock(spec=Request)
+    mock_response.method = params["method"]
+    mock_response.url = f"{dummy_api_host}{params['path']}"
+    mock_response.body = params["body"]
+    mock_response.headers = headers
+
     mock_httpx_async_client.build_request.return_value = mock_response
     mock_httpx_async_client.send.return_value = MockResponse(response_json, 200)
 
-    http_client = AsyncHttpClient(client=mock_httpx_async_client)
     client = AsyncAI21HTTPClient(
-        http_client=http_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host, api_version="v1"
+        client=mock_httpx_async_client,
+        api_key=_DUMMY_API_KEY,
+        base_url=dummy_api_host,
     )
 
     response = await client.execute_http_request(**params)
@@ -228,6 +238,8 @@ async def test__async_execute_http_request__(
             url=f"{dummy_api_host}{params['path']}",
             params=params["params"],
             method=params["method"],
+            data=None,
+            files=None,
         )
 
     mock_httpx_async_client.send.assert_called_once_with(request=mock_response, stream=False)
@@ -239,9 +251,10 @@ async def test__async_execute_http_request__when_files_with_put_method__should_r
     mock_httpx_async_client: httpx.AsyncClient,
 ):
     response_json = {"test_key": "test_value"}
-    http_client = AsyncHttpClient(client=mock_httpx_async_client)
     client = AsyncAI21HTTPClient(
-        http_client=http_client, api_key=_DUMMY_API_KEY, base_url=dummy_api_host, api_version="v1"
+        client=mock_httpx_async_client,
+        api_key=_DUMMY_API_KEY,
+        base_url=dummy_api_host,
     )
 
     mock_httpx_async_client.request.return_value = MockResponse(response_json, 200)
