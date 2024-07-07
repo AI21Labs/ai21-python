@@ -1,11 +1,7 @@
 name: "Pull Request Labeler"
 on:
-  pull_request_review:
-    types: [submitted]
-  pull_request_review_comment:
-    types: [created, deleted]
-  pull_request_target:
-    types: [opened, edited, reopened, synchronize]
+  pull_request:
+    types: [opened, synchronize, reopened]
 
 jobs:
   labeler:
