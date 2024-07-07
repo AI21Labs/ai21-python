@@ -41,12 +41,13 @@ prompt = (
 
 
 async def main():
-    response = await AsyncAI21BedrockClient(BedrockModelID.J2_MID_V1).completion.create(
+    response = await AsyncAI21BedrockClient().completion.create(
         prompt=prompt,
         max_tokens=50,
         temperature=0,
         top_p=1,
         top_k_return=0,
+        model=BedrockModelID.J2_MID_V1,
     )
 
     print(response.completions[0].data.text)
