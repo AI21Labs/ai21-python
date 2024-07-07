@@ -25,7 +25,7 @@ class BaseChatCompletions(ABC):
             raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
 
         if not model and not model_id:
-            raise ValueError("Please provide 'model'")
+            raise ValueError("model should be provided 'create' method call")
 
         return model or model_id
 

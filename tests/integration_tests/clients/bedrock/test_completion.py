@@ -74,7 +74,7 @@ def test_completion__when_no_model_id__should_raise_exception():
         client = AI21BedrockClient()
         client.completion.create(prompt=_PROMPT)
 
-    assert e.value.args[0] == "model_id should be provided in either the constructor or the 'create' method call"
+    assert e.value.args[0] == "model should be provided 'create' method call"
 
 
 @pytest.mark.asyncio
@@ -143,4 +143,4 @@ async def test_async_completion__when_no_model_id__should_raise_exception():
         client = AsyncAI21BedrockClient()
         await client.completion.create(prompt=_PROMPT)
 
-    assert e.value.args[0] == "model_id should be provided in either the constructor or the 'create' method call"
+    assert e.value.args[0] == "model should be provided 'create' method call"
