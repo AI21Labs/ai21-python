@@ -82,8 +82,11 @@ jobs:
               repo: context.repo.repo,
               issue_number: context.issue.number,
             });
-            echo "::set-output name=result::" + labels.map(label => label.name).join(',');
             return labels.map(label => label.name).join(',');
+
+      - name: Print labels
+        run: |
+          echo "Labels: ${{ steps.fetch_labels.outputs.result }}"
 
       - name: Remove old size labels
         id: remove_labels
