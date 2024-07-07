@@ -17,7 +17,7 @@ jobs:
     timeout-minutes: 1
     steps:
       - name: Semantic pull-request
-        uses: amannn/action-semantic-pull-request@v5.5.2
+        uses: amannn/action-semantic-pull-request@v5.5.3
         with:
           requireScope: false
           wip: true
