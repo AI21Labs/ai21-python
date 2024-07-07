@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import warnings
 from abc import ABC, abstractmethod
 from typing import List, Dict, Optional
 
@@ -11,8 +12,13 @@ from ai21.utils.typing import remove_not_given
 class Completion(ABC):
     _module_name = "complete"
 
-    def _get_model(self, model: Optional[str], **kwargs) -> str:
-        model_id = kwargs.get("model_id", None)
+    def _get_model(self, model: Optional[str], model_id: Optional[str]) -> str:
+        if model_id is not None:
+            warnings.warn(
+                "The 'model_id' parameter is deprecated and will be removed in a future version."
+                " Please use 'model' instead.",
+                DeprecationWarning,
+            )
 
         if model_id and model:
             raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
