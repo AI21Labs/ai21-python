@@ -37,14 +37,15 @@ jobs:
 
       - name: Calculate diff size
         id: diff
+        env:
+          BASE_BRANCH: ${{ env.base_branch }}
+          HEAD_BRANCH: ${{ env.head_branch }}
         run: |
-          base_branch=${{ env.base_branch }}
-          head_branch=${{ env.head_branch }}
-          echo $base_branch
-          echo $head_branch
-          git checkout $head_branch
-          git fetch origin $base_branch
-          diff_output=$(git diff --shortstat origin/$base_branch...$head_branch)
+          echo $BASE_BRANCH
+          echo $HEAD_BRANCH
+          git checkout $HEAD_BRANCH
+          git fetch origin $BASE_BRANCH
+          diff_output=$(git diff --shortstat origin/$BASE_BRANCH...$HEAD_BRANCH)
           echo $diff_output
           insertions=$(echo $diff_output | awk '{print ($4 == "" ? 0 : $4)}')
           deletions=$(echo $diff_output | awk '{print ($6 == "" ? 0 : $6)}')
@@ -53,9 +54,11 @@ jobs:
           echo "changed_lines=$changed_lines" >> $GITHUB_ENV
 
       - name: Determine label
+        env:
+          CHANGED_LINES: ${{ env.changed_lines }}
         id: label
         run: |
-          changed_lines=${{ env.changed_lines }}
+          changed_lines=$CHANGED_LINES
           if [ "$changed_lines" -le 9 ]; then
             label="size:s"
           elif [ "$changed_lines" -le 50 ]; then
