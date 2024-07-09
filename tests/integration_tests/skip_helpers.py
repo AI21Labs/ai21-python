@@ -7,3 +7,7 @@ def should_skip_bedrock_integration_tests() -> bool:
 
 def should_skip_studio_integration_tests() -> bool:
     return os.getenv("AI21_API_KEY") is None
+
+
+def should_skip_vertex_integration_tests() -> bool:
+    return True

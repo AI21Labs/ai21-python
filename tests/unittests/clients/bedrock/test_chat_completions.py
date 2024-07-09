@@ -11,23 +11,8 @@ from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient, AsyncAI21BedrockClient
 from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
 from ai21.models.chat import ChatMessage
+from tests.unittests.commons import FAKE_CHAT_COMPLETION_RESPONSE_DICT, FAKE_AUTH_HEADERS
 
-_FAKE_RESPONSE_DICT = {
-    "id": "cmpl-392a6a33e5204aa7a2070be4d0ddbc0a",
-    "choices": [
-        {
-            "index": 0,
-            "message": {
-                "role": "assistant",
-                "content": "Test",
-            },
-            "logprobs": None,
-            "finishReason": "stop",
-        }
-    ],
-    "usage": {"promptTokens": 1, "completionTokens": 1, "totalTokens": 2},
-}
-_FAKE_AUTH_HEADERS = {"Authorization": "Bearer fake-token"}
 _FULL_BEDROCK_URL = "https://bedrock-runtime.us-east-1.amazonaws.com/model/ai21.jamba-instruct-v1:0/invoke"
 
 
@@ -63,10 +48,10 @@ def test__options_in_request(mock_httpx_client: Mock):
 
     mock_httpx_client.send.return_value = httpx.Response(
         status_code=200,
-        content=json.dumps(_FAKE_RESPONSE_DICT).encode("utf-8"),
+        content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(AWSAuthorization, AWSAuthorization.get_auth_headers.__name__, return_value=_FAKE_AUTH_HEADERS):
+    with patch.object(AWSAuthorization, AWSAuthorization.get_auth_headers.__name__, return_value=FAKE_AUTH_HEADERS):
         client = AI21BedrockClient(http_client=mock_httpx_client)
         client.chat.completions.create(model=BedrockModelID.JAMBA_INSTRUCT_V1, messages=[message])
 
@@ -76,7 +61,7 @@ def test__options_in_request(mock_httpx_client: Mock):
         headers={
             "Content-Type": "application/json",
             "User-Agent": ANY,
-            **_FAKE_AUTH_HEADERS,
+            **FAKE_AUTH_HEADERS,
         },
         timeout=300,
         params={},
@@ -91,10 +76,10 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
 
     mock_async_httpx_client.send.return_value = httpx.Response(
         status_code=200,
-        content=json.dumps(_FAKE_RESPONSE_DICT).encode("utf-8"),
+        content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(AWSAuthorization, AWSAuthorization.get_auth_headers.__name__, return_value=_FAKE_AUTH_HEADERS):
+    with patch.object(AWSAuthorization, AWSAuthorization.get_auth_headers.__name__, return_value=FAKE_AUTH_HEADERS):
         client = AsyncAI21BedrockClient(http_client=mock_async_httpx_client)
         await client.chat.completions.create(model=BedrockModelID.JAMBA_INSTRUCT_V1, messages=[message])
 
@@ -104,7 +89,7 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
         headers={
             "Content-Type": "application/json",
             "User-Agent": ANY,
-            **_FAKE_AUTH_HEADERS,
+            **FAKE_AUTH_HEADERS,
         },
         timeout=300,
         params={},
