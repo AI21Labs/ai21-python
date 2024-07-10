@@ -78,4 +78,3 @@ def setup_logger() -> None:
         httpx_logger.setLevel(logging.DEBUG)
     elif AI21EnvConfig.log_level.lower() == "info":
         logger.setLevel(logging.INFO)
-        httpx_logger.setLevel(logging.INFO)
