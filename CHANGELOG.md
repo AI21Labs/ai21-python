@@ -1,8 +1,73 @@
 # CHANGELOG
 
+## v2.9.1 (2024-07-10)
+
+### Chore
+
+* chore(deps-dev): bump zipp from 3.18.1 to 3.19.1 (#183)
+
+Bumps [zipp](https://github.com/jaraco/zipp) from 3.18.1 to 3.19.1.
+- [Release notes](https://github.com/jaraco/zipp/releases)
+- [Changelog](https://github.com/jaraco/zipp/blob/main/NEWS.rst)
+- [Commits](https://github.com/jaraco/zipp/compare/v3.18.1...v3.19.1)
+
+---
+updated-dependencies:
+- dependency-name: zipp
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`1812ef5`](https://github.com/AI21Labs/ai21-python/commit/1812ef50f3700bc994694c9b45a7c1cf51c45f87))
+
+* chore(deps): bump certifi from 2024.2.2 to 2024.7.4 (#176)
+
+Bumps [certifi](https://github.com/certifi/python-certifi) from 2024.2.2 to 2024.7.4.
+- [Commits](https://github.com/certifi/python-certifi/compare/2024.02.02...2024.07.04)
+
+---
+updated-dependencies:
+- dependency-name: certifi
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`f5e1814`](https://github.com/AI21Labs/ai21-python/commit/f5e18140ffd289be8d3e5afa2e0c5352a0beb1cd))
+
+* chore(deps): bump amannn/action-semantic-pull-request (#154)
+
+Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-semantic-pull-request) from 5.5.2 to 5.5.3.
+- [Release notes](https://github.com/amannn/action-semantic-pull-request/releases)
+- [Changelog](https://github.com/amannn/action-semantic-pull-request/blob/main/CHANGELOG.md)
+- [Commits](https://github.com/amannn/action-semantic-pull-request/compare/v5.5.2...v5.5.3)
+
+---
+updated-dependencies:
+- dependency-name: amannn/action-semantic-pull-request
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`e57d99a`](https://github.com/AI21Labs/ai21-python/commit/e57d99a04ff4b6aa4a858a2fe87f8cc8c68bcfa0))
+
+### Fix
+
+* fix: remove httpx logger on log level info (#184) ([`06d0226`](https://github.com/AI21Labs/ai21-python/commit/06d02261c187a4bda1b5d479855d17b5a1507a1d))
+
+### Unknown
+
+* Securely use variables in labeler workflow. (#181)
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5349992`](https://github.com/AI21Labs/ai21-python/commit/53499926753a1854a2da6c65f8175c33d0a79ae1))
+
 ## v2.9.0 (2024-07-07)
 
 ### Chore
+
+* chore(release): v2.9.0 [skip ci] ([`f4b4d36`](https://github.com/AI21Labs/ai21-python/commit/f4b4d362b77ab94c970ae623f7f9185b94718181))
 
 * chore(deps): bump actions/github-script from 6 to 7 (#169)
 
