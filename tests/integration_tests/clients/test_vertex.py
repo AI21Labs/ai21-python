@@ -26,7 +26,7 @@ VERTEX_PATH = Path(__file__).parent.parent.parent.parent / "examples" / VERTEX_D
         "when_async_chat_completions__should_return_ok",
     ],
 )
-def test_bedrock(test_file_name: str):
+def test_vertex(test_file_name: str):
     file_path = VERTEX_PATH / test_file_name
     print(f"About to run: {file_path}")
     exit_code = subprocess.call(["python", file_path])

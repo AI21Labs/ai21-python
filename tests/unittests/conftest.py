@@ -4,6 +4,9 @@ import httpx
 from google.auth.credentials import Credentials
 from google.auth.transport.requests import Request
 
+from ai21.clients.vertex.ai21_vertex_client import AI21VertexClient
+from ai21.clients.vertex.gcp_authorization import GCPAuthorization
+
 
 @pytest.fixture
 def dummy_api_host() -> str:
@@ -40,3 +43,10 @@ def mock_gcp_credentials(mocker) -> Credentials:
 @pytest.fixture
 def mock_gcp_request(mocker) -> Request:
     return mocker.Mock(spec=Request)
+
+
+@pytest.fixture
+def mock_ai21_vertex_client(mocker) -> AI21VertexClient:
+    ai21_vertex_client_mock = mocker.Mock(spec=AI21VertexClient)
+    ai21_vertex_client_mock._gcp_auth = mocker.Mock(spec=GCPAuthorization)
+    return ai21_vertex_client_mock

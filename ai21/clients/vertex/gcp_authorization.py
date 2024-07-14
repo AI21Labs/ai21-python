@@ -5,54 +5,39 @@ from typing import Optional
 import google.auth
 from google.auth.credentials import Credentials
 from google.auth.transport.requests import Request
+from google.auth.exceptions import DefaultCredentialsError
+
+from ai21.errors import CredentialsError
 
 
 class GCPAuthorization:
-    def __init__(self, credentials: Optional[Credentials] = None, project_id: Optional[str] = None):
-        self._credentials = credentials
-        self._project_id = project_id
+    def get_gcp_credentials_and_project_id(
+        self,
+        project_id: Optional[str] = None,
+    ) -> tuple[Credentials, str]:
+        try:
+            credentials, loaded_project_id = google.auth.default(
+                scopes=["https://www.googleapis.com/auth/cloud-platform"],
+            )
+        except DefaultCredentialsError as e:
+            raise CredentialsError(str(e))
 
-    def _set_auth(self):
-        credentials, loaded_project_id = google.auth.default(
-            scopes=["https://www.googleapis.com/auth/cloud-platform"],
-        )
-
-        if self._project_id is not None and self._project_id != loaded_project_id:
+        if project_id is not None and project_id != loaded_project_id:
             raise ValueError("Mismatch between credentials project id and 'project_id'")
 
-        if self._project_id is None:
-            self._project_id = loaded_project_id
+        project_id = project_id or loaded_project_id
 
-        if self._project_id is None:
+        if project_id is None:
             raise ValueError("Could not get project_id for GCP project")
 
-        if not isinstance(self._project_id, str):
-            raise ValueError(f"Variable project_id must be a string, got {type(self._project_id)} instead")
+        if not isinstance(project_id, str):
+            raise ValueError(f"Variable project_id must be a string, got {type(project_id)} instead")
 
-        self._credentials = credentials
+        return credentials, project_id
 
     def _get_gcp_request(self) -> Request:
         return Request()
 
-    def _refresh_auth(self, request: Request):
-        self._credentials.refresh(request)
-
-    def get_access_token(self) -> str:
-        if self._credentials is None:
-            self._set_auth()
-        self._refresh_auth(self._get_gcp_request())
-
-        if self._credentials is None:
-            raise ValueError("Could not get credentials for GCP project")
-
-        if self._credentials.token is None:
-            raise RuntimeError(f"Could not get access token for GCP project {self._project_id}")
-
-        return self._credentials.token
-
-    @property
-    def project_id(self) -> str:
-        if self._project_id is None:
-            self._set_auth()
-
-        return self._project_id
+    def refresh_auth(self, credentials: Credentials) -> None:
+        request = self._get_gcp_request()
+        credentials.refresh(request)

@@ -86,7 +86,7 @@ def __getattr__(name: str) -> Any:
         if name == "AsyncAI21VertexClient":
             return _import_async_vertex_client()
     except ImportError as e:
-        raise ImportError('Please install "ai21[AWS]" for SageMaker or Bedrock, or ai21[Vertex] for Vertex') from e
+        raise ImportError('Please install "ai21[AWS]" for SageMaker or Bedrock, or "ai21[Vertex]" for Vertex') from e
 
 
 __all__ = [

@@ -1,49 +1,51 @@
-from typing import Optional
-
-import pytest
 from unittest.mock import Mock, patch
-from google.auth.credentials import Credentials
-from google.auth.exceptions import RefreshError
+
+import google.auth.exceptions
+import pytest
+from google.auth.transport.requests import Request
 
 from ai21.clients.vertex.gcp_authorization import GCPAuthorization
-from google.auth.transport.requests import Request
+from ai21.errors import CredentialsError
 
 _TEST_PROJECT_ID = "test-project"
 
 
-@pytest.mark.parametrize(
-    ids=[
-        "when_project_id_not_found__should_raise_error",
-        "when_project_id_found__should_set_auth",
-    ],
-    argvalues=[(None,), (_TEST_PROJECT_ID,)],
-    argnames=["project_id"],
-)
 @patch("google.auth.default")
 @patch.object(GCPAuthorization, GCPAuthorization._get_gcp_request.__name__)
-def test__gcp_authorization_set_auth(
+def test__get_gcp_credentials_and_project_id__when_project_id_not_found__should_raise_error(
     mock_gcp_request: Mock,
     mock_default: Mock,
     mock_gcp_credentials: Mock,
-    project_id: Optional[str],
 ):
-    mock_default.return_value = (mock_gcp_credentials, project_id)
+    mock_default.return_value = (mock_gcp_credentials, None)
     mock_gcp_request.return_value = Mock(spec=Request)
 
-    auth = GCPAuthorization(project_id=project_id)
+    auth = GCPAuthorization()
 
-    if project_id is None:
-        with pytest.raises(ValueError):
-            auth._set_auth()
-    else:
-        auth._set_auth()
-        assert auth._credentials == mock_gcp_credentials
-        assert auth.project_id == _TEST_PROJECT_ID
+    with pytest.raises(ValueError):
+        _, _ = auth.get_gcp_credentials_and_project_id(project_id=None)
 
 
 @patch("google.auth.default")
 @patch.object(GCPAuthorization, GCPAuthorization._get_gcp_request.__name__)
-def test__gcp_authorization_set_auth__project_id_mismatch__should_raise_error(
+def test__get_gcp_credentials_and_project_id__when_project_id_found__should_set_auth(
+    mock_gcp_request: Mock,
+    mock_default: Mock,
+    mock_gcp_credentials: Mock,
+):
+    mock_default.return_value = (mock_gcp_credentials, _TEST_PROJECT_ID)
+    mock_gcp_request.return_value = Mock(spec=Request)
+
+    auth = GCPAuthorization()
+    credentials, project_id = auth.get_gcp_credentials_and_project_id(project_id=_TEST_PROJECT_ID)
+
+    assert credentials == mock_gcp_credentials
+    assert project_id == _TEST_PROJECT_ID
+
+
+@patch("google.auth.default")
+@patch.object(GCPAuthorization, GCPAuthorization._get_gcp_request.__name__)
+def test__get_gcp_credentials_and_project_id__project_id_mismatch__should_raise_error(
     mock_gcp_request: Mock,
     mock_default: Mock,
     mock_gcp_credentials: Mock,
@@ -51,25 +53,27 @@ def test__gcp_authorization_set_auth__project_id_mismatch__should_raise_error(
     mock_default.return_value = (mock_gcp_credentials, "another-project")
     mock_gcp_request.return_value = Mock(spec=Request)
 
-    auth = GCPAuthorization(project_id=_TEST_PROJECT_ID)
+    auth = GCPAuthorization()
 
-    with pytest.raises(ValueError):
-        auth._set_auth()
+    with pytest.raises(ValueError, match="Mismatch between credentials project id and 'project_id'"):
+        _, _ = auth.get_gcp_credentials_and_project_id(project_id=_TEST_PROJECT_ID)
 
 
 @patch.object(GCPAuthorization, GCPAuthorization._get_gcp_request.__name__)
-def test__gcp_authorization_refresh_auth(
+def test__refresh_auth(
+    mock_get_gcp_request: Mock,
     mock_gcp_request: Mock,
     mock_gcp_credentials: Mock,
 ):
-    auth = GCPAuthorization(credentials=mock_gcp_credentials)
-    auth._refresh_auth(mock_gcp_request)
+    mock_get_gcp_request.return_value = mock_gcp_request
+    auth = GCPAuthorization()
+    auth.refresh_auth(credentials=mock_gcp_credentials)
 
     mock_gcp_credentials.refresh.assert_called_once_with(mock_gcp_request)
 
 
 @patch("google.auth.default")
-def test__gcp_authorization_get_access_token_success(
+def test__get_gcp_credentials_and_project_id__should_return_credentials_and_project_id(
     mock_default: Mock,
     mock_gcp_credentials: Mock,
 ):
@@ -77,49 +81,30 @@ def test__gcp_authorization_get_access_token_success(
     mock_gcp_credentials.token = "test-token"
 
     auth = GCPAuthorization()
-    token = auth.get_access_token()
+    credentials, project_id = auth.get_gcp_credentials_and_project_id(project_id=_TEST_PROJECT_ID)
 
-    assert token == "test-token"
-    mock_gcp_credentials.refresh.assert_called_once()
+    assert credentials == mock_gcp_credentials
+    assert project_id == _TEST_PROJECT_ID
 
 
-def test__gcp_authorization_get_access_token_no_credentials__should_raise_error():
+def test__get_gcp_credentials_and_project_id__with_no_credentials__should_raise_error():
     auth = GCPAuthorization()
-    auth._set_auth = Mock(side_effect=ValueError("Could not get credentials for GCP project"))
+    auth.get_gcp_credentials_and_project_id = Mock(side_effect=ValueError("Could not get credentials for GCP project"))
 
     with pytest.raises(ValueError, match="Could not get credentials for GCP project"):
-        auth.get_access_token()
-
-
-def test__gcp_authorization_get_access_token_no_token__should_raise_error(mock_gcp_credentials: Mock):
-    mock_gcp_credentials.token = None
-    auth = GCPAuthorization(credentials=mock_gcp_credentials)
-
-    with pytest.raises(RuntimeError, match="Could not get access token for GCP project"):
-        auth.get_access_token()
+        auth.get_gcp_credentials_and_project_id(project_id=None)
 
 
 @patch("google.auth.default")
-def test__gcp_authorization_project_id_property(mock_default: Mock):
-    mock_default.return_value = (Mock(spec=Credentials), _TEST_PROJECT_ID)
-
-    auth = GCPAuthorization()
-    assert auth.project_id == _TEST_PROJECT_ID
-
-
-def test__gcp_authorization_project_id_property_preset():
-    auth = GCPAuthorization(project_id="preset-project")
-    assert auth.project_id == "preset-project"
-
-
-@patch("google.auth.default")
-def test__gcp_authorization_get_access_token_refresh_error__should_raise_error(
+@patch.object(GCPAuthorization, GCPAuthorization._get_gcp_request.__name__)
+def test__get_gcp_credentials_and_project_id__with_default_credentials_error__should_raise_custom_credentials_error(
+    mock_gcp_request: Mock,
     mock_default: Mock,
-    mock_gcp_credentials: Mock,
 ):
-    mock_default.return_value = (mock_gcp_credentials, _TEST_PROJECT_ID)
-    mock_gcp_credentials.refresh.side_effect = RefreshError("Token refresh failed")
-
+    mock_default.side_effect = google.auth.exceptions.DefaultCredentialsError(
+        "Could not get project_id for GCP project"
+    )
     auth = GCPAuthorization()
-    with pytest.raises(RefreshError, match="Token refresh failed"):
-        auth.get_access_token()
+
+    with pytest.raises(CredentialsError, match="Could not get project_id for GCP project"):
+        auth.get_gcp_credentials_and_project_id(project_id=None)

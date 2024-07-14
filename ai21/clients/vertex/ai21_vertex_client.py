@@ -11,10 +11,10 @@ from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.request_options import RequestOptions
 
-DEFAULT_GCP_REGION = "us-central1"
-VERTEX_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"
+_DEFAULT_GCP_REGION = "us-central1"
+_VERTEX_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"
 # TODO: verify path
-VERTEX_PATH_FORMAT = "/projects/{project_id}/locations/{region}/publishers/ai21/models/{model}:{endpoint}"
+_VERTEX_PATH_FORMAT = "/projects/{project_id}/locations/{region}/publishers/ai21/models/{model}:{endpoint}"
 
 
 class BaseAI21VertexClient:
@@ -25,21 +25,33 @@ class BaseAI21VertexClient:
         access_token: Optional[str] = None,
         credentials: Optional[GCPCredentials] = None,
     ):
-        if region is None:
-            region = DEFAULT_GCP_REGION
-
-        self._region = region
+        self._region = region or _DEFAULT_GCP_REGION
         self._access_token = access_token
-        self._gcp_auth = GCPAuthorization(credentials=credentials, project_id=project_id)
+        self._project_id = project_id
+        self._credentials = credentials
+        self._gcp_auth = GCPAuthorization()
 
-    def _get_base_url(self):
-        return VERTEX_BASE_URL_FORMAT.format(region=self._region)
+    def _get_base_url(self) -> str:
+        return _VERTEX_BASE_URL_FORMAT.format(region=self._region)
 
     def _get_access_token(self) -> str:
         if self._access_token is not None:
             return self._access_token
 
-        return self._gcp_auth.get_access_token()
+        if self._credentials is None:
+            self._credentials, self._project_id = self._gcp_auth.get_gcp_credentials_and_project_id(
+                project_id=self._project_id,
+            )
+
+        if self._credentials is None:
+            raise ValueError("Could not get credentials for GCP project")
+
+        self._gcp_auth.refresh_auth(self._credentials)
+
+        if self._credentials.token is None:
+            raise RuntimeError(f"Could not get access token for GCP project {self._project_id}")
+
+        return self._credentials.token
 
     def _build_path(
         self,
@@ -47,13 +59,17 @@ class BaseAI21VertexClient:
         region: str,
         model: str,
         endpoint: str,
-    ):
-        return VERTEX_PATH_FORMAT.format(
+    ) -> str:
+        return _VERTEX_PATH_FORMAT.format(
             project_id=project_id,
             region=region,
             model=model,
             endpoint=endpoint,
         )
+
+    def _get_authorization_header(self) -> dict:
+        access_token = self._get_access_token()
+        return {"Authorization": f"Bearer {access_token}"}
 
 
 class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
@@ -107,7 +123,7 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
         endpoint = "streamRawPredict" if stream else "rawPredict"
         headers = self._prepare_headers()
         path = self._build_path(
-            project_id=self._gcp_auth.project_id,
+            project_id=self._project_id,
             region=self._region,
             model=model,
             endpoint=endpoint,
@@ -120,8 +136,7 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
         )
 
     def _prepare_headers(self) -> dict:
-        access_token = self._get_access_token()
-        return {"Authorization": f"Bearer {access_token}"}
+        return self._get_authorization_header()
 
 
 class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
@@ -175,7 +190,7 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
         endpoint = "streamRawPredict" if stream else "rawPredict"
         headers = self._prepare_headers()
         path = self._build_path(
-            project_id=self._gcp_auth.project_id,
+            project_id=self._project_id,
             region=self._region,
             model=model,
             endpoint=endpoint,
@@ -188,5 +203,4 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
         )
 
     def _prepare_headers(self) -> dict:
-        access_token = self._get_access_token()
-        return {"Authorization": f"Bearer {access_token}"}
+        return self._get_authorization_header()

@@ -94,6 +94,12 @@ class EmptyMandatoryListError(AI21Error):
         super().__init__(message)
 
 
+class CredentialsError(AI21Error):
+    def __init__(self, error_message: str):
+        message = f"Could not get default GCP credentials: {error_message}"
+        super().__init__(message)
+
+
 class StreamingDecodeError(AI21Error):
     def __init__(self, chunk: str):
         message = f"Failed to decode chunk: {chunk} in stream. Please check the stream format"
