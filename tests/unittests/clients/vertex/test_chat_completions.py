@@ -5,7 +5,6 @@ import httpx
 import pytest
 
 from ai21 import AI21VertexClient, AsyncAI21VertexClient
-from ai21.clients.vertex.gcp_authorization import GCPAuthorization
 from ai21.models.chat import ChatMessage
 from tests.unittests.commons import FAKE_CHAT_COMPLETION_RESPONSE_DICT, FAKE_AUTH_HEADERS
 
@@ -40,7 +39,7 @@ def test__options_in_request(mock_httpx_client: Mock):
         content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(GCPAuthorization, GCPAuthorization.get_access_token.__name__, return_value="fake-token"):
+    with patch.object(AI21VertexClient, AI21VertexClient._get_access_token.__name__, return_value="fake-token"):
         client = AI21VertexClient(http_client=mock_httpx_client, project_id=_TEST_PROJECT, region=_TEST_REGION)
         client.chat.completions.create(model="jamba-instruct", messages=[message])
 
@@ -68,7 +67,9 @@ async def test__async_options_in_request(mock_httpx_async_client: Mock):
         content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(GCPAuthorization, GCPAuthorization.get_access_token.__name__, return_value="fake-token"):
+    with patch.object(
+        AsyncAI21VertexClient, AsyncAI21VertexClient._get_access_token.__name__, return_value="fake-token"
+    ):
         client = AsyncAI21VertexClient(
             http_client=mock_httpx_async_client, project_id=_TEST_PROJECT, region=_TEST_REGION
         )
@@ -98,14 +99,13 @@ def test__vertex_client__when_passing_access_token__should_use_the_access_token(
         content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(GCPAuthorization, GCPAuthorization.get_access_token.__name__, return_value="fake-token"):
-        client = AI21VertexClient(
-            http_client=mock_httpx_client,
-            project_id=_TEST_PROJECT,
-            region=_TEST_REGION,
-            access_token=custom_access_token,
-        )
-        client.chat.completions.create(model="jamba-instruct", messages=[message])
+    client = AI21VertexClient(
+        http_client=mock_httpx_client,
+        project_id=_TEST_PROJECT,
+        region=_TEST_REGION,
+        access_token=custom_access_token,
+    )
+    client.chat.completions.create(model="jamba-instruct", messages=[message])
 
     mock_httpx_client.build_request.assert_called_once_with(
         method="POST",
@@ -134,14 +134,13 @@ async def test__async_vertex_client__when_passing_access_token__should_use_the_a
         content=json.dumps(FAKE_CHAT_COMPLETION_RESPONSE_DICT).encode("utf-8"),
     )
 
-    with patch.object(GCPAuthorization, GCPAuthorization.get_access_token.__name__, return_value="fake-token"):
-        client = AsyncAI21VertexClient(
-            http_client=mock_httpx_async_client,
-            project_id=_TEST_PROJECT,
-            region=_TEST_REGION,
-            access_token=custom_access_token,
-        )
-        await client.chat.completions.create(model="jamba-instruct", messages=[message])
+    client = AsyncAI21VertexClient(
+        http_client=mock_httpx_async_client,
+        project_id=_TEST_PROJECT,
+        region=_TEST_REGION,
+        access_token=custom_access_token,
+    )
+    await client.chat.completions.create(model="jamba-instruct", messages=[message])
 
     mock_httpx_async_client.build_request.assert_called_once_with(
         method="POST",
