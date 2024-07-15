@@ -57,7 +57,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         self,
         base_url: str,
         api_key: Optional[str] = None,
-        requires_api_key: bool = False,
+        requires_api_key: bool = True,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,

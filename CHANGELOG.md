@@ -1,8 +1,22 @@
 # CHANGELOG
 
+## v2.9.2 (2024-07-15)
+
+### Fix
+
+* fix: fix default for require_api_key in http client and other clients (#185)
+
+* fix: fix default for require_api_key in http client and other clients
+
+* test: fix unittests
+
+* test: add ai21 azure client ([`e6b305e`](https://github.com/AI21Labs/ai21-python/commit/e6b305edc8ed36c722cc359f499c764e05248b95))
+
 ## v2.9.1 (2024-07-10)
 
 ### Chore
+
+* chore(release): v2.9.1 [skip ci] ([`5ed7f07`](https://github.com/AI21Labs/ai21-python/commit/5ed7f07e677ce60eb960991f3c601869d4e2c68c))
 
 * chore(deps-dev): bump zipp from 3.18.1 to 3.19.1 (#183)
 
