@@ -39,7 +39,7 @@ class BaseAI21VertexClient:
             return self._access_token
 
         if self._credentials is None:
-            self._credentials, self._project_id = self._gcp_auth.get_gcp_credentials_and_project_id(
+            self._credentials, self._project_id = self._gcp_auth.get_gcp_credentials(
                 project_id=self._project_id,
             )
 
@@ -67,7 +67,7 @@ class BaseAI21VertexClient:
             endpoint=endpoint,
         )
 
-    def _get_authorization_header(self) -> dict:
+    def _get_authorization_header(self) -> Dict:
         access_token = self._get_access_token()
         return {"Authorization": f"Bearer {access_token}"}
 
@@ -135,7 +135,7 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
             headers=headers,
         )
 
-    def _prepare_headers(self) -> dict:
+    def _prepare_headers(self) -> Dict:
         return self._get_authorization_header()
 
 
@@ -202,5 +202,5 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
             headers=headers,
         )
 
-    def _prepare_headers(self) -> dict:
+    def _prepare_headers(self) -> Dict:
         return self._get_authorization_header()

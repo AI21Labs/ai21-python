@@ -95,8 +95,8 @@ class EmptyMandatoryListError(AI21Error):
 
 
 class CredentialsError(AI21Error):
-    def __init__(self, error_message: str):
-        message = f"Could not get default GCP credentials: {error_message}"
+    def __init__(self, provider_name: str, error_message: str):
+        message = f"Could not get default {provider_name} credentials: {error_message}"
         super().__init__(message)
 
 
