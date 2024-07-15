@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Optional, Dict
+from typing import Optional, Dict, Any
 
 import httpx
 from google.auth.credentials import Credentials as GCPCredentials
@@ -67,7 +67,7 @@ class BaseAI21VertexClient:
             endpoint=endpoint,
         )
 
-    def _get_authorization_header(self) -> Dict:
+    def _get_authorization_header(self) -> Dict[str, Any]:
         access_token = self._get_access_token()
         return {"Authorization": f"Bearer {access_token}"}
 
@@ -136,7 +136,7 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
             headers=headers,
         )
 
-    def _prepare_headers(self) -> Dict:
+    def _prepare_headers(self) -> Dict[str, Any]:
         return self._get_authorization_header()
 
 
@@ -204,5 +204,5 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
             headers=headers,
         )
 
-    def _prepare_headers(self) -> Dict:
+    def _prepare_headers(self) -> Dict[str, Any]:
         return self._get_authorization_header()
