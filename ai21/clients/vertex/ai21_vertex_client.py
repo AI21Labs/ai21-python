@@ -103,6 +103,7 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
             num_retries=num_retries,
             headers=headers,
             client=http_client,
+            requires_api_key=False,
         )
 
         self.chat = StudioChat(self)
