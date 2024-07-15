@@ -171,6 +171,7 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
             num_retries=num_retries,
             headers=headers,
             client=http_client,
+            requires_api_key=False,
         )
 
         self.chat = AsyncStudioChat(self)
