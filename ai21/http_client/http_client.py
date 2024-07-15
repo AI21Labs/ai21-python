@@ -27,7 +27,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
     def __init__(
         self,
         api_key: Optional[str] = None,
-        requires_api_key: bool = False,
+        requires_api_key: bool = True,
         client: Optional[httpx.Client] = None,
         timeout_sec: int = None,
         num_retries: int = None,

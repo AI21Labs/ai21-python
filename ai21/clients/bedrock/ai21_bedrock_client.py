@@ -100,6 +100,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
             num_retries=num_retries,
             headers=headers,
             client=http_client,
+            requires_api_key=False,
         )
 
         BaseBedrockClient.__init__(self, session=session, region=self._region)
@@ -148,6 +149,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
             num_retries=num_retries,
             headers=headers,
             client=http_client,
+            requires_api_key=False,
         )
 
         BaseBedrockClient.__init__(self, session=session, region=self._region)

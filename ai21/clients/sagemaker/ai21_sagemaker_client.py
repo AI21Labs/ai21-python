@@ -37,6 +37,7 @@ class AI21SageMakerClient:
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
+            requires_api_key=False,
         )
 
         self.completion = SageMakerCompletion(
@@ -77,6 +78,7 @@ class AsyncAI21SageMakerClient:
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
+            requires_api_key=False,
         )
 
         self.completion = AsyncSageMakerCompletion(

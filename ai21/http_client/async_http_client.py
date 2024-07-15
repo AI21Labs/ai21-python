@@ -27,17 +27,19 @@ def _requests_retry_async_session(retries: int) -> httpx.AsyncHTTPTransport:
 class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
     def __init__(
         self,
-        base_url: str,
         api_key: Optional[str] = None,
+        requires_api_key: bool = True,
+        client: Optional[httpx.AsyncClient] = None,
         timeout_sec: int = None,
         num_retries: int = None,
         headers: Dict = None,
-        client: Optional[httpx.AsyncClient] = None,
         via: Optional[str] = None,
+        base_url: Optional[str] = None,
     ):
         super().__init__(
-            base_url=base_url,
             api_key=api_key,
+            base_url=base_url,
+            requires_api_key=requires_api_key,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
             headers=headers,
