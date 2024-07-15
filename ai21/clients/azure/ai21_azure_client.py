@@ -78,6 +78,7 @@ class AsyncAI21AzureClient(BaseAzureClient, AsyncAI21HTTPClient):
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
+            requires_api_key=False,
         )
 
         self.chat = AsyncStudioChat(self)
@@ -114,6 +115,7 @@ class AI21AzureClient(BaseAzureClient, AI21HTTPClient):
             headers=headers,
             timeout_sec=timeout_sec,
             num_retries=num_retries,
+            requires_api_key=False,
         )
 
         self.chat = StudioChat(self)
