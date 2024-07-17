@@ -22,7 +22,7 @@ class GCPAuthorization:
         except DefaultCredentialsError as e:
             raise CredentialsError(provider_name="GCP", error_message=str(e))
 
-        if project_id != loaded_project_id:
+        if project_id is not None and project_id != loaded_project_id:
             raise ValueError("Mismatch between credentials project id and 'project_id'")
 
         project_id = project_id or loaded_project_id

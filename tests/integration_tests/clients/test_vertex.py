@@ -19,11 +19,15 @@ VERTEX_PATH = Path(__file__).parent.parent.parent.parent / "examples" / VERTEX_D
     argnames=["test_file_name"],
     argvalues=[
         ("chat_completions.py",),
+        ("stream_chat_completions.py",),
         ("async_chat_completions.py",),
+        ("async_stream_chat_completions.py",),
     ],
     ids=[
         "when_chat_completions__should_return_ok",
+        "when_stream_chat_completions__should_return_ok",
         "when_async_chat_completions__should_return_ok",
+        "when_async_stream_chat_completions__should_return_ok",
     ],
 )
 def test_vertex(test_file_name: str):
