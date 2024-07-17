@@ -498,7 +498,7 @@ messages = [
 
 response = client.chat.completions.create(
     messages=messages,
-    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model=BedrockModelID.JAMBA_INSTRUCT_V1,
 )
 ```
 
