@@ -1,11 +1,9 @@
-from dataclasses import dataclass
 from typing import Optional, List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class LibrarySearchResult(AI21BaseModelMixin):
+class LibrarySearchResult(AI21BaseModel):
     text: str
     file_id: str
     file_name: str
@@ -15,7 +13,6 @@ class LibrarySearchResult(AI21BaseModelMixin):
     labels: Optional[List[str]] = None
 
 
-@dataclass
-class LibrarySearchResponse(AI21BaseModelMixin):
+class LibrarySearchResponse(AI21BaseModel):
     id: str
     results: List[LibrarySearchResult]

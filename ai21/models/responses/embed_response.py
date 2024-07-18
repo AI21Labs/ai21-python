@@ -1,15 +1,12 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class EmbedResult(AI21BaseModelMixin):
+class EmbedResult(AI21BaseModel):
     embedding: List[float]
 
 
-@dataclass
-class EmbedResponse(AI21BaseModelMixin):
+class EmbedResponse(AI21BaseModel):
     id: str
     results: List[EmbedResult]

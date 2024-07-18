@@ -1,16 +1,17 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from typing import Optional
 
-from ai21.types import NOT_GIVEN, NotGiven
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Penalty(AI21BaseModelMixin):
+class Penalty(AI21BaseModel):
     scale: float
-    apply_to_whitespaces: bool | NotGiven = NOT_GIVEN
-    apply_to_punctuation: bool | NotGiven = NOT_GIVEN
-    apply_to_numbers: bool | NotGiven = NOT_GIVEN
-    apply_to_stopwords: bool | NotGiven = NOT_GIVEN
-    apply_to_emojis: bool | NotGiven = NOT_GIVEN
+    apply_to_whitespaces: Optional[bool] = None
+    apply_to_punctuation: Optional[bool] = None
+    apply_to_numbers: Optional[bool] = None
+    apply_to_stopwords: Optional[bool] = None
+    apply_to_emojis: Optional[bool] = None
+
+    def to_dict(self):
+        return super().dict(by_alias=True, exclude_none=True)

@@ -1,11 +1,9 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Improvement(AI21BaseModelMixin):
+class Improvement(AI21BaseModel):
     suggestions: List[str]
     start_index: int
     end_index: int
@@ -13,7 +11,6 @@ class Improvement(AI21BaseModelMixin):
     improvement_type: str
 
 
-@dataclass
-class ImprovementsResponse(AI21BaseModelMixin):
+class ImprovementsResponse(AI21BaseModel):
     id: str
     improvements: List[Improvement]

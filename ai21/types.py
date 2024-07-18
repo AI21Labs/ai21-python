@@ -1,4 +1,5 @@
 from typing import Any, Union, List
+from pydantic import BaseModel
 
 import httpx
 from typing_extensions import Literal, TypeVar, TYPE_CHECKING
@@ -6,15 +7,15 @@ from ai21.stream.stream import Stream
 from ai21.stream.async_stream import AsyncStream
 
 if TYPE_CHECKING:
-    from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin  # noqa
+    from ai21.models.ai21_base_model import AI21BaseModel  # noqa
 
-ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModelMixin", str, httpx.Response, List[Any]])
+ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModel", str, httpx.Response, List[Any]])
 StreamT = TypeVar("_StreamT", bound=Stream[Any])
 AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
 
 
 # Sentinel class used until PEP 0661 is accepted
-class NotGiven:
+class NotGiven(BaseModel):
     """
     A sentinel singleton class used to distinguish omitted keyword arguments
     from those passed in with the value None (which may have different behavior).

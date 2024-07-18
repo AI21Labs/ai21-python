@@ -1,8 +1,7 @@
-from dataclasses import dataclass
 from enum import Enum
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
 class CorrectionType(str, Enum):
@@ -14,8 +13,7 @@ class CorrectionType(str, Enum):
     WRONG_WORD = "Wrong Word"
 
 
-@dataclass
-class Correction(AI21BaseModelMixin):
+class Correction(AI21BaseModel):
     suggestion: str
     start_index: int
     end_index: int
@@ -23,7 +21,6 @@ class Correction(AI21BaseModelMixin):
     correction_type: CorrectionType
 
 
-@dataclass
-class GECResponse(AI21BaseModelMixin):
+class GECResponse(AI21BaseModel):
     id: str
     corrections: List[Correction]

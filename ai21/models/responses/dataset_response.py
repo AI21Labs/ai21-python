@@ -1,11 +1,9 @@
-from dataclasses import dataclass
 from datetime import datetime
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class DatasetResponse(AI21BaseModelMixin):
+class DatasetResponse(AI21BaseModel):
     id: str
     dataset_name: str
     size_bytes: int

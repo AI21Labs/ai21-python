@@ -1,19 +1,16 @@
-from dataclasses import dataclass
 from typing import List, Optional
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class SourceDocument(AI21BaseModelMixin):
+class SourceDocument(AI21BaseModel):
     file_id: str
     name: str
     highlights: List[str]
     public_url: Optional[str] = None
 
 
-@dataclass
-class LibraryAnswerResponse(AI21BaseModelMixin):
+class LibraryAnswerResponse(AI21BaseModel):
     id: str
     answer_in_context: bool
     answer: Optional[str] = None

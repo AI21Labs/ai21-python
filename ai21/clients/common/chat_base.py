@@ -89,7 +89,7 @@ class Chat(ABC):
             {
                 "model": model,
                 "system": system,
-                "messages": [message.to_dict() for message in messages],
+                "messages": [message.dict() for message in messages],
                 "temperature": temperature,
                 "maxTokens": max_tokens,
                 "minTokens": min_tokens,
@@ -97,9 +97,13 @@ class Chat(ABC):
                 "topP": top_p,
                 "topKReturn": top_k_return,
                 "stopSequences": stop_sequences,
-                "frequencyPenalty": NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.to_dict(),
-                "presencePenalty": NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.to_dict(),
-                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
+                "frequencyPenalty": (
+                    NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.dict(exclude_none=True)
+                ),
+                "presencePenalty": (
+                    NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.dict(exclude_none=True)
+                ),
+                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.dict(exclude_none=True),
                 **kwargs,
             }
         )

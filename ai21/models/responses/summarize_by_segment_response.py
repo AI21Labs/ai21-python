@@ -1,18 +1,15 @@
-from dataclasses import dataclass
 from typing import List, Optional
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Highlight(AI21BaseModelMixin):
+class Highlight(AI21BaseModel):
     text: str
     start_index: int
     end_index: int
 
 
-@dataclass
-class SegmentSummary(AI21BaseModelMixin):
+class SegmentSummary(AI21BaseModel):
     summary: Optional[str]
     segment_text: str
     segment_html: Optional[str]
@@ -21,7 +18,6 @@ class SegmentSummary(AI21BaseModelMixin):
     highlights: List[Highlight]
 
 
-@dataclass
-class SummarizeBySegmentResponse(AI21BaseModelMixin):
+class SummarizeBySegmentResponse(AI21BaseModel):
     id: str
     segments: List[SegmentSummary]

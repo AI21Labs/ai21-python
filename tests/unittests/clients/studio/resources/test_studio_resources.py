@@ -100,7 +100,7 @@ class TestStudioResources:
         mock_successful_httpx_response: httpx.Response,
     ):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
-        mock_successful_httpx_response.json.return_value = expected_answer.to_dict()
+        mock_successful_httpx_response.json.return_value = expected_answer.dict()
 
         mock_ai21_studio_client.execute_http_request.return_value = mock_successful_httpx_response
         studio_answer = StudioAnswer(mock_ai21_studio_client)

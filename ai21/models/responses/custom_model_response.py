@@ -1,11 +1,9 @@
-from dataclasses import dataclass
 from typing import Optional
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class BaseModelMetadata(AI21BaseModelMixin):
+class BaseModelMetadata(AI21BaseModel):
     learning_rate: float
     num_epochs: int
     default_epoch: int
@@ -14,8 +12,7 @@ class BaseModelMetadata(AI21BaseModelMixin):
     eval_loss: Optional[float] = None
 
 
-@dataclass
-class CustomBaseModelResponse(AI21BaseModelMixin):
+class CustomBaseModelResponse(AI21BaseModel):
     id: str
     name: str
     tier: str
