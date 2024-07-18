@@ -1,5 +1,5 @@
 import re
-from typing import Any
+from typing import Any, Dict
 
 from pydantic import BaseModel, ConfigDict
 
@@ -30,9 +30,16 @@ class AI21BaseModel(BaseModel):
             alias_generator = to_camel_case
             allow_population_by_field_name = True
 
-    def to_dict(self):
+    def to_dict(self) -> Dict[str, Any]:
         return super().dict()
+
+    def to_json(self) -> str:
+        return super().json()
 
     @classmethod
     def from_dict(cls, obj: Any) -> "AI21BaseModel":
         return cls.parse_obj(obj)
+
+    @classmethod
+    def from_json(cls, json_str: str) -> "AI21BaseModel":
+        return cls.parse_raw(json_str)
