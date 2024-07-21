@@ -31,10 +31,10 @@ class AI21BaseModel(BaseModel):
             allow_population_by_field_name = True
 
     def to_dict(self) -> Dict[str, Any]:
-        return super().dict()
+        return super().dict(by_alias=True)
 
     def to_json(self) -> str:
-        return super().json()
+        return super().json(by_alias=True)
 
     @classmethod
     def from_dict(cls, obj: Any) -> "AI21BaseModel":

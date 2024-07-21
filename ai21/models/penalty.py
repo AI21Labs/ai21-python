@@ -15,3 +15,6 @@ class Penalty(AI21BaseModel):
 
     def to_dict(self):
         return super().dict(by_alias=True, exclude_none=True)
+
+    def to_json(self) -> str:
+        return super().json(by_alias=True, exclude_none=True)
