@@ -25,6 +25,8 @@ class BaseAI21VertexClient:
         access_token: Optional[str] = None,
         credentials: Optional[GCPCredentials] = None,
     ):
+        if access_token is not None and project_id is None:
+            raise ValueError("Field project_id is required when setting access_token")
         self._region = region or _DEFAULT_GCP_REGION
         self._access_token = access_token
         self._project_id = project_id
