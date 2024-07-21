@@ -634,7 +634,7 @@ from ai21 import AI21AzureClient
 from ai21.models.chat import ChatMessage
 
 client = AI21AzureClient(
-  base_url="https://<YOUR-ENDPOINT>.inference.ai.azure.com/v1/chat/completions",
+  base_url="https://<YOUR-ENDPOINT>.inference.ai.azure.com",
   api_key="<your Azure api key>",
 )
 
