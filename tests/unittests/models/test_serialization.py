@@ -2,12 +2,12 @@ from ai21.models import Penalty
 from ai21.models.pydantic_compatibility import IS_PYDANTIC_V2
 
 
-def test_penalty__to_dict__when_has_not_given_fields__should_filter_them_out():
+def test_penalty__to_dict__when_has_none_fields__should_filter_them_out():
     penalty = Penalty(scale=0.5, apply_to_whitespaces=True)
     assert penalty.to_dict() == {"scale": 0.5, "applyToWhitespaces": True}
 
 
-def test_penalty__to_json__when_has_not_given_fields__should_filter_them_out():
+def test_penalty__to_json__when_has_none_fields__should_filter_them_out():
     penalty = Penalty(scale=0.5, apply_to_whitespaces=True)
     if IS_PYDANTIC_V2:
         assert penalty.to_json() == '{"scale":0.5,"applyToWhitespaces":true}'

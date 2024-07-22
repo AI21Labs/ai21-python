@@ -35,9 +35,9 @@ def _cast_response(
 
     if origin_type is not None and origin_type == list:
         subtype = extract_type(response_cls)
-        return [subtype.parse_obj(item) for item in response.json()]
+        return [subtype.from_dict(item) for item in response.json()]
 
-    return response_cls.parse_obj(response.json())
+    return response_cls.from_dict(response.json())
 
 
 class StudioResource(ABC):

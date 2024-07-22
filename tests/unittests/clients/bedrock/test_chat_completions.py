@@ -80,7 +80,7 @@ def test__options_in_request(mock_httpx_client: Mock):
         },
         timeout=300,
         params={},
-        data=json.dumps({"messages": [message.dict()]}).encode("utf-8"),
+        data=json.dumps({"messages": [message.to_dict()]}).encode("utf-8"),
         files=None,
     )
 
@@ -108,7 +108,7 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
         },
         timeout=300,
         params={},
-        data=json.dumps({"messages": [message.dict()]}).encode("utf-8"),
+        data=json.dumps({"messages": [message.to_dict()]}).encode("utf-8"),
         files=None,
     )
 
