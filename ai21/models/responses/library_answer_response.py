@@ -6,7 +6,7 @@ from ai21.models.ai21_base_model import AI21BaseModel
 
 
 class SourceDocument(AI21BaseModel):
-    file_id: str
+    file_id: str = Field(alias="fileId")
     name: str
     highlights: List[str]
     public_url: Optional[str] = Field(default=None, alias="publicUrl")

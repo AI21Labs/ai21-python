@@ -7,7 +7,7 @@ from ai21.models.ai21_base_model import AI21BaseModel
 
 
 class FileResponse(AI21BaseModel):
-    file_id: str
+    file_id: str = Field(alias="fileId")
     name: str
     file_type: str = Field(alias="fileType")
     size_bytes: int = Field(alias="sizeBytes")
