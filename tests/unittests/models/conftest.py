@@ -107,7 +107,7 @@ def get_chat_completions_response():
 
 def get_completions_response():
     expected_dict = {
-        "id": "123",
+        "id": "123-abc",
         "prompt": {
             "text": "life is like ",
             "tokens": [
@@ -176,7 +176,7 @@ def get_completions_response():
         ),
         finish_reason=CompletionFinishReason(reason="length", length=16),
     )
-    completion_response = CompletionsResponse(id="123", prompt=prompt, completions=[completion])
+    completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
 
