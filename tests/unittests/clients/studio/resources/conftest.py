@@ -152,14 +152,14 @@ def get_chat_completions(is_async: bool = False):
                     "content": "Hello, I need help with a signup process.",
                     "role": "user",
                 },
-                "finishReason": "dummy_reason",
+                "finish_reason": "dummy_reason",
                 "logprobs": None,
             }
         ],
         "usage": {
-            "promptTokens": 10,
-            "completionTokens": 20,
-            "totalTokens": 30,
+            "prompt_tokens": 10,
+            "completion_tokens": 20,
+            "total_tokens": 30,
         },
     }
 

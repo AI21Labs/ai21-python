@@ -24,10 +24,10 @@ _FAKE_RESPONSE_DICT = {
                 "content": "Test",
             },
             "logprobs": None,
-            "finishReason": "stop",
+            "finish_reason": "stop",
         }
     ],
-    "usage": {"promptTokens": 1, "completionTokens": 1, "totalTokens": 2},
+    "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
 }
 _FAKE_AUTH_HEADERS = {"Authorization": "Bearer fake-token"}
 _FULL_BEDROCK_URL = "https://bedrock-runtime.us-east-1.amazonaws.com/model/ai21.jamba-instruct-v1:0/invoke"
