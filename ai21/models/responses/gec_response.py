@@ -1,6 +1,8 @@
 from enum import Enum
 from typing import List
 
+from pydantic import Field
+
 from ai21.models.ai21_base_model import AI21BaseModel
 
 
@@ -15,10 +17,10 @@ class CorrectionType(str, Enum):
 
 class Correction(AI21BaseModel):
     suggestion: str
-    start_index: int
-    end_index: int
-    original_text: str
-    correction_type: CorrectionType
+    start_index: int = Field(alias="startIndex")
+    end_index: int = Field(alias="endIndex")
+    original_text: str = Field(alias="originalText")
+    correction_type: CorrectionType = Field(alias="correctionType")
 
 
 class GECResponse(AI21BaseModel):

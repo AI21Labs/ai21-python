@@ -1,5 +1,7 @@
 from typing import List, Optional, Union, Any, Dict
 
+from pydantic import Field
+
 from ai21.models.ai21_base_model import AI21BaseModel
 
 
@@ -20,7 +22,7 @@ class CompletionFinishReason(AI21BaseModel):
 
 class Completion(AI21BaseModel):
     data: CompletionData
-    finish_reason: Optional[CompletionFinishReason] = None
+    finish_reason: Optional[CompletionFinishReason] = Field(default=None, alias="finishReason")
 
 
 class CompletionsResponse(AI21BaseModel):
