@@ -117,3 +117,6 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
             return httpx.Client(transport=_requests_retry_session(retries=self._num_retries))
 
         return httpx.Client()
+
+    def _get_streaming_decoder(self):
+        return None

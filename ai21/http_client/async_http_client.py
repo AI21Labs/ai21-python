@@ -119,3 +119,6 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             return httpx.AsyncClient(transport=_requests_retry_async_session(retries=self._num_retries))
 
         return httpx.AsyncClient()
+
+    def _get_streaming_decoder(self):
+        return None

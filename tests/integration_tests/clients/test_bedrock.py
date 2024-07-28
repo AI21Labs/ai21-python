@@ -21,13 +21,17 @@ BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK
         ("completion.py",),
         ("async_completion.py",),
         ("chat/chat_completions.py",),
+        # ("chat/stream_chat_completions.py",),
         ("chat/async_chat_completions.py",),
+        # ("chat/stream)async_chat_completions.py",),
     ],
     ids=[
         "when_completion__should_return_ok",
         "when_async_completion__should_return_ok",
         "when_chat_completions__should_return_ok",
+        # "when_stream_chat_completions__should_return_ok",
         "when_async_chat_completions__should_return_ok",
+        # "when_stream_async_chat_completions__should_return_ok",
     ],
 )
 def test_bedrock(test_file_name: str):

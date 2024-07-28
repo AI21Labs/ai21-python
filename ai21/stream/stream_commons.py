@@ -2,6 +2,9 @@ from __future__ import annotations
 
 import json
 from typing import TypeVar, Iterator, AsyncIterator, Optional
+
+import httpx
+
 from ai21.errors import StreamingDecodeError
 
 
@@ -22,16 +25,16 @@ def get_stream_message(chunk: str, cast_to: type[_T]) -> Iterator[_T] | AsyncIte
 
 
 class _SSEDecoder:
-    def iter(self, iterator: Iterator[str]):
-        for line in iterator:
+    def iter(self, response: httpx.Response):
+        for line in response.iter_lines():
             line = line.strip()
             decoded_line = self._decode(line)
 
             if decoded_line is not None:
                 yield decoded_line
 
-    async def aiter(self, iterator: AsyncIterator[str]):
-        async for line in iterator:
+    async def aiter(self, response: httpx.Response):
+        async for line in response.aiter_lines():
             line = line.strip()
             decoded_line = self._decode(line)
 

@@ -95,8 +95,10 @@ class EmptyMandatoryListError(AI21Error):
 
 
 class StreamingDecodeError(AI21Error):
-    def __init__(self, chunk: str):
+    def __init__(self, chunk: str, error_message: Optional[str] = None):
         message = f"Failed to decode chunk: {chunk} in stream. Please check the stream format"
+        if error_message:
+            message += f". Error: {error_message}"
         super().__init__(message)
 
 

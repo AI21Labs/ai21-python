@@ -17,10 +17,11 @@ def _cast_response(
     response_cls: Optional[ResponseT],
     stream_cls: Optional[AsyncStreamT] = None,
     stream: bool = False,
+    streaming_decoder: Optional[Any] = None,
 ) -> ResponseT | AsyncStreamT | None:
     if stream and stream_cls is not None:
         cast_to = extract_type(stream_cls)
-        return stream_cls(cast_to=cast_to, response=response)
+        return stream_cls(cast_to=cast_to, response=response, streaming_decoder=streaming_decoder)
 
     if response_cls is None:
         return None
@@ -63,7 +64,13 @@ class StudioResource(ABC):
             files=files,
         )
 
-        return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
+        return _cast_response(
+            stream=stream,
+            response=response,
+            response_cls=response_cls,
+            stream_cls=stream_cls,
+            streaming_decoder=self._client._get_streaming_decoder(),
+        )
 
     def _get(
         self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
@@ -108,7 +115,13 @@ class AsyncStudioResource(ABC):
             files=files,
         )
 
-        return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
+        return _cast_response(
+            stream=stream,
+            response=response,
+            response_cls=response_cls,
+            stream_cls=stream_cls,
+            streaming_decoder=self._client._get_streaming_decoder(),
+        )
 
     async def _get(
         self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
