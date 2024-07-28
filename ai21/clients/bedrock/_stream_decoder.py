@@ -1,9 +1,11 @@
+from __future__ import annotations
+
 from functools import lru_cache
 from typing import Iterator, AsyncIterator
 
 import httpx
-from botocore.model import Shape
 from botocore.eventstream import EventStreamMessage
+from botocore.model import Shape
 
 from ai21.errors import StreamingDecodeError
 
