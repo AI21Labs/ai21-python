@@ -1,19 +1,18 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Improvement(AI21BaseModelMixin):
+class Improvement(AI21BaseModel):
     suggestions: List[str]
-    start_index: int
-    end_index: int
-    original_text: str
-    improvement_type: str
+    start_index: int = Field(alias="startIndex")
+    end_index: int = Field(alias="endIndex")
+    original_text: str = Field(alias="originalText")
+    improvement_type: str = Field(alias="improvementType")
 
 
-@dataclass
-class ImprovementsResponse(AI21BaseModelMixin):
+class ImprovementsResponse(AI21BaseModel):
     id: str
     improvements: List[Improvement]

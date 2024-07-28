@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Any, Dict
+from typing import Optional, Any, Dict, cast
 
 from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.models._pydantic_compatibility import _from_dict
 
 
 class Summarize(ABC):
@@ -28,7 +29,7 @@ class Summarize(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> SummarizeResponse:
-        return SummarizeResponse.from_dict(json)
+        return cast(_from_dict(obj=SummarizeResponse, obj_dict=json), SummarizeResponse)
 
     def _create_body(
         self,

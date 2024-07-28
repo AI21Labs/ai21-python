@@ -38,6 +38,7 @@ from ai21.models import (
     SummarizeResponse,
     SummarizeBySegmentResponse,
 )
+from ai21.models._pydantic_compatibility import _to_dict, _from_dict
 from ai21.models.chat import (
     ChatMessage as ChatCompletionChatMessage,
     ChatCompletionResponse,
@@ -86,7 +87,7 @@ def get_studio_answer(is_async: bool = False):
             "question": _DUMMY_QUESTION,
         },
         httpx.Response(status_code=200, json=json_response),
-        AnswerResponse.from_dict(json_response),
+        _from_dict(obj=AnswerResponse, obj_dict=json_response),
     )
 
 
@@ -119,7 +120,7 @@ def get_studio_chat(is_async: bool = False):
         {
             "model": _DUMMY_MODEL,
             "system": _DUMMY_SYSTEM,
-            "messages": [message.to_dict() for message in _DUMMY_MESSAGES],
+            "messages": [_to_dict(message) for message in _DUMMY_MESSAGES],
             "temperature": 0.7,
             "maxTokens": 300,
             "minTokens": 0,
@@ -128,7 +129,7 @@ def get_studio_chat(is_async: bool = False):
             "topKReturn": 0,
         },
         httpx.Response(status_code=200, json=json_response),
-        ChatResponse.from_dict(json_response),
+        _from_dict(obj=ChatResponse, obj_dict=json_response),
     )
 
 
@@ -141,7 +142,7 @@ def get_chat_completions(is_async: bool = False):
             role="assistant",
         ),
     ]
-    _EXPECTED_SERIALIZED_MESSAGES = [message.to_dict() for message in _DUMMY_MESSAGES]
+    _EXPECTED_SERIALIZED_MESSAGES = [_to_dict(message) for message in _DUMMY_MESSAGES]
     json_response = {
         "id": "some-id",
         "choices": [
@@ -151,14 +152,14 @@ def get_chat_completions(is_async: bool = False):
                     "content": "Hello, I need help with a signup process.",
                     "role": "user",
                 },
-                "finishReason": "dummy_reason",
+                "finish_reason": "dummy_reason",
                 "logprobs": None,
             }
         ],
         "usage": {
-            "promptTokens": 10,
-            "completionTokens": 20,
-            "totalTokens": 30,
+            "prompt_tokens": 10,
+            "completion_tokens": 20,
+            "total_tokens": 30,
         },
     }
 
@@ -174,7 +175,7 @@ def get_chat_completions(is_async: bool = False):
             "stream": False,
         },
         httpx.Response(status_code=200, json=json_response),
-        ChatCompletionResponse.from_dict(json_response),
+        _from_dict(obj=ChatCompletionResponse, obj_dict=json_response),
     )
 
 
@@ -204,7 +205,7 @@ def get_studio_completion(is_async: bool = True, **kwargs):
             **{to_lower_camel_case(k): v for k, v in kwargs.items()},
         },
         httpx.Response(status_code=200, json=json_response),
-        CompletionsResponse.from_dict(json_response),
+        _from_dict(obj=CompletionsResponse, obj_dict=json_response),
     )
 
 
@@ -228,7 +229,7 @@ def get_studio_embed(is_async: bool = False):
             "type": EmbedType.QUERY.value,
         },
         httpx.Response(status_code=200, json=json_response),
-        EmbedResponse.from_dict(json_response),
+        _from_dict(obj=EmbedResponse, obj_dict=json_response),
     )
 
 
@@ -257,7 +258,7 @@ def get_studio_gec(is_async: bool = False):
             "text": text,
         },
         httpx.Response(status_code=200, json=json_response),
-        GECResponse.from_dict(json_response),
+        _from_dict(obj=GECResponse, obj_dict=json_response),
     )
 
 
@@ -288,7 +289,7 @@ def get_studio_improvements(is_async: bool = False):
             "types": types,
         },
         httpx.Response(status_code=200, json=json_response),
-        ImprovementsResponse.from_dict(json_response),
+        _from_dict(obj=ImprovementsResponse, obj_dict=json_response),
     )
 
 
@@ -319,7 +320,7 @@ def get_studio_paraphrase(is_async: bool = False):
             "endIndex": end_index,
         },
         httpx.Response(status_code=200, json=json_response),
-        ParaphraseResponse.from_dict(json_response),
+        _from_dict(obj=ParaphraseResponse, obj_dict=json_response),
     )
 
 
@@ -347,7 +348,7 @@ def get_studio_segmentation(is_async: bool = False):
             "sourceType": source_type,
         },
         httpx.Response(status_code=200, json=json_response),
-        SegmentationResponse.from_dict(json_response),
+        _from_dict(obj=SegmentationResponse, obj_dict=json_response),
     )
 
 
@@ -374,7 +375,7 @@ def get_studio_summarization(is_async: bool = False):
             "summaryMethod": summary_method,
         },
         httpx.Response(status_code=200, json=json_response),
-        SummarizeResponse.from_dict(json_response),
+        _from_dict(obj=SummarizeResponse, obj_dict=json_response),
     )
 
 
@@ -408,5 +409,5 @@ def get_studio_summarize_by_segment(is_async: bool = False):
             "focus": focus,
         },
         httpx.Response(status_code=200, json=json_response),
-        SummarizeBySegmentResponse.from_dict(json_response),
+        _from_dict(obj=SummarizeBySegmentResponse, obj_dict=json_response),
     )

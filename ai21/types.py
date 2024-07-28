@@ -2,13 +2,14 @@ from typing import Any, Union, List
 
 import httpx
 from typing_extensions import Literal, TypeVar, TYPE_CHECKING
-from ai21.stream.stream import Stream
+
 from ai21.stream.async_stream import AsyncStream
+from ai21.stream.stream import Stream
 
 if TYPE_CHECKING:
-    from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin  # noqa
+    from ai21.models.ai21_base_model import AI21BaseModel  # noqa
 
-ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModelMixin", str, httpx.Response, List[Any]])
+ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModel", str, httpx.Response, List[Any]])
 StreamT = TypeVar("_StreamT", bound=Stream[Any])
 AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
 

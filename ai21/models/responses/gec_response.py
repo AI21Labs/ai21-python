@@ -1,8 +1,9 @@
-from dataclasses import dataclass
 from enum import Enum
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
 class CorrectionType(str, Enum):
@@ -14,16 +15,14 @@ class CorrectionType(str, Enum):
     WRONG_WORD = "Wrong Word"
 
 
-@dataclass
-class Correction(AI21BaseModelMixin):
+class Correction(AI21BaseModel):
     suggestion: str
-    start_index: int
-    end_index: int
-    original_text: str
-    correction_type: CorrectionType
+    start_index: int = Field(alias="startIndex")
+    end_index: int = Field(alias="endIndex")
+    original_text: str = Field(alias="originalText")
+    correction_type: CorrectionType = Field(alias="correctionType")
 
 
-@dataclass
-class GECResponse(AI21BaseModelMixin):
+class GECResponse(AI21BaseModel):
     id: str
     corrections: List[Correction]

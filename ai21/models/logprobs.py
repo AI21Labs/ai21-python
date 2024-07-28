@@ -1,22 +1,18 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class TopTokenData(AI21BaseModelMixin):
+class TopTokenData(AI21BaseModel):
     token: str
     logprob: float
 
 
-@dataclass
-class LogprobsData(AI21BaseModelMixin):
+class LogprobsData(AI21BaseModel):
     token: str
     logprob: float
     top_logprobs: List[TopTokenData]
 
 
-@dataclass
-class Logprobs(AI21BaseModelMixin):
+class Logprobs(AI21BaseModel):
     content: LogprobsData
