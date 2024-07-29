@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from functools import lru_cache
 from typing import Iterator, AsyncIterator
 
@@ -32,12 +33,22 @@ class AWSEventStreamDecoder:
         from botocore.eventstream import EventStreamBuffer
 
         event_stream_buffer = EventStreamBuffer()
+        last_message = None
         for chunk in response.iter_bytes():
             try:
                 event_stream_buffer.add_data(chunk)
                 for event in event_stream_buffer:
                     message = self._parse_message_from_event(event)
                     if message:
+                        # START TODO: remove the following conditions once response from Bedrock changes
+                        if last_message is not None:
+                            message = self._create_bedrock_last_chunk(
+                                chunk=last_message, bedrock_metrics_message=message
+                            )
+                        if '"finish_reason":null' not in message and last_message is None:
+                            last_message = message
+                            continue
+                        # END TODO
                         yield message
             except Exception as e:
                 raise StreamingDecodeError(chunk=str(chunk), error_message=str(e))
@@ -47,12 +58,22 @@ class AWSEventStreamDecoder:
         from botocore.eventstream import EventStreamBuffer
 
         event_stream_buffer = EventStreamBuffer()
+        last_message = None
         async for chunk in response.aiter_bytes():
             try:
                 event_stream_buffer.add_data(chunk)
                 for event in event_stream_buffer:
                     message = self._parse_message_from_event(event)
                     if message:
+                        # START TODO: remove the following conditions once response from Bedrock changes
+                        if last_message is not None:
+                            message = self._create_bedrock_last_chunk(
+                                chunk=last_message, bedrock_metrics_message=message
+                            )
+                        if '"finish_reason":null' not in message and last_message is None:
+                            last_message = message
+                            continue
+                        # END TODO
                         yield message
             except Exception as e:
                 raise StreamingDecodeError(chunk=str(chunk), error_message=str(e))
@@ -68,3 +89,9 @@ class AWSEventStreamDecoder:
             return None
 
         return chunk.get("bytes").decode()  # type: ignore[no-any-return]
+
+    def _create_bedrock_last_chunk(self, chunk: str, bedrock_metrics_message: str) -> str:
+        chunk_dict = json.loads(chunk)
+        bedrock_metrics_dict = json.loads(bedrock_metrics_message)
+        chunk_dict = {**chunk_dict, **bedrock_metrics_dict}
+        return json.dumps(chunk_dict)

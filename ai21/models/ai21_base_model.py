@@ -5,17 +5,22 @@ from typing_extensions import Self
 
 from ai21.models._pydantic_compatibility import _to_dict, _to_json, _from_dict, _from_json, IS_PYDANTIC_V2
 
+if not IS_PYDANTIC_V2:
+    from pydantic import Extra
+
 
 class AI21BaseModel(BaseModel):
     if IS_PYDANTIC_V2:
         model_config = ConfigDict(
             populate_by_name=True,
             protected_namespaces=(),
+            extra="allow",
         )
     else:
 
         class Config:
             allow_population_by_field_name = True
+            extra = Extra.allow
 
     def to_dict(self, **kwargs) -> Dict[str, Any]:
         warnings.warn(
