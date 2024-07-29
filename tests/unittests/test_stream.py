@@ -1,18 +1,16 @@
 import json
-from dataclasses import dataclass
 from typing import AsyncIterable
 
 import httpx
 import pytest
 
 from ai21.errors import StreamingDecodeError
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.stream.stream import Stream
 from ai21.stream.async_stream import AsyncStream
 
 
-@dataclass
-class StubStreamObject(AI21BaseModelMixin):
+class StubStreamObject(AI21BaseModel):
     id: str
     name: str
 

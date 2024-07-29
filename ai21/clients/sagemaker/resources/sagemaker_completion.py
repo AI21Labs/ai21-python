@@ -1,9 +1,10 @@
 from __future__ import annotations
 
-from typing import List, Dict
+from typing import List, Dict, cast
 
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource, AsyncSageMakerResource
 from ai21.models import Penalty, CompletionsResponse
+from ai21.models._pydantic_compatibility import _from_dict
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -63,7 +64,7 @@ class SageMakerCompletion(SageMakerResource):
 
         raw_response = self._post(body=body)
 
-        return CompletionsResponse.from_dict(raw_response.json())
+        return cast(_from_dict(obj=CompletionsResponse, obj_dict=raw_response.json()), CompletionsResponse)
 
 
 class AsyncSageMakerCompletion(AsyncSageMakerResource):
@@ -121,4 +122,4 @@ class AsyncSageMakerCompletion(AsyncSageMakerResource):
 
         raw_response = await self._post(body=body)
 
-        return CompletionsResponse.from_dict(raw_response.json())
+        return cast(_from_dict(obj=CompletionsResponse, obj_dict=raw_response.json()), CompletionsResponse)

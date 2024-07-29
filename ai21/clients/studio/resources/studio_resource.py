@@ -8,6 +8,7 @@ import httpx
 
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
+from ai21.models._pydantic_compatibility import _from_dict
 from ai21.types import ResponseT, StreamT, AsyncStreamT
 from ai21.utils.typing import extract_type
 
@@ -36,9 +37,9 @@ def _cast_response(
 
     if origin_type is not None and origin_type == list:
         subtype = extract_type(response_cls)
-        return [subtype.from_dict(item) for item in response.json()]
+        return [_from_dict(obj=subtype, obj_dict=item) for item in response.json()]
 
-    return response_cls.from_dict(response.json())
+    return _from_dict(obj=response_cls, obj_dict=response.json())
 
 
 class StudioResource(ABC):

@@ -11,6 +11,8 @@ from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.clients.bedrock.ai21_bedrock_client import AI21BedrockClient, AsyncAI21BedrockClient
 from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
 from ai21.models.chat import ChatMessage
+from ai21.models._pydantic_compatibility import _to_dict
+
 
 _FAKE_RESPONSE_DICT = {
     "id": "cmpl-392a6a33e5204aa7a2070be4d0ddbc0a",
@@ -22,10 +24,10 @@ _FAKE_RESPONSE_DICT = {
                 "content": "Test",
             },
             "logprobs": None,
-            "finishReason": "stop",
+            "finish_reason": "stop",
         }
     ],
-    "usage": {"promptTokens": 1, "completionTokens": 1, "totalTokens": 2},
+    "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
 }
 _FAKE_AUTH_HEADERS = {"Authorization": "Bearer fake-token"}
 _FULL_BEDROCK_URL = "https://bedrock-runtime.us-east-1.amazonaws.com/model/ai21.jamba-instruct-v1:0/invoke"
@@ -80,7 +82,7 @@ def test__options_in_request(mock_httpx_client: Mock):
         },
         timeout=300,
         params={},
-        data=json.dumps({"messages": [message.to_dict()]}).encode("utf-8"),
+        data=json.dumps({"messages": [_to_dict(message)]}).encode("utf-8"),
         files=None,
     )
 
@@ -108,7 +110,7 @@ async def test__options_in_async_request(mock_async_httpx_client: Mock):
         },
         timeout=300,
         params={},
-        data=json.dumps({"messages": [message.to_dict()]}).encode("utf-8"),
+        data=json.dumps({"messages": [_to_dict(message)]}).encode("utf-8"),
         files=None,
     )
 

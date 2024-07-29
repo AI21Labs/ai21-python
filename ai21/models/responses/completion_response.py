@@ -1,35 +1,31 @@
-from dataclasses import dataclass
 from typing import List, Optional, Union, Any, Dict
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Prompt(AI21BaseModelMixin):
+class Prompt(AI21BaseModel):
     text: Optional[str]
     tokens: Optional[List[Dict[str, Any]]] = None
 
 
-@dataclass
-class CompletionData(AI21BaseModelMixin):
+class CompletionData(AI21BaseModel):
     text: Optional[str]
     tokens: Optional[List[Dict[str, Any]]] = None
 
 
-@dataclass
-class CompletionFinishReason(AI21BaseModelMixin):
+class CompletionFinishReason(AI21BaseModel):
     reason: Optional[str] = None
     length: Optional[int] = None
 
 
-@dataclass
-class Completion(AI21BaseModelMixin):
+class Completion(AI21BaseModel):
     data: CompletionData
-    finish_reason: CompletionFinishReason
+    finish_reason: Optional[CompletionFinishReason] = Field(default=None, alias="finishReason")
 
 
-@dataclass
-class CompletionsResponse(AI21BaseModelMixin):
+class CompletionsResponse(AI21BaseModel):
     id: Union[int, str]
     prompt: Prompt
     completions: List[Completion]
