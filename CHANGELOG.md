@@ -1,6 +1,6 @@
 # CHANGELOG
 
-## v2.10.0-rc.1 (2024-07-28)
+## v2.10.0 (2024-07-29)
 
 ### Chore
 
@@ -45,6 +45,8 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ### Feature
 
+* feat: Pydantic Migration (#193)
+
 * feat: Pydantic migration (#189)
 
 * refactor: migrate from dataclass to pydantic for responses
@@ -75,7 +77,15 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * test: fix tests
 
-* chore: ci comments, remove basemodel from not_given ([`2591bc7`](https://github.com/AI21Labs/ai21-python/commit/2591bc7ce01f13b721fcd3b788fd67c898a5486f))
+* chore: ci comments, remove basemodel from not_given
+
+* chore(release): v2.10.0-rc.1 [skip ci]
+
+* chore: lower min pydantic version (#192)
+
+---------
+
+Co-authored-by: semantic-release &lt;semantic-release&gt; ([`135ea43`](https://github.com/AI21Labs/ai21-python/commit/135ea43e75f3692f966c2263c25b4b9c7c343b81))
 
 ## v2.9.2 (2024-07-15)
 
