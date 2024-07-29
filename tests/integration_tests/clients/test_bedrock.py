@@ -23,7 +23,7 @@ BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK
         ("chat/chat_completions.py",),
         ("chat/stream_chat_completions.py",),
         ("chat/async_chat_completions.py",),
-        ("chat/stream_async_chat_completions.py",),
+        ("chat/async_stream_chat_completions.py",),
     ],
     ids=[
         "when_completion__should_return_ok",
