@@ -10,24 +10,6 @@ from ai21.stream.async_stream import AsyncStream
 from ai21.stream.stream import Stream
 
 
-# @dataclass
-# class TestChoiceDelta:
-#     content: Optional[str] = None
-#     role: Optional[str] = None
-#
-#
-# @dataclass
-# class TestChoicesChunk:
-#     index: int
-#     message: TestChoiceDelta
-#     finish_reason: Optional[str] = None
-#
-#
-# @dataclass
-# class TestChatCompletionChunk:
-#     choices: List[TestChoicesChunk]
-
-
 def byte_stream() -> Iterable[bytes]:
     for i in range(10):
         yield (
