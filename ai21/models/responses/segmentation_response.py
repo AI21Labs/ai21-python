@@ -1,16 +1,15 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Segment(AI21BaseModelMixin):
-    segment_text: str
-    segment_type: str
+class Segment(AI21BaseModel):
+    segment_text: str = Field(alias="segmentText")
+    segment_type: str = Field(alias="segmentType")
 
 
-@dataclass
-class SegmentationResponse(AI21BaseModelMixin):
+class SegmentationResponse(AI21BaseModel):
     id: str
     segments: List[Segment]

@@ -1,24 +1,22 @@
-from dataclasses import dataclass
 from typing import Optional, List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.chat.role_type import RoleType
 
 
-@dataclass
-class FinishReason(AI21BaseModelMixin):
+class FinishReason(AI21BaseModel):
     reason: str
     length: Optional[int] = None
     sequence: Optional[str] = None
 
 
-@dataclass
-class ChatOutput(AI21BaseModelMixin):
+class ChatOutput(AI21BaseModel):
     text: str
     role: RoleType
-    finish_reason: FinishReason
+    finish_reason: Optional[FinishReason] = Field(default=None, alias="finishReason")
 
 
-@dataclass
-class ChatResponse(AI21BaseModelMixin):
+class ChatResponse(AI21BaseModel):
     outputs: List[ChatOutput]

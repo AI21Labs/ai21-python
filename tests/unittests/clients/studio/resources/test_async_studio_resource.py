@@ -1,11 +1,14 @@
 from typing import TypeVar, Callable
 
-import pytest
 import httpx
-from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+import pytest
+
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.models import AnswerResponse
+from ai21.models._pydantic_compatibility import _to_dict
+from ai21.models.ai21_base_model import AI21BaseModel
 from tests.unittests.clients.studio.resources.conftest import (
     get_studio_answer,
     get_studio_chat,
@@ -74,7 +77,7 @@ class TestAsyncStudioResources:
         url_suffix: str,
         expected_body,
         expected_httpx_response,
-        expected_response: AnswerResponse,
+        expected_response: AI21BaseModel,
         mock_async_ai21_studio_client: AsyncAI21HTTPClient,
     ):
         mock_async_ai21_studio_client.execute_http_request.return_value = expected_httpx_response
@@ -102,7 +105,7 @@ class TestAsyncStudioResources:
         mock_async_successful_httpx_response: httpx.Response,
     ):
         expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
-        mock_async_successful_httpx_response.json.return_value = expected_answer.to_dict()
+        mock_async_successful_httpx_response.json.return_value = _to_dict(expected_answer)
 
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_async_successful_httpx_response
         studio_answer = AsyncStudioAnswer(mock_async_ai21_studio_client)

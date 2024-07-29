@@ -4,8 +4,6 @@ from abc import ABC, abstractmethod
 from typing import List, Any, Dict, Optional, TypeVar, Union
 
 from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatCompletions
-from ai21.models import Penalty, ChatResponse, ChatMessage
-from ai21.types import NotGiven, NOT_GIVEN
 from ai21.clients.studio.resources.constants import (
     CHAT_DEFAULT_NUM_RESULTS,
     CHAT_DEFAULT_TEMPERATURE,
@@ -14,8 +12,10 @@ from ai21.clients.studio.resources.constants import (
     CHAT_DEFAULT_TOP_P,
     CHAT_DEFAULT_TOP_K_RETURN,
 )
+from ai21.models import Penalty, ChatResponse, ChatMessage
+from ai21.models._pydantic_compatibility import _to_dict
+from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
-
 
 _ChatCompletionsT = TypeVar("_ChatCompletionsT", bound=Union[ChatCompletions, AsyncChatCompletions])
 
@@ -89,7 +89,7 @@ class Chat(ABC):
             {
                 "model": model,
                 "system": system,
-                "messages": [message.to_dict() for message in messages],
+                "messages": [_to_dict(message) for message in messages],
                 "temperature": temperature,
                 "maxTokens": max_tokens,
                 "minTokens": min_tokens,
@@ -97,9 +97,9 @@ class Chat(ABC):
                 "topP": top_p,
                 "topKReturn": top_k_return,
                 "stopSequences": stop_sequences,
-                "frequencyPenalty": NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.to_dict(),
-                "presencePenalty": NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.to_dict(),
-                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
+                "frequencyPenalty": (NOT_GIVEN if frequency_penalty is NOT_GIVEN else _to_dict(frequency_penalty)),
+                "presencePenalty": (NOT_GIVEN if presence_penalty is NOT_GIVEN else _to_dict(presence_penalty)),
+                "countPenalty": (NOT_GIVEN if count_penalty is NOT_GIVEN else _to_dict(count_penalty)),
                 **kwargs,
             }
         )

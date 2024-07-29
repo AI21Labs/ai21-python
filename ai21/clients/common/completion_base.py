@@ -7,6 +7,7 @@ from typing import List, Dict, Optional
 from ai21.models import Penalty, CompletionsResponse
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
+from ai21.models._pydantic_compatibility import _to_dict
 
 
 class Completion(ABC):
@@ -104,9 +105,9 @@ class Completion(ABC):
                 "topP": top_p,
                 "topKReturn": top_k_return,
                 "stopSequences": stop_sequences,
-                "frequencyPenalty": NOT_GIVEN if frequency_penalty is NOT_GIVEN else frequency_penalty.to_dict(),
-                "presencePenalty": NOT_GIVEN if presence_penalty is NOT_GIVEN else presence_penalty.to_dict(),
-                "countPenalty": NOT_GIVEN if count_penalty is NOT_GIVEN else count_penalty.to_dict(),
+                "frequencyPenalty": (NOT_GIVEN if frequency_penalty is NOT_GIVEN else _to_dict(frequency_penalty)),
+                "presencePenalty": (NOT_GIVEN if presence_penalty is NOT_GIVEN else _to_dict(presence_penalty)),
+                "countPenalty": (NOT_GIVEN if count_penalty is NOT_GIVEN else _to_dict(count_penalty)),
                 "epoch": epoch,
                 "logitBias": logit_bias,
                 **kwargs,

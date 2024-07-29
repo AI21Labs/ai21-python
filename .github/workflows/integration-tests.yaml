@@ -19,8 +19,10 @@ jobs:
   integration-tests:
     runs-on: ubuntu-latest
     strategy:
+      max-parallel: 1
       matrix:
         python-version: ["3.11"]
+        pydantic-version: ["^1.10", "^2.0"]
     steps:
       - name: Checkout
         uses: actions/checkout@v3
@@ -54,6 +56,16 @@ jobs:
       - name: Install dependencies
         run: |
           poetry install --all-extras
+      - name: Override Pydantic version
+        run: |
+          if [[ "${{ matrix.pydantic-version }}" == ^1.* ]]; then
+            # Since there's a mismatch between pydantic 1.x and the python-semantic-release version
+            # we have in the project, we need to downgrade its version when running tests on pydantic v1
+            poetry remove python-semantic-release
+            poetry add python-semantic-release@8.0.0
+          fi
+          poetry add pydantic@${{ matrix.pydantic-version }}
+          poetry lock --no-update
       - name: Run Integration Tests
         env:
           AI21_API_KEY: ${{ secrets.AI21_API_KEY }}

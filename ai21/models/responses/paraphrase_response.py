@@ -1,15 +1,12 @@
-from dataclasses import dataclass
 from typing import List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class Suggestion(AI21BaseModelMixin):
+class Suggestion(AI21BaseModel):
     text: str
 
 
-@dataclass
-class ParaphraseResponse(AI21BaseModelMixin):
+class ParaphraseResponse(AI21BaseModel):
     id: str
     suggestions: List[Suggestion]
