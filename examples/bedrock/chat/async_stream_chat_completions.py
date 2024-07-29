@@ -19,7 +19,7 @@ async def main():
     )
 
     async for chunk in response:
-        print(chunk.choices[0].message.content, end="")
+        print(chunk.choices[0].delta.content, end="")
 
 
 asyncio.run(main())

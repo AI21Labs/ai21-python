@@ -19,4 +19,4 @@ response = client.chat.completions.create(
 )
 
 for chunk in response:
-    print(chunk.choices[0].message.content, end="")
+    print(chunk.choices[0].delta.content, end="")
