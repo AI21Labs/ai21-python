@@ -47,7 +47,7 @@ async def main():
         temperature=0,
         top_p=1,
         top_k_return=0,
-        model=BedrockModelID.J2_MID_V1,
+        model=BedrockModelID.J2_ULTRA_V1,
     )
 
     print(response.completions[0].data.text)
