@@ -92,7 +92,7 @@ jobs:
           github-token: ${{ secrets.GITHUB_TOKEN }}
           script: |
             const sizeLabels = ['size:s', 'size:m', 'size:l', 'size:xl', 'size:xxl'];
-            const newLabel = ${{ env.label }};
+            const newLabel = "${{ env.label }}";
             const currentLabels = ${{ steps.fetch_labels.outputs.result }};
             const labelsToRemove = currentLabels.filter(label => sizeLabels.includes(label) && label !== newLabel);
             for (const label of labelsToRemove) {
