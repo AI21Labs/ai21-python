@@ -407,21 +407,6 @@ test = ["certifi", "pretend", "pytest (>=6.2.0)", "pytest-benchmark", "pytest-co
 test-randomorder = ["pytest-randomly"]
 
 [[package]]
-name = "dataclasses-json"
-version = "0.6.6"
-description = "Easily serialize dataclasses to and from JSON."
-optional = false
-python-versions = "<4.0,>=3.7"
-files = [
-    {file = "dataclasses_json-0.6.6-py3-none-any.whl", hash = "sha256:e54c5c87497741ad454070ba0ed411523d46beb5da102e221efb873801b0ba85"},
-    {file = "dataclasses_json-0.6.6.tar.gz", hash = "sha256:0c09827d26fffda27f1be2fed7a7a01a29c5ddcd2eb6393ad5ebf9d77e9deae8"},
-]
-
-[package.dependencies]
-marshmallow = ">=3.18.0,<4.0.0"
-typing-inspect = ">=0.4.0,<1"
-
-[[package]]
 name = "dotty-dict"
 version = "1.3.1"
 description = "Dictionary wrapper for quick access to deeply nested keys."
@@ -1297,13 +1282,13 @@ files = [
 
 [[package]]
 name = "requests"
-version = "2.32.0"
+version = "2.32.3"
 description = "Python HTTP for Humans."
 optional = false
 python-versions = ">=3.8"
 files = [
-    {file = "requests-2.32.0-py3-none-any.whl", hash = "sha256:f2c3881dddb70d056c5bd7600a4fae312b2a300e39be6a118d30b90bd27262b5"},
-    {file = "requests-2.32.0.tar.gz", hash = "sha256:fa5490319474c82ef1d2c9bc459d3652e3ae4ef4c4ebdd18a21145a47ca4b6b8"},
+    {file = "requests-2.32.3-py3-none-any.whl", hash = "sha256:70761cfe03c773ceb22aa2f671b4757976145175cdfca038c02654d061d6dcc6"},
+    {file = "requests-2.32.3.tar.gz", hash = "sha256:55365417734eb18255590a9ff9eb97e9e1da868d4ccd6402399eaf68af20a760"},
 ]
 
 [package.dependencies]
@@ -1834,17 +1819,6 @@ typing-extensions = ">=3.7.4.3"
 
 [[package]]
 name = "typing-extensions"
-version = "4.11.0"
-description = "Backported and Experimental Type Hints for Python 3.8+"
-optional = false
-python-versions = ">=3.8"
-files = [
-    {file = "typing_extensions-4.11.0-py3-none-any.whl", hash = "sha256:c1f94d72897edaf4ce775bb7558d5b79d8126906a14ea5ed1635921406c0387a"},
-    {file = "typing_extensions-4.11.0.tar.gz", hash = "sha256:83f085bd5ca59c80295fc2a82ab5dac679cbe02b9f33f7d83af68e241bea51b0"},
-]
-
-[[package]]
-name = "typing-extensions"
 version = "4.12.2"
 description = "Backported and Experimental Type Hints for Python 3.8+"
 optional = false
@@ -1853,21 +1827,6 @@ files = [
     {file = "typing_extensions-4.12.2-py3-none-any.whl", hash = "sha256:04e5ca0351e0f3f85c6853954072df659d0d13fac324d0072316b67d7794700d"},
     {file = "typing_extensions-4.12.2.tar.gz", hash = "sha256:1a7ead55c7e559dd4dee8856e3a88b41225abfe1ce8df57b7c13915fe121ffb8"},
 ]
-
-[[package]]
-name = "typing-inspect"
-version = "0.9.0"
-description = "Runtime inspection utilities for typing module."
-optional = false
-python-versions = "*"
-files = [
-    {file = "typing_inspect-0.9.0-py3-none-any.whl", hash = "sha256:9ee6fc59062311ef8547596ab6b955e1b8aa46242d854bfc78f4f6b0eff35f9f"},
-    {file = "typing_inspect-0.9.0.tar.gz", hash = "sha256:b23fc42ff6f6ef6954e4852c1fb512cdd18dbea03134f91f856a95ccc9461f78"},
-]
-
-[package.dependencies]
-mypy-extensions = ">=0.3.0"
-typing-extensions = ">=3.7.4"
 
 [[package]]
 name = "urllib3"
@@ -1906,4 +1865,4 @@ aws = ["boto3"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "5e623e0d6b48b5a93a40cf0520ce9d31bb525f6872c10d19e8f262ef610fd2e2"
+content-hash = "a1ceb0890cec19b2efdb30de5b5abea0382ae25d409902cce86c7d8ee5f901c2"
