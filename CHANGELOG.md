@@ -1,8 +1,38 @@
 # CHANGELOG
 
+## v2.10.1 (2024-07-31)
+
+### Ci
+
+* ci: Fix label swap syntax (#196)
+
+* ci: Added quotes
+
+* ci: Read from env ([`a31233b`](https://github.com/AI21Labs/ai21-python/commit/a31233b385918a1118ed70c683b6850bf8667ab9))
+
+* ci: fix size labeler (#195) ([`1247b81`](https://github.com/AI21Labs/ai21-python/commit/1247b81bc7b02952f6ee87fbe1249bdb6cecd8da))
+
+### Fix
+
+* fix: remove redundant dependency - dataclass json (#194)
+
+* fix: remove redundant dependency - dataclass json
+
+* chore: use j2 ultra in examples
+
+* test: use j2 ultra in completion tests
+
+---------
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`e8dcd27`](https://github.com/AI21Labs/ai21-python/commit/e8dcd27e2883b4e60cbb4f4d7505309f4a963a6c))
+
+* fix: env (#197) ([`525c1ef`](https://github.com/AI21Labs/ai21-python/commit/525c1ef4cdd593eca62ae16eddda6db72a36dbcf))
+
 ## v2.10.0 (2024-07-29)
 
 ### Chore
+
+* chore(release): v2.10.0 [skip ci] ([`4b85505`](https://github.com/AI21Labs/ai21-python/commit/4b85505e5c1830e145ecd04dc249a4df5c44ac60))
 
 * chore(deps-dev): bump setuptools from 69.5.1 to 70.0.0 (#186)
 
