@@ -43,7 +43,7 @@ def test_completion_penalties__should_return_response(
     completion_args = dict(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_MID_V1,
+        model_id=BedrockModelID.J2_ULTRA_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
@@ -111,7 +111,7 @@ async def test_async_completion_penalties__should_return_response(
     completion_args = dict(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_MID_V1,
+        model_id=BedrockModelID.J2_ULTRA_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
