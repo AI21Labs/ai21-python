@@ -1,12 +1,10 @@
 import warnings
 from typing import Any, Dict
+
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
 from ai21.models._pydantic_compatibility import _to_dict, _to_json, _from_dict, _from_json, IS_PYDANTIC_V2
-
-if not IS_PYDANTIC_V2:
-    from pydantic import Extra
 
 
 class AI21BaseModel(BaseModel):
@@ -19,6 +17,8 @@ class AI21BaseModel(BaseModel):
     else:
 
         class Config:
+            from pydantic import Extra
+
             allow_population_by_field_name = True
             extra = Extra.allow
 

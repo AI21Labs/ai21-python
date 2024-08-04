@@ -1,12 +1,12 @@
 from __future__ import annotations
 
 import json
+from abc import ABC, abstractmethod
 from typing import TypeVar, Iterator, AsyncIterator, Optional
 
 import httpx
 
 from ai21.errors import StreamingDecodeError
-
 
 _T = TypeVar("_T")
 _SSE_DATA_PREFIX = "data: "
@@ -24,7 +24,17 @@ def get_stream_message(chunk: str, cast_to: type[_T]) -> Iterator[_T] | AsyncIte
         raise StreamingDecodeError(chunk)
 
 
-class _SSEDecoder:
+class SSEDecoderBase(ABC):
+    @abstractmethod
+    def iter(self, response: httpx.Response) -> Iterator[str]:
+        pass
+
+    @abstractmethod
+    async def aiter(self, response: httpx.Response) -> AsyncIterator[str]:
+        pass
+
+
+class _SSEDecoder(SSEDecoderBase):
     def iter(self, response: httpx.Response):
         for line in response.iter_lines():
             line = line.strip()

@@ -13,6 +13,7 @@ from ai21.http_client.base_http_client import (
 )
 from ai21.models.request_options import RequestOptions
 from ai21.stream.stream import Stream
+from ai21.stream.stream_commons import _SSEDecoder
 
 _logger = logging.getLogger(__name__)
 
@@ -54,6 +55,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
         )(self._request)
+        self._streaming_decoder = _SSEDecoder()
 
     def execute_http_request(
         self,
@@ -118,5 +120,5 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
 
         return httpx.Client()
 
-    def _get_streaming_decoder(self):
-        return None
+    def _get_streaming_decoder(self) -> _SSEDecoder:
+        return self._streaming_decoder

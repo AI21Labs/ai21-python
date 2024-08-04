@@ -9,6 +9,7 @@ import httpx
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models._pydantic_compatibility import _from_dict
+from ai21.stream.stream_commons import SSEDecoderBase
 from ai21.types import ResponseT, StreamT, AsyncStreamT
 from ai21.utils.typing import extract_type
 
@@ -18,7 +19,7 @@ def _cast_response(
     response_cls: Optional[ResponseT],
     stream_cls: Optional[AsyncStreamT] = None,
     stream: bool = False,
-    streaming_decoder: Optional[Any] = None,
+    streaming_decoder: Optional[SSEDecoderBase] = None,
 ) -> ResponseT | AsyncStreamT | None:
     if stream and stream_cls is not None:
         cast_to = extract_type(stream_cls)

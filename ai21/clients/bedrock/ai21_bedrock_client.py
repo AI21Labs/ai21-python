@@ -43,6 +43,7 @@ def _handle_bedrock_error(aws_error: AI21APIError) -> None:
 class BaseBedrockClient:
     def __init__(self, region: str, session: Optional[boto3.Session]):
         self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
+        self._streaming_decoder = AWSEventStreamDecoder()
 
     def _prepare_options(self, options: RequestOptions) -> RequestOptions:
         body = options.body
@@ -121,7 +122,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
         return options.url
 
     def _get_streaming_decoder(self) -> AWSEventStreamDecoder:
-        return AWSEventStreamDecoder()
+        return self._streaming_decoder
 
 
 class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
@@ -173,4 +174,4 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         return options.url
 
     def _get_streaming_decoder(self) -> AWSEventStreamDecoder:
-        return AWSEventStreamDecoder()
+        return self._streaming_decoder

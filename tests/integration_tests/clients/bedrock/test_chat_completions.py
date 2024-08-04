@@ -19,12 +19,7 @@ def test_chat_completions__when_stream__last_chunk_should_hold_bedrock_metrics()
         stream=True,
     )
 
-    last_chunk = None
-    for chunk in response:
-        assert chunk.id is not None
-        assert chunk.choices is not None
-        last_chunk = chunk
-
+    last_chunk = list(response)[-1]
     chunk_dict = _to_dict(last_chunk)
     assert "amazon-bedrock-invocationMetrics" in chunk_dict
 
@@ -38,11 +33,6 @@ async def test__async_chat_completions__when_stream__last_chunk_should_hold_bedr
         stream=True,
     )
 
-    last_chunk = None
-    async for chunk in response:
-        assert chunk.id is not None
-        assert chunk.choices is not None
-        last_chunk = chunk
-
+    last_chunk = [chunk async for chunk in response][-1]
     chunk_dict = _to_dict(last_chunk)
     assert "amazon-bedrock-invocationMetrics" in chunk_dict

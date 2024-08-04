@@ -14,6 +14,7 @@ from ai21.http_client.base_http_client import (
     RETRY_BACK_OFF_FACTOR,
     TIME_BETWEEN_RETRIES,
 )
+from ai21.stream.stream_commons import _SSEDecoder
 
 _logger = logging.getLogger(__name__)
 
@@ -55,6 +56,7 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
         )(self._request)
+        self._streaming_decoder = _SSEDecoder()
 
     async def execute_http_request(
         self,
@@ -120,5 +122,5 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
 
         return httpx.AsyncClient()
 
-    def _get_streaming_decoder(self):
-        return None
+    def _get_streaming_decoder(self) -> _SSEDecoder:
+        return self._streaming_decoder
