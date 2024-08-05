@@ -11,7 +11,7 @@ FAKE_CHAT_COMPLETION_RESPONSE_DICT = {
             "finishReason": "stop",
         }
     ],
-    "usage": {"promptTokens": 1, "completionTokens": 1, "totalTokens": 2},
+    "usage": {"prompt_tokens": 1, "completion_tokens": 1, "total_tokens": 2},
 }
 
 FAKE_AUTH_HEADERS = {"Authorization": "Bearer fake-token"}
