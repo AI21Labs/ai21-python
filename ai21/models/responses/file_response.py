@@ -1,22 +1,22 @@
-from dataclasses import dataclass
 from datetime import date
 from typing import Optional, List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class FileResponse(AI21BaseModelMixin):
-    file_id: str
+class FileResponse(AI21BaseModel):
+    file_id: str = Field(alias="fileId")
     name: str
-    file_type: str
-    size_bytes: int
-    created_by: str
-    creation_date: date
-    last_updated: date
+    file_type: str = Field(alias="fileType")
+    size_bytes: int = Field(alias="sizeBytes")
+    created_by: str = Field(alias="createdBy")
+    creation_date: date = Field(alias="creationDate")
+    last_updated: date = Field(alias="lastUpdated")
     status: str
     path: Optional[str] = None
     labels: Optional[List[str]] = None
-    public_url: Optional[str] = None
-    error_code: Optional[int] = None
-    error_message: Optional[str] = None
+    public_url: Optional[str] = Field(default=None, alias="publicUrl")
+    error_code: Optional[int] = Field(default=None, alias="errorCode")
+    error_message: Optional[str] = Field(default=None, alias="errorMessage")

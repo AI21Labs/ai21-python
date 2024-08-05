@@ -1,6 +1,127 @@
 # CHANGELOG
 
+## v2.10.1 (2024-07-31)
+
+### Ci
+
+* ci: Fix label swap syntax (#196)
+
+* ci: Added quotes
+
+* ci: Read from env ([`a31233b`](https://github.com/AI21Labs/ai21-python/commit/a31233b385918a1118ed70c683b6850bf8667ab9))
+
+* ci: fix size labeler (#195) ([`1247b81`](https://github.com/AI21Labs/ai21-python/commit/1247b81bc7b02952f6ee87fbe1249bdb6cecd8da))
+
+### Fix
+
+* fix: remove redundant dependency - dataclass json (#194)
+
+* fix: remove redundant dependency - dataclass json
+
+* chore: use j2 ultra in examples
+
+* test: use j2 ultra in completion tests
+
+---------
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`e8dcd27`](https://github.com/AI21Labs/ai21-python/commit/e8dcd27e2883b4e60cbb4f4d7505309f4a963a6c))
+
+* fix: env (#197) ([`525c1ef`](https://github.com/AI21Labs/ai21-python/commit/525c1ef4cdd593eca62ae16eddda6db72a36dbcf))
+
+## v2.10.0 (2024-07-29)
+
+### Chore
+
+* chore(release): v2.10.0 [skip ci] ([`4b85505`](https://github.com/AI21Labs/ai21-python/commit/4b85505e5c1830e145ecd04dc249a4df5c44ac60))
+
+* chore(deps-dev): bump setuptools from 69.5.1 to 70.0.0 (#186)
+
+Bumps [setuptools](https://github.com/pypa/setuptools) from 69.5.1 to 70.0.0.
+- [Release notes](https://github.com/pypa/setuptools/releases)
+- [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst)
+- [Commits](https://github.com/pypa/setuptools/compare/v69.5.1...v70.0.0)
+
+---
+updated-dependencies:
+- dependency-name: setuptools
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`51b59f8`](https://github.com/AI21Labs/ai21-python/commit/51b59f8eb166be299076d23fe646a292aa151f51))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#179)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.8.3 to 9.8.5.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.8.3...v9.8.5)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`2175f81`](https://github.com/AI21Labs/ai21-python/commit/2175f81c29e8fcaac8ff2dfb67af2b4f0aceead7))
+
+### Documentation
+
+* docs: fix base url for azure (#188) ([`bb84d35`](https://github.com/AI21Labs/ai21-python/commit/bb84d351fdda13b57617a6fc3fc5a12bce2d9528))
+
+### Feature
+
+* feat: Pydantic Migration (#193)
+
+* feat: Pydantic migration (#189)
+
+* refactor: migrate from dataclass to pydantic for responses
+
+* fix: add backward compatability for to_json, from_json
+
+* fix: add missing by_alias, add from_json to penalty, add tests
+
+* ci: add pydantic matrix for unittests
+
+* ci: fix version mismatch
+
+* test: fix test
+
+* ci: add matrix to integration tests for pydantic version
+
+* ci: limit parallel run in integration tests
+
+* refactor: ci comments, use to_*, and from_* funcs internally
+
+* refactor: ci comments, attach alias by field, create private functions for serialization, add deprecation warning
+
+* refactor: ci comments, attach alias by field, create private functions for serialization, add deprecation warning
+
+* test: fix tests
+
+* test: fix tests
+
+* test: fix tests
+
+* chore: ci comments, remove basemodel from not_given
+
+* chore(release): v2.10.0-rc.1 [skip ci]
+
+* chore: lower min pydantic version (#192)
+
+---------
+
+Co-authored-by: semantic-release &lt;semantic-release&gt; ([`135ea43`](https://github.com/AI21Labs/ai21-python/commit/135ea43e75f3692f966c2263c25b4b9c7c343b81))
+
 ## v2.9.2 (2024-07-15)
+
+### Chore
+
+* chore(release): v2.9.2 [skip ci] ([`30d9947`](https://github.com/AI21Labs/ai21-python/commit/30d9947b500e3c5d39858b187fc1f6d5c7a98916))
 
 ### Fix
 
@@ -2064,7 +2185,7 @@ This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https
 
 * fix: name ([`e985980`](https://github.com/AI21Labs/ai21-python/commit/e98598027d955e3f0108ab1919e90195c5b2d52d))
 
-## v2.0.0-rc.1 (2023-12-18)
+## v1.0.0-rc.2 (2023-12-18)
 
 ### Breaking
 

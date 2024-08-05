@@ -1,7 +1,8 @@
 from abc import ABC, abstractmethod
-from typing import Optional, Any, Dict
+from typing import Optional, Any, Dict, cast
 
 from ai21.models import ParaphraseStyleType, ParaphraseResponse
+from ai21.models._pydantic_compatibility import _from_dict
 
 
 class Paraphrase(ABC):
@@ -30,7 +31,7 @@ class Paraphrase(ABC):
         pass
 
     def _json_to_response(self, json: Dict[str, Any]) -> ParaphraseResponse:
-        return ParaphraseResponse.from_dict(json)
+        return cast(_from_dict(obj=ParaphraseResponse, obj_dict=json), ParaphraseResponse)
 
     def _create_body(
         self,

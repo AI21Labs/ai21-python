@@ -1,21 +1,20 @@
-from dataclasses import dataclass
 from typing import Optional, List
 
-from ai21.models.ai21_base_model_mixin import AI21BaseModelMixin
+from pydantic import Field
+
+from ai21.models.ai21_base_model import AI21BaseModel
 
 
-@dataclass
-class LibrarySearchResult(AI21BaseModelMixin):
+class LibrarySearchResult(AI21BaseModel):
     text: str
-    file_id: str
-    file_name: str
+    file_id: str = Field(alias="fileId")
+    file_name: str = Field(alias="fileName")
     score: float
     order: Optional[int] = None
-    public_url: Optional[str] = None
+    public_url: Optional[str] = Field(default=None, alias="publicUrl")
     labels: Optional[List[str]] = None
 
 
-@dataclass
-class LibrarySearchResponse(AI21BaseModelMixin):
+class LibrarySearchResponse(AI21BaseModel):
     id: str
     results: List[LibrarySearchResult]
