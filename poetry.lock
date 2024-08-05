@@ -1939,4 +1939,4 @@ vertex = ["google-auth"]
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.8"
-content-hash = "a1ceb0890cec19b2efdb30de5b5abea0382ae25d409902cce86c7d8ee5f901c2"
+content-hash = "3e5d07ef9b3f009e58c58ae7965248c68e6e9d27dd698372406ee440a93f819b"
