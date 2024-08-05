@@ -13,6 +13,9 @@ from ai21.errors import StreamingDecodeError
 from ai21.stream.stream_commons import SSEDecoderBase
 
 
+_FINISH_REASON_NULL_STR = '"finish_reason":null'
+
+
 @lru_cache(maxsize=None)
 def get_response_stream_shape() -> Shape:
     from botocore.model import ServiceModel
@@ -32,11 +35,14 @@ class AWSEventStreamDecoder(SSEDecoderBase):
         event_stream_buffer = EventStreamBuffer()
         previous_item = None
         for chunk in response.iter_bytes():
-            item = next(self._process_chunks(event_stream_buffer, chunk))
+            try:
+                item = next(self._process_chunks(event_stream_buffer, chunk))
+            except StopIteration as e:
+                raise StreamingDecodeError(chunk=str(chunk), error_message=str(e))
             # For Bedrock metering chunk:
             if previous_item is not None:
                 item = self._build_last_chunk(last_model_chunk=previous_item, bedrock_metrics_chunk=item)
-            if '"finish_reason":null' not in item and previous_item is None:
+            if _FINISH_REASON_NULL_STR not in item and previous_item is None:
                 previous_item = item
                 continue
             yield item
@@ -45,11 +51,14 @@ class AWSEventStreamDecoder(SSEDecoderBase):
         event_stream_buffer = EventStreamBuffer()
         previous_item = None
         async for chunk in response.aiter_bytes():
-            item = next(self._process_chunks(event_stream_buffer, chunk))
+            try:
+                item = next(self._process_chunks(event_stream_buffer, chunk))
+            except StopIteration as e:
+                raise StreamingDecodeError(chunk=str(chunk), error_message=str(e))
             # For Bedrock metering chunk:
             if previous_item is not None:
                 item = self._build_last_chunk(last_model_chunk=previous_item, bedrock_metrics_chunk=item)
-            if '"finish_reason":null' not in item and previous_item is None:
+            if _FINISH_REASON_NULL_STR not in item and previous_item is None:
                 previous_item = item
                 continue
             yield item
