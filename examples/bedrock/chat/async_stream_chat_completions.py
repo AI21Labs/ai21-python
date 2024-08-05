@@ -4,9 +4,12 @@ from ai21.models.chat import ChatMessage
 
 client = AsyncAI21BedrockClient(region="us-east-1")  # region is optional, as you can use the env variable instead
 
+system = "You're a support engineer in a SaaS company"
 messages = [
-    ChatMessage(content="You are a helpful assistant", role="system"),
-    ChatMessage(content="What is the meaning of life?", role="user"),
+    ChatMessage(content=system, role="system"),
+    ChatMessage(content="Hello, I need help with a signup process.", role="user"),
+    ChatMessage(content="Hi Alice, I can help you with that. What seems to be the problem?", role="assistant"),
+    ChatMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
 ]
 
 
