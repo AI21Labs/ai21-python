@@ -9,7 +9,7 @@ import httpx
 from ai21 import AI21APIError
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.aws.aws_authorization import AWSAuthorization
-from ai21.clients.bedrock._stream_decoder import AWSEventStreamDecoder
+from ai21.clients.bedrock._stream_decoder import _AWSEventStreamDecoder
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelErrorException
@@ -43,7 +43,7 @@ def _handle_bedrock_error(aws_error: AI21APIError) -> None:
 class BaseBedrockClient:
     def __init__(self, region: str, session: Optional[boto3.Session]):
         self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
-        self._streaming_decoder = AWSEventStreamDecoder()
+        self._streaming_decoder = _AWSEventStreamDecoder()
 
     def _prepare_options(self, options: RequestOptions) -> RequestOptions:
         body = options.body
@@ -121,7 +121,7 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
     def _prepare_url(self, options: RequestOptions) -> str:
         return options.url
 
-    def _get_streaming_decoder(self) -> AWSEventStreamDecoder:
+    def _get_streaming_decoder(self) -> _AWSEventStreamDecoder:
         return self._streaming_decoder
 
 
@@ -173,5 +173,5 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     def _prepare_url(self, options: RequestOptions) -> str:
         return options.url
 
-    def _get_streaming_decoder(self) -> AWSEventStreamDecoder:
+    def _get_streaming_decoder(self) -> _AWSEventStreamDecoder:
         return self._streaming_decoder

@@ -10,7 +10,7 @@ from botocore.model import Shape
 from botocore.parsers import EventStreamJSONParser
 
 from ai21.errors import StreamingDecodeError
-from ai21.stream.stream_commons import SSEDecoderBase
+from ai21.stream.stream_commons import _SSEDecoderBase
 
 
 _FINISH_REASON_NULL_STR = '"finish_reason":null'
@@ -27,7 +27,7 @@ def get_response_stream_shape() -> Shape:
     return bedrock_service_model.shape_for("ResponseStream")
 
 
-class AWSEventStreamDecoder(SSEDecoderBase):
+class _AWSEventStreamDecoder(_SSEDecoderBase):
     def __init__(self) -> None:
         self._parser = EventStreamJSONParser()
 
@@ -81,7 +81,7 @@ class AWSEventStreamDecoder(SSEDecoderBase):
         chunk_dict = {**chunk_dict, **bedrock_metrics_dict}
         return json.dumps(chunk_dict)
 
-    def _process_chunks(self, event_stream_buffer, chunk):
+    def _process_chunks(self, event_stream_buffer, chunk) -> Iterator[str]:
         try:
             event_stream_buffer.add_data(chunk)
             for event in event_stream_buffer:

@@ -24,7 +24,7 @@ def get_stream_message(chunk: str, cast_to: type[_T]) -> Iterator[_T] | AsyncIte
         raise StreamingDecodeError(chunk)
 
 
-class SSEDecoderBase(ABC):
+class _SSEDecoderBase(ABC):
     @abstractmethod
     def iter(self, response: httpx.Response) -> Iterator[str]:
         pass
@@ -34,7 +34,7 @@ class SSEDecoderBase(ABC):
         pass
 
 
-class _SSEDecoder(SSEDecoderBase):
+class _SSEDecoder(_SSEDecoderBase):
     def iter(self, response: httpx.Response):
         for line in response.iter_lines():
             line = line.strip()

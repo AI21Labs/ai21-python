@@ -3,7 +3,7 @@ from typing import AsyncIterable, Iterable
 import httpx
 import pytest
 
-from ai21.clients.bedrock._stream_decoder import AWSEventStreamDecoder
+from ai21.clients.bedrock._stream_decoder import _AWSEventStreamDecoder
 from ai21.errors import StreamingDecodeError
 from ai21.models.chat import ChatCompletionChunk
 from ai21.stream.async_stream import AsyncStream
@@ -48,7 +48,7 @@ def test_stream_object_when_json_string_ok__should_be_ok():
     stream = byte_stream()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = Stream[ChatCompletionChunk](
-        response=response, cast_to=ChatCompletionChunk, streaming_decoder=AWSEventStreamDecoder()
+        response=response, cast_to=ChatCompletionChunk, streaming_decoder=_AWSEventStreamDecoder()
     )
 
     chunk_counter = 0
@@ -64,7 +64,7 @@ async def test_async_stream_object_when_json_string_ok__should_be_ok():
     stream = async_byte_stream()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = AsyncStream[ChatCompletionChunk](
-        response=response, cast_to=ChatCompletionChunk, streaming_decoder=AWSEventStreamDecoder()
+        response=response, cast_to=ChatCompletionChunk, streaming_decoder=_AWSEventStreamDecoder()
     )
 
     chunk_counter = 0
@@ -79,7 +79,7 @@ def test_stream_object_when_bad_json__should_raise_error():
     stream = byte_bad_stream_json_format()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = Stream[ChatCompletionChunk](
-        response=response, cast_to=ChatCompletionChunk, streaming_decoder=AWSEventStreamDecoder()
+        response=response, cast_to=ChatCompletionChunk, streaming_decoder=_AWSEventStreamDecoder()
     )
 
     with pytest.raises(StreamingDecodeError):
@@ -92,7 +92,7 @@ async def test_async_stream_object_when_bad_json__should_raise_error():
     stream = async_byte_bad_stream_json_format()
     response = httpx.Response(status_code=200, content=stream)
     stream_obj = AsyncStream[ChatCompletionChunk](
-        response=response, cast_to=ChatCompletionChunk, streaming_decoder=AWSEventStreamDecoder()
+        response=response, cast_to=ChatCompletionChunk, streaming_decoder=_AWSEventStreamDecoder()
     )
 
     with pytest.raises(StreamingDecodeError):
