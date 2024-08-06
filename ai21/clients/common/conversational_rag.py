@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import Any
+from typing import Any, Dict, List
 
 from ai21.models import ChatMessage
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse
@@ -13,11 +13,11 @@ class ConversationalRag(ABC):
     @abstractmethod
     def create(
         self,
-        messages: list[ChatMessage],
+        messages: List[ChatMessage],
         *,
         path: str | NotGiven = NotGiven,
-        labels: list[str] | NotGiven = NotGiven,
-        file_ids: list[str] | NotGiven = NotGiven,
+        labels: List[str] | NotGiven = NotGiven,
+        file_ids: List[str] | NotGiven = NotGiven,
         max_segments: int | NotGiven = NotGiven,
         retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
         retrieval_similarity_threshold: float | NotGiven = NotGiven,
@@ -40,5 +40,5 @@ class ConversationalRag(ABC):
         """
         pass
 
-    def _create_body(self, **kwargs) -> dict[str, Any]:
+    def _create_body(self, **kwargs) -> Dict[str, Any]:
         return {k: v for k, v in kwargs.items() if v is not NotGiven}

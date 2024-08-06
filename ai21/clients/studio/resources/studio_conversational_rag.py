@@ -1,3 +1,5 @@
+from typing import List
+
 from ai21.clients.common.conversational_rag import ConversationalRag
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
@@ -12,11 +14,11 @@ from ai21.types import NotGiven
 class StudioConversationalRag(StudioResource, ConversationalRag):
     def create(
         self,
-        messages: list[ChatMessage],
+        messages: List[ChatMessage],
         *,
         path: str | NotGiven = NotGiven,
-        labels: list[str] | NotGiven = NotGiven,
-        file_ids: list[str] | NotGiven = NotGiven,
+        labels: List[str] | NotGiven = NotGiven,
+        file_ids: List[str] | NotGiven = NotGiven,
         max_segments: int | NotGiven = NotGiven,
         retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
         retrieval_similarity_threshold: float | NotGiven = NotGiven,
@@ -43,11 +45,11 @@ class StudioConversationalRag(StudioResource, ConversationalRag):
 class AsyncStudioConversationalRag(AsyncStudioResource, ConversationalRag):
     async def create(
         self,
-        messages: list[ChatMessage],
+        messages: List[ChatMessage],
         *,
         path: str | NotGiven = NotGiven,
-        labels: list[str] | NotGiven = NotGiven,
-        file_ids: list[str] | NotGiven = NotGiven,
+        labels: List[str] | NotGiven = NotGiven,
+        file_ids: List[str] | NotGiven = NotGiven,
         max_segments: int | NotGiven = NotGiven,
         retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
         retrieval_similarity_threshold: float | NotGiven = NotGiven,
