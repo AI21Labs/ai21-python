@@ -8,7 +8,6 @@ from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
 from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_conversational_rag import AsyncStudioConversationalRag
 from ai21.clients.studio.resources.studio_custom_model import AsyncStudioCustomModel
 from ai21.clients.studio.resources.studio_dataset import AsyncStudioDataset
 from ai21.clients.studio.resources.studio_embed import AsyncStudioEmbed
@@ -64,5 +63,4 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.answer = AsyncStudioAnswer(self)
         self.library = AsyncStudioLibrary(self)
         self.segmentation = AsyncStudioSegmentation(self)
-        self.conversational_rag = AsyncStudioConversationalRag(self)
         self.beta = AsyncBeta(self)

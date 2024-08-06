@@ -10,7 +10,6 @@ from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
-from ai21.clients.studio.resources.studio_conversational_rag import StudioConversationalRag
 from ai21.clients.studio.resources.studio_custom_model import StudioCustomModel
 from ai21.clients.studio.resources.studio_dataset import StudioDataset
 from ai21.clients.studio.resources.studio_embed import StudioEmbed
@@ -68,7 +67,6 @@ class AI21Client(AI21HTTPClient):
         self.answer = StudioAnswer(self)
         self.library = StudioLibrary(self)
         self.segmentation = StudioSegmentation(self)
-        self.conversational_rag = StudioConversationalRag(self)
         self.beta = Beta(self)
 
     def count_tokens(self, text: str, tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> int:
