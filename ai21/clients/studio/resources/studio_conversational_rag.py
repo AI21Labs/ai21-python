@@ -5,10 +5,10 @@ from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
-from ai21.models import ChatMessage
+from ai21.models.chat import ChatMessage
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse
 from ai21.models.retrieval_strategy import RetrievalStrategy
-from ai21.types import NotGiven
+from ai21.types import NotGiven, NOT_GIVEN
 
 
 class StudioConversationalRag(StudioResource, ConversationalRag):
@@ -16,14 +16,14 @@ class StudioConversationalRag(StudioResource, ConversationalRag):
         self,
         messages: List[ChatMessage],
         *,
-        path: str | NotGiven = NotGiven,
-        labels: List[str] | NotGiven = NotGiven,
-        file_ids: List[str] | NotGiven = NotGiven,
-        max_segments: int | NotGiven = NotGiven,
-        retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
-        retrieval_similarity_threshold: float | NotGiven = NotGiven,
-        max_neighbors: int | NotGiven = NotGiven,
-        hybrid_search_alpha: float | NotGiven = NotGiven,
+        path: str | NotGiven = NOT_GIVEN,
+        labels: List[str] | NotGiven = NOT_GIVEN,
+        file_ids: List[str] | NotGiven = NOT_GIVEN,
+        max_segments: int | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | NotGiven = NOT_GIVEN,
+        retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
+        max_neighbors: int | NotGiven = NOT_GIVEN,
+        hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ConversationalRagResponse:
         body = self._create_body(
@@ -39,7 +39,7 @@ class StudioConversationalRag(StudioResource, ConversationalRag):
             **kwargs,
         )
 
-        return self._post(path=self._endpoint, body=body, response_cls=ConversationalRagResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=ConversationalRagResponse)
 
 
 class AsyncStudioConversationalRag(AsyncStudioResource, ConversationalRag):
@@ -47,14 +47,14 @@ class AsyncStudioConversationalRag(AsyncStudioResource, ConversationalRag):
         self,
         messages: List[ChatMessage],
         *,
-        path: str | NotGiven = NotGiven,
-        labels: List[str] | NotGiven = NotGiven,
-        file_ids: List[str] | NotGiven = NotGiven,
-        max_segments: int | NotGiven = NotGiven,
-        retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
-        retrieval_similarity_threshold: float | NotGiven = NotGiven,
-        max_neighbors: int | NotGiven = NotGiven,
-        hybrid_search_alpha: float | NotGiven = NotGiven,
+        path: str | NotGiven = NOT_GIVEN,
+        labels: List[str] | NotGiven = NOT_GIVEN,
+        file_ids: List[str] | NotGiven = NOT_GIVEN,
+        max_segments: int | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | NotGiven = NOT_GIVEN,
+        retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
+        max_neighbors: int | NotGiven = NOT_GIVEN,
+        hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ConversationalRagResponse:
         body = self._create_body(
@@ -70,4 +70,4 @@ class AsyncStudioConversationalRag(AsyncStudioResource, ConversationalRag):
             **kwargs,
         )
 
-        return await self._post(path=f"/{self._endpoint}", body=body, response_cls=ConversationalRagResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=ConversationalRagResponse)

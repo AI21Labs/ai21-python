@@ -1,6 +1,6 @@
 from typing import Optional
 
-from ai21.models import ChatMessage
+from ai21.models.chat import ChatMessage
 from ai21.models.ai21_base_model import AI21BaseModel
 
 

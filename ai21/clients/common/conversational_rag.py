@@ -4,25 +4,25 @@ from typing import Any, Dict, List
 from ai21.models import ChatMessage
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse
 from ai21.models.retrieval_strategy import RetrievalStrategy
-from ai21.types import NotGiven
+from ai21.types import NotGiven, NOT_GIVEN
 
 
 class ConversationalRag(ABC):
-    _endpoint = "/studio/v1/conversational-rag"
+    _module_name = "conversational-rag"
 
     @abstractmethod
     def create(
         self,
         messages: List[ChatMessage],
         *,
-        path: str | NotGiven = NotGiven,
-        labels: List[str] | NotGiven = NotGiven,
-        file_ids: List[str] | NotGiven = NotGiven,
-        max_segments: int | NotGiven = NotGiven,
-        retrieval_strategy: RetrievalStrategy | NotGiven = NotGiven,
-        retrieval_similarity_threshold: float | NotGiven = NotGiven,
-        max_neighbors: int | NotGiven = NotGiven,
-        hybrid_search_alpha: float | NotGiven = NotGiven,
+        path: str | NotGiven = NOT_GIVEN,
+        labels: List[str] | NotGiven = NOT_GIVEN,
+        file_ids: List[str] | NotGiven = NOT_GIVEN,
+        max_segments: int | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | NotGiven = NOT_GIVEN,
+        retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
+        max_neighbors: int | NotGiven = NOT_GIVEN,
+        hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ConversationalRagResponse:
         """
