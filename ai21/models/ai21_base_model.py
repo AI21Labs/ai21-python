@@ -1,5 +1,6 @@
 import warnings
 from typing import Any, Dict
+
 from pydantic import BaseModel, ConfigDict
 from typing_extensions import Self
 
@@ -11,11 +12,15 @@ class AI21BaseModel(BaseModel):
         model_config = ConfigDict(
             populate_by_name=True,
             protected_namespaces=(),
+            extra="allow",
         )
     else:
 
         class Config:
+            from pydantic import Extra
+
             allow_population_by_field_name = True
+            extra = Extra.allow
 
     def to_dict(self, **kwargs) -> Dict[str, Any]:
         warnings.warn(
