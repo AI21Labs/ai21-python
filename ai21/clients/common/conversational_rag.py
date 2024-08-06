@@ -2,9 +2,11 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from ai21.models import ChatMessage
+from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse
 from ai21.models.retrieval_strategy import RetrievalStrategy
 from ai21.types import NotGiven, NOT_GIVEN
+from ai21.utils.typing import remove_not_given
 
 
 class ConversationalRag(ABC):
@@ -40,5 +42,31 @@ class ConversationalRag(ABC):
         """
         pass
 
-    def _create_body(self, **kwargs) -> Dict[str, Any]:
-        return {k: v for k, v in kwargs.items() if v is not NotGiven}
+    def _create_body(
+        self,
+        messages: List[ChatMessage],
+        *,
+        path: str | NotGiven,
+        labels: List[str] | NotGiven,
+        file_ids: List[str] | NotGiven,
+        max_segments: int | NotGiven,
+        retrieval_strategy: RetrievalStrategy | NotGiven,
+        retrieval_similarity_threshold: float | NotGiven,
+        max_neighbors: int | NotGiven,
+        hybrid_search_alpha: float | NotGiven,
+        **kwargs,
+    ) -> Dict[str, Any]:
+        return remove_not_given(
+            {
+                "messages": [_to_dict(message) for message in messages],
+                "path": path,
+                "labels": labels,
+                "file_ids": file_ids,
+                "max_segments": max_segments,
+                "retrieval_strategy": retrieval_strategy,
+                "retrieval_similarity_threshold": retrieval_similarity_threshold,
+                "max_neighbors": max_neighbors,
+                "hybrid_search_alpha": hybrid_search_alpha,
+                **kwargs,
+            }
+        )
