@@ -94,6 +94,12 @@ class EmptyMandatoryListError(AI21Error):
         super().__init__(message)
 
 
+class CredentialsError(AI21Error):
+    def __init__(self, provider_name: str, error_message: str):
+        message = f"Could not get default {provider_name} credentials: {error_message}"
+        super().__init__(message)
+
+
 class StreamingDecodeError(AI21Error):
     def __init__(self, chunk: str, error_message: Optional[str] = None):
         message = f"Failed to decode chunk: {chunk} in stream. Please check the stream format."

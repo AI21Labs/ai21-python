@@ -21,6 +21,8 @@ EXPECTED_ALL = [
     "TooManyRequestsError",
     "AsyncAI21BedrockClient",
     "AsyncAI21SageMakerClient",
+    "AI21VertexClient",
+    "AsyncAI21VertexClient",
 ]
 
 
