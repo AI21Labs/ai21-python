@@ -28,7 +28,7 @@ def delete_file(client: AI21Client, file_id: str):
 
 
 def main():
-    ai21_client = AI21Client(api_key="K8bU2iQWW0aqkUZwHdnFYgxjmMlge7QF")
+    ai21_client = AI21Client()
 
     file_id = upload_file(ai21_client)
 

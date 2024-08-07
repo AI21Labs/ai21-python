@@ -29,7 +29,7 @@ async def delete_file(client: AsyncAI21Client, file_id: str):
 
 
 async def main():
-    ai21_client = AsyncAI21Client(api_key="K8bU2iQWW0aqkUZwHdnFYgxjmMlge7QF")
+    ai21_client = AsyncAI21Client()
 
     file_id = await upload_file(ai21_client)
 
