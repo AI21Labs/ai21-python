@@ -348,7 +348,7 @@ chat_response = client.beta.conversational_rag.create(
 )
 ```
 
-For a more detailed example, see the chat [sync](examples/studio/conversational_rag.py) and [async](examples/studio/async_conversational_rag.py) examples.
+For a more detailed example, see the chat [sync](examples/studio/conversational_rag/conversational_rag.py) and [async](examples/studio/conversational_rag/async_conversational_rag.py) examples.
 
 ---
 
