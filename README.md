@@ -25,6 +25,7 @@
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
+- [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
