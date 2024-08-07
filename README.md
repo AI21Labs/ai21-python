@@ -25,6 +25,7 @@
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
+- [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
@@ -332,19 +333,22 @@ Like chat, but with the ability to retrieve information from your Studio library
 
 ```python
 from ai21 import AI21Client
-from ai21.models import ChatMessage
+from ai21.models.chat import ChatMessage
 
 messages = [
-    ChatMessage(text="Hey", role="user"),
-    ChatMessage(text="Hi Alice, How can I help you today?", role="assistant"),
-    ChatMessage(text="How long do deposit holds typically last?", role="user"),
+    ChatMessage(content="Ask a question about your files", role="user"),
 ]
 
 client = AI21Client()
+
+client.library.files.create(
+  file_path="path/to/file",
+  path="path/to/file/in/library",
+  labels=["my_file_label"],
+)
 chat_response = client.beta.conversational_rag.create(
     messages=messages,
-    # you may add file IDs from your studio library in order to question the model about their content
-    # file_ids=[]
+    labels=["my_file_label"],
 )
 ```
 
