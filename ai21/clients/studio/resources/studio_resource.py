@@ -9,6 +9,7 @@ import httpx
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models._pydantic_compatibility import _from_dict
+from ai21.stream.stream_commons import _SSEDecoderBase
 from ai21.types import ResponseT, StreamT, AsyncStreamT
 from ai21.utils.typing import extract_type
 
@@ -18,10 +19,11 @@ def _cast_response(
     response_cls: Optional[ResponseT],
     stream_cls: Optional[AsyncStreamT] = None,
     stream: bool = False,
+    streaming_decoder: Optional[_SSEDecoderBase] = None,
 ) -> ResponseT | AsyncStreamT | None:
     if stream and stream_cls is not None:
         cast_to = extract_type(stream_cls)
-        return stream_cls(cast_to=cast_to, response=response)
+        return stream_cls(cast_to=cast_to, response=response, streaming_decoder=streaming_decoder)
 
     if response_cls is None:
         return None
@@ -64,7 +66,13 @@ class StudioResource(ABC):
             files=files,
         )
 
-        return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
+        return _cast_response(
+            stream=stream,
+            response=response,
+            response_cls=response_cls,
+            stream_cls=stream_cls,
+            streaming_decoder=self._client._get_streaming_decoder(),
+        )
 
     def _get(
         self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
@@ -109,7 +117,13 @@ class AsyncStudioResource(ABC):
             files=files,
         )
 
-        return _cast_response(stream=stream, response=response, response_cls=response_cls, stream_cls=stream_cls)
+        return _cast_response(
+            stream=stream,
+            response=response,
+            response_cls=response_cls,
+            stream_cls=stream_cls,
+            streaming_decoder=self._client._get_streaming_decoder(),
+        )
 
     async def _get(
         self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None

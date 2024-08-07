@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from types import TracebackType
-from typing import Generic, Iterator
+from typing import Generic, Iterator, Optional, Any
 
 import httpx
 from typing_extensions import Self
@@ -17,10 +17,11 @@ class Stream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
+        streaming_decoder: Optional[Any] = None,
     ):
         self.response = response
         self.cast_to = cast_to
-        self._decoder = _SSEDecoder()
+        self._decoder = streaming_decoder or _SSEDecoder()
         self._iterator = self.__stream__()
 
     def __next__(self) -> _T:
@@ -31,7 +32,7 @@ class Stream(Generic[_T]):
             yield item
 
     def __stream__(self) -> Iterator[_T]:
-        iterator = self._decoder.iter(self.response.iter_lines())
+        iterator = self._decoder.iter(self.response)
         for chunk in iterator:
             if chunk.endswith(_SSE_DONE_MSG):
                 break
