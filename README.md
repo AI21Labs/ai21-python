@@ -326,6 +326,32 @@ asyncio.run(main())
 
 ---
 
+### Conversational RAG (Beta)
+
+Like chat, but with the ability to retrieve information from your Studio library.
+
+```python
+from ai21 import AI21Client
+from ai21.models import ChatMessage
+
+messages = [
+    ChatMessage(text="Hey", role="user"),
+    ChatMessage(text="Hi Alice, How can I help you today?", role="assistant"),
+    ChatMessage(text="How long do deposit holds typically last?", role="user"),
+]
+
+client = AI21Client()
+chat_response = client.beta.conversational_rag.create(
+    messages=messages,
+    # you may add file IDs from your studio library in order to question the model about their content
+    # file_ids=[]
+)
+```
+
+For a more detailed example, see the chat [sync](examples/studio/conversational_rag/conversational_rag.py) and [async](examples/studio/conversational_rag/async_conversational_rag.py) examples.
+
+---
+
 ## More Models
 
 ## TSMs

@@ -86,6 +86,8 @@ def test_studio(test_file_name: str):
         # ("async_dataset.py", ),
         # ("async_library.py", ),
         # ("async_library_answer.py", ),
+        ("conversational_rag/conversational_rag.py",),
+        ("conversational_rag/async_conversational_rag.py",),
     ],
     ids=[
         "when_answer__should_return_ok",
@@ -106,6 +108,8 @@ def test_studio(test_file_name: str):
         # "when_dataset__should_return_ok",
         # "when_library__should_return_ok",
         # "when_library_answer__should_return_ok",
+        "when_conversational_rag__should_return_ok",
+        "when_async_conversational_rag__should_return_ok",
     ],
 )
 async def test_async_studio(test_file_name: str):
