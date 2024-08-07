@@ -1,8 +1,16 @@
 # CHANGELOG
 
+## v2.12.0 (2024-08-07)
+
+### Feature
+
+* feat: :sparkles: add conversational RAG resource (#198) ([`fca3729`](https://github.com/AI21Labs/ai21-python/commit/fca372988e62c09e6ae03d6cc91ab83f62db2fd9))
+
 ## v2.11.0 (2024-08-06)
 
 ### Chore
+
+* chore(release): v2.11.0 [skip ci] ([`62ddebf`](https://github.com/AI21Labs/ai21-python/commit/62ddebfcd4037353440904800d8c8e394817040a))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#190)
 
