@@ -1,7 +1,7 @@
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from ai21.models import ChatMessage
+from ai21.models.chat import ChatMessage
 from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse
 from ai21.models.retrieval_strategy import RetrievalStrategy
@@ -21,7 +21,7 @@ class ConversationalRag(ABC):
         labels: List[str] | NotGiven = NOT_GIVEN,
         file_ids: List[str] | NotGiven = NOT_GIVEN,
         max_segments: int | NotGiven = NOT_GIVEN,
-        retrieval_strategy: RetrievalStrategy | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | str | NotGiven = NOT_GIVEN,
         retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
         max_neighbors: int | NotGiven = NOT_GIVEN,
         hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
@@ -50,7 +50,7 @@ class ConversationalRag(ABC):
         labels: List[str] | NotGiven,
         file_ids: List[str] | NotGiven,
         max_segments: int | NotGiven,
-        retrieval_strategy: RetrievalStrategy | NotGiven,
+        retrieval_strategy: RetrievalStrategy | str | NotGiven,
         retrieval_similarity_threshold: float | NotGiven,
         max_neighbors: int | NotGiven,
         hybrid_search_alpha: float | NotGiven,
