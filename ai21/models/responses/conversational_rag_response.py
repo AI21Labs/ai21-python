@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Optional, List
 
 from ai21.models.chat import ChatMessage

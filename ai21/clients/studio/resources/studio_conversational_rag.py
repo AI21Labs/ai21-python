@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import List
 
 from ai21.clients.common.conversational_rag import ConversationalRag
