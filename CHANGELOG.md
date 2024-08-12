@@ -1,6 +1,70 @@
 # CHANGELOG
 
+## v2.12.0 (2024-08-07)
+
+### Feature
+
+* feat: :sparkles: add conversational RAG resource (#198) ([`fca3729`](https://github.com/AI21Labs/ai21-python/commit/fca372988e62c09e6ae03d6cc91ab83f62db2fd9))
+
+## v2.11.0 (2024-08-06)
+
+### Chore
+
+* chore(release): v2.11.0 [skip ci] ([`62ddebf`](https://github.com/AI21Labs/ai21-python/commit/62ddebfcd4037353440904800d8c8e394817040a))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#190)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.8.5 to 9.8.6.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.8.5...v9.8.6)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`0c7622b`](https://github.com/AI21Labs/ai21-python/commit/0c7622b138a76bf74f509749b38ae228c761f894))
+
+### Feature
+
+* feat: add stream support for Bedrock (#191)
+
+* feat: add stream support for bedrock
+
+* chore: fix error
+
+* chore: fix stream examples
+
+* fix: add fix for last chunk on bedrock, add tests
+
+* test: fix unittests
+
+* test: remove comments
+
+* test: fix integration test
+
+* chore: cr comments
+
+* refactor: cr comments
+
+* refactor: async stream example
+
+* refactor: cr comments
+
+---------
+
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5392b52`](https://github.com/AI21Labs/ai21-python/commit/5392b5260da9ee0be00b1d9afe35d175cbfaf3e5))
+
 ## v2.10.1 (2024-07-31)
+
+### Chore
+
+* chore(release): v2.10.1 [skip ci] ([`c0050f4`](https://github.com/AI21Labs/ai21-python/commit/c0050f474d84853676ccbde17e71fc4419b86334))
 
 ### Ci
 

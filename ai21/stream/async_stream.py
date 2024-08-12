@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Generic, AsyncIterator
+from typing import Generic, AsyncIterator, Optional, Any
 from typing_extensions import Self
 from types import TracebackType
 
@@ -17,10 +17,11 @@ class AsyncStream(Generic[_T]):
         *,
         cast_to: type[_T],
         response: httpx.Response,
+        streaming_decoder: Optional[Any] = None,
     ):
         self.response = response
         self.cast_to = cast_to
-        self._decoder = _SSEDecoder()
+        self._decoder = streaming_decoder or _SSEDecoder()
         self._iterator = self.__stream__()
 
     async def __anext__(self) -> _T:
@@ -31,7 +32,7 @@ class AsyncStream(Generic[_T]):
             yield item
 
     async def __stream__(self) -> AsyncIterator[_T]:
-        iterator = self._decoder.aiter(self.response.aiter_lines())
+        iterator = self._decoder.aiter(self.response)
         async for chunk in iterator:
             if chunk.endswith(_SSE_DONE_MSG):
                 break

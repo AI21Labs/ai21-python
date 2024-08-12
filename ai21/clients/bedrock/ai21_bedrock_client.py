@@ -9,6 +9,7 @@ import httpx
 from ai21 import AI21APIError
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.aws.aws_authorization import AWSAuthorization
+from ai21.clients.bedrock._stream_decoder import _AWSEventStreamDecoder
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
 from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelErrorException
@@ -42,18 +43,19 @@ def _handle_bedrock_error(aws_error: AI21APIError) -> None:
 class BaseBedrockClient:
     def __init__(self, region: str, session: Optional[boto3.Session]):
         self._aws_auth = AWSAuthorization(aws_session=session or boto3.Session(region_name=region))
+        self._streaming_decoder = _AWSEventStreamDecoder()
 
     def _prepare_options(self, options: RequestOptions) -> RequestOptions:
         body = options.body
 
         model = body.pop("model", None)
         stream = body.pop("stream", False)
-
+        endpoint = "invoke"
         if stream:
-            _logger.warning("Field stream is not supported. Ignoring it.")
+            endpoint = "invoke-with-response-stream"
 
         # When stream is supported we would need to update this section and the URL
-        url = f"{options.url}/model/{model}/invoke"
+        url = f"{options.url}/model/{model}/{endpoint}"
         headers = self._prepare_headers(url=url, body=body)
 
         return options.replace(
@@ -119,6 +121,9 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
     def _prepare_url(self, options: RequestOptions) -> str:
         return options.url
 
+    def _get_streaming_decoder(self) -> _AWSEventStreamDecoder:
+        return self._streaming_decoder
+
 
 class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     def __init__(
@@ -167,3 +172,6 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
 
     def _prepare_url(self, options: RequestOptions) -> str:
         return options.url
+
+    def _get_streaming_decoder(self) -> _AWSEventStreamDecoder:
+        return self._streaming_decoder

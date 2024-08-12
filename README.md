@@ -25,6 +25,7 @@
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
+- [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
@@ -327,6 +328,35 @@ asyncio.run(main())
 
 ---
 
+### Conversational RAG (Beta)
+
+Like chat, but with the ability to retrieve information from your Studio library.
+
+```python
+from ai21 import AI21Client
+from ai21.models.chat import ChatMessage
+
+messages = [
+    ChatMessage(content="Ask a question about your files", role="user"),
+]
+
+client = AI21Client()
+
+client.library.files.create(
+  file_path="path/to/file",
+  path="path/to/file/in/library",
+  labels=["my_file_label"],
+)
+chat_response = client.beta.conversational_rag.create(
+    messages=messages,
+    labels=["my_file_label"],
+)
+```
+
+For a more detailed example, see the chat [sync](examples/studio/conversational_rag/conversational_rag.py) and [async](examples/studio/conversational_rag/async_conversational_rag.py) examples.
+
+---
+
 ## More Models
 
 ## TSMs
@@ -501,6 +531,32 @@ response = client.chat.completions.create(
     messages=messages,
     model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
 )
+```
+
+#### Stream
+
+```python
+from ai21 import AI21BedrockClient, BedrockModelID
+from ai21.models.chat import ChatMessage
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    ChatMessage(content=system, role="system"),
+    ChatMessage(content="Hello, I need help with a signup process.", role="user"),
+    ChatMessage(content="Hi Alice, I can help you with that. What seems to be the problem?", role="assistant"),
+    ChatMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
+]
+
+client = AI21BedrockClient()
+
+response = client.chat.completions.create(
+    messages=messages,
+    model=BedrockModelID.JAMBA_INSTRUCT_V1,
+    stream=True,
+)
+
+for chunk in response:
+    print(chunk.choices[0].message.content, end="")
 ```
 
 #### Async
