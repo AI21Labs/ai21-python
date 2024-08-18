@@ -5,7 +5,10 @@ from abc import ABC
 from typing import List, Optional, Union, Any, Dict, Literal
 
 from ai21.models.chat import ChatMessage
-from ai21.types import NotGiven
+from ai21.models.chat.document_schema import DocumentSchema
+from ai21.models.chat.response_format import ResponseFormat
+from ai21.models.chat.tool_defintions import ToolDefinition
+from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 from ai21.models._pydantic_compatibility import _to_dict
 
@@ -40,6 +43,9 @@ class BaseChatCompletions(ABC):
         stop: Optional[Union[str, List[str]]] | NotGiven,
         n: Optional[int] | NotGiven,
         stream: Literal[False] | Literal[True] | NotGiven,
+        tools: List[ToolDefinition] | NotGiven = NotGiven,
+        response_format: ResponseFormat = "text",
+        documents: List[DocumentSchema] | NotGiven = NotGiven,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(
@@ -52,6 +58,11 @@ class BaseChatCompletions(ABC):
                 "stop": stop,
                 "n": n,
                 "stream": stream,
+                "tools": [_to_dict(tools) for tools in tools] if tools is not NOT_GIVEN else NOT_GIVEN,
+                "response_format": _to_dict(response_format) if response_format is not NOT_GIVEN else NOT_GIVEN,
+                "documents": [_to_dict(document) for document in documents]
+                if documents is not NOT_GIVEN
+                else NOT_GIVEN,
                 **kwargs,
             }
         )

@@ -6,6 +6,9 @@ from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
 from ai21.models import ChatMessage as J2ChatMessage
 from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk
+from ai21.models.chat.document_schema import DocumentSchema
+from ai21.models.chat.response_format import ResponseFormat
+from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.stream.stream import Stream
 from ai21.types import NotGiven, NOT_GIVEN
 
@@ -24,6 +27,9 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
+        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
+        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
+        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         pass
@@ -39,6 +45,9 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
+        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
+        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
+        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
         **kwargs: Any,
     ) -> Stream[ChatCompletionChunk]:
         pass
@@ -53,6 +62,9 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
+        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
+        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
+        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse | Stream[ChatCompletionChunk]:
         if any(isinstance(item, J2ChatMessage) for item in messages):
@@ -70,6 +82,9 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
             top_p=top_p,
             n=n,
             stream=stream or False,
+            tools=tools,
+            response_format=response_format,
+            documents=documents,
             **kwargs,
         )
 
