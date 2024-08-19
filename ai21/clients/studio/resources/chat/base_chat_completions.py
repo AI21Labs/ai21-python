@@ -60,9 +60,9 @@ class BaseChatCompletions(ABC):
                 "stream": stream,
                 "tools": [_to_dict(tools) for tools in tools] if tools is not NOT_GIVEN else NOT_GIVEN,
                 "response_format": _to_dict(response_format) if response_format is not NOT_GIVEN else NOT_GIVEN,
-                "documents": [_to_dict(document) for document in documents]
-                if documents is not NOT_GIVEN
-                else NOT_GIVEN,
+                "documents": (
+                    [_to_dict(document) for document in documents] if documents is not NOT_GIVEN else NOT_GIVEN
+                ),
                 **kwargs,
             }
         )
