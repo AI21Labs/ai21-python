@@ -177,7 +177,7 @@ messages = [
 
 chat_completions = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct-preview",
+    model="jamba-1.5",
 )
 ```
 
@@ -207,7 +207,7 @@ client = AsyncAI21Client(
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-instruct-preview",
+        model="jamba-1.5",
     )
 
     print(response)
@@ -227,8 +227,9 @@ A more detailed example can be found [here](examples/studio/chat/chat_completion
 ### Supported Models:
 
 - j2-light
-- j2-mid
-- j2-ultra
+- [j2-ultra](#Chat)
+- [j2-mid](#Completion)
+- [jamba-instruct](#Chat-Completion)
 
 you can read more about the models [here](https://docs.ai21.com/reference/j2-complete-api-ref#jurassic-2-models).
 
@@ -270,6 +271,36 @@ completion_response = client.completion.create(
 )
 ```
 
+### Chat Completion
+
+```python
+from ai21 import AI21Client
+from ai21.models.chat import ChatMessage
+
+system = "You're a support engineer in a SaaS company"
+messages = [
+    ChatMessage(content=system, role="system"),
+    ChatMessage(content="Hello, I need help with a signup process.", role="user"),
+    ChatMessage(content="Hi Alice, I can help you with that. What seems to be the problem?", role="assistant"),
+    ChatMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
+]
+
+client = AI21Client()
+
+response = client.chat.completions.create(
+    messages=messages,
+    model="jamba-instruct",
+    max_tokens=100,
+    temperature=0.7,
+    top_p=1.0,
+    stop=["\n"],
+)
+
+print(response)
+```
+
+Note that jamba-instruct supports async streaming as well.
+
 </details>
 
 For a more detailed example, see the completion [examples](examples/studio/completion.py).
@@ -290,7 +321,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct-preview",
+    model="jamba-instruct",
     stream=True,
 )
 for chunk in response:
@@ -314,7 +345,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-instruct-preview",
+        model="jamba-1.5",
         stream=True,
     )
     async for chunk in response:
@@ -700,7 +731,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-  model="jamba-instruct",
+  model="jamba-1.5",
   messages=messages,
 )
 ```

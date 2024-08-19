@@ -18,7 +18,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-instruct-preview",
+        model="jamba-1.5",
         max_tokens=100,
         temperature=0.7,
         top_p=1.0,

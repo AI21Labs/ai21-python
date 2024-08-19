@@ -31,6 +31,6 @@ tools = [
 
 client = AI21Client()
 
-response = client.chat.completions.create(messages=messages, model="jamba-instruct", tools=tools)
+response = client.chat.completions.create(messages=messages, model="jamba-1.5", tools=tools)
 
 print(response)
