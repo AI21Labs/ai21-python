@@ -29,7 +29,7 @@ tools = [
     )
 ]
 
-client = AI21Client(api_host="https://api-stage.ai21.com", api_key="viPlqEZi052rQAD66prJIARU761Q2pc8")
+client = AI21Client()
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5", tools=tools)
 

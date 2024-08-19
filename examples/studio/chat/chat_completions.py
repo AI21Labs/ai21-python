@@ -9,7 +9,7 @@ messages = [
     UserMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
 ]
 
-client = AI21Client(api_host="https://api-stage.ai21.com", api_key="viPlqEZi052rQAD66prJIARU761Q2pc8")
+client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
