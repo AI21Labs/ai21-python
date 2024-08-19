@@ -1,9 +1,11 @@
 import uuid
 
 from ai21 import AI21Client
+from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage
 from ai21.models.chat.document_schema import DocumentSchema
 
+set_verbose(True)
 
 schnoodel = DocumentSchema(
     id=str(uuid.uuid4()),

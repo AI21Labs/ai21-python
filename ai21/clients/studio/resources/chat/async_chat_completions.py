@@ -27,9 +27,9 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
         stream: Optional[False] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
-        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
-        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
+        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
+        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
+        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         pass
@@ -45,9 +45,9 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
         top_p: float | NotGiven = NOT_GIVEN,
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
-        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
-        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
+        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
+        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
+        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> AsyncStream[ChatCompletionChunk]:
         pass
@@ -62,9 +62,9 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
         stop: str | List[str] | NotGiven = NOT_GIVEN,
         n: int | NotGiven = NOT_GIVEN,
         stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NOT_GIVEN = NOT_GIVEN,
-        response_format: ResponseFormat | NOT_GIVEN = NOT_GIVEN,
-        documents: List[DocumentSchema] | NOT_GIVEN = NOT_GIVEN,
+        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
+        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
+        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse | AsyncStream[ChatCompletionChunk]:
         if any(isinstance(item, J2ChatMessage) for item in messages):

@@ -1,6 +1,4 @@
-from __future__ import annotations
-
-from typing import Literal, List
+from typing import Literal, List, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.chat.tool_call import ToolCall
@@ -13,8 +11,8 @@ class ChatMessage(AI21BaseModel):
 
 class AssistantMessage(ChatMessage):
     role: Literal["assistant"] = "assistant"
-    tool_calls: List[ToolCall] | None = None
-    content: str | None = None
+    tool_calls: Optional[List[ToolCall]] = None
+    content: Optional[str] = None
 
 
 class ToolMessage(ChatMessage):
