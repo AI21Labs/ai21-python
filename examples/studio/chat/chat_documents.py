@@ -1,9 +1,11 @@
 import uuid
 
 from ai21 import AI21Client
+from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage
 from ai21.models.chat.document_schema import DocumentSchema
 
+set_verbose(True)
 
 schnoodel = DocumentSchema(
     id=str(uuid.uuid4()),
@@ -36,8 +38,8 @@ messages = [
     ChatMessage(role="user", content="Hi, which company earned more during 2024 - Schnoodel or Shnokel?"),
 ]
 
-client = AI21Client()
+client = AI21Client(api_host="https://api-stage.ai21.com", api_key="viPlqEZi052rQAD66prJIARU761Q2pc8")
 
-response = client.chat.completions.create(messages=messages, model="jamba-instruct", documents=documents)
+response = client.chat.completions.create(messages=messages, model="jamba-1.5", documents=documents)
 
 print(response)

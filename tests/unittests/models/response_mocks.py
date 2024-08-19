@@ -23,7 +23,8 @@ from ai21.models import (
     SegmentSummary,
     Highlight,
 )
-from ai21.models.chat import ChatCompletionResponse, ChatCompletionResponseChoice, ChatMessage
+from ai21.models.chat import ChatCompletionResponse, ChatCompletionResponseChoice
+from ai21.models.chat.chat_message import AssistantMessage
 from ai21.models.responses.segmentation_response import Segment
 from ai21.models.usage_info import UsageInfo
 
@@ -77,6 +78,7 @@ def get_chat_completions_response():
                     "more information about the issue you're facing? For example, are you receiving an "
                     "error message when you try to sign up with your Google account? If so, what does the "
                     "error message say?",
+                    "tool_calls": None,
                 },
                 "logprobs": None,
                 "finish_reason": "stop",
@@ -87,8 +89,8 @@ def get_chat_completions_response():
 
     choice = ChatCompletionResponseChoice(
         index=0,
-        message=ChatMessage(
-            role=RoleType.ASSISTANT,
+        message=AssistantMessage(
+            role="assistant",
             content="I apologize for any inconvenience you're experiencing. Can you please provide me with more "
             "information about the issue you're facing? For example, are you receiving an error message when "
             "you try to sign up with your Google account? If so, what does the error message say?",

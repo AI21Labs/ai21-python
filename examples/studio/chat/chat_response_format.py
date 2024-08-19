@@ -35,11 +35,11 @@ messages = [
     ChatMessage(role="user", content="Can I order a ticket for September 22, 2024, for myself and two kids?"),
 ]
 
-client = AI21Client()
+client = AI21Client(api_host="https://api-stage.ai21.com", api_key="viPlqEZi052rQAD66prJIARU761Q2pc8")
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct",
+    model="jamba-1.5",
     max_tokens=2000,
     temperature=0,
     response_format=ResponseFormat(type="json_object"),

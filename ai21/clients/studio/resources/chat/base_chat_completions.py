@@ -63,7 +63,7 @@ class BaseChatCompletions(ABC):
                 if not isinstance(response_format, NotGiven)
                 else response_format,
                 "documents": (
-                    [_to_dict(document) for document in documents] if not isinstance(documents, NotGiven) else tools,
+                    [_to_dict(document) for document in documents] if not isinstance(documents, NotGiven) else documents
                 ),
                 **kwargs,
             }
