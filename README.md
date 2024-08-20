@@ -26,6 +26,7 @@
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
 - [Conversational RAG (Beta)](#Conversational-RAG-Beta)
+- [Tool Use](#Tool-use)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
@@ -384,6 +385,12 @@ chat_response = client.beta.conversational_rag.create(
 ```
 
 For a more detailed example, see the chat [sync](examples/studio/conversational_rag/conversational_rag.py) and [async](examples/studio/conversational_rag/async_conversational_rag.py) examples.
+
+---
+
+## Tool Use
+
+Jamba 1.5 (Large & Mini) provide support for tools (function calling). See an example [here](examples/studio/chat/chat_function_calling.py).
 
 ---
 
