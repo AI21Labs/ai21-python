@@ -150,7 +150,7 @@ def get_chat_completions(is_async: bool = False):
                 "index": 0,
                 "message": {
                     "content": "Hello, I need help with a signup process.",
-                    "role": "user",
+                    "role": "assistant",
                 },
                 "finish_reason": "dummy_reason",
                 "logprobs": None,
