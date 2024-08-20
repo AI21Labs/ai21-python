@@ -1,4 +1,4 @@
-from typing import Literal, List, Optional
+from typing_extensions import Literal, List, Optional, Union, TypeAlias
 
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.chat.tool_call import ToolCall
@@ -26,3 +26,6 @@ class UserMessage(ChatMessage):
 
 class SystemMessage(ChatMessage):
     role: Literal["system"] = "system"
+
+
+ChatMessageParam: TypeAlias = Union[UserMessage, AssistantMessage, ToolMessage, SystemMessage]

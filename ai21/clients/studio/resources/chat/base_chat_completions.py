@@ -4,7 +4,7 @@ import warnings
 from abc import ABC
 from typing import List, Optional, Union, Any, Dict, Literal
 
-from ai21.models.chat import ChatMessage
+from ai21.models.chat.chat_message import ChatMessageParam
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.response_format import ResponseFormat
 from ai21.models.chat.tool_defintions import ToolDefinition
@@ -36,7 +36,7 @@ class BaseChatCompletions(ABC):
     def _create_body(
         self,
         model: str,
-        messages: List[ChatMessage],
+        messages: List[ChatMessageParam],
         max_tokens: Optional[int] | NotGiven,
         temperature: Optional[float] | NotGiven,
         top_p: Optional[float] | NotGiven,

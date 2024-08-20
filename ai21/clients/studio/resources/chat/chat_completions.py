@@ -5,7 +5,8 @@ from typing import List, Optional, Any, Literal, overload
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
 from ai21.models import ChatMessage as J2ChatMessage
-from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk
+from ai21.models.chat import ChatCompletionResponse, ChatCompletionChunk
+from ai21.models.chat.chat_message import ChatMessageParam
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.response_format import ResponseFormat
 from ai21.models.chat.tool_defintions import ToolDefinition
@@ -20,7 +21,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
     def create(
         self,
         model: str,
-        messages: List[ChatMessage],
+        messages: List[ChatMessageParam],
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
@@ -38,7 +39,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
     def create(
         self,
         model: str,
-        messages: List[ChatMessage],
+        messages: List[ChatMessageParam],
         stream: Literal[True],
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
@@ -54,7 +55,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
 
     def create(
         self,
-        messages: List[ChatMessage],
+        messages: List[ChatMessageParam],
         model: Optional[str] = None,
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
