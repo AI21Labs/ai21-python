@@ -1,6 +1,72 @@
 # CHANGELOG
 
+## v2.13.0-rc.1 (2024-08-20)
+
+### Documentation
+
+* docs: Fixed Conversational RAG README (#199)
+
+* docs: README for RAG
+
+* docs: Added link ([`e20978a`](https://github.com/AI21Labs/ai21-python/commit/e20978a8917e98a9b2ba86d11f6544d277201698))
+
+### Feature
+
+* feat: multiple tools example ([`d95fc69`](https://github.com/AI21Labs/ai21-python/commit/d95fc69986b8f142540abf2040b03fc26a9bb58d))
+
+* feat: revert TypedDict ([`e5b6b48`](https://github.com/AI21Labs/ai21-python/commit/e5b6b48d26a57f2be89dab4c3bdc3c32f6b72352))
+
+* feat: test TypedDict usage ([`3952220`](https://github.com/AI21Labs/ai21-python/commit/39522205e5fafd71673a3add5181c1c11cde511a))
+
+* feat: more flow in the func calling example ([`067ad50`](https://github.com/AI21Labs/ai21-python/commit/067ad50d8106d775316ab6e802f45ce7012a81d9))
+
+* feat: added models to __all__ ([`4ab26c2`](https://github.com/AI21Labs/ai21-python/commit/4ab26c29c6e3cc613cd3e64560ca5238f10f280d))
+
+* feat: fix DocumentSchema ([`98e4b4b`](https://github.com/AI21Labs/ai21-python/commit/98e4b4b6e4367fcf57d98b3b65183600431361da))
+
+* feat: simplify models ([`c9e1b3a`](https://github.com/AI21Labs/ai21-python/commit/c9e1b3a69c15edfe12659199b397643334c82c90))
+
+* feat: PR changes ([`f5a1d5e`](https://github.com/AI21Labs/ai21-python/commit/f5a1d5e78864fc6da332cd67068ec8a084bcb5ed))
+
+* feat: unit tests ([`6fb5c6e`](https://github.com/AI21Labs/ai21-python/commit/6fb5c6e5b0ccf3f8791dc2784d1a176297b5fe09))
+
+* feat: fix formatter ([`a778c8e`](https://github.com/AI21Labs/ai21-python/commit/a778c8e2aeb901a4eed6456b9e967740acf1eaef))
+
+* feat: jamba 1.5 features - tools calls (function calling), documents, response_format ([`5e186b9`](https://github.com/AI21Labs/ai21-python/commit/5e186b928e36d8f3e6d54fb1b85926e7302e2fb7))
+
+### Fix
+
+* fix: replace jamba-instruct usage with jamba-1.5, add documentation (#201)
+
+* fix: replace jamba-instruct usage with jamba-1.5, add jamba-instruct to legacy models, log headers in http_client
+
+* fix: formatting
+
+* fix: model name change ([`47f9668`](https://github.com/AI21Labs/ai21-python/commit/47f96685e3124396531b82c696f707e2eb3a865f))
+
+* fix: lint ([`58e407d`](https://github.com/AI21Labs/ai21-python/commit/58e407d58bb0b3447fe98482a4b71f7960cdf7ec))
+
+* fix: remove key ([`9eb439f`](https://github.com/AI21Labs/ai21-python/commit/9eb439fc4b357e8acc8b57fe29882865e5eb4bb2))
+
+* fix: fix all unit tests and a fix ([`b41b31a`](https://github.com/AI21Labs/ai21-python/commit/b41b31af45308d6ae18f5cda43d03ad80f14a43d))
+
+### Unknown
+
+* Merge pull request #202 from AI21Labs/chat-model-with-tools-docs-and-response-format
+
+feat: Chat model with tools docs and response format ([`9f4ed9b`](https://github.com/AI21Labs/ai21-python/commit/9f4ed9b8dfb238233839e25a5bf245c952db359b))
+
+* Merge branch &#39;chat-model-with-tools-docs-and-response-format&#39; of github.com:AI21Labs/ai21-python into chat-model-with-tools-docs-and-response-format ([`c1fff86`](https://github.com/AI21Labs/ai21-python/commit/c1fff869bcf9c556bbb68444f8e8d3a10861bf0a))
+
+* Revert &#34;feat: revert TypedDict&#34;
+
+This reverts commit e5b6b48d26a57f2be89dab4c3bdc3c32f6b72352. ([`157635e`](https://github.com/AI21Labs/ai21-python/commit/157635e445dc47972057b41088261b712efa1ea1))
+
 ## v2.12.0 (2024-08-07)
+
+### Chore
+
+* chore(release): v2.12.0 [skip ci] ([`38430ad`](https://github.com/AI21Labs/ai21-python/commit/38430ad46686ce94b40d66991598dae67a3dbdd8))
 
 ### Feature
 
