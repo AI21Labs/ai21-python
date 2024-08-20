@@ -177,7 +177,7 @@ messages = [
 
 chat_completions = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5",
+    model="jamba-1.5-mini",
 )
 ```
 
@@ -207,7 +207,7 @@ client = AsyncAI21Client(
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5",
+        model="jamba-1.5-mini",
     )
 
     print(response)
@@ -345,7 +345,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5",
+        model="jamba-1.5-mini",
         stream=True,
     )
     async for chunk in response:
@@ -731,7 +731,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-  model="jamba-1.5",
+  model="jamba-1.5-mini",
   messages=messages,
 )
 ```

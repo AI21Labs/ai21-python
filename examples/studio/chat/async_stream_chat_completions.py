@@ -17,7 +17,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5",
+        model="jamba-1.5-large",
         max_tokens=100,
         stream=True,
     )
