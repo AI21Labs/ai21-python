@@ -39,7 +39,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5",
+    model="jamba-1.5-mini",
     max_tokens=2000,
     temperature=0,
     response_format=ResponseFormat(type="text"),
