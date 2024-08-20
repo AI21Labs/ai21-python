@@ -1,9 +1,8 @@
-from typing import Literal
+from typing_extensions import Literal, TypedDict
 
-from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.chat import FunctionToolDefinition
 
 
-class ToolDefinition(AI21BaseModel):
+class ToolDefinition(TypedDict, total=False):
     type: Literal["function"]
     function: FunctionToolDefinition
