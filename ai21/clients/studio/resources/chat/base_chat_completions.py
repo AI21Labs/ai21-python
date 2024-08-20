@@ -58,7 +58,7 @@ class BaseChatCompletions(ABC):
                 "stop": stop,
                 "n": n,
                 "stream": stream,
-                "tools": tools,
+                "tools": [_to_dict(tool) for tool in tools] if not isinstance(tools, NotGiven) else tools,
                 "response_format": (
                     _to_dict(response_format) if not isinstance(response_format, NotGiven) else response_format
                 ),
