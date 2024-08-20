@@ -42,7 +42,11 @@ response = client.chat.completions.create(
     model="jamba-1.5",
     max_tokens=2000,
     temperature=0,
-    response_format=ResponseFormat(type="json_object"),
+    response_format=ResponseFormat(type="text"),
 )
 
 print(response)
+
+order = ZooTicketsOrder.model_validate_json(response.choices[0].message.content)
+
+print(order)

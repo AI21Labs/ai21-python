@@ -23,20 +23,21 @@ messages = [
     ChatMessage(role="user", content="i think it is order_12345"),
 ]
 
-tools = [
-    ToolDefinition(
-        type="function",
-        function=FunctionToolDefinition(
-            name="get_order_delivery_date",
-            description="Get the delivery date for a given order ID",
-            parameters=ToolParameters(
-                type="object",
-                properties={"order_id": {"type": "string", "description": "The customer's order ID."}},
-                required=["order_id"],
-            ),
+tool_definition = ToolDefinition(
+    type="function",
+    function=FunctionToolDefinition(
+        name="get_order_delivery_date",
+        description="Get the delivery date for a given order ID",
+        parameters=ToolParameters(
+            type="object",
+            properties={"order_id": {"type": "string", "description": "The customer's order ID."}},
+            required=["order_id"],
         ),
-    )
-]
+    ),
+)
+
+
+tools = [tool_definition]
 
 client = AI21Client()
 
