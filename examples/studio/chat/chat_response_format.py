@@ -35,7 +35,7 @@ messages = [
     ChatMessage(role="user", content="Can I order a ticket for September 22, 2024, for myself and two kids?"),
 ]
 
-client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
+client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
