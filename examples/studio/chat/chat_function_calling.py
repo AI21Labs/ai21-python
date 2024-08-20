@@ -36,7 +36,6 @@ tool_definition = ToolDefinition(
     ),
 )
 
-
 tools = [tool_definition]
 
 client = AI21Client()

@@ -1,8 +1,8 @@
-from typing_extensions import Literal, TypedDict
+from typing_extensions import Literal, TypedDict, Required
 
 from ai21.models.chat import FunctionToolDefinition
 
 
 class ToolDefinition(TypedDict, total=False):
-    type: Literal["function"]
-    function: FunctionToolDefinition
+    type: Required[Literal["function"]]
+    function: Required[FunctionToolDefinition]
