@@ -19,7 +19,7 @@ _DUMMY_API_KEY = "dummy_api_key"
 def test_chat_create__when_bad_import_to_chat_message__raise_error():
     with pytest.raises(ValueError) as e:
         AI21Client(api_key=_DUMMY_API_KEY).chat.completions.create(
-            model="jamba-instruct-preview",
+            model="jamba-1.5",
             messages=[ChatMessage(role=RoleType.USER, text="Hello")],
             system="System Test",
         )
@@ -34,7 +34,7 @@ def test_chat_create__when_bad_import_to_chat_message__raise_error():
 async def test_async_chat_create__when_bad_import_to_chat_message__raise_error():
     with pytest.raises(ValueError) as e:
         await AsyncAI21Client(api_key=_DUMMY_API_KEY).chat.completions.create(
-            model="jamba-instruct-preview",
+            model="jamba-1.5",
             messages=[ChatMessage(role=RoleType.USER, text="Hello")],
             system="System Test",
         )
@@ -49,7 +49,7 @@ def test__when_model_and_model_id__raise_error():
     client = AI21Client()
     with pytest.raises(ValueError):
         client.chat.completions.create(
-            model="jamba-instruct",
+            model="jamba-1.5",
             model_id="jamba-instruct",
             messages=[ChatMessage(role=RoleType.USER, text="Hello")],
         )

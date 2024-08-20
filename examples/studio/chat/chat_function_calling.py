@@ -68,5 +68,5 @@ if delivery_date is not None:
     tool_message = ToolMessage(role="tool", tool_call_id=tool_calls[0].id, content=delivery_date)
     messages.append(assistant_message)
     messages.append(tool_message)
-    response = client.chat.completions.create(messages=messages, model="jamba-1.5", tools=tools)
+    response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
     print(response)
