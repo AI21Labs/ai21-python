@@ -6,8 +6,6 @@ from ai21 import AI21Client
 from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage, ResponseFormat
 
-from ai21.models.ai21_base_model import IS_PYDANTIC_V2
-
 set_verbose(True)
 
 
@@ -49,9 +47,6 @@ print(response)
 try:
     order = ZooTicketsOrder.model_validate_json(response.choices[0].message.content)
     print("Zoo tickets order details JSON:")
-    if IS_PYDANTIC_V2:
-        print(order.model_dump_json(indent=4))
-    else:
-        print(order.json(indent=4))
+    print(order)
 except ValidationError as exc:
     print(exc)
