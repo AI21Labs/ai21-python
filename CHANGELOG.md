@@ -1,6 +1,26 @@
 # CHANGELOG
 
+## v2.13.0-rc.2 (2024-08-21)
+
+### Feature
+
+* feat: a few more classes to TypedDict ([`99f9160`](https://github.com/AI21Labs/ai21-python/commit/99f91605ade7c1bd9fc43e739b8c3bc5404ea45d))
+
+* feat: response json example ([`75f9d7c`](https://github.com/AI21Labs/ai21-python/commit/75f9d7c704eb3c5103ee7b023df506597bf61f5e))
+
+* feat: unioned chat message types + async unit tests ([`fbb8267`](https://github.com/AI21Labs/ai21-python/commit/fbb82672a50a63580846d0c7bc6c478d233f3701))
+
+### Fix
+
+* fix: PR comments addressed ([`a66d4e1`](https://github.com/AI21Labs/ai21-python/commit/a66d4e17f9913c42b8666d9e37d0157ff86ae051))
+
+* fix: remove keys, again ([`9588c29`](https://github.com/AI21Labs/ai21-python/commit/9588c29257d87cff935239f6ab4edc9219c3e6bc))
+
 ## v2.13.0-rc.1 (2024-08-20)
+
+### Chore
+
+* chore(release): v2.13.0-rc.1 [skip ci] ([`6075e8e`](https://github.com/AI21Labs/ai21-python/commit/6075e8e7e85572a9ab848af17454e0c10d6649b0))
 
 ### Documentation
 
