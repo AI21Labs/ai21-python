@@ -59,12 +59,8 @@ class BaseChatCompletions(ABC):
                 "n": n,
                 "stream": stream,
                 "tools": tools,
-                "response_format": (
-                    _to_dict(response_format) if not isinstance(response_format, NotGiven) else response_format
-                ),
-                "documents": (
-                    [_to_dict(document) for document in documents] if not isinstance(documents, NotGiven) else documents
-                ),
+                "response_format": response_format,
+                "documents": documents,
                 **kwargs,
             }
         )

@@ -1,9 +1,8 @@
-from typing import Optional, Dict
+from typing import Dict
+from typing_extensions import TypedDict, Required
 
-from ai21.models.ai21_base_model import AI21BaseModel
 
-
-class DocumentSchema(AI21BaseModel):
-    content: str
-    id: Optional[str] = None
-    metadata: Optional[Dict[str, str]] = None
+class DocumentSchema(TypedDict, total=False):
+    content: Required[str]
+    id: str
+    metadata: Dict[str, str]

@@ -1,7 +1,6 @@
 from typing import Literal
+from typing_extensions import TypedDict, Required
 
-from ai21.models.ai21_base_model import AI21BaseModel
 
-
-class ResponseFormat(AI21BaseModel):
-    type: Literal["text", "json_object"]
+class ResponseFormat(TypedDict, total=False):
+    type: Required[Literal["text", "json_object"]]
