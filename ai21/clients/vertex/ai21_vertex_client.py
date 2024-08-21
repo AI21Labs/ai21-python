@@ -13,7 +13,6 @@ from ai21.models.request_options import RequestOptions
 
 _DEFAULT_GCP_REGION = "us-central1"
 _VERTEX_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"
-# TODO: verify path
 _VERTEX_PATH_FORMAT = "/projects/{project_id}/locations/{region}/publishers/ai21/models/{model}:{endpoint}"
 
 
