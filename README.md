@@ -768,9 +768,10 @@ asyncio.run(main())
 If you wish to interact with your Vertex AI endpoint on GCP, use the `AI21VertexClient`
 and `AsyncAI21VertexClient` clients.
 
-The following models are supported on Azure:
+The following models are supported on Vertex:
 
-- `jamba-instruct`
+- `jamba-1.5-mini`
+- `jamba-1.5-large`
 
 ```python
 from ai21 import AI21VertexClient
@@ -783,7 +784,7 @@ client = AI21VertexClient()
 messages = ChatMessage(content="What is the meaning of life?", role="user")
 
 response = client.chat.completions.create(
-    model="jamba-instruct",
+    model="jamba-1.5-mini",
     messages=[messages],
 )
 ```
@@ -804,7 +805,7 @@ async def main():
     messages = ChatMessage(content="What is the meaning of life?", role="user")
 
     response = await client.chat.completions.create(
-        model="jamba-instruct",
+        model="jamba-1.5-mini",
         messages=[messages],
     )
 
