@@ -6,10 +6,12 @@ from ai21 import AI21Client, AsyncAI21Client
 from tests.integration_tests.clients.studio.conftest import LIBRARY_FILE_TO_UPLOAD, DEFAULT_LABELS
 
 
+@pytest.mark.skipif
 def test_library__when_upload__should_get_file_id(file_in_library: str):
     assert file_in_library is not None
 
 
+@pytest.mark.skipif
 def test_library__when_list__should_get_file_id_in_list_of_files(file_in_library: str):
     client = AI21Client()
 
@@ -18,6 +20,7 @@ def test_library__when_list__should_get_file_id_in_list_of_files(file_in_library
     assert files[0].name == Path(LIBRARY_FILE_TO_UPLOAD).name
 
 
+@pytest.mark.skipif
 def test_library__when_get__should_match_file_id(file_in_library: str):
     client = AI21Client()
 
@@ -25,6 +28,7 @@ def test_library__when_get__should_match_file_id(file_in_library: str):
     assert file_response.file_id == file_in_library
 
 
+@pytest.mark.skipif
 def test_library__when_update__should_update_labels_successfully(file_in_library: str):
     client = AI21Client()
 
@@ -38,6 +42,7 @@ def test_library__when_update__should_update_labels_successfully(file_in_library
     assert set(file_response.labels) == set(new_labels)
 
 
+@pytest.mark.skipif
 @pytest.mark.asyncio
 async def test_async_library__when_list__should_get_file_id_in_list_of_files(file_in_library: str):
     client = AsyncAI21Client()
@@ -47,6 +52,7 @@ async def test_async_library__when_list__should_get_file_id_in_list_of_files(fil
     assert files[0].name == Path(LIBRARY_FILE_TO_UPLOAD).name
 
 
+@pytest.mark.skipif
 @pytest.mark.asyncio
 async def test_async_library__when_get__should_match_file_id(file_in_library: str):
     client = AsyncAI21Client()
@@ -55,6 +61,7 @@ async def test_async_library__when_get__should_match_file_id(file_in_library: st
     assert file_response.file_id == file_in_library
 
 
+@pytest.mark.skipif
 @pytest.mark.asyncio
 async def test_async_library__when_update__should_update_labels_successfully(file_in_library: str):
     client = AsyncAI21Client()

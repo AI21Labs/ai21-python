@@ -3,12 +3,12 @@ from typing import Optional, List
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.logprobs import Logprobs
 from ai21.models.usage_info import UsageInfo
-from .chat_message import ChatMessage
+from .chat_message import AssistantMessage
 
 
 class ChatCompletionResponseChoice(AI21BaseModel):
     index: int
-    message: ChatMessage
+    message: AssistantMessage
     logprobs: Optional[Logprobs] = None
     finish_reason: Optional[str] = None
 

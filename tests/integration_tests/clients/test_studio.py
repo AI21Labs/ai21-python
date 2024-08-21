@@ -3,6 +3,7 @@ Run this script after setting the environment variable called AI21_API_KEY
 """
 
 from pathlib import Path
+from time import sleep
 
 import pytest
 import subprocess
@@ -17,7 +18,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     argnames=["test_file_name"],
     argvalues=[
         ("answer.py",),
-        ("chat.py",),
         ("completion.py",),
         ("embed.py",),
         ("gec.py",),
@@ -28,7 +28,12 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("summarize_by_segment.py",),
         ("tokenization.py",),
         ("chat/chat_completions.py",),
+        ("chat/chat_completions_jamba_instruct.py",),
         ("chat/stream_chat_completions.py",),
+        ("chat/chat_documents.py",),
+        ("chat/chat_function_calling.py",),
+        ("chat/chat_function_calling_multiple_tools.py",),
+        ("chat/chat_response_format.py",),
         # ("custom_model.py", ),
         # ('custom_model_completion.py', ),
         # ("dataset.py", ),
@@ -37,7 +42,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     ],
     ids=[
         "when_answer__should_return_ok",
-        "when_chat__should_return_ok",
         "when_completion__should_return_ok",
         "when_embed__should_return_ok",
         "when_gec__should_return_ok",
@@ -48,7 +52,12 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         "when_summarize_by_segment__should_return_ok",
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
+        "when_chat_completions_jamba_instruct__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
+        "when_chat_completions_with_documents__should_return_ok",
+        "when_chat_completions_with_function_calling__should_return_ok",
+        "when_chat_completions_with_function_calling_multiple_tools_should_return_ok",
+        "when_chat_completions_with_response_format__should_return_ok",
         # "when_custom_model__should_return_ok",
         # "when_custom_model_completion__should_return_ok",
         # "when_dataset__should_return_ok",
@@ -59,6 +68,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 def test_studio(test_file_name: str):
     file_path = STUDIO_PATH / test_file_name
     print(f"About to run: {file_path}")
+    sleep(0.5)
     exit_code = subprocess.call(["python", file_path])
     assert exit_code == 0, f"failed to run {test_file_name}"
 

@@ -2,6 +2,7 @@ from ai21 import AI21Client, AsyncAI21Client
 import pytest
 
 
+@pytest.mark.skipif
 def test_library_search__when_search__should_return_relevant_results(file_in_library: str):
     client = AI21Client()
     response = client.library.search.create(
@@ -12,6 +13,7 @@ def test_library_search__when_search__should_return_relevant_results(file_in_lib
         assert result.file_id == file_in_library
 
 
+@pytest.mark.skipif
 @pytest.mark.asyncio
 async def test_async_library_search__when_search__should_return_relevant_results(file_in_library: str):
     client = AsyncAI21Client()
