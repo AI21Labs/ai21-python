@@ -8,8 +8,6 @@ from ai21.models.chat import ChatMessage, ResponseFormat
 
 set_verbose(True)
 
-fi
-
 
 class TicketType(Enum):
     ADULT = "adult"

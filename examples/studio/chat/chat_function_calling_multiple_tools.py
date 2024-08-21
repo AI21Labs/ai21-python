@@ -1,12 +1,13 @@
 import json
 
 from ai21 import AI21Client
+from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage, ToolMessage
 from ai21.models.chat.function_tool_definition import FunctionToolDefinition
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.models.chat.tool_parameters import ToolParameters
 
-# set_verbose(True)
+set_verbose(True)
 
 
 def get_weather(place: str, date: str) -> str:
@@ -83,7 +84,6 @@ to the AI model to continue the conversation, using the ToolMessage object. """
 assistant_message = response.choices[0].message
 messages.append(assistant_message)  # Adding the assistant message to the chat history
 
-
 too_call_id_to_result = {}
 tool_calls = assistant_message.tool_calls
 if tool_calls:
@@ -114,7 +114,6 @@ if tool_calls:
             print(f"Unexpected tool call found - {tool_call.function.name}")
 else:
     print("No tool calls found")
-
 
 if too_call_id_to_result:
     """Continue the conversation by passing the sunset and weather back to the AI model:"""
