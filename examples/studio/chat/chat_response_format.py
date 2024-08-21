@@ -27,17 +27,17 @@ class ZooTicketsOrder(BaseModel):
 messages = [
     ChatMessage(
         role="user",
-        content="Generate for a zoo tickets order json for for September 22, 2024, for myself and two kids using the"
-        f"following JSON scheme: {ZooTicketsOrder.model_json_schema()}",
+        content="Please create a JSON object for ordering zoo tickets for September 22, 2024, "
+        f"for myself and two kids, based on the following JSON schema: {ZooTicketsOrder.model_json_schema()}.",
     )
 ]
 
-client = AI21Client()
+client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
 
 response = client.chat.completions.create(
     messages=messages,
     model="jamba-1.5-large",
-    max_tokens=2000,
+    max_tokens=800,
     temperature=0,
     response_format=ResponseFormat(type="json_object"),
 )

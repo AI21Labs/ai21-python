@@ -299,7 +299,7 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-Note that jamba-instruct supports async streaming as well.
+Note that jamba-instruct supports async and streaming as well.
 
 </details>
 

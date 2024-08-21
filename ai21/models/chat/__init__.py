@@ -11,6 +11,8 @@ from .chat_completion_chunk import ChatCompletionChunk, ChoicesChunk, ChoiceDelt
 from .tool_call import ToolCall
 from .tool_defintions import ToolDefinition
 from .tool_function import ToolFunction
+from .tool_parameters import ToolParameters
+
 
 __all__ = [
     "ChatCompletionResponse",
@@ -32,5 +34,3 @@ __all__ = [
     "ToolFunction",
     "ToolParameters",
 ]
-
-from .tool_parameters import ToolParameters
