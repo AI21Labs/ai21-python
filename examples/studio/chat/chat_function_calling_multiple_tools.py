@@ -78,7 +78,7 @@ response = client.chat.completions.create(messages=messages, model="jamba-1.5-la
 
 """ AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
 The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
-to get the delivery date for the user's order. After retrieving the delivery date, we pass the response back
+to get the weather forcast and expected sunset hour. After retrieving them, we pass the responses back
 to the AI model to continue the conversation, using the ToolMessage object. """
 
 assistant_message = response.choices[0].message
@@ -116,7 +116,7 @@ else:
     print("No tool calls found")
 
 if too_call_id_to_result:
-    """Continue the conversation by passing the sunset and weather back to the AI model:"""
+    """Continue the conversation by passing the sunset and weather info back to the AI model:"""
 
     for tool_id_called, result in too_call_id_to_result.items():
         tool_message = ToolMessage(role="tool", tool_call_id=tool_id_called, content=str(result))
