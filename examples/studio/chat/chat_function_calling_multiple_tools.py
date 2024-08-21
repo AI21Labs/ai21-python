@@ -100,7 +100,7 @@ if tool_calls:
                 print(f"Got unexpected arguments in function call - {args}")
 
         elif tool_call.function.name == "get_sunset_hour":
-            """Verify get_sunset_hour tool call arguments and invoke the function to get the weather forecast:"""
+            """Verify get_sunset_hour tool call arguments and invoke the function to get the sunset hour:"""
             func_arguments = tool_call.function.arguments
             args = json.loads(func_arguments)
 
