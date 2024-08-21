@@ -1,6 +1,7 @@
+import json
 from enum import Enum
 
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
 from ai21 import AI21Client
 from ai21.logger import set_verbose
@@ -28,7 +29,7 @@ messages = [
     ChatMessage(
         role="user",
         content="Please create a JSON object for ordering zoo tickets for September 22, 2024, "
-        f"for myself and two kids, based on the following JSON schema: {ZooTicketsOrder.model_json_schema()}.",
+        f"for myself and two kids, based on the following JSON schema: {ZooTicketsOrder.schema()}.",
     )
 ]
 
@@ -42,11 +43,5 @@ response = client.chat.completions.create(
     response_format=ResponseFormat(type="json_object"),
 )
 
-print(response)
-
-try:
-    order = ZooTicketsOrder.model_validate_json(response.choices[0].message.content)
-    print("Zoo tickets order details JSON:")
-    print(order)
-except ValidationError as exc:
-    print(exc)
+zoo_order_json = json.loads(response.choices[0].message.content)
+print(zoo_order_json)
