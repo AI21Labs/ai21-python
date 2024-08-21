@@ -28,4 +28,4 @@ class SystemMessage(ChatMessage):
     role: Literal["system"] = "system"
 
 
-ChatMessageParam: TypeAlias = Union[UserMessage, AssistantMessage, ToolMessage, SystemMessage]
+ChatMessageParam: TypeAlias = Union[UserMessage, AssistantMessage, ToolMessage, SystemMessage, ChatMessage]
