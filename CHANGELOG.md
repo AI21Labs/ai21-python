@@ -1,6 +1,43 @@
 # CHANGELOG
 
+## v2.13.0 (2024-08-21)
+
+### Chore
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#204)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.8.6 to 9.8.7.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.8.6...v9.8.7)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`82d3abe`](https://github.com/AI21Labs/ai21-python/commit/82d3abece58b95818505c51707145c4410dfe4d6))
+
+### Documentation
+
+* docs: Fixed Conversational RAG README (#199)
+
+* docs: README for RAG
+
+* docs: Added link ([`e20978a`](https://github.com/AI21Labs/ai21-python/commit/e20978a8917e98a9b2ba86d11f6544d277201698))
+
+### Feature
+
+* feat: Jamba 1.5 Support (#203) ([`6c131ac`](https://github.com/AI21Labs/ai21-python/commit/6c131ac67896ed827ca55c65a119bf0736812d58))
+
 ## v2.12.0 (2024-08-07)
+
+### Chore
+
+* chore(release): v2.12.0 [skip ci] ([`38430ad`](https://github.com/AI21Labs/ai21-python/commit/38430ad46686ce94b40d66991598dae67a3dbdd8))
 
 ### Feature
 
