@@ -71,7 +71,7 @@ get_weather_tool = ToolDefinition(
 
 tools = [get_sunset_tool, get_weather_tool]
 
-client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
+client = AI21Client()
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
 

@@ -2,10 +2,7 @@ import json
 
 from ai21 import AI21Client
 from ai21.logger import set_verbose
-from ai21.models.chat import ChatMessage, ToolMessage
-from ai21.models.chat import FunctionToolDefinition
-from ai21.models.chat import ToolDefinition
-from ai21.models.chat import ToolParameters
+from ai21.models.chat import ChatMessage, ToolMessage, FunctionToolDefinition, ToolDefinition, ToolParameters
 
 set_verbose(True)
 
@@ -69,9 +66,8 @@ if tool_calls:
 else:
     print("No tool calls found")
 
-
 if delivery_date is not None:
-    """Continue the conversation by passing the delivery date back to the AI model:"""
+    """Continue the conversation by passing the delivery date back to the model"""
 
     tool_message = ToolMessage(role="tool", tool_call_id=tool_calls[0].id, content=delivery_date)
     messages.append(tool_message)
