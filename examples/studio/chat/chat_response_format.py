@@ -1,12 +1,14 @@
 from enum import Enum
 
-from ai21 import AI21Client
-from ai21.logger import set_verbose
-from ai21.models.chat import ChatMessage
-from ai21.models.chat.response_format import ResponseFormat
 from pydantic import BaseModel, ValidationError
 
+from ai21 import AI21Client
+from ai21.logger import set_verbose
+from ai21.models.chat import ChatMessage, ResponseFormat
+
 set_verbose(True)
+
+fi
 
 
 class TicketType(Enum):
@@ -31,7 +33,6 @@ messages = [
         f"for myself and two kids, based on the following JSON schema: {ZooTicketsOrder.model_json_schema()}.",
     )
 ]
-
 
 client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
 
