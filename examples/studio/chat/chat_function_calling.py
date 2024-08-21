@@ -1,15 +1,17 @@
+import json
+
 from ai21 import AI21Client
 from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage, ToolMessage
-from ai21.models.chat.function_tool_definition import FunctionToolDefinition
-from ai21.models.chat.tool_defintions import ToolDefinition
-from ai21.models.chat.tool_parameters import ToolParameters
+from ai21.models.chat import FunctionToolDefinition
+from ai21.models.chat import ToolDefinition
+from ai21.models.chat import ToolParameters
 
 set_verbose(True)
 
 
 def get_order_delivery_date(order_id: str) -> str:
-    print(f"Getting delivery date from database for order ID: {order_id}...")
+    print(f"Retrieving the delivery date for order ID: {order_id} from the database...")
     return "2025-05-04"
 
 
@@ -27,7 +29,7 @@ tool_definition = ToolDefinition(
     type="function",
     function=FunctionToolDefinition(
         name="get_order_delivery_date",
-        description="Get the delivery date for a given order ID",
+        description="Retrieve the delivery date associated with the specified order ID",
         parameters=ToolParameters(
             type="object",
             properties={"order_id": {"type": "string", "description": "The customer's order ID."}},
@@ -42,31 +44,37 @@ client = AI21Client()
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
 
-print(response)
+""" AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
+The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
+to get the delivery date for the user's order. After retrieving the delivery date, we pass the response back
+to the AI model to continue the conversation, using the ToolMessage object. """
 
 assistant_message = response.choices[0].message
-tool_calls = assistant_message.tool_calls
+messages.append(assistant_message)  # Adding the assistant message to the chat history
 
 delivery_date = None
+tool_calls = assistant_message.tool_calls
 if tool_calls:
     tool_call = tool_calls[0]
     if tool_call.function.name == "get_order_delivery_date":
         func_arguments = tool_call.function.arguments
-        if "order_id" in func_arguments:
-            # extract the order ID from the function arguments logic... (in this case it's just 1 argument)
-            order_id = func_arguments
-            delivery_date = get_order_delivery_date(order_id)
-            print(f"Delivery date for order ID {order_id}: {delivery_date}")
+        func_args_dict = json.loads(func_arguments)
+
+        if "order_id" in func_args_dict:
+            delivery_date = get_order_delivery_date(func_args_dict["order_id"])
         else:
             print("order_id not found in function arguments")
     else:
         print(f"Unexpected tool call found - {tool_call.function.name}")
 else:
-    print("No tool calls found.")
+    print("No tool calls found")
+
 
 if delivery_date is not None:
+    """Continue the conversation by passing the delivery date back to the AI model:"""
+
     tool_message = ToolMessage(role="tool", tool_call_id=tool_calls[0].id, content=delivery_date)
-    messages.append(assistant_message)
     messages.append(tool_message)
+
     response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
-    print(response)
+    print(response.choices[0].message.content)

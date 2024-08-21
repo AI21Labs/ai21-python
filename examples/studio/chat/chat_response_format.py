@@ -32,6 +32,7 @@ messages = [
     )
 ]
 
+
 client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
 
 response = client.chat.completions.create(
@@ -42,9 +43,11 @@ response = client.chat.completions.create(
     response_format=ResponseFormat(type="json_object"),
 )
 
+print(response)
+
 try:
     order = ZooTicketsOrder.model_validate_json(response.choices[0].message.content)
-    print("Here is the order:")
+    print("Zoo tickets order details JSON:")
     print(order.model_dump_json(indent=4))
 except ValidationError as exc:
     print(exc)

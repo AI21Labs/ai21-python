@@ -19,7 +19,7 @@ schnoodel = DocumentSchema(
 )
 shnokel = DocumentSchema(
     id=str(uuid.uuid4()),
-    content="Shnokel Corp. TL;DR Annual Report - 2024. Shnokel Corp., a pioneer in renewable energy solutions, "
+    content="Shnokel Corp. Annual Report - 2024. Shnokel Corp., a pioneer in renewable energy solutions, "
     "reported a 20% increase in revenue this year, reaching $200 million. The successful deployment of "
     "our advanced solar panels, SolarFlex, accounted for 40% of our sales. We entered new markets in Europe "
     "and have plans to develop wind energy projects next year. Our commitment to reducing environmental "
