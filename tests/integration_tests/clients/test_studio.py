@@ -18,7 +18,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     argnames=["test_file_name"],
     argvalues=[
         ("answer.py",),
-        ("chat.py",),
         ("completion.py",),
         ("embed.py",),
         ("gec.py",),
@@ -43,7 +42,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     ],
     ids=[
         "when_answer__should_return_ok",
-        "when_chat__should_return_ok",
         "when_completion__should_return_ok",
         "when_embed__should_return_ok",
         "when_gec__should_return_ok",

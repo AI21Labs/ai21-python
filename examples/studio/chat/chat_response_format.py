@@ -32,7 +32,7 @@ messages = [
     )
 ]
 
-client = AI21Client(api_host="https://api-stage.ai21.com", api_key="F6iFeKlMsisusyhtoy1ZUj4bRPhEd6sf")
+client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
