@@ -11,7 +11,7 @@ messages = ChatMessage(content="What is the meaning of life?", role="user")
 
 async def main():
     completion = await client.chat.completions.create(
-        model="jamba-instruct",
+        model="jamba-1.5-mini",
         messages=[messages],
         stream=True,
     )

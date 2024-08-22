@@ -7,8 +7,8 @@ client = AI21VertexClient()
 messages = ChatMessage(content="What is the meaning of life?", role="user")
 
 completion = client.chat.completions.create(
-    model="jamba-instruct",
+    model="jamba-1.5-mini",
     messages=[messages],
 )
 
-print(completion.to_json())
+print(completion)
