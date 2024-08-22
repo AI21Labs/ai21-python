@@ -1,8 +1,20 @@
 # CHANGELOG
 
+## v2.14.0 (2024-08-22)
+
+### Feature
+
+* feat: add vertex support (#182) ([`0c7a32d`](https://github.com/AI21Labs/ai21-python/commit/0c7a32df521c23443cd1a5a64b15a4429e0f57a7))
+
+### Fix
+
+* fix: example text (#205) ([`e526c53`](https://github.com/AI21Labs/ai21-python/commit/e526c533129dd3d279e0b3e2866298683cfbd693))
+
 ## v2.13.0 (2024-08-21)
 
 ### Chore
+
+* chore(release): v2.13.0 [skip ci] ([`5d350ea`](https://github.com/AI21Labs/ai21-python/commit/5d350ea1a913e0f851de9e87e6ed01823ace2ce4))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#204)
 
