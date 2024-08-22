@@ -38,6 +38,7 @@
     - [Bedrock](#Bedrock)
     - [SageMaker](#SageMaker)
   - [Azure](#Azure)
+  - [Vertex](#Vertex)
 
 ## Examples (tl;dr)
 
@@ -734,6 +735,81 @@ response = client.chat.completions.create(
   model="jamba-1.5-mini",
   messages=messages,
 )
+```
+
+#### Async
+
+```python
+import asyncio
+from ai21 import AsyncAI21AzureClient
+from ai21.models.chat import ChatMessage
+
+client = AsyncAI21AzureClient(
+  base_url="https://<YOUR-ENDPOINT>.inference.ai.azure.com/v1/chat/completions",
+  api_key="<your Azure api key>",
+)
+
+messages = [
+  ChatMessage(content="You are a helpful assistant", role="system"),
+  ChatMessage(content="What is the meaning of life?", role="user")
+]
+
+async def main():
+  response = await client.chat.completions.create(
+    model="jamba-instruct",
+    messages=messages,
+  )
+
+asyncio.run(main())
+```
+
+### Vertex
+
+If you wish to interact with your Vertex AI endpoint on GCP, use the `AI21VertexClient`
+and `AsyncAI21VertexClient` clients.
+
+The following models are supported on Vertex:
+
+- `jamba-1.5-mini`
+- `jamba-1.5-large`
+
+```python
+from ai21 import AI21VertexClient
+
+from ai21.models.chat import ChatMessage
+
+# You can also set the project_id, region, access_token and Google credentials in the constructor
+client = AI21VertexClient()
+
+messages = ChatMessage(content="What is the meaning of life?", role="user")
+
+response = client.chat.completions.create(
+    model="jamba-1.5-mini",
+    messages=[messages],
+)
+```
+
+#### Async
+
+```python
+import asyncio
+
+from ai21 import AsyncAI21VertexClient
+from ai21.models.chat import ChatMessage
+
+# You can also set the project_id, region, access_token and Google credentials in the constructor
+client = AsyncAI21VertexClient()
+
+
+async def main():
+    messages = ChatMessage(content="What is the meaning of life?", role="user")
+
+    response = await client.chat.completions.create(
+        model="jamba-1.5-mini",
+        messages=[messages],
+    )
+
+asyncio.run(main())
 ```
 
 Happy prompting! 🚀
