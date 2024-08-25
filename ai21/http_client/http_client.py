@@ -102,7 +102,12 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
                 f"Calling {method} {self._base_url} failed with a non-200 "
                 f"response code: {response.status_code} headers: {response.headers}"
             )
-            handle_non_success_response(response.status_code, response.text)
+
+            if stream:
+                details = self._extract_streaming_error_details(response)
+                handle_non_success_response(response.status_code, details)
+            else:
+                handle_non_success_response(response.status_code, response.text)
 
         return response
 

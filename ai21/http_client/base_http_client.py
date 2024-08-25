@@ -171,3 +171,6 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
             return f"{options.url}{options.path}"
 
         return options.url
+
+    def _extract_streaming_error_details(self, response: httpx.Response) -> str:
+        return response.read().decode("utf-8")

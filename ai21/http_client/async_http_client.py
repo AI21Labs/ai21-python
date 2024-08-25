@@ -103,7 +103,12 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             logger.error(
                 f"Calling {method} {self._base_url} failed with a non-200 response code: {response.status_code}"
             )
-            handle_non_success_response(response.status_code, response.text)
+
+            if stream:
+                details = self._extract_streaming_error_details(response)
+                handle_non_success_response(response.status_code, details)
+            else:
+                handle_non_success_response(response.status_code, response.text)
 
         return response
 
