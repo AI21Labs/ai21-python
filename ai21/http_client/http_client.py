@@ -81,7 +81,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
                 timeout=self._timeout_sec,
                 url=self._base_url,
             )
-            response = self._run_request(options=options)
+            response = self._request(options=options)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
