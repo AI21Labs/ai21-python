@@ -54,7 +54,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
             wait=wait_exponential(multiplier=RETRY_BACK_OFF_FACTOR, min=TIME_BETWEEN_RETRIES),
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
-        )(self._request)
+        )(self._run_request)
         self._streaming_decoder = _SSEDecoder()
 
     def execute_http_request(
@@ -81,7 +81,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
                 timeout=self._timeout_sec,
                 url=self._base_url,
             )
-            response = self._request(options=options)
+            response = self._run_request(options=options)
         except RetryError as retry_error:
             last_attempt = retry_error.last_attempt
 
@@ -111,7 +111,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
 
         return response
 
-    def _request(self, options: RequestOptions) -> httpx.Response:
+    def _run_request(self, options: RequestOptions) -> httpx.Response:
         request = self._build_request(options)
 
         _logger.debug(f"Calling {request.method} {request.url} {request.headers}, {options.body}")

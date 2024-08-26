@@ -118,7 +118,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         pass
 
     @abstractmethod
-    def _request(
+    def _run_request(
         self,
         options: RequestOptions,
     ) -> httpx.Response:
