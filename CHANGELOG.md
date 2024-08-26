@@ -1,6 +1,18 @@
 # CHANGELOG
 
+## v2.14.1 (2024-08-26)
+
+### Fix
+
+* fix: Bug fixes - embed, streaming response, request retry rename (#206)
+
+Co-authored-by: Paz Shalev &lt;pazs@ai21.com&gt; ([`882de79`](https://github.com/AI21Labs/ai21-python/commit/882de79241239dc0068d7619dbed326fe13cc6b1))
+
 ## v2.14.0 (2024-08-22)
+
+### Chore
+
+* chore(release): v2.14.0 [skip ci] ([`307cfc6`](https://github.com/AI21Labs/ai21-python/commit/307cfc6f78355515acc9949de65a89bac7279db0))
 
 ### Feature
 
