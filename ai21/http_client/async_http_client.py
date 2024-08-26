@@ -55,7 +55,7 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             wait=wait_exponential(multiplier=RETRY_BACK_OFF_FACTOR, min=TIME_BETWEEN_RETRIES),
             retry=retry_if_result(self._should_retry),
             stop=stop_after_attempt(self._num_retries),
-        )(self._request)
+        )(self._run_request)
         self._streaming_decoder = _SSEDecoder()
 
     async def execute_http_request(
@@ -103,11 +103,16 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             logger.error(
                 f"Calling {method} {self._base_url} failed with a non-200 response code: {response.status_code}"
             )
-            handle_non_success_response(response.status_code, response.text)
+
+            if stream:
+                details = self._extract_streaming_error_details(response)
+                handle_non_success_response(response.status_code, details)
+            else:
+                handle_non_success_response(response.status_code, response.text)
 
         return response
 
-    async def _request(self, options: RequestOptions) -> httpx.Response:
+    async def _run_request(self, options: RequestOptions) -> httpx.Response:
         request = self._build_request(options)
 
         _logger.debug(f"Calling {request.method} {request.url} {request.headers}, {options.body}")

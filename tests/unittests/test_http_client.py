@@ -4,7 +4,7 @@ from urllib.request import Request
 
 import httpx
 
-from ai21.errors import ServiceUnavailable
+from ai21.errors import ServiceUnavailable, Unauthorized
 from ai21.http_client.base_http_client import RETRY_ERROR_CODES
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
@@ -42,6 +42,17 @@ def test__execute_http_request__when_retry_error__should_retry_and_stop(mock_htt
     assert mock_httpx_client.send.call_count == retries
 
 
+def test__execute_http_request__when_streaming__should_handle_non_200_response_code(mock_httpx_client: Mock) -> None:
+    error_details = "test_error"
+    request = Request(method=_METHOD, url=_URL)
+    response = httpx.Response(status_code=401, request=request, text=error_details)
+    mock_httpx_client.send.return_value = response
+
+    client = AI21HTTPClient(client=mock_httpx_client, base_url=_URL, api_key=_API_KEY)
+    with pytest.raises(Unauthorized, match=error_details):
+        client.execute_http_request(method=_METHOD, stream=True)
+
+
 @pytest.mark.asyncio
 async def test__execute_async_http_request__when_retry_error_code_once__should_retry_and_succeed(
     mock_httpx_async_client: Mock,
@@ -74,3 +85,17 @@ async def test__execute_async_http_request__when_retry_error__should_retry_and_s
         await client.execute_http_request(method=_METHOD)
 
     assert mock_httpx_async_client.send.call_count == retries
+
+
+@pytest.mark.asyncio
+async def test__execute_async_http_request__when_streaming__should_handle_non_200_response_code(
+    mock_httpx_async_client: Mock,
+) -> None:
+    error_details = "test_error"
+    request = Request(method=_METHOD, url=_URL)
+    response = httpx.Response(status_code=401, request=request, text=error_details)
+    mock_httpx_async_client.send.return_value = response
+
+    client = AsyncAI21HTTPClient(client=mock_httpx_async_client, base_url=_URL, api_key=_API_KEY)
+    with pytest.raises(Unauthorized, match=error_details):
+        await client.execute_http_request(method=_METHOD, stream=True)

@@ -118,7 +118,7 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
         pass
 
     @abstractmethod
-    def _request(
+    def _run_request(
         self,
         options: RequestOptions,
     ) -> httpx.Response:
@@ -171,3 +171,9 @@ class BaseHttpClient(ABC, Generic[_HttpxClientT, _DefaultStreamT]):
             return f"{options.url}{options.path}"
 
         return options.url
+
+    def _extract_streaming_error_details(self, response: httpx.Response) -> str:
+        try:
+            return response.read().decode("utf-8")
+        except Exception:
+            return "could not extract streaming error details"
