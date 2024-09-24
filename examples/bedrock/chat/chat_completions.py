@@ -22,7 +22,7 @@ response = client.chat.completions.create(
     messages=messages,
     max_tokens=1000,
     temperature=0,
-    model=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model=BedrockModelID.JAMBA_1_5_MINI,
 )
 
 print(f"response: {response}")
