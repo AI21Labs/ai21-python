@@ -13,7 +13,7 @@ client = AI21BedrockClient()
 
 response = client.chat.completions.create(
     messages=messages,
-    model=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model=BedrockModelID.JAMBA_1_5_MINI,
     max_tokens=100,
     stream=True,
 )
