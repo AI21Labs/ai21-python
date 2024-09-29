@@ -560,7 +560,7 @@ messages = [
 
 response = client.chat.completions.create(
     messages=messages,
-    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model_id=BedrockModelID.JAMBA_1_5_LARGE,
 )
 ```
 
@@ -582,7 +582,7 @@ client = AI21BedrockClient()
 
 response = client.chat.completions.create(
     messages=messages,
-    model=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model=BedrockModelID.JAMBA_1_5_LARGE,
     stream=True,
 )
 
@@ -607,7 +607,7 @@ messages = [
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+        model_id=BedrockModelID.JAMBA_1_5_LARGE,
     )
 
 
@@ -633,7 +633,7 @@ messages = [
 
 response = client.chat.completions.create(
     messages=messages,
-    model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+    model_id=BedrockModelID.JAMBA_1_5_LARGE,
 )
 ```
 
@@ -658,7 +658,7 @@ messages = [
 async def main():
   response = await client.chat.completions.create(
       messages=messages,
-      model_id=BedrockModelID.JAMBA_INSTRUCT_V1,
+      model_id=BedrockModelID.JAMBA_1_5_LARGE,
   )
 
 asyncio.run(main())

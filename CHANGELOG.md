@@ -1,6 +1,71 @@
 # CHANGELOG
 
+## v2.15.0 (2024-09-24)
+
+### Chore
+
+* chore(deps-dev): bump cryptography from 42.0.7 to 43.0.1 (#209)
+
+Bumps [cryptography](https://github.com/pyca/cryptography) from 42.0.7 to 43.0.1.
+- [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst)
+- [Commits](https://github.com/pyca/cryptography/compare/42.0.7...43.0.1)
+
+---
+updated-dependencies:
+- dependency-name: cryptography
+  dependency-type: indirect
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`e811d74`](https://github.com/AI21Labs/ai21-python/commit/e811d74bfb067546f7e1873a273896b4747a7d57))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#207)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.8.7 to 9.8.8.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.8.7...v9.8.8)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`37cfc24`](https://github.com/AI21Labs/ai21-python/commit/37cfc244ca3989718fea80ab02360ec78d4343f3))
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.9.0 to 1.10.0 (#208)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.9.0 to 1.10.0.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/ec4db0b4ddc65acdf4bff5fa45ac92d78b56bdf0...8a08d616893759ef8e1aa1f2785787c0b97e20d6)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`6bec329`](https://github.com/AI21Labs/ai21-python/commit/6bec329d453b969f721c5a27d1459fe2cbdea9a7))
+
+### Feature
+
+* feat: Bedrock model id support for jamba-1.5 (#212)
+
+* feat: Bedrock model id support for jamba-1.5
+
+* fix: Bedrock examples ([`2eda23f`](https://github.com/AI21Labs/ai21-python/commit/2eda23f1aedcd65671554aff93e3feaf929cb903))
+
 ## v2.14.1 (2024-08-26)
+
+### Chore
+
+* chore(release): v2.14.1 [skip ci] ([`2816660`](https://github.com/AI21Labs/ai21-python/commit/28166609752483988974c089e6eb09a7bf82f48c))
 
 ### Fix
 

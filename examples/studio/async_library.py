@@ -5,9 +5,6 @@ import uuid
 import file_utils
 from ai21 import AsyncAI21Client, AI21APIError
 
-# Use api_host for testing staging, default is production
-# os.environ["AI21_API_HOST"] = "https://api-stage.ai21.com"
-
 client = AsyncAI21Client()
 
 
