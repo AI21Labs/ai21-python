@@ -1,8 +1,35 @@
 # CHANGELOG
 
+## v2.15.1 (2024-09-30)
+
+### Chore
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.10.0 to 1.10.1 (#210)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.10.0 to 1.10.1.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/8a08d616893759ef8e1aa1f2785787c0b97e20d6...0ab0b79471669eb3a4d647e625009c62f9f3b241)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`6da18da`](https://github.com/AI21Labs/ai21-python/commit/6da18da7dd9c104092161f435e3c39432e04f095))
+
+### Fix
+
+* fix: Removed unnecessary urls (#213) ([`8562e86`](https://github.com/AI21Labs/ai21-python/commit/8562e86f611a3ca49d78bbd82b6c6f5962265613))
+
 ## v2.15.0 (2024-09-24)
 
 ### Chore
+
+* chore(release): v2.15.0 [skip ci] ([`8835e75`](https://github.com/AI21Labs/ai21-python/commit/8835e75c4b825986d044658b79b5fd44497a9673))
 
 * chore(deps-dev): bump cryptography from 42.0.7 to 43.0.1 (#209)
 
