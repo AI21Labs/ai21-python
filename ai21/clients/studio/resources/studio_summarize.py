@@ -3,9 +3,11 @@ from typing import Optional
 from ai21.clients.common.summarize_base import Summarize
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class StudioSummarize(StudioResource, Summarize):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         source: str,
@@ -27,6 +29,7 @@ class StudioSummarize(StudioResource, Summarize):
 
 
 class AsyncStudioSummarize(AsyncStudioResource, Summarize):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         source: str,

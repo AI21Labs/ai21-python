@@ -3,9 +3,11 @@ from typing import Optional, List
 from ai21.clients.common.dataset_base import Dataset
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import DatasetResponse
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class StudioDataset(StudioResource, Dataset):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         file_path: str,
@@ -32,14 +34,17 @@ class StudioDataset(StudioResource, Dataset):
             files=files,
         )
 
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def list(self) -> List[DatasetResponse]:
         return self._get(path=f"/{self._module_name}", response_cls=List[DatasetResponse])
 
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def get(self, dataset_pid: str) -> DatasetResponse:
         return self._get(path=f"/{self._module_name}/{dataset_pid}", response_cls=DatasetResponse)
 
 
 class AsyncStudioDataset(AsyncStudioResource, Dataset):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         file_path: str,
@@ -67,8 +72,10 @@ class AsyncStudioDataset(AsyncStudioResource, Dataset):
             files=files,
         )
 
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def list(self) -> List[DatasetResponse]:
         return await self._get(path=f"/{self._module_name}", response_cls=List[DatasetResponse])
 
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def get(self, dataset_pid: str) -> DatasetResponse:
         return await self._get(path=f"/{self._module_name}/{dataset_pid}", response_cls=DatasetResponse)

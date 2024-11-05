@@ -5,9 +5,11 @@ from typing import Optional
 from ai21.clients.common.summarize_base import Summarize
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource, AsyncSageMakerResource
 from ai21.models import SummarizeResponse, SummaryMethod
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class SageMakerSummarize(SageMakerResource, Summarize):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         source: str,
@@ -30,6 +32,7 @@ class SageMakerSummarize(SageMakerResource, Summarize):
 
 
 class AsyncSageMakerSummarize(AsyncSageMakerResource, Summarize):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         source: str,

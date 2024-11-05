@@ -3,9 +3,11 @@ from typing import Optional
 from ai21.clients.common.summarize_by_segment_base import SummarizeBySegment
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import SummarizeBySegmentResponse, DocumentType
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         source: str,
@@ -25,6 +27,7 @@ class StudioSummarizeBySegment(StudioResource, SummarizeBySegment):
 
 
 class AsyncStudioSummarizeBySegment(AsyncStudioResource, SummarizeBySegment):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         source: str,

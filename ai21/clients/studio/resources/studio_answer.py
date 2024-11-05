@@ -1,9 +1,11 @@
 from ai21.clients.common.answer_base import Answer
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import AnswerResponse
+from ai21.version_utils import deprecated, V3_DEPRECATION_MESSAGE
 
 
 class StudioAnswer(StudioResource, Answer):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         context: str,
@@ -16,6 +18,7 @@ class StudioAnswer(StudioResource, Answer):
 
 
 class AsyncStudioAnswer(AsyncStudioResource, Answer):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         context: str,
