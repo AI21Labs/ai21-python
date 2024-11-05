@@ -1,9 +1,11 @@
 from ai21.clients.common.answer_base import Answer
 from ai21.clients.sagemaker.resources.sagemaker_resource import SageMakerResource, AsyncSageMakerResource
 from ai21.models import AnswerResponse
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class SageMakerAnswer(SageMakerResource, Answer):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         context: str,
@@ -17,6 +19,7 @@ class SageMakerAnswer(SageMakerResource, Answer):
 
 
 class AsyncSageMakerAnswer(AsyncSageMakerResource, Answer):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         context: str,

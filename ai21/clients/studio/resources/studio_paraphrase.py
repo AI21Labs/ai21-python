@@ -3,9 +3,11 @@ from typing import Optional
 from ai21.clients.common.paraphrase_base import Paraphrase
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models import ParaphraseStyleType, ParaphraseResponse
+from ai21.version_utils import V3_DEPRECATION_MESSAGE, deprecated
 
 
 class StudioParaphrase(StudioResource, Paraphrase):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     def create(
         self,
         text: str,
@@ -27,6 +29,7 @@ class StudioParaphrase(StudioResource, Paraphrase):
 
 
 class AsyncStudioParaphrase(AsyncStudioResource, Paraphrase):
+    @deprecated(V3_DEPRECATION_MESSAGE)
     async def create(
         self,
         text: str,
