@@ -1,7 +1,6 @@
 from ai21.models.chat.role_type import RoleType
 from ai21.models.chat_message import ChatMessage
 from ai21.models.document_type import DocumentType
-from ai21.models.embed_type import EmbedType
 from ai21.models.improvement_type import ImprovementType
 from ai21.models.paraphrase_style_type import ParaphraseStyleType
 from ai21.models.penalty import Penalty
@@ -17,7 +16,6 @@ from ai21.models.responses.completion_response import (
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse, ConversationalRagSource
 from ai21.models.responses.custom_model_response import CustomBaseModelResponse, BaseModelMetadata
 from ai21.models.responses.dataset_response import DatasetResponse
-from ai21.models.responses.embed_response import EmbedResponse, EmbedResult
 from ai21.models.responses.file_response import FileResponse
 from ai21.models.responses.gec_response import GECResponse, Correction, CorrectionType
 from ai21.models.responses.improvement_response import ImprovementsResponse, Improvement
@@ -33,7 +31,6 @@ __all__ = [
     "ChatMessage",
     "RoleType",
     "Penalty",
-    "EmbedType",
     "ImprovementType",
     "ParaphraseStyleType",
     "DocumentType",
@@ -50,8 +47,6 @@ __all__ = [
     "CustomBaseModelResponse",
     "BaseModelMetadata",
     "DatasetResponse",
-    "EmbedResponse",
-    "EmbedResult",
     "FileResponse",
     "GECResponse",
     "Correction",

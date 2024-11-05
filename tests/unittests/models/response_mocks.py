@@ -9,8 +9,6 @@ from ai21.models import (
     Completion,
     CompletionFinishReason,
     CompletionData,
-    EmbedResponse,
-    EmbedResult,
     GECResponse,
     Correction,
     ImprovementsResponse,
@@ -181,26 +179,6 @@ def get_completions_response():
     completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
-
-
-def get_embed_response():
-    expected_dict = {
-        "id": "123",
-        "results": [
-            {
-                "embedding": [
-                    0.03452427685260773,
-                    -0.0011991093633696437,
-                ]
-            }
-        ],
-    }
-
-    embed_response = EmbedResponse(
-        id="123", results=[EmbedResult(embedding=[0.03452427685260773, -0.0011991093633696437])]
-    )
-
-    return embed_response, expected_dict, EmbedResponse
 
 
 def get_gec_response():

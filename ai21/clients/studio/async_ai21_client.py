@@ -10,7 +10,6 @@ from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_custom_model import AsyncStudioCustomModel
 from ai21.clients.studio.resources.studio_dataset import AsyncStudioDataset
-from ai21.clients.studio.resources.studio_embed import AsyncStudioEmbed
 from ai21.clients.studio.resources.studio_gec import AsyncStudioGEC
 from ai21.clients.studio.resources.studio_improvements import AsyncStudioImprovements
 from ai21.clients.studio.resources.studio_library import AsyncStudioLibrary
@@ -53,7 +52,6 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.completion = AsyncStudioCompletion(self)
         self.chat: AsyncStudioChat = AsyncStudioChat(self)
         self.summarize = AsyncStudioSummarize(self)
-        self.embed = AsyncStudioEmbed(self)
         self.gec = AsyncStudioGEC(self)
         self.improvements = AsyncStudioImprovements(self)
         self.paraphrase = AsyncStudioParaphrase(self)

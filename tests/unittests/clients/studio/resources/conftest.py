@@ -7,7 +7,6 @@ from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_embed import StudioEmbed, AsyncStudioEmbed
 from ai21.clients.studio.resources.studio_gec import StudioGEC, AsyncStudioGEC
 from ai21.clients.studio.resources.studio_improvements import StudioImprovements, AsyncStudioImprovements
 from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase, AsyncStudioParaphrase
@@ -25,8 +24,6 @@ from ai21.models import (
     RoleType,
     ChatResponse,
     CompletionsResponse,
-    EmbedType,
-    EmbedResponse,
     GECResponse,
     ImprovementType,
     ImprovementsResponse,
@@ -206,30 +203,6 @@ def get_studio_completion(is_async: bool = True, **kwargs):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=CompletionsResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_embed(is_async: bool = False):
-    json_response = {
-        "id": "some-id",
-        "results": [
-            {"embedding": [1.0, 2.0, 3.0]},
-            {"embedding": [4.0, 5.0, 6.0]},
-        ],
-    }
-
-    resource = AsyncStudioEmbed if is_async else StudioEmbed
-
-    return (
-        resource,
-        {"texts": ["text0", "text1"], "type": EmbedType.QUERY},
-        "embed",
-        {
-            "texts": ["text0", "text1"],
-            "type": EmbedType.QUERY.value,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=EmbedResponse, obj_dict=json_response),
     )
 
 
