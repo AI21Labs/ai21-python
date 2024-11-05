@@ -1,8 +1,54 @@
 # CHANGELOG
 
+
+## v2.15.2 (2024-11-05)
+
+### Chores
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.3 (#216)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.10.1 to 1.10.3.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/0ab0b79471669eb3a4d647e625009c62f9f3b241...f7600683efdcb7656dec5b29656edb7bc586e597)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-patch
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`5de5ae5`](https://github.com/AI21Labs/ai21-python/commit/5de5ae5cc3a42726b525e6956d61bd8bfefbc0cb))
+
+* chore(deps): bump python-semantic-release/python-semantic-release (#218)
+
+Bumps [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release) from 9.8.8 to 9.10.1.
+- [Release notes](https://github.com/python-semantic-release/python-semantic-release/releases)
+- [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.md)
+- [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.8.8...v9.10.1)
+
+---
+updated-dependencies:
+- dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`cc4a26c`](https://github.com/AI21Labs/ai21-python/commit/cc4a26c528517aceb32322ed090cb83cec1fa72a))
+
+### Fixes
+
+* fix: adding depracation warning to all TSMs, custom models and datasets (#223) ([`155c6a9`](https://github.com/AI21Labs/ai21-python/commit/155c6a9b008cfe0f52a10a2d30324d42f07bc2a5))
+
+
 ## v2.15.1 (2024-09-30)
 
-### Chore
+### Chores
+
+* chore(release): v2.15.1 [skip ci] ([`d31badb`](https://github.com/AI21Labs/ai21-python/commit/d31badbaf2b688b216317967b2d85fbad986c1b0))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.10.0 to 1.10.1 (#210)
 
@@ -17,17 +63,18 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`6da18da`](https://github.com/AI21Labs/ai21-python/commit/6da18da7dd9c104092161f435e3c39432e04f095))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`6da18da`](https://github.com/AI21Labs/ai21-python/commit/6da18da7dd9c104092161f435e3c39432e04f095))
 
-### Fix
+### Fixes
 
 * fix: Removed unnecessary urls (#213) ([`8562e86`](https://github.com/AI21Labs/ai21-python/commit/8562e86f611a3ca49d78bbd82b6c6f5962265613))
 
+
 ## v2.15.0 (2024-09-24)
 
-### Chore
+### Chores
 
 * chore(release): v2.15.0 [skip ci] ([`8835e75`](https://github.com/AI21Labs/ai21-python/commit/8835e75c4b825986d044658b79b5fd44497a9673))
 
@@ -43,8 +90,8 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`e811d74`](https://github.com/AI21Labs/ai21-python/commit/e811d74bfb067546f7e1873a273896b4747a7d57))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`e811d74`](https://github.com/AI21Labs/ai21-python/commit/e811d74bfb067546f7e1873a273896b4747a7d57))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#207)
 
@@ -60,9 +107,9 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`37cfc24`](https://github.com/AI21Labs/ai21-python/commit/37cfc244ca3989718fea80ab02360ec78d4343f3))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`37cfc24`](https://github.com/AI21Labs/ai21-python/commit/37cfc244ca3989718fea80ab02360ec78d4343f3))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.9.0 to 1.10.0 (#208)
 
@@ -77,10 +124,10 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`6bec329`](https://github.com/AI21Labs/ai21-python/commit/6bec329d453b969f721c5a27d1459fe2cbdea9a7))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`6bec329`](https://github.com/AI21Labs/ai21-python/commit/6bec329d453b969f721c5a27d1459fe2cbdea9a7))
 
-### Feature
+### Features
 
 * feat: Bedrock model id support for jamba-1.5 (#212)
 
@@ -88,35 +135,38 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: Bedrock examples ([`2eda23f`](https://github.com/AI21Labs/ai21-python/commit/2eda23f1aedcd65671554aff93e3feaf929cb903))
 
+
 ## v2.14.1 (2024-08-26)
 
-### Chore
+### Chores
 
 * chore(release): v2.14.1 [skip ci] ([`2816660`](https://github.com/AI21Labs/ai21-python/commit/28166609752483988974c089e6eb09a7bf82f48c))
 
-### Fix
+### Fixes
 
 * fix: Bug fixes - embed, streaming response, request retry rename (#206)
 
-Co-authored-by: Paz Shalev &lt;pazs@ai21.com&gt; ([`882de79`](https://github.com/AI21Labs/ai21-python/commit/882de79241239dc0068d7619dbed326fe13cc6b1))
+Co-authored-by: Paz Shalev <pazs@ai21.com> ([`882de79`](https://github.com/AI21Labs/ai21-python/commit/882de79241239dc0068d7619dbed326fe13cc6b1))
+
 
 ## v2.14.0 (2024-08-22)
 
-### Chore
+### Chores
 
 * chore(release): v2.14.0 [skip ci] ([`307cfc6`](https://github.com/AI21Labs/ai21-python/commit/307cfc6f78355515acc9949de65a89bac7279db0))
 
-### Feature
+### Features
 
 * feat: add vertex support (#182) ([`0c7a32d`](https://github.com/AI21Labs/ai21-python/commit/0c7a32df521c23443cd1a5a64b15a4429e0f57a7))
 
-### Fix
+### Fixes
 
 * fix: example text (#205) ([`e526c53`](https://github.com/AI21Labs/ai21-python/commit/e526c533129dd3d279e0b3e2866298683cfbd693))
 
+
 ## v2.13.0 (2024-08-21)
 
-### Chore
+### Chores
 
 * chore(release): v2.13.0 [skip ci] ([`5d350ea`](https://github.com/AI21Labs/ai21-python/commit/5d350ea1a913e0f851de9e87e6ed01823ace2ce4))
 
@@ -134,8 +184,8 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`82d3abe`](https://github.com/AI21Labs/ai21-python/commit/82d3abece58b95818505c51707145c4410dfe4d6))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`82d3abe`](https://github.com/AI21Labs/ai21-python/commit/82d3abece58b95818505c51707145c4410dfe4d6))
 
 ### Documentation
 
@@ -145,23 +195,25 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * docs: Added link ([`e20978a`](https://github.com/AI21Labs/ai21-python/commit/e20978a8917e98a9b2ba86d11f6544d277201698))
 
-### Feature
+### Features
 
 * feat: Jamba 1.5 Support (#203) ([`6c131ac`](https://github.com/AI21Labs/ai21-python/commit/6c131ac67896ed827ca55c65a119bf0736812d58))
 
+
 ## v2.12.0 (2024-08-07)
 
-### Chore
+### Chores
 
 * chore(release): v2.12.0 [skip ci] ([`38430ad`](https://github.com/AI21Labs/ai21-python/commit/38430ad46686ce94b40d66991598dae67a3dbdd8))
 
-### Feature
+### Features
 
 * feat: :sparkles: add conversational RAG resource (#198) ([`fca3729`](https://github.com/AI21Labs/ai21-python/commit/fca372988e62c09e6ae03d6cc91ab83f62db2fd9))
 
+
 ## v2.11.0 (2024-08-06)
 
-### Chore
+### Chores
 
 * chore(release): v2.11.0 [skip ci] ([`62ddebf`](https://github.com/AI21Labs/ai21-python/commit/62ddebfcd4037353440904800d8c8e394817040a))
 
@@ -179,11 +231,11 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`0c7622b`](https://github.com/AI21Labs/ai21-python/commit/0c7622b138a76bf74f509749b38ae228c761f894))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`0c7622b`](https://github.com/AI21Labs/ai21-python/commit/0c7622b138a76bf74f509749b38ae228c761f894))
 
-### Feature
+### Features
 
 * feat: add stream support for Bedrock (#191)
 
@@ -211,15 +263,16 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5392b52`](https://github.com/AI21Labs/ai21-python/commit/5392b5260da9ee0be00b1d9afe35d175cbfaf3e5))
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`5392b52`](https://github.com/AI21Labs/ai21-python/commit/5392b5260da9ee0be00b1d9afe35d175cbfaf3e5))
+
 
 ## v2.10.1 (2024-07-31)
 
-### Chore
+### Chores
 
 * chore(release): v2.10.1 [skip ci] ([`c0050f4`](https://github.com/AI21Labs/ai21-python/commit/c0050f474d84853676ccbde17e71fc4419b86334))
 
-### Ci
+### Continuous Integration
 
 * ci: Fix label swap syntax (#196)
 
@@ -229,7 +282,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * ci: fix size labeler (#195) ([`1247b81`](https://github.com/AI21Labs/ai21-python/commit/1247b81bc7b02952f6ee87fbe1249bdb6cecd8da))
 
-### Fix
+### Fixes
 
 * fix: remove redundant dependency - dataclass json (#194)
 
@@ -241,13 +294,14 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`e8dcd27`](https://github.com/AI21Labs/ai21-python/commit/e8dcd27e2883b4e60cbb4f4d7505309f4a963a6c))
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`e8dcd27`](https://github.com/AI21Labs/ai21-python/commit/e8dcd27e2883b4e60cbb4f4d7505309f4a963a6c))
 
 * fix: env (#197) ([`525c1ef`](https://github.com/AI21Labs/ai21-python/commit/525c1ef4cdd593eca62ae16eddda6db72a36dbcf))
 
+
 ## v2.10.0 (2024-07-29)
 
-### Chore
+### Chores
 
 * chore(release): v2.10.0 [skip ci] ([`4b85505`](https://github.com/AI21Labs/ai21-python/commit/4b85505e5c1830e145ecd04dc249a4df5c44ac60))
 
@@ -264,9 +318,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`51b59f8`](https://github.com/AI21Labs/ai21-python/commit/51b59f8eb166be299076d23fe646a292aa151f51))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`51b59f8`](https://github.com/AI21Labs/ai21-python/commit/51b59f8eb166be299076d23fe646a292aa151f51))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#179)
 
@@ -282,15 +336,15 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`2175f81`](https://github.com/AI21Labs/ai21-python/commit/2175f81c29e8fcaac8ff2dfb67af2b4f0aceead7))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`2175f81`](https://github.com/AI21Labs/ai21-python/commit/2175f81c29e8fcaac8ff2dfb67af2b4f0aceead7))
 
 ### Documentation
 
 * docs: fix base url for azure (#188) ([`bb84d35`](https://github.com/AI21Labs/ai21-python/commit/bb84d351fdda13b57617a6fc3fc5a12bce2d9528))
 
-### Feature
+### Features
 
 * feat: Pydantic Migration (#193)
 
@@ -332,15 +386,16 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Co-authored-by: semantic-release &lt;semantic-release&gt; ([`135ea43`](https://github.com/AI21Labs/ai21-python/commit/135ea43e75f3692f966c2263c25b4b9c7c343b81))
+Co-authored-by: semantic-release <semantic-release> ([`135ea43`](https://github.com/AI21Labs/ai21-python/commit/135ea43e75f3692f966c2263c25b4b9c7c343b81))
+
 
 ## v2.9.2 (2024-07-15)
 
-### Chore
+### Chores
 
 * chore(release): v2.9.2 [skip ci] ([`30d9947`](https://github.com/AI21Labs/ai21-python/commit/30d9947b500e3c5d39858b187fc1f6d5c7a98916))
 
-### Fix
+### Fixes
 
 * fix: fix default for require_api_key in http client and other clients (#185)
 
@@ -350,9 +405,10 @@ Co-authored-by: semantic-release &lt;semantic-release&gt; ([`135ea43`](https://g
 
 * test: add ai21 azure client ([`e6b305e`](https://github.com/AI21Labs/ai21-python/commit/e6b305edc8ed36c722cc359f499c764e05248b95))
 
+
 ## v2.9.1 (2024-07-10)
 
-### Chore
+### Chores
 
 * chore(release): v2.9.1 [skip ci] ([`5ed7f07`](https://github.com/AI21Labs/ai21-python/commit/5ed7f07e677ce60eb960991f3c601869d4e2c68c))
 
@@ -369,8 +425,8 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`1812ef5`](https://github.com/AI21Labs/ai21-python/commit/1812ef50f3700bc994694c9b45a7c1cf51c45f87))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`1812ef5`](https://github.com/AI21Labs/ai21-python/commit/1812ef50f3700bc994694c9b45a7c1cf51c45f87))
 
 * chore(deps): bump certifi from 2024.2.2 to 2024.7.4 (#176)
 
@@ -383,9 +439,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`f5e1814`](https://github.com/AI21Labs/ai21-python/commit/f5e18140ffd289be8d3e5afa2e0c5352a0beb1cd))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`f5e1814`](https://github.com/AI21Labs/ai21-python/commit/f5e18140ffd289be8d3e5afa2e0c5352a0beb1cd))
 
 * chore(deps): bump amannn/action-semantic-pull-request (#154)
 
@@ -401,11 +457,11 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`e57d99a`](https://github.com/AI21Labs/ai21-python/commit/e57d99a04ff4b6aa4a858a2fe87f8cc8c68bcfa0))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`e57d99a`](https://github.com/AI21Labs/ai21-python/commit/e57d99a04ff4b6aa4a858a2fe87f8cc8c68bcfa0))
 
-### Fix
+### Fixes
 
 * fix: remove httpx logger on log level info (#184) ([`06d0226`](https://github.com/AI21Labs/ai21-python/commit/06d02261c187a4bda1b5d479855d17b5a1507a1d))
 
@@ -413,11 +469,12 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * Securely use variables in labeler workflow. (#181)
 
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5349992`](https://github.com/AI21Labs/ai21-python/commit/53499926753a1854a2da6c65f8175c33d0a79ae1))
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`5349992`](https://github.com/AI21Labs/ai21-python/commit/53499926753a1854a2da6c65f8175c33d0a79ae1))
+
 
 ## v2.9.0 (2024-07-07)
 
-### Chore
+### Chores
 
 * chore(release): v2.9.0 [skip ci] ([`f4b4d36`](https://github.com/AI21Labs/ai21-python/commit/f4b4d362b77ab94c970ae623f7f9185b94718181))
 
@@ -434,9 +491,9 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`de4b1af`](https://github.com/AI21Labs/ai21-python/commit/de4b1af5654b30fbf01d7258a9174eb091362b1d))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`de4b1af`](https://github.com/AI21Labs/ai21-python/commit/de4b1af5654b30fbf01d7258a9174eb091362b1d))
 
 * chore: semantic pr - allow running on external prs (#164) ([`032fd5d`](https://github.com/AI21Labs/ai21-python/commit/032fd5d3a384f8dba26568c0b618e7c5f59a0431))
 
@@ -460,7 +517,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * chore: integration-tests.yaml - add trigger for push on main ([`4c170b8`](https://github.com/AI21Labs/ai21-python/commit/4c170b8378e6bfe06a1bc342d612ad1711792fca))
 
-### Ci
+### Continuous Integration
 
 * ci: Update size label When PR size changes (#171) (#172)
 
@@ -472,7 +529,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * ci: remove explicit permissions from semantic-pr.yml (#167) ([`3674efc`](https://github.com/AI21Labs/ai21-python/commit/3674efc106959f9b5b9b35c6eacc19db413c80cf))
 
-### Feature
+### Features
 
 * feat: Async Support AWS (#180)
 
@@ -498,7 +555,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * test: adjust unittest + add unittest for async
 
-* chore: cache -&gt; lru_cache to support python 3.8
+* chore: cache -> lru_cache to support python 3.8
 
 * test: fix test_imports test
 
@@ -525,9 +582,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 (#138)
 
@@ -542,9 +599,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
 * chore: rebase code
 
@@ -570,9 +627,9 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 * Add sagemaker async support (#155)
 
@@ -596,13 +653,13 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * test: adjust unittest + add unittest for async
 
-* chore: cache -&gt; lru_cache to support python 3.8
+* chore: cache -> lru_cache to support python 3.8
 
 * test: fix test_imports test
 
 * chore: add env_config to bedrock client to avoid breaking changes
 
-* refactor: sagemaker client, boto-&gt;aws http client
+* refactor: sagemaker client, boto->aws http client
 
 * refactor: export aws auth logic to new class
 
@@ -625,9 +682,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.8.14 to 1.9.0 (#138)
 
@@ -642,9 +699,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
 * chore: rebase code
 
@@ -684,9 +741,9 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 * feat: Use the same http client for all Clients (#163)
 
@@ -716,7 +773,7 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: Added deprecation warning
 
-* fix: Moved &#39;model&#39; extract
+* fix: Moved 'model' extract
 
 * test: Added a tests to validate model_id and model cant be together
 
@@ -726,9 +783,9 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 ---------
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: miri-bar &lt;160584887+miri-bar@users.noreply.github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`5248d96`](https://github.com/AI21Labs/ai21-python/commit/5248d96a783b5ffab7cb7c9f6de383a1eba4df11))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: miri-bar <160584887+miri-bar@users.noreply.github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`5248d96`](https://github.com/AI21Labs/ai21-python/commit/5248d96a783b5ffab7cb7c9f6de383a1eba4df11))
 
 * feat: Added Log Verbosity (#152)
 
@@ -750,7 +807,7 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: Added amazon header to secrets ([`57b1ea9`](https://github.com/AI21Labs/ai21-python/commit/57b1ea9aa172fdef7723199fe77ca50a15d6427c))
 
-### Fix
+### Fixes
 
 * fix: label parse (#178) ([`1ea52f5`](https://github.com/AI21Labs/ai21-python/commit/1ea52f5b7b842edcb6f61e40edc9c8c58e49d9ac))
 
@@ -758,9 +815,10 @@ Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.githu
 
 * fix: Version of action and json parser (#173) ([`8a270ec`](https://github.com/AI21Labs/ai21-python/commit/8a270ecfc3e8b5d312dbe49d2a47a41c31be9be3))
 
+
 ## v2.8.0 (2024-06-26)
 
-### Chore
+### Chores
 
 * chore(release): v2.8.0 [skip ci] ([`c5087cf`](https://github.com/AI21Labs/ai21-python/commit/c5087cf6f20accdeba57d7630e1cd780de36e435))
 
@@ -778,9 +836,9 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`718baaa`](https://github.com/AI21Labs/ai21-python/commit/718baaacce4af67c39c6e875782948e2158f22d4))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`718baaa`](https://github.com/AI21Labs/ai21-python/commit/718baaacce4af67c39c6e875782948e2158f22d4))
 
 * chore(deps): bump urllib3 from 1.26.18 to 1.26.19 (#140)
 
@@ -795,11 +853,11 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`dccf911`](https://github.com/AI21Labs/ai21-python/commit/dccf9117a2b17a74f8e9c298de22a072b84c6994))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`dccf911`](https://github.com/AI21Labs/ai21-python/commit/dccf9117a2b17a74f8e9c298de22a072b84c6994))
 
-### Ci
+### Continuous Integration
 
 * ci: Update pull request action (#151) ([`bf535c6`](https://github.com/AI21Labs/ai21-python/commit/bf535c64a71a17d257dadbdfbe7ef5c384b1268a))
 
@@ -809,11 +867,11 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 minor fix
 
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`09798b1`](https://github.com/AI21Labs/ai21-python/commit/09798b1e730098d0f3d43695a39d416a75f5a17d))
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`09798b1`](https://github.com/AI21Labs/ai21-python/commit/09798b1e730098d0f3d43695a39d416a75f5a17d))
 
 * docs: Fix message pass (#150) ([`8f41631`](https://github.com/AI21Labs/ai21-python/commit/8f41631025021f19b665c0b4836a664438957549))
 
-### Feature
+### Features
 
 * feat: adding Jamaba-Instruct-V1(chat_completions) to AWS Bedrock (#153)
 
@@ -833,11 +891,12 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 ---------
 
-Co-authored-by: Josephasafg &lt;ajgard7@gmail.com&gt; ([`7fae5c6`](https://github.com/AI21Labs/ai21-python/commit/7fae5c6dd097ee491ed3a37c6c0b1b2e6f21502a))
+Co-authored-by: Josephasafg <ajgard7@gmail.com> ([`7fae5c6`](https://github.com/AI21Labs/ai21-python/commit/7fae5c6dd097ee491ed3a37c6c0b1b2e6f21502a))
+
 
 ## v2.7.0 (2024-06-21)
 
-### Chore
+### Chores
 
 * chore(release): v2.7.0 [skip ci] ([`054459e`](https://github.com/AI21Labs/ai21-python/commit/054459e1289efb1a82a81a37038c7ca32279f5ed))
 
@@ -854,9 +913,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c509b7e`](https://github.com/AI21Labs/ai21-python/commit/c509b7e59aa984cc9948db1362162eaa52eeb1d7))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`c509b7e`](https://github.com/AI21Labs/ai21-python/commit/c509b7e59aa984cc9948db1362162eaa52eeb1d7))
 
 * chore(deps-dev): bump authlib from 1.3.0 to 1.3.1 (#131)
 
@@ -871,11 +930,11 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5eeaf52`](https://github.com/AI21Labs/ai21-python/commit/5eeaf52af19eee54d19fb9430b6caadf972e5f9c))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`5eeaf52`](https://github.com/AI21Labs/ai21-python/commit/5eeaf52af19eee54d19fb9430b6caadf972e5f9c))
 
-### Ci
+### Continuous Integration
 
 * ci: Added parter labels (#147) ([`737d98f`](https://github.com/AI21Labs/ai21-python/commit/737d98f0b28d6e335b747dbae44fc68929cf39d6))
 
@@ -937,7 +996,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * docs: Azure README (#139) ([`5b0eadb`](https://github.com/AI21Labs/ai21-python/commit/5b0eadbe88702e2ca28de608191d9a17b8c0b4b0))
 
-### Feature
+### Features
 
 * feat: Add async tokenizer, add detokenize method (#144)
 
@@ -947,7 +1006,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: fix tokenizer name in examples and readme, add example ([`f2d06fc`](https://github.com/AI21Labs/ai21-python/commit/f2d06fc7d2bc155beeaec72c0481f9a239656c07))
 
-### Fix
+### Fixes
 
 * fix: Add default version to azure url (#148)
 
@@ -955,33 +1014,36 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: Added _create_base_url ([`cbea1d1`](https://github.com/AI21Labs/ai21-python/commit/cbea1d19197bf48c26679f8f97d37013333994f6))
 
+
 ## v2.6.0 (2024-06-13)
 
-### Chore
+### Chores
 
 * chore(release): v2.6.0 [skip ci] ([`3a6de49`](https://github.com/AI21Labs/ai21-python/commit/3a6de495aa88dc98577b8b27fff94cb88d7662ba))
 
-### Feature
+### Features
 
 * feat: Azure Client Support (#135) ([`6115632`](https://github.com/AI21Labs/ai21-python/commit/611563279999168703e49dbbf288190ee0ae262d))
 
+
 ## v2.5.2 (2024-06-13)
 
-### Chore
+### Chores
 
 * chore(release): v2.5.2 [skip ci] ([`3eae31e`](https://github.com/AI21Labs/ai21-python/commit/3eae31e1f82cec6bcf208d1ed614daa0fd6ddad1))
 
-### Fix
+### Fixes
 
 * fix: camel case (#136) ([`e2b8466`](https://github.com/AI21Labs/ai21-python/commit/e2b846666bf5b2b8617cc26214fa5f36d65f5e35))
 
+
 ## v2.5.1 (2024-06-13)
 
-### Chore
+### Chores
 
 * chore(release): v2.5.1 [skip ci] ([`e2a43b8`](https://github.com/AI21Labs/ai21-python/commit/e2a43b82cf891d8858d8927be77e696ff9ace4b3))
 
-### Fix
+### Fixes
 
 * fix: Chain /studio/v1 to default url (#134)
 
@@ -995,13 +1057,14 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: Moved to external function ([`8d305c5`](https://github.com/AI21Labs/ai21-python/commit/8d305c537df846be8f6c12ba0e165c6d8ae3c06d))
 
+
 ## v2.5.0 (2024-06-10)
 
-### Chore
+### Chores
 
 * chore(release): v2.5.0 [skip ci] ([`f829c8f`](https://github.com/AI21Labs/ai21-python/commit/f829c8fc5430d65e771931c8c1f0af09bd75f94e))
 
-### Feature
+### Features
 
 * feat: add support for studio async client (#129)
 
@@ -1089,7 +1152,7 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: cr comments ([`d1933e4`](https://github.com/AI21Labs/ai21-python/commit/d1933e4f4ba5964c4622b737504fbd0f0f77353a))
 
-### Fix
+### Fixes
 
 * fix: Pass Base URL to HTTP Client (#128)
 
@@ -1097,19 +1160,21 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: tests ([`8b91187`](https://github.com/AI21Labs/ai21-python/commit/8b9118746bc30c9ba91fbca80ca6c6a9256d2876))
 
+
 ## v2.4.2 (2024-06-06)
 
-### Chore
+### Chores
 
 * chore(release): v2.4.2 [skip ci] ([`15109d6`](https://github.com/AI21Labs/ai21-python/commit/15109d6d1747c939612fa1a546818d011283e6ea))
 
-### Fix
+### Fixes
 
 * fix: parameters (#130) ([`dfcc567`](https://github.com/AI21Labs/ai21-python/commit/dfcc5675dc22fc3aafe7624b7e8ebd8cbd021146))
 
+
 ## v2.4.1 (2024-06-03)
 
-### Chore
+### Chores
 
 * chore(release): v2.4.1 [skip ci] ([`f708889`](https://github.com/AI21Labs/ai21-python/commit/f708889469a022a26df4dcd2dc29636cebc5f581))
 
@@ -1127,15 +1192,15 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c8ade60`](https://github.com/AI21Labs/ai21-python/commit/c8ade60602661e0193e33371e942dd7a4600915a))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`c8ade60`](https://github.com/AI21Labs/ai21-python/commit/c8ade60602661e0193e33371e942dd7a4600915a))
 
-### Ci
+### Continuous Integration
 
 * ci: Added reach for auto assign (#124) ([`3f3aed0`](https://github.com/AI21Labs/ai21-python/commit/3f3aed0a653aef7a5addc005e96323c5f8874108))
 
-### Fix
+### Fixes
 
 * fix: num_retries (#125) ([`cbbc213`](https://github.com/AI21Labs/ai21-python/commit/cbbc213bd840158797d3b5cfbcbc11200bd12f06))
 
@@ -1148,31 +1213,33 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`30e1e58`](https://github.com/AI21Labs/ai21-python/commit/30e1e589e050958d277af00dd2aadbc493b9c56d))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`30e1e58`](https://github.com/AI21Labs/ai21-python/commit/30e1e589e050958d277af00dd2aadbc493b9c56d))
+
 
 ## v2.4.0 (2024-05-28)
 
-### Chore
+### Chores
 
 * chore(release): v2.4.0 [skip ci] ([`b4062d2`](https://github.com/AI21Labs/ai21-python/commit/b4062d250f04b89b0f9ddd6762d61dd1363f0dc5))
 
-### Feature
+### Features
 
 * feat: Added beta to client (#123) ([`e3bfb27`](https://github.com/AI21Labs/ai21-python/commit/e3bfb272fc2d5f4341dff55d90e34da319b464f1))
 
-### Fix
+### Fixes
 
 * fix: Update library_search_response.py (#122)
 
 feat: adding new field: order to library-search api response
 
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`c8b57a8`](https://github.com/AI21Labs/ai21-python/commit/c8b57a8177754a376d2f53e2f730682832e76f04))
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`c8b57a8`](https://github.com/AI21Labs/ai21-python/commit/c8b57a8177754a376d2f53e2f730682832e76f04))
+
 
 ## v2.3.1 (2024-05-22)
 
-### Chore
+### Chores
 
 * chore(release): v2.3.1 [skip ci] ([`b6d3186`](https://github.com/AI21Labs/ai21-python/commit/b6d3186a3854a2f04366558f17f5b2d81cd88fdc))
 
@@ -1189,9 +1256,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`7c52f19`](https://github.com/AI21Labs/ai21-python/commit/7c52f19012d400a23e38f5e41191d5f865c7d0a6))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`7c52f19`](https://github.com/AI21Labs/ai21-python/commit/7c52f19012d400a23e38f5e41191d5f865c7d0a6))
 
 ### Documentation
 
@@ -1207,13 +1274,14 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: cloud emoji ([`aca280e`](https://github.com/AI21Labs/ai21-python/commit/aca280e3d57f70c054491fbcaee45a905dda6b6b))
 
-### Fix
+### Fixes
 
 * fix: updated env var in real time (#120) ([`d19332d`](https://github.com/AI21Labs/ai21-python/commit/d19332d43d138b2060670561abbac292ece76826))
 
+
 ## v2.3.0 (2024-05-20)
 
-### Chore
+### Chores
 
 * chore(release): v2.3.0 [skip ci] ([`d2d416a`](https://github.com/AI21Labs/ai21-python/commit/d2d416aaaf018c9905ad947fe70e30dfd951b5e6))
 
@@ -1231,9 +1299,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`2ff5912`](https://github.com/AI21Labs/ai21-python/commit/2ff5912c38be61ea3c06b52037109eb7504ae1a2))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`2ff5912`](https://github.com/AI21Labs/ai21-python/commit/2ff5912c38be61ea3c06b52037109eb7504ae1a2))
 
 * chore(deps): bump amannn/action-semantic-pull-request (#103)
 
@@ -1249,11 +1317,11 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github.com&gt; ([`5dd95ac`](https://github.com/AI21Labs/ai21-python/commit/5dd95acdeb73967377ada7ba3da98002df58398f))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`5dd95ac`](https://github.com/AI21Labs/ai21-python/commit/5dd95acdeb73967377ada7ba3da98002df58398f))
 
-### Feature
+### Features
 
 * feat: Jamba Stream Support (#117)
 
@@ -1461,17 +1529,18 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: Removed unused json_to_response ([`ae0d12b`](https://github.com/AI21Labs/ai21-python/commit/ae0d12b4e4fbb9cdf8e2fac20ec370e7f91215b4))
 
-### Fix
+### Fixes
 
 * fix: delete file fixture (#116) ([`9d9a9ba`](https://github.com/AI21Labs/ai21-python/commit/9d9a9ba7a00a6efeb1fedb936633e5d35cec3527))
 
+
 ## v2.2.5 (2024-05-14)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.5 [skip ci] ([`6d1502f`](https://github.com/AI21Labs/ai21-python/commit/6d1502f75457906f156503d9bbd63daf87665e54))
 
-### Fix
+### Fixes
 
 * fix: upgrade ai21-tokenizer to latest version with less restrictive deps (#113)
 
@@ -1479,13 +1548,14 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: upgrade deps in general ([`022d60c`](https://github.com/AI21Labs/ai21-python/commit/022d60c78a1342fbe6a30a7a4d95c05b656a03bb))
 
+
 ## v2.2.4 (2024-05-09)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.4 [skip ci] ([`aa2e8e2`](https://github.com/AI21Labs/ai21-python/commit/aa2e8e2fc4ca28728ed3f6b59abcbce398a04228))
 
-### Fix
+### Fixes
 
 * fix: pass kwargs to endpoints (#110)
 
@@ -1493,13 +1563,14 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: test when passing kwargs ([`0d895e4`](https://github.com/AI21Labs/ai21-python/commit/0d895e49330400e938d87ef5eaa75f8c34fe36d1))
 
+
 ## v2.2.3 (2024-04-25)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.3 [skip ci] ([`58c0166`](https://github.com/AI21Labs/ai21-python/commit/58c01660400fe54c0034447e903a843bc92ffcd5))
 
-### Fix
+### Fixes
 
 * fix: Support num_retries (#104)
 
@@ -1507,25 +1578,27 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: Added 408 for retries ([`94c3254`](https://github.com/AI21Labs/ai21-python/commit/94c32542be3d4af6e80aae156b074055b9e5c34a))
 
+
 ## v2.2.2 (2024-04-24)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.2 [skip ci] ([`f3daeba`](https://github.com/AI21Labs/ai21-python/commit/f3daebaeafd168090c7a9b06485c49ebfe4f1b87))
 
-### Fix
+### Fixes
 
 * fix: Added raise error on wrong use of chat message (#102) ([`4efbea6`](https://github.com/AI21Labs/ai21-python/commit/4efbea6d85cd70f77650e4c4d96a3395eb60517b))
 
+
 ## v2.2.1 (2024-04-22)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.1 [skip ci] ([`4fbfe00`](https://github.com/AI21Labs/ai21-python/commit/4fbfe0002bdf1e28bdfc611f1e9b9b99012f77c7))
 
 * chore: update chat example (#95) ([`7dd83b1`](https://github.com/AI21Labs/ai21-python/commit/7dd83b184a21fe3d94a8a8b90f9bfe04c6e30e2e))
 
-### Fix
+### Fixes
 
 * fix: Add support for n param to chat completion in studio (#98)
 
@@ -1537,19 +1610,21 @@ Co-authored-by: Asaf Joseph Gardin &lt;39553475+Josephasafg@users.noreply.github
 
 * fix: add n param support, add integration test ([`5459323`](https://github.com/AI21Labs/ai21-python/commit/54593235b590c35f5bfd391b3b195d294a65237b))
 
+
 ## v2.2.0 (2024-04-10)
 
-### Chore
+### Chores
 
 * chore(release): v2.2.0 [skip ci] ([`52a0fa3`](https://github.com/AI21Labs/ai21-python/commit/52a0fa3fe71f9491c89b12f183758eb9491a929d))
 
-### Feature
+### Features
 
 * feat: Support new chat API (#93) ([`d14bb7c`](https://github.com/AI21Labs/ai21-python/commit/d14bb7c80c18cef8589515eeade1b917499ea09c))
 
+
 ## v2.1.3 (2024-03-27)
 
-### Chore
+### Chores
 
 * chore(release): v2.1.3 [skip ci] ([`a2b783c`](https://github.com/AI21Labs/ai21-python/commit/a2b783c6e1d7a095f69fc6cc3be86460e12949af))
 
@@ -1568,16 +1643,16 @@ updated-dependencies:
   dependency-type: direct:development
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
 
 * refactor: lint fixes
 
 ---------
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
-Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`5986522`](https://github.com/AI21Labs/ai21-python/commit/59865220571bbdb19edf69aee16b21dbe7582d85))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Gardin <147075902+asafgardin@users.noreply.github.com>
+Co-authored-by: Asaf Gardin <asafg@ai21.com> ([`5986522`](https://github.com/AI21Labs/ai21-python/commit/59865220571bbdb19edf69aee16b21dbe7582d85))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#85)
 
@@ -1593,8 +1668,8 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`aea5963`](https://github.com/AI21Labs/ai21-python/commit/aea5963943ad6220a41386acc5adbf23a8f0bf3e))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`aea5963`](https://github.com/AI21Labs/ai21-python/commit/aea5963943ad6220a41386acc5adbf23a8f0bf3e))
 
 * chore(deps): bump python-semantic-release/python-semantic-release (#81)
 
@@ -1610,9 +1685,9 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`c94966b`](https://github.com/AI21Labs/ai21-python/commit/c94966b4b05eec93a44e828800f043233b1fe5f4))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Gardin <147075902+asafgardin@users.noreply.github.com> ([`c94966b`](https://github.com/AI21Labs/ai21-python/commit/c94966b4b05eec93a44e828800f043233b1fe5f4))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.8.11 to 1.8.14 (#77)
 
@@ -1627,11 +1702,11 @@ updated-dependencies:
   update-type: version-update:semver-patch
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`7f3ea4a`](https://github.com/AI21Labs/ai21-python/commit/7f3ea4ab5ff87f92312e6fd873a17cbab010ed4e))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Gardin <147075902+asafgardin@users.noreply.github.com> ([`7f3ea4a`](https://github.com/AI21Labs/ai21-python/commit/7f3ea4ab5ff87f92312e6fd873a17cbab010ed4e))
 
-### Fix
+### Fixes
 
 * fix: Fix readme gaps (#87)
 
@@ -1641,7 +1716,7 @@ Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt
 
 * docs: Examples section ([`da3afed`](https://github.com/AI21Labs/ai21-python/commit/da3afed67b806a35638ad804172183f8029619ea))
 
-### Test
+### Testing
 
 * test: integration test for library files (#83)
 
@@ -1653,23 +1728,25 @@ Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt
 
 * test: check imports (#76) ([`a72e23b`](https://github.com/AI21Labs/ai21-python/commit/a72e23b063ad3c1db076ced932bf0f4e6703c576))
 
+
 ## v2.1.2 (2024-02-27)
 
-### Chore
+### Chores
 
 * chore(release): v2.1.2 [skip ci] ([`9551776`](https://github.com/AI21Labs/ai21-python/commit/9551776a9f6c4c3a1671e308dad37a900e786b0f))
 
-### Fix
+### Fixes
 
 * fix: Added future type annotation to sagemaker (#74) ([`f561dd8`](https://github.com/AI21Labs/ai21-python/commit/f561dd8ce2a2bd4e532f46fe96211486f9b8cc39))
 
+
 ## v2.1.1 (2024-02-25)
 
-### Chore
+### Chores
 
 * chore(release): v2.1.1 [skip ci] ([`69dc136`](https://github.com/AI21Labs/ai21-python/commit/69dc1361e47cdc60dde3c366dffe89b364fdce26))
 
-### Fix
+### Fixes
 
 * fix: add logit bias to studio, sagemaker (#70)
 
@@ -1699,13 +1776,14 @@ Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt
 
 * fix: update code with new not_giving approach ([`b0b5bc1`](https://github.com/AI21Labs/ai21-python/commit/b0b5bc152d61944313b53f39cd314a621568e6e0))
 
+
 ## v2.1.0 (2024-02-25)
 
-### Chore
+### Chores
 
 * chore(release): v2.1.0 [skip ci] ([`5e9a768`](https://github.com/AI21Labs/ai21-python/commit/5e9a7681e4ab1ffcdcff1c07e0cb94452eb2632c))
 
-### Feature
+### Features
 
 * feat: support NOT_GIVEN type (#69)
 
@@ -1723,9 +1801,9 @@ Co-authored-by: Asaf Gardin &lt;147075902+asafgardin@users.noreply.github.com&gt
 
 ---------
 
-Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`c7fd28a`](https://github.com/AI21Labs/ai21-python/commit/c7fd28a124c4971a9d9b85ad0d5fc5bd187535b0))
+Co-authored-by: Asaf Gardin <asafg@ai21.com> ([`c7fd28a`](https://github.com/AI21Labs/ai21-python/commit/c7fd28a124c4971a9d9b85ad0d5fc5bd187535b0))
 
-### Fix
+### Fixes
 
 * fix: Pass default model_id in bedrock client (#72)
 
@@ -1745,19 +1823,20 @@ Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`c7fd28a`](https://github.c
 
 * refactor: rename test params ([`409e818`](https://github.com/AI21Labs/ai21-python/commit/409e818b751c261b93befedad968d6533860296c))
 
+
 ## v2.0.5 (2024-02-21)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.5 [skip ci] ([`8965828`](https://github.com/AI21Labs/ai21-python/commit/896582839dd298121210187572adc178351f8d58))
 
-### Fix
+### Fixes
 
 * fix: penalties in Sagemaker and Bedrock (#67)
 
 * fix: penalties in sagemaker
 
-* fix: don&#39;t pass None penalties to Bedrock
+* fix: don't pass None penalties to Bedrock
 
 * fix: remove some default arge, and some unused args from bedrock model
 
@@ -1769,11 +1848,12 @@ Co-authored-by: Asaf Gardin &lt;asafg@ai21.com&gt; ([`c7fd28a`](https://github.c
 
 ---------
 
-Co-authored-by: etang &lt;etang@ai21.com&gt; ([`d7c912f`](https://github.com/AI21Labs/ai21-python/commit/d7c912f0ef86d8ca18a7225cdf8da6b79de8b415))
+Co-authored-by: etang <etang@ai21.com> ([`d7c912f`](https://github.com/AI21Labs/ai21-python/commit/d7c912f0ef86d8ca18a7225cdf8da6b79de8b415))
+
 
 ## v2.0.4 (2024-02-18)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.4 [skip ci] ([`8b0f217`](https://github.com/AI21Labs/ai21-python/commit/8b0f217dd14aa820b5e404ed564e099d214d882f))
 
@@ -1781,7 +1861,7 @@ Co-authored-by: etang &lt;etang@ai21.com&gt; ([`d7c912f`](https://github.com/AI2
 
 * docs: fix error handling example (#63) ([`fcd2746`](https://github.com/AI21Labs/ai21-python/commit/fcd2746ffd5839932628a10c0292fc766fef8963))
 
-### Fix
+### Fixes
 
 * fix: Removed answer_length and mode from answer (#65)
 
@@ -1795,9 +1875,10 @@ Co-authored-by: etang &lt;etang@ai21.com&gt; ([`d7c912f`](https://github.com/AI2
 
 * fix: Added header ([`ca5c3ca`](https://github.com/AI21Labs/ai21-python/commit/ca5c3ca4127fa3393c1d29f069120b3896da8beb))
 
+
 ## v2.0.3 (2024-02-07)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.3 [skip ci] ([`d0ccc5d`](https://github.com/AI21Labs/ai21-python/commit/d0ccc5d9f3a14a61fca788496afc65e02d9dca4f))
 
@@ -1811,16 +1892,17 @@ Co-authored-by: etang &lt;etang@ai21.com&gt; ([`d7c912f`](https://github.com/AI2
 
 ---------
 
-Co-authored-by: Joshua Broyde &lt;joshuabroyde@Joshua-Broyde-PMGQ73FQ16.local&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`139d05f`](https://github.com/AI21Labs/ai21-python/commit/139d05f919d7c89da031dd50bf7bc1f080dc2d31))
+Co-authored-by: Joshua Broyde <joshuabroyde@Joshua-Broyde-PMGQ73FQ16.local>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com> ([`139d05f`](https://github.com/AI21Labs/ai21-python/commit/139d05f919d7c89da031dd50bf7bc1f080dc2d31))
 
-### Fix
+### Fixes
 
 * fix: skip passing API key to ARN endpoint (#60) ([`8fd72f0`](https://github.com/AI21Labs/ai21-python/commit/8fd72f0ebe23bc23244e8453744b46bd093bccb3))
 
+
 ## v2.0.2 (2024-02-04)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.2 [skip ci] ([`2db1816`](https://github.com/AI21Labs/ai21-python/commit/2db1816a152a20d18cbd397183512f479d4fec90))
 
@@ -1838,17 +1920,18 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt; ([`aac9932`](https://github.com/AI21Labs/ai21-python/commit/aac993213edfe2ee889d5d12e899fe32e0ba702a))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com> ([`aac9932`](https://github.com/AI21Labs/ai21-python/commit/aac993213edfe2ee889d5d12e899fe32e0ba702a))
 
-### Fix
+### Fixes
 
 * fix: Changed log level (#56) ([`8db493c`](https://github.com/AI21Labs/ai21-python/commit/8db493c9ccd98e2421ff65a583e5e43773dc4bb1))
 
+
 ## v2.0.1 (2024-02-01)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.1 [skip ci] ([`2af2f2b`](https://github.com/AI21Labs/ai21-python/commit/2af2f2b3153a486a8df33b4266f54cf28f0da049))
 
@@ -1860,9 +1943,10 @@ Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
 
 * fix: example ([`bca0424`](https://github.com/AI21Labs/ai21-python/commit/bca0424f44ffb2c5e5a3b9f292eb08649a844f53))
 
-### Fix
+### Fixes
 
 * fix: Added badges (#55) ([`96d716d`](https://github.com/AI21Labs/ai21-python/commit/96d716de7a49868c20461bc2dc34c142da36070b))
+
 
 ## v2.0.0 (2024-01-31)
 
@@ -1872,19 +1956,20 @@ Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
 
 BREAKING CHANGE: 2.0.0 to SDK ([`77cfb85`](https://github.com/AI21Labs/ai21-python/commit/77cfb85d4b422ff217c511edfdf0782fce65c3b3))
 
-### Chore
+### Chores
 
 * chore(release): v2.0.0 [skip ci] ([`2a65f23`](https://github.com/AI21Labs/ai21-python/commit/2a65f23b487d7d64c09ea69f87daf1cd80a42146))
 
+
 ## v1.0.0 (2024-01-31)
 
-### Chore
+### Chores
 
 * chore(release): v1.0.0 [skip ci] ([`34efede`](https://github.com/AI21Labs/ai21-python/commit/34efedeb9a181bce86f8cbf0458dcd6b54538415))
 
 * chore(release): v1.0.0 [skip ci] ([`66a0086`](https://github.com/AI21Labs/ai21-python/commit/66a008632304265914acb25a6eb8c6dfd8476911))
 
-### Feature
+### Features
 
 * feat: bump to 2.0.0 (#52) ([`5e61e29`](https://github.com/AI21Labs/ai21-python/commit/5e61e29ec74c6c508969301c949e5b2bf72ad85b))
 
@@ -1936,7 +2021,7 @@ BREAKING CHANGE: 2.0.0 to SDK ([`77cfb85`](https://github.com/AI21Labs/ai21-pyth
 
 * ci: Remove python 3_7 support (#25)
 
-* ci: python 3.8 &gt;= support
+* ci: python 3.8 >= support
 
 * ci: unittests
 
@@ -2245,9 +2330,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * chore(deps-dev): bump gitpython from 3.1.40 to 3.1.41 (#37)
 
@@ -2262,9 +2347,9 @@ updated-dependencies:
   dependency-type: indirect
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * chore(deps): bump actions/upload-artifact from 3 to 4 (#21)
 
@@ -2279,9 +2364,9 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.4.2 to 1.8.11 (#20)
 
@@ -2296,9 +2381,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * chore(deps): bump actions/setup-python from 4 to 5 (#19)
 
@@ -2313,9 +2398,9 @@ updated-dependencies:
   update-type: version-update:semver-major
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * chore(deps): bump amannn/action-semantic-pull-request (#2)
 
@@ -2331,9 +2416,9 @@ updated-dependencies:
   update-type: version-update:semver-minor
 ...
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt;
-Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 * test: Added tests for library (#45)
 
@@ -2359,14 +2444,14 @@ Co-authored-by: asafgardin &lt;147075902+asafgardin@users.noreply.github.com&gt;
 
 ---------
 
-Signed-off-by: dependabot[bot] &lt;support@github.com&gt;
-Co-authored-by: github-actions &lt;action@github.com&gt;
-Co-authored-by: etang &lt;etang@ai21.com&gt;
-Co-authored-by: dependabot[bot] &lt;49699333+dependabot[bot]@users.noreply.github.com&gt; ([`60e3f4d`](https://github.com/AI21Labs/ai21-python/commit/60e3f4dc93f83c11ad1c1bc1f51cb64ec6036520))
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: github-actions <action@github.com>
+Co-authored-by: etang <etang@ai21.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com> ([`60e3f4d`](https://github.com/AI21Labs/ai21-python/commit/60e3f4dc93f83c11ad1c1bc1f51cb64ec6036520))
 
 ### Unknown
 
-* Revert &#34;chore(release): v1.0.0 [skip ci]&#34; (#51)
+* Revert "chore(release): v1.0.0 [skip ci]" (#51)
 
 This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https://github.com/AI21Labs/ai21-python/commit/6bab55101e3b17800c435442ae2a762ec39ce0f8))
 
@@ -2374,13 +2459,14 @@ This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https
 
 * Update issue templates ([`2590685`](https://github.com/AI21Labs/ai21-python/commit/2590685fed8ea63204dcfdd47e27cb340a79cfb8))
 
+
 ## v2.0.0-rc.3 (2023-12-18)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.0-rc.3 [skip ci] ([`0a9ace7`](https://github.com/AI21Labs/ai21-python/commit/0a9ace7dd8b59eb51b6dcb4e4a1118aaa012b454))
 
-### Fix
+### Fixes
 
 * fix: Change main project name in setup (#17)
 
@@ -2388,19 +2474,21 @@ This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https
 
 * fix: version name ([`7c68b7f`](https://github.com/AI21Labs/ai21-python/commit/7c68b7f0671681e0faab3720649760b50d05d6c6))
 
+
 ## v2.0.0-rc.2 (2023-12-18)
 
-### Chore
+### Chores
 
 * chore(release): v2.0.0-rc.2 [skip ci] ([`5b83506`](https://github.com/AI21Labs/ai21-python/commit/5b835060bc223bfec907624b2d717418ab51309e))
 
-### Feature
+### Features
 
 * feat: project name (#16)
 
 * feat: project name
 
 * fix: name ([`e985980`](https://github.com/AI21Labs/ai21-python/commit/e98598027d955e3f0108ab1919e90195c5b2d52d))
+
 
 ## v1.0.0-rc.2 (2023-12-18)
 
@@ -2414,9 +2502,10 @@ This reverts commit 66a008632304265914acb25a6eb8c6dfd8476911. ([`6bab551`](https
 
 * feat: new line ([`a086c7d`](https://github.com/AI21Labs/ai21-python/commit/a086c7d8ef40ba3f53b0144c5ba4b5911ecd5932))
 
-### Chore
+### Chores
 
 * chore(release): v1.0.0-rc.2 [skip ci] ([`ea8b6a9`](https://github.com/AI21Labs/ai21-python/commit/ea8b6a90e21f9a287a026b438ba5a5eb4eacdaa3))
+
 
 ## v1.0.0-rc.1 (2023-12-18)
 
@@ -2446,7 +2535,7 @@ BREAKING CHANGE:  New SDK version
 
 * fix: removed version rc ([`5650abd`](https://github.com/AI21Labs/ai21-python/commit/5650abdac34dd035b80962ce14d173376210193e))
 
-### Chore
+### Chores
 
 * chore(release): v1.0.0-rc.1 [skip ci] ([`65e09a4`](https://github.com/AI21Labs/ai21-python/commit/65e09a4146540c977c619348effcbeb443441a58))
 
@@ -2466,13 +2555,13 @@ BREAKING CHANGE:  New SDK version
 
 * chore(release): v0.1.0-rc.1 [skip ci] ([`3d67c2c`](https://github.com/AI21Labs/ai21-python/commit/3d67c2c9165441c09ca9a75f79021f0dba8e9325))
 
-### Ci
+### Continuous Integration
 
 * ci: python versions (#5) ([`52d18cb`](https://github.com/AI21Labs/ai21-python/commit/52d18cb6b3f4a52976aced6f24f5543886e7403f))
 
 * ci: add_integration_test_action (#4) ([`f89e082`](https://github.com/AI21Labs/ai21-python/commit/f89e08213fc06b0328987331260368ca248f14ee))
 
-### Feature
+### Features
 
 * feat: BREAKING CHANGE: pre release 2.0.0 (#9)
 
@@ -2631,7 +2720,7 @@ BREAKING CHANGE: pre release ([`b15d4c7`](https://github.com/AI21Labs/ai21-pytho
 
 * fix: removed unused import ([`0e9b36a`](https://github.com/AI21Labs/ai21-python/commit/0e9b36aca7ab0a3800552c8929c6f4f7d1cd9e1f))
 
-### Fix
+### Fixes
 
 * fix: test pypi params (#8) ([`ed8fa1f`](https://github.com/AI21Labs/ai21-python/commit/ed8fa1f7b52b0ab6f94ed9815adf0256152dd02e))
 
