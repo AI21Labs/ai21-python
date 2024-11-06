@@ -9,7 +9,6 @@ from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_library import AsyncStudioLibrary
-from ai21.clients.studio.resources.studio_paraphrase import AsyncStudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudioSummarizeBySegment
@@ -48,7 +47,6 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.completion = AsyncStudioCompletion(self)
         self.chat: AsyncStudioChat = AsyncStudioChat(self)
         self.summarize = AsyncStudioSummarize(self)
-        self.paraphrase = AsyncStudioParaphrase(self)
         self.summarize_by_segment = AsyncStudioSummarizeBySegment(self)
         self.answer = AsyncStudioAnswer(self)
         self.library = AsyncStudioLibrary(self)

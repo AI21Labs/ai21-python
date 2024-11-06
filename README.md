@@ -430,8 +430,6 @@ file_id = client.library.files.create(
 uploaded_file = client.library.files.get(file_id)
 ```
 
-For more information on more Task Specific Models, see the [documentation](https://docs.ai21.com/reference/paraphrase-api-ref).
-
 ## Token Counting
 
 ---

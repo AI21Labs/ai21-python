@@ -9,8 +9,6 @@ from ai21.models import (
     Completion,
     CompletionFinishReason,
     CompletionData,
-    ParaphraseResponse,
-    Suggestion,
     SegmentationResponse,
     SummarizeResponse,
     SummarizeBySegmentResponse,
@@ -175,21 +173,6 @@ def get_completions_response():
     completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
-
-
-def get_paraphrase_response():
-    expected_dict = {
-        "id": "123",
-        "suggestions": [
-            {"text": "Thank you so much for the gift I received on Monday."},
-        ],
-    }
-
-    paraphrase_response = ParaphraseResponse(
-        id="123", suggestions=[Suggestion(text="Thank you so much for the gift I received on Monday.")]
-    )
-
-    return paraphrase_response, expected_dict, ParaphraseResponse
 
 
 def get_segmentation_response():

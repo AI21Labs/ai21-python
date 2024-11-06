@@ -11,7 +11,6 @@ from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
 from ai21.clients.studio.resources.studio_library import StudioLibrary
-from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
@@ -52,7 +51,6 @@ class AI21Client(AI21HTTPClient):
         self.completion = StudioCompletion(self)
         self.chat: StudioChat = StudioChat(self)
         self.summarize = StudioSummarize(self)
-        self.paraphrase = StudioParaphrase(self)
         self.summarize_by_segment = StudioSummarizeBySegment(self)
         self.answer = StudioAnswer(self)
         self.library = StudioLibrary(self)

@@ -7,7 +7,6 @@ from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase, AsyncStudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import (
@@ -22,8 +21,6 @@ from ai21.models import (
     RoleType,
     ChatResponse,
     CompletionsResponse,
-    ParaphraseStyleType,
-    ParaphraseResponse,
     DocumentType,
     SegmentationResponse,
     SummaryMethod,
@@ -198,37 +195,6 @@ def get_studio_completion(is_async: bool = True, **kwargs):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=CompletionsResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_paraphrase(is_async: bool = False):
-    text = "text to paraphrase"
-    style = ParaphraseStyleType.CASUAL
-    start_index = 0
-    end_index = 10
-    json_response = {
-        "id": "some-id",
-        "suggestions": [
-            {
-                "text": "This text is paraphrased",
-            }
-        ],
-    }
-
-    resource = AsyncStudioParaphrase if is_async else StudioParaphrase
-
-    return (
-        resource,
-        {"text": text, "style": style, "start_index": start_index, "end_index": end_index},
-        "paraphrase",
-        {
-            "text": text,
-            "style": style,
-            "startIndex": start_index,
-            "endIndex": end_index,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=ParaphraseResponse, obj_dict=json_response),
     )
 
 
