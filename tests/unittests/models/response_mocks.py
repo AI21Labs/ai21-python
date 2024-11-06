@@ -11,8 +11,6 @@ from ai21.models import (
     CompletionData,
     GECResponse,
     Correction,
-    ImprovementsResponse,
-    Improvement,
     ParaphraseResponse,
     Suggestion,
     SegmentationResponse,
@@ -205,36 +203,6 @@ def get_gec_response():
     )
 
     return gec_response, expected_dict, GECResponse
-
-
-def get_improvements_response():
-    expected_dict = {
-        "id": "123",
-        "improvements": [
-            {
-                "suggestions": ["technical", "practical", "analytical"],
-                "startIndex": 104,
-                "endIndex": 108,
-                "originalText": "hard",
-                "improvementType": "vocabulary/specificity",
-            },
-        ],
-    }
-
-    improvements_response = ImprovementsResponse(
-        id="123",
-        improvements=[
-            Improvement(
-                suggestions=["technical", "practical", "analytical"],
-                start_index=104,
-                end_index=108,
-                original_text="hard",
-                improvement_type="vocabulary/specificity",
-            )
-        ],
-    )
-
-    return improvements_response, expected_dict, ImprovementsResponse
 
 
 def get_paraphrase_response():

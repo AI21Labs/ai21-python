@@ -8,7 +8,6 @@ from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudi
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_gec import StudioGEC, AsyncStudioGEC
-from ai21.clients.studio.resources.studio_improvements import StudioImprovements, AsyncStudioImprovements
 from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase, AsyncStudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
@@ -25,8 +24,6 @@ from ai21.models import (
     ChatResponse,
     CompletionsResponse,
     GECResponse,
-    ImprovementType,
-    ImprovementsResponse,
     ParaphraseStyleType,
     ParaphraseResponse,
     DocumentType,
@@ -232,37 +229,6 @@ def get_studio_gec(is_async: bool = False):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=GECResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_improvements(is_async: bool = False):
-    json_response = {
-        "id": "some-id",
-        "improvements": [
-            {
-                "suggestions": ["This text is improved"],
-                "startIndex": 0,
-                "endIndex": 15,
-                "originalText": "text to improve",
-                "improvementType": "FLUENCY",
-            }
-        ],
-    }
-    text = "text to improve"
-    types = [ImprovementType.FLUENCY]
-
-    resource = AsyncStudioImprovements if is_async else StudioImprovements
-
-    return (
-        resource,
-        {"text": text, "types": types},
-        "improvements",
-        {
-            "text": text,
-            "types": types,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=ImprovementsResponse, obj_dict=json_response),
     )
 
 
