@@ -8,8 +8,6 @@ from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_library import AsyncStudioLibrary
-from ai21.clients.studio.resources.studio_summarize import AsyncStudioSummarize
-from ai21.clients.studio.resources.studio_summarize_by_segment import AsyncStudioSummarizeBySegment
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 
 
@@ -44,7 +42,5 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
 
         self.completion = AsyncStudioCompletion(self)
         self.chat: AsyncStudioChat = AsyncStudioChat(self)
-        self.summarize = AsyncStudioSummarize(self)
-        self.summarize_by_segment = AsyncStudioSummarizeBySegment(self)
         self.library = AsyncStudioLibrary(self)
         self.beta = AsyncBeta(self)

@@ -18,8 +18,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     argnames=["test_file_name"],
     argvalues=[
         ("completion.py",),
-        ("summarize.py",),
-        ("summarize_by_segment.py",),
         ("tokenization.py",),
         ("chat/chat_completions.py",),
         ("chat/chat_completions_jamba_instruct.py",),
@@ -34,8 +32,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     ids=[
         "when_answer__should_return_ok",
         "when_completion__should_return_ok",
-        "when_summarize__should_return_ok",
-        "when_summarize_by_segment__should_return_ok",
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_chat_completions_jamba_instruct__should_return_ok",
@@ -63,8 +59,6 @@ def test_studio(test_file_name: str):
     argvalues=[
         ("async_chat.py",),
         ("async_completion.py",),
-        ("async_summarize.py",),
-        ("async_summarize_by_segment.py",),
         # ("async_tokenization.py",),
         ("chat/async_chat_completions.py",),
         ("chat/async_stream_chat_completions.py",),
@@ -74,11 +68,8 @@ def test_studio(test_file_name: str):
         ("conversational_rag/async_conversational_rag.py",),
     ],
     ids=[
-        "when_answer__should_return_ok",
         "when_chat__should_return_ok",
         "when_completion__should_return_ok",
-        "when_summarize__should_return_ok",
-        "when_summarize_by_segment__should_return_ok",
         # "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",

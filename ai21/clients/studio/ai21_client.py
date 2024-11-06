@@ -10,8 +10,6 @@ from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
 from ai21.clients.studio.resources.studio_library import StudioLibrary
-from ai21.clients.studio.resources.studio_summarize import StudioSummarize
-from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 from ai21.tokenizers.factory import get_tokenizer
@@ -48,8 +46,6 @@ class AI21Client(AI21HTTPClient):
         )
         self.completion = StudioCompletion(self)
         self.chat: StudioChat = StudioChat(self)
-        self.summarize = StudioSummarize(self)
-        self.summarize_by_segment = StudioSummarizeBySegment(self)
         self.library = StudioLibrary(self)
         self.beta = Beta(self)
 

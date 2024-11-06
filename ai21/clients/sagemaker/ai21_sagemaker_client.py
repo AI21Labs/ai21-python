@@ -4,7 +4,6 @@ import boto3
 
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion, AsyncSageMakerCompletion
-from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize, AsyncSageMakerSummarize
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 
@@ -40,9 +39,6 @@ class AI21SageMakerClient:
         self.completion = SageMakerCompletion(
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
-        self.summarize = SageMakerSummarize(
-            base_url=base_url, region=region, client=self._http_client, aws_session=session
-        )
 
 
 class AsyncAI21SageMakerClient:
@@ -74,8 +70,5 @@ class AsyncAI21SageMakerClient:
         )
 
         self.completion = AsyncSageMakerCompletion(
-            base_url=base_url, region=region, client=self._http_client, aws_session=session
-        )
-        self.summarize = AsyncSageMakerSummarize(
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )

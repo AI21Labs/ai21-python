@@ -8,10 +8,6 @@ from ai21.models import (
     Completion,
     CompletionFinishReason,
     CompletionData,
-    SummarizeResponse,
-    SummarizeBySegmentResponse,
-    SegmentSummary,
-    Highlight,
 )
 from ai21.models.chat import ChatCompletionResponse, ChatCompletionResponseChoice
 from ai21.models.chat.chat_message import AssistantMessage
@@ -154,47 +150,3 @@ def get_completions_response():
     completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
-
-
-def get_summarize_response():
-    expected_dict = {
-        "id": "123",
-        "summary": "The blue whale is a marine mammal that lives off California's coast.",
-    }
-
-    summarization_response = SummarizeResponse(
-        id="123",
-        summary="The blue whale is a marine mammal that lives off California's coast.",
-    )
-
-    return summarization_response, expected_dict, SummarizeResponse
-
-
-def get_summarize_by_segment_response():
-    expected_dict = {
-        "id": "123",
-        "segments": [
-            {
-                "summary": "The blue whale is the largest animal known ever to have existed.",
-                "segmentType": "normal_text",
-                "hasSummary": True,
-                "highlights": [{"text": "The blue whale", "startIndex": 0, "endIndex": 14}],
-                "segmentHtml": None,
-                "segmentText": None,
-            },
-        ],
-    }
-
-    summarization_response = SummarizeBySegmentResponse(
-        id="123",
-        segments=[
-            SegmentSummary(
-                summary="The blue whale is the largest animal known ever to have existed.",
-                segment_type="normal_text",
-                has_summary=True,
-                highlights=[Highlight(text="The blue whale", start_index=0, end_index=14)],
-            ),
-        ],
-    )
-
-    return summarization_response, expected_dict, SummarizeBySegmentResponse

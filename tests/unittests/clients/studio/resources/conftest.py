@@ -6,11 +6,6 @@ from ai21.clients.studio.resources.chat import AsyncChatCompletions
 from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
-from ai21.clients.studio.resources.studio_summarize_by_segment import (
-    StudioSummarizeBySegment,
-    AsyncStudioSummarizeBySegment,
-)
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models import (
@@ -18,9 +13,6 @@ from ai21.models import (
     RoleType,
     ChatResponse,
     CompletionsResponse,
-    SummaryMethod,
-    SummarizeResponse,
-    SummarizeBySegmentResponse,
 )
 from ai21.models._pydantic_compatibility import _to_dict, _from_dict
 from ai21.models.chat import (
@@ -171,65 +163,4 @@ def get_studio_completion(is_async: bool = True, **kwargs):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=CompletionsResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_summarization(is_async: bool = False):
-    source = "text to summarize"
-    source_type = "TEXT"
-    focus = "text"
-    summary_method = SummaryMethod.FULL_DOCUMENT
-    json_response = {
-        "id": "some-id",
-        "summary": "This text is summarized",
-    }
-
-    resource = AsyncStudioSummarize if is_async else StudioSummarize
-
-    return (
-        resource,
-        {"source": source, "source_type": source_type, "focus": focus, "summary_method": summary_method},
-        "summarize",
-        {
-            "source": source,
-            "sourceType": source_type,
-            "focus": focus,
-            "summaryMethod": summary_method,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=SummarizeResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_summarize_by_segment(is_async: bool = False):
-    source = "text to summarize"
-    source_type = "TEXT"
-    focus = "text"
-    json_response = {
-        "id": "some-id",
-        "segments": [
-            {
-                "summary": "This text is summarized",
-                "segmentText": "This text is segmented",
-                "segmentHtml": "",
-                "segmentType": "segment_type",
-                "hasSummary": True,
-                "highlights": [],
-            }
-        ],
-    }
-
-    resource = AsyncStudioSummarizeBySegment if is_async else StudioSummarizeBySegment
-
-    return (
-        resource,
-        {"source": source, "source_type": source_type, "focus": focus},
-        "summarize-by-segment",
-        {
-            "source": source,
-            "sourceType": source_type,
-            "focus": focus,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=SummarizeBySegmentResponse, obj_dict=json_response),
     )

@@ -9,8 +9,6 @@ from tests.unittests.models.response_mocks import (
     get_chat_response,
     get_chat_completions_response,
     get_completions_response,
-    get_summarize_response,
-    get_summarize_by_segment_response,
 )
 
 
@@ -46,8 +44,6 @@ def test_penalty__from_json__should_return_instance_with_given_values():
         "chat_response",
         "chat_completions_response",
         "completion_response",
-        "summarization_response",
-        "summarize_by_segment_response",
     ],
     argnames=[
         "response_obj",
@@ -58,8 +54,6 @@ def test_penalty__from_json__should_return_instance_with_given_values():
         (get_chat_response()),
         (get_chat_completions_response()),
         (get_completions_response()),
-        (get_summarize_response()),
-        (get_summarize_by_segment_response()),
     ],
 )
 def test_to_dict__should_serialize_to_dict__(
@@ -74,8 +68,6 @@ def test_to_dict__should_serialize_to_dict__(
         "chat_response",
         "chat_completions_response",
         "completion_response",
-        "summarization_response",
-        "summarize_by_segment_response",
     ],
     argnames=[
         "response_obj",
@@ -86,8 +78,6 @@ def test_to_dict__should_serialize_to_dict__(
         (get_chat_response()),
         (get_chat_completions_response()),
         (get_completions_response()),
-        (get_summarize_response()),
-        (get_summarize_by_segment_response()),
     ],
 )
 def test_from_dict__should_serialize_from_dict__(
