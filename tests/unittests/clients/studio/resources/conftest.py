@@ -6,7 +6,6 @@ from ai21.clients.studio.resources.chat import AsyncChatCompletions
 from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import (
     StudioSummarizeBySegment,
@@ -19,8 +18,6 @@ from ai21.models import (
     RoleType,
     ChatResponse,
     CompletionsResponse,
-    DocumentType,
-    SegmentationResponse,
     SummaryMethod,
     SummarizeResponse,
     SummarizeBySegmentResponse,
@@ -174,34 +171,6 @@ def get_studio_completion(is_async: bool = True, **kwargs):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=CompletionsResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_segmentation(is_async: bool = False):
-    source = "segmentation text"
-    source_type = DocumentType.TEXT
-    json_response = {
-        "id": "some-id",
-        "segments": [
-            {
-                "segmentText": "This text is segmented",
-                "segmentType": "segment_type",
-            }
-        ],
-    }
-
-    resource = AsyncStudioSegmentation if is_async else StudioSegmentation
-
-    return (
-        resource,
-        {"source": source, "source_type": source_type},
-        "segmentation",
-        {
-            "source": source,
-            "sourceType": source_type,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=SegmentationResponse, obj_dict=json_response),
     )
 
 

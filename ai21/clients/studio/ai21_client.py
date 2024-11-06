@@ -10,7 +10,6 @@ from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
 from ai21.clients.studio.resources.studio_library import StudioLibrary
-from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize
 from ai21.clients.studio.resources.studio_summarize_by_segment import StudioSummarizeBySegment
 from ai21.http_client.http_client import AI21HTTPClient
@@ -52,7 +51,6 @@ class AI21Client(AI21HTTPClient):
         self.summarize = StudioSummarize(self)
         self.summarize_by_segment = StudioSummarizeBySegment(self)
         self.library = StudioLibrary(self)
-        self.segmentation = StudioSegmentation(self)
         self.beta = Beta(self)
 
     def count_tokens(self, text: str, tokenizer_name: str = PreTrainedTokenizers.J2_TOKENIZER) -> int:

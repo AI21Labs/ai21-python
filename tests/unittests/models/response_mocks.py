@@ -8,7 +8,6 @@ from ai21.models import (
     Completion,
     CompletionFinishReason,
     CompletionData,
-    SegmentationResponse,
     SummarizeResponse,
     SummarizeBySegmentResponse,
     SegmentSummary,
@@ -16,7 +15,6 @@ from ai21.models import (
 )
 from ai21.models.chat import ChatCompletionResponse, ChatCompletionResponseChoice
 from ai21.models.chat.chat_message import AssistantMessage
-from ai21.models.responses.segmentation_response import Segment
 from ai21.models.usage_info import UsageInfo
 
 
@@ -156,21 +154,6 @@ def get_completions_response():
     completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
-
-
-def get_segmentation_response():
-    expected_dict = {
-        "id": "123",
-        "segments": [
-            {"segmentText": "Further reading", "segmentType": "h2"},
-        ],
-    }
-
-    segmentation_response = SegmentationResponse(
-        id="123", segments=[Segment(segment_text="Further reading", segment_type="h2")]
-    )
-
-    return segmentation_response, expected_dict, SegmentationResponse
 
 
 def get_summarize_response():

@@ -18,7 +18,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     argnames=["test_file_name"],
     argvalues=[
         ("completion.py",),
-        ("segmentation.py",),
         ("summarize.py",),
         ("summarize_by_segment.py",),
         ("tokenization.py",),
@@ -35,7 +34,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     ids=[
         "when_answer__should_return_ok",
         "when_completion__should_return_ok",
-        "when_segmentation__should_return_ok",
         "when_summarize__should_return_ok",
         "when_summarize_by_segment__should_return_ok",
         "when_tokenization__should_return_ok",
@@ -65,7 +63,6 @@ def test_studio(test_file_name: str):
     argvalues=[
         ("async_chat.py",),
         ("async_completion.py",),
-        ("async_segmentation.py",),
         ("async_summarize.py",),
         ("async_summarize_by_segment.py",),
         # ("async_tokenization.py",),
@@ -80,7 +77,6 @@ def test_studio(test_file_name: str):
         "when_answer__should_return_ok",
         "when_chat__should_return_ok",
         "when_completion__should_return_ok",
-        "when_segmentation__should_return_ok",
         "when_summarize__should_return_ok",
         "when_summarize_by_segment__should_return_ok",
         # "when_tokenization__should_return_ok",

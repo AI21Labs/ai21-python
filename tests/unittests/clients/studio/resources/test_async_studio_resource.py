@@ -9,7 +9,6 @@ from tests.unittests.clients.studio.resources.conftest import (
     get_studio_chat,
     get_chat_completions,
     get_studio_completion,
-    get_studio_segmentation,
     get_studio_summarization,
     get_studio_summarize_by_segment,
 )
@@ -27,7 +26,6 @@ class TestAsyncStudioResources:
             "async_chat_completions",
             "async_studio_completion",
             "async_studio_completion_with_extra_args",
-            "async_studio_segmentation",
             "async_studio_summarization",
             "async_studio_summarize_by_segment",
         ],
@@ -44,7 +42,6 @@ class TestAsyncStudioResources:
             (get_chat_completions(is_async=True)),
             (get_studio_completion(is_async=True)),
             (get_studio_completion(is_async=True, temperature=0.5, max_tokens=50)),
-            (get_studio_segmentation(is_async=True)),
             (get_studio_summarization(is_async=True)),
             (get_studio_summarize_by_segment(is_async=True)),
         ],
