@@ -7,7 +7,6 @@ from ai21.clients.studio.resources.chat import ChatCompletions
 from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.clients.studio.resources.studio_gec import StudioGEC, AsyncStudioGEC
 from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase, AsyncStudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
 from ai21.clients.studio.resources.studio_summarize import StudioSummarize, AsyncStudioSummarize
@@ -23,7 +22,6 @@ from ai21.models import (
     RoleType,
     ChatResponse,
     CompletionsResponse,
-    GECResponse,
     ParaphraseStyleType,
     ParaphraseResponse,
     DocumentType,
@@ -200,35 +198,6 @@ def get_studio_completion(is_async: bool = True, **kwargs):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=CompletionsResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_gec(is_async: bool = False):
-    json_response = {
-        "id": "some-id",
-        "corrections": [
-            {
-                "suggestion": "text to fix",
-                "startIndex": 9,
-                "endIndex": 10,
-                "originalText": "text to fi",
-                "correctionType": "Spelling",
-            }
-        ],
-    }
-    text = "text to fi"
-
-    resource = AsyncStudioGEC if is_async else StudioGEC
-
-    return (
-        resource,
-        {"text": text},
-        "gec",
-        {
-            "text": text,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=GECResponse, obj_dict=json_response),
     )
 
 

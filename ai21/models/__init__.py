@@ -17,7 +17,6 @@ from ai21.models.responses.conversational_rag_response import ConversationalRagR
 from ai21.models.responses.custom_model_response import CustomBaseModelResponse, BaseModelMetadata
 from ai21.models.responses.dataset_response import DatasetResponse
 from ai21.models.responses.file_response import FileResponse
-from ai21.models.responses.gec_response import GECResponse, Correction, CorrectionType
 from ai21.models.responses.library_answer_response import LibraryAnswerResponse, SourceDocument
 from ai21.models.responses.library_search_response import LibrarySearchResponse, LibrarySearchResult
 from ai21.models.responses.paraphrase_response import ParaphraseResponse, Suggestion
@@ -47,9 +46,6 @@ __all__ = [
     "BaseModelMetadata",
     "DatasetResponse",
     "FileResponse",
-    "GECResponse",
-    "Correction",
-    "CorrectionType",
     "LibraryAnswerResponse",
     "SourceDocument",
     "LibrarySearchResponse",

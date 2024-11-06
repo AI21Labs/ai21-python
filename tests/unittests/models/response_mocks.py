@@ -9,8 +9,6 @@ from ai21.models import (
     Completion,
     CompletionFinishReason,
     CompletionData,
-    GECResponse,
-    Correction,
     ParaphraseResponse,
     Suggestion,
     SegmentationResponse,
@@ -177,32 +175,6 @@ def get_completions_response():
     completion_response = CompletionsResponse(id="123-abc", prompt=prompt, completions=[completion])
 
     return completion_response, expected_dict, CompletionsResponse
-
-
-def get_gec_response():
-    expected_dict = {
-        "id": "123",
-        "corrections": [
-            {
-                "suggestion": "love rock",
-                "startIndex": 2,
-                "endIndex": 9,
-                "originalText": "luv rok",
-                "correctionType": "Spelling",
-            }
-        ],
-    }
-
-    gec_response = GECResponse(
-        id="123",
-        corrections=[
-            Correction(
-                suggestion="love rock", start_index=2, end_index=9, original_text="luv rok", correction_type="Spelling"
-            )
-        ],
-    )
-
-    return gec_response, expected_dict, GECResponse
 
 
 def get_paraphrase_response():

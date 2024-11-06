@@ -5,7 +5,6 @@ import boto3
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.sagemaker.resources.sagemaker_answer import SageMakerAnswer, AsyncSageMakerAnswer
 from ai21.clients.sagemaker.resources.sagemaker_completion import SageMakerCompletion, AsyncSageMakerCompletion
-from ai21.clients.sagemaker.resources.sagemaker_gec import SageMakerGEC, AsyncSageMakerGEC
 from ai21.clients.sagemaker.resources.sagemaker_paraphrase import SageMakerParaphrase, AsyncSageMakerParaphrase
 from ai21.clients.sagemaker.resources.sagemaker_summarize import SageMakerSummarize, AsyncSageMakerSummarize
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
@@ -47,7 +46,6 @@ class AI21SageMakerClient:
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
         self.answer = SageMakerAnswer(base_url=base_url, region=region, client=self._http_client, aws_session=session)
-        self.gec = SageMakerGEC(base_url=base_url, region=region, client=self._http_client, aws_session=session)
         self.summarize = SageMakerSummarize(
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
@@ -90,7 +88,6 @@ class AsyncAI21SageMakerClient:
         self.answer = AsyncSageMakerAnswer(
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
-        self.gec = AsyncSageMakerGEC(base_url=base_url, region=region, client=self._http_client, aws_session=session)
         self.summarize = AsyncSageMakerSummarize(
             base_url=base_url, region=region, client=self._http_client, aws_session=session
         )
