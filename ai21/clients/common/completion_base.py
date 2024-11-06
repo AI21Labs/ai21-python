@@ -42,7 +42,6 @@ class Completion(ABC):
         temperature: float | NOT_GIVEN = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
         top_k_return: int | NotGiven = NOT_GIVEN,
-        custom_model: str | NotGiven = NOT_GIVEN,
         stop_sequences: List[str] | NotGiven = NOT_GIVEN,
         frequency_penalty: Penalty | NotGiven = NOT_GIVEN,
         presence_penalty: Penalty | NotGiven = NOT_GIVEN,
@@ -60,7 +59,6 @@ class Completion(ABC):
         :param temperature: A value controlling the "creativity" of the model's responses.
         :param top_p: A value controlling the diversity of the model's responses.
         :param top_k_return: The number of top-scoring tokens to consider for each generation step.
-        :param custom_model:
         :param stop_sequences: Stops decoding if any of the strings is generated
         :param frequency_penalty: A penalty applied to tokens that are frequently generated.
         :param presence_penalty:  A penalty applied to tokens that are already present in the prompt.
@@ -84,7 +82,6 @@ class Completion(ABC):
         temperature: float | NotGiven,
         top_p: float | NotGiven,
         top_k_return: int | NotGiven,
-        custom_model: str | NotGiven,
         stop_sequences: List[str] | NotGiven,
         frequency_penalty: Penalty | NotGiven,
         presence_penalty: Penalty | NotGiven,
@@ -96,7 +93,6 @@ class Completion(ABC):
         return remove_not_given(
             {
                 "model": model,
-                "customModel": custom_model,
                 "prompt": prompt,
                 "maxTokens": max_tokens,
                 "numResults": num_results,
@@ -114,12 +110,6 @@ class Completion(ABC):
             }
         )
 
-    def _get_completion_path(self, model: str, custom_model: str | NotGiven = NOT_GIVEN):
-        path = f"/{model}"
-
-        if custom_model:
-            path = f"{path}/{custom_model}"
-
-        path = f"{path}/{self._module_name}"
-
+    def _get_completion_path(self, model: str):
+        path = f"/{model}/{self._module_name}"
         return path

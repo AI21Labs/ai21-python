@@ -20,7 +20,6 @@ class StudioCompletion(StudioResource, Completion):
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
         top_k_return: int | NotGiven = NOT_GIVEN,
-        custom_model: str | NotGiven = NOT_GIVEN,
         stop_sequences: List[str] | NotGiven = NOT_GIVEN,
         frequency_penalty: Penalty | NotGiven = NOT_GIVEN,
         presence_penalty: Penalty | NotGiven = NOT_GIVEN,
@@ -30,7 +29,7 @@ class StudioCompletion(StudioResource, Completion):
         **kwargs,
     ) -> CompletionsResponse:
         model = self._get_model(model=model, model_id=kwargs.pop("model_id", None))
-        path = self._get_completion_path(model=model, custom_model=custom_model)
+        path = self._get_completion_path(model=model)
         body = self._create_body(
             model=model,
             prompt=prompt,
@@ -40,7 +39,6 @@ class StudioCompletion(StudioResource, Completion):
             temperature=temperature,
             top_p=top_p,
             top_k_return=top_k_return,
-            custom_model=custom_model,
             stop_sequences=stop_sequences,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
@@ -64,7 +62,6 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
         top_k_return: int | NotGiven = NOT_GIVEN,
-        custom_model: str | NotGiven = NOT_GIVEN,
         stop_sequences: List[str] | NotGiven = NOT_GIVEN,
         frequency_penalty: Penalty | NotGiven = NOT_GIVEN,
         presence_penalty: Penalty | NotGiven = NOT_GIVEN,
@@ -74,7 +71,7 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
         **kwargs,
     ) -> CompletionsResponse:
         model = self._get_model(model=model, model_id=kwargs.pop("model_id", None))
-        path = self._get_completion_path(model=model, custom_model=custom_model)
+        path = self._get_completion_path(model=model)
         body = self._create_body(
             model=model,
             prompt=prompt,
@@ -84,7 +81,6 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
             temperature=temperature,
             top_p=top_p,
             top_k_return=top_k_return,
-            custom_model=custom_model,
             stop_sequences=stop_sequences,
             frequency_penalty=frequency_penalty,
             presence_penalty=presence_penalty,
