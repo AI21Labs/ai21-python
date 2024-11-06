@@ -7,7 +7,6 @@ from ai21_tokenizer import PreTrainedTokenizers
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
-from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
 from ai21.clients.studio.resources.studio_library import StudioLibrary
@@ -52,7 +51,6 @@ class AI21Client(AI21HTTPClient):
         self.chat: StudioChat = StudioChat(self)
         self.summarize = StudioSummarize(self)
         self.summarize_by_segment = StudioSummarizeBySegment(self)
-        self.answer = StudioAnswer(self)
         self.library = StudioLibrary(self)
         self.segmentation = StudioSegmentation(self)
         self.beta = Beta(self)

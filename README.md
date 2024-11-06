@@ -388,32 +388,7 @@ For a more detailed example, see the chat [sync](examples/studio/conversational_
 
 ---
 
-## More Models
-
-## TSMs
-
-AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
-The full documentation and guides can be found [here](https://docs.ai21.com/docs/task-specific).
-
-### Contextual Answers
-
-The `answer` API allows you to access our high-quality question answering model.
-
-```python
-from ai21 import AI21Client
-
-client = AI21Client()
-response = client.answer.create(
-    context="This is a text is for testing purposes",
-    question="Question about context",
-)
-```
-
-A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
-
 ### File Upload
-
----
 
 ```python
 from ai21 import AI21Client

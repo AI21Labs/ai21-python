@@ -12,8 +12,6 @@ SAGEMAKER_PATH = Path(__file__).parent.parent.parent.parent / "examples" / SAGEM
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("answer.py",),
-        ("async_answer.py",),
         ("completion.py",),
         ("async_completion.py",),
         ("summarization.py",),

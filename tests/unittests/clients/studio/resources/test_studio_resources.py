@@ -1,15 +1,10 @@
 from typing import TypeVar, Callable
 
 import pytest
-import httpx
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_resource import StudioResource
-from ai21.models import AnswerResponse
-from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.ai21_base_model import AI21BaseModel
 from tests.unittests.clients.studio.resources.conftest import (
-    get_studio_answer,
     get_studio_chat,
     get_studio_completion,
     get_studio_segmentation,
@@ -19,16 +14,12 @@ from tests.unittests.clients.studio.resources.conftest import (
 )
 
 _BASE_URL = "https://test.api.ai21.com/studio/v1"
-_DUMMY_CONTEXT = "What is the answer to life, the universe and everything?"
-_DUMMY_QUESTION = "What is the answer?"
-
 T = TypeVar("T", bound=StudioResource)
 
 
 class TestStudioResources:
     @pytest.mark.parametrize(
         ids=[
-            "studio_answer",
             "studio_chat",
             "chat_completions",
             "studio_completion",
@@ -46,7 +37,6 @@ class TestStudioResources:
             "expected_response",
         ],
         argvalues=[
-            (get_studio_answer()),
             (get_studio_chat()),
             (get_chat_completions()),
             (get_studio_completion(is_async=False)),
@@ -79,36 +69,6 @@ class TestStudioResources:
             method="POST",
             path=f"/{url_suffix}",
             body=expected_body,
-            params={},
-            stream=False,
-            files=None,
-        )
-
-    def test__create__when_pass_kwargs__should_pass_to_request(
-        self,
-        mock_ai21_studio_client: AI21HTTPClient,
-        mock_successful_httpx_response: httpx.Response,
-    ):
-        expected_answer = AnswerResponse(id="some-id", answer_in_context=True, answer="42")
-        mock_successful_httpx_response.json.return_value = _to_dict(expected_answer)
-
-        mock_ai21_studio_client.execute_http_request.return_value = mock_successful_httpx_response
-        studio_answer = StudioAnswer(mock_ai21_studio_client)
-
-        studio_answer.create(
-            context=_DUMMY_CONTEXT,
-            question=_DUMMY_QUESTION,
-            some_dummy_kwargs="some_dummy_value",
-        )
-
-        mock_ai21_studio_client.execute_http_request.assert_called_with(
-            method="POST",
-            path="/answer",
-            body={
-                "context": _DUMMY_CONTEXT,
-                "question": _DUMMY_QUESTION,
-                "some_dummy_kwargs": "some_dummy_value",
-            },
             params={},
             stream=False,
             files=None,

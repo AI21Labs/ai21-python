@@ -5,7 +5,6 @@ import httpx
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
-from ai21.clients.studio.resources.studio_answer import AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_library import AsyncStudioLibrary
@@ -48,7 +47,6 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
         self.chat: AsyncStudioChat = AsyncStudioChat(self)
         self.summarize = AsyncStudioSummarize(self)
         self.summarize_by_segment = AsyncStudioSummarizeBySegment(self)
-        self.answer = AsyncStudioAnswer(self)
         self.library = AsyncStudioLibrary(self)
         self.segmentation = AsyncStudioSegmentation(self)
         self.beta = AsyncBeta(self)

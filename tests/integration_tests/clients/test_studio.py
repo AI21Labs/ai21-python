@@ -17,7 +17,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("answer.py",),
         ("completion.py",),
         ("segmentation.py",),
         ("summarize.py",),
@@ -64,7 +63,6 @@ def test_studio(test_file_name: str):
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("async_answer.py",),
         ("async_chat.py",),
         ("async_completion.py",),
         ("async_segmentation.py",),

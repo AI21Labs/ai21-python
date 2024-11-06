@@ -1,5 +1,4 @@
 from ai21.models import (
-    AnswerResponse,
     ChatResponse,
     ChatOutput,
     RoleType,
@@ -19,22 +18,6 @@ from ai21.models.chat import ChatCompletionResponse, ChatCompletionResponseChoic
 from ai21.models.chat.chat_message import AssistantMessage
 from ai21.models.responses.segmentation_response import Segment
 from ai21.models.usage_info import UsageInfo
-
-
-def get_answer_response__answer_in_context_not_none():
-    expected_dict = {"id": "123", "answerInContext": True, "answer": "Koalas eat the leaves of Eucalyptus trees."}
-    answer_response = AnswerResponse(
-        id="123", answer_in_context=True, answer="Koalas eat the leaves of Eucalyptus trees."
-    )
-
-    return answer_response, expected_dict, AnswerResponse
-
-
-def get_answer_response__answer_in_context_is_none():
-    expected_dict = {"id": "123", "answerInContext": False, "answer": None}
-    answer_response = AnswerResponse(id="123", answer_in_context=False)
-
-    return answer_response, expected_dict, AnswerResponse
 
 
 def get_chat_response():

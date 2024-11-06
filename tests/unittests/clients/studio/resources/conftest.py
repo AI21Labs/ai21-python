@@ -4,7 +4,6 @@ from pytest_mock import MockerFixture
 
 from ai21.clients.studio.resources.chat import AsyncChatCompletions
 from ai21.clients.studio.resources.chat import ChatCompletions
-from ai21.clients.studio.resources.studio_answer import StudioAnswer, AsyncStudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation, AsyncStudioSegmentation
@@ -16,7 +15,6 @@ from ai21.clients.studio.resources.studio_summarize_by_segment import (
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models import (
-    AnswerResponse,
     ChatMessage,
     RoleType,
     ChatResponse,
@@ -59,25 +57,6 @@ def mock_async_successful_httpx_response(mocker: MockerFixture) -> httpx.Respons
     async_mock_httpx_response.status_code = 200
 
     return async_mock_httpx_response
-
-
-def get_studio_answer(is_async: bool = False):
-    _DUMMY_CONTEXT = "What is the answer to life, the universe and everything?"
-    _DUMMY_QUESTION = "What is the answer?"
-    json_response = {"id": "some-id", "answer_in_context": True, "answer": "42"}
-    resource = AsyncStudioAnswer if is_async else StudioAnswer
-
-    return (
-        resource,
-        {"context": _DUMMY_CONTEXT, "question": _DUMMY_QUESTION},
-        "answer",
-        {
-            "context": _DUMMY_CONTEXT,
-            "question": _DUMMY_QUESTION,
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=AnswerResponse, obj_dict=json_response),
-    )
 
 
 def get_studio_chat(is_async: bool = False):

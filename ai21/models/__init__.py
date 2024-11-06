@@ -3,7 +3,6 @@ from ai21.models.chat_message import ChatMessage
 from ai21.models.document_type import DocumentType
 from ai21.models.improvement_type import ImprovementType
 from ai21.models.penalty import Penalty
-from ai21.models.responses.answer_response import AnswerResponse
 from ai21.models.responses.chat_response import ChatResponse, ChatOutput, FinishReason
 from ai21.models.responses.completion_response import (
     CompletionsResponse,
@@ -28,7 +27,6 @@ __all__ = [
     "ImprovementType",
     "DocumentType",
     "SummaryMethod",
-    "AnswerResponse",
     "ChatResponse",
     "ChatOutput",
     "FinishReason",
