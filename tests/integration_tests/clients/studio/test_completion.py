@@ -24,7 +24,6 @@ def test_completion():
         top_k_return=0.2,
         stop_sequences=["##"],
         num_results=num_results,
-        custom_model=None,
         epoch=1,
         logit_bias={"▁a▁box▁of": -100.0},
         count_penalty=Penalty(
@@ -149,7 +148,6 @@ async def test_async_completion():
         top_k_return=0.2,
         stop_sequences=["##"],
         num_results=num_results,
-        custom_model=None,
         epoch=1,
         logit_bias={"▁a▁box▁of": -100.0},
         count_penalty=Penalty(

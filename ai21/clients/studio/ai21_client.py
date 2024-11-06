@@ -10,8 +10,6 @@ from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_answer import StudioAnswer
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_completion import StudioCompletion
-from ai21.clients.studio.resources.studio_custom_model import StudioCustomModel
-from ai21.clients.studio.resources.studio_dataset import StudioDataset
 from ai21.clients.studio.resources.studio_library import StudioLibrary
 from ai21.clients.studio.resources.studio_paraphrase import StudioParaphrase
 from ai21.clients.studio.resources.studio_segmentation import StudioSegmentation
@@ -56,8 +54,6 @@ class AI21Client(AI21HTTPClient):
         self.summarize = StudioSummarize(self)
         self.paraphrase = StudioParaphrase(self)
         self.summarize_by_segment = StudioSummarizeBySegment(self)
-        self.custom_model = StudioCustomModel(self)
-        self.dataset = StudioDataset(self)
         self.answer = StudioAnswer(self)
         self.library = StudioLibrary(self)
         self.segmentation = StudioSegmentation(self)
