@@ -18,7 +18,6 @@ EXPECTED_ALL = [
     "AI21AzureClient",
     "AsyncAI21AzureClient",
     "AsyncAI21BedrockClient",
-    "AsyncAI21SageMakerClient",
     "AI21VertexClient",
     "AsyncAI21VertexClient",
 ]
