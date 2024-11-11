@@ -111,5 +111,4 @@ class Completion(ABC):
         )
 
     def _get_completion_path(self, model: str):
-        path = f"/{model}/{self._module_name}"
-        return path
+        return f"/{model}/{self._module_name}"
