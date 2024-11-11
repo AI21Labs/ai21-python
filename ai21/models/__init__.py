@@ -13,8 +13,6 @@ from ai21.models.responses.completion_response import (
 )
 from ai21.models.responses.conversational_rag_response import ConversationalRagResponse, ConversationalRagSource
 from ai21.models.responses.file_response import FileResponse
-from ai21.models.responses.library_answer_response import LibraryAnswerResponse, SourceDocument
-from ai21.models.responses.library_search_response import LibrarySearchResponse, LibrarySearchResult
 from ai21.models.summary_method import SummaryMethod
 
 __all__ = [
@@ -33,10 +31,6 @@ __all__ = [
     "CompletionData",
     "Prompt",
     "FileResponse",
-    "LibraryAnswerResponse",
-    "SourceDocument",
-    "LibrarySearchResponse",
-    "LibrarySearchResult",
     "ConversationalRagResponse",
     "ConversationalRagSource",
 ]

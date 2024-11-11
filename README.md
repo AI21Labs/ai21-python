@@ -304,7 +304,7 @@ Note that jamba-instruct supports async and streaming as well.
 
 </details>
 
-For a more detailed example, see the completion [examples](examples/studio/completion.py).
+For a more detailed example, see the completion [examples](examples/studio/chat/chat_completions.py).
 
 ---
 

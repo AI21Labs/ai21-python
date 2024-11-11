@@ -5,7 +5,7 @@ from typing import Optional, List
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.models import FileResponse, LibraryAnswerResponse, LibrarySearchResponse
+from ai21.models import FileResponse
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -16,8 +16,6 @@ class StudioLibrary(StudioResource):
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
         self.files = LibraryFiles(client)
-        self.search = LibrarySearch(client)
-        self.answer = LibraryAnswer(client)
 
 
 class LibraryFiles(StudioResource):
@@ -74,64 +72,12 @@ class LibraryFiles(StudioResource):
         self._delete(path=f"/{self._module_name}/{file_id}")
 
 
-class LibrarySearch(StudioResource):
-    _module_name = "library/search"
-
-    def create(
-        self,
-        query: str,
-        *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        max_segments: Optional[int] | NotGiven = NOT_GIVEN,
-        **kwargs,
-    ) -> LibrarySearchResponse:
-        body = remove_not_given(
-            {
-                "query": query,
-                "path": path,
-                "fieldIds": field_ids,
-                "maxSegments": max_segments,
-                **kwargs,
-            }
-        )
-
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=LibrarySearchResponse)
-
-
-class LibraryAnswer(StudioResource):
-    _module_name = "library/answer"
-
-    def create(
-        self,
-        question: str,
-        *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        **kwargs,
-    ) -> LibraryAnswerResponse:
-        body = remove_not_given(
-            {
-                "question": question,
-                "path": path,
-                "fieldIds": field_ids,
-                "labels": labels,
-                **kwargs,
-            }
-        )
-
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=LibraryAnswerResponse)
-
-
 class AsyncStudioLibrary(AsyncStudioResource):
     _module_name = "library/files"
 
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
         self.files = AsyncLibraryFiles(client)
-        self.search = AsyncLibrarySearch(client)
-        self.answer = AsyncLibraryAnswer(client)
 
 
 class AsyncLibraryFiles(AsyncStudioResource):
@@ -186,53 +132,3 @@ class AsyncLibraryFiles(AsyncStudioResource):
 
     async def delete(self, file_id: str) -> None:
         await self._delete(path=f"/{self._module_name}/{file_id}")
-
-
-class AsyncLibrarySearch(AsyncStudioResource):
-    _module_name = "library/search"
-
-    async def create(
-        self,
-        query: str,
-        *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        max_segments: Optional[int] | NotGiven = NOT_GIVEN,
-        **kwargs,
-    ) -> LibrarySearchResponse:
-        body = remove_not_given(
-            {
-                "query": query,
-                "path": path,
-                "fieldIds": field_ids,
-                "maxSegments": max_segments,
-                **kwargs,
-            }
-        )
-
-        return await self._post(path=f"/{self._module_name}", body=body, response_cls=LibrarySearchResponse)
-
-
-class AsyncLibraryAnswer(AsyncStudioResource):
-    _module_name = "library/answer"
-
-    async def create(
-        self,
-        question: str,
-        *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        field_ids: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        **kwargs,
-    ) -> LibraryAnswerResponse:
-        body = remove_not_given(
-            {
-                "question": question,
-                "path": path,
-                "fieldIds": field_ids,
-                "labels": labels,
-                **kwargs,
-            }
-        )
-
-        return await self._post(path=f"/{self._module_name}", body=body, response_cls=LibraryAnswerResponse)

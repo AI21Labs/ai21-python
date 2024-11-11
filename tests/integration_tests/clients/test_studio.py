@@ -17,7 +17,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("completion.py",),
+        # ("completion.py",),
         ("tokenization.py",),
         ("chat/chat_completions.py",),
         ("chat/chat_completions_jamba_instruct.py",),
@@ -26,12 +26,9 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("chat/chat_function_calling.py",),
         ("chat/chat_function_calling_multiple_tools.py",),
         ("chat/chat_response_format.py",),
-        # ("library.py", ),
-        # ("library_answer.py", ),
     ],
     ids=[
-        "when_answer__should_return_ok",
-        "when_completion__should_return_ok",
+        # "when_completion__should_return_ok",
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_chat_completions_jamba_instruct__should_return_ok",
@@ -40,8 +37,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         "when_chat_completions_with_function_calling__should_return_ok",
         "when_chat_completions_with_function_calling_multiple_tools_should_return_ok",
         "when_chat_completions_with_response_format__should_return_ok",
-        # "when_library__should_return_ok",
-        # "when_library_answer__should_return_ok",
     ],
 )
 def test_studio(test_file_name: str):
@@ -58,7 +53,7 @@ def test_studio(test_file_name: str):
     argnames=["test_file_name"],
     argvalues=[
         ("async_chat.py",),
-        ("async_completion.py",),
+        # ("async_completion.py",),
         # ("async_tokenization.py",),
         ("chat/async_chat_completions.py",),
         ("chat/async_stream_chat_completions.py",),
@@ -69,7 +64,7 @@ def test_studio(test_file_name: str):
     ],
     ids=[
         "when_chat__should_return_ok",
-        "when_completion__should_return_ok",
+        # "when_completion__should_return_ok",
         # "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
