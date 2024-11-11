@@ -1,7 +1,15 @@
 # CHANGELOG
 
 
-## v2.16.0 (2024-11-11)
+## v3.0.0 (2024-11-11)
+
+### Breaking
+
+* feat!: BREAKING CHANGE: Version v3.0.0 (#229) ([`53bac6c`](https://github.com/AI21Labs/ai21-python/commit/53bac6c0b373b196fabe38f133213ac9d24e7e73))
+
+### Chores
+
+* chore(release): v2.16.0 [skip ci] ([`d8a6ecc`](https://github.com/AI21Labs/ai21-python/commit/d8a6ecc0da4f19183cdba826cf6641ad39dafbe8))
 
 ### Features
 
