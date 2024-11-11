@@ -17,7 +17,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        # ("completion.py",),
         ("tokenization.py",),
         ("chat/chat_completions.py",),
         ("chat/chat_completions_jamba_instruct.py",),
@@ -28,7 +27,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("chat/chat_response_format.py",),
     ],
     ids=[
-        # "when_completion__should_return_ok",
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_chat_completions_jamba_instruct__should_return_ok",
@@ -53,23 +51,15 @@ def test_studio(test_file_name: str):
     argnames=["test_file_name"],
     argvalues=[
         ("async_chat.py",),
-        # ("async_completion.py",),
-        # ("async_tokenization.py",),
         ("chat/async_chat_completions.py",),
         ("chat/async_stream_chat_completions.py",),
-        # ("async_library.py", ),
-        # ("async_library_answer.py", ),
         ("conversational_rag/conversational_rag.py",),
         ("conversational_rag/async_conversational_rag.py",),
     ],
     ids=[
         "when_chat__should_return_ok",
-        # "when_completion__should_return_ok",
-        # "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
-        # "when_library__should_return_ok",
-        # "when_library_answer__should_return_ok",
         "when_conversational_rag__should_return_ok",
         "when_async_conversational_rag__should_return_ok",
     ],
