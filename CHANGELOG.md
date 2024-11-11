@@ -1,9 +1,20 @@
 # CHANGELOG
 
 
+## v2.16.0 (2024-11-11)
+
+### Features
+
+* feat: Sunset tsms and j2 (#225)
+
+feat!: Removed Legacy TSM Models ([`b39c92c`](https://github.com/AI21Labs/ai21-python/commit/b39c92cfbdc88c9f98f3d5bfb20aa850f6211b78))
+
+
 ## v2.15.2 (2024-11-05)
 
 ### Chores
+
+* chore(release): v2.15.2 [skip ci] ([`b94594f`](https://github.com/AI21Labs/ai21-python/commit/b94594f70a68223059505c712fea54111145cd50))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.3 (#216)
 
