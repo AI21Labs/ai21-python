@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from ai21.models.responses.assistant_response import AssistantResponse
+from ai21.models.responses.assistant_response import AssistantResponse, Optimization, ToolsResources, Model, Tool
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -17,24 +17,13 @@ class Assistant(ABC):
         name: str,
         *,
         description: str | NotGiven = NOT_GIVEN,
-        optimization: str | NotGiven = NOT_GIVEN,
+        optimization: Optimization | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolsResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
-        """
-        :param name: The name of the assistant.
-        :param description: The description of the assistant.
-        :param optimization: The optimization to use.
-        :param avatar: The avatar to use.
-        :param models: The models to use.
-        :param tools: The tools to use.
-        :param tool_resources: The tool resources to use.
-        :param kwargs: Additional keyword arguments.
-        :return: The response object.
-        """
         pass
 
     def _create_body(
@@ -64,17 +53,10 @@ class Assistant(ABC):
 
     @abstractmethod
     def list(self) -> List[AssistantResponse]:
-        """
-        :return: The response object.
-        """
         pass
 
     @abstractmethod
     def get(self, assistant_id: str) -> AssistantResponse:
-        """
-        :param assistant_id: The ID of the assistant.
-        :return: The response object.
-        """
         pass
 
     @abstractmethod
@@ -84,26 +66,13 @@ class Assistant(ABC):
         *,
         name: str | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
-        optimization: str | NotGiven = NOT_GIVEN,
+        optimization: Optimization | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolsResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
-        """
-        :param assistant_id: The ID of the assistant.
-        :param name: The name of the assistant.
-        :param description: The description of the assistant.
-        :param optimization: The optimization to use.
-        :param avatar: The avatar to use.
-        :param is_archived: Whether the assistant is archived.
-        :param models: The models to use.
-        :param tools: The tools to use.
-        :param tool_resources: The tool resources to use.
-        :param kwargs: Additional keyword arguments.
-        :return: The response object.
-        """
         pass
 
     def _modify_body(
