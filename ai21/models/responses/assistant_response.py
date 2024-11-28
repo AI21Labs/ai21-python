@@ -28,7 +28,7 @@ class AssistantResponse(AI21BaseModel):
     is_archived: bool = False
     models: Optional[List[str]] = None
     tools: Optional[List[str]] = None
-    tool_resources: Optional[dict] = None
+    tool_resources: Optional[ToolResources] = None
 
 
 class ListAssistantResponse(AI21BaseModel):
