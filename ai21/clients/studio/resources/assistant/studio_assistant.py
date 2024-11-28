@@ -9,7 +9,6 @@ from ai21.clients.studio.resources.studio_resource import (
 )
 from ai21.models.responses.assistant_response import (
     AssistantResponse,
-    Model,
     Tool,
     ToolResources,
     ListAssistantResponse,
@@ -25,7 +24,7 @@ class StudioAssistant(StudioResource, Assistant):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
@@ -58,7 +57,7 @@ class StudioAssistant(StudioResource, Assistant):
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
@@ -84,7 +83,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
@@ -117,7 +116,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
