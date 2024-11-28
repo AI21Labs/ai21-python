@@ -3,7 +3,14 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from ai21.models.responses.assistant_response import AssistantResponse, Optimization, ToolsResources, Model, Tool
+from ai21.models.responses.assistant_response import (
+    AssistantResponse,
+    Optimization,
+    ToolResources,
+    Model,
+    Tool,
+    ListAssistantResponse,
+)
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -21,15 +28,15 @@ class Assistant(ABC):
         avatar: str | NotGiven = NOT_GIVEN,
         models: List[Model] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolsResources | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
         pass
 
     def _create_body(
         self,
-        name: str,
         *,
+        name: str,
         description: str | NotGiven,
         optimization: str | NotGiven,
         avatar: str | NotGiven,
@@ -52,7 +59,7 @@ class Assistant(ABC):
         )
 
     @abstractmethod
-    def list(self) -> List[AssistantResponse]:
+    def list(self) -> ListAssistantResponse:
         pass
 
     @abstractmethod
@@ -71,30 +78,6 @@ class Assistant(ABC):
         is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[Model] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolsResources | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
         pass
-
-    def _modify_body(
-        self,
-        name: str,
-        description: str | NotGiven,
-        optimization: str | NotGiven,
-        avatar: str | NotGiven,
-        is_archived: bool | NotGiven,
-        models: List[str] | NotGiven,
-        tools: List[str] | NotGiven,
-        tool_resources: dict | NotGiven,
-    ) -> Dict[str, Any]:
-        return remove_not_given(
-            {
-                "name": name,
-                "description": description,
-                "optimization": optimization,
-                "avatar": avatar,
-                "is_archived": is_archived,
-                "models": models,
-                "tools": tools,
-                "tool_resources": tool_resources,
-            }
-        )

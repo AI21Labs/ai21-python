@@ -9,7 +9,7 @@ Model = Literal["jamba-1-5", "jamba-1-5-large"]
 Tool = Literal["rag", "internet_research", "plan_approval"]
 
 
-class ToolsResources(TypedDict, total=False):
+class ToolResources(TypedDict, total=False):
     rag: Optional[dict]
     internet_research: Optional[dict]
     plan_approval: Optional[dict]
@@ -30,3 +30,7 @@ class AssistantResponse(AI21BaseModel):
     models: Optional[List[str]] = None
     tools: Optional[List[str]] = None
     tool_resources: Optional[dict] = None
+
+
+class ListAssistantResponse(AI21BaseModel):
+    results: List[AssistantResponse]
