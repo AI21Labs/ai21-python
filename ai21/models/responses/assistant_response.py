@@ -1,5 +1,7 @@
 from datetime import datetime
-from typing import Optional, List, Literal, TypedDict
+from typing import Optional, List, Literal
+
+from typing_extensions import TypedDict
 
 from ai21.models.ai21_base_model import AI21BaseModel
 
