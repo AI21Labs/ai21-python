@@ -7,7 +7,13 @@ from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
-from ai21.models.responses.assistant_response import AssistantResponse
+from ai21.models.responses.assistant_response import (
+    AssistantResponse,
+    Model,
+    Tool,
+    ToolResources,
+    ListAssistantResponse,
+)
 from ai21.types import NotGiven, NOT_GIVEN
 
 
@@ -19,9 +25,9 @@ class StudioAssistant(StudioResource, Assistant):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
         body = self._create_body(
@@ -40,9 +46,8 @@ class StudioAssistant(StudioResource, Assistant):
     def get(self, assistant_id: str) -> AssistantResponse:
         return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
 
-    def list(self) -> List[AssistantResponse]:
-        response = self._get(path=f"/{self._module_name}")
-        return response["results"]
+    def list(self) -> ListAssistantResponse:
+        return self._get(path=f"/{self._module_name}", response_cls=ListAssistantResponse)
 
     def modify(
         self,
@@ -53,11 +58,11 @@ class StudioAssistant(StudioResource, Assistant):
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
-        body = self._modify_body(
+        body = self._create_body(
             name=name,
             description=description,
             optimization=optimization,
@@ -79,9 +84,9 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
         body = self._create_body(
@@ -100,9 +105,8 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
     async def get(self, assistant_id: str) -> AssistantResponse:
         return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
 
-    async def list(self) -> List[AssistantResponse]:
-        response = await self._get(path=f"/{self._module_name}")
-        return response["results"]
+    async def list(self) -> ListAssistantResponse:
+        return await self._get(path=f"/{self._module_name}", response_cls=ListAssistantResponse)
 
     async def modify(
         self,
@@ -113,11 +117,11 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         optimization: str | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[str] | NotGiven = NOT_GIVEN,
-        tool_resources: dict | NotGiven = NOT_GIVEN,
+        models: List[Model] | NotGiven = NOT_GIVEN,
+        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
-        body = self._modify_body(
+        body = self._create_body(
             name=name,
             description=description,
             optimization=optimization,
