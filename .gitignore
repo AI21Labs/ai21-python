@@ -119,3 +119,5 @@ fabric.properties
 *.orig
 *.rej
 __pycache__
+
+tests/integration_tests/test-file/*

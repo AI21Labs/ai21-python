@@ -1,9 +1,28 @@
 # CHANGELOG
 
 
+## v3.0.0 (2024-11-11)
+
+### Breaking
+
+* feat!: BREAKING CHANGE: Version v3.0.0 (#229) ([`53bac6c`](https://github.com/AI21Labs/ai21-python/commit/53bac6c0b373b196fabe38f133213ac9d24e7e73))
+
+### Chores
+
+* chore(release): v2.16.0 [skip ci] ([`d8a6ecc`](https://github.com/AI21Labs/ai21-python/commit/d8a6ecc0da4f19183cdba826cf6641ad39dafbe8))
+
+### Features
+
+* feat: Sunset tsms and j2 (#225)
+
+feat!: Removed Legacy TSM Models ([`b39c92c`](https://github.com/AI21Labs/ai21-python/commit/b39c92cfbdc88c9f98f3d5bfb20aa850f6211b78))
+
+
 ## v2.15.2 (2024-11-05)
 
 ### Chores
+
+* chore(release): v2.15.2 [skip ci] ([`b94594f`](https://github.com/AI21Labs/ai21-python/commit/b94594f70a68223059505c712fea54111145cd50))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.10.1 to 1.10.3 (#216)
 

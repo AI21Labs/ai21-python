@@ -304,7 +304,7 @@ Note that jamba-instruct supports async and streaming as well.
 
 </details>
 
-For a more detailed example, see the completion [examples](examples/studio/completion.py).
+For a more detailed example, see the completion [examples](examples/studio/chat/chat_completions.py).
 
 ---
 
@@ -388,32 +388,7 @@ For a more detailed example, see the chat [sync](examples/studio/conversational_
 
 ---
 
-## More Models
-
-## TSMs
-
-AI21 Studio's Task-Specific Models offer a range of powerful tools. These models have been specifically designed for their respective tasks and provide high-quality results while optimizing efficiency.
-The full documentation and guides can be found [here](https://docs.ai21.com/docs/task-specific).
-
-### Contextual Answers
-
-The `answer` API allows you to access our high-quality question answering model.
-
-```python
-from ai21 import AI21Client
-
-client = AI21Client()
-response = client.answer.create(
-    context="This is a text is for testing purposes",
-    question="Question about context",
-)
-```
-
-A detailed explanation on Contextual Answers, can be found [here](https://docs.ai21.com/docs/contextual-answers-api)
-
 ### File Upload
-
----
 
 ```python
 from ai21 import AI21Client
@@ -429,8 +404,6 @@ file_id = client.library.files.create(
 
 uploaded_file = client.library.files.get(file_id)
 ```
-
-For more information on more Task Specific Models, see the [documentation](https://docs.ai21.com/reference/paraphrase-api-ref).
 
 ## Token Counting
 
