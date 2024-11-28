@@ -7,7 +7,6 @@ from ai21.models.responses.assistant_response import (
     AssistantResponse,
     Optimization,
     ToolResources,
-    Model,
     Tool,
     ListAssistantResponse,
 )
@@ -26,7 +25,7 @@ class Assistant(ABC):
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
@@ -76,7 +75,7 @@ class Assistant(ABC):
         optimization: Optimization | NotGiven = NOT_GIVEN,
         avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
-        models: List[Model] | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:

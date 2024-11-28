@@ -5,7 +5,6 @@ from ai21.models.ai21_base_model import AI21BaseModel
 
 
 Optimization = Literal["cost", "latency"]
-Model = Literal["jamba-1-5", "jamba-1-5-large"]
 Tool = Literal["rag", "internet_research", "plan_approval"]
 
 
@@ -21,7 +20,7 @@ class AssistantResponse(AI21BaseModel):
     updated_at: datetime
     object: str
     name: str
-    description: Optional[str]
+    description: Optional[str] = None
     optimization: str
     organization_id: str
     user_id: str
