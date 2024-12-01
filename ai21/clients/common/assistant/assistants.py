@@ -3,18 +3,13 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from ai21.models.responses.assistant_response import (
-    AssistantResponse,
-    Optimization,
-    ToolResources,
-    Tool,
-    ListAssistantResponse,
-)
+from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
+from ai21.models.responses.assistant_response import Assistant, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
 
-class Assistant(ABC):
+class Assistants(ABC):
     _module_name = "assistants"
 
     @abstractmethod
@@ -29,7 +24,7 @@ class Assistant(ABC):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         pass
 
     def _create_body(
@@ -58,11 +53,11 @@ class Assistant(ABC):
         )
 
     @abstractmethod
-    def list(self) -> ListAssistantResponse:
+    def list(self) -> ListAssistant:
         pass
 
     @abstractmethod
-    def get(self, assistant_id: str) -> AssistantResponse:
+    def get(self, assistant_id: str) -> Assistant:
         pass
 
     @abstractmethod
@@ -78,5 +73,5 @@ class Assistant(ABC):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         pass
