@@ -20,7 +20,7 @@ class AssistantResponse(AI21BaseModel):
     id: str
     created_at: datetime
     updated_at: datetime
-    object: str
+    object: Literal["assistant"] = "assistant"
     name: str
     description: Optional[str] = None
     optimization: str

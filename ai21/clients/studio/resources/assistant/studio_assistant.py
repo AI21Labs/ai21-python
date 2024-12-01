@@ -99,7 +99,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
             **kwargs,
         )
 
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
 
     async def get(self, assistant_id: str) -> AssistantResponse:
         return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
