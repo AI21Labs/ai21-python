@@ -7,12 +7,8 @@ from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
-from ai21.models.responses.assistant_response import (
-    Assistant,
-    Tool,
-    ToolResources,
-    ListAssistant,
-)
+from ai21.models.assistant.assistant import Tool, ToolResources
+from ai21.models.responses.assistant_response import Assistant, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 
 

@@ -3,12 +3,8 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
-from ai21.models.assistant.assistant import Optimization, Tool
-from ai21.models.responses.assistant_response import (
-    Assistant,
-    ToolResources,
-    ListAssistant,
-)
+from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
+from ai21.models.responses.assistant_response import Assistant, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
