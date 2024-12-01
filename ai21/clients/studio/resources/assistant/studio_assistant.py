@@ -2,21 +2,21 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.assistant.assistant import Assistant
+from ai21.clients.common.assistant.assistants import Assistants
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
 from ai21.models.responses.assistant_response import (
-    AssistantResponse,
+    Assistant,
     Tool,
     ToolResources,
-    ListAssistantResponse,
+    ListAssistant,
 )
 from ai21.types import NotGiven, NOT_GIVEN
 
 
-class StudioAssistant(StudioResource, Assistant):
+class StudioAssistant(StudioResource, Assistants):
     def create(
         self,
         name: str,
@@ -28,7 +28,7 @@ class StudioAssistant(StudioResource, Assistant):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         body = self._create_body(
             name=name,
             description=description,
@@ -40,13 +40,13 @@ class StudioAssistant(StudioResource, Assistant):
             **kwargs,
         )
 
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
 
-    def get(self, assistant_id: str) -> AssistantResponse:
-        return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
+    def get(self, assistant_id: str) -> Assistant:
+        return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
 
-    def list(self) -> ListAssistantResponse:
-        return self._get(path=f"/{self._module_name}", response_cls=ListAssistantResponse)
+    def list(self) -> ListAssistant:
+        return self._get(path=f"/{self._module_name}", response_cls=ListAssistant)
 
     def modify(
         self,
@@ -60,7 +60,7 @@ class StudioAssistant(StudioResource, Assistant):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         body = self._create_body(
             name=name,
             description=description,
@@ -72,10 +72,10 @@ class StudioAssistant(StudioResource, Assistant):
             tool_resources=tool_resources,
         )
 
-        return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
+        return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=Assistant)
 
 
-class AsyncStudioAssistant(AsyncStudioResource, Assistant):
+class AsyncStudioAssistant(AsyncStudioResource, Assistants):
     async def create(
         self,
         name: str,
@@ -87,7 +87,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         body = self._create_body(
             name=name,
             description=description,
@@ -99,13 +99,13 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
             **kwargs,
         )
 
-        return await self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
 
-    async def get(self, assistant_id: str) -> AssistantResponse:
-        return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
+    async def get(self, assistant_id: str) -> Assistant:
+        return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
 
-    async def list(self) -> ListAssistantResponse:
-        return await self._get(path=f"/{self._module_name}", response_cls=ListAssistantResponse)
+    async def list(self) -> ListAssistant:
+        return await self._get(path=f"/{self._module_name}", response_cls=ListAssistant)
 
     async def modify(
         self,
@@ -119,7 +119,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> AssistantResponse:
+    ) -> Assistant:
         body = self._create_body(
             name=name,
             description=description,
@@ -131,4 +131,4 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistant):
             tool_resources=tool_resources,
         )
 
-        return await self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
+        return await self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=Assistant)

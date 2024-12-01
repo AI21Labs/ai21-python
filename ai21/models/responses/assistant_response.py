@@ -1,22 +1,11 @@
 from datetime import datetime
 from typing import Optional, List, Literal
 
-from typing_extensions import TypedDict
-
 from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.models.assistant.assistant import ToolResources
 
 
-Optimization = Literal["cost", "latency"]
-Tool = Literal["rag", "internet_research", "plan_approval"]
-
-
-class ToolResources(TypedDict, total=False):
-    rag: Optional[dict]
-    internet_research: Optional[dict]
-    plan_approval: Optional[dict]
-
-
-class AssistantResponse(AI21BaseModel):
+class Assistant(AI21BaseModel):
     id: str
     created_at: datetime
     updated_at: datetime
@@ -33,5 +22,5 @@ class AssistantResponse(AI21BaseModel):
     tool_resources: Optional[ToolResources] = None
 
 
-class ListAssistantResponse(AI21BaseModel):
-    results: List[AssistantResponse]
+class ListAssistant(AI21BaseModel):
+    results: List[Assistant]
