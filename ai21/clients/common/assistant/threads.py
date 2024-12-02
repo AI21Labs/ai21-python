@@ -15,5 +15,5 @@ class Threads(ABC):
         pass
 
     @abstractmethod
-    def get(self, thread_id: str) -> Thread:
+    def retrieve(self, thread_id: str) -> Thread:
         pass

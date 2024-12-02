@@ -14,7 +14,7 @@ class StudioThread(StudioResource, Threads):
 
         return self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)
 
-    def get(self, thread_id: str) -> Thread:
+    def retrieve(self, thread_id: str) -> Thread:
         return self._get(path=f"/{self._module_name}/{thread_id}", response_cls=Thread)
 
 
@@ -24,5 +24,5 @@ class AsyncStudioThread(AsyncStudioResource, Threads):
 
         return await self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)
 
-    async def get(self, thread_id: str) -> Thread:
+    async def retrieve(self, thread_id: str) -> Thread:
         return await self._get(path=f"/{self._module_name}/{thread_id}", response_cls=Thread)

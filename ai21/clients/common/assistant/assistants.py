@@ -57,7 +57,7 @@ class Assistants(ABC):
         pass
 
     @abstractmethod
-    def get(self, assistant_id: str) -> Assistant:
+    def retrieve(self, assistant_id: str) -> Assistant:
         pass
 
     @abstractmethod
