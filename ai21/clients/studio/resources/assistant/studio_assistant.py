@@ -38,7 +38,7 @@ class StudioAssistant(StudioResource, Assistants):
 
         return self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
 
-    def get(self, assistant_id: str) -> Assistant:
+    def retrieve(self, assistant_id: str) -> Assistant:
         return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
 
     def list(self) -> ListAssistant:
@@ -97,7 +97,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistants):
 
         return await self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
 
-    async def get(self, assistant_id: str) -> Assistant:
+    async def retrieve(self, assistant_id: str) -> Assistant:
         return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
 
     async def list(self) -> ListAssistant:
