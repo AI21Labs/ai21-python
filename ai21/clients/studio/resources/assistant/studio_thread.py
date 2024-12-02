@@ -17,7 +17,11 @@ class StudioThread(StudioResource, Threads):
 
         self.messages = StudioThreadMessage(client)
 
-    def create(self, messages: List[Message], **kwargs) -> Thread:
+    def create(
+        self,
+        messages: List[Message],
+        **kwargs,
+    ) -> Thread:
         body = dict(messages=messages)
 
         return self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)
@@ -32,7 +36,11 @@ class AsyncStudioThread(AsyncStudioResource, Threads):
 
         self.messages = AsyncStudioThreadMessage(client)
 
-    async def create(self, messages: List[Message], **kwargs) -> Thread:
+    async def create(
+        self,
+        messages: List[Message],
+        **kwargs,
+    ) -> Thread:
         body = dict(messages=messages)
 
         return await self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)

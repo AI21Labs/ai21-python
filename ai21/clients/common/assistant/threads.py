@@ -13,7 +13,11 @@ class Threads(ABC):
     messages: Messages
 
     @abstractmethod
-    def create(self, messages: List[Message], **kwargs) -> Thread:
+    def create(
+        self,
+        messages: List[Message],
+        **kwargs,
+    ) -> Thread:
         pass
 
     @abstractmethod

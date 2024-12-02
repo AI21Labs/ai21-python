@@ -11,7 +11,12 @@ class Messages(ABC):
 
     @abstractmethod
     def create(
-        self, thread_id: str, *, role: ThreadMessageRole, content: MessageContentText, **kwargs
+        self,
+        thread_id: str,
+        *,
+        role: ThreadMessageRole,
+        content: MessageContentText,
+        **kwargs,
     ) -> MessageResponse:
         pass
 

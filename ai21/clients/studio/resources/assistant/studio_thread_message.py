@@ -8,7 +8,12 @@ from ai21.models.responses.message_response import MessageResponse, ListMessageR
 
 class StudioThreadMessage(StudioResource, Messages):
     def create(
-        self, thread_id: str, *, role: ThreadMessageRole, content: MessageContentText, **kwargs
+        self,
+        thread_id: str,
+        *,
+        role: ThreadMessageRole,
+        content: MessageContentText,
+        **kwargs,
     ) -> MessageResponse:
         body = dict(
             role=role,
@@ -23,7 +28,12 @@ class StudioThreadMessage(StudioResource, Messages):
 
 class AsyncStudioThreadMessage(AsyncStudioResource, Messages):
     async def create(
-        self, thread_id: str, *, role: ThreadMessageRole, content: MessageContentText, **kwargs
+        self,
+        thread_id: str,
+        *,
+        role: ThreadMessageRole,
+        content: MessageContentText,
+        **kwargs,
     ) -> MessageResponse:
         body = dict(
             role=role,
