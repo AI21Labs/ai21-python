@@ -1,5 +1,5 @@
-from ai21.clients.studio.resources.assistant.studio_assistant import AsyncAssistant
-from ai21.clients.studio.resources.assistant.studio_thread import AsyncThread
+from ai21.clients.studio.resources.beta.assistant.assistant import AsyncAssistant
+from ai21.clients.studio.resources.beta.assistant.thread import AsyncThread
 from ai21.clients.studio.resources.studio_conversational_rag import AsyncStudioConversationalRag
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.assistant.threads import Threads
-from ai21.clients.studio.resources.assistant.studio_thread_message import ThreadMessage, AsyncThreadMessage
-from ai21.clients.studio.resources.assistant.studio_thread_run import AsyncThreadRun, ThreadRun
+from ai21.clients.common.beta.assistant.threads import Threads
+from ai21.clients.studio.resources.beta.assistant.thread_message import ThreadMessage, AsyncThreadMessage
+from ai21.clients.studio.resources.beta.assistant.thread_run import AsyncThreadRun, ThreadRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient

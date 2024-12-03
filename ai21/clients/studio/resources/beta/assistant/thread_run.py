@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.assistant.runs import Runs
+from ai21.clients.common.beta.assistant.runs import Runs
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models.assistant.assistant import Optimization
 from ai21.models.assistant.run import ToolOutput

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.assistant.assistants import Assistants
+from ai21.clients.common.beta.assistant.assistants import Assistants
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
