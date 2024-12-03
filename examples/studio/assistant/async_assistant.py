@@ -1,6 +1,10 @@
 import asyncio
+import time
 
 from ai21 import AsyncAI21Client
+
+
+TIMEOUT = 20
 
 
 async def main():
@@ -25,13 +29,20 @@ async def main():
         assistant_id=assistant.id,
     )
 
+    start = time.time()
+
     while run.status == "in_progress":
         run = await ai21_client.beta.threads.runs.retrieve(thread_id=thread.id, run_id=run.id)
+        if time.time() - start > TIMEOUT:
+            break
+        time.sleep(1)
 
     if run.status == "completed":
         messages = await ai21_client.beta.threads.messages.list(thread_id=thread.id)
         print("Messages:")
         print("\n".join(f"{msg.role}: {msg.content['text']}" for msg in messages.results))
+    else:
+        raise Exception("Run failed")
 
 
 if __name__ == "__main__":
