@@ -1,4 +1,4 @@
-from typing import Literal, Any
+from typing import Literal, Any, List, Dict
 
 from typing_extensions import TypedDict
 
@@ -33,9 +33,9 @@ class ToolCall(TypedDict):
 
 
 class SubmitToolCallOutputs(TypedDict):
-    tool_calls: list[ToolOutput]
+    tool_calls: List[ToolOutput]
 
 
 class RequiredAction(TypedDict):
     type: Literal["submit_tool_outputs"]
-    submit_tool_outputs: dict[str, Any]
+    submit_tool_outputs: Dict[str, Any]
