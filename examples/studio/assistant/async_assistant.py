@@ -42,7 +42,7 @@ async def main():
         print("Messages:")
         print("\n".join(f"{msg.role}: {msg.content['text']}" for msg in messages.results))
     else:
-        raise Exception("Run failed")
+        raise Exception(f"Run failed. Status: {run.status}")
 
 
 if __name__ == "__main__":
