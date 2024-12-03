@@ -2,9 +2,7 @@ from ai21 import AI21Client
 
 
 def main():
-    ai21_client = AI21Client(
-        api_key="413NQymWvgp83hNaqbA3EwYgqUjvREgn", api_host="https://api-stage.ai21.com/studio/v1"
-    )
+    ai21_client = AI21Client()
 
     assistant = ai21_client.beta.assistants.create(name="My Assistant")
 
