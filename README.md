@@ -26,6 +26,7 @@
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
 - [Conversational RAG (Beta)](#Conversational-RAG-Beta)
+- [Assistants (Beta)](#Assistants-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
@@ -419,7 +420,7 @@ else:
     pass
 ```
 
-For a more detailed example, see the chat [sync](examples/studio/assistant/assistant.py) and [async](examples/studio/assistant/async_assistant.py) examples.
+For a more detailed example, see [sync](examples/studio/assistant/assistant.py) and [async](examples/studio/assistant/async_assistant.py) examples.
 
 ---
 
