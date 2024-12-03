@@ -12,7 +12,7 @@ class RunResponse(AI21BaseModel):
     updated_at: datetime
     thread_id: str
     assistant_id: str
-    description: str = None
+    description: Optional[str] = None
     status: RunStatus
     optimization: Optimization
     execution_id: Optional[str] = None
