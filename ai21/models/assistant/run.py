@@ -1,4 +1,4 @@
-from typing import Literal, Any, List, Dict
+from typing import Literal, Any, List
 
 from typing_extensions import TypedDict
 
@@ -38,4 +38,4 @@ class SubmitToolCallOutputs(TypedDict):
 
 class RequiredAction(TypedDict):
     type: Literal["submit_tool_outputs"]
-    submit_tool_outputs: Dict[str, Any]
+    submit_tool_outputs: SubmitToolCallOutputs
