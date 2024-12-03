@@ -25,8 +25,6 @@ async def main():
     run = await ai21_client.beta.threads.runs.create(
         thread_id=thread.id,
         assistant_id=assistant.id,
-        description="Get response",
-        optimization="latency",
     )
 
     while run.status == "in_progress":

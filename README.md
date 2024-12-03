@@ -388,6 +388,41 @@ For a more detailed example, see the chat [sync](examples/studio/conversational_
 
 ---
 
+### Assistants (Beta)
+
+Create assistants to help you with your tasks.
+
+```python
+from time import sleep
+from ai21 import AI21Client
+from ai21.models.assistant.message import Message
+
+messages = [
+    Message(content={"type": "text", "text": "Youre message here"}, role="user"),
+]
+
+client = AI21Client()
+
+assistant = client.beta.assistants.create(name="My assistant")
+thread = client.beta.threads.create(messages=messages)
+run = client.beta.threads.runs.create(thread_id=thread.id, assistant_id=assistant.id)
+
+while run.status == "in_progress":
+    run = client.beta.threads.runs.get(thread_id=thread.id, run_id=run.id)
+    sleep(1)
+
+if run.status == "completed":
+    messages = client.beta.threads.messages.list(thread_id=thread.id)
+    print(messages)
+else:
+    # handle error or required action
+    pass
+```
+
+For a more detailed example, see the chat [sync](examples/studio/assistant/assistant.py) and [async](examples/studio/assistant/async_assistant.py) examples.
+
+---
+
 ### File Upload
 
 ```python
