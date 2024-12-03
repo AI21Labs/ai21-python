@@ -4,6 +4,7 @@ from typing import List
 
 from ai21.clients.common.assistant.threads import Threads
 from ai21.clients.studio.resources.assistant.studio_thread_message import StudioThreadMessage, AsyncStudioThreadMessage
+from ai21.clients.studio.resources.assistant.studio_thread_run import AsyncStudioThreadRun, StudioThreadRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
@@ -16,6 +17,7 @@ class StudioThread(StudioResource, Threads):
         super().__init__(client)
 
         self.messages = StudioThreadMessage(client)
+        self.runs = StudioThreadRun(client)
 
     def create(
         self,
@@ -35,6 +37,7 @@ class AsyncStudioThread(AsyncStudioResource, Threads):
         super().__init__(client)
 
         self.messages = AsyncStudioThreadMessage(client)
+        self.runs = AsyncStudioThreadRun(client)
 
     async def create(
         self,
