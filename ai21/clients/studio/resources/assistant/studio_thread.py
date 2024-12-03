@@ -3,50 +3,50 @@ from __future__ import annotations
 from typing import List
 
 from ai21.clients.common.assistant.threads import Threads
-from ai21.clients.studio.resources.assistant.studio_thread_message import StudioThreadMessage, AsyncStudioThreadMessage
-from ai21.clients.studio.resources.assistant.studio_thread_run import AsyncStudioThreadRun, StudioThreadRun
+from ai21.clients.studio.resources.assistant.studio_thread_message import ThreadMessage, AsyncThreadMessage
+from ai21.clients.studio.resources.assistant.studio_thread_run import AsyncThreadRun, ThreadRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.assistant.message import Message
-from ai21.models.responses.thread_response import Thread
+from ai21.models.responses.thread_response import ThreadResponse
 
 
-class StudioThread(StudioResource, Threads):
+class Thread(StudioResource, Threads):
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
 
-        self.messages = StudioThreadMessage(client)
-        self.runs = StudioThreadRun(client)
+        self.messages = ThreadMessage(client)
+        self.runs = ThreadRun(client)
 
     def create(
         self,
         messages: List[Message],
         **kwargs,
-    ) -> Thread:
+    ) -> ThreadResponse:
         body = dict(messages=messages)
 
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 
-    def retrieve(self, thread_id: str) -> Thread:
-        return self._get(path=f"/{self._module_name}/{thread_id}", response_cls=Thread)
+    def retrieve(self, thread_id: str) -> ThreadResponse:
+        return self._get(path=f"/{self._module_name}/{thread_id}", response_cls=ThreadResponse)
 
 
-class AsyncStudioThread(AsyncStudioResource, Threads):
+class AsyncThread(AsyncStudioResource, Threads):
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
 
-        self.messages = AsyncStudioThreadMessage(client)
-        self.runs = AsyncStudioThreadRun(client)
+        self.messages = AsyncThreadMessage(client)
+        self.runs = AsyncThreadRun(client)
 
     async def create(
         self,
         messages: List[Message],
         **kwargs,
-    ) -> Thread:
+    ) -> ThreadResponse:
         body = dict(messages=messages)
 
-        return await self._post(path=f"/{self._module_name}", body=body, response_cls=Thread)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 
-    async def retrieve(self, thread_id: str) -> Thread:
-        return await self._get(path=f"/{self._module_name}/{thread_id}", response_cls=Thread)
+    async def retrieve(self, thread_id: str) -> ThreadResponse:
+        return await self._get(path=f"/{self._module_name}/{thread_id}", response_cls=ThreadResponse)

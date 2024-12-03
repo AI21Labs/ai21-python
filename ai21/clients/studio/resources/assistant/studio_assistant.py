@@ -8,11 +8,11 @@ from ai21.clients.studio.resources.studio_resource import (
     StudioResource,
 )
 from ai21.models.assistant.assistant import Tool, ToolResources
-from ai21.models.responses.assistant_response import Assistant, ListAssistant
+from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 
 
-class StudioAssistant(StudioResource, Assistants):
+class Assistant(StudioResource, Assistants):
     def create(
         self,
         name: str,
@@ -24,7 +24,7 @@ class StudioAssistant(StudioResource, Assistants):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         body = self._create_body(
             name=name,
             description=description,
@@ -36,10 +36,10 @@ class StudioAssistant(StudioResource, Assistants):
             **kwargs,
         )
 
-        return self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
 
-    def retrieve(self, assistant_id: str) -> Assistant:
-        return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
+    def retrieve(self, assistant_id: str) -> AssistantResponse:
+        return self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
 
     def list(self) -> ListAssistant:
         return self._get(path=f"/{self._module_name}", response_cls=ListAssistant)
@@ -56,7 +56,7 @@ class StudioAssistant(StudioResource, Assistants):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         body = self._create_body(
             name=name,
             description=description,
@@ -68,10 +68,10 @@ class StudioAssistant(StudioResource, Assistants):
             tool_resources=tool_resources,
         )
 
-        return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=Assistant)
+        return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
 
 
-class AsyncStudioAssistant(AsyncStudioResource, Assistants):
+class AsyncAssistant(AsyncStudioResource, Assistants):
     async def create(
         self,
         name: str,
@@ -83,7 +83,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistants):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         body = self._create_body(
             name=name,
             description=description,
@@ -95,10 +95,10 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistants):
             **kwargs,
         )
 
-        return await self._post(path=f"/{self._module_name}", body=body, response_cls=Assistant)
+        return await self._post(path=f"/{self._module_name}", body=body, response_cls=AssistantResponse)
 
-    async def retrieve(self, assistant_id: str) -> Assistant:
-        return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=Assistant)
+    async def retrieve(self, assistant_id: str) -> AssistantResponse:
+        return await self._get(path=f"/{self._module_name}/{assistant_id}", response_cls=AssistantResponse)
 
     async def list(self) -> ListAssistant:
         return await self._get(path=f"/{self._module_name}", response_cls=ListAssistant)
@@ -115,7 +115,7 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistants):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         body = self._create_body(
             name=name,
             description=description,
@@ -127,4 +127,4 @@ class AsyncStudioAssistant(AsyncStudioResource, Assistants):
             tool_resources=tool_resources,
         )
 
-        return await self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=Assistant)
+        return await self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)

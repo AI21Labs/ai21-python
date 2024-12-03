@@ -5,7 +5,7 @@ from typing import List
 
 from ai21.clients.common.assistant.messages import Messages
 from ai21.models.assistant.message import Message
-from ai21.models.responses.thread_response import Thread
+from ai21.models.responses.thread_response import ThreadResponse
 
 
 class Threads(ABC):
@@ -17,9 +17,9 @@ class Threads(ABC):
         self,
         messages: List[Message],
         **kwargs,
-    ) -> Thread:
+    ) -> ThreadResponse:
         pass
 
     @abstractmethod
-    def retrieve(self, thread_id: str) -> Thread:
+    def retrieve(self, thread_id: str) -> ThreadResponse:
         pass

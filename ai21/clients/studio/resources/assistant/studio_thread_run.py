@@ -10,7 +10,7 @@ from ai21.models.responses.run_response import RunResponse
 from ai21.types import NotGiven, NOT_GIVEN
 
 
-class StudioThreadRun(StudioResource, Runs):
+class ThreadRun(StudioResource, Runs):
     def create(
         self,
         *,
@@ -56,7 +56,7 @@ class StudioThreadRun(StudioResource, Runs):
         )
 
 
-class AsyncStudioThreadRun(AsyncStudioResource, Runs):
+class AsyncThreadRun(AsyncStudioResource, Runs):
     async def create(
         self,
         *,

@@ -5,7 +5,7 @@ from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.assistant.assistant import ToolResources
 
 
-class Assistant(AI21BaseModel):
+class AssistantResponse(AI21BaseModel):
     id: str
     created_at: datetime
     updated_at: datetime
@@ -23,4 +23,4 @@ class Assistant(AI21BaseModel):
 
 
 class ListAssistant(AI21BaseModel):
-    results: List[Assistant]
+    results: List[AssistantResponse]

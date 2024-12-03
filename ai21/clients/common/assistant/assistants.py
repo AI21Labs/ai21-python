@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
-from ai21.models.responses.assistant_response import Assistant, ListAssistant
+from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -24,7 +24,7 @@ class Assistants(ABC):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         pass
 
     def _create_body(
@@ -57,7 +57,7 @@ class Assistants(ABC):
         pass
 
     @abstractmethod
-    def retrieve(self, assistant_id: str) -> Assistant:
+    def retrieve(self, assistant_id: str) -> AssistantResponse:
         pass
 
     @abstractmethod
@@ -73,5 +73,5 @@ class Assistants(ABC):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         pass
