@@ -12,7 +12,7 @@ class RouteResponse(AI21BaseModel):
     plan_id: str
     name: str
     description: str
-    examples: list[str]
+    examples: List[str]
 
 
 class ListRouteResponse(AI21BaseModel):
