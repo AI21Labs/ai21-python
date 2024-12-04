@@ -1,6 +1,144 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.1 (2024-12-04)
+
+### Chores
+
+* chore(deps): bump pypa/gh-action-pypi-publish from 1.10.3 to 1.12.2 (#227)
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.10.3 to 1.12.2.
+- [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases)
+- [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/f7600683efdcb7656dec5b29656edb7bc586e597...15c56dba361d8335944d31a2ecd17d700fc7bcbc)
+
+---
+updated-dependencies:
+- dependency-name: pypa/gh-action-pypi-publish
+  dependency-type: direct:production
+  update-type: version-update:semver-minor
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com> ([`4247632`](https://github.com/AI21Labs/ai21-python/commit/4247632694cee72baf6208ff61a806611a5f2ebe))
+
+### Features
+
+* feat: :sparkles: add support for `Plan` and `Route` resources (#238)
+
+* feat: :sparkles: add support for Plan resource
+
+* feat: :sparkles: add support for Route resource
+
+* fix: :label: List instead of list
+
+* refactor: :truck: rename classes and files
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com> ([`f1f5cbc`](https://github.com/AI21Labs/ai21-python/commit/f1f5cbccb894fdd2ccb8680376801cd9c9bc4391))
+
+* feat: ✨ add support for Run resource (#236)
+
+* feat: :sparkles: add support for Run resource
+
+* fix: :label: typing backwards compatability
+
+* refactor: :truck: rename classes & types and such
+
+* refactor: :fire: remove `avatar` option
+
+* fix: :label: typing yay
+
+* feat: :sparkles: add examples
+
+* fix: :label: make `description` optional
+
+* docs: :memo: add assistants info to README
+
+also, add examples
+
+* test: :white_check_mark: add assistants to tests
+
+* docs: :memo: update docs about Assistants
+
+* docs: :memo: better example
+
+* chore: :truck: move files
+
+* docs: :memo: examples fixes
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com> ([`d4beb22`](https://github.com/AI21Labs/ai21-python/commit/d4beb227242d6e2055f1279b6ba9f453a5c0233b))
+
+* feat: :sparkles: add support for Message resource ([`b483e70`](https://github.com/AI21Labs/ai21-python/commit/b483e704743a2d9e8fbd5da99f97bf348263a4d5))
+
+* feat: :sparkles: add support for Thread resource ([`62566cd`](https://github.com/AI21Labs/ai21-python/commit/62566cd1fd0b42bfcd181ebb5b5032e62a15730b))
+
+* feat: :sparkles: add support for Assistant resource
+
+under `beta` ([`16ef903`](https://github.com/AI21Labs/ai21-python/commit/16ef9038dc50f4c7731953bdc51073ba45655b03))
+
+* feat: :sparkles: add support for Assistant resource
+
+under `beta` ([`4b31a42`](https://github.com/AI21Labs/ai21-python/commit/4b31a42351d42b6604a9b05ea9bc0b19413d91d8))
+
+### Fixes
+
+* fix: :truck: rename `get` method to `retrieve` ([`d2747a5`](https://github.com/AI21Labs/ai21-python/commit/d2747a56169c8c68cd9701291fab72509835f830))
+
+* fix: :truck: move classes and such ([`c944172`](https://github.com/AI21Labs/ai21-python/commit/c944172571e10452b93542944794e6bcaeaff2c7))
+
+* fix: :truck: rename classes and such ([`ae7a3e4`](https://github.com/AI21Labs/ai21-python/commit/ae7a3e40dd13c3feb0b41af8bbef3ed4b2490ca9))
+
+* fix: :green_heart: imports ([`a9f7d67`](https://github.com/AI21Labs/ai21-python/commit/a9f7d67feaa088ffa97f87220e3198cf0d5eb0b3))
+
+* fix: :label: tool_resources use type ([`5de2d8c`](https://github.com/AI21Labs/ai21-python/commit/5de2d8c0af03b7e1fb95bf7302422374e0d77954))
+
+* fix: :label: remove `Model` Literal typing ([`90f44f5`](https://github.com/AI21Labs/ai21-python/commit/90f44f575b3031f4b11edcbc6e9fef4a8b2e1c62))
+
+* fix: :bug: pr fixes ([`c46e517`](https://github.com/AI21Labs/ai21-python/commit/c46e517cfd8619e4cb25581f5e714ee8fc919e47))
+
+* fix: :label: better typing & remove doc string ([`18d0092`](https://github.com/AI21Labs/ai21-python/commit/18d009202b64a41e70c9824fa14256e4c741606f))
+
+* fix: :bug: use `List` for typing instead of `list` ([`fc45f19`](https://github.com/AI21Labs/ai21-python/commit/fc45f19027b9f21cbf3c711952a6b1ddc3db932c))
+
+* fix: :green_heart: imports ([`f9e695b`](https://github.com/AI21Labs/ai21-python/commit/f9e695bd5e51b49ade8342cb4796cf2b1b97e630))
+
+* fix: :label: tool_resources use type ([`c8ee041`](https://github.com/AI21Labs/ai21-python/commit/c8ee04176eeb3cf70591048a7fcf516dab99c5f4))
+
+* fix: :label: remove `Model` Literal typing ([`17af071`](https://github.com/AI21Labs/ai21-python/commit/17af071f1a8d3dc7913ee7922884eedf1468f157))
+
+* fix: :bug: pr fixes ([`dd7d71d`](https://github.com/AI21Labs/ai21-python/commit/dd7d71d82eda94ef2a72fdb1492015d57444bf4e))
+
+* fix: :label: better typing & remove doc string ([`a03deab`](https://github.com/AI21Labs/ai21-python/commit/a03deab60a4a4be43a3211959a16c4ea132bf63f))
+
+* fix: :bug: use `List` for typing instead of `list` ([`3128145`](https://github.com/AI21Labs/ai21-python/commit/3128145a85283c8f7ed0984fffee7febb32f3ae0))
+
+### Refactoring
+
+* refactor: :art: reformat functions with 2+ arguments ([`a8c345e`](https://github.com/AI21Labs/ai21-python/commit/a8c345e81f2b29dd14e5ec118d5f4068792198df))
+
+* refactor: :truck: move `MessageResponse` type to a separate file ([`151f5ac`](https://github.com/AI21Labs/ai21-python/commit/151f5acfa2d83fccb8b9bc459fce761324542ce5))
+
+### Unknown
+
+* Merge pull request #234 from AI21Labs/messages
+
+feat: :sparkles: add support for Message resource ([`abcc2f9`](https://github.com/AI21Labs/ai21-python/commit/abcc2f9fc465244f35ae11cf6cd910f03016a722))
+
+* Merge pull request #232 from AI21Labs/threads
+
+feat: :sparkles: add support for Thread resource ([`29fb8ce`](https://github.com/AI21Labs/ai21-python/commit/29fb8ce68a48ce94196059eadd0664726e59207a))
+
+* Merge remote-tracking branch 'origin/rc_assistant_api_support' into rc_assistant_api_support ([`2cf1a85`](https://github.com/AI21Labs/ai21-python/commit/2cf1a85950dd6b52dc1ded2606cef21fe358f224))
+
+* Merge pull request #231 from AI21Labs/assistant
+
+feat: :sparkles: add support for Assistant resource ([`139887d`](https://github.com/AI21Labs/ai21-python/commit/139887d99edf8d8fb23e43e40511cb5b6753d577))
+
+
 ## v3.0.0 (2024-11-11)
 
 ### Breaking
@@ -8,6 +146,8 @@
 * feat!: BREAKING CHANGE: Version v3.0.0 (#229) ([`53bac6c`](https://github.com/AI21Labs/ai21-python/commit/53bac6c0b373b196fabe38f133213ac9d24e7e73))
 
 ### Chores
+
+* chore(release): v3.0.0 [skip ci] ([`7457c5b`](https://github.com/AI21Labs/ai21-python/commit/7457c5b2c2d9dab24b1cf863786db710bd16f7a6))
 
 * chore(release): v2.16.0 [skip ci] ([`d8a6ecc`](https://github.com/AI21Labs/ai21-python/commit/d8a6ecc0da4f19183cdba826cf6641ad39dafbe8))
 
