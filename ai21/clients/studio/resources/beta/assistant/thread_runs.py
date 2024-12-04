@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.beta.assistant.runs import Runs
+from ai21.clients.common.beta.assistant.runs import BaseRuns
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models.assistant.assistant import Optimization
 from ai21.models.assistant.run import ToolOutput
@@ -10,7 +10,7 @@ from ai21.models.responses.run_response import RunResponse
 from ai21.types import NotGiven, NOT_GIVEN
 
 
-class ThreadRun(StudioResource, Runs):
+class ThreadRuns(StudioResource, BaseRuns):
     def create(
         self,
         *,
@@ -56,7 +56,7 @@ class ThreadRun(StudioResource, Runs):
         )
 
 
-class AsyncThreadRun(AsyncStudioResource, Runs):
+class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
     async def create(
         self,
         *,

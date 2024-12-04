@@ -7,7 +7,7 @@ from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 from ai21.utils.typing import remove_not_given
 
 
-class Plans(ABC):
+class BasePlans(ABC):
     _module_name = "plans"
 
     @abstractmethod

@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.beta.assistant.routes import Routes
+from ai21.clients.common.beta.assistant.routes import BaseRoutes
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
@@ -11,7 +11,7 @@ from ai21.models.responses.route_response import RouteResponse, ListRouteRespons
 from ai21.types import NotGiven
 
 
-class Route(StudioResource, Routes):
+class AssistantRoutes(StudioResource, BaseRoutes):
     def create(
         self,
         *,
@@ -78,7 +78,7 @@ class Route(StudioResource, Routes):
         return self._delete(path=f"/assistants/{assistant_id}/{self._module_name}/{route_id}")
 
 
-class AsyncRoute(AsyncStudioResource, Routes):
+class AsyncAssistantRoutes(AsyncStudioResource, BaseRoutes):
     async def create(
         self,
         *,

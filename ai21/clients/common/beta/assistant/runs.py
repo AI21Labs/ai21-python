@@ -10,7 +10,7 @@ from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
 
-class Runs(ABC):
+class BaseRuns(ABC):
     _module_name = "runs"
 
     @abstractmethod

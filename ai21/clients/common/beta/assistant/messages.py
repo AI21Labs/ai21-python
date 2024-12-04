@@ -6,7 +6,7 @@ from ai21.models.assistant.message import ThreadMessageRole, MessageContentText
 from ai21.models.responses.message_response import MessageResponse, ListMessageResponse
 
 
-class Messages(ABC):
+class BaseMessages(ABC):
     _module_name = "messages"
 
     @abstractmethod

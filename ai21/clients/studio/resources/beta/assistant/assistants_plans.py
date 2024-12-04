@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from ai21.clients.common.beta.assistant.plans import Plans
+from ai21.clients.common.beta.assistant.plans import BasePlans
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
@@ -8,7 +8,7 @@ from ai21.clients.studio.resources.studio_resource import (
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 
 
-class Plan(StudioResource, Plans):
+class AssistantPlans(StudioResource, BasePlans):
     def create(
         self,
         *,
@@ -52,7 +52,7 @@ class Plan(StudioResource, Plans):
         )
 
 
-class AsyncPlan(AsyncStudioResource, Plans):
+class AsyncAssistantPlans(AsyncStudioResource, BasePlans):
     async def create(
         self,
         *,

@@ -2,9 +2,9 @@ from __future__ import annotations
 
 from typing import List
 
-from ai21.clients.common.beta.assistant.assistants import Assistants
-from ai21.clients.studio.resources.beta.assistant.plan import Plan, AsyncPlan
-from ai21.clients.studio.resources.beta.assistant.route import Route, AsyncRoute
+from ai21.clients.common.beta.assistant.assistants import BaseAssistants
+from ai21.clients.studio.resources.beta.assistant.assistants_plans import AssistantPlans, AsyncAssistantPlans
+from ai21.clients.studio.resources.beta.assistant.assistant_routes import AssistantRoutes, AsyncAssistantRoutes
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
@@ -16,12 +16,12 @@ from ai21.models.responses.assistant_response import AssistantResponse, ListAssi
 from ai21.types import NotGiven, NOT_GIVEN
 
 
-class Assistant(StudioResource, Assistants):
+class Assistants(StudioResource, BaseAssistants):
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
 
-        self.plans = Plan(client)
-        self.routes = Route(client)
+        self.plans = AssistantPlans(client)
+        self.routes = AssistantRoutes(client)
 
     def create(
         self,
@@ -77,12 +77,12 @@ class Assistant(StudioResource, Assistants):
         return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
 
 
-class AsyncAssistant(AsyncStudioResource, Assistants):
+class AsyncAssistants(AsyncStudioResource, BaseAssistants):
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
 
-        self.plans = AsyncPlan(client)
-        self.routes = AsyncRoute(client)
+        self.plans = AsyncAssistantPlans(client)
+        self.routes = AsyncAssistantRoutes(client)
 
     async def create(
         self,

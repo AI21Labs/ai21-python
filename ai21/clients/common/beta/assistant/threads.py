@@ -3,14 +3,14 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
-from ai21.clients.common.beta.assistant.messages import Messages
+from ai21.clients.common.beta.assistant.messages import BaseMessages
 from ai21.models.assistant.message import Message
 from ai21.models.responses.thread_response import ThreadResponse
 
 
-class Threads(ABC):
+class BaseThreads(ABC):
     _module_name = "threads"
-    messages: Messages
+    messages: BaseMessages
 
     @abstractmethod
     def create(

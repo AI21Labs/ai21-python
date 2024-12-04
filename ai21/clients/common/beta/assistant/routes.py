@@ -8,7 +8,7 @@ from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
 
-class Routes(ABC):
+class BaseRoutes(ABC):
     _module_name = "routes"
 
     @abstractmethod
