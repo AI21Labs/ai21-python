@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
 from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
-from ai21.models.responses.assistant_response import Assistant, ListAssistant
+from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -19,12 +19,11 @@ class Assistants(ABC):
         *,
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
-        avatar: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         pass
 
     def _create_body(
@@ -33,7 +32,6 @@ class Assistants(ABC):
         name: str,
         description: str | NotGiven,
         optimization: str | NotGiven,
-        avatar: str | NotGiven,
         models: List[str] | NotGiven,
         tools: List[str] | NotGiven,
         tool_resources: dict | NotGiven,
@@ -44,7 +42,6 @@ class Assistants(ABC):
                 "name": name,
                 "description": description,
                 "optimization": optimization,
-                "avatar": avatar,
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
@@ -57,7 +54,7 @@ class Assistants(ABC):
         pass
 
     @abstractmethod
-    def retrieve(self, assistant_id: str) -> Assistant:
+    def retrieve(self, assistant_id: str) -> AssistantResponse:
         pass
 
     @abstractmethod
@@ -68,10 +65,9 @@ class Assistants(ABC):
         name: str | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
-        avatar: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-    ) -> Assistant:
+    ) -> AssistantResponse:
         pass

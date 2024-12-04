@@ -55,6 +55,8 @@ def test_studio(test_file_name: str):
         ("chat/async_stream_chat_completions.py",),
         ("conversational_rag/conversational_rag.py",),
         ("conversational_rag/async_conversational_rag.py",),
+        ("assistant/assistant.py",),
+        ("assistant/async_assistant.py",),
     ],
     ids=[
         "when_chat__should_return_ok",
@@ -62,6 +64,8 @@ def test_studio(test_file_name: str):
         "when_stream_chat_completions__should_return_ok",
         "when_conversational_rag__should_return_ok",
         "when_async_conversational_rag__should_return_ok",
+        "when_assistant__should_return_ok",
+        "when_async_assistant__should_return_ok",
     ],
 )
 async def test_async_studio(test_file_name: str):
