@@ -4,6 +4,7 @@ from typing import List
 
 from ai21.clients.common.beta.assistant.assistants import Assistants
 from ai21.clients.studio.resources.beta.assistant.plan import Plan, AsyncPlan
+from ai21.clients.studio.resources.beta.assistant.route import Route, AsyncRoute
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
@@ -20,6 +21,7 @@ class Assistant(StudioResource, Assistants):
         super().__init__(client)
 
         self.plans = Plan(client)
+        self.routes = Route(client)
 
     def create(
         self,
@@ -80,6 +82,7 @@ class AsyncAssistant(AsyncStudioResource, Assistants):
         super().__init__(client)
 
         self.plans = AsyncPlan(client)
+        self.routes = AsyncRoute(client)
 
     async def create(
         self,
