@@ -3,16 +3,24 @@ from __future__ import annotations
 from typing import List
 
 from ai21.clients.common.beta.assistant.assistants import Assistants
+from ai21.clients.studio.resources.beta.assistant.plan import Plan, AsyncPlan
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
+from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.assistant.assistant import Tool, ToolResources
 from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 
 
 class Assistant(StudioResource, Assistants):
+    def __init__(self, client: AI21HTTPClient):
+        super().__init__(client)
+
+        self.plans = Plan(client)
+
     def create(
         self,
         name: str,
@@ -68,6 +76,11 @@ class Assistant(StudioResource, Assistants):
 
 
 class AsyncAssistant(AsyncStudioResource, Assistants):
+    def __init__(self, client: AsyncAI21HTTPClient):
+        super().__init__(client)
+
+        self.plans = AsyncPlan(client)
+
     async def create(
         self,
         name: str,
