@@ -3,14 +3,18 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import Any, Dict, List
 
+from ai21.clients.common.beta.assistant.plans import BasePlans
+from ai21.clients.common.beta.assistant.routes import BaseRoutes
 from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
 from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
 
-class Assistants(ABC):
+class BaseAssistants(ABC):
     _module_name = "assistants"
+    plans: BasePlans
+    routes: BaseRoutes
 
     @abstractmethod
     def create(
