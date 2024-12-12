@@ -6,6 +6,7 @@ from typing import Any, Dict, Type, Callable, List
 
 from pydantic import BaseModel
 
+from ai21.errors import CodeParsingError
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
@@ -19,7 +20,11 @@ def _parse_schema(schema: Type[BaseModel] | Dict[str, Any]) -> Dict[str, Any]:
 
 def _parse_code(code: str | Callable) -> str:
     if callable(code):
-        return inspect.getsource(code).strip()
+        try:
+            return inspect.getsource(code).strip()
+        except Exception:
+            raise CodeParsingError()
+    return code
 
 
 class BasePlans(ABC):
@@ -44,7 +49,6 @@ class BasePlans(ABC):
         **kwargs,
     ) -> Dict[str, Any]:
         code_str = _parse_code(code)
-
         schema_dicts = [_parse_schema(schema) for schema in schemas]
 
         return remove_not_given(

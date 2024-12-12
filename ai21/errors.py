@@ -111,3 +111,10 @@ class StreamingDecodeError(AI21Error):
 class InternalDependencyException(AI21APIError):
     def __init__(self, details: Optional[str] = None):
         super().__init__(530, details)
+
+
+class CodeParsingError(AI21Error):
+    def __init__(self):
+        message = "Code can't be parsed"
+        super().__init__(message)
+        self.message = message
