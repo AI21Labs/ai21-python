@@ -1,11 +1,16 @@
 from __future__ import annotations
 
+from typing import List, Any, Dict, Type
+
+from pydantic import BaseModel
+
 from ai21.clients.common.beta.assistant.plans import BasePlans
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
     StudioResource,
 )
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
+from ai21.types import NotGiven, NOT_GIVEN
 
 
 class AssistantPlans(StudioResource, BasePlans):
@@ -14,10 +19,12 @@ class AssistantPlans(StudioResource, BasePlans):
         *,
         assistant_id: str,
         code: str,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> PlanResponse:
         body = self._create_body(
             code=code,
+            schemas=schemas,
             **kwargs,
         )
 
@@ -44,8 +51,12 @@ class AssistantPlans(StudioResource, BasePlans):
         assistant_id: str,
         plan_id: str,
         code: str,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
     ) -> PlanResponse:
-        body = dict(code=code)
+        body = self._create_body(
+            code=code,
+            schemas=schemas,
+        )
 
         return self._patch(
             path=f"/assistants/{assistant_id}/{self._module_name}/{plan_id}", body=body, response_cls=PlanResponse
@@ -58,10 +69,12 @@ class AsyncAssistantPlans(AsyncStudioResource, BasePlans):
         *,
         assistant_id: str,
         code: str,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> PlanResponse:
         body = self._create_body(
             code=code,
+            schemas=schemas,
             **kwargs,
         )
 
@@ -90,8 +103,12 @@ class AsyncAssistantPlans(AsyncStudioResource, BasePlans):
         assistant_id: str,
         plan_id: str,
         code: str,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
     ) -> PlanResponse:
-        body = dict(code=code)
+        body = self._create_body(
+            code=code,
+            schemas=schemas,
+        )
 
         return await self._patch(
             path=f"/assistants/{assistant_id}/{self._module_name}/{plan_id}", body=body, response_cls=PlanResponse

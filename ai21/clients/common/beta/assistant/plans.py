@@ -2,13 +2,24 @@ from __future__ import annotations
 
 import inspect
 from abc import ABC, abstractmethod
-from typing import Any, Dict, Type
+from typing import Any, Dict, Type, Callable, List
 
 from pydantic import BaseModel
 
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
+
+
+def _parse_schema(schema: Type[BaseModel] | Dict[str, Any]) -> Dict[str, Any]:
+    if inspect.isclass(schema) and issubclass(schema, BaseModel):
+        return schema.model_json_schema()
+    return schema
+
+
+def _parse_code(code: str | Callable) -> str:
+    if callable(code):
+        return inspect.getsource(code).strip()
 
 
 class BasePlans(ABC):
@@ -19,8 +30,8 @@ class BasePlans(ABC):
         self,
         *,
         assistant_id: str,
-        code: str | callable,
-        schemas: list[dict] | list[Type[BaseModel]] | NotGiven = NOT_GIVEN,
+        code: str | Callable,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> PlanResponse:
         pass
@@ -28,23 +39,17 @@ class BasePlans(ABC):
     def _create_body(
         self,
         *,
-        code: str | callable,
-        schemas: list[dict] | list[Type[BaseModel]] | NotGiven = NOT_GIVEN,
+        code: str | Callable,
+        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Dict[str, Any]:
-        if callable(code):
-            code = inspect.getsource(code).strip()
+        code_str = _parse_code(code)
 
-        schema_dicts = []
-        for schema in schemas:
-            if inspect.isclass(schema) and issubclass(schema, BaseModel):
-                schema_dicts.append(schema.model_json_schema())
-            else:
-                schema_dicts.append(schema)
+        schema_dicts = [_parse_schema(schema) for schema in schemas]
 
         return remove_not_given(
             {
-                "code": code,
+                "code": code_str,
                 "schemas": schema_dicts,
                 **kwargs,
             }
@@ -74,6 +79,6 @@ class BasePlans(ABC):
         assistant_id: str,
         plan_id: str,
         code: str,
-        schemas: list[dict] | NotGiven = NOT_GIVEN,
+        schemas: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
     ) -> PlanResponse:
         pass
