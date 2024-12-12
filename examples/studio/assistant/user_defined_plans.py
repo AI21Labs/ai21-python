@@ -20,6 +20,10 @@ inputs=dict(table=table, current_stock_price=current_stock_price),\n        allo
 ask_for_approval=True,\n    )\n    return summary"""
 
 
+def test_func():
+    pass
+
+
 class ExampleSchema(BaseModel):
     name: str
     id: str
@@ -30,10 +34,7 @@ def main():
 
     assistant = ai21_client.beta.assistants.create(name="My Assistant")
 
-    plan = ai21_client.beta.assistants.plans.create(
-        assistant_id=assistant.id, code=CODE_STR, schemas=[ExampleSchema.model_json_schema()]
-    )
-
+    plan = ai21_client.beta.assistants.plans.create(assistant_id=assistant.id, code=test_func, schemas=[ExampleSchema])
     ai21_client.beta.assistants.routes.create(
         assistant_id=assistant.id, plan_id=plan.id, name="My Route", examples=["hi"], description="My Route Description"
     )

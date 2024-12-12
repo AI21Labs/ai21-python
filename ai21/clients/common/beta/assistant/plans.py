@@ -1,7 +1,10 @@
 from __future__ import annotations
 
+import inspect
 from abc import ABC, abstractmethod
-from typing import Any, Dict
+from typing import Any, Dict, Type
+
+from pydantic import BaseModel
 
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 from ai21.types import NOT_GIVEN, NotGiven
@@ -16,8 +19,8 @@ class BasePlans(ABC):
         self,
         *,
         assistant_id: str,
-        code: str,
-        schemas: list[dict] | NotGiven = NOT_GIVEN,
+        code: str | callable,
+        schemas: list[dict] | list[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> PlanResponse:
         pass
@@ -25,14 +28,24 @@ class BasePlans(ABC):
     def _create_body(
         self,
         *,
-        code: str,
-        schemas: list[dict] | NotGiven = NOT_GIVEN,
+        code: str | callable,
+        schemas: list[dict] | list[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Dict[str, Any]:
+        if callable(code):
+            code = inspect.getsource(code).strip()
+
+        schema_dicts = []
+        for schema in schemas:
+            if inspect.isclass(schema) and issubclass(schema, BaseModel):
+                schema_dicts.append(schema.model_json_schema())
+            else:
+                schema_dicts.append(schema)
+
         return remove_not_given(
             {
                 "code": code,
-                "schemas": schemas,
+                "schemas": schema_dicts,
                 **kwargs,
             }
         )
