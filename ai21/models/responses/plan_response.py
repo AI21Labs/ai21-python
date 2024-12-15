@@ -10,7 +10,7 @@ class PlanResponse(AI21BaseModel):
     updated_at: datetime
     assistant_id: str
     code: str
-    schemas: list[dict]
+    schemas: List[dict]
 
 
 class ListPlanResponse(AI21BaseModel):
