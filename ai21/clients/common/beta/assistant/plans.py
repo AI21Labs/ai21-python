@@ -7,7 +7,7 @@ from typing import Any, Dict, Type, Callable, List
 from pydantic import BaseModel
 
 from ai21.errors import CodeParsingError
-from ai21.models._pydantic_compatibility import _to_dict
+from ai21.models._pydantic_compatibility import _to_schema
 from ai21.models.responses.plan_response import PlanResponse, ListPlanResponse
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
@@ -18,7 +18,7 @@ class BasePlans(ABC):
 
     def _parse_schema(self, schema: Type[BaseModel] | Dict[str, Any]) -> Dict[str, Any]:
         if inspect.isclass(schema) and issubclass(schema, BaseModel):
-            return _to_dict(schema)
+            return _to_schema(schema)
         return schema
 
     def _parse_code(self, code: str | Callable) -> str:
