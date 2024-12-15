@@ -12,23 +12,23 @@ from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
 
-def _parse_schema(schema: Type[BaseModel] | Dict[str, Any]) -> Dict[str, Any]:
-    if inspect.isclass(schema) and issubclass(schema, BaseModel):
-        return schema.model_json_schema()
-    return schema
-
-
-def _parse_code(code: str | Callable) -> str:
-    if callable(code):
-        try:
-            return inspect.getsource(code).strip()
-        except Exception:
-            raise CodeParsingError()
-    return code
-
-
 class BasePlans(ABC):
     _module_name = "plans"
+
+    def _parse_schema(self, schema: Type[BaseModel] | Dict[str, Any]) -> Dict[str, Any]:
+        if inspect.isclass(schema) and issubclass(schema, BaseModel):
+            return schema.model_json_schema()
+        return schema
+
+    def _parse_code(self, code: str | Callable) -> str:
+        if callable(code):
+            try:
+                return inspect.getsource(code).strip()
+            except OSError as e:
+                raise CodeParsingError(str(e))
+            except Exception:
+                raise CodeParsingError()
+        return code
 
     @abstractmethod
     def create(
@@ -48,8 +48,12 @@ class BasePlans(ABC):
         schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Dict[str, Any]:
-        code_str = _parse_code(code)
-        schema_dicts = [_parse_schema(schema) for schema in schemas]
+        code_str = self._parse_code(code)
+
+        if schemas is NOT_GIVEN:
+            schema_dicts = NOT_GIVEN
+        else:
+            schema_dicts = [self._parse_schema(schema) for schema in schemas]
 
         return remove_not_given(
             {
