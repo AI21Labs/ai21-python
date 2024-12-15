@@ -51,7 +51,7 @@ def test_create_body__when_pass_code_callable__should_return_dict():
     result = PlanTestClass()._create_body(code=code)
 
     # Assert
-    assert result == {"code": 'code = lambda: "code"'}
+    assert result == {"code": 'def code():\n        return "code"'}
 
 
 def test_create_body__when_pass_code_and_dict_schemas__should_return_dict_with_schemas():
