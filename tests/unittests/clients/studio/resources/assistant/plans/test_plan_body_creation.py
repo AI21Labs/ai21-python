@@ -1,4 +1,4 @@
-from typing import Callable, List, Dict, Any, Type
+from typing import Callable, List, Dict, Any, Type, Union
 
 from pydantic import BaseModel
 from ai21.clients.common.beta.assistant.plans import BasePlans
@@ -13,8 +13,8 @@ class PlanTestClass(BasePlans):
         self,
         *,
         assistant_id: str,
-        code: str | Callable,
-        schemas: List[Dict[str, Any]] | List[Type[BaseModel]] | NotGiven = NOT_GIVEN,
+        code: Union[str, Callable],
+        schemas: Union[List[Dict[str, Any]], List[Type[BaseModel]], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> PlanResponse:
         pass
@@ -26,7 +26,7 @@ class PlanTestClass(BasePlans):
         pass
 
     def modify(
-        self, *, assistant_id: str, plan_id: str, code: str, schemas: List[Dict[str, Any]] | NotGiven = NOT_GIVEN
+        self, *, assistant_id: str, plan_id: str, code: str, schemas: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN
     ) -> PlanResponse:
         pass
 
