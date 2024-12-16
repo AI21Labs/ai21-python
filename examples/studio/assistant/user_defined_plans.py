@@ -19,10 +19,7 @@ def main():
     assistant = ai21_client.beta.assistants.create(name="My Assistant")
 
     plan = ai21_client.beta.assistants.plans.create(assistant_id=assistant.id, code=test_func, schemas=[ExampleSchema])
-    ai21_client.beta.assistants.routes.create(
+    route = ai21_client.beta.assistants.routes.create(
         assistant_id=assistant.id, plan_id=plan.id, name="My Route", examples=["hi"], description="My Route Description"
     )
-
-
-if __name__ == "__main__":
-    main()
+    print(f"Route: {route}")

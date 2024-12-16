@@ -51,15 +51,12 @@ class BasePlans(ABC):
     ) -> Dict[str, Any]:
         code_str = self._parse_code(code)
 
-        if schemas is NOT_GIVEN:
-            schema_dicts = NOT_GIVEN
-        else:
-            schema_dicts = [self._parse_schema(schema) for schema in schemas]
-
         return remove_not_given(
             {
                 "code": code_str,
-                "schemas": schema_dicts,
+                "schemas": [self._parse_schema(schema) for schema in schemas]
+                if schemas is not NOT_GIVEN
+                else NOT_GIVEN,
                 **kwargs,
             }
         )

@@ -115,6 +115,6 @@ class InternalDependencyException(AI21APIError):
 
 class CodeParsingError(AI21Error):
     def __init__(self, details: Optional[str] = None):
-        message = f"Code can't be parsed: {details}"
+        message = f"Code can't be parsed{'' if details is None else f': {details}'}"
         super().__init__(message)
         self.message = message
