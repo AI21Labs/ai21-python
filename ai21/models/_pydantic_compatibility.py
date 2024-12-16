@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Dict, Any
+from typing import Dict, Any, Type
 
 from pydantic import VERSION, BaseModel
 
@@ -33,3 +33,10 @@ def _from_json(obj: "AI21BaseModel", json_str: str, **kwargs) -> BaseModel:  # n
         return obj.model_validate_json(json_str, **kwargs)
 
     return obj.parse_raw(json_str, **kwargs)
+
+
+def _to_schema(model_object: Type[BaseModel], **kwargs) -> Dict[str, Any]:
+    if IS_PYDANTIC_V2:
+        return model_object.model_json_schema(**kwargs)
+
+    return model_object.schema(**kwargs)

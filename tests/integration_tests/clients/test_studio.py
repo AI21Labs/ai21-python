@@ -25,6 +25,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("chat/chat_function_calling.py",),
         ("chat/chat_function_calling_multiple_tools.py",),
         ("chat/chat_response_format.py",),
+        ("assistant/user_defined_plans.py",),
     ],
     ids=[
         "when_tokenization__should_return_ok",
@@ -35,6 +36,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         "when_chat_completions_with_function_calling__should_return_ok",
         "when_chat_completions_with_function_calling_multiple_tools_should_return_ok",
         "when_chat_completions_with_response_format__should_return_ok",
+        "when_assistant_with_user_defined_plans_should_return_ok",
     ],
 )
 def test_studio(test_file_name: str):
