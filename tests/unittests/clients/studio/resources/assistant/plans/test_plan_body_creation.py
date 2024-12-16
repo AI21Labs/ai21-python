@@ -112,7 +112,7 @@ def test_create_body__when_pass_empty_schemas_list__should_return_dict_with_empt
     assert result == {"code": code, "schemas": schemas}
 
 
-def test_create_body__when_cannot_get_source_code__should_raise_os_error():
+def test_create_body__when_cannot_get_source_code__should_raise_code_parsing_error():
     # Arrange
     class CallableWithoutSource:
         def __call__(self):

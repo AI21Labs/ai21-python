@@ -54,9 +54,9 @@ class BasePlans(ABC):
         return remove_not_given(
             {
                 "code": code_str,
-                "schemas": [self._parse_schema(schema) for schema in schemas]
-                if schemas is not NOT_GIVEN
-                else NOT_GIVEN,
+                "schemas": (
+                    [self._parse_schema(schema) for schema in schemas] if schemas is not NOT_GIVEN else NOT_GIVEN
+                ),
                 **kwargs,
             }
         )
