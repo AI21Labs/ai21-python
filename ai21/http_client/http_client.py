@@ -99,8 +99,7 @@ class AI21HTTPClient(BaseHttpClient[httpx.Client, Stream[Any]]):
 
         if response.status_code != httpx.codes.OK:
             _logger.error(
-                f"Calling {method} {self._base_url} failed with a non-200 "
-                f"response code: {response.status_code} headers: {response.headers}"
+                f"Calling {method} {response.url} failed with a non-200 response code: {response.status_code}"
             )
 
             if stream:
