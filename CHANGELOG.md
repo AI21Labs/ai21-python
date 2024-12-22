@@ -1,9 +1,52 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.2 (2024-12-22)
+
+### Chores
+
+* chore: :truck: rename `internet_research` to `web_search` (#241)
+
+EXEC-470
+
+Co-authored-by: benshuk <bens@ai21.com> ([`770c6c5`](https://github.com/AI21Labs/ai21-python/commit/770c6c51fd7ea287d2485a3048fe748db5b636b3))
+
+### Fixes
+
+* fix: Adapt assistant sdk to hlp (#242)
+
+* fix: add schemas to assistant plans
+
+* fix: support func type in code and class in schemas
+
+* fix: add schemas to api call
+
+* fix: raise an error on code parsing failed
+
+* fix: change types
+
+* fix: add tests
+
+* fix: adapt code to 3.8
+
+* fix: adapt code to 3.8
+
+* fix: support model schemas of python 3.11
+
+* fix: support model schemas of python 3.11
+
+* fix: PR comments
+
+* fix: PR comments
+
+* fix: add user defined plan example to integration tests ([`78c58d5`](https://github.com/AI21Labs/ai21-python/commit/78c58d588b91f64bebd53445a1585b008011afe7))
+
+
 ## v3.1.0-rc.1 (2024-12-04)
 
 ### Chores
+
+* chore(release): v3.1.0-rc.1 [skip ci] ([`3bdad90`](https://github.com/AI21Labs/ai21-python/commit/3bdad90a0dd7ac5e7ace2acdea58d18cf6b6599b))
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.10.3 to 1.12.2 (#227)
 
