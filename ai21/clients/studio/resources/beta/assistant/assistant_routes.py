@@ -8,7 +8,7 @@ from ai21.clients.studio.resources.studio_resource import (
     StudioResource,
 )
 from ai21.models.responses.route_response import RouteResponse, ListRouteResponse
-from ai21.types import NotGiven
+from ai21.types import NotGiven, NOT_GIVEN
 
 
 class AssistantRoutes(StudioResource, BaseRoutes):
@@ -36,7 +36,7 @@ class AssistantRoutes(StudioResource, BaseRoutes):
         self,
         *,
         assistant_id: str,
-        name: str | NotGiven = NotGiven,
+        name: str | NotGiven = NOT_GIVEN,
     ) -> ListRouteResponse:
         params = self._create_body(name=name)
 
@@ -57,8 +57,8 @@ class AssistantRoutes(StudioResource, BaseRoutes):
         *,
         assistant_id: str,
         route_id: str,
-        description: str | NotGiven = NotGiven,
-        examples: List[str] | NotGiven = NotGiven,
+        description: str | NotGiven = NOT_GIVEN,
+        examples: List[str] | NotGiven = NOT_GIVEN,
     ) -> RouteResponse:
         body = self._create_body(
             description=description,
@@ -105,7 +105,7 @@ class AsyncAssistantRoutes(AsyncStudioResource, BaseRoutes):
         self,
         *,
         assistant_id: str,
-        name: str | NotGiven = NotGiven,
+        name: str | NotGiven = NOT_GIVEN,
     ) -> ListRouteResponse:
         params = self._create_body(name=name)
 
@@ -128,8 +128,8 @@ class AsyncAssistantRoutes(AsyncStudioResource, BaseRoutes):
         *,
         assistant_id: str,
         route_id: str,
-        description: str | NotGiven = NotGiven,
-        examples: List[str] | NotGiven = NotGiven,
+        description: str | NotGiven = NOT_GIVEN,
+        examples: List[str] | NotGiven = NOT_GIVEN,
     ) -> RouteResponse:
         body = self._create_body(
             description=description,
