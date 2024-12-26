@@ -1,9 +1,18 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.3 (2024-12-26)
+
+### Fixes
+
+* fix: not given as a constant not class (#244) ([`5782127`](https://github.com/AI21Labs/ai21-python/commit/5782127fbc805b68345ba68de2508a94306f50f4))
+
+
 ## v3.1.0-rc.2 (2024-12-22)
 
 ### Chores
+
+* chore(release): v3.1.0-rc.2 [skip ci] ([`5deee97`](https://github.com/AI21Labs/ai21-python/commit/5deee97bfdf97e7e15203c2267983c55e695cfde))
 
 * chore: :truck: rename `internet_research` to `web_search` (#241)
 
