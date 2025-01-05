@@ -8,7 +8,7 @@ from ai21.clients.studio.resources.beta.assistant.thread_runs import AsyncThread
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.models.assistant.message import Message
+from ai21.models.assistant.message import Message, modify_message_content
 from ai21.models.responses.thread_response import ThreadResponse
 
 
@@ -24,7 +24,7 @@ class Threads(StudioResource, BaseThreads):
         messages: List[Message],
         **kwargs,
     ) -> ThreadResponse:
-        body = dict(messages=messages)
+        body = dict(messages=[modify_message_content(message) for message in messages])
 
         return self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 
@@ -44,7 +44,7 @@ class AsyncThreads(AsyncStudioResource, BaseThreads):
         messages: List[Message],
         **kwargs,
     ) -> ThreadResponse:
-        body = dict(messages=messages)
+        body = dict(messages=[modify_message_content(message) for message in messages])
 
         return await self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 

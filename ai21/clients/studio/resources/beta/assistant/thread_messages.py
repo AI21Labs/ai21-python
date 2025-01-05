@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from ai21.clients.common.beta.assistant.messages import BaseMessages
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
-from ai21.models.assistant.message import ThreadMessageRole, MessageContentText
+from ai21.models.assistant.message import ThreadMessageRole, MessageContentText, modify_message_content, Message
 from ai21.models.responses.message_response import MessageResponse, ListMessageResponse
 
 
@@ -12,13 +12,10 @@ class ThreadMessages(StudioResource, BaseMessages):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: MessageContentText,
+        content: str | MessageContentText,
         **kwargs,
     ) -> MessageResponse:
-        body = dict(
-            role=role,
-            content=content,
-        )
+        body = modify_message_content(Message(role=role, content=content))
 
         return self._post(path=f"/threads/{thread_id}/{self._module_name}", body=body, response_cls=MessageResponse)
 
@@ -32,13 +29,10 @@ class AsyncThreadMessages(AsyncStudioResource, BaseMessages):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: MessageContentText,
+        content: str | MessageContentText,
         **kwargs,
     ) -> MessageResponse:
-        body = dict(
-            role=role,
-            content=content,
-        )
+        body = modify_message_content(Message(role=role, content=content))
 
         return await self._post(
             path=f"/threads/{thread_id}/{self._module_name}", body=body, response_cls=MessageResponse

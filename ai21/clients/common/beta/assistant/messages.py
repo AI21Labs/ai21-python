@@ -15,7 +15,7 @@ class BaseMessages(ABC):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: MessageContentText,
+        content: str | MessageContentText,
         **kwargs,
     ) -> MessageResponse:
         pass
