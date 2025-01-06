@@ -16,10 +16,7 @@ async def main():
         messages=[
             {
                 "role": "user",
-                "content": {
-                    "type": "text",
-                    "text": "Hello",
-                },
+                "content": "Hello",
             },
         ]
     )

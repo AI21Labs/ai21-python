@@ -2,7 +2,7 @@ from datetime import datetime
 from typing import Literal, Optional, List
 
 from ai21.models.ai21_base_model import AI21BaseModel
-from ai21.models.assistant.message import ThreadMessageRole, MessageContentText
+from ai21.models.assistant.message import ThreadMessageRole, ThreadMessageContentText
 
 
 class MessageResponse(AI21BaseModel):
@@ -11,7 +11,7 @@ class MessageResponse(AI21BaseModel):
     updated_at: datetime
     object: Literal["message"] = "message"
     role: ThreadMessageRole
-    content: MessageContentText
+    content: ThreadMessageContentText
     run_id: Optional[str] = None
     assistant_id: Optional[str] = None
 
