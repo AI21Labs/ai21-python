@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Union
+
 from ai21.clients.common.beta.assistant.messages import BaseMessages
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models.assistant.message import ThreadMessageRole, MessageContentText, modify_message_content, Message
@@ -12,7 +14,7 @@ class ThreadMessages(StudioResource, BaseMessages):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: str | MessageContentText,
+        content: Union[str, MessageContentText],
         **kwargs,
     ) -> MessageResponse:
         body = modify_message_content(Message(role=role, content=content))
@@ -29,7 +31,7 @@ class AsyncThreadMessages(AsyncStudioResource, BaseMessages):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: str | MessageContentText,
+        content: Union[str, MessageContentText],
         **kwargs,
     ) -> MessageResponse:
         body = modify_message_content(Message(role=role, content=content))
