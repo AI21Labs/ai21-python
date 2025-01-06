@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import Literal
+from typing import Literal, Union
 
 from typing_extensions import TypedDict
 
@@ -7,12 +7,12 @@ from typing_extensions import TypedDict
 ThreadMessageRole = Literal["assistant", "user"]
 
 
-class MessageContentText(TypedDict):
+class ThreadMessageContentText(TypedDict):
     type: Literal["text"]
     text: str
 
 
-ThreadMessageContent = str | MessageContentText
+ThreadMessageContent = Union[str, ThreadMessageContentText]
 
 
 class Message(TypedDict):
@@ -25,6 +25,6 @@ def modify_message_content(message: Message) -> Message:
     content = message["content"]
 
     if isinstance(content, str):
-        content = MessageContentText(type="text", text=content)
+        content = ThreadMessageContentText(type="text", text=content)
 
     return Message(role=role, content=content)
