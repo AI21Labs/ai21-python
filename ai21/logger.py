@@ -4,6 +4,7 @@ import re
 
 from ai21.ai21_env_config import AI21EnvConfig
 
+
 _verbose = False
 
 logger = logging.getLogger("ai21")
@@ -61,17 +62,15 @@ def get_verbose() -> bool:
     return _verbose
 
 
-def _basic_config() -> None:
-    logging.basicConfig(
-        format="[%(asctime)s - %(name)s - %(levelname)s] %(message)s",
-        datefmt="%Y-%m-%d %H:%M:%S",
+def setup_logger() -> None:
+    handler = logging.StreamHandler()
+
+    handler.setFormatter(
+        CensorSecretsFormatter(fmt="[%(asctime)s - %(name)s - %(levelname)s] %(message)s", datefmt="%Y-%m-%d %H:%M:%S")
     )
 
-
-def setup_logger() -> None:
-    _basic_config()
-    # Set the root handler with the censor formatter
-    logger.root.handlers[0].setFormatter(CensorSecretsFormatter())
+    logger.addHandler(handler)
+    httpx_logger.addHandler(handler)
 
     if AI21EnvConfig.log_level.lower() == "debug":
         logger.setLevel(logging.DEBUG)
