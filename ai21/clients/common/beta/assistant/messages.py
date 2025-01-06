@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import Union
 
-from ai21.models.assistant.message import ThreadMessageRole, MessageContentText
+from ai21.models.assistant.message import ThreadMessageRole, ThreadMessageContent
 from ai21.models.responses.message_response import MessageResponse, ListMessageResponse
 
 
@@ -16,7 +15,7 @@ class BaseMessages(ABC):
         thread_id: str,
         *,
         role: ThreadMessageRole,
-        content: Union[str, MessageContentText],
+        content: ThreadMessageContent,
         **kwargs,
     ) -> MessageResponse:
         pass

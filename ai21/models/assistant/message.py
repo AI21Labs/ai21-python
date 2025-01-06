@@ -1,4 +1,5 @@
-from typing import Literal, Union
+from __future__ import annotations
+from typing import Literal
 
 from typing_extensions import TypedDict
 
@@ -11,9 +12,12 @@ class MessageContentText(TypedDict):
     text: str
 
 
+ThreadMessageContent = str | MessageContentText
+
+
 class Message(TypedDict):
     role: ThreadMessageRole
-    content: Union[str, MessageContentText]
+    content: ThreadMessageContent
 
 
 def modify_message_content(message: Message) -> Message:
