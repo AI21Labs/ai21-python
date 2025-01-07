@@ -1,4 +1,4 @@
-from typing import Literal, Any, List
+from typing import Literal, Any, List, Set
 
 from typing_extensions import TypedDict
 
@@ -14,6 +14,10 @@ RunStatus = Literal[
     "queued",
     "requires_action",
 ]
+
+TERMINATED_RUN_STATUSES: Set[RunStatus] = {"completed", "failed", "expired", "cancelled", "requires_action"}
+DEFAULT_RUN_POLL_INTERVAL: float = 1  # seconds
+DEFAULT_RUN_POLL_TIMEOUT: float = 60  # seconds
 
 
 class ToolOutput(TypedDict):

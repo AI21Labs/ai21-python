@@ -1,11 +1,18 @@
 from __future__ import annotations
 
+import asyncio
+import time
 from typing import List
 
 from ai21.clients.common.beta.assistant.runs import BaseRuns
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models.assistant.assistant import Optimization
-from ai21.models.assistant.run import ToolOutput
+from ai21.models.assistant.run import (
+    ToolOutput,
+    TERMINATED_RUN_STATUSES,
+    DEFAULT_RUN_POLL_INTERVAL,
+    DEFAULT_RUN_POLL_TIMEOUT,
+)
 from ai21.models.responses.run_response import RunResponse
 from ai21.types import NotGiven, NOT_GIVEN
 
@@ -55,6 +62,41 @@ class ThreadRuns(StudioResource, BaseRuns):
             response_cls=RunResponse,
         )
 
+    def _poll_for_status(
+        self, *, thread_id: str, run_id: str, poll_interval: float, poll_timeout: float
+    ) -> RunResponse:
+        start_time = time.time()
+
+        while True:
+            run = self.retrieve(thread_id=thread_id, run_id=run_id)
+
+            if run.status in TERMINATED_RUN_STATUSES:
+                return run
+
+            if (time.time() - start_time) > poll_timeout:
+                return run
+
+            time.sleep(poll_interval)
+
+    def create_and_poll(
+        self,
+        *,
+        thread_id: str,
+        assistant_id: str,
+        description: str | NotGiven = NOT_GIVEN,
+        optimization: Optimization | NotGiven = NOT_GIVEN,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
+        **kwargs,
+    ) -> RunResponse:
+        run = self.create(
+            thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
+        )
+
+        return self._poll_for_status(
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
+        )
+
 
 class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
     async def create(
@@ -101,4 +143,39 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
             path=f"/threads/{thread_id}/{self._module_name}/{run_id}/submit_tool_outputs",
             body=body,
             response_cls=RunResponse,
+        )
+
+    async def _poll_for_status(
+        self, *, thread_id: str, run_id: str, poll_interval: float, poll_timeout: float
+    ) -> RunResponse:
+        start_time = time.time()
+
+        while True:
+            run = await self.retrieve(thread_id=thread_id, run_id=run_id)
+
+            if run.status in TERMINATED_RUN_STATUSES:
+                return run
+
+            if (time.time() - start_time) > poll_timeout:
+                return run
+
+            await asyncio.sleep(poll_interval)
+
+    async def create_and_poll(
+        self,
+        *,
+        thread_id: str,
+        assistant_id: str,
+        description: str | NotGiven = NOT_GIVEN,
+        optimization: Optimization | NotGiven = NOT_GIVEN,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
+        **kwargs,
+    ) -> RunResponse:
+        run = await self.create(
+            thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
+        )
+
+        return await self._poll_for_status(
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
         )
