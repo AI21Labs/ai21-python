@@ -47,5 +47,5 @@ class SubmitInput(TypedDict):
 
 class RequiredAction(TypedDict):
     type: Literal["submit_tool_outputs", "submit_input"]
-    submit_tool_outputs: Optional[SubmitToolCallOutputs]
-    submit_input: Optional[SubmitInput]
+    submit_tool_outputs: Optional[SubmitToolCallOutputs] = None
+    submit_input: Optional[SubmitInput] = None
