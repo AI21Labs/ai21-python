@@ -73,7 +73,7 @@ class ThreadRuns(StudioResource, BaseRuns):
             if run.status in TERMINATED_RUN_STATUSES:
                 return run
 
-            if (time.time() - start_time) > poll_timeout:
+            if (time.time() - start_time) >= poll_timeout:
                 return run
 
             time.sleep(poll_interval)
@@ -180,7 +180,7 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
             if run.status in TERMINATED_RUN_STATUSES:
                 return run
 
-            if (time.time() - start_time) > poll_timeout:
+            if (time.time() - start_time) >= poll_timeout:
                 return run
 
             await asyncio.sleep(poll_interval)
