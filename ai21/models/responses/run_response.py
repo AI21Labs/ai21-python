@@ -17,3 +17,4 @@ class RunResponse(AI21BaseModel):
     optimization: Optimization
     execution_id: Optional[str] = None
     required_action: Optional[RequiredAction] = None
+    error: Optional[str] = None
