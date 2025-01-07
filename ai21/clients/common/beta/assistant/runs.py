@@ -67,7 +67,21 @@ class BaseRuns(ABC):
         pass
 
     @abstractmethod
-    def poll_for_status(
-        self, *, thread_id: str, run_id: str, polling_interval: int, polling_timeout: int
+    def _poll_for_status(
+        self, *, thread_id: str, run_id: str, poll_interval: float, poll_timeout: float
+    ) -> RunResponse:
+        pass
+
+    @abstractmethod
+    def create_and_poll(
+        self,
+        *,
+        thread_id: str,
+        assistant_id: str,
+        description: str | NotGiven,
+        optimization: Optimization | NotGiven,
+        poll_interval: float,
+        poll_timeout: float,
+        **kwargs,
     ) -> RunResponse:
         pass
