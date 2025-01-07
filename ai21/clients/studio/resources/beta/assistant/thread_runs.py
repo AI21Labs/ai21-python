@@ -85,30 +85,16 @@ class ThreadRuns(StudioResource, BaseRuns):
         assistant_id: str,
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
-        poll_interval: float = DEFAULT_RUN_POLL_INTERVAL,
-        poll_timeout: float = DEFAULT_RUN_POLL_TIMEOUT,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
     ) -> RunResponse:
-        """
-        Create a run and poll for its status until it is no longer in progress or the timeout is reached.
-
-        Args:
-            thread_id: The ID of the thread.
-            assistant_id: The ID of the assistant.
-            description: The description of the run.
-            optimization: The optimization level to use.
-            poll_interval: The interval in seconds to poll for the run status.
-            poll_timeout: The timeout in seconds to wait for the run to complete.
-
-        Returns:
-            The run response.
-        """
         run = self.create(
             thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
         )
 
         return self._poll_for_status(
-            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval, poll_timeout=poll_timeout
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
         )
 
 
@@ -182,28 +168,14 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
         assistant_id: str,
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
-        poll_interval: float = DEFAULT_RUN_POLL_INTERVAL,
-        poll_timeout: float = DEFAULT_RUN_POLL_TIMEOUT,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
     ) -> RunResponse:
-        """
-        Create a run and poll for its status until it is no longer in progress or the timeout is reached.
-
-        Args:
-            thread_id: The ID of the thread.
-            assistant_id: The ID of the assistant.
-            description: The description of the run.
-            optimization: The optimization level to use.
-            poll_interval: The interval in seconds to poll for the run status.
-            poll_timeout: The timeout in seconds to wait for the run to complete.
-
-        Returns:
-            The run response.
-        """
         run = await self.create(
             thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
         )
 
         return await self._poll_for_status(
-            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval, poll_timeout=poll_timeout
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
         )

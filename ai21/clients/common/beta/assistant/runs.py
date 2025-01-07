@@ -80,8 +80,8 @@ class BaseRuns(ABC):
         assistant_id: str,
         description: str | NotGiven,
         optimization: Optimization | NotGiven,
-        poll_interval: float,
-        poll_timeout: float,
+        poll_interval_sec: float,
+        poll_timeout_sec: float,
         **kwargs,
     ) -> RunResponse:
         pass
