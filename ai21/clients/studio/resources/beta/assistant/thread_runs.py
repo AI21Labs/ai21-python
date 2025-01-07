@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import asyncio
+import time
 from typing import List
 
 from ai21.clients.common.beta.assistant.runs import BaseRuns
@@ -55,6 +57,22 @@ class ThreadRuns(StudioResource, BaseRuns):
             response_cls=RunResponse,
         )
 
+    def poll_for_status(
+        self, *, thread_id: str, run_id: str, polling_interval: int = 1, timeout: int = 60
+    ) -> RunResponse:
+        start_time = time.time()
+        run = self.retrieve(thread_id=thread_id, run_id=run_id)
+
+        while run.status == "in_progress":
+            run = self.retrieve(thread_id=thread_id, run_id=run_id)
+
+            if time.time() - start_time > timeout:
+                break
+            else:
+                time.sleep(polling_interval)
+
+        return run
+
 
 class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
     async def create(
@@ -102,3 +120,19 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
             body=body,
             response_cls=RunResponse,
         )
+
+    async def poll_for_status(
+        self, *, thread_id: str, run_id: str, polling_interval: int = 1, timeout: int = 60
+    ) -> RunResponse:
+        start_time = time.time()
+        run = await self.retrieve(thread_id=thread_id, run_id=run_id)
+
+        while run.status == "in_progress":
+            run = await self.retrieve(thread_id=thread_id, run_id=run_id)
+
+            if time.time() - start_time > timeout:
+                break
+            else:
+                await asyncio.sleep(polling_interval)
+
+        return run

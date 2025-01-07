@@ -65,3 +65,9 @@ class BaseRuns(ABC):
     @abstractmethod
     def submit_tool_outputs(self, *, thread_id: str, run_id: str, tool_outputs: List[ToolOutput]) -> RunResponse:
         pass
+
+    @abstractmethod
+    def poll_for_status(
+        self, *, thread_id: str, run_id: str, polling_interval: int, polling_timeout: int
+    ) -> RunResponse:
+        pass
