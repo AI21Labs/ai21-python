@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List
+from typing import Any, List
 
 from ai21.models.assistant.assistant import Optimization
 from ai21.models.assistant.run import ToolOutput
@@ -83,5 +83,21 @@ class BaseRuns(ABC):
         poll_interval_sec: float,
         poll_timeout_sec: float,
         **kwargs,
+    ) -> RunResponse:
+        pass
+
+    @abstractmethod
+    def submit_input(self, *, thread_id: str, run_id: str, input: Any) -> RunResponse:
+        pass
+
+    @abstractmethod
+    def submit_input_and_poll(
+        self,
+        *,
+        thread_id: str,
+        run_id: str,
+        input: Any,
+        poll_interval_sec: float,
+        poll_timeout_sec: float,
     ) -> RunResponse:
         pass
