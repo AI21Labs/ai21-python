@@ -1,6 +1,15 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.6 (2025-01-08)
+
+### Bug Fixes
+
+- Do not require all fields for RequiredAction
+  ([#253](https://github.com/AI21Labs/ai21-python/pull/253),
+  [`1714ccc`](https://github.com/AI21Labs/ai21-python/commit/1714ccc8538e7e0329f4dc564a8d40c92b650d81))
+
+
 ## v3.1.0-rc.5 (2025-01-08)
 
 ### Bug Fixes
@@ -29,6 +38,9 @@ Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5. - [Release
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **release**: V3.1.0-rc.5 [skip ci]
+  ([`f2f7918`](https://github.com/AI21Labs/ai21-python/commit/f2f7918fc0336bd026efb02e2228546f6abbcc5d))
 
 ### Refactoring
 
