@@ -78,7 +78,9 @@ class AsyncAssistantPlans(AsyncStudioResource, BasePlans):
             **kwargs,
         )
 
-        return self._post(path=f"/assistants/{assistant_id}/{self._module_name}", body=body, response_cls=PlanResponse)
+        return await self._post(
+            path=f"/assistants/{assistant_id}/{self._module_name}", body=body, response_cls=PlanResponse
+        )
 
     async def list(
         self,
