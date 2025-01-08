@@ -1,6 +1,44 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.5 (2025-01-08)
+
+### Bug Fixes
+
+- :bug: await needed for async `plans.create`
+  ([#252](https://github.com/AI21Labs/ai21-python/pull/252),
+  [`d646e99`](https://github.com/AI21Labs/ai21-python/commit/d646e99cdd1dabca423b62e7e001ca58c5105594))
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+### Chores
+
+- **deps-dev**: Bump jinja2 from 3.1.4 to 3.1.5
+  ([#247](https://github.com/AI21Labs/ai21-python/pull/247),
+  [`2d36461`](https://github.com/AI21Labs/ai21-python/commit/2d36461958abeb267c7f664fd2c1ce43d59d5506))
+
+Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5. - [Release
+  notes](https://github.com/pallets/jinja/releases) -
+  [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst) -
+  [Commits](https://github.com/pallets/jinja/compare/3.1.4...3.1.5)
+
+--- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect
+
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+### Refactoring
+
+- :label: change `rag` tool resource to `file_search`
+  ([#251](https://github.com/AI21Labs/ai21-python/pull/251),
+  [`c09170f`](https://github.com/AI21Labs/ai21-python/commit/c09170fdc2ce93aa768704aa343c769af654d686))
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
 ## v3.1.0-rc.4 (2025-01-08)
 
 ### Chores
@@ -51,6 +89,9 @@ update-type: version-update:semver-minor
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **release**: V3.1.0-rc.4 [skip ci]
+  ([`4327dbb`](https://github.com/AI21Labs/ai21-python/commit/4327dbbd38dcf1dead95eda3dcc88f0e03aedd70))
 
 ### Continuous Integration
 
