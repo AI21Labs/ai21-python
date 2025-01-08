@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import List
+from typing import Any, List
 
 from ai21.clients.common.beta.assistant.runs import BaseRuns
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
@@ -73,7 +73,7 @@ class ThreadRuns(StudioResource, BaseRuns):
             if run.status in TERMINATED_RUN_STATUSES:
                 return run
 
-            if (time.time() - start_time) > poll_timeout:
+            if (time.time() - start_time) >= poll_timeout:
                 return run
 
             time.sleep(poll_interval)
@@ -92,6 +92,30 @@ class ThreadRuns(StudioResource, BaseRuns):
         run = self.create(
             thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
         )
+
+        return self._poll_for_status(
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
+        )
+
+    def submit_input(self, *, thread_id: str, run_id: str, input: Any) -> RunResponse:
+        body = dict(input=input)
+
+        return self._post(
+            path=f"/threads/{thread_id}/{self._module_name}/{run_id}/submit_input",
+            body=body,
+            response_cls=RunResponse,
+        )
+
+    def submit_input_and_poll(
+        self,
+        *,
+        thread_id: str,
+        run_id: str,
+        input: Any,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
+    ) -> RunResponse:
+        run = self.submit_input(thread_id=thread_id, run_id=run_id, input=input)
 
         return self._poll_for_status(
             thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
@@ -156,7 +180,7 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
             if run.status in TERMINATED_RUN_STATUSES:
                 return run
 
-            if (time.time() - start_time) > poll_timeout:
+            if (time.time() - start_time) >= poll_timeout:
                 return run
 
             await asyncio.sleep(poll_interval)
@@ -175,6 +199,30 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
         run = await self.create(
             thread_id=thread_id, assistant_id=assistant_id, description=description, optimization=optimization, **kwargs
         )
+
+        return await self._poll_for_status(
+            thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
+        )
+
+    async def submit_input(self, *, thread_id: str, run_id: str, input: Any) -> RunResponse:
+        body = dict(input=input)
+
+        return await self._post(
+            path=f"/threads/{thread_id}/{self._module_name}/{run_id}/submit_inputs",
+            body=body,
+            response_cls=RunResponse,
+        )
+
+    async def submit_input_and_poll(
+        self,
+        *,
+        thread_id: str,
+        run_id: str,
+        input: Any,
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
+    ) -> RunResponse:
+        run = await self.submit_input(thread_id=thread_id, run_id=run_id, input=input)
 
         return await self._poll_for_status(
             thread_id=thread_id, run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
