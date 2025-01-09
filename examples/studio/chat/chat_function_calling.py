@@ -2,7 +2,14 @@ import json
 
 from ai21 import AI21Client
 from ai21.logger import set_verbose
-from ai21.models.chat import ChatMessage, ToolMessage, FunctionToolDefinition, ToolDefinition, ToolParameters
+from ai21.models.chat import (
+    ChatMessage,
+    FunctionToolDefinition,
+    ToolDefinition,
+    ToolMessage,
+    ToolParameters,
+)
+
 
 set_verbose(True)
 

@@ -2,13 +2,15 @@
 Run this script after setting the environment variable called AI21_API_KEY
 """
 
+import subprocess
+
 from pathlib import Path
 from time import sleep
 
 import pytest
-import subprocess
 
 from tests.integration_tests.skip_helpers import should_skip_studio_integration_tests
+
 
 STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 
@@ -50,14 +52,12 @@ def test_studio(test_file_name: str):
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("async_chat.py",),
         ("chat/async_chat_completions.py",),
         ("chat/async_stream_chat_completions.py",),
         ("conversational_rag/conversational_rag.py",),
         ("conversational_rag/async_conversational_rag.py",),
     ],
     ids=[
-        "when_chat__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_conversational_rag__should_return_ok",
