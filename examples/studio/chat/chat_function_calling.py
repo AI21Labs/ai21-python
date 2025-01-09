@@ -48,7 +48,6 @@ client = AI21Client()
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
 
-print(response.usage.prompt_tokens)
 """ AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
 The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
 to get the delivery date for the user's order. After retrieving the delivery date, we pass the response back
@@ -82,5 +81,3 @@ if delivery_date is not None:
 
     response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
     print(response.choices[0].message.content)
-
-print(response.usage.prompt_tokens)
