@@ -2,7 +2,14 @@ import json
 
 from ai21 import AI21Client
 from ai21.logger import set_verbose
-from ai21.models.chat import ChatMessage, ToolMessage, FunctionToolDefinition, ToolDefinition, ToolParameters
+from ai21.models.chat import (
+    ChatMessage,
+    FunctionToolDefinition,
+    ToolDefinition,
+    ToolMessage,
+    ToolParameters,
+)
+
 
 set_verbose(True)
 
@@ -37,10 +44,11 @@ tool_definition = ToolDefinition(
 
 tools = [tool_definition]
 
-client = AI21Client()
+client = AI21Client(api_key="L40MQGXxfbtQVnCRqNTTKaojD8Snt7nQ")
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
 
+print(response.usage.prompt_tokens)
 """ AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
 The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
 to get the delivery date for the user's order. After retrieving the delivery date, we pass the response back
@@ -74,3 +82,5 @@ if delivery_date is not None:
 
     response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
     print(response.choices[0].message.content)
+
+print(response.usage.prompt_tokens)
