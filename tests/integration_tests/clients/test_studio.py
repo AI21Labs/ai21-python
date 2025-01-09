@@ -58,7 +58,6 @@ def test_studio(test_file_name: str):
         ("conversational_rag/async_conversational_rag.py",),
     ],
     ids=[
-        "when_chat__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_conversational_rag__should_return_ok",

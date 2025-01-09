@@ -44,7 +44,7 @@ tool_definition = ToolDefinition(
 
 tools = [tool_definition]
 
-client = AI21Client(api_key="L40MQGXxfbtQVnCRqNTTKaojD8Snt7nQ")
+client = AI21Client()
 
 response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
 
