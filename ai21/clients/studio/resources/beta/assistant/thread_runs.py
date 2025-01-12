@@ -208,7 +208,7 @@ class AsyncThreadRuns(AsyncStudioResource, BaseRuns):
         body = dict(input=input)
 
         return await self._post(
-            path=f"/threads/{thread_id}/{self._module_name}/{run_id}/submit_inputs",
+            path=f"/threads/{thread_id}/{self._module_name}/{run_id}/submit_input",
             body=body,
             response_cls=RunResponse,
         )
