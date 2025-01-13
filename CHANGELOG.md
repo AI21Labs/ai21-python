@@ -1,6 +1,18 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.7 (2025-01-13)
+
+### Bug Fixes
+
+- Bad endpoint in async thread runs ([#255](https://github.com/AI21Labs/ai21-python/pull/255),
+  [`4a7dfe0`](https://github.com/AI21Labs/ai21-python/commit/4a7dfe0c642321c2f58c56b747586d830b1ade05))
+
+- Change schemas field in PlanResponse to be optional
+  ([#257](https://github.com/AI21Labs/ai21-python/pull/257),
+  [`6d9d1a4`](https://github.com/AI21Labs/ai21-python/commit/6d9d1a416dc070076175430fcdd18b56bd658e5b))
+
+
 ## v3.1.0-rc.6 (2025-01-08)
 
 ### Bug Fixes
@@ -8,6 +20,11 @@
 - Do not require all fields for RequiredAction
   ([#253](https://github.com/AI21Labs/ai21-python/pull/253),
   [`1714ccc`](https://github.com/AI21Labs/ai21-python/commit/1714ccc8538e7e0329f4dc564a8d40c92b650d81))
+
+### Chores
+
+- **release**: V3.1.0-rc.6 [skip ci]
+  ([`0d8f306`](https://github.com/AI21Labs/ai21-python/commit/0d8f3060e69947a1d9ac5627b392c1ffb4fc3151))
 
 
 ## v3.1.0-rc.5 (2025-01-08)
