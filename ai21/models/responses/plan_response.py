@@ -10,7 +10,7 @@ class PlanResponse(AI21BaseModel):
     updated_at: datetime
     assistant_id: str
     code: str
-    schemas: List[Dict[str, Any]]
+    schemas: Optional[List[Dict[str, Any]]] = None
 
 
 class ListPlanResponse(AI21BaseModel):
