@@ -6,7 +6,7 @@ from typing import Any, Dict, List
 from ai21.clients.common.beta.assistant.plans import BasePlans
 from ai21.clients.common.beta.assistant.routes import BaseRoutes
 from ai21.models.assistant.assistant import Optimization, Tool, ToolResources
-from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
+from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant, DeletedAssistantResponse
 from ai21.types import NotGiven, NOT_GIVEN
 from ai21.utils.typing import remove_not_given
 
@@ -74,4 +74,8 @@ class BaseAssistants(ABC):
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
+        pass
+
+    @abstractmethod
+    def delete(self, assistant_id: str) -> DeletedAssistantResponse:
         pass
