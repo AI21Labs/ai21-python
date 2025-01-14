@@ -24,3 +24,9 @@ class AssistantResponse(AI21BaseModel):
 
 class ListAssistant(AI21BaseModel):
     results: List[AssistantResponse]
+
+
+class DeletedAssistantResponse(AI21BaseModel):
+    object: Literal["assistant"] = "assistant"
+    deleted: bool = True
+    id: str

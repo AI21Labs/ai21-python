@@ -12,7 +12,7 @@ from ai21.clients.studio.resources.studio_resource import (
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.assistant.assistant import Tool, ToolResources
-from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant
+from ai21.models.responses.assistant_response import AssistantResponse, ListAssistant, DeletedAssistantResponse
 from ai21.types import NotGiven, NOT_GIVEN
 
 
@@ -76,6 +76,9 @@ class Assistants(StudioResource, BaseAssistants):
 
         return self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
 
+    def delete(self, assistant_id: str) -> DeletedAssistantResponse:
+        return self._delete(path=f"/{self._module_name}/{assistant_id}", response_cls=DeletedAssistantResponse)
+
 
 class AsyncAssistants(AsyncStudioResource, BaseAssistants):
     def __init__(self, client: AsyncAI21HTTPClient):
@@ -136,3 +139,6 @@ class AsyncAssistants(AsyncStudioResource, BaseAssistants):
         )
 
         return await self._patch(path=f"/{self._module_name}/{assistant_id}", body=body, response_cls=AssistantResponse)
+
+    async def delete(self, assistant_id: str) -> DeletedAssistantResponse:
+        return await self._delete(path=f"/{self._module_name}/{assistant_id}", response_cls=DeletedAssistantResponse)
