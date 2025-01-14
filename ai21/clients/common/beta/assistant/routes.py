@@ -18,8 +18,8 @@ class BaseRoutes(ABC):
         assistant_id: str,
         plan_id: str,
         name: str,
-        description: str,
         examples: List[str],
+        description: str | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RouteResponse:
         pass

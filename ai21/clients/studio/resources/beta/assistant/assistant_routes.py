@@ -18,7 +18,7 @@ class AssistantRoutes(StudioResource, BaseRoutes):
         assistant_id: str,
         plan_id: str,
         name: str,
-        description: str,
+        description: str | NotGiven = NOT_GIVEN,
         examples: List[str],
         **kwargs,
     ) -> RouteResponse:
@@ -85,7 +85,7 @@ class AsyncAssistantRoutes(AsyncStudioResource, BaseRoutes):
         assistant_id: str,
         plan_id: str,
         name: str,
-        description: str,
+        description: str | NotGiven = NOT_GIVEN,
         examples: List[str],
         **kwargs,
     ) -> RouteResponse:
