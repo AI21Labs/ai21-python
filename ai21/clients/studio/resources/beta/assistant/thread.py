@@ -8,8 +8,9 @@ from ai21.clients.studio.resources.beta.assistant.thread_runs import AsyncThread
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.models.assistant.message import Message, modify_message_content
+from ai21.models.assistant.message import Message
 from ai21.models.responses.thread_response import ThreadResponse
+from ai21.types import NOT_GIVEN, NotGiven
 
 
 class Threads(StudioResource, BaseThreads):
@@ -21,10 +22,10 @@ class Threads(StudioResource, BaseThreads):
 
     def create(
         self,
-        messages: List[Message],
+        messages: List[Message] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ThreadResponse:
-        body = dict(messages=[modify_message_content(message) for message in messages])
+        body = self._create_body(messages=messages, **kwargs)
 
         return self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 
@@ -41,10 +42,10 @@ class AsyncThreads(AsyncStudioResource, BaseThreads):
 
     async def create(
         self,
-        messages: List[Message],
+        messages: List[Message] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ThreadResponse:
-        body = dict(messages=[modify_message_content(message) for message in messages])
+        body = self._create_body(messages=messages, **kwargs)
 
         return await self._post(path=f"/{self._module_name}", body=body, response_cls=ThreadResponse)
 
