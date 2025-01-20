@@ -25,8 +25,7 @@ class BaseThreads(ABC):
     def _create_body(self, messages: List[Message] | NotGiven, **kwargs) -> Optional[dict]:
         body = remove_not_given({"messages": messages, **kwargs})
 
-        if "messages" in body:
-            body["messages"] = [modify_message_content(message) for message in body["messages"]]
+        body["messages"] = [modify_message_content(message) for message in body.get("messages", [])]
 
         return body
 
