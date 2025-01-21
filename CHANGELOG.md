@@ -1,6 +1,40 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.8 (2025-01-21)
+
+### Bug Fixes
+
+- 🐛 create thread without messages plz ([#260](https://github.com/AI21Labs/ai21-python/pull/260),
+  [`9b73967`](https://github.com/AI21Labs/ai21-python/commit/9b73967be1762d8cd0e772a7455dc9db6ebbb9c0))
+
+* fix: :bug: create thread without messages plz
+
+* docs: :memo: update assistant example
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+### Chores
+
+- :recycle: thread messages should be optional
+  ([`7198db9`](https://github.com/AI21Labs/ai21-python/commit/7198db963dd9d922ec290ac5f9e79b941a116075))
+
+### Features
+
+- ✨ support deleting assistant ([#258](https://github.com/AI21Labs/ai21-python/pull/258),
+  [`0195f62`](https://github.com/AI21Labs/ai21-python/commit/0195f62ba33f2c5af0403f40e49d1a1865869a1a))
+
+* feat: :sparkles: support deleting assistant
+
+* fix: :recycle: assistant route description should be optional
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
 ## v3.1.0-rc.7 (2025-01-13)
 
 ### Bug Fixes
@@ -11,6 +45,11 @@
 - Change schemas field in PlanResponse to be optional
   ([#257](https://github.com/AI21Labs/ai21-python/pull/257),
   [`6d9d1a4`](https://github.com/AI21Labs/ai21-python/commit/6d9d1a416dc070076175430fcdd18b56bd658e5b))
+
+### Chores
+
+- **release**: V3.1.0-rc.7 [skip ci]
+  ([`45d874c`](https://github.com/AI21Labs/ai21-python/commit/45d874cc46e382746cd3eaf2165222ff7318c7ca))
 
 
 ## v3.1.0-rc.6 (2025-01-08)
