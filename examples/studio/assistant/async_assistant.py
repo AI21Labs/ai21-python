@@ -8,14 +8,9 @@ async def main():
 
     assistant = await ai21_client.beta.assistants.create(name="My Assistant")
 
-    thread = await ai21_client.beta.threads.create(
-        messages=[
-            {
-                "role": "user",
-                "content": "Hello",
-            },
-        ]
-    )
+    thread = await ai21_client.beta.threads.create()
+
+    await ai21_client.beta.threads.messages.create(thread_id=thread.id, role="user", content="Hello")
 
     run = await ai21_client.beta.threads.runs.create_and_poll(
         thread_id=thread.id,
