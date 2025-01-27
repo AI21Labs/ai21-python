@@ -2,7 +2,7 @@
 
 [Template](https://github.com/DynamicYield/template) is a [*Git repository template*](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/creating-a-repository-from-a-template) for bootstrapping your repositories.
 
-Bundled support for:
+Bundled support for test:
 
 - [Code Owners](https://docs.github.com/en/github/creating-cloning-and-archiving-repositories/about-code-owners#about-code-owners) — Automatically requested for review when someone opens a pull request that modifies code that they own as defined in [`.github/CODEOWNERS`](.github/CODEOWNERS)
 
