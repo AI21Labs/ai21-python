@@ -1,7 +1,7 @@
 minimum_pre_commit_version: 2.20.0
 fail_fast: false
 default_stages:
-  - commit
+  - pre-commit
 exclude: (.idea|vscode)
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
