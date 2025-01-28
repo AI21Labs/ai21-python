@@ -24,7 +24,7 @@ class BaseAssistants(ABC):
         description: str | NotGiven = NOT_GIVEN,
         optimization: Optimization | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
@@ -37,7 +37,7 @@ class BaseAssistants(ABC):
         description: str | NotGiven,
         optimization: str | NotGiven,
         models: List[str] | NotGiven,
-        tools: List[str] | NotGiven,
+        tools: List[Dict[str, Tool]] | NotGiven,
         tool_resources: dict | NotGiven,
         **kwargs,
     ) -> Dict[str, Any]:
@@ -71,7 +71,7 @@ class BaseAssistants(ABC):
         optimization: Optimization | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
         pass

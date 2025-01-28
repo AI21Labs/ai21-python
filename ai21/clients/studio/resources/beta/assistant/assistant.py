@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List
+from typing import Dict, List
 
 from ai21.clients.common.beta.assistant.assistants import BaseAssistants
 from ai21.clients.studio.resources.beta.assistant.assistants_plans import AssistantPlans, AsyncAssistantPlans
@@ -30,7 +30,7 @@ class Assistants(StudioResource, BaseAssistants):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
@@ -61,7 +61,7 @@ class Assistants(StudioResource, BaseAssistants):
         optimization: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
         body = self._create_body(
@@ -94,7 +94,7 @@ class AsyncAssistants(AsyncStudioResource, BaseAssistants):
         description: str | NotGiven = NOT_GIVEN,
         optimization: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> AssistantResponse:
@@ -125,7 +125,7 @@ class AsyncAssistants(AsyncStudioResource, BaseAssistants):
         optimization: str | NotGiven = NOT_GIVEN,
         is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Tool]] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
     ) -> AssistantResponse:
         body = self._create_body(
