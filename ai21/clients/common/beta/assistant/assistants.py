@@ -37,7 +37,7 @@ class BaseAssistants(ABC):
         description: str | NotGiven,
         optimization: str | NotGiven,
         models: List[str] | NotGiven,
-        tools: List[str] | NotGiven,
+        tools: List[dict[str, Tool]] | NotGiven,
         tool_resources: dict | NotGiven,
         **kwargs,
     ) -> Dict[str, Any]:
