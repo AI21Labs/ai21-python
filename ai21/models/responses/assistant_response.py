@@ -1,5 +1,5 @@
 from datetime import datetime
-from typing import Optional, List, Literal, Any
+from typing import Optional, List, Literal, Any, Dict
 
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.assistant.assistant import ToolResources
@@ -18,7 +18,7 @@ class AssistantResponse(AI21BaseModel):
     avatar: Optional[str] = None
     is_archived: bool = False
     models: Optional[List[str]] = None
-    tools: Optional[List[dict[str, Any]]] = None
+    tools: Optional[List[Dict[str, Any]]] = None
     tool_resources: Optional[ToolResources] = None
 
 
