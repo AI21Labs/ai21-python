@@ -1,6 +1,25 @@
 # CHANGELOG
 
 
+## v3.1.0-rc.9 (2025-01-28)
+
+### Bug Fixes
+
+- Change tool to a dict
+  ([`9b7cbfc`](https://github.com/AI21Labs/ai21-python/commit/9b7cbfc14ec7bb521f612494b1a764bbca4ca375))
+
+- Pre commit
+  ([`cc3984f`](https://github.com/AI21Labs/ai21-python/commit/cc3984fa43a37d77957ace37019f79a54eb85caa))
+
+- Tools
+  ([`e70e1f8`](https://github.com/AI21Labs/ai21-python/commit/e70e1f8f0608b8329ecb7a8480b8b0d873fc096b))
+
+### Chores
+
+- Fix dict to Dict big D
+  ([`5cb61b8`](https://github.com/AI21Labs/ai21-python/commit/5cb61b84d70af2a44d83236047dcb8f6412aef2b))
+
+
 ## v3.1.0-rc.8 (2025-01-21)
 
 ### Bug Fixes
@@ -20,6 +39,9 @@ Co-authored-by: benshuk <bens@ai21.com>
 
 - :recycle: thread messages should be optional
   ([`7198db9`](https://github.com/AI21Labs/ai21-python/commit/7198db963dd9d922ec290ac5f9e79b941a116075))
+
+- **release**: V3.1.0-rc.8 [skip ci]
+  ([`aedf04a`](https://github.com/AI21Labs/ai21-python/commit/aedf04a4d70e005f4f3ae6bc046cd43766ca5cdd))
 
 ### Features
 
