@@ -1,18 +1,21 @@
 import uuid
+
 from unittest.mock import AsyncMock
 
 import httpx
 import pytest
+
 from pytest_mock import MockerFixture
 
 from ai21 import AI21Client, AsyncAI21Client
 from ai21.models import ChatMessage, RoleType
 from ai21.models.chat import ChatCompletionResponse, ResponseFormat
-from ai21.models.chat.chat_message import UserMessage, SystemMessage, AssistantMessage
+from ai21.models.chat.chat_message import AssistantMessage, SystemMessage, UserMessage
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.function_tool_definition import FunctionToolDefinition
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.models.chat.tool_parameters import ToolParameters
+
 
 _FAKE_API_KEY = "dummy_api_key"
 
@@ -44,18 +47,6 @@ async def test_async_chat_create__when_bad_import_to_chat_message__raise_error()
         e.value.args[0] == "Please use the ChatMessage class from ai21.models.chat instead"
         " of ai21.models when working with chat completions."
     )
-
-
-def test__when_model_and_model_id__raise_error():
-    client = AI21Client(
-        api_key=_FAKE_API_KEY,
-    )
-    with pytest.raises(ValueError):
-        client.chat.completions.create(
-            model="jamba-1.5",
-            model_id="jamba-instruct",
-            messages=[ChatMessage(role=RoleType.USER, text="Hello")],
-        )
 
 
 # ----------------------------------- Basic Happy Flow: ----------------------------------- #

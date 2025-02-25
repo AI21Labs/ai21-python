@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-from typing import List, Optional, Any, Literal, overload
+from typing import Any, List, Literal, Optional, overload
 
-from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
+from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.models import ChatMessage as J2ChatMessage
-from ai21.models.chat import ChatCompletionResponse, ChatCompletionChunk
+from ai21.models.chat import ChatCompletionChunk, ChatCompletionResponse
 from ai21.models.chat.chat_message import ChatMessageParam
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.response_format import ResponseFormat
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.stream.async_stream import AsyncStream
-from ai21.types import NotGiven, NOT_GIVEN
+from ai21.types import NOT_GIVEN, NotGiven
+
 
 __all__ = ["AsyncChatCompletions"]
 
@@ -74,8 +75,10 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
                 " instead of ai21.models when working with chat completions."
             )
 
+        model = self._get_model(model=model)
+
         body = self._create_body(
-            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
+            model=model,
             messages=messages,
             stop=stop,
             temperature=temperature,
@@ -96,3 +99,9 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
             stream_cls=AsyncStream[ChatCompletionChunk],
             response_cls=ChatCompletionResponse,
         )
+
+    def _get_model(self, model: str) -> str:
+        if self._client.__class__.__name__ == "AsyncAI21Client":
+            return self._check_model(model=model)
+
+        return model

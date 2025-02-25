@@ -1,10 +1,13 @@
 from __future__ import annotations
 
-from typing import List, Dict, Optional
+from typing import Dict, List
 
 from ai21.clients.common.completion_base import Completion
-from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
-from ai21.models import Penalty, CompletionsResponse
+from ai21.clients.studio.resources.studio_resource import (
+    AsyncStudioResource,
+    StudioResource,
+)
+from ai21.models import CompletionsResponse, Penalty
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -12,8 +15,8 @@ class StudioCompletion(StudioResource, Completion):
     def create(
         self,
         prompt: str,
+        model: str,
         *,
-        model: Optional[str] = None,
         max_tokens: int | NotGiven = NOT_GIVEN,
         num_results: int | NotGiven = NOT_GIVEN,
         min_tokens: int | NotGiven = NOT_GIVEN,
@@ -28,7 +31,6 @@ class StudioCompletion(StudioResource, Completion):
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
-        model = self._get_model(model=model, model_id=kwargs.pop("model_id", None))
         path = self._get_completion_path(model=model)
         body = self._create_body(
             model=model,
@@ -54,8 +56,8 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
     async def create(
         self,
         prompt: str,
+        model: str,
         *,
-        model: Optional[str] = None,
         max_tokens: int | NotGiven = NOT_GIVEN,
         num_results: int | NotGiven = NOT_GIVEN,
         min_tokens: int | NotGiven = NOT_GIVEN,
@@ -70,7 +72,6 @@ class AsyncStudioCompletion(AsyncStudioResource, Completion):
         logit_bias: Dict[str, float] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> CompletionsResponse:
-        model = self._get_model(model=model, model_id=kwargs.pop("model_id", None))
         path = self._get_completion_path(model=model)
         body = self._create_body(
             model=model,

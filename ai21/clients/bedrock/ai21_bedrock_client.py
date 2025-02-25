@@ -1,7 +1,6 @@
 import json
-import logging
-import warnings
-from typing import Optional, Dict, Any
+
+from typing import Any, Dict, Optional
 
 import boto3
 import httpx
@@ -10,14 +9,15 @@ from ai21 import AI21APIError
 from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.clients.bedrock._stream_decoder import _AWSEventStreamDecoder
-from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
-from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
-from ai21.errors import AccessDenied, NotFound, APITimeoutError, ModelErrorException
+from ai21.clients.studio.resources.studio_chat import AsyncStudioChat, StudioChat
+from ai21.clients.studio.resources.studio_completion import (
+    AsyncStudioCompletion,
+    StudioCompletion,
+)
+from ai21.errors import AccessDenied, APITimeoutError, ModelErrorException, NotFound
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.request_options import RequestOptions
-
-_logger = logging.getLogger(__name__)
 
 
 _BEDROCK_URL_FORMAT = "https://bedrock-runtime.{region}.amazonaws.com"
@@ -76,7 +76,6 @@ class BaseBedrockClient:
 class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
     def __init__(
         self,
-        model_id: Optional[str] = None,
         base_url: Optional[str] = None,
         region: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
@@ -85,12 +84,6 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
         session: Optional[boto3.Session] = None,
         http_client: Optional[httpx.Client] = None,
     ):
-        if model_id is not None:
-            warnings.warn(
-                "Please consider using the 'model' parameter in the "
-                "'create' method calls instead of the constructor.",
-                DeprecationWarning,
-            )
         self._region = region or AI21EnvConfig.aws_region
         if base_url is None:
             base_url = _BEDROCK_URL_FORMAT.format(region=self._region)
@@ -128,7 +121,6 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
 class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
     def __init__(
         self,
-        model_id: Optional[str] = None,
         base_url: Optional[str] = None,
         region: Optional[str] = None,
         headers: Optional[Dict[str, Any]] = None,
@@ -137,12 +129,6 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         session: Optional[boto3.Session] = None,
         http_client: Optional[httpx.AsyncClient] = None,
     ):
-        if model_id is not None:
-            warnings.warn(
-                "Please consider using the 'model' parameter in the "
-                "'create' method calls instead of the constructor.",
-                DeprecationWarning,
-            )
         self._region = region or AI21EnvConfig.aws_region
         if base_url is None:
             base_url = _BEDROCK_URL_FORMAT.format(region=self._region)

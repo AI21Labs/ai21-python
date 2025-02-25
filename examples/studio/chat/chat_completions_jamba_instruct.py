@@ -1,5 +1,6 @@
 from ai21 import AI21Client
-from ai21.models.chat.chat_message import SystemMessage, UserMessage, AssistantMessage
+from ai21.models.chat.chat_message import AssistantMessage, SystemMessage, UserMessage
+
 
 system = "You're a support engineer in a SaaS company"
 messages = [

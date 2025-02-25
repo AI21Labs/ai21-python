@@ -3,6 +3,7 @@ import asyncio
 from ai21 import AsyncAI21Client
 from ai21.models.chat import ChatMessage
 
+
 system = "You're a support engineer in a SaaS company"
 messages = [
     ChatMessage(content=system, role="system"),
@@ -17,7 +18,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5-large",
+        model="jamba-1.5-mini-2025-02",
         max_tokens=100,
         stream=True,
     )

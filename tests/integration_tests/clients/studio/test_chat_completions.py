@@ -1,14 +1,22 @@
 import json
+
 from unittest.mock import patch
-import pytest
 
 import httpx
+import pytest
 
 from ai21 import AI21Client, AsyncAI21Client
-from ai21.models.chat import ChatMessage, ChatCompletionResponse, ChatCompletionChunk, ChoicesChunk, ChoiceDelta
 from ai21.models import RoleType
+from ai21.models.chat import (
+    ChatCompletionChunk,
+    ChatCompletionResponse,
+    ChatMessage,
+    ChoiceDelta,
+    ChoicesChunk,
+)
 
-_MODEL = "jamba-instruct-preview"
+
+_MODEL = "jamba-1.5-mini-2025-02"
 _MESSAGES = [
     ChatMessage(
         content="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",

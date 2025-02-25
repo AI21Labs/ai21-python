@@ -4,6 +4,7 @@ from ai21 import AI21Client
 from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage, DocumentSchema
 
+
 set_verbose(True)
 
 schnoodel = DocumentSchema(
@@ -39,6 +40,10 @@ messages = [
 
 client = AI21Client()
 
-response = client.chat.completions.create(messages=messages, model="jamba-1.5-mini", documents=documents)
+response = client.chat.completions.create(
+    messages=messages,
+    model="jamba-1.5-mini-2025-02",
+    documents=documents,
+)
 
 print(response)
