@@ -1,4 +1,5 @@
 import json
+
 from enum import Enum
 
 from pydantic import BaseModel
@@ -6,6 +7,7 @@ from pydantic import BaseModel
 from ai21 import AI21Client
 from ai21.logger import set_verbose
 from ai21.models.chat import ChatMessage, ResponseFormat
+
 
 set_verbose(True)
 
@@ -37,7 +39,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5-large",
+    model="jamba-1.5-large-2025-02",
     max_tokens=800,
     temperature=0,
     response_format=ResponseFormat(type="json_object"),

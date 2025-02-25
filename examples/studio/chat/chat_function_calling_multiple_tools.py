@@ -7,6 +7,7 @@ from ai21.models.chat.function_tool_definition import FunctionToolDefinition
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.models.chat.tool_parameters import ToolParameters
 
+
 set_verbose(True)
 
 
@@ -122,5 +123,5 @@ if too_call_id_to_result:
         tool_message = ToolMessage(role="tool", tool_call_id=tool_id_called, content=str(result))
         messages.append(tool_message)
 
-    response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
+    response = client.chat.completions.create(messages=messages, model="jamba-1.5-mini-2025-02", tools=tools)
     print(response.choices[0].message.content)
