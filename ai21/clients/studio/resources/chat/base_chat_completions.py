@@ -24,7 +24,7 @@ Please use jamba-1.5-mini-2025-02 or jamba-1.5-large-2025-02 instead.
 class BaseChatCompletions(ABC):
     _module_name = "chat/completions"
 
-    def _get_model(self, model: Optional[str]) -> str:
+    def _check_model(self, model: Optional[str]) -> str:
         if not model:
             raise ValueError("model should be provided 'create' method call")
 

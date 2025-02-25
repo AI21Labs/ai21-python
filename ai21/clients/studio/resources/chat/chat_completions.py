@@ -102,6 +102,6 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
 
     def _get_model(self, model: str) -> str:
         if self._client.__class__.__name__ == "AI21Client":
-            return self._get_model(model=model)
+            return self._check_model(model=model)
 
         return model
