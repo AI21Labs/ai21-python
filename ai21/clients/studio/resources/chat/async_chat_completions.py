@@ -75,6 +75,8 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
                 " instead of ai21.models when working with chat completions."
             )
 
+        model = self._get_model(model=model)
+
         body = self._create_body(
             model=model,
             messages=messages,
@@ -97,3 +99,9 @@ class AsyncChatCompletions(AsyncStudioResource, BaseChatCompletions):
             stream_cls=AsyncStream[ChatCompletionChunk],
             response_cls=ChatCompletionResponse,
         )
+
+    def _get_model(self, model: str) -> str:
+        if self._client.__class__.__name__ == "AsyncAI21Client":
+            return self._get_model(model=model)
+
+        return model

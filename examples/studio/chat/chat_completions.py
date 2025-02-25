@@ -1,5 +1,6 @@
 from ai21 import AI21Client
-from ai21.models.chat.chat_message import SystemMessage, UserMessage, AssistantMessage
+from ai21.models.chat.chat_message import AssistantMessage, SystemMessage, UserMessage
+
 
 system = "You're a support engineer in a SaaS company"
 messages = [
@@ -9,7 +10,7 @@ messages = [
     UserMessage(content="I am having trouble signing up for your product with my Google account.", role="user"),
 ]
 
-client = AI21Client()
+client = AI21Client(api_key="L40MQGXxfbtQVnCRqNTTKaojD8Snt7nQ")
 
 response = client.chat.completions.create(
     messages=messages,

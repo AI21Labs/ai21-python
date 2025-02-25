@@ -57,7 +57,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
     def create(
         self,
         messages: List[ChatMessageParam],
-        model: Optional[str] = None,
+        model: str,
         max_tokens: int | NotGiven = NOT_GIVEN,
         temperature: float | NotGiven = NOT_GIVEN,
         top_p: float | NotGiven = NOT_GIVEN,
@@ -75,8 +75,10 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
                 " instead of ai21.models when working with chat completions."
             )
 
+        model = self._get_model(model=model)
+
         body = self._create_body(
-            model=self._get_model(model=model),
+            model=model,
             messages=messages,
             stop=stop,
             temperature=temperature,
@@ -97,3 +99,9 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
             stream_cls=Stream[ChatCompletionChunk],
             response_cls=ChatCompletionResponse,
         )
+
+    def _get_model(self, model: str) -> str:
+        if self._client.__class__.__name__ == "AI21Client":
+            return self._get_model(model=model)
+
+        return model

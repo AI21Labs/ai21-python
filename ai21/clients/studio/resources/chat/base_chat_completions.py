@@ -32,7 +32,7 @@ class BaseChatCompletions(ABC):
             warnings.warn(
                 _MODEL_DEPRECATION_WARNING,
                 DeprecationWarning,
-                stacklevel=2,
+                stacklevel=3,
             )
 
         return model
