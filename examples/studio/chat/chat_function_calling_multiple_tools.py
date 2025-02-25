@@ -75,7 +75,7 @@ tools = [get_sunset_tool, get_weather_tool]
 
 client = AI21Client()
 
-response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
+response = client.chat.completions.create(messages=messages, model="jamba-1.5-large-2025-02", tools=tools)
 
 """ AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
 The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
@@ -123,5 +123,5 @@ if too_call_id_to_result:
         tool_message = ToolMessage(role="tool", tool_call_id=tool_id_called, content=str(result))
         messages.append(tool_message)
 
-    response = client.chat.completions.create(messages=messages, model="jamba-1.5-mini-2025-02", tools=tools)
+    response = client.chat.completions.create(messages=messages, model="jamba-1.5-large-2025-02", tools=tools)
     print(response.choices[0].message.content)
