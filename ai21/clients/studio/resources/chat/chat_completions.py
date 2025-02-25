@@ -1,17 +1,18 @@
 from __future__ import annotations
 
-from typing import List, Optional, Any, Literal, overload
+from typing import Any, List, Literal, Optional, overload
 
-from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
+from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models import ChatMessage as J2ChatMessage
-from ai21.models.chat import ChatCompletionResponse, ChatCompletionChunk
+from ai21.models.chat import ChatCompletionChunk, ChatCompletionResponse
 from ai21.models.chat.chat_message import ChatMessageParam
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.response_format import ResponseFormat
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.stream.stream import Stream
-from ai21.types import NotGiven, NOT_GIVEN
+from ai21.types import NOT_GIVEN, NotGiven
+
 
 __all__ = ["ChatCompletions"]
 
@@ -75,7 +76,7 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
             )
 
         body = self._create_body(
-            model=self._get_model(model=model, model_id=kwargs.pop("model_id", None)),
+            model=self._get_model(model=model),
             messages=messages,
             stop=stop,
             temperature=temperature,

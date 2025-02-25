@@ -7,6 +7,7 @@ from ai21.clients.bedrock.bedrock_model_id import BedrockModelID
 from ai21.models import Penalty
 from tests.integration_tests.skip_helpers import should_skip_bedrock_integration_tests
 
+
 _PROMPT = "Once upon a time, in a land far, far away, there was a"
 
 
@@ -43,7 +44,7 @@ def test_completion_penalties__should_return_response(
     completion_args = dict(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_ULTRA_V1,
+        model=BedrockModelID.J2_ULTRA_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
@@ -66,15 +67,6 @@ def test_completion_penalties__should_return_response(
     assert len([completion.data.text for completion in response.completions]) == 1
     for completion in response.completions:
         assert isinstance(completion.data.text, str)
-
-
-@pytest.mark.skipif(should_skip_bedrock_integration_tests(), reason="No keys supplied for AWS. Skipping.")
-def test_completion__when_no_model_id__should_raise_exception():
-    with pytest.raises(ValueError) as e:
-        client = AI21BedrockClient()
-        client.completion.create(prompt=_PROMPT)
-
-    assert e.value.args[0] == "model should be provided 'create' method call"
 
 
 @pytest.mark.asyncio
@@ -111,7 +103,7 @@ async def test_async_completion_penalties__should_return_response(
     completion_args = dict(
         prompt=_PROMPT,
         max_tokens=64,
-        model_id=BedrockModelID.J2_ULTRA_V1,
+        model=BedrockModelID.J2_ULTRA_V1,
         temperature=0,
         top_p=1,
         top_k_return=0,
@@ -134,13 +126,3 @@ async def test_async_completion_penalties__should_return_response(
     assert len([completion.data.text for completion in response.completions]) == 1
     for completion in response.completions:
         assert isinstance(completion.data.text, str)
-
-
-@pytest.mark.asyncio
-@pytest.mark.skipif(should_skip_bedrock_integration_tests(), reason="No keys supplied for AWS. Skipping.")
-async def test_async_completion__when_no_model_id__should_raise_exception():
-    with pytest.raises(ValueError) as e:
-        client = AsyncAI21BedrockClient()
-        await client.completion.create(prompt=_PROMPT)
-
-    assert e.value.args[0] == "model should be provided 'create' method call"
