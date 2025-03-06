@@ -1,6 +1,14 @@
 # CHANGELOG
 
 
+## v3.0.3 (2025-02-27)
+
+### Bug Fixes
+
+- Httpx version to support until 1.0.0 ([#273](https://github.com/AI21Labs/ai21-python/pull/273),
+  [`6a233fa`](https://github.com/AI21Labs/ai21-python/commit/6a233fa840ee0530a4d00378b5433900c53f2690))
+
+
 ## v3.0.2 (2025-02-19)
 
 ### Bug Fixes
@@ -93,6 +101,9 @@ Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5. - [Release
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+- **release**: V3.0.2 [skip ci]
+  ([`040c7bf`](https://github.com/AI21Labs/ai21-python/commit/040c7bf4d98e5b3f94d93b9b4f124d0758944f2e))
 
 ### Continuous Integration
 
