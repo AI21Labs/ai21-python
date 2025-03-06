@@ -17,7 +17,7 @@ from ai21.utils.typing import remove_not_given
 _MODEL_DEPRECATION_WARNING = """
 The 'jamba-1.5-mini' and 'jamba-1.5-large' models are deprecated and will
 be removed in a future version.
-Please use jamba-1.6-mini-2025-03 or jamba-1.6-large-2025-03 instead.
+Please use jamba-mini-1.6-2025-03 or jamba-large-1.6-2025-03 instead.
 """
 
 
