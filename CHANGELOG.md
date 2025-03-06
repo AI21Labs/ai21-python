@@ -1,12 +1,37 @@
 # CHANGELOG
 
 
+## v3.0.4 (2025-03-06)
+
+### Bug Fixes
+
+- Deprecation warning jamba 1 6 ([#274](https://github.com/AI21Labs/ai21-python/pull/274),
+  [`353d113`](https://github.com/AI21Labs/ai21-python/commit/353d113c85acac4ec38f8988f87ac9b299ff68fc))
+
+* fix: Added deprecation and removed model_id from bedrock
+
+* fix: Recursion func
+
+* fix: Changed model
+
+* fix: Another model name
+
+* fix: Model deprecation warning
+
+* fix: Rename model
+
+
 ## v3.0.3 (2025-02-27)
 
 ### Bug Fixes
 
 - Httpx version to support until 1.0.0 ([#273](https://github.com/AI21Labs/ai21-python/pull/273),
   [`6a233fa`](https://github.com/AI21Labs/ai21-python/commit/6a233fa840ee0530a4d00378b5433900c53f2690))
+
+### Chores
+
+- **release**: V3.0.3 [skip ci]
+  ([`a2d5abf`](https://github.com/AI21Labs/ai21-python/commit/a2d5abfc979c02537e29f93627c6220a96c8b96b))
 
 
 ## v3.0.2 (2025-02-19)
