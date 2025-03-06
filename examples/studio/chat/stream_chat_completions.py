@@ -14,7 +14,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5-large-2025-02",
+    model="jamba-1.6-large-2025-03",
     max_tokens=100,
     stream=True,
 )
