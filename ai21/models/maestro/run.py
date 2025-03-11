@@ -1,4 +1,6 @@
-from typing import TypedDict, Literal, List, Optional, Any, Set
+from typing import TypedDict, Literal, List, Optional, Any, Set, Dict, Type
+
+from pydantic import BaseModel
 
 from ai21.models.ai21_base_model import AI21BaseModel
 
@@ -6,6 +8,8 @@ Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
+PrimitiveType = Type[str] | Type[int] | Type[float] | Type[bool] | Type[List[str]] | Type[List[int]] | Type[List[float]]
+OutputType = PrimitiveType | Type[BaseModel] | Dict[str, Any]
 
 DEFAULT_RUN_POLL_INTERVAL: float = 1  # seconds
 DEFAULT_RUN_POLL_TIMEOUT: float = 120  # seconds
@@ -31,9 +35,9 @@ class WebSearchToolResource(TypedDict, total=False):
     fallback_to_web: Optional[bool]
 
 
-class ToolResources(TypedDict):
-    file_search: FileSearchToolResource
-    web_search: WebSearchToolResource
+class ToolResources(TypedDict, total=False):
+    file_search: Optional[FileSearchToolResource]
+    web_search: Optional[WebSearchToolResource]
 
 
 class Constraint(TypedDict):

@@ -369,7 +369,7 @@ from ai21 import AI21Client
 client = AI21Client()
 
 run_result = client.maestro.runs.create_and_poll(
-  instruction="Who was the Maestro in the movie 'The Maestro'?",
+  messages=[{"role": "user", "content": "Who was the Maestro in the movie 'The Maestro'?"}],
   tools=[{"type": "web_search"}],
 )
 ```

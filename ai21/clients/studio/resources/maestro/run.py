@@ -15,6 +15,7 @@ from ai21.models.maestro.run import (
     TERMINATED_RUN_STATUSES,
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
+    OutputType,
 )
 
 from ai21.types import NotGiven, NOT_GIVEN
@@ -24,9 +25,8 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -37,7 +37,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     ) -> RunResponse:
         body = self._create_body(
             messages=messages,
-            instruction=instruction,
             output_type=output_type,
             models=models,
             tools=tools,
@@ -73,9 +72,8 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create_and_poll(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -88,7 +86,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     ) -> RunResponse:
         run = self.create(
             messages=messages,
-            instruction=instruction,
             output_type=output_type,
             models=models,
             tools=tools,
@@ -106,9 +103,8 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -119,7 +115,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     ) -> RunResponse:
         body = self._create_body(
             messages=messages,
-            instruction=instruction,
             output_type=output_type,
             models=models,
             tools=tools,
@@ -155,9 +150,8 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create_and_poll(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -170,7 +164,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     ) -> RunResponse:
         run = await self.create(
             messages=messages,
-            instruction=instruction,
             output_type=output_type,
             models=models,
             tools=tools,

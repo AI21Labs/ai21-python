@@ -1,9 +1,12 @@
 from __future__ import annotations
 
+import inspect
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List, Dict, Any, get_origin, get_args, Optional
 
-from ai21.models._pydantic_compatibility import _to_dict
+from pydantic import BaseModel
+
+from ai21.models._pydantic_compatibility import _to_dict, _to_schema
 from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
     Tool,
@@ -12,20 +15,55 @@ from ai21.models.maestro.run import (
     RunResponse,
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
+    OutputType,
 )
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
 
+def _primitive_to_schema(output_type):
+    type_mapping = {
+        int: "integer",
+        float: "number",
+        str: "string",
+        bool: "boolean",
+    }
+
+    if output_type in type_mapping:
+        return {"type": type_mapping[output_type]}
+
+    origin = get_origin(output_type)
+    args = get_args(output_type)
+
+    if origin is list and len(args) == 1 and args[0] in type_mapping:
+        return {"type": "array", "items": {"type": type_mapping[args[0]]}}
+
+
 class BaseMaestroRun(ABC):
     _module_name = "maestro/runs"
+
+    def _output_type_to_json_schema(self, output_type: OutputType | NotGiven) -> Optional[Dict[str, Any]]:
+        if not output_type or isinstance(output_type, NotGiven):
+            return NOT_GIVEN
+
+        if inspect.isclass(output_type) and issubclass(output_type, BaseModel):
+            result = _to_schema(output_type)
+        else:
+            result = _primitive_to_schema(output_type)
+
+        if not result:
+            raise ValueError(
+                "Unsupported type. Supported types are: primitives types, List of primitive types, json schema dict, "
+                "and pydantic models."
+            )
+
+        return result
 
     def _create_body(
         self,
         *,
-        instruction: str | NotGiven,
-        messages: List[ChatMessage] | NotGiven,
-        output_type: Dict[str, Any] | NotGiven,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven,
         models: List[str] | NotGiven,
         tools: List[Tool] | NotGiven,
         tool_resources: ToolResources | NotGiven,
@@ -34,21 +72,10 @@ class BaseMaestroRun(ABC):
         budget: Budget | NotGiven,
         **kwargs,
     ) -> dict:
-        messages_payload = remove_not_given({"messages": messages, "instruction": instruction})
-        if not messages_payload:
-            # not messages nor instruction were given
-            raise ValueError("Must provide either `messages` or `instruction`")
-        elif len(messages_payload.keys()) > 1:
-            # both messages and instruction were given
-            raise ValueError("Must provide only one of `messages` or `instruction`")
-        elif "instruction" in messages_payload:
-            # instruction was given and should be modified accordingly
-            messages = [ChatMessage(role="user", content=instruction)]
-
         return remove_not_given(
             {
                 "messages": [_to_dict(message) for message in messages],
-                "output_type": output_type,
+                "output_type": self._output_type_to_json_schema(output_type),
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
@@ -63,9 +90,8 @@ class BaseMaestroRun(ABC):
     def create(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -88,9 +114,8 @@ class BaseMaestroRun(ABC):
     def create_and_poll(
         self,
         *,
-        instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
-        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage],
+        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
