@@ -5,7 +5,7 @@ from typing import List, Dict, Any
 
 from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.chat import ChatMessage
-from ai21.models.maestro.runs import (
+from ai21.models.maestro.run import (
     Tool,
     ToolResources,
     Budget,

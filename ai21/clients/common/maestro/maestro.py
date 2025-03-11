@@ -1,6 +1,6 @@
 from abc import ABC
 
-from ai21.clients.common.maestro.runs import BaseMaestroRun
+from ai21.clients.common.maestro.run import BaseMaestroRun
 
 
 class BaseMaestro(ABC):

@@ -4,10 +4,10 @@ import asyncio
 import time
 from typing import Any, List, Dict
 
-from ai21.clients.common.maestro.runs import BaseMaestroRun
+from ai21.clients.common.maestro.run import BaseMaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
 from ai21.models.chat import ChatMessage
-from ai21.models.maestro.runs import (
+from ai21.models.maestro.run import (
     Tool,
     ToolResources,
     Budget,
