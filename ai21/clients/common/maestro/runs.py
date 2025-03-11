@@ -3,8 +3,9 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 
+from ai21.models._pydantic_compatibility import _to_dict
+from ai21.models.chat import ChatMessage
 from ai21.models.maestro.runs import (
-    Message,
     Tool,
     ToolResources,
     Budget,
@@ -22,8 +23,8 @@ class BaseMaestroRun(ABC):
     def _create_body(
         self,
         *,
-        messages: List[Message] | NotGiven,
         instruction: str | NotGiven,
+        messages: List[ChatMessage] | NotGiven,
         output_type: Dict[str, Any] | NotGiven,
         models: List[str] | NotGiven,
         tools: List[Tool] | NotGiven,
@@ -42,11 +43,11 @@ class BaseMaestroRun(ABC):
             raise ValueError("Must provide only one of `messages` or `instruction`")
         elif "instruction" in messages_payload:
             # instruction was given and should be modified accordingly
-            messages = [{"role": "user", "content": instruction}]
+            messages = [ChatMessage(role="user", content=instruction)]
 
         return remove_not_given(
             {
-                "messages": messages,
+                "messages": [_to_dict(message) for message in messages],
                 "output_type": output_type,
                 "models": models,
                 "tools": tools,
@@ -62,8 +63,8 @@ class BaseMaestroRun(ABC):
     def create(
         self,
         *,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
         instruction: str | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
@@ -88,7 +89,7 @@ class BaseMaestroRun(ABC):
         self,
         *,
         instruction: str | NotGiven = NOT_GIVEN,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,

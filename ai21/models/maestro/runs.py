@@ -36,11 +36,6 @@ class ToolResources(TypedDict):
     web_search: WebSearchToolResource
 
 
-class Message(TypedDict):
-    role: Role
-    content: str
-
-
 class Constraint(TypedDict):
     name: str
     description: str

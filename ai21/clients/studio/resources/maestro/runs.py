@@ -6,8 +6,8 @@ from typing import Any, List, Dict
 
 from ai21.clients.common.maestro.runs import BaseMaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
+from ai21.models.chat import ChatMessage
 from ai21.models.maestro.runs import (
-    Message,
     Tool,
     ToolResources,
     Budget,
@@ -24,8 +24,8 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create(
         self,
         *,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
         instruction: str | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
@@ -73,8 +73,8 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create_and_poll(
         self,
         *,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
         instruction: str | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
@@ -106,8 +106,8 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create(
         self,
         *,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
         instruction: str | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
@@ -155,8 +155,8 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create_and_poll(
         self,
         *,
-        messages: List[Message] | NotGiven = NOT_GIVEN,
         instruction: str | NotGiven = NOT_GIVEN,
+        messages: List[ChatMessage] | NotGiven = NOT_GIVEN,
         output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,

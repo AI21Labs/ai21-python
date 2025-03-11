@@ -359,6 +359,25 @@ asyncio.run(main())
 
 ---
 
+### Maestro
+
+AI Planning & Orchestration System built for the enterprise. Read more [here](https://www.ai21.com/maestro/).
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+
+run_result = client.maestro.runs.create_and_poll(
+  instruction="Who was the Maestro in the movie 'The Maestro'?",
+  tools=[{"type": "web_search"}],
+)
+```
+
+For a more detailed example, see maestro [sync](examples/studio/maestro/runs.py) and [async](examples/studio/maestro/async_runs.py) examples.
+
+---
+
 ### Conversational RAG (Beta)
 
 Like chat, but with the ability to retrieve information from your Studio library.
