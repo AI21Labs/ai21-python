@@ -5,6 +5,7 @@ import httpx
 from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.async_beta import AsyncBeta
+from ai21.clients.studio.resources.maestro.maestro import AsyncMaestro
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat
 from ai21.clients.studio.resources.studio_library import AsyncStudioLibrary
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
@@ -41,4 +42,5 @@ class AsyncAI21Client(AsyncAI21HTTPClient):
 
         self.chat: AsyncStudioChat = AsyncStudioChat(self)
         self.library = AsyncStudioLibrary(self)
+        self.maestro = AsyncMaestro(self)
         self.beta = AsyncBeta(self)
