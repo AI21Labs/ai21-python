@@ -25,9 +25,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: poetry
           cache-dependency-path: poetry.lock
-      - name: Set Poetry environment
+      - name: Set Poetry environment and clear cache
         run: |
           poetry env use ${{ matrix.python-version }}
+          poetry cache clear --all pypi
       - name: Install dependencies
         run: |
           poetry install --no-root --only dev --all-extras
@@ -58,9 +59,10 @@ jobs:
           python-version: ${{ matrix.python-version }}
           cache: poetry
           cache-dependency-path: poetry.lock
-      - name: Set Poetry environment
+      - name: Set Poetry environment and clear cache
         run: |
           poetry env use ${{ matrix.python-version }}
+          poetry cache clear --all pypi
       - name: Override Pydantic version
         run: |
           if [[ "${{ matrix.pydantic-version }}" == ^1.* ]]; then
