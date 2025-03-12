@@ -9,6 +9,7 @@ Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
+PrimitiveLists = Type[List[PrimitiveTypes]]
 OutputType = Union[Type[BaseModel], PrimitiveTypes, Dict[str, Any]]
 
 DEFAULT_RUN_POLL_INTERVAL: float = 1  # seconds
