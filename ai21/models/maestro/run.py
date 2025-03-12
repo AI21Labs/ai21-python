@@ -32,7 +32,6 @@ class FileSearchToolResource(TypedDict, total=False):
 
 class WebSearchToolResource(TypedDict, total=False):
     urls: Optional[List[str]]
-    fallback_to_web: Optional[bool]
 
 
 class ToolResources(TypedDict, total=False):
