@@ -1,4 +1,4 @@
-from typing import TypedDict, Literal, List, Optional, Any, Set, Dict, Type
+from typing import TypedDict, Literal, List, Optional, Any, Set, Dict, Type, Union
 
 from pydantic import BaseModel
 
@@ -8,7 +8,8 @@ Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
-OutputType = Type[BaseModel] | Dict[str, Any]
+PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
+OutputType = Union[Type[BaseModel], PrimitiveTypes, Dict[str, Any]]
 
 DEFAULT_RUN_POLL_INTERVAL: float = 1  # seconds
 DEFAULT_RUN_POLL_TIMEOUT: float = 120  # seconds
