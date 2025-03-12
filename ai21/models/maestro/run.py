@@ -8,8 +8,7 @@ Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
-PrimitiveType = Type[str] | Type[int] | Type[float] | Type[bool] | Type[List[str]] | Type[List[int]] | Type[List[float]]
-OutputType = PrimitiveType | Type[BaseModel] | Dict[str, Any]
+OutputType = Type[BaseModel] | Type[int] | Dict[str, Any]
 
 DEFAULT_RUN_POLL_INTERVAL: float = 1  # seconds
 DEFAULT_RUN_POLL_TIMEOUT: float = 120  # seconds
