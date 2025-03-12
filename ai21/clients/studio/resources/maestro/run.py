@@ -10,14 +10,12 @@ from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
     Tool,
     ToolResources,
-    Budget,
     RunResponse,
     TERMINATED_RUN_STATUSES,
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
-    OutputType,
+    Requirement,
 )
-
 from ai21.types import NotGiven, NOT_GIVEN
 
 
@@ -26,24 +24,20 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         self,
         *,
         messages: List[ChatMessage],
-        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[str] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
             messages=messages,
-            output_type=output_type,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
             context=context,
             requirements=requirements,
-            budget=budget,
             **kwargs,
         )
 
@@ -73,26 +67,22 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         self,
         *,
         messages: List[ChatMessage],
-        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[str] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
     ) -> RunResponse:
         run = self.create(
             messages=messages,
-            output_type=output_type,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
             context=context,
             requirements=requirements,
-            budget=budget,
             **kwargs,
         )
 
@@ -104,24 +94,20 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         self,
         *,
         messages: List[ChatMessage],
-        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[str] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
             messages=messages,
-            output_type=output_type,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
             context=context,
             requirements=requirements,
-            budget=budget,
             **kwargs,
         )
 
@@ -151,26 +137,22 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         self,
         *,
         messages: List[ChatMessage],
-        output_type: OutputType | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[str] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
     ) -> RunResponse:
         run = await self.create(
             messages=messages,
-            output_type=output_type,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
             context=context,
             requirements=requirements,
-            budget=budget,
             **kwargs,
         )
 

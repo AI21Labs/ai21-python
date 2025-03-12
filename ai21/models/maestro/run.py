@@ -40,10 +40,9 @@ class ToolResources(TypedDict, total=False):
     web_search: Optional[WebSearchToolResource]
 
 
-class Constraint(TypedDict):
+class Requirement(TypedDict):
     name: str
     description: str
-    is_mandatory: bool
 
 
 class RunResponse(AI21BaseModel):
