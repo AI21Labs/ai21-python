@@ -1,14 +1,15 @@
-from typing import TypeVar, Callable
+from typing import Callable, TypeVar
 
 import pytest
-from ai21.http_client.http_client import AI21HTTPClient
+
 from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.ai21_base_model import AI21BaseModel
 from tests.unittests.clients.studio.resources.conftest import (
-    get_studio_chat,
-    get_studio_completion,
     get_chat_completions,
+    get_studio_chat,
 )
+
 
 _BASE_URL = "https://test.api.ai21.com/studio/v1"
 T = TypeVar("T", bound=StudioResource)
@@ -19,8 +20,6 @@ class TestStudioResources:
         ids=[
             "studio_chat",
             "chat_completions",
-            "studio_completion",
-            "studio_completion_with_extra_args",
         ],
         argnames=[
             "studio_resource",
@@ -33,8 +32,6 @@ class TestStudioResources:
         argvalues=[
             (get_studio_chat()),
             (get_chat_completions()),
-            (get_studio_completion(is_async=False)),
-            (get_studio_completion(is_async=False, temperature=0.5, max_tokens=50)),
         ],
     )
     def test__create__should_return_response(

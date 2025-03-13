@@ -10,10 +10,6 @@ from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.aws.aws_authorization import AWSAuthorization
 from ai21.clients.bedrock._stream_decoder import _AWSEventStreamDecoder
 from ai21.clients.studio.resources.studio_chat import AsyncStudioChat, StudioChat
-from ai21.clients.studio.resources.studio_completion import (
-    AsyncStudioCompletion,
-    StudioCompletion,
-)
 from ai21.errors import AccessDenied, APITimeoutError, ModelErrorException, NotFound
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
@@ -101,10 +97,6 @@ class AI21BedrockClient(AI21HTTPClient, BaseBedrockClient):
         BaseBedrockClient.__init__(self, session=session, region=self._region)
 
         self.chat = StudioChat(self)
-        # Override the chat.create method to match the completions endpoint,
-        # so it wouldn't get to the old J2 completion endpoint
-        self.chat.create = self.chat.completions.create
-        self.completion = StudioCompletion(self)
 
     def _build_request(self, options: RequestOptions) -> httpx.Request:
         options = self._prepare_options(options)
@@ -146,10 +138,7 @@ class AsyncAI21BedrockClient(AsyncAI21HTTPClient, BaseBedrockClient):
         BaseBedrockClient.__init__(self, session=session, region=self._region)
 
         self.chat = AsyncStudioChat(self)
-        # Override the chat.create method to match the completions endpoint,
-        # so it wouldn't get to the old J2 completion endpoint
         self.chat.create = self.chat.completions.create
-        self.completion = AsyncStudioCompletion(self)
 
     def _build_request(self, options: RequestOptions) -> httpx.Request:
         options = self._prepare_options(options)
