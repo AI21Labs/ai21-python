@@ -1,14 +1,13 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
 import pytest
 
 from ai21.models import Penalty
-from ai21.models._pydantic_compatibility import _to_dict, _from_dict
+from ai21.models._pydantic_compatibility import _from_dict, _to_dict
 from ai21.models.ai21_base_model import IS_PYDANTIC_V2, AI21BaseModel
 from tests.unittests.models.response_mocks import (
-    get_chat_response,
     get_chat_completions_response,
-    get_completions_response,
+    get_chat_response,
 )
 
 
@@ -53,7 +52,6 @@ def test_penalty__from_json__should_return_instance_with_given_values():
     argvalues=[
         (get_chat_response()),
         (get_chat_completions_response()),
-        (get_completions_response()),
     ],
 )
 def test_to_dict__should_serialize_to_dict__(
@@ -67,7 +65,6 @@ def test_to_dict__should_serialize_to_dict__(
     ids=[
         "chat_response",
         "chat_completions_response",
-        "completion_response",
     ],
     argnames=[
         "response_obj",
@@ -77,7 +74,6 @@ def test_to_dict__should_serialize_to_dict__(
     argvalues=[
         (get_chat_response()),
         (get_chat_completions_response()),
-        (get_completions_response()),
     ],
 )
 def test_from_dict__should_serialize_from_dict__(
