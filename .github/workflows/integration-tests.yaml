@@ -53,6 +53,7 @@ jobs:
       - name: Set Poetry environment
         run: |
           poetry env use ${{ matrix.python-version }}
+          poetry cache clear --all pypi
       - name: Install dependencies
         run: |
           poetry install --all-extras
