@@ -42,7 +42,6 @@ def test_penalty__from_json__should_return_instance_with_given_values():
     ids=[
         "chat_response",
         "chat_completions_response",
-        "completion_response",
     ],
     argnames=[
         "response_obj",
