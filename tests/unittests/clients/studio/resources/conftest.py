@@ -1,25 +1,18 @@
 import httpx
 import pytest
+
 from pytest_mock import MockerFixture
 
-from ai21.clients.studio.resources.chat import AsyncChatCompletions
-from ai21.clients.studio.resources.chat import ChatCompletions
-from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
-from ai21.clients.studio.resources.studio_completion import StudioCompletion, AsyncStudioCompletion
+from ai21.clients.studio.resources.chat import AsyncChatCompletions, ChatCompletions
+from ai21.clients.studio.resources.studio_chat import AsyncStudioChat, StudioChat
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.models import (
-    ChatMessage,
-    RoleType,
-    ChatResponse,
-    CompletionsResponse,
-)
-from ai21.models._pydantic_compatibility import _to_dict, _from_dict
+from ai21.models import ChatMessage, ChatResponse, RoleType
+from ai21.models._pydantic_compatibility import _from_dict, _to_dict
 from ai21.models.chat import (
-    ChatMessage as ChatCompletionChatMessage,
     ChatCompletionResponse,
+    ChatMessage as ChatCompletionChatMessage,
 )
-from ai21.utils.typing import to_lower_camel_case
 
 
 @pytest.fixture
@@ -133,34 +126,4 @@ def get_chat_completions(is_async: bool = False):
         },
         httpx.Response(status_code=200, json=json_response),
         _from_dict(obj=ChatCompletionResponse, obj_dict=json_response),
-    )
-
-
-def get_studio_completion(is_async: bool = True, **kwargs):
-    _DUMMY_MODEL = "dummy-completion-model"
-    _DUMMY_PROMPT = "dummy-prompt"
-    json_response = {
-        "id": "some-id",
-        "completions": [
-            {
-                "data": {"text": "dummy-completion", "tokens": []},
-                "finishReason": {"reason": "dummy_reason", "length": 1},
-            }
-        ],
-        "prompt": {"text": "dummy-prompt"},
-    }
-
-    resource = AsyncStudioCompletion if is_async else StudioCompletion
-
-    return (
-        resource,
-        {"model": _DUMMY_MODEL, "prompt": _DUMMY_PROMPT, **kwargs},
-        f"{_DUMMY_MODEL}/complete",
-        {
-            "model": _DUMMY_MODEL,
-            "prompt": _DUMMY_PROMPT,
-            **{to_lower_camel_case(k): v for k, v in kwargs.items()},
-        },
-        httpx.Response(status_code=200, json=json_response),
-        _from_dict(obj=CompletionsResponse, obj_dict=json_response),
     )
