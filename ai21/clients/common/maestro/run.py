@@ -3,7 +3,6 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List, Dict, Any
 
-from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
     Tool,
@@ -23,7 +22,7 @@ class BaseMaestroRun(ABC):
     def _create_body(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven,
         tools: List[Tool] | NotGiven,
         tool_resources: ToolResources | NotGiven,
@@ -33,7 +32,7 @@ class BaseMaestroRun(ABC):
     ) -> dict:
         return remove_not_given(
             {
-                "messages": [_to_dict(message) for message in messages],
+                "input": input,
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
@@ -47,7 +46,7 @@ class BaseMaestroRun(ABC):
     def create(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -69,7 +68,7 @@ class BaseMaestroRun(ABC):
     def create_and_poll(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,

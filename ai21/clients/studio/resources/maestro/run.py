@@ -23,7 +23,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -32,7 +32,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
-            messages=messages,
+            input=input,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
@@ -66,7 +66,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create_and_poll(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -77,7 +77,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         **kwargs,
     ) -> RunResponse:
         run = self.create(
-            messages=messages,
+            input=input,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
@@ -93,7 +93,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -102,7 +102,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
-            messages=messages,
+            input=input,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
@@ -136,7 +136,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create_and_poll(
         self,
         *,
-        messages: List[ChatMessage],
+        input: str | List[ChatMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -147,7 +147,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         **kwargs,
     ) -> RunResponse:
         run = await self.create(
-            messages=messages,
+            input=input,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
