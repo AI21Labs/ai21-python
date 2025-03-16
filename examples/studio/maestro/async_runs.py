@@ -6,7 +6,7 @@ client = AsyncAI21Client()
 
 
 async def main():
-    run_result = await client.maestro.runs.create_and_poll(
+    run_result = await client.beta.maestro.runs.create_and_poll(
         input="Analyze the text below and determine who's the best pokemon ever",
         context={"text": "Psyduck is the best pokemon."},
     )
