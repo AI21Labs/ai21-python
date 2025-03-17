@@ -1,4 +1,4 @@
-from typing import Literal
+from typing import Literal, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
 
@@ -27,22 +27,19 @@ class Batch(AI21BaseModel):
     cancelled_at: int | None = None
     """The Unix timestamp (in seconds) for when the batch was cancelled."""
 
-    expires_at: int
-    """The Unix timestamp (in seconds) for when the batch will expire."""
+    # expires_at: int
+    # """The Unix timestamp (in seconds) for when the batch will expire."""
 
-    expired_at: int | None = None
-    """The Unix timestamp (in seconds) for when the batch expired."""
+    # expired_at: int | None = None
+    # """The Unix timestamp (in seconds) for when the batch expired."""
 
     request_counts: RequestCounts
     """The request counts for different statuses within the batch."""
 
-    metadata: dict
+    metadata: Optional[dict] = None
 
     output_file: str | None = None
     """The path to the file containing the outputs of successfully executed requests."""
 
     error_file: str | None = None
     """The path to the file containing the outputs of requests with errors."""
-
-    total_input_tokens: int
-    """The total number of input tokens in the batch."""

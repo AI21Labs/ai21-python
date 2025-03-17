@@ -3,6 +3,8 @@ from typing import Any, Dict, Literal, Optional
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
+from ai21.models.responses.batch_response import Batch
+from ai21.pagination.async_pagination import AsyncPagination
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -26,9 +28,14 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
         self,
         after: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
-    ):
+    ) -> AsyncPagination[Batch]:
         params = self._create_list_params(after=after, limit=limit)
-        return await self._get(path=f"/{self._module_name}", params=params, response_cls=dict)
+        return await self._list(
+            path=f"/{self._module_name}",
+            params=params,
+            page_cls=AsyncPagination[Batch],
+            response_cls=Batch,
+        )
 
     async def cancel(self, batch_id: str):
         return await self._post(path=f"/{self._module_name}/{batch_id}/cancel", response_cls=dict)

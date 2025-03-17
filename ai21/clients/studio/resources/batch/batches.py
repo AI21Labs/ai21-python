@@ -1,9 +1,10 @@
 from os import PathLike
-from typing import Any, Dict, List, Literal, Optional
+from typing import Any, Dict, Literal, Optional
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.models.responses.batch_response import Batch
+from ai21.pagination.sync_pagination import SyncPagination
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -27,9 +28,14 @@ class Batches(StudioResource, BaseBatches):
         self,
         after: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
-    ) -> List[Batch]:
+    ) -> SyncPagination[Batch]:
         params = self._create_list_params(after=after, limit=limit)
-        return self._get(path=f"/{self._module_name}", params=params, response_cls=List[Batch])
+        return self._list(
+            path=f"/{self._module_name}",
+            params=params,
+            page_cls=SyncPagination[Batch],
+            response_cls=Batch,
+        )
 
     def cancel(self, batch_id: str):
         return self._post(path=f"/{self._module_name}/{batch_id}/cancel", response_cls=dict)
