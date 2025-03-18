@@ -1,5 +1,3 @@
-from __future__ import annotations
-
 from typing import Literal, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
@@ -23,10 +21,10 @@ class Batch(AI21BaseModel):
     created_at: int
     """The Unix timestamp (in seconds) for when the batch was created."""
 
-    completed_at: int | None = None
+    completed_at: Optional[int] = None
     """The Unix timestamp (in seconds) for when the batch was completed."""
 
-    cancelled_at: int | None = None
+    cancelled_at: Optional[int] = None
     """The Unix timestamp (in seconds) for when the batch was cancelled."""
 
     # expires_at: int
@@ -40,8 +38,8 @@ class Batch(AI21BaseModel):
 
     metadata: Optional[dict] = None
 
-    output_file: str | None = None
+    output_file: Optional[str] = None
     """The path to the file containing the outputs of successfully executed requests."""
 
-    error_file: str | None = None
+    error_file: Optional[str] = None
     """The path to the file containing the outputs of requests with errors."""
