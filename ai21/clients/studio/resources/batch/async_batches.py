@@ -1,5 +1,5 @@
 from os import PathLike
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, Literal
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
@@ -14,15 +14,15 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
         self,
         file: PathLike,
         endpoint: Literal["/v1/chat/completions"],
-        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
-    ):
+    ) -> Batch:
         files = {"file": open(file, "rb")}
         body = self._create_body(endpoint=endpoint, metadata=metadata, **kwargs)
 
         return await self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
-    async def retrieve(self, batch_id: str):
+    async def retrieve(self, batch_id: str) -> Batch:
         return await self._get(path=f"/{self._module_name}/{batch_id}", response_cls=dict)
 
     async def list(
@@ -38,7 +38,7 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
             response_cls=Batch,
         )
 
-    async def cancel(self, batch_id: str):
+    async def cancel(self, batch_id: str) -> Batch:
         return await self._post(path=f"/{self._module_name}/{batch_id}/cancel", response_cls=dict)
 
     async def get_results(
