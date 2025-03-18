@@ -1,6 +1,8 @@
-from typing import Any, Callable, Dict, Iterator, List, Optional, Type
+from __future__ import annotations
 
-from .base_page import BasePagination, PageT, cast_page_response
+from typing import Any, Callable, Dict, Iterator, List, Type
+
+from .base_pagination import BasePagination, PageT, cast_page_response
 
 
 class SyncPagination(BasePagination[PageT]):
@@ -10,8 +12,8 @@ class SyncPagination(BasePagination[PageT]):
         self,
         request_callback: Callable,
         path: str,
-        params: Optional[Dict[str, Any]] = None,
-        response_cls: Optional[Type[PageT]] = None,
+        params: Dict[str, Any] | None = None,
+        response_cls: Type[PageT] | None = None,
         **kwargs: Any,
     ):
         super().__init__(request_callback, path, params, response_cls, **kwargs)
