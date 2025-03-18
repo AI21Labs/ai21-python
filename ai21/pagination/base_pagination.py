@@ -1,15 +1,6 @@
-from typing import (
-    Any,
-    Callable,
-    Dict,
-    Generic,
-    List,
-    Optional,
-    Protocol,
-    Sequence,
-    Type,
-    TypeVar,
-)
+from __future__ import annotations
+
+from typing import Any, Callable, Dict, Generic, List, Protocol, Sequence, Type, TypeVar
 
 from ai21.models._pydantic_compatibility import _from_dict
 
@@ -33,8 +24,8 @@ class BasePagination(Generic[PageT]):
         self,
         request_callback: Callable,
         path: str,
-        params: Optional[Dict[str, Any]] = None,
-        response_cls: Optional[Type[PageT]] = None,
+        params: Dict[str, Any] | None = None,
+        response_cls: Type[PageT] | None = None,
         **kwargs: Any,
     ):
         self.request_method = request_callback
