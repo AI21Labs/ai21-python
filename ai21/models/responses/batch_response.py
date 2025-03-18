@@ -1,3 +1,5 @@
+from __future__ import annotations
+
 from typing import Literal, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
