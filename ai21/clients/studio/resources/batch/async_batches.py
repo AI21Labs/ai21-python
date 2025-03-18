@@ -3,6 +3,7 @@ from typing import Any, Dict, Literal, Optional
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
+from ai21.files.downloaded_file import DownloadedFile
 from ai21.models.responses.batch_response import Batch
 from ai21.pagination.async_pagination import AsyncPagination
 from ai21.types import NOT_GIVEN, NotGiven
@@ -46,9 +47,10 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
         file_type: Literal["output", "error"],
         force: bool = False,
         **kwargs: Any,
-    ):
+    ) -> DownloadedFile:
         return await self._get(
             path=f"/{self._module_name}/{batch_id}/results",
             params={"file_type": file_type, "force": force},
-            response_cls=dict,
+            response_cls=DownloadedFile,
+            **kwargs,
         )

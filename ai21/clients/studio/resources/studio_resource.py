@@ -7,6 +7,7 @@ from typing import Any, BinaryIO, Callable, Dict, Optional, get_origin
 
 import httpx
 
+from ai21.files.downloaded_file import DownloadedFile
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models._pydantic_compatibility import _from_dict
@@ -25,6 +26,9 @@ def _cast_response(
     if stream and stream_cls is not None:
         cast_to = extract_type(stream_cls)
         return stream_cls(cast_to=cast_to, response=response, streaming_decoder=streaming_decoder)
+
+    if response_cls is DownloadedFile:
+        return DownloadedFile(response)
 
     if response_cls is None:
         return None
@@ -50,12 +54,14 @@ def _cast_request(
     params: Optional[Dict[str, Any]],
     response_cls: Optional[ResponseT],
     page_cls: PaginationT | AsyncPaginationT,
+    **kwargs: Any,
 ) -> PaginationT | AsyncPaginationT:
     return page_cls(
         request_callback=request_callback,
         path=path,
         params=params,
         response_cls=response_cls,
+        **kwargs,
     )
 
 
@@ -69,6 +75,7 @@ class StudioResource(ABC):
         params: Optional[Dict[str, Any]] = None,
         response_cls: Optional[ResponseT] = None,
         page_cls: Optional[PaginationT] = None,
+        **kwargs: Any,
     ) -> ResponseT | PaginationT | None:
         if page_cls is not None:
             return _cast_request(
@@ -77,12 +84,14 @@ class StudioResource(ABC):
                 params=params,
                 response_cls=response_cls,
                 page_cls=page_cls,
+                **kwargs,
             )
 
         response = self._client.execute_http_request(
             method="GET",
             path=path,
             params=params or {},
+            **kwargs,
         )
 
         return _cast_response(
@@ -118,7 +127,10 @@ class StudioResource(ABC):
         )
 
     def _get(
-        self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
+        self,
+        path: str,
+        response_cls: Optional[ResponseT] = None,
+        params: Optional[Dict[str, Any]] = None,
     ) -> ResponseT | StreamT:
         response = self._client.execute_http_request(method="GET", path=path, params=params or {})
         return _cast_response(response=response, response_cls=response_cls)

@@ -3,6 +3,7 @@ from typing import Any, Dict, Literal, Optional
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import StudioResource
+from ai21.files.downloaded_file import DownloadedFile
 from ai21.models.responses.batch_response import Batch
 from ai21.pagination.sync_pagination import SyncPagination
 from ai21.types import NOT_GIVEN, NotGiven
@@ -28,6 +29,7 @@ class Batches(StudioResource, BaseBatches):
         self,
         after: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        **kwargs: Any,
     ) -> SyncPagination[Batch]:
         params = self._create_list_params(after=after, limit=limit)
         return self._list(
@@ -35,6 +37,7 @@ class Batches(StudioResource, BaseBatches):
             params=params,
             page_cls=SyncPagination[Batch],
             response_cls=Batch,
+            **kwargs,
         )
 
     def cancel(self, batch_id: str):
@@ -46,9 +49,10 @@ class Batches(StudioResource, BaseBatches):
         file_type: Literal["output", "error"],
         force: bool = False,
         **kwargs: Any,
-    ) -> dict:
+    ) -> DownloadedFile:
         return self._get(
             path=f"/{self._module_name}/{batch_id}/results",
             params={"file_type": file_type, "force": force},
-            response_cls=dict,
+            response_cls=DownloadedFile,
+            **kwargs,
         )
