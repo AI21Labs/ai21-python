@@ -35,11 +35,13 @@ class BasePagination(Generic[PageT]):
         path: str,
         params: Optional[Dict[str, Any]] = None,
         response_cls: Optional[Type[PageT]] = None,
+        **kwargs: Any,
     ):
         self.request_method = request_callback
         self.path = path
         self.params = params or {}
         self.response_cls = response_cls
+        self.kwargs = kwargs
 
     def _next_page_params(self, response: Sequence[PageT]) -> None:
         """Update params with the ID from the last item in the response."""

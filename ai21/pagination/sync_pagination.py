@@ -12,8 +12,9 @@ class SyncPagination(BasePagination[PageT]):
         path: str,
         params: Optional[Dict[str, Any]] = None,
         response_cls: Optional[Type[PageT]] = None,
+        **kwargs: Any,
     ):
-        super().__init__(request_callback, path, params, response_cls)
+        super().__init__(request_callback, path, params, response_cls, **kwargs)
         self._iterator = self.__paginate__()
 
     def __iter__(self) -> Iterator[List[PageT]]:
@@ -25,7 +26,7 @@ class SyncPagination(BasePagination[PageT]):
 
     def __paginate__(self) -> Iterator[List[PageT]]:
         while True:
-            results = self.request_method(path=self.path, params=self.params, method="GET")
+            results = self.request_method(path=self.path, params=self.params, method="GET", **self.kwargs)
             response = cast_page_response(results, self.response_cls)
 
             if not response:
