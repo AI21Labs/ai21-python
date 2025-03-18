@@ -1,5 +1,5 @@
 from os import PathLike
-from typing import Any, Dict, Literal, Optional
+from typing import Any, Dict, Literal
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -12,9 +12,9 @@ from ai21.types import NOT_GIVEN, NotGiven
 class Batches(StudioResource, BaseBatches):
     def create(
         self,
-        file: PathLike,
+        file: str | PathLike[str],
         endpoint: Literal["/v1/chat/completions"],
-        metadata: Optional[Dict[str, str]] | NotGiven = NOT_GIVEN,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> Batch:
         files = {"file": open(file, "rb")}
@@ -40,7 +40,7 @@ class Batches(StudioResource, BaseBatches):
             **kwargs,
         )
 
-    def cancel(self, batch_id: str):
+    def cancel(self, batch_id: str) -> Batch:
         return self._post(path=f"/{self._module_name}/{batch_id}/cancel", response_cls=dict)
 
     def get_results(
