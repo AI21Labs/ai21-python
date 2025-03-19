@@ -1,12 +1,16 @@
 from __future__ import annotations
 
-from typing import Optional, List
+from os import PathLike
+from typing import List, Optional
 
-from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
+from ai21.clients.studio.resources.studio_resource import (
+    AsyncStudioResource,
+    StudioResource,
+)
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models import FileResponse
-from ai21.types import NotGiven, NOT_GIVEN
+from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
 
@@ -23,7 +27,7 @@ class LibraryFiles(StudioResource):
 
     def create(
         self,
-        file_path: str,
+        file_path: PathLike,
         *,
         path: Optional[str] | NotGiven = NOT_GIVEN,
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
