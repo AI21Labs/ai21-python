@@ -1,9 +1,9 @@
 from __future__ import annotations
 
 from abc import ABC
-from typing import Any, Dict, Optional
+from typing import Any, Dict
 
-from ai21.types import NotGiven
+from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
 
@@ -13,7 +13,7 @@ class BaseBatches(ABC):
     def _create_body(
         self,
         endpoint: str,
-        metadata: Optional[Dict[str, str]] | NotGiven,
+        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> Dict[str, Any]:
         return remove_not_given(

@@ -1,5 +1,6 @@
 from typing import Literal, Optional
 
+
 from ai21.models.ai21_base_model import AI21BaseModel
 
 
@@ -12,7 +13,7 @@ class RequestCounts(AI21BaseModel):
 class Batch(AI21BaseModel):
     id: str
     """The ID of the batch."""
-    status: Literal["FAILED", "PROCESSING", "COMPLETED", "EXPIRED", "CANCELLED", "PENDING"]
+    status: Literal["FAILED", "PROCESSING", "COMPLETED", "EXPIRED", "CANCELLED", "PENDING", "STALE"]
 
     """The current status of the batch."""
     endpoint: str

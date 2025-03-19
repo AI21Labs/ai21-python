@@ -37,7 +37,7 @@ class Batches(StudioResource, BaseBatches):
         return self._list(
             path=f"/{self._module_name}",
             params=params,
-            page_cls=SyncPagination[Batch],
+            pagination_cls=SyncPagination[Batch],
             response_cls=Batch,
             **kwargs,
         )
@@ -48,8 +48,8 @@ class Batches(StudioResource, BaseBatches):
     def get_results(
         self,
         batch_id: str,
-        file_type: Literal["output", "error"],
-        force: bool = False,
+        file_type: Literal["output", "error"] | NotGiven = NOT_GIVEN,
+        force: bool | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> DownloadedFile:
         return self._get(

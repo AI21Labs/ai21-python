@@ -36,7 +36,7 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
         return await self._list(
             path=f"/{self._module_name}",
             params=params,
-            page_cls=AsyncPagination[Batch],
+            pagination_cls=AsyncPagination[Batch],
             response_cls=Batch,
         )
 
@@ -46,8 +46,8 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
     async def get_results(
         self,
         batch_id: str,
-        file_type: Literal["output", "error"],
-        force: bool = False,
+        file_type: Literal["output", "error"] | NotGiven = NOT_GIVEN,
+        force: bool | NotGiven = NOT_GIVEN,
         **kwargs: Any,
     ) -> DownloadedFile:
         return await self._get(

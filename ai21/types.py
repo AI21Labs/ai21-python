@@ -16,7 +16,7 @@ if TYPE_CHECKING:
 ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModel", str, httpx.Response, List[Any]])
 StreamT = TypeVar("_StreamT", bound=Stream[Any])
 AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
-PaginationT = TypeVar("PaginationT", bound=SyncPagination[Any])
+SyncPaginationT = TypeVar("SyncPagination", bound=SyncPagination[Any])
 AsyncPaginationT = TypeVar("AsyncPaginationT", bound=AsyncPagination[Any])
 
 
