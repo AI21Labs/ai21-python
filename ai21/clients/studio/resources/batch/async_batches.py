@@ -31,13 +31,28 @@ class AsyncBatches(AsyncStudioResource, BaseBatches):
         self,
         after: str | NotGiven = NOT_GIVEN,
         limit: int | NotGiven = NOT_GIVEN,
+        **kwargs: Any,
     ) -> AsyncPagination[Batch]:
+        """List your organization's batches.
+
+        Args:
+            after: A cursor for pagination. Provide a batch ID to fetch results
+                  starting after this batch. Useful for navigating through large
+                  result sets.
+
+            limit: Maximum number of batches to return per page. Value must be
+                  between 1 and 100. Defaults to 20 if not specified.
+
+        Returns:
+            A paginator object that yields pages of batch results when iterated.
+        """
         params = self._create_list_params(after=after, limit=limit)
         return await self._list(
             path=f"/{self._module_name}",
             params=params,
             pagination_cls=AsyncPagination[Batch],
             response_cls=Batch,
+            **kwargs,
         )
 
     async def cancel(self, batch_id: str) -> Batch:
