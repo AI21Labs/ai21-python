@@ -272,7 +272,7 @@ run_result = client.beta.maestro.runs.create_and_poll(
 )
 ```
 
-For a more detailed example, see maestro [sync](examples/studio/maestro/runs.py) and [async](examples/studio/maestro/async_runs.py) examples.
+For a more detailed example, see maestro [sync](examples/studio/maestro/run.py) and [async](examples/studio/maestro/async_run.py) examples.
 
 ---
 

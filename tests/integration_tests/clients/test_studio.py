@@ -56,8 +56,8 @@ def test_studio(test_file_name: str):
         ("chat/async_stream_chat_completions.py",),
         ("conversational_rag/conversational_rag.py",),
         ("conversational_rag/async_conversational_rag.py",),
-        ("maestro/runs.py",),
-        ("maestro/async_runs.py",),
+        ("maestro/run.py",),
+        ("maestro/async_run.py",),
     ],
     ids=[
         "when_chat_completions__should_return_ok",
