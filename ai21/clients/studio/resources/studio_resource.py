@@ -3,7 +3,7 @@ from __future__ import annotations
 import json
 
 from abc import ABC
-from typing import Any, BinaryIO, Callable, Dict, Optional, get_origin
+from typing import Any, BinaryIO, Dict, Optional, get_origin
 
 import httpx
 
@@ -12,7 +12,13 @@ from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models._pydantic_compatibility import _from_dict
 from ai21.stream.stream_commons import _SSEDecoderBase
-from ai21.types import AsyncPaginationT, AsyncStreamT, PaginationT, ResponseT, StreamT
+from ai21.types import (
+    AsyncPaginationT,
+    AsyncStreamT,
+    ResponseT,
+    StreamT,
+    SyncPaginationT,
+)
 from ai21.utils.typing import extract_type
 
 
@@ -48,23 +54,6 @@ def _cast_response(
     return _from_dict(obj=response_cls, obj_dict=response.json())
 
 
-def _cast_request(
-    request_callback: Callable,
-    path: str,
-    params: Optional[Dict[str, Any]],
-    response_cls: Optional[ResponseT],
-    page_cls: PaginationT | AsyncPaginationT,
-    **kwargs: Any,
-) -> PaginationT | AsyncPaginationT:
-    return page_cls(
-        request_callback=request_callback,
-        path=path,
-        params=params,
-        response_cls=response_cls,
-        **kwargs,
-    )
-
-
 class StudioResource(ABC):
     def __init__(self, client: AI21HTTPClient):
         self._client = client
@@ -72,18 +61,17 @@ class StudioResource(ABC):
     def _list(
         self,
         path: str,
+        response_cls: ResponseT,
         params: Optional[Dict[str, Any]] = None,
-        response_cls: Optional[ResponseT] = None,
-        page_cls: Optional[PaginationT] = None,
+        pagination_cls: Optional[SyncPaginationT] = None,
         **kwargs: Any,
-    ) -> ResponseT | PaginationT | None:
-        if page_cls is not None:
-            return _cast_request(
+    ) -> ResponseT | SyncPaginationT | None:
+        if pagination_cls is not None:
+            return pagination_cls(
                 request_callback=self._client.execute_http_request,
                 path=path,
                 params=params,
                 response_cls=response_cls,
-                page_cls=page_cls,
                 **kwargs,
             )
 
@@ -202,17 +190,18 @@ class AsyncStudioResource(ABC):
     async def _list(
         self,
         path: str,
+        response_cls: ResponseT,
         params: Optional[Dict[str, Any]] = None,
-        response_cls: Optional[ResponseT] = None,
-        page_cls: Optional[AsyncPaginationT] = None,
+        pagination_cls: Optional[AsyncPaginationT] = None,
+        **kwargs: Any,
     ) -> ResponseT | AsyncPaginationT | None:
-        if page_cls is not None:
-            return _cast_request(
+        if pagination_cls is not None:
+            return pagination_cls(
                 request_callback=self._client.execute_http_request,
                 path=path,
                 params=params,
                 response_cls=response_cls,
-                page_cls=page_cls,
+                **kwargs,
             )
 
         response = await self._client.execute_http_request(
