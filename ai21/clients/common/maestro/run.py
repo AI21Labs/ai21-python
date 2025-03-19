@@ -11,6 +11,7 @@ from ai21.models.maestro.run import (
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
     Requirement,
+    Budget,
 )
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
@@ -28,6 +29,7 @@ class BaseMaestroRun(ABC):
         tool_resources: ToolResources | NotGiven,
         context: Dict[str, Any] | NotGiven,
         requirements: List[Requirement] | NotGiven,
+        budget: Budget | NotGiven,
         **kwargs,
     ) -> dict:
         return remove_not_given(
@@ -38,6 +40,7 @@ class BaseMaestroRun(ABC):
                 "tool_resources": tool_resources,
                 "context": context,
                 "requirements": requirements,
+                "budget": budget,
                 **kwargs,
             }
         )
@@ -52,6 +55,7 @@ class BaseMaestroRun(ABC):
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        budget: Budget | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         pass
@@ -74,6 +78,7 @@ class BaseMaestroRun(ABC):
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        budget: Budget | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
