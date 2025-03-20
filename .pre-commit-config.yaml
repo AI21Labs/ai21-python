@@ -118,3 +118,10 @@ repos:
         entry: hadolint/hadolint:v2.10.0 hadolint
         types:
           - dockerfile
+  - repo: local
+    hooks:
+      - id: check-api-key
+        name: Check for API keys
+        entry: .git-hooks/check_api_key.sh
+        language: system
+        stages: [commit]
