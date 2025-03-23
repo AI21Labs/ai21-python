@@ -1,29 +1,40 @@
 from __future__ import annotations
 
 import json
+
 from abc import ABC
-from typing import Any, Dict, Optional, BinaryIO, get_origin
+from typing import Any, BinaryIO, Dict, Optional, get_origin
 
 import httpx
 
+from ai21.files.downloaded_file import DownloadedFile
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models._pydantic_compatibility import _from_dict
 from ai21.stream.stream_commons import _SSEDecoderBase
-from ai21.types import ResponseT, StreamT, AsyncStreamT
+from ai21.types import (
+    AsyncPaginationT,
+    AsyncStreamT,
+    ResponseT,
+    StreamT,
+    SyncPaginationT,
+)
 from ai21.utils.typing import extract_type
 
 
 def _cast_response(
     response: httpx.Response,
     response_cls: Optional[ResponseT],
-    stream_cls: Optional[AsyncStreamT] = None,
+    stream_cls: Optional[StreamT | AsyncStreamT] = None,
     stream: bool = False,
     streaming_decoder: Optional[_SSEDecoderBase] = None,
-) -> ResponseT | AsyncStreamT | None:
+) -> ResponseT | StreamT | None:
     if stream and stream_cls is not None:
         cast_to = extract_type(stream_cls)
         return stream_cls(cast_to=cast_to, response=response, streaming_decoder=streaming_decoder)
+
+    if response_cls is DownloadedFile:
+        return DownloadedFile(response)
 
     if response_cls is None:
         return None
@@ -47,6 +58,35 @@ class StudioResource(ABC):
     def __init__(self, client: AI21HTTPClient):
         self._client = client
 
+    def _list(
+        self,
+        path: str,
+        response_cls: ResponseT,
+        params: Optional[Dict[str, Any]] = None,
+        pagination_cls: Optional[SyncPaginationT] = None,
+        **kwargs: Any,
+    ) -> ResponseT | SyncPaginationT | None:
+        if pagination_cls is not None:
+            return pagination_cls(
+                request_callback=self._client.execute_http_request,
+                path=path,
+                params=params,
+                response_cls=response_cls,
+                **kwargs,
+            )
+
+        response = self._client.execute_http_request(
+            method="GET",
+            path=path,
+            params=params or {},
+            **kwargs,
+        )
+
+        return _cast_response(
+            response=response,
+            response_cls=response_cls,
+        )
+
     def _post(
         self,
         path: str,
@@ -56,7 +96,7 @@ class StudioResource(ABC):
         stream_cls: Optional[StreamT] = None,
         stream: bool = False,
         files: Optional[Dict[str, BinaryIO]] = None,
-    ) -> ResponseT | StreamT:
+    ) -> ResponseT | StreamT | None:
         response = self._client.execute_http_request(
             method="POST",
             path=path,
@@ -75,7 +115,10 @@ class StudioResource(ABC):
         )
 
     def _get(
-        self, path: str, response_cls: Optional[ResponseT] = None, params: Optional[Dict[str, Any]] = None
+        self,
+        path: str,
+        response_cls: Optional[ResponseT] = None,
+        params: Optional[Dict[str, Any]] = None,
     ) -> ResponseT | StreamT:
         response = self._client.execute_http_request(method="GET", path=path, params=params or {})
         return _cast_response(response=response, response_cls=response_cls)
@@ -143,3 +186,31 @@ class AsyncStudioResource(ABC):
             path=path,
         )
         return _cast_response(response=response, response_cls=response_cls)
+
+    async def _list(
+        self,
+        path: str,
+        response_cls: ResponseT,
+        params: Optional[Dict[str, Any]] = None,
+        pagination_cls: Optional[AsyncPaginationT] = None,
+        **kwargs: Any,
+    ) -> ResponseT | AsyncPaginationT | None:
+        if pagination_cls is not None:
+            return pagination_cls(
+                request_callback=self._client.execute_http_request,
+                path=path,
+                params=params,
+                response_cls=response_cls,
+                **kwargs,
+            )
+
+        response = await self._client.execute_http_request(
+            method="GET",
+            path=path,
+            params=params or {},
+        )
+
+        return _cast_response(
+            response=response,
+            response_cls=response_cls,
+        )
