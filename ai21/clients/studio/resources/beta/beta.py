@@ -1,3 +1,4 @@
+from ai21.clients.studio.resources.batch.batches import Batches
 from ai21.clients.studio.resources.maestro.maestro import Maestro
 from ai21.clients.studio.resources.studio_conversational_rag import (
     StudioConversationalRag,
@@ -12,3 +13,4 @@ class Beta(StudioResource):
 
         self.conversational_rag = StudioConversationalRag(client)
         self.maestro = Maestro(client)
+        self.batches = Batches(client)
