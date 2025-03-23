@@ -1,6 +1,90 @@
 # CHANGELOG
 
 
+## v3.1.0 (2025-03-20)
+
+### Chores
+
+- Use correct model id name for usage examples
+  ([#280](https://github.com/AI21Labs/ai21-python/pull/280),
+  [`a822f62`](https://github.com/AI21Labs/ai21-python/commit/a822f621a04b0f1fdcc07d3389ccf5cde24abd89))
+
+- **deps-dev**: Bump jinja2 from 3.1.5 to 3.1.6
+  ([#275](https://github.com/AI21Labs/ai21-python/pull/275),
+  [`1572a9c`](https://github.com/AI21Labs/ai21-python/commit/1572a9cd23e32a0f394b899f1967209e46a38004))
+
+Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6. - [Release
+  notes](https://github.com/pallets/jinja/releases) -
+  [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst) -
+  [Commits](https://github.com/pallets/jinja/compare/3.1.5...3.1.6)
+
+--- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect
+
+...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+### Features
+
+- :sparkles: introduce Maestro ([#276](https://github.com/AI21Labs/ai21-python/pull/276),
+  [`2284cc7`](https://github.com/AI21Labs/ai21-python/commit/2284cc7528b8020f3a3da274e5ff5dec72521d1f))
+
+* feat: :sparkles: introduce Maestro
+
+* ci: Added remove cache
+
+* chore: :refactor: use `ChatMessage` instead of `Message` pretty TypedDict :(
+
+* chore: :truck: rename `maestro/runs` files to `maestro/run`
+
+* fix: :recycle: bug fixes and support for more params
+
+- update examples (async & sync) - support passing types in `output_type` - deprecate `instruction`
+
+* fix: :fire: remove unsupported parameters
+
+* fix: :bug: try saving the day
+
+* fix: :bug: let's give it another go shall we
+
+* fix: :fire: remove unused functions
+
+* test: :white_check_mark: tests
+
+* refactor: :truck: rename messages and constraints
+
+* ci: :technologist: add git hooks to check for in commit content
+
+* chore: :truck: move `maestro` under beta
+
+* docs: :memo: update examples
+
+* docs: :memo: update README
+
+* refactor: :truck: rename maestro runs examples
+
+* chore: :wrench: add budget support
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+Co-authored-by: Josephasafg <ajgard7@gmail.com>
+
+### Refactoring
+
+- Removed J2 Support from Bedrock ([#277](https://github.com/AI21Labs/ai21-python/pull/277),
+  [`8733047`](https://github.com/AI21Labs/ai21-python/commit/8733047aca6b1f75375abaff1d9df74aea5690c7))
+
+* refactor: Removed j2 support
+
+* fix: Bad imports
+
+* fix: Extra test removal
+
+
 ## v3.0.4 (2025-03-06)
 
 ### Bug Fixes
@@ -19,6 +103,11 @@
 * fix: Model deprecation warning
 
 * fix: Rename model
+
+### Chores
+
+- **release**: V3.0.4 [skip ci]
+  ([`557ab8e`](https://github.com/AI21Labs/ai21-python/commit/557ab8ee4785fab4382783d9c69c09f6819f5fc3))
 
 
 ## v3.0.3 (2025-02-27)
