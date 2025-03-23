@@ -1,6 +1,5 @@
 from typing import Literal, Optional
 
-
 from ai21.models.ai21_base_model import AI21BaseModel
 
 
@@ -27,12 +26,6 @@ class Batch(AI21BaseModel):
 
     cancelled_at: Optional[int] = None
     """The Unix timestamp (in seconds) for when the batch was cancelled."""
-
-    # expires_at: int
-    # """The Unix timestamp (in seconds) for when the batch will expire."""
-
-    # expired_at: int | None = None
-    # """The Unix timestamp (in seconds) for when the batch expired."""
 
     request_counts: RequestCounts
     """The request counts for different statuses within the batch."""
