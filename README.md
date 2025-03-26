@@ -21,7 +21,6 @@
 ## Table of Contents
 
 - [Examples](#examples-tldr) 🗂️
-- [Migration from v1.3.4 and below](#migration-from-v134-and-below)
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
@@ -29,7 +28,6 @@
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
-  - [TSMs](#TSMs)
 - [Token Counting](#Token-Counting)
 - [Environment Variables](#Environment-Variables)
 - [Error Handling](#Error-Handling)
@@ -47,101 +45,6 @@ If you want to quickly get a glance how to use the AI21 Python SDK and jump stra
 ### [Check out the Examples](examples/)
 
 Feel free to dive in, experiment, and adapt these examples to suit your needs. We believe they'll help you get up and running quickly.
-
-## Migration from v1.3.4 and below
-
-In `v2.0.0` we introduced a new SDK that is not backwards compatible with the previous version.
-This version allows for non-static instances of the client, defined parameters to each resource, modelized responses and
-more.
-
-<details>
-<summary>Migration Examples</summary>
-
-### Instance creation (not available in v1.3.4 and below)
-
-```python
-from ai21 import AI21Client
-
-client = AI21Client(api_key='my_api_key')
-
-# or set api_key in environment variable - AI21_API_KEY and then
-client = AI21Client()
-```
-
-We No longer support static methods for each resource, instead we have a client instance that has a method for each
-allowing for more flexibility and better control.
-
-### Completion before/after
-
-```diff
-prompt = "some prompt"
-
-- import ai21
-- response = ai21.Completion.execute(model="j2-light", prompt=prompt, maxTokens=2)
-
-+ from ai21 import AI21Client
-+ client = ai21.AI21Client()
-+ response = client.completion.create(model="j2-light", prompt=prompt, max_tokens=2)
-```
-
-This applies to all resources. You would now need to create a client instance and use it to call the resource method.
-
-### Tokenization and Token counting before/after
-
-```diff
-- response = ai21.Tokenization.execute(text=prompt)
-- print(len(response)) # number of tokens
-
-+ from ai21 import AI21Client
-+ client = AI21Client()
-+ token_count = client.count_tokens(text=prompt)
-```
-
-### Key Access in Response Objects before/after
-
-It is no longer possible to access the response object as a dictionary. Instead, you can access the response object as an object with attributes.
-
-```diff
-- import ai21
-- response = ai21.Summarize.execute(source="some text", sourceType="TEXT")
-- response["summary"]
-
-+ from ai21 import AI21Client
-+ from ai21.models import DocumentType
-+ client = AI21Client()
-+ response = client.summarize.create(source="some text", source_type=DocumentType.TEXT)
-+ response.summary
-```
-
----
-
-### AWS Client Creations
-
-### Bedrock Client creation before/after
-
-```diff
-- import ai21
-- destination = ai21.BedrockDestination(model_id=ai21.BedrockModelID.J2_MID_V1)
-- response = ai21.Completion.execute(prompt=prompt, maxTokens=1000, destination=destination)
-
-+ from ai21 import AI21BedrockClient, BedrockModelID
-+ client = AI21BedrockClient()
-+ response = client.completion.create(prompt=prompt, max_tokens=1000, model_id=BedrockModelID.J2_MID_V1)
-```
-
-### SageMaker Client creation before/after
-
-```diff
-- import ai21
-- destination = ai21.SageMakerDestination("j2-mid-test-endpoint")
-- response = ai21.Completion.execute(prompt=prompt, maxTokens=1000, destination=destination)
-
-+ from ai21 import AI21SageMakerClient
-+ client = AI21SageMakerClient(endpoint_name="j2-mid-test-endpoint")
-+ response = client.completion.create(prompt=prompt, max_tokens=1000)
-```
-
-</details>
 
 ## Documentation
 
@@ -178,7 +81,7 @@ messages = [
 
 chat_completions = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5-mini",
+    model="jamba-mini-1.6-2025-03",
 )
 ```
 
@@ -208,7 +111,7 @@ client = AsyncAI21Client(
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5-mini",
+        model="jamba-mini-1.6-2025-03",
     )
 
     print(response)
@@ -219,20 +122,6 @@ asyncio.run(main())
 ```
 
 A more detailed example can be found [here](examples/studio/chat/chat_completions.py).
-
-## Older Models Support Usage
-
-<details>
-<summary>Examples</summary>
-
-### Supported Models:
-
-- j2-light
-- [j2-ultra](#Chat)
-- [j2-mid](#Completion)
-- [jamba-instruct](#Chat-Completion)
-
-you can read more about the models [here](https://docs.ai21.com/reference/j2-complete-api-ref#jurassic-2-models).
 
 ### Chat
 
@@ -346,7 +235,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-1.5-mini",
+        model="jamba-mini-1.6-2025-03",
         stream=True,
     )
     async for chunk in response:
@@ -356,6 +245,34 @@ async def main():
 asyncio.run(main())
 
 ```
+
+---
+
+### Maestro
+
+AI Planning & Orchestration System built for the enterprise. Read more [here](https://www.ai21.com/maestro/).
+
+```python
+from ai21 import AI21Client
+
+client = AI21Client()
+
+run_result = client.beta.maestro.runs.create_and_poll(
+    input="Write a poem about the ocean",
+    requirements=[
+        {
+            "name": "length requirement",
+            "description": "The length of the poem should be less than 1000 characters",
+        },
+        {
+            "name": "rhyme requirement",
+            "description": "The poem should rhyme",
+        },
+    ],
+)
+```
+
+For a more detailed example, see maestro [sync](examples/studio/maestro/run.py) and [async](examples/studio/maestro/async_run.py) examples.
 
 ---
 
@@ -705,7 +622,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-  model="jamba-1.5-mini",
+  model="jamba-mini-1.6-2025-03",
   messages=messages,
 )
 ```

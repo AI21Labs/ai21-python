@@ -58,7 +58,7 @@ class AI21ServerError(AI21APIError):
 
 class ServiceUnavailable(AI21APIError):
     def __init__(self, details: Optional[str] = None):
-        super().__init__(500, details)
+        super().__init__(503, details)
 
 
 class AI21Error(Exception):

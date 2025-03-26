@@ -1,8 +1,8 @@
-from typing import Optional, Any, Dict
+from typing import Any, Dict, Optional
 
 import httpx
 
-from ai21.ai21_env_config import _AI21EnvConfig, AI21EnvConfig
+from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
 from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_chat import StudioChat

@@ -1,6 +1,7 @@
 from ai21 import AI21Client
 from ai21.models.chat import ChatMessage
 
+
 system = "You're a support engineer in a SaaS company"
 messages = [
     ChatMessage(content=system, role="system"),
@@ -13,7 +14,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-1.5-large",
+    model="jamba-large-1.6-2025-03",
     max_tokens=100,
     stream=True,
 )
