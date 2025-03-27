@@ -14,15 +14,16 @@ from ai21.models.request_options import RequestOptions
 
 
 _DEFAULT_GCP_REGION = "us-central1"
-_VERTEX_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"
-_VERTEX_PATH_FORMAT = "/projects/{project_id}/locations/{region}/publishers/ai21/models/{model}:{endpoint}"
+_LAUNCHPAD_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"
+_LAUNCHPAD_PATH_FORMAT = "/projects/{project_id}/locations/{region}/endpoints/{endpoint_id}:{endpoint}"
 
 
-class BaseAI21VertexClient:
+class BaseAI21LaunchpadClient:
     def __init__(
         self,
         region: Optional[str] = None,
         project_id: Optional[str] = None,
+        endpoint_id: Optional[str] = None,
         access_token: Optional[str] = None,
         credentials: Optional[GCPCredentials] = None,
     ):
@@ -31,11 +32,12 @@ class BaseAI21VertexClient:
         self._region = region or _DEFAULT_GCP_REGION
         self._access_token = access_token
         self._project_id = project_id
+        self._endpoint_id = endpoint_id
         self._credentials = credentials
         self._gcp_auth = GCPAuthorization()
 
     def _get_base_url(self) -> str:
-        return _VERTEX_BASE_URL_FORMAT.format(region=self._region)
+        return _LAUNCHPAD_BASE_URL_FORMAT.format(region=self._region)
 
     def _get_access_token(self) -> str:
         if self._access_token is not None:
@@ -63,9 +65,10 @@ class BaseAI21VertexClient:
         model: str,
         endpoint: str,
     ) -> str:
-        return _VERTEX_PATH_FORMAT.format(
+        return _LAUNCHPAD_PATH_FORMAT.format(
             project_id=project_id,
             region=region,
+            endpoint_id=self._endpoint_id,
             model=model,
             endpoint=endpoint,
         )
@@ -75,11 +78,12 @@ class BaseAI21VertexClient:
         return {"Authorization": f"Bearer {access_token}"}
 
 
-class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
+class AI21LaunchpadClient(BaseAI21LaunchpadClient, AI21HTTPClient):
     def __init__(
         self,
         region: Optional[str] = None,
         project_id: Optional[str] = None,
+        endpoint_id: Optional[str] = None,
         base_url: Optional[str] = None,
         access_token: Optional[str] = None,
         credentials: Optional[GCPCredentials] = None,
@@ -88,10 +92,11 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
         num_retries: Optional[int] = None,
         http_client: Optional[httpx.Client] = None,
     ):
-        BaseAI21VertexClient.__init__(
+        BaseAI21LaunchpadClient.__init__(
             self,
             region=region,
             project_id=project_id,
+            endpoint_id=endpoint_id,
             access_token=access_token,
             credentials=credentials,
         )
@@ -143,11 +148,12 @@ class AI21VertexClient(BaseAI21VertexClient, AI21HTTPClient):
         return self._get_authorization_header()
 
 
-class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
+class AsyncAI21LaunchpadClient(BaseAI21LaunchpadClient, AsyncAI21HTTPClient):
     def __init__(
         self,
         region: Optional[str] = None,
         project_id: Optional[str] = None,
+        endpoint_id: Optional[str] = None,
         base_url: Optional[str] = None,
         access_token: Optional[str] = None,
         credentials: Optional[GCPCredentials] = None,
@@ -156,10 +162,11 @@ class AsyncAI21VertexClient(BaseAI21VertexClient, AsyncAI21HTTPClient):
         num_retries: Optional[int] = None,
         http_client: Optional[httpx.AsyncClient] = None,
     ):
-        BaseAI21VertexClient.__init__(
+        BaseAI21LaunchpadClient.__init__(
             self,
             region=region,
             project_id=project_id,
+            endpoint_id=endpoint_id,
             access_token=access_token,
             credentials=credentials,
         )

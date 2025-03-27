@@ -4,17 +4,17 @@ from ai21.ai21_env_config import AI21EnvConfig
 from ai21.clients.azure.ai21_azure_client import AI21AzureClient, AsyncAI21AzureClient
 from ai21.clients.studio.ai21_client import AI21Client
 from ai21.clients.studio.async_ai21_client import AsyncAI21Client
-
 from ai21.errors import (
     AI21APIError,
+    AI21Error,
     APITimeoutError,
     MissingApiKeyError,
     ModelPackageDoesntExistError,
-    AI21Error,
     TooManyRequestsError,
 )
 from ai21.logger import setup_logger
 from ai21.version import VERSION
+
 
 __version__ = VERSION
 setup_logger()
@@ -44,6 +44,18 @@ def _import_vertex_client():
     return AI21VertexClient
 
 
+def _import_launchpad_client():
+    from ai21.clients.launchpad.ai21_launchpad_client import AI21LaunchpadClient
+
+    return AI21LaunchpadClient
+
+
+def _import_async_launchpad_client():
+    from ai21.clients.launchpad.ai21_launchpad_client import AsyncAI21LaunchpadClient
+
+    return AsyncAI21LaunchpadClient
+
+
 def _import_async_vertex_client():
     from ai21.clients.vertex.ai21_vertex_client import AsyncAI21VertexClient
 
@@ -66,6 +78,13 @@ def __getattr__(name: str) -> Any:
 
         if name == "AsyncAI21VertexClient":
             return _import_async_vertex_client()
+
+        if name == "AI21LaunchpadClient":
+            return _import_launchpad_client()
+
+        if name == "AsyncAI21LaunchpadClient":
+            return _import_async_launchpad_client()
+
     except ImportError as e:
         raise ImportError('Please install "ai21[AWS]" for Bedrock, or "ai21[Vertex]" for Vertex') from e
 
@@ -87,4 +106,6 @@ __all__ = [
     "AsyncAI21BedrockClient",
     "AI21VertexClient",
     "AsyncAI21VertexClient",
+    "AI21LaunchpadClient",
+    "AsyncAI21LaunchpadClient",
 ]
