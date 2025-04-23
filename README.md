@@ -24,6 +24,7 @@
 - [AI21 Official Documentation](#Documentation)
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
+- [Maestro](#Maestro)
 - [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
