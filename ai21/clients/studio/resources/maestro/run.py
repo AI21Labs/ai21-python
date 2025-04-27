@@ -121,6 +121,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             context=context,
             requirements=requirements,
             budget=budget,
+            include=include,
             **kwargs,
         )
 
