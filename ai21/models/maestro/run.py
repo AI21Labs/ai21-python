@@ -41,12 +41,12 @@ class ToolResources(TypedDict, total=False):
     web_search: Optional[WebSearchToolResource]
 
 
-class Requirement(TypedDict):
+class Requirement(TypedDict, total=False):
     name: str
     description: str
 
 
-class FileSearchResult(TypedDict):
+class FileSearchResult(TypedDict, total=False):
     text: Optional[str]
     file_id: str
     file_name: str
@@ -54,7 +54,7 @@ class FileSearchResult(TypedDict):
     order: int
 
 
-class WebSearchResult(TypedDict):
+class WebSearchResult(TypedDict, total=False):
     text: str
     url: str
     score: float
