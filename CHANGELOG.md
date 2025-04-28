@@ -1,6 +1,112 @@
 # CHANGELOG
 
 
+## v3.2.0 (2025-04-28)
+
+### Bug Fixes
+
+- :wrench: export maestro requirements ([#281](https://github.com/AI21Labs/ai21-python/pull/281),
+  [`1888bd7`](https://github.com/AI21Labs/ai21-python/commit/1888bd7a58e670cc05cdc92e2cd673070ccba653))
+
+* feat: Add Requirement, Budget, Tool, and ToolResources exports
+
+* docs: Add Maestro section to README
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+### Chores
+
+- **deps**: Bump pypa/gh-action-pypi-publish from 1.12.3 to 1.12.4
+  ([#261](https://github.com/AI21Labs/ai21-python/pull/261),
+  [`36eca68`](https://github.com/AI21Labs/ai21-python/commit/36eca68b6636bd5edfb86a78d1431b621483531c))
+
+Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publish) from 1.12.3 to
+  1.12.4. - [Release notes](https://github.com/pypa/gh-action-pypi-publish/releases) -
+  [Commits](https://github.com/pypa/gh-action-pypi-publish/compare/67339c736fd9354cd4f8cb0b744f2b82a74b5c70...76f52bc884231f62b9a034ebfe128415bbaabdfc)
+
+--- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
+  direct:production
+
+update-type: version-update:semver-patch ...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+
+- **deps**: Bump python-semantic-release/python-semantic-release
+  ([#271](https://github.com/AI21Labs/ai21-python/pull/271),
+  [`7c4c4a4`](https://github.com/AI21Labs/ai21-python/commit/7c4c4a4b9e3ef3bdf29fda3f55d07f004c8596b1))
+
+Bumps
+  [python-semantic-release/python-semantic-release](https://github.com/python-semantic-release/python-semantic-release)
+  from 9.15.2 to 9.21.0. - [Release
+  notes](https://github.com/python-semantic-release/python-semantic-release/releases) -
+  [Changelog](https://github.com/python-semantic-release/python-semantic-release/blob/master/CHANGELOG.rst)
+  -
+  [Commits](https://github.com/python-semantic-release/python-semantic-release/compare/v9.15.2...v9.21.0)
+
+--- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
+  dependency-type: direct:production
+
+update-type: version-update:semver-minor ...
+
+Signed-off-by: dependabot[bot] <support@github.com>
+
+Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
+
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+
+### Features
+
+- Batch API in Beta ([#278](https://github.com/AI21Labs/ai21-python/pull/278),
+  [`1d8506e`](https://github.com/AI21Labs/ai21-python/commit/1d8506ef3a61e1bd9bdb8641b186710f6de7b6a4))
+
+* feat: Added batches
+
+* feat: Added batch object
+
+* feat: Added batches to client
+
+* ci: Updated .gitignore
+
+* feat: Support for pagination
+
+* feat: Support for downloading files
+
+* refactor: Moved to beta
+
+* fix: Lint
+
+* fix: Typings
+
+* fix: CR
+
+* fix: Added docstring for batch list
+
+* fix: Added batches to beta
+
+* refactor: Removed commented out code
+
+- Maestro - add data sources support ([#282](https://github.com/AI21Labs/ai21-python/pull/282),
+  [`0764852`](https://github.com/AI21Labs/ai21-python/commit/0764852da17cda02bfb287043df89174079e3736))
+
+fix: add data sources support
+
+* fix: typedDict import
+
+* fix: add missing param
+
+* fix: add test
+
+* fix: remove skip
+
+* fix: fix test
+
+
 ## v3.1.0 (2025-03-20)
 
 ### Chores
@@ -18,9 +124,7 @@ Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.5 to 3.1.6. - [Release
   [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst) -
   [Commits](https://github.com/pallets/jinja/compare/3.1.5...3.1.6)
 
---- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -104,11 +208,6 @@ Co-authored-by: Josephasafg <ajgard7@gmail.com>
 
 * fix: Rename model
 
-### Chores
-
-- **release**: V3.0.4 [skip ci]
-  ([`557ab8e`](https://github.com/AI21Labs/ai21-python/commit/557ab8ee4785fab4382783d9c69c09f6819f5fc3))
-
 
 ## v3.0.3 (2025-02-27)
 
@@ -116,11 +215,6 @@ Co-authored-by: Josephasafg <ajgard7@gmail.com>
 
 - Httpx version to support until 1.0.0 ([#273](https://github.com/AI21Labs/ai21-python/pull/273),
   [`6a233fa`](https://github.com/AI21Labs/ai21-python/commit/6a233fa840ee0530a4d00378b5433900c53f2690))
-
-### Chores
-
-- **release**: V3.0.3 [skip ci]
-  ([`a2d5abf`](https://github.com/AI21Labs/ai21-python/commit/a2d5abfc979c02537e29f93627c6220a96c8b96b))
 
 
 ## v3.0.2 (2025-02-19)
@@ -143,9 +237,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -166,9 +258,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -189,9 +279,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -208,16 +296,11 @@ Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.4 to 3.1.5. - [Release
   [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst) -
   [Commits](https://github.com/pallets/jinja/compare/3.1.4...3.1.5)
 
---- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-
-- **release**: V3.0.2 [skip ci]
-  ([`040c7bf`](https://github.com/AI21Labs/ai21-python/commit/040c7bf4d98e5b3f94d93b9b4f124d0758944f2e))
 
 ### Continuous Integration
 
@@ -256,9 +339,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -281,9 +362,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -291,19 +370,8 @@ Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.c
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
-- **release**: V3.0.1 [skip ci]
-  ([`4d42360`](https://github.com/AI21Labs/ai21-python/commit/4d42360564d73f1045b9f7cf98bc47938a813fc7))
-
 
 ## v3.0.0 (2024-11-11)
-
-### Chores
-
-- **release**: V2.16.0 [skip ci]
-  ([`d8a6ecc`](https://github.com/AI21Labs/ai21-python/commit/d8a6ecc0da4f19183cdba826cf6641ad39dafbe8))
-
-- **release**: V3.0.0 [skip ci]
-  ([`7457c5b`](https://github.com/AI21Labs/ai21-python/commit/7457c5b2c2d9dab24b1cf863786db710bd16f7a6))
 
 ### Features
 
@@ -315,7 +383,7 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 feat!: Removed Legacy TSM Models
 
-### BREAKING CHANGES
+### Breaking Changes
 
 - Version v3.0.0 (#229)
 
@@ -341,9 +409,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -366,16 +432,11 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-
-- **release**: V2.15.2 [skip ci]
-  ([`b94594f`](https://github.com/AI21Labs/ai21-python/commit/b94594f70a68223059505c712fea54111145cd50))
 
 
 ## v2.15.1 (2024-09-30)
@@ -398,18 +459,13 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.15.1 [skip ci]
-  ([`d31badb`](https://github.com/AI21Labs/ai21-python/commit/d31badbaf2b688b216317967b2d85fbad986c1b0))
 
 
 ## v2.15.0 (2024-09-24)
@@ -427,9 +483,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -450,9 +504,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -468,16 +520,11 @@ Bumps [cryptography](https://github.com/pyca/cryptography) from 42.0.7 to 43.0.1
   [Changelog](https://github.com/pyca/cryptography/blob/main/CHANGELOG.rst) -
   [Commits](https://github.com/pyca/cryptography/compare/42.0.7...43.0.1)
 
---- updated-dependencies: - dependency-name: cryptography dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: cryptography dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-
-- **release**: V2.15.0 [skip ci]
-  ([`8835e75`](https://github.com/AI21Labs/ai21-python/commit/8835e75c4b825986d044658b79b5fd44497a9673))
 
 ### Features
 
@@ -499,11 +546,6 @@ Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.c
 
 Co-authored-by: Paz Shalev <pazs@ai21.com>
 
-### Chores
-
-- **release**: V2.14.1 [skip ci]
-  ([`2816660`](https://github.com/AI21Labs/ai21-python/commit/28166609752483988974c089e6eb09a7bf82f48c))
-
 
 ## v2.14.0 (2024-08-22)
 
@@ -511,11 +553,6 @@ Co-authored-by: Paz Shalev <pazs@ai21.com>
 
 - Example text ([#205](https://github.com/AI21Labs/ai21-python/pull/205),
   [`e526c53`](https://github.com/AI21Labs/ai21-python/commit/e526c533129dd3d279e0b3e2866298683cfbd693))
-
-### Chores
-
-- **release**: V2.14.0 [skip ci]
-  ([`307cfc6`](https://github.com/AI21Labs/ai21-python/commit/307cfc6f78355515acc9949de65a89bac7279db0))
 
 ### Features
 
@@ -542,16 +579,11 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-
-- **release**: V2.13.0 [skip ci]
-  ([`5d350ea`](https://github.com/AI21Labs/ai21-python/commit/5d350ea1a913e0f851de9e87e6ed01823ace2ce4))
 
 ### Documentation
 
@@ -569,11 +601,6 @@ Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.c
 
 
 ## v2.12.0 (2024-08-07)
-
-### Chores
-
-- **release**: V2.12.0 [skip ci]
-  ([`38430ad`](https://github.com/AI21Labs/ai21-python/commit/38430ad46686ce94b40d66991598dae67a3dbdd8))
 
 ### Features
 
@@ -601,18 +628,13 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.11.0 [skip ci]
-  ([`62ddebf`](https://github.com/AI21Labs/ai21-python/commit/62ddebfcd4037353440904800d8c8e394817040a))
 
 ### Features
 
@@ -665,11 +687,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
 
-### Chores
-
-- **release**: V2.10.1 [skip ci]
-  ([`c0050f4`](https://github.com/AI21Labs/ai21-python/commit/c0050f474d84853676ccbde17e71fc4419b86334))
-
 ### Continuous Integration
 
 - Fix label swap syntax ([#196](https://github.com/AI21Labs/ai21-python/pull/196),
@@ -702,9 +719,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -721,18 +736,13 @@ Bumps [setuptools](https://github.com/pypa/setuptools) from 69.5.1 to 70.0.0. - 
   [Changelog](https://github.com/pypa/setuptools/blob/main/NEWS.rst) -
   [Commits](https://github.com/pypa/setuptools/compare/v69.5.1...v70.0.0)
 
---- updated-dependencies: - dependency-name: setuptools dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: setuptools dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.10.0 [skip ci]
-  ([`4b85505`](https://github.com/AI21Labs/ai21-python/commit/4b85505e5c1830e145ecd04dc249a4df5c44ac60))
 
 ### Documentation
 
@@ -794,11 +804,6 @@ Co-authored-by: semantic-release <semantic-release>
 
 * test: add ai21 azure client
 
-### Chores
-
-- **release**: V2.9.2 [skip ci]
-  ([`30d9947`](https://github.com/AI21Labs/ai21-python/commit/30d9947b500e3c5d39858b187fc1f6d5c7a98916))
-
 
 ## v2.9.1 (2024-07-10)
 
@@ -822,9 +827,7 @@ Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-sem
 --- updated-dependencies: - dependency-name: amannn/action-semantic-pull-request dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -839,9 +842,7 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 Bumps [certifi](https://github.com/certifi/python-certifi) from 2024.2.2 to 2024.7.4. -
   [Commits](https://github.com/certifi/python-certifi/compare/2024.02.02...2024.07.04)
 
---- updated-dependencies: - dependency-name: certifi dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: certifi dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -858,16 +859,11 @@ Bumps [zipp](https://github.com/jaraco/zipp) from 3.18.1 to 3.19.1. - [Release
   [Changelog](https://github.com/jaraco/zipp/blob/main/NEWS.rst) -
   [Commits](https://github.com/jaraco/zipp/compare/v3.18.1...v3.19.1)
 
---- updated-dependencies: - dependency-name: zipp dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: zipp dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
-
-- **release**: V2.9.1 [skip ci]
-  ([`5ed7f07`](https://github.com/AI21Labs/ai21-python/commit/5ed7f07e677ce60eb960991f3c601869d4e2c68c))
 
 
 ## v2.9.0 (2024-07-07)
@@ -927,18 +923,13 @@ Bumps [actions/github-script](https://github.com/actions/github-script) from 6 t
 --- updated-dependencies: - dependency-name: actions/github-script dependency-type:
   direct:production
 
-update-type: version-update:semver-major
-
-...
+update-type: version-update:semver-major ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.9.0 [skip ci]
-  ([`f4b4d36`](https://github.com/AI21Labs/ai21-python/commit/f4b4d362b77ab94c970ae623f7f9185b94718181))
 
 ### Continuous Integration
 
@@ -1025,9 +1016,7 @@ Bumps [authlib](https://github.com/lepture/authlib) from 1.3.0 to 1.3.1. - [Rele
   [Changelog](https://github.com/lepture/authlib/blob/master/docs/changelog.rst) -
   [Commits](https://github.com/lepture/authlib/compare/v1.3.0...v1.3.1)
 
---- updated-dependencies: - dependency-name: authlib dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: authlib dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1044,7 +1033,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
+update-type: version-update:semver-minor ...
 
 * chore: rebase code
 
@@ -1144,9 +1133,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1163,18 +1150,13 @@ Bumps [urllib3](https://github.com/urllib3/urllib3) from 1.26.18 to 1.26.19. - [
   [Changelog](https://github.com/urllib3/urllib3/blob/1.26.19/CHANGES.rst) -
   [Commits](https://github.com/urllib3/urllib3/compare/1.26.18...1.26.19)
 
---- updated-dependencies: - dependency-name: urllib3 dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: urllib3 dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.8.0 [skip ci]
-  ([`c5087cf`](https://github.com/AI21Labs/ai21-python/commit/c5087cf6f20accdeba57d7630e1cd780de36e435))
 
 ### Continuous Integration
 
@@ -1242,9 +1224,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1261,18 +1241,13 @@ Bumps [authlib](https://github.com/lepture/authlib) from 1.3.0 to 1.3.1. - [Rele
   [Changelog](https://github.com/lepture/authlib/blob/master/docs/changelog.rst) -
   [Commits](https://github.com/lepture/authlib/compare/v1.3.0...v1.3.1)
 
---- updated-dependencies: - dependency-name: authlib dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: authlib dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.7.0 [skip ci]
-  ([`054459e`](https://github.com/AI21Labs/ai21-python/commit/054459e1289efb1a82a81a37038c7ca32279f5ed))
 
 ### Continuous Integration
 
@@ -1352,11 +1327,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 ## v2.6.0 (2024-06-13)
 
-### Chores
-
-- **release**: V2.6.0 [skip ci]
-  ([`3a6de49`](https://github.com/AI21Labs/ai21-python/commit/3a6de495aa88dc98577b8b27fff94cb88d7662ba))
-
 ### Features
 
 - Azure Client Support ([#135](https://github.com/AI21Labs/ai21-python/pull/135),
@@ -1369,11 +1339,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 - Camel case ([#136](https://github.com/AI21Labs/ai21-python/pull/136),
   [`e2b8466`](https://github.com/AI21Labs/ai21-python/commit/e2b846666bf5b2b8617cc26214fa5f36d65f5e35))
-
-### Chores
-
-- **release**: V2.5.2 [skip ci]
-  ([`3eae31e`](https://github.com/AI21Labs/ai21-python/commit/3eae31e1f82cec6bcf208d1ed614daa0fd6ddad1))
 
 
 ## v2.5.1 (2024-06-13)
@@ -1393,11 +1358,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 * fix: Moved to external function
 
-### Chores
-
-- **release**: V2.5.1 [skip ci]
-  ([`e2a43b8`](https://github.com/AI21Labs/ai21-python/commit/e2a43b82cf891d8858d8927be77e696ff9ace4b3))
-
 
 ## v2.5.0 (2024-06-10)
 
@@ -1409,11 +1369,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 * fix: Support base urls
 
 * fix: tests
-
-### Chores
-
-- **release**: V2.5.0 [skip ci]
-  ([`f829c8f`](https://github.com/AI21Labs/ai21-python/commit/f829c8fc5430d65e771931c8c1f0af09bd75f94e))
 
 ### Features
 
@@ -1474,11 +1429,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 - Parameters ([#130](https://github.com/AI21Labs/ai21-python/pull/130),
   [`dfcc567`](https://github.com/AI21Labs/ai21-python/commit/dfcc5675dc22fc3aafe7624b7e8ebd8cbd021146))
 
-### Chores
-
-- **release**: V2.4.2 [skip ci]
-  ([`15109d6`](https://github.com/AI21Labs/ai21-python/commit/15109d6d1747c939612fa1a546818d011283e6ea))
-
 
 ## v2.4.1 (2024-06-03)
 
@@ -1504,18 +1454,13 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.4.1 [skip ci]
-  ([`f708889`](https://github.com/AI21Labs/ai21-python/commit/f708889469a022a26df4dcd2dc29636cebc5f581))
 
 ### Continuous Integration
 
@@ -1533,11 +1478,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 feat: adding new field: order to library-search api response
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-### Chores
-
-- **release**: V2.4.0 [skip ci]
-  ([`b4062d2`](https://github.com/AI21Labs/ai21-python/commit/b4062d250f04b89b0f9ddd6762d61dd1363f0dc5))
 
 ### Features
 
@@ -1562,18 +1502,13 @@ Bumps [idna](https://github.com/kjd/idna) from 3.6 to 3.7. - [Release
   [Changelog](https://github.com/kjd/idna/blob/master/HISTORY.rst) -
   [Commits](https://github.com/kjd/idna/compare/v3.6...v3.7)
 
---- updated-dependencies: - dependency-name: idna dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: idna dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.3.1 [skip ci]
-  ([`b6d3186`](https://github.com/AI21Labs/ai21-python/commit/b6d3186a3854a2f04366558f17f5b2d81cd88fdc))
 
 ### Documentation
 
@@ -1613,9 +1548,7 @@ Bumps [amannn/action-semantic-pull-request](https://github.com/amannn/action-sem
 --- updated-dependencies: - dependency-name: amannn/action-semantic-pull-request dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1638,18 +1571,13 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
-
-- **release**: V2.3.0 [skip ci]
-  ([`d2d416a`](https://github.com/AI21Labs/ai21-python/commit/d2d416aaaf018c9905ad947fe70e30dfd951b5e6))
 
 ### Features
 
@@ -1741,11 +1669,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 * fix: upgrade deps in general
 
-### Chores
-
-- **release**: V2.2.5 [skip ci]
-  ([`6d1502f`](https://github.com/AI21Labs/ai21-python/commit/6d1502f75457906f156503d9bbd63daf87665e54))
-
 
 ## v2.2.4 (2024-05-09)
 
@@ -1757,11 +1680,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 * feat: pass kwargs to endpoints
 
 * fix: test when passing kwargs
-
-### Chores
-
-- **release**: V2.2.4 [skip ci]
-  ([`aa2e8e2`](https://github.com/AI21Labs/ai21-python/commit/aa2e8e2fc4ca28728ed3f6b59abcbce398a04228))
 
 
 ## v2.2.3 (2024-04-25)
@@ -1775,11 +1693,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 
 * fix: Added 408 for retries
 
-### Chores
-
-- **release**: V2.2.3 [skip ci]
-  ([`58c0166`](https://github.com/AI21Labs/ai21-python/commit/58c01660400fe54c0034447e903a843bc92ffcd5))
-
 
 ## v2.2.2 (2024-04-24)
 
@@ -1788,11 +1701,6 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 - Added raise error on wrong use of chat message
   ([#102](https://github.com/AI21Labs/ai21-python/pull/102),
   [`4efbea6`](https://github.com/AI21Labs/ai21-python/commit/4efbea6d85cd70f77650e4c4d96a3395eb60517b))
-
-### Chores
-
-- **release**: V2.2.2 [skip ci]
-  ([`f3daeba`](https://github.com/AI21Labs/ai21-python/commit/f3daebaeafd168090c7a9b06485c49ebfe4f1b87))
 
 
 ## v2.2.1 (2024-04-22)
@@ -1816,16 +1724,8 @@ Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.co
 - Update chat example ([#95](https://github.com/AI21Labs/ai21-python/pull/95),
   [`7dd83b1`](https://github.com/AI21Labs/ai21-python/commit/7dd83b184a21fe3d94a8a8b90f9bfe04c6e30e2e))
 
-- **release**: V2.2.1 [skip ci]
-  ([`4fbfe00`](https://github.com/AI21Labs/ai21-python/commit/4fbfe0002bdf1e28bdfc611f1e9b9b99012f77c7))
-
 
 ## v2.2.0 (2024-04-10)
-
-### Chores
-
-- **release**: V2.2.0 [skip ci]
-  ([`52a0fa3`](https://github.com/AI21Labs/ai21-python/commit/52a0fa3fe71f9491c89b12f183758eb9491a929d))
 
 ### Features
 
@@ -1859,9 +1759,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1884,9 +1782,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-major
-
-...
+update-type: version-update:semver-major ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1909,9 +1805,7 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-patch
-
-...
+update-type: version-update:semver-patch ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1928,9 +1822,7 @@ Bumps [black](https://github.com/psf/black) from 22.12.0 to 24.3.0. - [Release
   [Changelog](https://github.com/psf/black/blob/main/CHANGES.md) -
   [Commits](https://github.com/psf/black/compare/22.12.0...24.3.0)
 
---- updated-dependencies: - dependency-name: black dependency-type: direct:development
-
-...
+--- updated-dependencies: - dependency-name: black dependency-type: direct:development ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -1943,9 +1835,6 @@ Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.c
 Co-authored-by: Asaf Gardin <147075902+asafgardin@users.noreply.github.com>
 
 Co-authored-by: Asaf Gardin <asafg@ai21.com>
-
-- **release**: V2.1.3 [skip ci]
-  ([`a2b783c`](https://github.com/AI21Labs/ai21-python/commit/a2b783c6e1d7a095f69fc6cc3be86460e12949af))
 
 ### Testing
 
@@ -1968,11 +1857,6 @@ Co-authored-by: Asaf Gardin <asafg@ai21.com>
 
 - Added future type annotation to sagemaker ([#74](https://github.com/AI21Labs/ai21-python/pull/74),
   [`f561dd8`](https://github.com/AI21Labs/ai21-python/commit/f561dd8ce2a2bd4e532f46fe96211486f9b8cc39))
-
-### Chores
-
-- **release**: V2.1.2 [skip ci]
-  ([`9551776`](https://github.com/AI21Labs/ai21-python/commit/9551776a9f6c4c3a1671e308dad37a900e786b0f))
 
 
 ## v2.1.1 (2024-02-25)
@@ -1998,11 +1882,6 @@ Co-authored-by: Asaf Gardin <asafg@ai21.com>
 
 * fix: update code with new not_giving approach
 
-### Chores
-
-- **release**: V2.1.1 [skip ci]
-  ([`69dc136`](https://github.com/AI21Labs/ai21-python/commit/69dc1361e47cdc60dde3c366dffe89b364fdce26))
-
 
 ## v2.1.0 (2024-02-25)
 
@@ -2025,11 +1904,6 @@ Co-authored-by: Asaf Gardin <asafg@ai21.com>
 * fix: bedrock example
 
 * refactor: rename test params
-
-### Chores
-
-- **release**: V2.1.0 [skip ci]
-  ([`5e9a768`](https://github.com/AI21Labs/ai21-python/commit/5e9a7681e4ab1ffcdcff1c07e0cb94452eb2632c))
 
 ### Features
 
@@ -2076,11 +1950,6 @@ Co-authored-by: Asaf Gardin <asafg@ai21.com>
 
 Co-authored-by: etang <etang@ai21.com>
 
-### Chores
-
-- **release**: V2.0.5 [skip ci]
-  ([`8965828`](https://github.com/AI21Labs/ai21-python/commit/896582839dd298121210187572adc178351f8d58))
-
 
 ## v2.0.4 (2024-02-18)
 
@@ -2101,11 +1970,6 @@ Co-authored-by: etang <etang@ai21.com>
 
 * test: Fixed test
 
-### Chores
-
-- **release**: V2.0.4 [skip ci]
-  ([`8b0f217`](https://github.com/AI21Labs/ai21-python/commit/8b0f217dd14aa820b5e404ed564e099d214d882f))
-
 ### Documentation
 
 - Fix error handling example ([#63](https://github.com/AI21Labs/ai21-python/pull/63),
@@ -2118,11 +1982,6 @@ Co-authored-by: etang <etang@ai21.com>
 
 - Skip passing API key to ARN endpoint ([#60](https://github.com/AI21Labs/ai21-python/pull/60),
   [`8fd72f0`](https://github.com/AI21Labs/ai21-python/commit/8fd72f0ebe23bc23244e8453744b46bd093bccb3))
-
-### Chores
-
-- **release**: V2.0.3 [skip ci]
-  ([`d0ccc5d`](https://github.com/AI21Labs/ai21-python/commit/d0ccc5d9f3a14a61fca788496afc65e02d9dca4f))
 
 ### Documentation
 
@@ -2164,18 +2023,13 @@ Bumps
 --- updated-dependencies: - dependency-name: python-semantic-release/python-semantic-release
   dependency-type: direct:production
 
-update-type: version-update:semver-minor
-
-...
+update-type: version-update:semver-minor ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
 Co-authored-by: dependabot[bot] <49699333+dependabot[bot]@users.noreply.github.com>
 
 Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
-
-- **release**: V2.0.2 [skip ci]
-  ([`2db1816`](https://github.com/AI21Labs/ai21-python/commit/2db1816a152a20d18cbd397183512f479d4fec90))
 
 
 ## v2.0.1 (2024-02-01)
@@ -2184,11 +2038,6 @@ Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 - Added badges ([#55](https://github.com/AI21Labs/ai21-python/pull/55),
   [`96d716d`](https://github.com/AI21Labs/ai21-python/commit/96d716de7a49868c20461bc2dc34c142da36070b))
-
-### Chores
-
-- **release**: V2.0.1 [skip ci]
-  ([`2af2f2b`](https://github.com/AI21Labs/ai21-python/commit/2af2f2b3153a486a8df33b4266f54cf28f0da049))
 
 ### Documentation
 
@@ -2202,11 +2051,6 @@ Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 ## v2.0.0 (2024-01-31)
 
-### Chores
-
-- **release**: V2.0.0 [skip ci]
-  ([`2a65f23`](https://github.com/AI21Labs/ai21-python/commit/2a65f23b487d7d64c09ea69f87daf1cd80a42146))
-
 ### Features
 
 - Bump version ([#53](https://github.com/AI21Labs/ai21-python/pull/53),
@@ -2214,20 +2058,12 @@ Co-authored-by: asafgardin <147075902+asafgardin@users.noreply.github.com>
 
 BREAKING CHANGE: 2.0.0 to SDK
 
-### BREAKING CHANGES
+### Breaking Changes
 
 - 2.0.0 to SDK
 
 
 ## v1.0.0 (2024-01-31)
-
-### Chores
-
-- **release**: V1.0.0 [skip ci]
-  ([`34efede`](https://github.com/AI21Labs/ai21-python/commit/34efedeb9a181bce86f8cbf0458dcd6b54538415))
-
-- **release**: V1.0.0 [skip ci]
-  ([`66a0086`](https://github.com/AI21Labs/ai21-python/commit/66a008632304265914acb25a6eb8c6dfd8476911))
 
 ### Features
 
@@ -2482,9 +2318,7 @@ Bumps [jinja2](https://github.com/pallets/jinja) from 3.1.2 to 3.1.3. - [Release
   [Changelog](https://github.com/pallets/jinja/blob/main/CHANGES.rst) -
   [Commits](https://github.com/pallets/jinja/compare/3.1.2...3.1.3)
 
---- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect
-
-...
+--- updated-dependencies: - dependency-name: jinja2 dependency-type: indirect ...
 
 Signed-off-by: dependabot[bot] <support@github.com>
 
@@ -2499,7 +2333,7 @@ Bumps [gitpython](https://github.com/gitpython-developers/GitPython) from 3.1.40
   [Changelog](https://github.com/gitpython-developers/GitPython/blob/main/CHANGES) -
   [Commits](https://github.com/gitpython-developers/GitPython/compare/3.1.40...3.1.41)
 
---- updated-dependencies: - dependency-name: gitpython dependency-type: indirect
+--- updated-dependencies: - dependency-name: gitpython dependency-type: indirect ...
 
 * chore(deps): bump actions/upload-artifact from 3 to 4 (#21)
 
@@ -2510,7 +2344,7 @@ Bumps [actions/upload-artifact](https://github.com/actions/upload-artifact) from
 --- updated-dependencies: - dependency-name: actions/upload-artifact dependency-type:
   direct:production
 
-update-type: version-update:semver-major
+update-type: version-update:semver-major ...
 
 * chore(deps): bump pypa/gh-action-pypi-publish from 1.4.2 to 1.8.11 (#20)
 
@@ -2521,7 +2355,7 @@ Bumps [pypa/gh-action-pypi-publish](https://github.com/pypa/gh-action-pypi-publi
 --- updated-dependencies: - dependency-name: pypa/gh-action-pypi-publish dependency-type:
   direct:production
 
-update-type: version-update:semver-minor
+update-type: version-update:semver-minor ...
 
 * chore(deps): bump actions/setup-python from 4 to 5 (#19)
 
@@ -2578,18 +2412,8 @@ Co-authored-by: etang <etang@ai21.com>
 
 * fix: version name
 
-### Chores
-
-- **release**: V2.0.0-rc.3 [skip ci]
-  ([`0a9ace7`](https://github.com/AI21Labs/ai21-python/commit/0a9ace7dd8b59eb51b6dcb4e4a1118aaa012b454))
-
 
 ## v2.0.0-rc.2 (2023-12-18)
-
-### Chores
-
-- **release**: V2.0.0-rc.2 [skip ci]
-  ([`5b83506`](https://github.com/AI21Labs/ai21-python/commit/5b835060bc223bfec907624b2d717418ab51309e))
 
 ### Features
 
@@ -2602,11 +2426,6 @@ Co-authored-by: etang <etang@ai21.com>
 
 
 ## v1.0.0-rc.2 (2023-12-18)
-
-### Chores
-
-- **release**: V1.0.0-rc.2 [skip ci]
-  ([`ea8b6a9`](https://github.com/AI21Labs/ai21-python/commit/ea8b6a90e21f9a287a026b438ba5a5eb4eacdaa3))
 
 ### Features
 
@@ -2627,35 +2446,6 @@ Co-authored-by: etang <etang@ai21.com>
 
 - Test pypi params ([#8](https://github.com/AI21Labs/ai21-python/pull/8),
   [`ed8fa1f`](https://github.com/AI21Labs/ai21-python/commit/ed8fa1f7b52b0ab6f94ed9815adf0256152dd02e))
-
-### Chores
-
-- **release**: V0.1.0-rc.1 [skip ci]
-  ([`3d67c2c`](https://github.com/AI21Labs/ai21-python/commit/3d67c2c9165441c09ca9a75f79021f0dba8e9325))
-
-- **release**: V0.1.0-rc.2 [skip ci]
-  ([`46e8eae`](https://github.com/AI21Labs/ai21-python/commit/46e8eaebe8ccacafc6b90172b3c3e3da783c3d6f))
-
-- **release**: V0.1.0-rc.3 [skip ci]
-  ([`71ee300`](https://github.com/AI21Labs/ai21-python/commit/71ee3005b92b70e1655e26566d7454c79c5008f9))
-
-- **release**: V1.0.0-rc.1 [skip ci]
-  ([`65e09a4`](https://github.com/AI21Labs/ai21-python/commit/65e09a4146540c977c619348effcbeb443441a58))
-
-- **release**: V1.1.0-rc.1 [skip ci]
-  ([`de5b2b5`](https://github.com/AI21Labs/ai21-python/commit/de5b2b55c4fb0ba99b002ec7c75c34eb130a63c8))
-
-- **release**: V1.1.0-rc.2 [skip ci]
-  ([`d131bfc`](https://github.com/AI21Labs/ai21-python/commit/d131bfc603a3f3d1c2de32e9cd6c436169476db3))
-
-- **release**: V1.1.0-rc.3 [skip ci]
-  ([`25a4f85`](https://github.com/AI21Labs/ai21-python/commit/25a4f85a52ba024b1a44683f03ba395f8c7eb12d))
-
-- **release**: V1.1.0-rc.4 [skip ci]
-  ([`f696102`](https://github.com/AI21Labs/ai21-python/commit/f69610222200239ea8a7203d475780859c76bfab))
-
-- **release**: V1.10.0-rc.1 [skip ci]
-  ([`331d142`](https://github.com/AI21Labs/ai21-python/commit/331d142e8b07c9688ab42280659a57d38759b9e6))
 
 ### Continuous Integration
 
