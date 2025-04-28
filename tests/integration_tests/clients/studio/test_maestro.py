@@ -3,7 +3,6 @@ import pytest
 from ai21 import AsyncAI21Client
 
 
-@pytest.mark.skipif
 @pytest.mark.asyncio
 async def test_maestro__when_upload__should_return_data_sources(file_in_library: str):
     client = AsyncAI21Client()
