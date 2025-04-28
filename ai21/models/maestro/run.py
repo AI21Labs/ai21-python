@@ -1,5 +1,5 @@
-from typing import TypedDict, Literal, List, Optional, Any, Set, Dict, Type, Union
-
+from typing import Literal, List, Optional, Any, Set, Dict, Type, Union
+from typing_extensions import TypedDict
 from pydantic import BaseModel
 
 from ai21.models.ai21_base_model import AI21BaseModel
@@ -8,6 +8,7 @@ Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
+OutputOptions = Literal["data_sources"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
 PrimitiveLists = Type[List[PrimitiveTypes]]
 OutputType = Union[Type[BaseModel], PrimitiveTypes, Dict[str, Any]]
@@ -40,12 +41,32 @@ class ToolResources(TypedDict, total=False):
     web_search: Optional[WebSearchToolResource]
 
 
-class Requirement(TypedDict):
+class Requirement(TypedDict, total=False):
     name: str
     description: str
+
+
+class FileSearchResult(TypedDict, total=False):
+    text: Optional[str]
+    file_id: str
+    file_name: str
+    score: float
+    order: int
+
+
+class WebSearchResult(TypedDict, total=False):
+    text: str
+    url: str
+    score: float
+
+
+class DataSources(TypedDict, total=False):
+    file_search: Optional[List[FileSearchResult]]
+    web_search: Optional[List[WebSearchResult]]
 
 
 class RunResponse(AI21BaseModel):
     id: str
     status: RunStatus
     result: Any
+    data_sources: Optional[DataSources] = None

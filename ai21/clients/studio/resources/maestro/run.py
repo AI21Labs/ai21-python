@@ -16,6 +16,7 @@ from ai21.models.maestro.run import (
     DEFAULT_RUN_POLL_TIMEOUT,
     Requirement,
     Budget,
+    OutputOptions,
 )
 from ai21.types import NotGiven, NOT_GIVEN
 
@@ -31,6 +32,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
+        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -41,6 +43,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             context=context,
             requirements=requirements,
             budget=budget,
+            include=include,
             **kwargs,
         )
 
@@ -76,6 +79,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
+        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
@@ -88,6 +92,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             context=context,
             requirements=requirements,
             budget=budget,
+            include=include,
             **kwargs,
         )
 
@@ -105,6 +110,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
+        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -115,6 +121,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             context=context,
             requirements=requirements,
             budget=budget,
+            include=include,
             **kwargs,
         )
 
@@ -150,6 +157,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
+        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
@@ -162,6 +170,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             context=context,
             requirements=requirements,
             budget=budget,
+            include=include,
             **kwargs,
         )
 
