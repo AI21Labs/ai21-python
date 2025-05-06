@@ -1,2 +1,2 @@
 DEFAULT_API_VERSION = "v1"
-STUDIO_HOST = "https://api.ai21.com"
+STUDIO_HOST = "https://api.ai21.com/studio/v1"

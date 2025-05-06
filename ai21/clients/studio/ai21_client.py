@@ -3,7 +3,6 @@ from typing import Any, Dict, Optional
 import httpx
 
 from ai21.ai21_env_config import AI21EnvConfig, _AI21EnvConfig
-from ai21.clients.studio.client_url_parser import create_client_url
 from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_library import StudioLibrary
@@ -30,7 +29,7 @@ class AI21Client(AI21HTTPClient):
         env_config: _AI21EnvConfig = AI21EnvConfig,
         **kwargs,
     ):
-        base_url = create_client_url(api_host or env_config.api_host)
+        base_url = api_host or env_config.api_host
         super().__init__(
             api_key=api_key or env_config.api_key,
             base_url=base_url,
