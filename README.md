@@ -180,7 +180,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct",
+    model="jamba-large",
     max_tokens=100,
     temperature=0.7,
     top_p=1.0,
@@ -190,7 +190,7 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-Note that jamba-instruct supports async and streaming as well.
+Note that jamba-large supports async and streaming as well.
 
 </details>
 
@@ -212,7 +212,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct",
+    model="jamba-large",
     stream=True,
 )
 for chunk in response:
@@ -606,7 +606,7 @@ and `AsyncAI21AzureClient` clients.
 
 The following models are supported on Azure:
 
-- `jamba-instruct`
+- `jamba-large`
 
 ```python
 from ai21 import AI21AzureClient
@@ -647,7 +647,7 @@ messages = [
 
 async def main():
   response = await client.chat.completions.create(
-    model="jamba-instruct",
+    model="jamba-large",
     messages=messages,
   )
 
