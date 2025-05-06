@@ -11,9 +11,9 @@ def test_async_ai21_client__when_pass_api_host__should_leave_as_is():
 
 
 @pytest.mark.asyncio
-def test_async_ai21_client__when_not_pass_api_host__should_add_suffix():
+def test_async_ai21_client__when_not_pass_api_host__should_be_studio_host():
     client = AsyncAI21Client()
-    assert client._base_url == f"{AI21EnvConfig.api_host}/studio/v1"
+    assert client._base_url == AI21EnvConfig.api_host
 
 
 @pytest.mark.asyncio

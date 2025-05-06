@@ -7,9 +7,9 @@ def test_ai21_client__when_pass_api_host__should_leave_as_is():
     assert client._base_url == base_url
 
 
-def test_ai21_client__when_not_pass_api_host__should_add_suffix():
+def test_ai21_client__when_not_pass_api_host__should_be_studio_host():
     client = AI21Client()
-    assert client._base_url == f"{AI21EnvConfig.api_host}/studio/v1"
+    assert client._base_url == AI21EnvConfig.api_host
 
 
 def test_ai21_client__when_pass_ai21_with_suffix__should_not_modify():
