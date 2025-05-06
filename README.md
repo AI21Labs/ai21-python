@@ -376,7 +376,7 @@ $ export AI21_LOG_LEVEL=debug
 
 - `AI21_API_KEY` - Your API key. If not set, you must pass it to the client constructor.
 - `AI21_API_VERSION` - The API version. Defaults to `v1`.
-- `AI21_API_HOST` - The API host. Defaults to `https://api.ai21.com/v1/`.
+- `AI21_API_HOST` - The API host. Defaults to `https://api.ai21.com/studio/v1/`.
 - `AI21_TIMEOUT_SEC` - The timeout for API requests.
 - `AI21_NUM_RETRIES` - The maximum number of retries for API requests. Defaults to `3` retries.
 - `AI21_AWS_REGION` - The AWS region to use for AWS clients. Defaults to `us-east-1`.
