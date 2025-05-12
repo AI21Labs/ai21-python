@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import Any, List, Dict
+from typing import List
 
 from ai21.clients.common.maestro.run import BaseMaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
@@ -29,7 +29,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -40,7 +39,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             models=models,
             tools=tools,
             tool_resources=tool_resources,
-            context=context,
             requirements=requirements,
             budget=budget,
             include=include,
@@ -76,7 +74,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -89,7 +86,6 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             models=models,
             tools=tools,
             tool_resources=tool_resources,
-            context=context,
             requirements=requirements,
             budget=budget,
             include=include,
@@ -107,7 +103,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -118,7 +113,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             models=models,
             tools=tools,
             tool_resources=tool_resources,
-            context=context,
             requirements=requirements,
             budget=budget,
             include=include,
@@ -154,7 +148,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -167,7 +160,6 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             models=models,
             tools=tools,
             tool_resources=tool_resources,
-            context=context,
             requirements=requirements,
             budget=budget,
             include=include,
