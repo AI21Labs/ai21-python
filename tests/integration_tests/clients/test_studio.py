@@ -21,7 +21,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     argvalues=[
         ("tokenization.py",),
         ("chat/chat_completions.py",),
-        ("chat/chat_completions_jamba_instruct.py",),
         ("chat/stream_chat_completions.py",),
         ("chat/chat_documents.py",),
         ("chat/chat_function_calling.py",),
@@ -31,7 +30,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
     ids=[
         "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
-        "when_chat_completions_jamba_instruct__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_chat_completions_with_documents__should_return_ok",
         "when_chat_completions_with_function_calling__should_return_ok",

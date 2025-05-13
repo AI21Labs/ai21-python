@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any
+from typing import List
 
 from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
@@ -28,7 +28,6 @@ class BaseMaestroRun(ABC):
         models: List[str] | NotGiven,
         tools: List[Tool] | NotGiven,
         tool_resources: ToolResources | NotGiven,
-        context: Dict[str, Any] | NotGiven,
         requirements: List[Requirement] | NotGiven,
         budget: Budget | NotGiven,
         include: List[OutputOptions] | NotGiven,
@@ -40,7 +39,6 @@ class BaseMaestroRun(ABC):
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
-                "context": context,
                 "requirements": requirements,
                 "budget": budget,
                 "include": include,
@@ -56,7 +54,6 @@ class BaseMaestroRun(ABC):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -80,7 +77,6 @@ class BaseMaestroRun(ABC):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        context: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
