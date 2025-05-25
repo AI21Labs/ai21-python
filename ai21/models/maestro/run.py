@@ -44,7 +44,7 @@ class ToolResources(TypedDict, total=False):
 class Requirement(TypedDict, total=False):
     name: str
     description: str
-    is_mandatory: Optional[bool] = False
+    is_mandatory: bool = False
 
 
 class RequirementResultItem(Requirement, total=False):
@@ -55,7 +55,7 @@ class RequirementResultItem(Requirement, total=False):
 class RequirementsResult(TypedDict, total=False):
     score: float
     finish_reason: str
-    requirements: list[RequirementResultItem]
+    requirements: List[RequirementResultItem]
 
 
 class FileSearchResult(TypedDict, total=False):
