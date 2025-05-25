@@ -1,6 +1,56 @@
 # CHANGELOG
 
 
+## v3.3.0 (2025-05-25)
+
+### Bug Fixes
+
+- Remove optional `context` parameter from maestro requests
+  ([#288](https://github.com/AI21Labs/ai21-python/pull/288),
+  [`8fbfc9d`](https://github.com/AI21Labs/ai21-python/commit/8fbfc9daa9d856ca7b367bd502b20661aadfc493))
+
+* fix: remove optional parameter from maestro requests
+
+* fix: remove jamba instruct tests
+
+### Documentation
+
+- Update README.md ([#287](https://github.com/AI21Labs/ai21-python/pull/287),
+  [`c0939c4`](https://github.com/AI21Labs/ai21-python/commit/c0939c4fdab19e66526144f2630f534bf7c284bc))
+
+### Features
+
+- :sparkles: Enhance Requirement and Output Options in Maestro
+  ([#289](https://github.com/AI21Labs/ai21-python/pull/289),
+  [`329379f`](https://github.com/AI21Labs/ai21-python/commit/329379ff9f295f0d1f05a962ea19868b490a7544))
+
+* feat: :sparkles: Enhance Requirement and Output Options in Maestro
+
+* chore: :wrench: Include Requirements Result in Maestro Async and Sync Runs examples
+
+* fix: :label: requirements typings
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+- Added launchpad client ([#285](https://github.com/AI21Labs/ai21-python/pull/285),
+  [`08a5b41`](https://github.com/AI21Labs/ai21-python/commit/08a5b4103de9cf61e337b6eb7c9a531c7420894d))
+
+* feat: Added launchpad client
+
+* test: Added imports to test
+
+### Refactoring
+
+- Remove client url creation ([#286](https://github.com/AI21Labs/ai21-python/pull/286),
+  [`05b2e0d`](https://github.com/AI21Labs/ai21-python/commit/05b2e0d9dd792713963891b9c508813217bfce2a))
+
+* refactor: Remove client url creation
+
+* fix: tests
+
+
 ## v3.2.0 (2025-04-28)
 
 ### Bug Fixes
