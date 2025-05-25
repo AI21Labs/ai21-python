@@ -8,7 +8,7 @@ Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 ToolType = Literal["file_search", "web_search"]
-OutputOptions = Literal["data_sources"]
+OutputOptions = Literal["data_sources", "requirements_result"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
 PrimitiveLists = Type[List[PrimitiveTypes]]
 OutputType = Union[Type[BaseModel], PrimitiveTypes, Dict[str, Any]]
@@ -44,6 +44,18 @@ class ToolResources(TypedDict, total=False):
 class Requirement(TypedDict, total=False):
     name: str
     description: str
+    is_mandatory: bool = False
+
+
+class RequirementResultItem(Requirement, total=False):
+    score: float
+    reason: Optional[str] = None
+
+
+class RequirementsResult(TypedDict, total=False):
+    score: float
+    finish_reason: str
+    requirements: List[RequirementResultItem]
 
 
 class FileSearchResult(TypedDict, total=False):
@@ -70,3 +82,4 @@ class RunResponse(AI21BaseModel):
     status: RunStatus
     result: Any
     data_sources: Optional[DataSources] = None
+    requirements_result: Optional[RequirementsResult] = None

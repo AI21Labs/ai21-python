@@ -18,6 +18,7 @@ async def main():
                 "description": "The poem should rhyme",
             },
         ],
+        include=["requirements_result"],
     )
 
     print(run_result)
