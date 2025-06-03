@@ -53,7 +53,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     ) -> RunResponse:
         return self._get(path=f"/{self._module_name}/{run_id}", response_cls=RunResponse)
 
-    def _poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
+    def poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
         start_time = time.time()
 
         while True:
@@ -92,7 +92,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             **kwargs,
         )
 
-        return self._poll_for_status(run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec)
+        return self.poll_for_status(run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec)
 
 
 class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
@@ -127,7 +127,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     ) -> RunResponse:
         return await self._get(path=f"/{self._module_name}/{run_id}", response_cls=RunResponse)
 
-    async def _poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
+    async def poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
         start_time = time.time()
 
         while True:
@@ -166,6 +166,4 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             **kwargs,
         )
 
-        return await self._poll_for_status(
-            run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec
-        )
+        return await self.poll_for_status(run_id=run.id, poll_interval=poll_interval_sec, poll_timeout=poll_timeout_sec)

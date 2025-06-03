@@ -66,7 +66,7 @@ class BaseMaestroRun(ABC):
         pass
 
     @abstractmethod
-    def _poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
+    def poll_for_status(self, *, run_id: str, poll_interval: float, poll_timeout: float) -> RunResponse:
         pass
 
     @abstractmethod
