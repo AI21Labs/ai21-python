@@ -1,6 +1,40 @@
 # CHANGELOG
 
 
+## v4.0.0 (2025-06-11)
+
+### Bug Fixes
+
+- Incomplete URL logging on exception ([#211](https://github.com/AI21Labs/ai21-python/pull/211),
+  [`fd422a5`](https://github.com/AI21Labs/ai21-python/commit/fd422a5aa45c91622c7739a06bc5adee077209a7))
+
+* fix: Incomplete URL logging on exception
+
+* fix: tests
+
+- ♻️ expose poll_for_status function ([#291](https://github.com/AI21Labs/ai21-python/pull/291),
+  [`81f4209`](https://github.com/AI21Labs/ai21-python/commit/81f4209aaf14babe8086f321ef60b5e850ad0791))
+
+* fix: :recycle: expose `poll_for_status` function
+
+* refactor: :recycle: update `poll_for_status` method parameters to use consistent naming convention
+
+* chore: :wrench: update CI configuration to use ubuntu-latest
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+### Refactoring
+
+- Removed ai21-tokenizer dependency ([#294](https://github.com/AI21Labs/ai21-python/pull/294),
+  [`1c80f12`](https://github.com/AI21Labs/ai21-python/commit/1c80f12d77330ac328a40091706446e1e4944955))
+
+* refactor: Removed ai21-tokenizer dependency
+
+* fix: Removed unused test
+
+
 ## v3.3.0 (2025-05-25)
 
 ### Bug Fixes
