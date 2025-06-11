@@ -7,15 +7,12 @@ from ai21.clients.studio.resources.beta.beta import Beta
 from ai21.clients.studio.resources.studio_chat import StudioChat
 from ai21.clients.studio.resources.studio_library import StudioLibrary
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.tokenizers.ai21_tokenizer import AI21Tokenizer
 
 
 class AI21Client(AI21HTTPClient):
     """
     This class would be sending requests to our REST API using http requests
     """
-
-    _tokenizer: Optional[AI21Tokenizer]
 
     def __init__(
         self,

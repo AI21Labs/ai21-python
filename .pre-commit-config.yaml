@@ -8,7 +8,6 @@ repos:
     rev: v4.4.0
     hooks:
       - id: check-added-large-files
-        exclude: (ai21_tokenizer/resources|tests/resources)
       - id: check-case-conflict
       - id: check-executables-have-shebangs
       - id: check-shebang-scripts-are-executable
