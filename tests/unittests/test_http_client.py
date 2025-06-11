@@ -1,13 +1,12 @@
-import pytest
 from unittest.mock import Mock
-from urllib.request import Request
 
 import httpx
+import pytest
 
 from ai21.errors import ServiceUnavailable, Unauthorized
+from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.base_http_client import RETRY_ERROR_CODES
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 
 _METHOD = "GET"
 _URL = "http://test_url"
@@ -15,7 +14,7 @@ _API_KEY = "fake-key"
 
 
 def test__execute_http_request__when_retry_error_code_once__should_retry_and_succeed(mock_httpx_client: Mock) -> None:
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     retries = 3
     mock_httpx_client.send.side_effect = [
         httpx.Response(status_code=429, request=request),
@@ -28,7 +27,7 @@ def test__execute_http_request__when_retry_error_code_once__should_retry_and_suc
 
 
 def test__execute_http_request__when_retry_error__should_retry_and_stop(mock_httpx_client: Mock) -> None:
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     retries = len(RETRY_ERROR_CODES)
 
     mock_httpx_client.send.side_effect = [
@@ -44,7 +43,7 @@ def test__execute_http_request__when_retry_error__should_retry_and_stop(mock_htt
 
 def test__execute_http_request__when_streaming__should_handle_non_200_response_code(mock_httpx_client: Mock) -> None:
     error_details = "test_error"
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     response = httpx.Response(status_code=401, request=request, text=error_details)
     mock_httpx_client.send.return_value = response
 
@@ -57,7 +56,7 @@ def test__execute_http_request__when_streaming__should_handle_non_200_response_c
 async def test__execute_async_http_request__when_retry_error_code_once__should_retry_and_succeed(
     mock_httpx_async_client: Mock,
 ) -> None:
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     retries = 3
     mock_httpx_async_client.send.side_effect = [
         httpx.Response(status_code=429, request=request),
@@ -73,7 +72,7 @@ async def test__execute_async_http_request__when_retry_error_code_once__should_r
 async def test__execute_async_http_request__when_retry_error__should_retry_and_stop(
     mock_httpx_async_client: Mock,
 ) -> None:
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     retries = len(RETRY_ERROR_CODES)
 
     mock_httpx_async_client.send.side_effect = [
@@ -92,7 +91,7 @@ async def test__execute_async_http_request__when_streaming__should_handle_non_20
     mock_httpx_async_client: Mock,
 ) -> None:
     error_details = "test_error"
-    request = Request(method=_METHOD, url=_URL)
+    request = httpx.Request(method=_METHOD, url=_URL)
     response = httpx.Response(status_code=401, request=request, text=error_details)
     mock_httpx_async_client.send.return_value = response
 
