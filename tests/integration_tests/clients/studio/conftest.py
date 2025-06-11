@@ -20,7 +20,7 @@ def _wait_for_file_to_process(client: AI21Client, file_id: str, timeout: float =
             return
 
         elapsed_time = time.time() - start_time
-        time.sleep(0.5)
+        time.sleep(2)
 
     raise TimeoutError(f"Timeout: {timeout} seconds passed. File processing not completed")
 

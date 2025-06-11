@@ -1,23 +1,13 @@
-from typing import Dict, Any
+from typing import Any, Dict
 
 import pytest
 
 from ai21.models import Penalty
-from ai21.models._pydantic_compatibility import _to_dict, _from_dict
+from ai21.models._pydantic_compatibility import _from_dict, _to_dict
 from ai21.models.ai21_base_model import IS_PYDANTIC_V2, AI21BaseModel
 from tests.unittests.models.response_mocks import (
-    get_answer_response__answer_in_context_not_none,
-    get_answer_response__answer_in_context_is_none,
-    get_chat_response,
     get_chat_completions_response,
-    get_completions_response,
-    get_embed_response,
-    get_gec_response,
-    get_improvements_response,
-    get_paraphrase_response,
-    get_segmentation_response,
-    get_summarize_response,
-    get_summarize_by_segment_response,
+    get_chat_response,
 )
 
 
@@ -50,18 +40,8 @@ def test_penalty__from_json__should_return_instance_with_given_values():
 
 @pytest.mark.parametrize(
     ids=[
-        "answer_response__answer_in_context",
-        "answer_response__answer_not_in_context",
         "chat_response",
         "chat_completions_response",
-        "completion_response",
-        "embed_response",
-        "gec_response",
-        "improvements_response",
-        "paraphrase_response",
-        "segmentation_response",
-        "summarization_response",
-        "summarize_by_segment_response",
     ],
     argnames=[
         "response_obj",
@@ -69,18 +49,8 @@ def test_penalty__from_json__should_return_instance_with_given_values():
         "response_cls",
     ],
     argvalues=[
-        (get_answer_response__answer_in_context_not_none()),
-        (get_answer_response__answer_in_context_is_none()),
         (get_chat_response()),
         (get_chat_completions_response()),
-        (get_completions_response()),
-        (get_embed_response()),
-        (get_gec_response()),
-        (get_improvements_response()),
-        (get_paraphrase_response()),
-        (get_segmentation_response()),
-        (get_summarize_response()),
-        (get_summarize_by_segment_response()),
     ],
 )
 def test_to_dict__should_serialize_to_dict__(
@@ -92,18 +62,8 @@ def test_to_dict__should_serialize_to_dict__(
 
 @pytest.mark.parametrize(
     ids=[
-        "answer_response__answer_in_context_not_none",
-        "answer_response__answer_in_context_is_none",
         "chat_response",
         "chat_completions_response",
-        "completion_response",
-        "embed_response",
-        "gec_response",
-        "improvements_response",
-        "paraphrase_response",
-        "segmentation_response",
-        "summarization_response",
-        "summarize_by_segment_response",
     ],
     argnames=[
         "response_obj",
@@ -111,18 +71,8 @@ def test_to_dict__should_serialize_to_dict__(
         "response_cls",
     ],
     argvalues=[
-        (get_answer_response__answer_in_context_not_none()),
-        (get_answer_response__answer_in_context_is_none()),
         (get_chat_response()),
         (get_chat_completions_response()),
-        (get_completions_response()),
-        (get_embed_response()),
-        (get_gec_response()),
-        (get_improvements_response()),
-        (get_paraphrase_response()),
-        (get_segmentation_response()),
-        (get_summarize_response()),
-        (get_summarize_by_segment_response()),
     ],
 )
 def test_from_dict__should_serialize_from_dict__(

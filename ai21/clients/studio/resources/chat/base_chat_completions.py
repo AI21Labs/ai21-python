@@ -1,37 +1,41 @@
 from __future__ import annotations
 
 import warnings
-from abc import ABC
-from typing import List, Optional, Union, Any, Dict, Literal
 
+from abc import ABC
+from typing import Any, Dict, List, Literal, Optional, Union
+
+from ai21.models._pydantic_compatibility import _to_dict
 from ai21.models.chat.chat_message import ChatMessageParam
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.response_format import ResponseFormat
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.types import NotGiven
 from ai21.utils.typing import remove_not_given
-from ai21.models._pydantic_compatibility import _to_dict
+
+
+_MODEL_DEPRECATION_WARNING = """
+The 'jamba-1.5-mini' and 'jamba-1.5-large' models are deprecated and will
+be removed in a future version.
+Please use jamba-mini-1.6-2025-03 or jamba-large-1.6-2025-03 instead.
+"""
 
 
 class BaseChatCompletions(ABC):
     _module_name = "chat/completions"
 
-    def _get_model(self, model: Optional[str], model_id: Optional[str]) -> str:
-        if model_id is not None:
-            warnings.warn(
-                "The 'model_id' parameter is deprecated and will be removed in a future version."
-                " Please use 'model' instead.",
-                DeprecationWarning,
-                stacklevel=2,
-            )
-
-        if model_id and model:
-            raise ValueError("Please provide only 'model' as 'model_id' is deprecated.")
-
-        if not model and not model_id:
+    def _check_model(self, model: Optional[str]) -> str:
+        if not model:
             raise ValueError("model should be provided 'create' method call")
 
-        return model or model_id
+        if model in ["jamba-1.5-mini", "jamba-1.5-large"]:
+            warnings.warn(
+                _MODEL_DEPRECATION_WARNING,
+                DeprecationWarning,
+                stacklevel=3,
+            )
+
+        return model
 
     def _create_body(
         self,

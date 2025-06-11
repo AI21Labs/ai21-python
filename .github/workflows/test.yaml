@@ -18,16 +18,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Poetry
         run: |
-          pipx install poetry
+          pipx install poetry==1.8
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
           cache-dependency-path: poetry.lock
-      - name: Set Poetry environment
+      - name: Set Poetry environment and clear cache
         run: |
           poetry env use ${{ matrix.python-version }}
+          poetry cache clear --all pypi
       - name: Install dependencies
         run: |
           poetry install --no-root --only dev --all-extras
@@ -51,16 +52,17 @@ jobs:
         uses: actions/checkout@v3
       - name: Install Poetry
         run: |
-          pipx install poetry
+          pipx install poetry==1.8
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
           python-version: ${{ matrix.python-version }}
           cache: poetry
           cache-dependency-path: poetry.lock
-      - name: Set Poetry environment
+      - name: Set Poetry environment and clear cache
         run: |
           poetry env use ${{ matrix.python-version }}
+          poetry cache clear --all pypi
       - name: Override Pydantic version
         run: |
           if [[ "${{ matrix.pydantic-version }}" == ^1.* ]]; then

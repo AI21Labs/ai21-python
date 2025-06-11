@@ -1,18 +1,21 @@
 import uuid
+
 from unittest.mock import AsyncMock
 
 import httpx
 import pytest
+
 from pytest_mock import MockerFixture
 
 from ai21 import AI21Client, AsyncAI21Client
 from ai21.models import ChatMessage, RoleType
 from ai21.models.chat import ChatCompletionResponse, ResponseFormat
-from ai21.models.chat.chat_message import UserMessage, SystemMessage, AssistantMessage
+from ai21.models.chat.chat_message import AssistantMessage, SystemMessage, UserMessage
 from ai21.models.chat.document_schema import DocumentSchema
 from ai21.models.chat.function_tool_definition import FunctionToolDefinition
 from ai21.models.chat.tool_defintions import ToolDefinition
 from ai21.models.chat.tool_parameters import ToolParameters
+
 
 _FAKE_API_KEY = "dummy_api_key"
 
@@ -46,18 +49,6 @@ async def test_async_chat_create__when_bad_import_to_chat_message__raise_error()
     )
 
 
-def test__when_model_and_model_id__raise_error():
-    client = AI21Client(
-        api_key=_FAKE_API_KEY,
-    )
-    with pytest.raises(ValueError):
-        client.chat.completions.create(
-            model="jamba-1.5",
-            model_id="jamba-instruct",
-            messages=[ChatMessage(role=RoleType.USER, text="Hello")],
-        )
-
-
 # ----------------------------------- Basic Happy Flow: ----------------------------------- #
 
 _FAKE_BASIC_HAPPY_FLOW_RESPONSE_JSON = {
@@ -81,7 +72,7 @@ def test_chat_completion_basic_happy_flow(mocker: MockerFixture) -> None:
     mocked_client.send.return_value = httpx.Response(status_code=200, json=_FAKE_BASIC_HAPPY_FLOW_RESPONSE_JSON)
     client = AI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response: ChatCompletionResponse = client.chat.completions.create(
-        model="jamba-1.5-mini", messages=[UserMessage(role="user", content="Hello")]
+        model="jamba-mini-1.6-2025-03", messages=[UserMessage(role="user", content="Hello")]
     )
     assert response.choices[0].message.content == _FAKE_BASIC_HAPPY_FLOW_EXPECTED_CONTENT
 
@@ -94,7 +85,7 @@ async def test_async_chat_completion_basic_happy_flow(mocker: MockerFixture) -> 
     )
     async_client = AsyncAI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response: ChatCompletionResponse = await async_client.chat.completions.create(
-        model="jamba-1.5-mini", messages=[UserMessage(role="user", content="Hello")]
+        model="jamba-mini-1.6-2025-03", messages=[UserMessage(role="user", content="Hello")]
     )
     assert response.choices[0].message.content == _FAKE_BASIC_HAPPY_FLOW_EXPECTED_CONTENT
 
@@ -158,7 +149,7 @@ def test_chat_completion_with_tool_calls_happy_flow(mocker: MockerFixture) -> No
     mocked_client.send.return_value = httpx.Response(status_code=200, json=_FAKE_TOOL_CALLS_HAPPY_FLOW_RESPONSE_JSON)
     client = AI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = client.chat.completions.create(
-        model="jamba-1.5-mini", messages=_FAKE_TOOL_CALL_TEST_MESSAGES, tools=_FAKE_TOOL_CALL_TEST_TOOLS
+        model="jamba-mini-1.6-2025-03", messages=_FAKE_TOOL_CALL_TEST_MESSAGES, tools=_FAKE_TOOL_CALL_TEST_TOOLS
     )
     assert response.choices[0].message.tool_calls[0].function.name == _FAKE_TOOL_CALL_TEST_EXPECTED_FUNCTION_NAME
     assert (
@@ -174,7 +165,7 @@ async def test_async_chat_completion_with_tool_calls_happy_flow(mocker: MockerFi
     )
     async_client = AsyncAI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = await async_client.chat.completions.create(
-        model="jamba-1.5-mini", messages=_FAKE_TOOL_CALL_TEST_MESSAGES, tools=_FAKE_TOOL_CALL_TEST_TOOLS
+        model="jamba-mini-1.6-2025-03", messages=_FAKE_TOOL_CALL_TEST_MESSAGES, tools=_FAKE_TOOL_CALL_TEST_TOOLS
     )
     assert response.choices[0].message.tool_calls[0].function.name == _FAKE_TOOL_CALL_TEST_EXPECTED_FUNCTION_NAME
     assert (
@@ -240,7 +231,7 @@ def test_chat_completion_with_documents_happy_flow(mocker: MockerFixture) -> Non
     mocked_client.send.return_value = httpx.Response(status_code=200, json=_FAKE_DOCUMENTS_TEST_RESPONSE_JSON)
     client = AI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = client.chat.completions.create(
-        model="jamba-1.5-mini", messages=_FAKE_DOCUMENTS_TEST_MESSAGES, documents=_FAKE_DOCUMENTS_TEST_DOCUMENTS
+        model="jamba-mini-1.6-2025-03", messages=_FAKE_DOCUMENTS_TEST_MESSAGES, documents=_FAKE_DOCUMENTS_TEST_DOCUMENTS
     )
     assert response.choices[0].message.content == _FAKE_DOCUMENTS_TEST_EXPECTED_CONTENT
 
@@ -253,7 +244,7 @@ async def test_async_chat_completion_with_documents_happy_flow(mocker: MockerFix
     )
     async_client = AsyncAI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = await async_client.chat.completions.create(
-        model="jamba-1.5-mini", messages=_FAKE_DOCUMENTS_TEST_MESSAGES, documents=_FAKE_DOCUMENTS_TEST_DOCUMENTS
+        model="jamba-mini-1.6-2025-03", messages=_FAKE_DOCUMENTS_TEST_MESSAGES, documents=_FAKE_DOCUMENTS_TEST_DOCUMENTS
     )
     assert response.choices[0].message.content == _FAKE_DOCUMENTS_TEST_EXPECTED_CONTENT
 
@@ -310,7 +301,7 @@ def test_chat_completion_response_format_json_happy_flow(mocker: MockerFixture) 
     )
     client = AI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = client.chat.completions.create(
-        model="jamba-1.5-mini",
+        model="jamba-mini-1.6-2025-03",
         messages=_FAKE_RESPONSE_FORMAT_JSON_TEST_MESSAGES,
         response_format=ResponseFormat(type="json_object"),
     )
@@ -325,7 +316,7 @@ async def test_async_chat_completion_response_format_json_happy_flow(mocker: Moc
     )
     async_client = AsyncAI21Client(api_key=_FAKE_API_KEY, http_client=mocked_client)
     response = await async_client.chat.completions.create(
-        model="jamba-1.5-mini",
+        model="jamba-mini-1.6-2025-03",
         messages=_FAKE_RESPONSE_FORMAT_JSON_TEST_MESSAGES,
         response_format=ResponseFormat(type="json_object"),
     )

@@ -2,7 +2,14 @@ import json
 
 from ai21 import AI21Client
 from ai21.logger import set_verbose
-from ai21.models.chat import ChatMessage, ToolMessage, FunctionToolDefinition, ToolDefinition, ToolParameters
+from ai21.models.chat import (
+    ChatMessage,
+    FunctionToolDefinition,
+    ToolDefinition,
+    ToolMessage,
+    ToolParameters,
+)
+
 
 set_verbose(True)
 
@@ -39,7 +46,7 @@ tools = [tool_definition]
 
 client = AI21Client()
 
-response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
+response = client.chat.completions.create(messages=messages, model="jamba-large-1.6-2025-03", tools=tools)
 
 """ AI models can be error-prone, it's crucial to ensure that the tool calls align with the expectations.
 The below code snippet demonstrates how to handle tool calls in the response and invoke the tool function
@@ -72,5 +79,5 @@ if delivery_date is not None:
     tool_message = ToolMessage(role="tool", tool_call_id=tool_calls[0].id, content=delivery_date)
     messages.append(tool_message)
 
-    response = client.chat.completions.create(messages=messages, model="jamba-1.5-large", tools=tools)
+    response = client.chat.completions.create(messages=messages, model="jamba-large-1.6-2025-03", tools=tools)
     print(response.choices[0].message.content)

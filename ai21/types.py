@@ -1,10 +1,14 @@
-from typing import Any, Union, List
+from typing import Any, List, Union
 
 import httpx
-from typing_extensions import Literal, TypeVar, TYPE_CHECKING
 
+from typing_extensions import TYPE_CHECKING, Literal, TypeVar
+
+from ai21.pagination.async_pagination import AsyncPagination
+from ai21.pagination.sync_pagination import SyncPagination
 from ai21.stream.async_stream import AsyncStream
 from ai21.stream.stream import Stream
+
 
 if TYPE_CHECKING:
     from ai21.models.ai21_base_model import AI21BaseModel  # noqa
@@ -12,6 +16,8 @@ if TYPE_CHECKING:
 ResponseT = TypeVar("_ResponseT", bound=Union["AI21BaseModel", str, httpx.Response, List[Any]])
 StreamT = TypeVar("_StreamT", bound=Stream[Any])
 AsyncStreamT = TypeVar("_AsyncStreamT", bound=AsyncStream[Any])
+SyncPaginationT = TypeVar("SyncPagination", bound=SyncPagination[Any])
+AsyncPaginationT = TypeVar("AsyncPaginationT", bound=AsyncPagination[Any])
 
 
 # Sentinel class used until PEP 0661 is accepted

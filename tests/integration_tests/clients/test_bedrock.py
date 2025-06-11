@@ -3,11 +3,13 @@ Run this script after setting the environment variable called AWS_ACCESS_KEY_ID,
 """
 
 import subprocess
+
 from pathlib import Path
 
 import pytest
 
 from tests.integration_tests.skip_helpers import should_skip_bedrock_integration_tests
+
 
 BEDROCK_DIR = "bedrock"
 
@@ -18,16 +20,12 @@ BEDROCK_PATH = Path(__file__).parent.parent.parent.parent / "examples" / BEDROCK
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("completion.py",),
-        ("async_completion.py",),
         ("chat/chat_completions.py",),
         ("chat/stream_chat_completions.py",),
         ("chat/async_chat_completions.py",),
         ("chat/async_stream_chat_completions.py",),
     ],
     ids=[
-        "when_completion__should_return_ok",
-        "when_async_completion__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_async_chat_completions__should_return_ok",

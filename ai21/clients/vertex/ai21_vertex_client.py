@@ -1,15 +1,17 @@
 from __future__ import annotations
 
-from typing import Optional, Dict, Any
+from typing import Any, Dict, Optional
 
 import httpx
+
 from google.auth.credentials import Credentials as GCPCredentials
 
-from ai21.clients.studio.resources.studio_chat import StudioChat, AsyncStudioChat
-from ai21.clients.vertex.gcp_authorization import GCPAuthorization
+from ai21.clients.common.auth.gcp_authorization import GCPAuthorization
+from ai21.clients.studio.resources.studio_chat import AsyncStudioChat, StudioChat
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.request_options import RequestOptions
+
 
 _DEFAULT_GCP_REGION = "us-central1"
 _VERTEX_BASE_URL_FORMAT = "https://{region}-aiplatform.googleapis.com/v1"

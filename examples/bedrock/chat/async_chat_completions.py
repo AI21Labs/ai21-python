@@ -13,7 +13,7 @@ messages = [
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model=BedrockModelID.JAMBA_INSTRUCT_V1,
+        model=BedrockModelID.JAMBA_1_5_MINI,
     )
 
     print(f"response: {response}")
