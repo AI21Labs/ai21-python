@@ -29,7 +29,6 @@
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
-- [Token Counting](#Token-Counting)
 - [Environment Variables](#Environment-Variables)
 - [Error Handling](#Error-Handling)
 - [Cloud Providers](#Cloud-Providers) ☁️
