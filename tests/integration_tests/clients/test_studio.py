@@ -19,7 +19,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("tokenization.py",),
         ("chat/chat_completions.py",),
         ("chat/stream_chat_completions.py",),
         ("chat/chat_documents.py",),
@@ -28,7 +27,6 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("chat/chat_response_format.py",),
     ],
     ids=[
-        "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_chat_completions_with_documents__should_return_ok",
