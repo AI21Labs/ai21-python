@@ -63,7 +63,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
                 return run
 
             if (time.time() - start_time) >= poll_timeout_sec:
-                return run
+                raise TimeoutError(f"Timeout of {poll_timeout_sec} while polling for status of run with id {run_id}")
 
             time.sleep(poll_interval_sec)
 
@@ -139,7 +139,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
                 return run
 
             if (time.time() - start_time) >= poll_timeout_sec:
-                return run
+                raise TimeoutError(f"Timeout of {poll_timeout_sec} while polling for status of run with id {run_id}")
 
             await asyncio.sleep(poll_interval_sec)
 
