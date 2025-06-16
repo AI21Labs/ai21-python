@@ -1,6 +1,39 @@
 # CHANGELOG
 
 
+## v4.0.3 (2025-06-16)
+
+### Bug Fixes
+
+- :wrench: introduce `MaestroMessage` ([#298](https://github.com/AI21Labs/ai21-python/pull/298),
+  [`2202f61`](https://github.com/AI21Labs/ai21-python/commit/2202f611332653e399ac710d572b93445be4262a))
+
+* refactor: reorganize imports by moving maestro models to their own module
+
+* refactor: update input type in maestro run methods to use MaestroMessage instead of ChatMessage
+
+* test: add parameterized tests for Maestro input formats in maestro.py
+
+* feat: add async example for multi-message processing
+
+* feat: update async example to handle multi-message input for business proposal
+
+* feat: include requirements result in README example for Maestro runs
+
+* fix: update content formatting in async_run_multi_messages.py for improved readability
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+
+### Continuous Integration
+
+- Added masestro labeler ([#299](https://github.com/AI21Labs/ai21-python/pull/299),
+  [`fc872d5`](https://github.com/AI21Labs/ai21-python/commit/fc872d566921b7dce84b0b21fd1b2da32d2b3ec0))
+
+
 ## v4.0.2 (2025-06-16)
 
 ### Bug Fixes
