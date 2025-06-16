@@ -1,16 +1,49 @@
 import pytest
 
 from ai21 import AsyncAI21Client
+from ai21.models.maestro import MaestroMessage
 
 
 @pytest.mark.asyncio
 async def test_maestro__when_upload__should_return_data_sources():  # file_in_library: str):
     client = AsyncAI21Client()
     result = await client.beta.maestro.runs.create_and_poll(
-        input="When did Einstein receive a Nobel Prize?", tools=[{"type": "file_search"}], include=["data_sources"]
+        input="When did Einstein receive a Nobel Prize?",
+        tools=[{"type": "file_search"}],
+        include=["data_sources"],
+        poll_timeout_sec=200,
     )
     assert result.status == "completed", "Expected 'completed' status"
     assert result.result, "Expected a non-empty answer"
     assert result.data_sources, "Expected data sources"
     assert len(result.data_sources["file_search"]) > 0, "Expected at least one file search data source"
     assert result.data_sources.get("web_search") is None, "Expected no web search data sources"
+
+
+@pytest.mark.parametrize(
+    "input_data,test_description",
+    [
+        ("What is the capital of France?", "string input"),
+        (
+            [MaestroMessage(role="user", content="What is the capital of France?")],
+            "Use MaestroMessage format in a list",
+        ),
+        (
+            [
+                {"role": "user", "content": "I need help with geography."},
+                {"role": "assistant", "content": "I'd be happy to help with geography questions."},
+                {"role": "user", "content": "What is the capital of France?"},
+            ],
+            "multi-message conversation input",
+        ),
+    ],
+)
+@pytest.mark.asyncio
+async def test_maestro__input_formats__should_accept_string_and_list(input_data, test_description):
+    """Test that input can be passed as both string and list of dictionaries."""
+    client = AsyncAI21Client()
+
+    run = await client.beta.maestro.runs.create_and_poll(input=input_data, poll_timeout_sec=200)
+
+    assert run.status == "completed", f"Expected 'completed' status for {test_description}"
+    assert run.result, f"Expected a non-empty answer for {test_description}"
