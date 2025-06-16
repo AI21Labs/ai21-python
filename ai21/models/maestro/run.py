@@ -18,6 +18,11 @@ DEFAULT_RUN_POLL_TIMEOUT: float = 120  # seconds
 TERMINATED_RUN_STATUSES: Set[RunStatus] = {"completed", "failed", "requires_action"}
 
 
+class MaestroMessage(TypedDict):
+    role: Role
+    content: str
+
+
 class Tool(TypedDict):
     type: ToolType
 

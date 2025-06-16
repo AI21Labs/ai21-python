@@ -269,6 +269,7 @@ run_result = client.beta.maestro.runs.create_and_poll(
             "description": "The poem should rhyme",
         },
     ],
+    include=["requirements_result"]
 )
 ```
 

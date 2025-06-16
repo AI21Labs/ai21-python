@@ -3,16 +3,16 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 from typing import List
 
-from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
-    Tool,
-    ToolResources,
-    RunResponse,
+    Budget,
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
-    Requirement,
-    Budget,
+    MaestroMessage,
     OutputOptions,
+    Requirement,
+    RunResponse,
+    Tool,
+    ToolResources,
 )
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
@@ -24,7 +24,7 @@ class BaseMaestroRun(ABC):
     def _create_body(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven,
         tools: List[Tool] | NotGiven,
         tool_resources: ToolResources | NotGiven,
@@ -33,14 +33,9 @@ class BaseMaestroRun(ABC):
         include: List[OutputOptions] | NotGiven,
         **kwargs,
     ) -> dict:
-        if isinstance(input, list):
-            _input = [{"role": message.role, "content": message.content} for message in input]
-        else:
-            _input = input
-
         return remove_not_given(
             {
-                "input": _input,
+                "input": input,
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
@@ -55,7 +50,7 @@ class BaseMaestroRun(ABC):
     def create(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -78,7 +73,7 @@ class BaseMaestroRun(ABC):
     def create_and_poll(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,

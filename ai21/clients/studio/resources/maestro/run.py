@@ -6,17 +6,17 @@ from typing import List
 
 from ai21.clients.common.maestro.run import BaseMaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
-from ai21.models.chat import ChatMessage
 from ai21.models.maestro.run import (
-    Tool,
-    ToolResources,
-    RunResponse,
-    TERMINATED_RUN_STATUSES,
+    Budget,
     DEFAULT_RUN_POLL_INTERVAL,
     DEFAULT_RUN_POLL_TIMEOUT,
-    Requirement,
-    Budget,
+    MaestroMessage,
     OutputOptions,
+    Requirement,
+    RunResponse,
+    TERMINATED_RUN_STATUSES,
+    Tool,
+    ToolResources,
 )
 from ai21.types import NotGiven, NOT_GIVEN
 
@@ -25,7 +25,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -70,7 +70,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create_and_poll(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -101,7 +101,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
@@ -146,7 +146,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create_and_poll(
         self,
         *,
-        input: str | List[ChatMessage],
+        input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Tool] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
