@@ -1,6 +1,23 @@
 # CHANGELOG
 
 
+## v4.0.1 (2025-06-16)
+
+### Bug Fixes
+
+- Raise error when poll_timeout_sec is reached
+  ([#296](https://github.com/AI21Labs/ai21-python/pull/296),
+  [`cd8bc03`](https://github.com/AI21Labs/ai21-python/commit/cd8bc036d4e354846cd28229bea334d1325282f1))
+
+* fix: raise error when poll_timeout_sec is reached
+
+* chore: handle timeout errors in async_run and run examples
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
 ## v4.0.0 (2025-06-11)
 
 ### Bug Fixes
