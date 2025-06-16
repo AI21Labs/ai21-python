@@ -1,6 +1,17 @@
 # CHANGELOG
 
 
+## v4.0.2 (2025-06-16)
+
+### Bug Fixes
+
+- :bug: handle maestro input as a list of `ChatMessage`s
+  ([#297](https://github.com/AI21Labs/ai21-python/pull/297),
+  [`3c63bd0`](https://github.com/AI21Labs/ai21-python/commit/3c63bd06ff4bcd02bebfbcba994d78981ce89860))
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
 ## v4.0.1 (2025-06-16)
 
 ### Bug Fixes
