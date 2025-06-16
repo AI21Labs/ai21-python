@@ -7,17 +7,17 @@ from ai21.models.maestro import MaestroMessage
 @pytest.mark.asyncio
 async def test_maestro__when_upload__should_return_data_sources():  # file_in_library: str):
     client = AsyncAI21Client()
-    result = await client.beta.maestro.runs.create_and_poll(
+    run = await client.beta.maestro.runs.create_and_poll(
         input="When did Einstein receive a Nobel Prize?",
         tools=[{"type": "file_search"}],
         include=["data_sources"],
         poll_timeout_sec=200,
     )
-    assert result.status == "completed", "Expected 'completed' status"
-    assert result.result, "Expected a non-empty answer"
-    assert result.data_sources, "Expected data sources"
-    assert len(result.data_sources["file_search"]) > 0, "Expected at least one file search data source"
-    assert result.data_sources.get("web_search") is None, "Expected no web search data sources"
+    assert run.status == "completed", f"[RUN {run.id}] Expected 'completed' status"
+    assert run.result, f"[RUN {run.id}] Expected a non-empty answer"
+    assert run.data_sources, f"[RUN {run.id}] Expected data sources"
+    assert len(run.data_sources["file_search"]) > 0, f"[RUN {run.id}] Expected at least one file search data source"
+    assert run.data_sources.get("web_search") is None, f"[RUN {run.id}] Expected no web search data sources"
 
 
 @pytest.mark.parametrize(
@@ -45,5 +45,5 @@ async def test_maestro__input_formats__should_accept_string_and_list(input_data,
 
     run = await client.beta.maestro.runs.create_and_poll(input=input_data, poll_timeout_sec=200)
 
-    assert run.status == "completed", f"Expected 'completed' status for {test_description}"
-    assert run.result, f"Expected a non-empty answer for {test_description}"
+    assert run.status == "completed", f"[RUN {run.id}] Expected 'completed' status for {test_description}"
+    assert run.result, f"[RUN {run.id}] Expected a non-empty answer for {test_description}"
