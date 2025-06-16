@@ -33,9 +33,14 @@ class BaseMaestroRun(ABC):
         include: List[OutputOptions] | NotGiven,
         **kwargs,
     ) -> dict:
+        if isinstance(input, list):
+            _input = [{"role": message.role, "content": message.content} for message in input]
+        else:
+            _input = input
+
         return remove_not_given(
             {
-                "input": input,
+                "input": _input,
                 "models": models,
                 "tools": tools,
                 "tool_resources": tool_resources,
