@@ -33,7 +33,6 @@ class LibraryFiles(StudioResource):
         path: Optional[str] | NotGiven = NOT_GIVEN,
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        upload_mode: Optional[UploadMode] | NotGiven = NOT_GIVEN,
         batch_id: Optional[uuid.UUID] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
@@ -43,11 +42,13 @@ class LibraryFiles(StudioResource):
                 "path": path,
                 "labels": labels,
                 "publicUrl": public_url,
-                "upload_mode": upload_mode,
                 "batch_id": batch_id,
                 **kwargs,
             }
         )
+
+        if body.get("batch_id"):
+            body["upload_mode"] = UploadMode.BATCH.value
 
         raw_response = self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
@@ -109,7 +110,6 @@ class AsyncLibraryFiles(AsyncStudioResource):
         path: Optional[str] | NotGiven = NOT_GIVEN,
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        upload_mode: Optional[UploadMode] | NotGiven = NOT_GIVEN,
         batch_id: Optional[uuid.UUID] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
@@ -119,11 +119,13 @@ class AsyncLibraryFiles(AsyncStudioResource):
                 "path": path,
                 "labels": labels,
                 "publicUrl": public_url,
-                "upload_mode": upload_mode,
                 "batch_id": batch_id,
                 **kwargs,
             }
         )
+
+        if body.get("batch_id"):
+            body["upload_mode"] = UploadMode.BATCH.value
 
         raw_response = await self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 

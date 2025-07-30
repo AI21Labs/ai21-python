@@ -5,7 +5,6 @@ from pydantic import BaseModel, Field
 
 
 class UploadMode(StrEnum):
-    IMMEDIATE = "immediate"
     BATCH = "batch"
 
 
