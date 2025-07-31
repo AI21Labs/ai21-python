@@ -29,9 +29,6 @@ fi
     pip install --upgrade poetry || brew install poetry
   fi
 } && {
-  # install keyring
-  poetry self add keyrings-google-artifactregistry-auth@1.1.2
-} && {
   # update lock file
   poetry lock
 } && {

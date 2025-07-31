@@ -4,7 +4,7 @@ from typing import List
 from pydantic import BaseModel, Field
 
 
-class UploadMode(Enum):
+class UploadMode(str, Enum):
     BATCH = "batch"
 
 
