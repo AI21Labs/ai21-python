@@ -1,10 +1,10 @@
-from enum import StrEnum
+from enum import Enum
 from typing import List
 
 from pydantic import BaseModel, Field
 
 
-class UploadMode(StrEnum):
+class UploadMode(Enum):
     BATCH = "batch"
 
 
