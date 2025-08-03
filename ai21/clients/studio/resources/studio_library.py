@@ -16,7 +16,7 @@ from ai21.utils.typing import remove_not_given
 
 
 class StudioLibrary(StudioResource):
-    _module_name = "library/files"
+    _module_name = "library"
 
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
@@ -24,7 +24,7 @@ class StudioLibrary(StudioResource):
 
 
 class LibraryFiles(StudioResource):
-    _module_name = "library/files"
+    _module_name = "library"
 
     def create(
         self,
@@ -50,15 +50,15 @@ class LibraryFiles(StudioResource):
         if body.get("batch_id"):
             body["upload_mode"] = UploadMode.BATCH
 
-        raw_response = self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
+        raw_response = self._post(path=f"/{self._module_name}/files", files=files, body=body, response_cls=dict)
 
         return raw_response["fileId"]
 
     def get(self, file_id: str) -> FileResponse:
-        return self._get(path=f"/{self._module_name}/{file_id}", response_cls=FileResponse)
+        return self._get(path=f"/{self._module_name}/files/{file_id}", response_cls=FileResponse)
 
     def get_batch_status(self, batch_id: str) -> BatchStatusResponse:
-        return self._get(path=f"/library/batches/{batch_id}/status", response_cls=BatchStatusResponse)
+        return self._get(path=f"/{self._module_name}/batches/{batch_id}/status", response_cls=BatchStatusResponse)
 
     def list(
         self,
@@ -69,7 +69,7 @@ class LibraryFiles(StudioResource):
     ) -> List[FileResponse]:
         params = remove_not_given({"offset": offset, "limit": limit})
 
-        return self._get(path=f"/{self._module_name}", params=params, response_cls=List[FileResponse])
+        return self._get(path=f"/{self._module_name}/files", params=params, response_cls=List[FileResponse])
 
     def update(
         self,
@@ -86,14 +86,14 @@ class LibraryFiles(StudioResource):
                 **kwargs,
             }
         )
-        self._put(path=f"/{self._module_name}/{file_id}", body=body)
+        self._put(path=f"/{self._module_name}/files/{file_id}", body=body)
 
     def delete(self, file_id: str) -> None:
-        self._delete(path=f"/{self._module_name}/{file_id}")
+        self._delete(path=f"/{self._module_name}/files/{file_id}")
 
 
 class AsyncStudioLibrary(AsyncStudioResource):
-    _module_name = "library/files"
+    _module_name = "library"
 
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
@@ -101,7 +101,7 @@ class AsyncStudioLibrary(AsyncStudioResource):
 
 
 class AsyncLibraryFiles(AsyncStudioResource):
-    _module_name = "library/files"
+    _module_name = "library"
 
     async def create(
         self,
@@ -127,15 +127,15 @@ class AsyncLibraryFiles(AsyncStudioResource):
         if body.get("batch_id"):
             body["upload_mode"] = UploadMode.BATCH
 
-        raw_response = await self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
+        raw_response = await self._post(path=f"/{self._module_name}/files", files=files, body=body, response_cls=dict)
 
         return raw_response["fileId"]
 
     async def get(self, file_id: str) -> FileResponse:
-        return await self._get(path=f"/{self._module_name}/{file_id}", response_cls=FileResponse)
+        return await self._get(path=f"/{self._module_name}/files/{file_id}", response_cls=FileResponse)
 
     async def get_batch_status(self, batch_id: str) -> BatchStatusResponse:
-        return await self._get(path=f"/library/batches/{batch_id}/status", response_cls=BatchStatusResponse)
+        return await self._get(path=f"/{self._module_name}/batches/{batch_id}/status", response_cls=BatchStatusResponse)
 
     async def list(
         self,
@@ -146,7 +146,7 @@ class AsyncLibraryFiles(AsyncStudioResource):
     ) -> List[FileResponse]:
         params = remove_not_given({"offset": offset, "limit": limit})
 
-        return await self._get(path=f"/{self._module_name}", params=params, response_cls=List[FileResponse])
+        return await self._get(path=f"/{self._module_name}/files", params=params, response_cls=List[FileResponse])
 
     async def update(
         self,
@@ -163,7 +163,7 @@ class AsyncLibraryFiles(AsyncStudioResource):
                 **kwargs,
             }
         )
-        await self._put(path=f"/{self._module_name}/{file_id}", body=body)
+        await self._put(path=f"/{self._module_name}/files/{file_id}", body=body)
 
     async def delete(self, file_id: str) -> None:
-        await self._delete(path=f"/{self._module_name}/{file_id}")
+        await self._delete(path=f"/{self._module_name}/files/{file_id}")
