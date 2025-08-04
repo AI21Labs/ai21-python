@@ -58,7 +58,7 @@ jobs:
               repo: context.repo.repo,
               sha: '${{ github.event.pull_request.head.sha }}',
               state: 'pending',
-              context: 'Integration Tests (PR Approved)',
+              context: 'Integration Tests',
               description: 'Integration tests are running after approval'
             })
 
@@ -80,7 +80,7 @@ jobs:
               repo: context.repo.repo,
               sha: '${{ github.event.pull_request.head.sha }}',
               state: 'success',
-              context: 'Integration Tests (PR Approved)',
+              context: 'Integration Tests',
               description: 'Integration tests passed after approval'
             })
 
@@ -94,7 +94,7 @@ jobs:
               repo: context.repo.repo,
               sha: '${{ github.event.pull_request.head.sha }}',
               state: 'failure',
-              context: 'Integration Tests (PR Approved)',
+              context: 'Integration Tests',
               description: 'Integration tests failed after approval'
             })
 
