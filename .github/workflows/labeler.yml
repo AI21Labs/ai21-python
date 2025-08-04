@@ -111,17 +111,3 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: ${{ env.label }}
-
-  add_lgtm_label:
-    runs-on: ubuntu-latest
-    if: github.event.review.state == 'APPROVED'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Add LGTM label
-        uses: actions-ecosystem/action-add-labels@v1
-        with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          labels: lgtm
