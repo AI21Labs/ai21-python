@@ -13,6 +13,7 @@ jobs:
       contents: read
       pull-requests: write
     runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -112,13 +113,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: ${{ env.label }}
 
-  remove_lgtm_on_push:
-    runs-on: ubuntu-latest
-    if: github.event.action == 'synchronize'
-    permissions:
-      pull-requests: write
-
-    steps:
       - name: Remove lgtm label on new commits
         uses: actions/github-script@v7
         with:
