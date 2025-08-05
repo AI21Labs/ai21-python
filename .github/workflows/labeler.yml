@@ -13,6 +13,7 @@ jobs:
       contents: read
       pull-requests: write
     runs-on: ubuntu-latest
+    if: github.event.action == 'synchronize'
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
@@ -112,16 +113,20 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: ${{ env.label }}
 
-  add_lgtm_label:
-    runs-on: ubuntu-latest
-    if: github.event.review.state == 'APPROVED'
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
-
-      - name: Add LGTM label
-        uses: actions-ecosystem/action-add-labels@v1
+      - name: Remove lgtm label on new commits
+        uses: actions/github-script@v7
         with:
-          github_token: ${{ secrets.GITHUB_TOKEN }}
-          labels: lgtm
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            try {
+              await github.rest.issues.removeLabel({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                name: 'lgtm'
+              });
+            } catch (error) {
+              if (error.status !== 404) {
+                throw error;
+              }
+            }
