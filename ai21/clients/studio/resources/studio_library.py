@@ -9,7 +9,8 @@ from ai21.clients.studio.resources.studio_resource import (
 )
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.http_client.http_client import AI21HTTPClient
-from ai21.models import FileResponse
+from ai21.models import FileResponse, BatchStatusResponse
+from ai21.models.upload_mode import UploadMode
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
 
@@ -24,6 +25,7 @@ class StudioLibrary(StudioResource):
 
 class LibraryFiles(StudioResource):
     _module_name = "library/files"
+    _sub_module_name = "library"
 
     def create(
         self,
@@ -32,10 +34,22 @@ class LibraryFiles(StudioResource):
         path: Optional[str] | NotGiven = NOT_GIVEN,
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
+        batch_id: Optional[str] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
         files = {"file": open(file_path, "rb")}
-        body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
+        body = remove_not_given(
+            {
+                "path": path,
+                "labels": labels,
+                "publicUrl": public_url,
+                "batch_id": batch_id,
+                **kwargs,
+            }
+        )
+
+        if body.get("batch_id"):
+            body["upload_mode"] = UploadMode.BATCH
 
         raw_response = self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
@@ -43,6 +57,9 @@ class LibraryFiles(StudioResource):
 
     def get(self, file_id: str) -> FileResponse:
         return self._get(path=f"/{self._module_name}/{file_id}", response_cls=FileResponse)
+
+    def get_batch_status(self, batch_id: str) -> BatchStatusResponse:
+        return self._get(path=f"/{self._sub_module_name}/batches/{batch_id}/status", response_cls=BatchStatusResponse)
 
     def list(
         self,
@@ -86,6 +103,7 @@ class AsyncStudioLibrary(AsyncStudioResource):
 
 class AsyncLibraryFiles(AsyncStudioResource):
     _module_name = "library/files"
+    _sub_module_name = "library"
 
     async def create(
         self,
@@ -94,10 +112,22 @@ class AsyncLibraryFiles(AsyncStudioResource):
         path: Optional[str] | NotGiven = NOT_GIVEN,
         labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
         public_url: Optional[str] | NotGiven = NOT_GIVEN,
+        batch_id: Optional[str] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> str:
         files = {"file": open(file_path, "rb")}
-        body = remove_not_given({"path": path, "labels": labels, "publicUrl": public_url, **kwargs})
+        body = remove_not_given(
+            {
+                "path": path,
+                "labels": labels,
+                "publicUrl": public_url,
+                "batch_id": batch_id,
+                **kwargs,
+            }
+        )
+
+        if body.get("batch_id"):
+            body["upload_mode"] = UploadMode.BATCH
 
         raw_response = await self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
@@ -105,6 +135,11 @@ class AsyncLibraryFiles(AsyncStudioResource):
 
     async def get(self, file_id: str) -> FileResponse:
         return await self._get(path=f"/{self._module_name}/{file_id}", response_cls=FileResponse)
+
+    async def get_batch_status(self, batch_id: str) -> BatchStatusResponse:
+        return await self._get(
+            path=f"/{self._sub_module_name}/batches/{batch_id}/status", response_cls=BatchStatusResponse
+        )
 
     async def list(
         self,
