@@ -5,7 +5,7 @@ from ai21.models.maestro import MaestroMessage
 
 
 @pytest.mark.asyncio
-async def test_maestro__when_upload__should_return_data_sources():  # file_in_library: str):
+async def test_maestro__when_upload__should_return_data_sources(file_in_library: str):
     client = AsyncAI21Client()
     run = await client.beta.maestro.runs.create_and_poll(
         input="When did Einstein receive a Nobel Prize?",
