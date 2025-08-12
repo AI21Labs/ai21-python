@@ -13,7 +13,7 @@ jobs:
     if: github.event.review.state == 'APPROVED'
     runs-on: ubuntu-latest
     permissions:
-      contents: read
+      contents: write
       pull-requests: write
       statuses: write
 
@@ -28,6 +28,30 @@ jobs:
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           labels: lgtm
+
+      - name: Enable auto-merge
+        uses: actions/github-script@v7
+        with:
+          script: |
+            await github.graphql(`
+              mutation enableAutoMerge($pullRequestId: ID!, $mergeMethod: PullRequestMergeMethod!) {
+                enablePullRequestAutoMerge(input: {
+                  pullRequestId: $pullRequestId,
+                  mergeMethod: $mergeMethod
+                }) {
+                  pullRequest {
+                    autoMergeRequest {
+                      enabledAt
+                      mergeMethod
+                    }
+                  }
+                }
+              }
+            `, {
+              pullRequestId: context.payload.pull_request.node_id,
+              mergeMethod: 'SQUASH'
+            });
+            console.log('Auto-merge enabled with squash method');
 
       - name: Install Poetry
         run: |
@@ -104,15 +128,3 @@ jobs:
           name: pytest-results-pr-approval
           path: junit/test-results-*.xml
         if: always()
-
-      - name: Auto-merge PR
-        if: success()
-        uses: actions/github-script@v7
-        with:
-          script: |
-            await github.rest.pulls.merge({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              pull_number: context.issue.number,
-              merge_method: 'squash'
-            })
