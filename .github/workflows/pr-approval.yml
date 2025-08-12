@@ -110,9 +110,40 @@ jobs:
         uses: actions/github-script@v7
         with:
           script: |
-            await github.rest.pulls.merge({
+            const { data: pullRequest } = await github.rest.pulls.get({
               owner: context.repo.owner,
               repo: context.repo.repo,
-              pull_number: context.issue.number,
-              merge_method: 'squash'
-            })
+              pull_number: context.issue.number
+            });
+
+            console.log(`PR State: ${pullRequest.state}`);
+            console.log(`PR Mergeable: ${pullRequest.mergeable}`);
+            console.log(`PR Mergeable State: ${pullRequest.mergeable_state}`);
+
+            if (pullRequest.state !== 'open') {
+              console.log('PR is not open, cannot merge');
+              return;
+            }
+
+            if (pullRequest.draft) {
+              console.log('PR is a draft, cannot merge');
+              return;
+            }
+
+            if (pullRequest.mergeable === false) {
+              console.log('PR is not mergeable, cannot merge');
+              return;
+            }
+
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.issue.number,
+                merge_method: 'squash'
+              });
+              console.log('PR merged successfully');
+            } catch (error) {
+              console.log(`Failed to merge PR: ${error.message}`);
+              throw error;
+            }
