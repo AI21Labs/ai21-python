@@ -16,7 +16,7 @@ from ai21.models.chat import (
 )
 
 
-_MODEL = "jamba-mini-1.6-2025-03"
+_MODEL = "jamba-mini"
 _MESSAGES = [
     ChatMessage(
         content="Hello, I need help studying for the coming test, can you teach me about the US constitution? ",
