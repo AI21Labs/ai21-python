@@ -1,10 +1,13 @@
 import warnings
 from typing import Any, Dict
 
-from pydantic import BaseModel, ConfigDict
+from pydantic import BaseModel
 from typing_extensions import Self
 
 from ai21.models._pydantic_compatibility import _to_dict, _to_json, _from_dict, _from_json, IS_PYDANTIC_V2
+
+if IS_PYDANTIC_V2:
+    from pydantic import ConfigDict
 
 
 class AI21BaseModel(BaseModel):
