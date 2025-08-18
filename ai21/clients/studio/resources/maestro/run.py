@@ -32,6 +32,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        response_language: str | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -42,6 +43,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             requirements=requirements,
             budget=budget,
             include=include,
+            response_language=response_language,
             **kwargs,
         )
 
@@ -77,6 +79,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        response_language: str | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
@@ -89,6 +92,7 @@ class MaestroRun(StudioResource, BaseMaestroRun):
             requirements=requirements,
             budget=budget,
             include=include,
+            response_language=response_language,
             **kwargs,
         )
 
@@ -108,6 +112,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        response_language: str | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -118,6 +123,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             requirements=requirements,
             budget=budget,
             include=include,
+            response_language=response_language,
             **kwargs,
         )
 
@@ -155,6 +161,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
+        response_language: str | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         run = await self.create(
@@ -165,6 +172,7 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
             requirements=requirements,
             budget=budget,
             include=include,
+            response_language=response_language,
             **kwargs,
         )
 
