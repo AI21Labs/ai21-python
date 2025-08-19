@@ -31,6 +31,7 @@ class BaseMaestroRun(ABC):
         requirements: List[Requirement] | NotGiven,
         budget: Budget | NotGiven,
         include: List[OutputOptions] | NotGiven,
+        response_language: str | NotGiven,
         **kwargs,
     ) -> dict:
         return remove_not_given(
@@ -42,6 +43,7 @@ class BaseMaestroRun(ABC):
                 "requirements": requirements,
                 "budget": budget,
                 "include": include,
+                "response_language": response_language,
                 **kwargs,
             }
         )
@@ -57,6 +59,7 @@ class BaseMaestroRun(ABC):
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        response_language: str | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         pass
@@ -80,6 +83,7 @@ class BaseMaestroRun(ABC):
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        response_language: str | NotGiven = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
