@@ -1,13 +1,12 @@
 from typing import Literal, List, Optional, Any, Set, Dict, Type, Union
-from typing_extensions import TypedDict
-from pydantic import BaseModel
+from typing_extensions import TypedDict, Required, Annotated
+from pydantic import BaseModel, Field
 
 from ai21.models.ai21_base_model import AI21BaseModel
 
 Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
-ToolType = Literal["file_search", "web_search"]
 OutputOptions = Literal["data_sources", "requirements_result"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
 PrimitiveLists = Type[List[PrimitiveTypes]]
@@ -23,11 +22,45 @@ class MaestroMessage(TypedDict):
     content: str
 
 
-class Tool(TypedDict):
-    type: ToolType
+class HTTPToolFunctionParamProperties(TypedDict):
+    type: str
+    description: str
 
 
-class FileSearchToolResource(TypedDict, total=False):
+class Parameters(TypedDict, total=False):
+    type: Literal["object"]
+    properties: Dict[str, HTTPToolFunctionParamProperties]
+    required: List[str]
+    additional_properties: Optional[bool]
+
+
+class Function(TypedDict):
+    name: str
+    description: str
+    parameters: Parameters
+
+
+class Endpoint(TypedDict, total=False):
+    url: str
+    headers: Optional[dict]
+
+
+class HttpTool(TypedDict):
+    type: Required[Literal["http"]]
+    function: Function
+    endpoint: Endpoint
+
+
+class McpTool(TypedDict, total=False):
+    type: Required[Literal["mcp"]]
+    server_label: str
+    server_url: str
+    headers: Optional[dict]
+    allowed_tools: Optional[List[str]]
+
+
+class FileSearch(TypedDict, total=False):
+    type: Literal["file_search"]
     retrieval_similarity_threshold: Optional[float]
     labels: Optional[List[str]]
     labels_filter_mode: Optional[Literal["AND", "OR"]]
@@ -37,24 +70,36 @@ class FileSearchToolResource(TypedDict, total=False):
     max_neighbors: Optional[int]
 
 
-class WebSearchToolResource(TypedDict, total=False):
+class WebSearch(TypedDict, total=False):
+    type: Literal["web_search"]
     urls: Optional[List[str]]
 
 
 class ToolResources(TypedDict, total=False):
-    file_search: Optional[FileSearchToolResource]
-    web_search: Optional[WebSearchToolResource]
+    file_search: Optional[FileSearch]
+    web_search: Optional[WebSearch]
+
+
+ToolDefinition = Annotated[
+    Union[
+        HttpTool,
+        McpTool,
+        FileSearch,
+        WebSearch,
+    ],
+    Field(discriminator="type"),
+]
 
 
 class Requirement(TypedDict, total=False):
     name: str
     description: str
-    is_mandatory: bool = False
+    is_mandatory: bool
 
 
 class RequirementResultItem(Requirement, total=False):
     score: float
-    reason: Optional[str] = None
+    reason: Optional[str]
 
 
 class RequirementsResult(TypedDict, total=False):
