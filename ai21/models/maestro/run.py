@@ -46,13 +46,13 @@ class Endpoint(TypedDict, total=False):
 
 
 class HttpTool(TypedDict):
-    type: Required[Literal["http"]] = "http"
+    type: Required[Literal["http"]]
     function: Function
     endpoint: Endpoint
 
 
 class McpTool(TypedDict, total=False):
-    type: Required[Literal["mcp"]] = "mcp"
+    type: Required[Literal["mcp"]]
     server_label: str
     server_url: str
     headers: Optional[dict]
@@ -60,7 +60,7 @@ class McpTool(TypedDict, total=False):
 
 
 class FileSearch(TypedDict, total=False):
-    type: Literal["file_search"] = "file_search"
+    type: Literal["file_search"]
     retrieval_similarity_threshold: Optional[float]
     labels: Optional[List[str]]
     labels_filter_mode: Optional[Literal["AND", "OR"]]
@@ -71,7 +71,7 @@ class FileSearch(TypedDict, total=False):
 
 
 class WebSearch(TypedDict, total=False):
-    type: Literal["web_search"] = "web_search"
+    type: Literal["web_search"]
     urls: Optional[List[str]]
 
 
@@ -94,12 +94,12 @@ ToolDefinition = Annotated[
 class Requirement(TypedDict, total=False):
     name: str
     description: str
-    is_mandatory: bool = False
+    is_mandatory: bool
 
 
 class RequirementResultItem(Requirement, total=False):
     score: float
-    reason: Optional[str] = None
+    reason: Optional[str]
 
 
 class RequirementsResult(TypedDict, total=False):
