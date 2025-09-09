@@ -1,5 +1,5 @@
-from typing import Literal, List, Optional, Any, Set, Dict, Type, Union, Annotated
-from typing_extensions import TypedDict, Required
+from typing import Literal, List, Optional, Any, Set, Dict, Type, Union
+from typing_extensions import TypedDict, Required, Annotated
 from pydantic import BaseModel, Field
 
 from ai21.models.ai21_base_model import AI21BaseModel
