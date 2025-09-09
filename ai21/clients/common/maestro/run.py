@@ -11,8 +11,8 @@ from ai21.models.maestro.run import (
     OutputOptions,
     Requirement,
     RunResponse,
-    Tool,
     ToolResources,
+    ToolDefinition,
 )
 from ai21.types import NOT_GIVEN, NotGiven
 from ai21.utils.typing import remove_not_given
@@ -26,7 +26,7 @@ class BaseMaestroRun(ABC):
         *,
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven,
-        tools: List[Tool] | NotGiven,
+        tools: List[ToolDefinition] | NotGiven,
         tool_resources: ToolResources | NotGiven,
         requirements: List[Requirement] | NotGiven,
         budget: Budget | NotGiven,
@@ -54,7 +54,7 @@ class BaseMaestroRun(ABC):
         *,
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
@@ -78,7 +78,7 @@ class BaseMaestroRun(ABC):
         *,
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Tool] | NotGiven = NOT_GIVEN,
+        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
         tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
