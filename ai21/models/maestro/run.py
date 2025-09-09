@@ -23,10 +23,6 @@ class MaestroMessage(TypedDict):
     content: str
 
 
-class Tool(TypedDict):
-    type: ToolType
-
-
 class HTTPToolFunctionParamProperties(TypedDict):
     type: str
     description: str
@@ -50,13 +46,13 @@ class Endpoint(TypedDict, total=False):
     headers: Optional[dict]
 
 
-class HttpTool(Tool):
+class HttpTool(TypedDict):
     type: Required[Literal["http"]] = "http"
     function: Function
     endpoint: Endpoint
 
 
-class McpTool(Tool, total=False):
+class McpTool(TypedDict, total=False):
     type: Required[Literal["mcp"]] = "mcp"
     server_label: str
     server_url: str
@@ -64,7 +60,7 @@ class McpTool(Tool, total=False):
     allowed_tools: Optional[List[str]]
 
 
-class FileSearchToolResource(Tool, total=False):
+class FileSearch(TypedDict, total=False):
     type: Literal["file_search"] = "file_search"
     retrieval_similarity_threshold: Optional[float]
     labels: Optional[List[str]]
@@ -75,22 +71,22 @@ class FileSearchToolResource(Tool, total=False):
     max_neighbors: Optional[int]
 
 
-class WebSearchToolResource(Tool, total=False):
+class WebSearch(TypedDict, total=False):
     type: Literal["web_search"] = "web_search"
     urls: Optional[List[str]]
 
 
 class ToolResources(TypedDict, total=False):
-    file_search: Optional[FileSearchToolResource]
-    web_search: Optional[WebSearchToolResource]
+    file_search: Optional[FileSearch]
+    web_search: Optional[WebSearch]
 
 
 ToolDefinition = Annotated[
     Union[
         HttpTool,
         McpTool,
-        FileSearchToolResource,
-        WebSearchToolResource,
+        FileSearch,
+        WebSearch,
     ],
     Field(discriminator="type"),
 ]
