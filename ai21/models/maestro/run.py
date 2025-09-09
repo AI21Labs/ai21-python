@@ -32,31 +32,31 @@ class HTTPToolFunctionParamProperties(TypedDict):
     description: str
 
 
-class HTTPToolFunctionParameters(TypedDict, total=False):
+class Parameters(TypedDict, total=False):
     type: Literal["object"]
     properties: Dict[str, HTTPToolFunctionParamProperties]
     required: List[str]
     additionalProperties: Optional[bool]
 
 
-class HTTPToolFunction(TypedDict):
+class Function(TypedDict):
     name: str
     description: str
-    parameters: HTTPToolFunctionParameters
+    parameters: Parameters
 
 
-class HTTPToolEndpoint(TypedDict, total=False):
+class Endpoint(TypedDict, total=False):
     url: str
     headers: Optional[dict]
 
 
-class HTTPToolResource(Tool):
+class HttpTool(Tool):
     type: Required[Literal["http"]] = "http"
-    function: HTTPToolFunction
-    endpoint: HTTPToolEndpoint
+    function: Function
+    endpoint: Endpoint
 
 
-class MCPToolResource(Tool, total=False):
+class McpTool(Tool, total=False):
     type: Required[Literal["mcp"]] = "mcp"
     server_label: str
     server_url: str
@@ -87,8 +87,8 @@ class ToolResources(TypedDict, total=False):
 
 ToolDefinition = Annotated[
     Union[
-        HTTPToolResource,
-        MCPToolResource,
+        HttpTool,
+        McpTool,
         FileSearchToolResource,
         WebSearchToolResource,
     ],

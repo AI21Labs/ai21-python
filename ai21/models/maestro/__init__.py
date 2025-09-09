@@ -9,6 +9,11 @@ from ai21.models.maestro.run import (
     Tool,
     ToolResources,
     WebSearchResult,
+    HttpTool,
+    McpTool,
+    Function,
+    Endpoint,
+    Parameters,
 )
 
 __all__ = [
@@ -22,4 +27,9 @@ __all__ = [
     "Tool",
     "ToolResources",
     "WebSearchResult",
+    "HttpTool",
+    "McpTool",
+    "Function",
+    "Endpoint",
+    "Parameters",
 ]
