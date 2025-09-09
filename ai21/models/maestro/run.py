@@ -36,7 +36,7 @@ class Parameters(TypedDict, total=False):
     type: Literal["object"]
     properties: Dict[str, HTTPToolFunctionParamProperties]
     required: List[str]
-    additionalProperties: Optional[bool]
+    additional_properties: Optional[bool]
 
 
 class Function(TypedDict):
