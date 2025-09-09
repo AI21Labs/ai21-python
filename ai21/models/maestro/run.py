@@ -7,7 +7,6 @@ from ai21.models.ai21_base_model import AI21BaseModel
 Budget = Literal["low", "medium", "high"]
 Role = Literal["user", "assistant"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
-ToolType = Literal["file_search", "web_search", "http", "mcp"]
 OutputOptions = Literal["data_sources", "requirements_result"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
 PrimitiveLists = Type[List[PrimitiveTypes]]
