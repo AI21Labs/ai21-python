@@ -48,9 +48,7 @@ class AgentRun(StudioResource, BaseAgentRun):
 
     def retrieve(self, run_id: str) -> RunResponse:
         """Retrieve a run by ID"""
-        # Note: This would typically need a different endpoint structure
-        # For now, assuming maestro-like endpoint
-        result = self._get(path=f"/maestro/runs/{run_id}", response_cls=RunResponse)
+        result = self._get(path=self._get_run_path(run_id), response_cls=RunResponse)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
 
@@ -79,7 +77,7 @@ class AgentRun(StudioResource, BaseAgentRun):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
@@ -113,7 +111,7 @@ class AsyncAgentRun(AsyncStudioResource, BaseAgentRun):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         **kwargs,
     ) -> RunResponse:
         """Run an agent with the given input"""
@@ -135,7 +133,7 @@ class AsyncAgentRun(AsyncStudioResource, BaseAgentRun):
 
     async def retrieve(self, run_id: str) -> RunResponse:
         """Retrieve a run by ID"""
-        result = await self._get(path=f"/maestro/runs/{run_id}", response_cls=RunResponse)
+        result = await self._get(path=self._get_run_path(run_id), response_cls=RunResponse)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
 
@@ -164,7 +162,7 @@ class AsyncAgentRun(AsyncStudioResource, BaseAgentRun):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,

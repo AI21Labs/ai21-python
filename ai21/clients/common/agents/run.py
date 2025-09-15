@@ -11,6 +11,10 @@ from ai21.utils.typing import remove_not_given
 class BaseAgentRun(ABC):
     _module_name = "assistants"  # Uses assistants API underneath
 
+    def _get_run_path(self, run_id: str) -> str:
+        # Runs are handled by maestro system
+        return f"/maestro/runs/{run_id}"
+
     def _create_run_body(
         self,
         agent_id: str,
@@ -21,7 +25,7 @@ class BaseAgentRun(ABC):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         **kwargs,
     ) -> dict:
         return remove_not_given(
@@ -48,7 +52,7 @@ class BaseAgentRun(ABC):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         **kwargs,
     ) -> RunResponse:
         pass
@@ -72,7 +76,7 @@ class BaseAgentRun(ABC):
         include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
-        response_language: str = "unset",
+        response_language: str = "english",
         poll_interval_sec: float = 2.0,
         poll_timeout_sec: float = 300.0,
         **kwargs,
