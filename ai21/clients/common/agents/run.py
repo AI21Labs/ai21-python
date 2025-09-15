@@ -9,7 +9,7 @@ from ai21.utils.typing import remove_not_given
 
 
 class BaseAgentRun(ABC):
-    _module_name = "assistants"  # Uses assistants API underneath
+    _module_name = "assistants"
 
     def _get_run_path(self, run_id: str) -> str:
         # Runs are handled by maestro system
