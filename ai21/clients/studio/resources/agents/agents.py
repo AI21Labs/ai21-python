@@ -10,6 +10,7 @@ from ai21.models.agents import (
     ListAgentsResponse,
     ModifyAgentRequest,
 )
+from ai21.models._pydantic_compatibility import _to_dict
 
 
 class Agents(StudioResource, BaseAgents):
@@ -20,7 +21,7 @@ class Agents(StudioResource, BaseAgents):
     def create(self, *, request: CreateAgentRequest) -> Agent:
         """Create a new agent"""
         # Convert agent request to assistant request format if needed
-        body = request.model_dump(exclude_none=True)
+        body = _to_dict(request, exclude_none=True)
         # Map agent_type to assistant_type for API compatibility
         if "agent_type" in body:
             body["assistant_type"] = body.pop("agent_type")
@@ -43,7 +44,7 @@ class Agents(StudioResource, BaseAgents):
 
     def modify(self, agent_id: str, *, request: ModifyAgentRequest) -> Agent:
         """Modify an existing agent"""
-        body = request.model_dump(exclude_none=True)
+        body = _to_dict(request, exclude_none=True)
         result = self._patch(path=f"/{self._module_name}/{agent_id}", body=body, response_cls=Agent)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
@@ -62,7 +63,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
 
     async def create(self, *, request: CreateAgentRequest) -> Agent:
         """Create a new agent"""
-        body = request.model_dump(exclude_none=True)
+        body = _to_dict(request, exclude_none=True)
         if "agent_type" in body:
             body["assistant_type"] = body.pop("agent_type")
 
@@ -84,7 +85,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
 
     async def modify(self, agent_id: str, *, request: ModifyAgentRequest) -> Agent:
         """Modify an existing agent"""
-        body = request.model_dump(exclude_none=True)
+        body = _to_dict(request, exclude_none=True)
         result = await self._patch(path=f"/{self._module_name}/{agent_id}", body=body, response_cls=Agent)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
