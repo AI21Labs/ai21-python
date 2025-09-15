@@ -1,3 +1,4 @@
+from ai21.clients.studio.resources.agents.agents import AsyncAgents
 from ai21.clients.studio.resources.batch.async_batches import AsyncBatches
 from ai21.clients.studio.resources.maestro.maestro import AsyncMaestro
 from ai21.clients.studio.resources.studio_conversational_rag import (
@@ -11,6 +12,7 @@ class AsyncBeta(AsyncStudioResource):
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
 
+        self.agents = AsyncAgents(client)
         self.conversational_rag = AsyncStudioConversationalRag(client)
         self.maestro = AsyncMaestro(client)
         self.batches = AsyncBatches(client)
