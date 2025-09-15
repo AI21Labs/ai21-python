@@ -71,7 +71,7 @@ class ModifyAgentRequest(AI21BaseModel):
     description: Optional[str] = None
     optimization: Optional[str] = None
     avatar: Optional[str] = None
-    is_archived: Optional[bool] = False
+    is_archived: Optional[bool] = None
     models: Optional[List[str]] = None
     tools: Optional[List[Dict[str, Any]]] = None
     tool_resources: Optional[Dict[str, Any]] = None
