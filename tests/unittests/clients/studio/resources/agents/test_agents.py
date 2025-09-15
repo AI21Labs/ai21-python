@@ -14,10 +14,7 @@ from ai21.models.agents import (
     DeleteAgentResponse,
     ListAgentsResponse,
     ModifyAgentRequest,
-    Requirement,
-    Visibility,
 )
-from ai21.models._pydantic_compatibility import _from_dict, _to_dict
 
 
 @pytest.fixture
@@ -62,26 +59,26 @@ class TestAgents:
         # Arrange
         agent_data = get_dummy_agent_data()
         request = get_dummy_create_request()
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = Agents(mock_ai21_studio_client)
-        
+
         # Act
         result = agents.create(request=request)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.name == "Test Agent"
         assert result.budget == BudgetLevel.MEDIUM
-        
+
         # Verify the API call
         mock_ai21_studio_client.execute_http_request.assert_called_once()
         args, kwargs = mock_ai21_studio_client.execute_http_request.call_args
         assert kwargs["method"] == "POST"
         assert kwargs["path"] == "/assistants"
-        
+
         # Check that agent_type was mapped to assistant_type
         body = kwargs["body"]
         assert "assistant_type" in body
@@ -92,48 +89,44 @@ class TestAgents:
         # Arrange
         agent_data = get_dummy_agent_data()
         agent_id = agent_data["id"]
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = Agents(mock_ai21_studio_client)
-        
+
         # Act
         result = agents.get(agent_id)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.id == agent_id
         assert result.name == "Test Agent"
-        
+
         mock_ai21_studio_client.execute_http_request.assert_called_once_with(
-            method="GET",
-            path=f"/assistants/{agent_id}",
-            params={}
+            method="GET", path=f"/assistants/{agent_id}", params={}
         )
 
     def test_list_agents(self, mock_ai21_studio_client):
         # Arrange
         agent_data = get_dummy_agent_data()
         list_response = {"results": [agent_data]}
-        
+
         mock_response = httpx.Response(status_code=200, json=list_response)
         mock_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = Agents(mock_ai21_studio_client)
-        
+
         # Act
         result = agents.list()
-        
+
         # Assert
         assert isinstance(result, ListAgentsResponse)
         assert len(result.results) == 1
         assert result.results[0].name == "Test Agent"
-        
+
         mock_ai21_studio_client.execute_http_request.assert_called_once_with(
-            method="GET",
-            path="/assistants",
-            params={}
+            method="GET", path="/assistants", params={}
         )
 
     def test_modify_agent(self, mock_ai21_studio_client):
@@ -141,48 +134,45 @@ class TestAgents:
         agent_data = get_dummy_agent_data()
         agent_id = agent_data["id"]
         agent_data["name"] = "Modified Agent"
-        
+
         modify_request = ModifyAgentRequest(name="Modified Agent")
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = Agents(mock_ai21_studio_client)
-        
+
         # Act
         result = agents.modify(agent_id, request=modify_request)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.name == "Modified Agent"
-        
+
         mock_ai21_studio_client.execute_http_request.assert_called_once_with(
-            method="PATCH",
-            path=f"/assistants/{agent_id}",
-            body={"name": "Modified Agent"}
+            method="PATCH", path=f"/assistants/{agent_id}", body={"name": "Modified Agent"}
         )
 
     def test_delete_agent(self, mock_ai21_studio_client):
         # Arrange
         agent_id = str(uuid4())
         delete_response = {"object": "agent", "deleted": True, "id": agent_id}
-        
+
         mock_response = httpx.Response(status_code=200, json=delete_response)
         mock_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = Agents(mock_ai21_studio_client)
-        
+
         # Act
         result = agents.delete(agent_id)
-        
+
         # Assert
         assert isinstance(result, DeleteAgentResponse)
         assert result.deleted is True
         assert result.id == agent_id
-        
+
         mock_ai21_studio_client.execute_http_request.assert_called_once_with(
-            method="DELETE",
-            path=f"/assistants/{agent_id}"
+            method="DELETE", path=f"/assistants/{agent_id}"
         )
 
 
@@ -192,20 +182,20 @@ class TestAsyncAgents:
         # Arrange
         agent_data = get_dummy_agent_data()
         request = get_dummy_create_request()
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = AsyncAgents(mock_async_ai21_studio_client)
-        
+
         # Act
         result = await agents.create(request=request)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.name == "Test Agent"
         assert result.budget == BudgetLevel.MEDIUM
-        
+
         # Verify the API call
         mock_async_ai21_studio_client.execute_http_request.assert_called_once()
         args, kwargs = mock_async_ai21_studio_client.execute_http_request.call_args
@@ -217,15 +207,15 @@ class TestAsyncAgents:
         # Arrange
         agent_data = get_dummy_agent_data()
         agent_id = agent_data["id"]
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = AsyncAgents(mock_async_ai21_studio_client)
-        
+
         # Act
         result = await agents.get(agent_id)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.id == agent_id
@@ -236,15 +226,15 @@ class TestAsyncAgents:
         # Arrange
         agent_data = get_dummy_agent_data()
         list_response = {"results": [agent_data]}
-        
+
         mock_response = httpx.Response(status_code=200, json=list_response)
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = AsyncAgents(mock_async_ai21_studio_client)
-        
+
         # Act
         result = await agents.list()
-        
+
         # Assert
         assert isinstance(result, ListAgentsResponse)
         assert len(result.results) == 1
@@ -256,17 +246,17 @@ class TestAsyncAgents:
         agent_data = get_dummy_agent_data()
         agent_id = agent_data["id"]
         agent_data["name"] = "Modified Agent"
-        
+
         modify_request = ModifyAgentRequest(name="Modified Agent")
-        
+
         mock_response = httpx.Response(status_code=200, json=agent_data)
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = AsyncAgents(mock_async_ai21_studio_client)
-        
+
         # Act
         result = await agents.modify(agent_id, request=modify_request)
-        
+
         # Assert
         assert isinstance(result, Agent)
         assert result.name == "Modified Agent"
@@ -276,15 +266,15 @@ class TestAsyncAgents:
         # Arrange
         agent_id = str(uuid4())
         delete_response = {"object": "agent", "deleted": True, "id": agent_id}
-        
+
         mock_response = httpx.Response(status_code=200, json=delete_response)
         mock_async_ai21_studio_client.execute_http_request.return_value = mock_response
-        
+
         agents = AsyncAgents(mock_async_ai21_studio_client)
-        
+
         # Act
         result = await agents.delete(agent_id)
-        
+
         # Assert
         assert isinstance(result, DeleteAgentResponse)
         assert result.deleted is True

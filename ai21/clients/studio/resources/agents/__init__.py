@@ -3,7 +3,7 @@ from ai21.clients.studio.resources.agents.run import AgentRun, AsyncAgentRun
 
 __all__ = [
     "Agents",
-    "AsyncAgents", 
+    "AsyncAgents",
     "AgentRun",
     "AsyncAgentRun",
 ]

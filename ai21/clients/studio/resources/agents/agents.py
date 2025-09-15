@@ -24,7 +24,7 @@ class Agents(StudioResource, BaseAgents):
         # Map agent_type to assistant_type for API compatibility
         if "agent_type" in body:
             body["assistant_type"] = body.pop("agent_type")
-        
+
         result = self._post(path=f"/{self._module_name}", body=body, response_cls=Agent)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
@@ -65,7 +65,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         body = request.model_dump(exclude_none=True)
         if "agent_type" in body:
             body["assistant_type"] = body.pop("agent_type")
-        
+
         result = await self._post(path=f"/{self._module_name}", body=body, response_cls=Agent)
         assert result is not None  # response_cls is provided, so result should never be None
         return result
