@@ -65,7 +65,7 @@ class TestAgentRun:
         body = kwargs["body"]
         assert body["input"] == input_messages
         assert body["verbose"] is False
-        assert body["response_language"] == "unset"
+        assert body["response_language"] == "english"
 
     def test_create_run_with_all_options(self, mock_ai21_studio_client):
         # Arrange
