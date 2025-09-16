@@ -12,7 +12,7 @@ class AsyncBeta(AsyncStudioResource):
     def __init__(self, client: AsyncAI21HTTPClient):
         super().__init__(client)
 
-        self.agents = AsyncAgents(client)
-        self.conversational_rag = AsyncStudioConversationalRag(client)
         self.maestro = AsyncMaestro(client)
+        self.agents = AsyncAgents(client, self.maestro.runs)
+        self.conversational_rag = AsyncStudioConversationalRag(client)
         self.batches = AsyncBatches(client)

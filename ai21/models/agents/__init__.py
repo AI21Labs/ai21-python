@@ -8,7 +8,6 @@ from ai21.models.agents.agent import (
     ModifyAgentRequest,
     Requirement,
     RunAgentRequest,
-    RunResponse,
     Visibility,
 )
 
@@ -22,6 +21,5 @@ __all__ = [
     "ModifyAgentRequest",
     "Requirement",
     "RunAgentRequest",
-    "RunResponse",
     "Visibility",
 ]

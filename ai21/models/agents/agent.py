@@ -100,9 +100,3 @@ class RunAgentRequest(AI21BaseModel):
     response_language: str = "unset"
 
 
-class RunResponse(AI21BaseModel):
-    id: UUID
-    status: str  # "completed", "failed", "in_progress", "requires_action"
-    result: Optional[Any] = None
-    data_sources: Optional[Dict[str, Any]] = None
-    requirements_result: Optional[Dict[str, Any]] = None

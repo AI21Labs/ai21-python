@@ -12,7 +12,7 @@ class Beta(StudioResource):
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
 
-        self.agents = Agents(client)
-        self.conversational_rag = StudioConversationalRag(client)
         self.maestro = Maestro(client)
+        self.agents = Agents(client, self.maestro.runs)
+        self.conversational_rag = StudioConversationalRag(client)
         self.batches = Batches(client)
