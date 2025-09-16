@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import asyncio
 import time
-from typing import List
+from typing import List, Union
 
 from ai21.clients.common.maestro.run import BaseMaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource, AsyncStudioResource
@@ -25,14 +25,14 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create(
         self,
         *,
-        input: str | List[MaestroMessage],
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
-        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
-        response_language: str | NotGiven = NOT_GIVEN,
+        input: Union[str, List[MaestroMessage]],
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[ToolResources, NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[Budget, NotGiven] = NOT_GIVEN,
+        include: Union[List[OutputOptions], NotGiven] = NOT_GIVEN,
+        response_language: Union[str, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -72,14 +72,14 @@ class MaestroRun(StudioResource, BaseMaestroRun):
     def create_and_poll(
         self,
         *,
-        input: str | List[MaestroMessage],
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
-        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
-        response_language: str | NotGiven = NOT_GIVEN,
+        input: Union[str, List[MaestroMessage]],
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[ToolResources, NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[Budget, NotGiven] = NOT_GIVEN,
+        include: Union[List[OutputOptions], NotGiven] = NOT_GIVEN,
+        response_language: Union[str, NotGiven] = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
@@ -105,14 +105,14 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create(
         self,
         *,
-        input: str | List[MaestroMessage],
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
-        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
-        response_language: str | NotGiven = NOT_GIVEN,
+        input: Union[str, List[MaestroMessage]],
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[ToolResources, NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[Budget, NotGiven] = NOT_GIVEN,
+        include: Union[List[OutputOptions], NotGiven] = NOT_GIVEN,
+        response_language: Union[str, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         body = self._create_body(
@@ -152,16 +152,16 @@ class AsyncMaestroRun(AsyncStudioResource, BaseMaestroRun):
     async def create_and_poll(
         self,
         *,
-        input: str | List[MaestroMessage],
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: Budget | NotGiven = NOT_GIVEN,
-        include: List[OutputOptions] | NotGiven = NOT_GIVEN,
+        input: Union[str, List[MaestroMessage]],
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[ToolResources, NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[Budget, NotGiven] = NOT_GIVEN,
+        include: Union[List[OutputOptions], NotGiven] = NOT_GIVEN,
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
-        response_language: str | NotGiven = NOT_GIVEN,
+        response_language: Union[str, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         run = await self.create(

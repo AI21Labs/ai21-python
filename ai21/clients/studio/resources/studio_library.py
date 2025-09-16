@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from os import PathLike
-from typing import List, Optional
+from typing import List, Optional, Union
 
 from ai21.clients.studio.resources.studio_resource import (
     AsyncStudioResource,
@@ -31,10 +31,10 @@ class LibraryFiles(StudioResource):
         self,
         file_path: PathLike,
         *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_id: Optional[str] | NotGiven = NOT_GIVEN,
+        path: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        labels: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
+        public_url: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        batch_id: Union[Optional[str], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> str:
         files = {"file": open(file_path, "rb")}
@@ -64,8 +64,8 @@ class LibraryFiles(StudioResource):
     def list(
         self,
         *,
-        offset: Optional[int] | NotGiven = NOT_GIVEN,
-        limit: Optional[int] | NotGiven = NOT_GIVEN,
+        offset: Union[Optional[int], NotGiven] = NOT_GIVEN,
+        limit: Union[Optional[int], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> List[FileResponse]:
         params = remove_not_given({"offset": offset, "limit": limit})
@@ -76,8 +76,8 @@ class LibraryFiles(StudioResource):
         self,
         file_id: str,
         *,
-        public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        public_url: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        labels: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> None:
         body = remove_not_given(
@@ -109,10 +109,10 @@ class AsyncLibraryFiles(AsyncStudioResource):
         self,
         file_path: str,
         *,
-        path: Optional[str] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
-        public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        batch_id: Optional[str] | NotGiven = NOT_GIVEN,
+        path: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        labels: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
+        public_url: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        batch_id: Union[Optional[str], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> str:
         files = {"file": open(file_path, "rb")}
@@ -144,8 +144,8 @@ class AsyncLibraryFiles(AsyncStudioResource):
     async def list(
         self,
         *,
-        offset: Optional[int] | NotGiven = NOT_GIVEN,
-        limit: Optional[int] | NotGiven = NOT_GIVEN,
+        offset: Union[Optional[int], NotGiven] = NOT_GIVEN,
+        limit: Union[Optional[int], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> List[FileResponse]:
         params = remove_not_given({"offset": offset, "limit": limit})
@@ -156,8 +156,8 @@ class AsyncLibraryFiles(AsyncStudioResource):
         self,
         file_id: str,
         *,
-        public_url: Optional[str] | NotGiven = NOT_GIVEN,
-        labels: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        public_url: Union[Optional[str], NotGiven] = NOT_GIVEN,
+        labels: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> None:
         body = remove_not_given(

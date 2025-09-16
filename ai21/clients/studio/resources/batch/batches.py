@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from os import PathLike
-from typing import Any, Dict, Literal
+from typing import Any, Dict, Literal, Union
 
 from ai21.clients.studio.resources.batch.base_batches import BaseBatches
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -14,9 +14,9 @@ from ai21.types import NOT_GIVEN, NotGiven
 class Batches(StudioResource, BaseBatches):
     def create(
         self,
-        file: str | PathLike[str],
+        file: Union[str, PathLike[str]],
         endpoint: Literal["/v1/chat/completions"],
-        metadata: Dict[str, str] | NotGiven = NOT_GIVEN,
+        metadata: Union[Dict[str, str], NotGiven] = NOT_GIVEN,
         **kwargs: Any,
     ) -> Batch:
         files = {"file": open(file, "rb")}
@@ -29,8 +29,8 @@ class Batches(StudioResource, BaseBatches):
 
     def list(
         self,
-        after: str | NotGiven = NOT_GIVEN,
-        limit: int | NotGiven = NOT_GIVEN,
+        after: Union[str, NotGiven] = NOT_GIVEN,
+        limit: Union[int, NotGiven] = NOT_GIVEN,
         **kwargs: Any,
     ) -> SyncPagination[Batch]:
         """List your organization's batches.
@@ -61,8 +61,8 @@ class Batches(StudioResource, BaseBatches):
     def get_results(
         self,
         batch_id: str,
-        file_type: Literal["output", "error"] | NotGiven = NOT_GIVEN,
-        force: bool | NotGiven = NOT_GIVEN,
+        file_type: Union[Literal["output", "error"], NotGiven] = NOT_GIVEN,
+        force: Union[bool, NotGiven] = NOT_GIVEN,
         **kwargs: Any,
     ) -> DownloadedFile:
         return self._get(

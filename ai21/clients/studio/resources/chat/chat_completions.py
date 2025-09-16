@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Any, List, Literal, Optional, overload
+from typing import Any, List, Literal, Optional, overload, Union
 
 from ai21.clients.studio.resources.chat.base_chat_completions import BaseChatCompletions
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -23,15 +23,15 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         self,
         model: str,
         messages: List[ChatMessageParam],
-        max_tokens: int | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        top_p: float | NotGiven = NOT_GIVEN,
-        stop: str | List[str] | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
-        stream: Optional[Literal[False]] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
-        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
+        max_tokens: Union[int, NotGiven] = NOT_GIVEN,
+        temperature: Union[float, NotGiven] = NOT_GIVEN,
+        top_p: Union[float, NotGiven] = NOT_GIVEN,
+        stop: Union[str, List[str], NotGiven] = NOT_GIVEN,
+        n: Union[int, NotGiven] = NOT_GIVEN,
+        stream: Union[Optional[Literal[False]], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        response_format: Union[ResponseFormat, NotGiven] = NOT_GIVEN,
+        documents: Union[List[DocumentSchema], NotGiven] = NOT_GIVEN,
         **kwargs: Any,
     ) -> ChatCompletionResponse:
         pass
@@ -42,14 +42,14 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         model: str,
         messages: List[ChatMessageParam],
         stream: Literal[True],
-        max_tokens: int | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        top_p: float | NotGiven = NOT_GIVEN,
-        stop: str | List[str] | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
-        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
+        max_tokens: Union[int, NotGiven] = NOT_GIVEN,
+        temperature: Union[float, NotGiven] = NOT_GIVEN,
+        top_p: Union[float, NotGiven] = NOT_GIVEN,
+        stop: Union[str, List[str], NotGiven] = NOT_GIVEN,
+        n: Union[int, NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        response_format: Union[ResponseFormat, NotGiven] = NOT_GIVEN,
+        documents: Union[List[DocumentSchema], NotGiven] = NOT_GIVEN,
         **kwargs: Any,
     ) -> Stream[ChatCompletionChunk]:
         pass
@@ -58,17 +58,17 @@ class ChatCompletions(StudioResource, BaseChatCompletions):
         self,
         messages: List[ChatMessageParam],
         model: str,
-        max_tokens: int | NotGiven = NOT_GIVEN,
-        temperature: float | NotGiven = NOT_GIVEN,
-        top_p: float | NotGiven = NOT_GIVEN,
-        stop: str | List[str] | NotGiven = NOT_GIVEN,
-        n: int | NotGiven = NOT_GIVEN,
-        stream: Optional[Literal[False]] | Literal[True] | NotGiven = NOT_GIVEN,
-        tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        response_format: ResponseFormat | NotGiven = NOT_GIVEN,
-        documents: List[DocumentSchema] | NotGiven = NOT_GIVEN,
+        max_tokens: Union[int, NotGiven] = NOT_GIVEN,
+        temperature: Union[float, NotGiven] = NOT_GIVEN,
+        top_p: Union[float, NotGiven] = NOT_GIVEN,
+        stop: Union[str, List[str], NotGiven] = NOT_GIVEN,
+        n: Union[int, NotGiven] = NOT_GIVEN,
+        stream: Union[Optional[Literal[False]], Literal[True], NotGiven] = NOT_GIVEN,
+        tools: Union[List[ToolDefinition], NotGiven] = NOT_GIVEN,
+        response_format: Union[ResponseFormat, NotGiven] = NOT_GIVEN,
+        documents: Union[List[DocumentSchema], NotGiven] = NOT_GIVEN,
         **kwargs: Any,
-    ) -> ChatCompletionResponse | Stream[ChatCompletionChunk]:
+    ) -> Union[ChatCompletionResponse, Stream[ChatCompletionChunk]]:
         if any(isinstance(item, J2ChatMessage) for item in messages):
             raise ValueError(
                 "Please use the ChatMessage class from ai21.models.chat"
