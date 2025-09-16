@@ -3,7 +3,6 @@ from __future__ import annotations
 from datetime import datetime
 from enum import Enum
 from typing import Any, Dict, List, Optional
-from uuid import UUID
 
 from ai21.models.ai21_base_model import AI21BaseModel
 
