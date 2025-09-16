@@ -18,11 +18,11 @@ from ai21.types import NOT_GIVEN, NotGiven
 
 class AgentRuns:
     """Agent runs interface that delegates to maestro"""
-    
+
     def __init__(self, agents_client, maestro_runs):
         self._agents_client = agents_client
         self._maestro_runs = maestro_runs
-    
+
     def create(
         self,
         agent_id: str,
@@ -38,7 +38,7 @@ class AgentRuns:
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
         agent = self._agents_client.get(agent_id)
-        
+
         # Use Pydantic converter to handle parameter conversion
         converter = AgentToMaestroRunConverter.from_agent_and_params(
             agent=agent,
@@ -50,20 +50,20 @@ class AgentRuns:
             structured_rag_enabled=structured_rag_enabled,
             dynamic_planning_enabled=dynamic_planning_enabled,
             response_language=response_language,
-            **kwargs
+            **kwargs,
         )
-        
+
         return self._maestro_runs.create(**converter.to_maestro_create_params())
-    
+
     # Delegate directly to maestro methods
     @property
     def retrieve(self):
         return self._maestro_runs.retrieve
-    
+
     @property
     def poll_for_status(self):
         return self._maestro_runs.poll_for_status
-    
+
     def create_and_poll(
         self,
         agent_id: str,
@@ -81,7 +81,7 @@ class AgentRuns:
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
         agent = self._agents_client.get(agent_id)
-        
+
         # Use Pydantic converter to handle parameter conversion
         converter = AgentToMaestroRunConverter.from_agent_and_params(
             agent=agent,
@@ -93,15 +93,12 @@ class AgentRuns:
             structured_rag_enabled=structured_rag_enabled,
             dynamic_planning_enabled=dynamic_planning_enabled,
             response_language=response_language,
-            **kwargs
+            **kwargs,
         )
-        
+
         maestro_params = converter.to_maestro_create_params()
-        maestro_params.update({
-            "poll_interval_sec": poll_interval_sec,
-            "poll_timeout_sec": poll_timeout_sec
-        })
-        
+        maestro_params.update({"poll_interval_sec": poll_interval_sec, "poll_timeout_sec": poll_timeout_sec})
+
         return self._maestro_runs.create_and_poll(**maestro_params)
 
 

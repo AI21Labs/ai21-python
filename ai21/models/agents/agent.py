@@ -98,5 +98,3 @@ class RunAgentRequest(AI21BaseModel):
     structured_rag_enabled: bool = False
     dynamic_planning_enabled: bool = False
     response_language: str = "unset"
-
-

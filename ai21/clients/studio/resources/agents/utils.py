@@ -10,7 +10,7 @@ from ai21.types import NOT_GIVEN, NotGiven
 
 class AgentToMaestroRunConverter(AI21BaseModel):
     """Pydantic model that converts agent run parameters to maestro run parameters"""
-    
+
     # Agent inputs
     agent_id: str
     input: List[Dict[str, str]]
@@ -20,14 +20,14 @@ class AgentToMaestroRunConverter(AI21BaseModel):
     structured_rag_enabled: bool = False
     dynamic_planning_enabled: bool = False
     response_language: str = "english"
-    
+
     # Agent configuration (will be populated from agent fetch)
     agent_models: List[str] | NotGiven = NOT_GIVEN
     agent_tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN
     agent_tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN
     agent_requirements: List[Dict[str, Any]] | NotGiven = NOT_GIVEN
     agent_budget: str | NotGiven = NOT_GIVEN
-    
+
     # Computed maestro parameters
     maestro_input: List[MaestroMessage] = Field(default_factory=list)
     maestro_models: List[str] | NotGiven = NOT_GIVEN
@@ -36,13 +36,12 @@ class AgentToMaestroRunConverter(AI21BaseModel):
     maestro_requirements: List[Dict[str, Any]] | NotGiven = NOT_GIVEN
     maestro_budget: str | NotGiven = NOT_GIVEN
     maestro_include: List[str] | NotGiven = NOT_GIVEN
-    
+
     def model_post_init(self, __context) -> None:
         """Convert agent parameters to maestro parameters after initialization"""
         # Convert input messages
-        self.maestro_input = [MaestroMessage(role=msg["role"], content=msg["content"]) 
-                             for msg in self.input]
-        
+        self.maestro_input = [MaestroMessage(role=msg["role"], content=msg["content"]) for msg in self.input]
+
         # Map agent configuration to maestro parameters
         self.maestro_models = self.agent_models
         self.maestro_tools = self.agent_tools
@@ -50,7 +49,7 @@ class AgentToMaestroRunConverter(AI21BaseModel):
         self.maestro_requirements = self.agent_requirements
         self.maestro_budget = self.agent_budget
         self.maestro_include = self.include if self.include is not NOT_GIVEN else NOT_GIVEN
-    
+
     @classmethod
     def from_agent_and_params(
         cls,
@@ -63,13 +62,13 @@ class AgentToMaestroRunConverter(AI21BaseModel):
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
         response_language: str = "english",
-        **kwargs
-    ) -> 'AgentToMaestroRunConverter':
+        **kwargs,
+    ) -> "AgentToMaestroRunConverter":
         """Create converter from agent configuration and run parameters"""
         agent_requirements = NOT_GIVEN
         if agent.requirements:
             agent_requirements = [req.model_dump() for req in agent.requirements]
-        
+
         return cls(
             agent_id=agent_id,
             input=input,
@@ -84,9 +83,9 @@ class AgentToMaestroRunConverter(AI21BaseModel):
             agent_tool_resources=agent.tool_resources or NOT_GIVEN,
             agent_requirements=agent_requirements,
             agent_budget=agent.budget.value if agent.budget else NOT_GIVEN,
-            **kwargs
+            **kwargs,
         )
-    
+
     def to_maestro_create_params(self) -> dict:
         """Convert to parameters for maestro.runs.create()"""
         params = {
