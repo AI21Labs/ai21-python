@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import List, Optional, Union
+from typing import List, Optional
 
 from ai21.clients.common.chat_base import Chat
 from ai21.clients.studio.resources.chat import ChatCompletions, AsyncChatCompletions
@@ -31,10 +31,10 @@ class StudioChat(StudioResource, Chat):
         min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
         top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
         top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
-        stop_sequences: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
-        frequency_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
-        presence_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
-        count_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ChatResponse:
         if any(isinstance(item, JambaChatMessage) for item in messages):
@@ -80,10 +80,10 @@ class AsyncStudioChat(AsyncStudioResource, Chat):
         min_tokens: Optional[int] = CHAT_DEFAULT_MIN_TOKENS,
         top_p: Optional[float] = CHAT_DEFAULT_TOP_P,
         top_k_return: Optional[int] = CHAT_DEFAULT_TOP_K_RETURN,
-        stop_sequences: Union[Optional[List[str]], NotGiven] = NOT_GIVEN,
-        frequency_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
-        presence_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
-        count_penalty: Union[Optional[Penalty], NotGiven] = NOT_GIVEN,
+        stop_sequences: Optional[List[str]] | NotGiven = NOT_GIVEN,
+        frequency_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        presence_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
+        count_penalty: Optional[Penalty] | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ChatResponse:
         if any(isinstance(item, JambaChatMessage) for item in messages):

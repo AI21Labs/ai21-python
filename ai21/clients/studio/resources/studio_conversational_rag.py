@@ -1,5 +1,5 @@
 from __future__ import annotations
-from typing import List, Union
+from typing import List
 
 from ai21.clients.common.conversational_rag import ConversationalRag
 from ai21.clients.studio.resources.studio_resource import (
@@ -17,14 +17,14 @@ class StudioConversationalRag(StudioResource, ConversationalRag):
         self,
         messages: List[ChatMessage],
         *,
-        path: Union[str, NotGiven] = NOT_GIVEN,
-        labels: Union[List[str], NotGiven] = NOT_GIVEN,
-        file_ids: Union[List[str], NotGiven] = NOT_GIVEN,
-        max_segments: Union[int, NotGiven] = NOT_GIVEN,
-        retrieval_strategy: Union[RetrievalStrategy, str, NotGiven] = NOT_GIVEN,
-        retrieval_similarity_threshold: Union[float, NotGiven] = NOT_GIVEN,
-        max_neighbors: Union[int, NotGiven] = NOT_GIVEN,
-        hybrid_search_alpha: Union[float, NotGiven] = NOT_GIVEN,
+        path: str | NotGiven = NOT_GIVEN,
+        labels: List[str] | NotGiven = NOT_GIVEN,
+        file_ids: List[str] | NotGiven = NOT_GIVEN,
+        max_segments: int | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | str | NotGiven = NOT_GIVEN,
+        retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
+        max_neighbors: int | NotGiven = NOT_GIVEN,
+        hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ConversationalRagResponse:
         body = self._create_body(
@@ -48,14 +48,14 @@ class AsyncStudioConversationalRag(AsyncStudioResource, ConversationalRag):
         self,
         messages: List[ChatMessage],
         *,
-        path: Union[str, NotGiven] = NOT_GIVEN,
-        labels: Union[List[str], NotGiven] = NOT_GIVEN,
-        file_ids: Union[List[str], NotGiven] = NOT_GIVEN,
-        max_segments: Union[int, NotGiven] = NOT_GIVEN,
-        retrieval_strategy: Union[RetrievalStrategy, str, NotGiven] = NOT_GIVEN,
-        retrieval_similarity_threshold: Union[float, NotGiven] = NOT_GIVEN,
-        max_neighbors: Union[int, NotGiven] = NOT_GIVEN,
-        hybrid_search_alpha: Union[float, NotGiven] = NOT_GIVEN,
+        path: str | NotGiven = NOT_GIVEN,
+        labels: List[str] | NotGiven = NOT_GIVEN,
+        file_ids: List[str] | NotGiven = NOT_GIVEN,
+        max_segments: int | NotGiven = NOT_GIVEN,
+        retrieval_strategy: RetrievalStrategy | str | NotGiven = NOT_GIVEN,
+        retrieval_similarity_threshold: float | NotGiven = NOT_GIVEN,
+        max_neighbors: int | NotGiven = NOT_GIVEN,
+        hybrid_search_alpha: float | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> ConversationalRagResponse:
         body = self._create_body(

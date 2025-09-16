@@ -1,5 +1,5 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Union
+from typing import List, Dict, Any
 
 from ai21.models.maestro.run import RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
@@ -15,8 +15,8 @@ class BaseAgentRun(ABC):
         *,
         input: List[Dict[str, str]],
         verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
+        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
         response_language: str = "english",
@@ -32,8 +32,8 @@ class BaseAgentRun(ABC):
         *,
         input: List[Dict[str, str]],
         verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
+        output_type: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        include: List[str] | NotGiven = NOT_GIVEN,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
         response_language: str = "english",
