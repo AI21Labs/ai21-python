@@ -1,4 +1,4 @@
-from ai21.clients.studio.resources.agents.agents import AsyncAgents
+from ai21.clients.studio.resources.agents.async_agents import AsyncAgents
 from ai21.clients.studio.resources.batch.async_batches import AsyncBatches
 from ai21.clients.studio.resources.maestro.maestro import AsyncMaestro
 from ai21.clients.studio.resources.studio_conversational_rag import (
