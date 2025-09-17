@@ -9,7 +9,6 @@ from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.models.agents import (
     Agent,
-    AgentType,
     BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,

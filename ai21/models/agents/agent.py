@@ -2,7 +2,7 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import List, Optional, Union
+from typing import List, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.maestro.run import Budget, ToolDefinition, ToolResources
