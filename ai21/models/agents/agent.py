@@ -49,19 +49,19 @@ class Requirement(AI21BaseModel):
 class Agent(AI21BaseModel):
     id: str
     name: str
-    description: str | None = None
+    description: Optional[str] = None
     organization_id: str
     user_id: str
-    models: list[str] | None = None
-    tools: list[ToolDefinition] | None = None
-    tool_resources: ToolResources | None = None
-    requirements: list[Requirement] | None = None
-    budget: Budget | None = None
-    visibility: Visibility | None = None
-    assistant_type: AgentType | None = None
+    models: Optional[List[str]] = None
+    tools: Optional[List[ToolDefinition]] = None
+    tool_resources: Optional[ToolResources] = None
+    requirements: Optional[List[Requirement]] = None
+    budget: Optional[Budget] = None
+    visibility: Optional[Visibility] = None
+    assistant_type: Optional[AgentType] = None
     created_at: datetime
     updated_at: datetime
-    response_language: ResponseLanguage | None = None
+    response_language: Optional[ResponseLanguage] = None
 
 
 class ListAgentsResponse(AI21BaseModel):
