@@ -1,4 +1,4 @@
-from typing import Callable, List, Dict, Any
+from typing import Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
@@ -30,7 +30,7 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: str | List[MaestroMessage],
+        input: Union[str, List[MaestroMessage]],
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
@@ -55,7 +55,7 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: str | List[MaestroMessage],
+        input: Union[str, List[MaestroMessage]],
         **kwargs,
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
@@ -77,14 +77,14 @@ class Agents(StudioResource, BaseAgents):
         self,
         *,
         name: str,
-        description: str | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
-        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: BudgetLevel | NotGiven = NOT_GIVEN,
-        agent_type: AgentType | NotGiven = NOT_GIVEN,
-        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
+        description: Union[str, NotGiven] = NOT_GIVEN,
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
+        agent_type: Union[AgentType, NotGiven] = NOT_GIVEN,
+        response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Create a new agent"""
@@ -115,15 +115,15 @@ class Agents(StudioResource, BaseAgents):
         self,
         agent_id: str,
         *,
-        name: str | NotGiven = NOT_GIVEN,
-        description: str | NotGiven = NOT_GIVEN,
-        models: List[str] | NotGiven = NOT_GIVEN,
-        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
-        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
-        budget: BudgetLevel | NotGiven = NOT_GIVEN,
-        visibility: Visibility | NotGiven = NOT_GIVEN,
-        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
+        name: Union[str, NotGiven] = NOT_GIVEN,
+        description: Union[str, NotGiven] = NOT_GIVEN,
+        models: Union[List[str], NotGiven] = NOT_GIVEN,
+        tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
+        tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
+        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
+        visibility: Union[Visibility, NotGiven] = NOT_GIVEN,
+        response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Modify an existing agent"""
