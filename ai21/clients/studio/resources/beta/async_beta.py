@@ -13,6 +13,6 @@ class AsyncBeta(AsyncStudioResource):
         super().__init__(client)
 
         self.maestro = AsyncMaestro(client)
-        self.agents = AsyncAgents(client, self.maestro.runs)
+        self.agents = AsyncAgents(client, self.maestro)
         self.conversational_rag = AsyncStudioConversationalRag(client)
         self.batches = AsyncBatches(client)

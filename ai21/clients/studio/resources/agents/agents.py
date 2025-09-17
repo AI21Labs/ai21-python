@@ -1,27 +1,31 @@
-from typing import List, Dict, Any, Union
+from typing import Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.studio.resources.agents.utils import AgentToMaestroRunConverter
+from ai21.clients.studio.resources.maestro.maestro import Maestro
+from ai21.clients.studio.resources.maestro.run import MaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.agents import (
     Agent,
-    CreateAgentRequest,
+    AgentType,
+    BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,
-    ModifyAgentRequest,
+    Requirement,
+    Visibility,
 )
+from ai21.models.agents.agent import ResponseLanguage
 from ai21.models.maestro.run import RunResponse
-from ai21.models._pydantic_compatibility import _to_dict
 from ai21.types import NOT_GIVEN, NotGiven
 
 
 class AgentRuns:
     """Agent runs interface that delegates to maestro"""
 
-    def __init__(self, agents_client, maestro_runs):
-        self._agents_client = agents_client
-        self._maestro_runs = maestro_runs
+    def __init__(self, maestro: Maestro, get_agent: Callable[[str], Agent]):
+        self._get_agent = get_agent
+        self._maestro_runs = maestro.runs
 
     def create(
         self,
@@ -31,15 +35,14 @@ class AgentRuns:
         verbose: bool = False,
         output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
         include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool = False,
-        dynamic_planning_enabled: bool = False,
-        response_language: str = "english",
+        structured_rag_enabled: bool | NotGiven = NOT_GIVEN,
+        dynamic_planning_enabled: bool | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
-        agent = self._agents_client.get(agent_id)
+        agent = self._get_agent(agent_id)
 
-        # Use Pydantic converter to handle parameter conversion
         converter = AgentToMaestroRunConverter.from_agent_and_params(
             agent=agent,
             agent_id=agent_id,
@@ -55,7 +58,6 @@ class AgentRuns:
 
         return self._maestro_runs.create(**converter.to_maestro_create_params())
 
-    # Delegate directly to maestro methods
     @property
     def retrieve(self):
         return self._maestro_runs.retrieve
@@ -69,20 +71,19 @@ class AgentRuns:
         agent_id: str,
         *,
         input: List[Dict[str, str]],
-        verbose: bool = False,
+        verbose: Union[bool, NotGiven] = NOT_GIVEN,
         output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
         include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool = False,
-        dynamic_planning_enabled: bool = False,
-        response_language: str = "english",
-        poll_interval_sec: float = 2.0,
-        poll_timeout_sec: float = 300.0,
+        structured_rag_enabled: Union[bool, NotGiven] = NOT_GIVEN,
+        dynamic_planning_enabled: Union[bool, NotGiven] = NOT_GIVEN,
+        response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
+        poll_interval_sec: Union[float, NotGiven] = NOT_GIVEN,
+        poll_timeout_sec: Union[float, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
-        agent = self._agents_client.get(agent_id)
+        agent = self._get_agent(agent_id)
 
-        # Use Pydantic converter to handle parameter conversion
         converter = AgentToMaestroRunConverter.from_agent_and_params(
             agent=agent,
             agent_id=agent_id,
@@ -103,43 +104,78 @@ class AgentRuns:
 
 
 class Agents(StudioResource, BaseAgents):
-    def __init__(self, client: AI21HTTPClient, maestro_runs):
+    def __init__(self, client: AI21HTTPClient, maestro: Maestro):
         super().__init__(client)
-        self.runs = AgentRuns(self, maestro_runs)
+        self.runs = AgentRuns(maestro, get_agent=self.get)
 
-    def create(self, *, request: CreateAgentRequest) -> Agent:
+    def create(
+        self,
+        *,
+        name: str,
+        description: str | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
+        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        agent_type: AgentType | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
+        **kwargs,
+    ) -> Agent:
         """Create a new agent"""
-        # Convert agent request to assistant request format if needed
-        body = _to_dict(request, exclude_none=True)
-        # Map agent_type to assistant_type for API compatibility
-        if "agent_type" in body:
-            body["assistant_type"] = body.pop("agent_type")
+        body = self._create_body(
+            name=name,
+            description=description,
+            models=models,
+            tools=tools,
+            tool_resources=tool_resources,
+            requirements=requirements,
+            budget=budget,
+            agent_type=agent_type,
+            response_language=response_language,
+            **kwargs,
+        )
 
-        result = self._post(path=f"/{self._module_name}", body=body, response_cls=Agent)
-        assert result is not None  # response_cls is provided, so result should never be None
-        return result
+        return self._post(path=f"/{self._module_name}", body=body, response_cls=Agent)
 
     def get(self, agent_id: str) -> Agent:
         """Retrieve an agent by ID"""
-        result = self._get(path=f"/{self._module_name}/{agent_id}", response_cls=Agent)
-        assert result is not None  # response_cls is provided, so result should never be None
-        return result
+        return self._get(path=f"/{self._module_name}/{agent_id}", response_cls=Agent)
 
     def list(self) -> ListAgentsResponse:
         """List all agents"""
-        result = self._get(path=f"/{self._module_name}", response_cls=ListAgentsResponse)
-        assert result is not None  # response_cls is provided, so result should never be None
-        return result
+        return self._get(path=f"/{self._module_name}", response_cls=ListAgentsResponse)
 
-    def modify(self, agent_id: str, *, request: ModifyAgentRequest) -> Agent:
+    def modify(
+        self,
+        agent_id: str,
+        *,
+        name: str | NotGiven = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
+        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        visibility: Visibility | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
+        **kwargs,
+    ) -> Agent:
         """Modify an existing agent"""
-        body = _to_dict(request, exclude_none=True)
-        result = self._patch(path=f"/{self._module_name}/{agent_id}", body=body, response_cls=Agent)
-        assert result is not None  # response_cls is provided, so result should never be None
-        return result
+        body = self._modify_body(
+            name=name,
+            description=description,
+            response_language=response_language,
+            models=models,
+            tools=tools,
+            tool_resources=tool_resources,
+            requirements=requirements,
+            budget=budget,
+            visibility=visibility,
+            **kwargs,
+        )
+        return self._patch(path=f"/{self._module_name}/{agent_id}", body=body, response_cls=Agent)
 
     def delete(self, agent_id: str) -> DeleteAgentResponse:
         """Delete an agent"""
-        result = self._delete(path=f"/{self._module_name}/{agent_id}", response_cls=DeleteAgentResponse)
-        assert result is not None  # response_cls is provided, so result should never be None
-        return result
+        return self._delete(path=f"/{self._module_name}/{agent_id}", response_cls=DeleteAgentResponse)

@@ -1,7 +1,7 @@
 import pytest
 
 from ai21 import AsyncAI21Client
-from ai21.models.agents import CreateAgentRequest, BudgetLevel, AgentType, ModifyAgentRequest
+from ai21.models.agents import BudgetLevel, AgentType
 
 
 @pytest.mark.asyncio
@@ -10,14 +10,12 @@ async def test_agents_create_and_delete():
     client = AsyncAI21Client()
 
     # Create an agent
-    create_request = CreateAgentRequest(
+    agent = await client.beta.agents.create(
         name="Test Agent for Integration",
         description="This is a test agent created by integration tests",
         budget=BudgetLevel.LOW,
         agent_type=AgentType.DEFAULT,
     )
-
-    agent = await client.beta.agents.create(request=create_request)
 
     # Verify agent was created
     assert agent.id is not None
@@ -39,13 +37,11 @@ async def test_agents_crud_operations():
     client = AsyncAI21Client()
 
     # Create
-    create_request = CreateAgentRequest(
+    agent = await client.beta.agents.create(
         name="CRUD Test Agent",
         description="Testing CRUD operations",
         budget=BudgetLevel.MEDIUM,
     )
-
-    agent = await client.beta.agents.create(request=create_request)
     agent_id = agent.id
 
     try:
@@ -60,12 +56,11 @@ async def test_agents_crud_operations():
         assert agent_id in agent_ids
 
         # Update
-        modify_request = ModifyAgentRequest(
+        updated_agent = await client.beta.agents.modify(
+            agent_id,
             name="Modified CRUD Test Agent",
             description="Updated description for testing",
         )
-
-        updated_agent = await client.beta.agents.modify(agent_id, request=modify_request)
         assert updated_agent.id == agent_id
         assert updated_agent.name == "Modified CRUD Test Agent"
         assert updated_agent.description == "Updated description for testing"
@@ -82,13 +77,11 @@ async def test_agent_run_basic():
     client = AsyncAI21Client()
 
     # Create a test agent
-    create_request = CreateAgentRequest(
+    agent = await client.beta.agents.create(
         name="Test Run Agent",
         description="Agent for testing runs",
         budget=BudgetLevel.LOW,
     )
-
-    agent = await client.beta.agents.create(request=create_request)
     agent_id = agent.id
 
     try:
@@ -123,13 +116,11 @@ async def test_agent_run_with_options():
     client = AsyncAI21Client()
 
     # Create a test agent
-    create_request = CreateAgentRequest(
+    agent = await client.beta.agents.create(
         name="Test Options Agent",
         description="Agent for testing run options",
         budget=BudgetLevel.MEDIUM,
     )
-
-    agent = await client.beta.agents.create(request=create_request)
     agent_id = agent.id
 
     try:

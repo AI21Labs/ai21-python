@@ -22,6 +22,20 @@ class AgentType(str, Enum):
     DEFAULT = "default"
     CHAT = "chat"
     MAESTRO = "maestro"
+    RAG = "rag"
+
+
+class ResponseLanguage(str, Enum):
+    ARABIC = "arabic"
+    DUTCH = "dutch"
+    ENGLISH = "english"
+    FRENCH = "french"
+    GERMAN = "german"
+    HEBREW = "hebrew"
+    ITALIAN = "italian"
+    PORTUGUESE = "portuguese"
+    SPANISH = "spanish"
+    UNSET = "unset"
 
 
 class Requirement(AI21BaseModel):

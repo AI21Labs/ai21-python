@@ -13,6 +13,6 @@ class Beta(StudioResource):
         super().__init__(client)
 
         self.maestro = Maestro(client)
-        self.agents = Agents(client, self.maestro.runs)
+        self.agents = Agents(client, self.maestro)
         self.conversational_rag = StudioConversationalRag(client)
         self.batches = Batches(client)
