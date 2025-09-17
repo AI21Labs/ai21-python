@@ -1,9 +1,8 @@
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Optional
+from typing import List, Dict, Any
 
-from ai21.clients.common.agents.run import BaseAgentRun
 from ai21.models.agents import (
     Agent,
     AgentType,

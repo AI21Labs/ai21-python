@@ -1,7 +1,7 @@
 from typing import Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
-from ai21.clients.studio.resources.agents.utils import AgentToMaestroRunConverter
+from ai21.clients.common.agents.run import BaseAgentRun
 from ai21.clients.studio.resources.maestro.maestro import Maestro
 from ai21.clients.studio.resources.maestro.run import MaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource
@@ -20,7 +20,7 @@ from ai21.models.maestro.run import RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
-class AgentRuns:
+class AgentRuns(BaseAgentRun):
     """Agent runs interface that delegates to maestro"""
 
     def __init__(self, maestro: Maestro, get_agent: Callable[[str], Agent]):
@@ -43,7 +43,7 @@ class AgentRuns:
         """Create an agent run using maestro client with agent configuration"""
         agent = self._get_agent(agent_id)
 
-        converter = AgentToMaestroRunConverter.from_agent_and_params(
+        converter = self._create_agent_to_maestro_converter(
             agent=agent,
             agent_id=agent_id,
             input=input,
@@ -84,7 +84,7 @@ class AgentRuns:
         """Create and poll an agent run using maestro client"""
         agent = self._get_agent(agent_id)
 
-        converter = AgentToMaestroRunConverter.from_agent_and_params(
+        converter = self._create_agent_to_maestro_converter(
             agent=agent,
             agent_id=agent_id,
             input=input,

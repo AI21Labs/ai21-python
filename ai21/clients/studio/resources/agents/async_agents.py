@@ -1,7 +1,7 @@
 from typing import Awaitable, Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
-from ai21.clients.studio.resources.agents.utils import AgentToMaestroRunConverter
+from ai21.clients.common.agents.run import BaseAgentRun
 from ai21.clients.studio.resources.maestro.maestro import AsyncMaestro
 from ai21.clients.studio.resources.maestro.run import AsyncMaestroRun
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
@@ -19,7 +19,7 @@ from ai21.models.maestro.run import RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
-class AsyncAgentRuns:
+class AsyncAgentRuns(BaseAgentRun):
     """Async agent runs interface that delegates to maestro"""
 
     def __init__(self, maestro: AsyncMaestro, get_agent: Callable[[str], Awaitable[Agent]]):

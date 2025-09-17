@@ -1,45 +1,42 @@
 from abc import ABC, abstractmethod
-from typing import List, Dict, Any, Union
+from typing import List, Dict, Any, Union, Optional
 
+from ai21.models.agents import Agent
 from ai21.models.maestro.run import RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
 class BaseAgentRun(ABC):
-    """Base class for agent run operations"""
-
-    @abstractmethod
-    def create(
+    def _create_agent_to_maestro_converter(
         self,
+        agent: Agent,
         agent_id: str,
-        *,
         input: List[Dict[str, str]],
         verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
+        output_type: Optional[Dict[str, Any]] = None,
+        include: Optional[List[str]] = None,
         structured_rag_enabled: bool = False,
         dynamic_planning_enabled: bool = False,
         response_language: str = "english",
         **kwargs,
-    ) -> RunResponse:
-        """Create an agent run"""
-        pass
+    ):
+        """Create converter from agent configuration and run parameters
 
-    @abstractmethod
-    def create_and_poll(
-        self,
-        agent_id: str,
-        *,
-        input: List[Dict[str, str]],
-        verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool = False,
-        dynamic_planning_enabled: bool = False,
-        response_language: str = "english",
-        poll_interval_sec: float = 2.0,
-        poll_timeout_sec: float = 300.0,
-        **kwargs,
-    ) -> RunResponse:
-        """Create and poll an agent run"""
-        pass
+        This method needs to be imported and used by subclasses since AgentToMaestroRunConverter
+        is defined in the studio-specific utils module.
+        """
+        # Import here to avoid circular dependencies
+        from ai21.clients.studio.resources.agents.utils import AgentToMaestroRunConverter
+
+        return AgentToMaestroRunConverter.from_agent_and_params(
+            agent=agent,
+            agent_id=agent_id,
+            input=input,
+            verbose=verbose,
+            output_type=output_type,
+            include=include,
+            structured_rag_enabled=structured_rag_enabled,
+            dynamic_planning_enabled=dynamic_planning_enabled,
+            response_language=response_language,
+            **kwargs,
+        )
