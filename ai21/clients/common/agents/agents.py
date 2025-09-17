@@ -30,11 +30,10 @@ class BaseAgents(ABC):
         tool_resources: Dict[str, Any] | NotGiven,
         requirements: List[Requirement] | NotGiven,
         budget: BudgetLevel | NotGiven,
-        agent_type: AgentType | NotGiven,
         response_language: ResponseLanguage | NotGiven,
         **kwargs,
     ) -> dict:
-        body = remove_not_given(
+        return remove_not_given(
             {
                 "name": name,
                 "description": description,
@@ -43,15 +42,10 @@ class BaseAgents(ABC):
                 "tool_resources": tool_resources,
                 "requirements": requirements,
                 "budget": budget,
-                "agent_type": agent_type,
                 "response_language": response_language,
                 **kwargs,
             }
         )
-        # Map agent_type to assistant_type for API compatibility
-        if "agent_type" in body:
-            body["assistant_type"] = body.pop("agent_type")
-        return body
 
     def _modify_body(
         self,
@@ -115,9 +109,6 @@ class BaseAgents(ABC):
         *,
         name: str | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
-        optimization: str | NotGiven = NOT_GIVEN,
-        avatar: str | NotGiven = NOT_GIVEN,
-        is_archived: bool | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
