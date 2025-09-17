@@ -50,19 +50,19 @@ class Requirement(AI21BaseModel):
 class Agent(AI21BaseModel):
     id: str
     name: str
-    description: Union[str, NotGiven] = NOT_GIVEN
+    description: Union[str, None] = None
     organization_id: str
     user_id: str
-    models: List[str] | NotGiven = NOT_GIVEN
-    tools: List[ToolDefinition] | NotGiven = NOT_GIVEN
-    tool_resources: ToolResources | NotGiven = NOT_GIVEN
-    requirements: List[Requirement] | NotGiven = NOT_GIVEN
-    budget: Budget | NotGiven = NOT_GIVEN
-    visibility: Visibility | NotGiven = NOT_GIVEN
-    assistant_type: AgentType | NotGiven = NOT_GIVEN
+    models: List[str] | None = None
+    tools: List[ToolDefinition] | None = None
+    tool_resources: ToolResources | None = None
+    requirements: List[Requirement] | None = None
+    budget: Budget | None = None
+    visibility: Visibility | None = None
+    assistant_type: AgentType | None = None
     created_at: datetime
     updated_at: datetime
-    response_language: ResponseLanguage | NotGiven = NOT_GIVEN
+    response_language: ResponseLanguage | None = None
 
 
 class ListAgentsResponse(AI21BaseModel):

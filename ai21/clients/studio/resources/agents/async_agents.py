@@ -34,7 +34,6 @@ class AsyncAgentRuns(BaseAgentRun):
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
         agent = await self._get_agent(agent_id)
-
         return await self._maestro_runs.create(
             input=input,
             **self.convert_agent_to_maestro_run_payload(agent),

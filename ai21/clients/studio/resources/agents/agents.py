@@ -15,7 +15,7 @@ from ai21.models.agents import (
     Visibility,
 )
 from ai21.models.agents.agent import ResponseLanguage
-from ai21.models.maestro.run import RunResponse
+from ai21.models.maestro.run import MaestroMessage, RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -30,32 +30,18 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: List[Dict[str, str]],
-        verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool | NotGiven = NOT_GIVEN,
-        dynamic_planning_enabled: bool | NotGiven = NOT_GIVEN,
-        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
+        input: str | List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
         agent = self._get_agent(agent_id)
+        print(agent)
 
-        converter = self._create_agent_to_maestro_converter(
-            agent=agent,
-            agent_id=agent_id,
+        return self._maestro_runs.create(
             input=input,
-            verbose=verbose,
-            output_type=output_type,
-            include=include,
-            structured_rag_enabled=structured_rag_enabled,
-            dynamic_planning_enabled=dynamic_planning_enabled,
-            response_language=response_language,
+            **self.convert_agent_to_maestro_run_payload(agent),
             **kwargs,
         )
-
-        return self._maestro_runs.create(**converter.to_maestro_create_params())
 
     @property
     def retrieve(self):
@@ -69,37 +55,17 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: List[Dict[str, str]],
-        verbose: Union[bool, NotGiven] = NOT_GIVEN,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: Union[bool, NotGiven] = NOT_GIVEN,
-        dynamic_planning_enabled: Union[bool, NotGiven] = NOT_GIVEN,
-        response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
-        poll_interval_sec: Union[float, NotGiven] = NOT_GIVEN,
-        poll_timeout_sec: Union[float, NotGiven] = NOT_GIVEN,
+        input: str | List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
         agent = self._get_agent(agent_id)
 
-        converter = self._create_agent_to_maestro_converter(
-            agent=agent,
-            agent_id=agent_id,
+        return self._maestro_runs.create_and_poll(
             input=input,
-            verbose=verbose,
-            output_type=output_type,
-            include=include,
-            structured_rag_enabled=structured_rag_enabled,
-            dynamic_planning_enabled=dynamic_planning_enabled,
-            response_language=response_language,
+            **self.convert_agent_to_maestro_run_payload(agent),
             **kwargs,
         )
-
-        maestro_params = converter.to_maestro_create_params()
-        maestro_params.update({"poll_interval_sec": poll_interval_sec, "poll_timeout_sec": poll_timeout_sec})
-
-        return self._maestro_runs.create_and_poll(**maestro_params)
 
 
 class Agents(StudioResource, BaseAgents):
