@@ -2,9 +2,11 @@ from __future__ import annotations
 
 from datetime import datetime
 from enum import Enum
-from typing import Any, Dict, List, Optional
+from typing import List, Optional, Union
 
 from ai21.models.ai21_base_model import AI21BaseModel
+from ai21.models.maestro.run import Budget, ToolDefinition, ToolResources
+from ai21.types import NOT_GIVEN, NotGiven
 
 
 class BudgetLevel(str, Enum):
@@ -48,49 +50,19 @@ class Requirement(AI21BaseModel):
 class Agent(AI21BaseModel):
     id: str
     name: str
-    description: Optional[str] = None
-    optimization: Optional[str] = None
+    description: Union[str, NotGiven] = NOT_GIVEN
     organization_id: str
     user_id: str
-    avatar: Optional[str] = None
-    is_archived: bool = False
-    models: Optional[List[str]] = None
-    tools: Optional[List[Dict[str, Any]]] = None
-    tool_resources: Optional[Dict[str, Any]] = None
-    requirements: Optional[List[Requirement]] = None
-    budget: BudgetLevel = BudgetLevel.MEDIUM
-    visibility: Visibility = Visibility.PUBLIC
-    agent_type: AgentType = AgentType.DEFAULT
+    models: List[str] | NotGiven = NOT_GIVEN
+    tools: List[ToolDefinition] | NotGiven = NOT_GIVEN
+    tool_resources: ToolResources | NotGiven = NOT_GIVEN
+    requirements: List[Requirement] | NotGiven = NOT_GIVEN
+    budget: Budget | NotGiven = NOT_GIVEN
+    visibility: Visibility | NotGiven = NOT_GIVEN
+    assistant_type: AgentType | NotGiven = NOT_GIVEN
     created_at: datetime
     updated_at: datetime
-    object: str = "agent"
-
-
-class CreateAgentRequest(AI21BaseModel):
-    name: str
-    description: Optional[str] = None
-    optimization: Optional[str] = None
-    avatar: Optional[str] = None
-    models: Optional[List[str]] = None
-    tools: Optional[List[Dict[str, Any]]] = None
-    tool_resources: Optional[Dict[str, Any]] = None
-    requirements: Optional[List[Requirement]] = None
-    budget: BudgetLevel = BudgetLevel.MEDIUM
-    agent_type: Optional[AgentType] = AgentType.DEFAULT
-
-
-class ModifyAgentRequest(AI21BaseModel):
-    name: Optional[str] = None
-    description: Optional[str] = None
-    optimization: Optional[str] = None
-    avatar: Optional[str] = None
-    is_archived: Optional[bool] = None
-    models: Optional[List[str]] = None
-    tools: Optional[List[Dict[str, Any]]] = None
-    tool_resources: Optional[Dict[str, Any]] = None
-    requirements: Optional[List[Requirement]] = None
-    budget: Optional[BudgetLevel] = None
-    visibility: Optional[Visibility] = None
+    response_language: ResponseLanguage | NotGiven = NOT_GIVEN
 
 
 class ListAgentsResponse(AI21BaseModel):
@@ -101,13 +73,3 @@ class DeleteAgentResponse(AI21BaseModel):
     object: str = "agent"
     deleted: bool = True
     id: str
-
-
-class RunAgentRequest(AI21BaseModel):
-    input: List[Dict[str, str]]  # Messages with role and content
-    verbose: bool = False
-    output_type: Optional[Dict[str, Any]] = None
-    include: Optional[List[str]] = None
-    structured_rag_enabled: bool = False
-    dynamic_planning_enabled: bool = False
-    response_language: str = "unset"

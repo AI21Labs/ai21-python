@@ -3,7 +3,6 @@ from typing import Awaitable, Callable, List, Dict, Any, Union
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
 from ai21.clients.studio.resources.maestro.maestro import AsyncMaestro
-from ai21.clients.studio.resources.maestro.run import AsyncMaestroRun
 from ai21.clients.studio.resources.studio_resource import AsyncStudioResource
 from ai21.http_client.async_http_client import AsyncAI21HTTPClient
 from ai21.models.agents import (
@@ -15,7 +14,7 @@ from ai21.models.agents import (
     Requirement,
     Visibility,
 )
-from ai21.models.maestro.run import RunResponse
+from ai21.models.maestro.run import MaestroMessage, RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -30,32 +29,17 @@ class AsyncAgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: List[Dict[str, str]],
-        verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool = False,
-        dynamic_planning_enabled: bool = False,
-        response_language: str = "english",
+        input: str | List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
         agent = await self._get_agent(agent_id)
 
-        converter = AgentToMaestroRunConverter.from_agent_and_params(
-            agent=agent,
-            agent_id=agent_id,
+        return await self._maestro_runs.create(
             input=input,
-            verbose=verbose,
-            output_type=output_type,
-            include=include,
-            structured_rag_enabled=structured_rag_enabled,
-            dynamic_planning_enabled=dynamic_planning_enabled,
-            response_language=response_language,
+            **self.convert_agent_to_maestro_run_payload(agent),
             **kwargs,
         )
-
-        return await self._maestro_runs.create(**converter.to_maestro_create_params())
 
     @property
     def retrieve(self):
@@ -69,37 +53,17 @@ class AsyncAgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: List[Dict[str, str]],
-        verbose: bool = False,
-        output_type: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        include: Union[List[str], NotGiven] = NOT_GIVEN,
-        structured_rag_enabled: bool = False,
-        dynamic_planning_enabled: bool = False,
-        response_language: str = "english",
-        poll_interval_sec: float = 2.0,
-        poll_timeout_sec: float = 300.0,
+        input: List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
         agent = await self._get_agent(agent_id)
 
-        converter = AgentToMaestroRunConverter.from_agent_and_params(
-            agent=agent,
-            agent_id=agent_id,
+        return await self._maestro_runs.create_and_poll(
             input=input,
-            verbose=verbose,
-            output_type=output_type,
-            include=include,
-            structured_rag_enabled=structured_rag_enabled,
-            dynamic_planning_enabled=dynamic_planning_enabled,
-            response_language=response_language,
+            **self.convert_agent_to_maestro_run_payload(agent),
             **kwargs,
         )
-
-        maestro_params = converter.to_maestro_create_params()
-        maestro_params.update({"poll_interval_sec": poll_interval_sec, "poll_timeout_sec": poll_timeout_sec})
-
-        return await self._maestro_runs.create_and_poll(**maestro_params)
 
 
 class AsyncAgents(AsyncStudioResource, BaseAgents):
