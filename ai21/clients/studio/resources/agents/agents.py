@@ -3,7 +3,6 @@ from typing import Callable, List, Dict, Any, Union
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
 from ai21.clients.studio.resources.maestro.maestro import Maestro
-from ai21.clients.studio.resources.maestro.run import MaestroRun
 from ai21.clients.studio.resources.studio_resource import StudioResource
 from ai21.http_client.http_client import AI21HTTPClient
 from ai21.models.agents import (

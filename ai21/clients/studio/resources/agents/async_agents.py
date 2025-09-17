@@ -1,4 +1,4 @@
-from typing import Awaitable, Callable, List, Dict, Any, Union
+from typing import Awaitable, Callable, List, Dict, Any
 
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
