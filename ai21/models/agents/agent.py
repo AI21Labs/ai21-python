@@ -6,7 +6,6 @@ from typing import List, Optional, Union
 
 from ai21.models.ai21_base_model import AI21BaseModel
 from ai21.models.maestro.run import Budget, ToolDefinition, ToolResources
-from ai21.types import NOT_GIVEN, NotGiven
 
 
 class BudgetLevel(str, Enum):
