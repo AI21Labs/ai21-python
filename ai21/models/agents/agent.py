@@ -52,16 +52,16 @@ class Agent(AI21BaseModel):
     description: Union[str, None] = None
     organization_id: str
     user_id: str
-    models: List[str] | None = None
-    tools: List[ToolDefinition] | None = None
-    tool_resources: ToolResources | None = None
-    requirements: List[Requirement] | None = None
-    budget: Budget | None = None
-    visibility: Visibility | None = None
-    assistant_type: AgentType | None = None
+    models: Union[List[str], None] = None
+    tools: Union[List[ToolDefinition], None] = None
+    tool_resources: Union[ToolResources, None] = None
+    requirements: Union[List[Requirement], None] = None
+    budget: Union[Budget, None] = None
+    visibility: Union[Visibility, None] = None
+    assistant_type: Union[AgentType, None] = None
     created_at: datetime
     updated_at: datetime
-    response_language: ResponseLanguage | None = None
+    response_language: Union[ResponseLanguage, None] = None
 
 
 class ListAgentsResponse(AI21BaseModel):
