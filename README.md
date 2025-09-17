@@ -25,6 +25,7 @@
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
 - [Maestro](#Maestro)
+- [Agents (Beta)](#Agents-Beta)
 - [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
@@ -274,6 +275,61 @@ run_result = client.beta.maestro.runs.create_and_poll(
 ```
 
 For a more detailed example, see maestro [sync](examples/studio/maestro/run.py) and [async](examples/studio/maestro/async_run.py) examples.
+
+---
+
+### Agents (Beta)
+
+AI21 Agents provide a comprehensive way to create, manage, and run your Agents.
+
+```python
+from ai21 import AI21Client
+from ai21.models.agents import BudgetLevel, AgentType
+
+client = AI21Client()
+
+# Run the agent
+run_response = client.beta.agents.runs.create_and_poll(
+    agent_id=agent.id,
+    input=[{"role": "user", "content": "What is 2+2?"}],
+    poll_timeout_sec=120,
+)
+
+print(f"Result: {run_response.result}")
+
+```
+
+#### Agent CRUD Operations
+
+```python
+from ai21 import AI21Client
+from ai21.models.agents import BudgetLevel, AgentType
+
+client = AI21Client()
+
+# Create
+agent = client.beta.agents.create(
+    name="Research Assistant",
+    description="Specialized in research tasks",
+    budget=BudgetLevel.HIGH,
+)
+
+# Read
+retrieved_agent = client.beta.agents.get(agent.id)
+agents_list = client.beta.agents.list()
+
+# Update
+modified_agent = client.beta.agents.modify(
+    agent.id,
+    name="Enhanced Research Assistant",
+    description="Updated with enhanced capabilities",
+)
+
+# Delete
+delete_response = client.beta.agents.delete(agent.id)
+```
+
+For more detailed examples, see agent [CRUD operations](examples/studio/agents/agent_crud.py), [basic runs](examples/studio/agents/agent_run.py), and [async operations](examples/studio/agents/async_agent_run.py) examples.
 
 ---
 

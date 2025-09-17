@@ -16,7 +16,7 @@ from ai21.models.agents import (
     Requirement,
     Visibility,
 )
-from ai21.models.maestro.run import MaestroMessage, RunResponse
+from ai21.models.maestro.run import DEFAULT_RUN_POLL_INTERVAL, DEFAULT_RUN_POLL_TIMEOUT, MaestroMessage, RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
 
@@ -55,6 +55,8 @@ class AsyncAgentRuns(BaseAgentRun):
         agent_id: str,
         *,
         input: List[MaestroMessage],
+        poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
+        poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
     ) -> RunResponse:
         """Create and poll an agent run using maestro client"""
@@ -63,6 +65,8 @@ class AsyncAgentRuns(BaseAgentRun):
         return await self._maestro_runs.create_and_poll(
             input=input,
             **self.convert_agent_to_maestro_run_payload(agent),
+            poll_interval_sec=poll_interval_sec,
+            poll_timeout_sec=poll_timeout_sec,
             **kwargs,
         )
 
@@ -88,7 +92,6 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
-        agent_type: Union[AgentType, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Create a new agent"""
@@ -102,7 +105,6 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
             tool_resources=tool_resources,
             requirements=requirements,
             budget=budget,
-            agent_type=agent_type,
             **kwargs,
         )
 

@@ -54,6 +54,9 @@ def test_studio(test_file_name: str):
         ("conversational_rag/async_conversational_rag.py",),
         ("maestro/run.py",),
         ("maestro/async_run.py",),
+        ("agents/agent_crud.py",),
+        ("agents/agent_run.py",),
+        ("agents/async_agent_run.py",),
     ],
     ids=[
         "when_chat_completions__should_return_ok",
@@ -62,6 +65,9 @@ def test_studio(test_file_name: str):
         "when_async_conversational_rag__should_return_ok",
         "when_maestro_runs__should_return_ok",
         "when_maestro_async_runs__should_return_ok",
+        "when_agent_crud__should_return_ok",
+        "when_agent_run__should_return_ok",
+        "when_async_agent_run__should_return_ok",
     ],
 )
 async def test_async_studio(test_file_name: str):
