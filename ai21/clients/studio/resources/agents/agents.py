@@ -1,3 +1,4 @@
+from __future__ import annotations
 from typing import Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
