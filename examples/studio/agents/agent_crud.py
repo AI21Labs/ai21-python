@@ -16,7 +16,6 @@ def main():
     )
 
     print(f"Created agent: {agent.name} (ID: {agent.id})")
-    print(f"Agent type: {agent.agent_type}")
     print(f"Budget: {agent.budget}")
 
     agent_id = agent.id

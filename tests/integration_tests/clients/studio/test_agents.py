@@ -1,7 +1,7 @@
 import pytest
 
 from ai21 import AsyncAI21Client
-from ai21.models.agents import BudgetLevel, AgentType
+from ai21.models.agents import BudgetLevel
 
 
 @pytest.mark.asyncio
@@ -21,7 +21,6 @@ async def test_agents_create_and_delete():
     assert agent.name == "Test Agent for Integration"
     assert agent.description == "This is a test agent created by integration tests"
     assert agent.budget == BudgetLevel.LOW
-    assert agent.agent_type == AgentType.DEFAULT
     assert agent.object == "agent"
 
     # Clean up - delete the agent
