@@ -15,6 +15,7 @@ from ai21.models.agents import (
     AgentRequirement,
     Visibility,
 )
+from ai21.models.agents.agent import ResponseLanguage
 from ai21.models.maestro.run import DEFAULT_RUN_POLL_INTERVAL, DEFAULT_RUN_POLL_TIMEOUT, MaestroMessage, RunResponse
 from ai21.types import NOT_GIVEN, NotGiven
 
@@ -91,6 +92,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Create a new agent"""
@@ -104,6 +106,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
             tool_resources=tool_resources,
             requirements=requirements,
             budget=budget,
+            response_language=response_language,
             **kwargs,
         )
 
@@ -129,6 +132,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
         visibility: Visibility | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Modify an existing agent"""
@@ -141,6 +145,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
             requirements=requirements,
             budget=budget,
             visibility=visibility,
+            response_language=response_language,
             **kwargs,
         )
         return await self._patch(path=f"/{self._module_name}/{agent_id}", body=body, response_cls=Agent)

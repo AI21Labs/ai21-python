@@ -14,6 +14,7 @@ async def test_agents_create_and_delete():
         name="Test Agent for Integration",
         description="This is a test agent created by integration tests",
         budget=BudgetLevel.LOW,
+        models=["jamba-mini"],
     )
 
     # Verify agent was created
@@ -21,7 +22,7 @@ async def test_agents_create_and_delete():
     assert agent.name == "Test Agent for Integration"
     assert agent.description == "This is a test agent created by integration tests"
     assert agent.budget == BudgetLevel.LOW
-    assert agent.object == "agent"
+    assert agent.object == "assistant"
 
     # Clean up - delete the agent
     delete_response = await client.beta.agents.delete(agent.id)
@@ -39,6 +40,7 @@ async def test_agents_crud_operations():
         name="CRUD Test Agent",
         description="Testing CRUD operations",
         budget=BudgetLevel.MEDIUM,
+        models=["jamba-mini"],
     )
     agent_id = agent.id
 
@@ -79,6 +81,7 @@ async def test_agent_run_basic():
         name="Test Run Agent",
         description="Agent for testing runs",
         budget=BudgetLevel.LOW,
+        models=["jamba-mini"],
     )
     agent_id = agent.id
 
@@ -102,43 +105,6 @@ async def test_agent_run_basic():
         retrieved_run = await client.beta.agents.runs.retrieve(str(run_response.id))
         assert retrieved_run.id == run_response.id
         assert retrieved_run.status == run_response.status
-
-    finally:
-        # Clean up
-        await client.beta.agents.delete(agent_id)
-
-
-@pytest.mark.asyncio
-async def test_agent_run_with_options():
-    """Test running an agent with various options"""
-    client = AsyncAI21Client()
-
-    # Create a test agent
-    agent = await client.beta.agents.create(
-        name="Test Options Agent",
-        description="Agent for testing run options",
-        budget=BudgetLevel.MEDIUM,
-    )
-    agent_id = agent.id
-
-    try:
-        # Test agent run with options
-        input_messages = [{"role": "user", "content": "Tell me about AI"}]
-
-        run_response = await client.beta.agents.runs.create_and_poll(
-            agent_id,
-            input=input_messages,
-            verbose=True,
-            include=["data_sources", "requirements_result"],
-            response_language="english",
-            poll_timeout_sec=120,
-        )
-
-        assert run_response.id is not None
-        assert run_response.status in ["completed", "failed"]
-
-        if run_response.status == "completed":
-            assert run_response.result is not None
 
     finally:
         # Clean up

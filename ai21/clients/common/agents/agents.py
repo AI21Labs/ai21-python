@@ -88,6 +88,7 @@ class BaseAgents(ABC):
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         pass
@@ -113,6 +114,7 @@ class BaseAgents(ABC):
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
         visibility: Visibility | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         pass
