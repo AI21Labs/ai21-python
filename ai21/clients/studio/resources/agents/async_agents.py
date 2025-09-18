@@ -30,7 +30,7 @@ class AsyncAgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: Union[str, List[MaestroMessage]],
+        input: str | List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
@@ -83,14 +83,14 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         self,
         *,
         name: str,
-        description: Union[str, NotGiven] = NOT_GIVEN,
-        optimization: Union[str, NotGiven] = NOT_GIVEN,
-        avatar: Union[str, NotGiven] = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
+        optimization: str | NotGiven = NOT_GIVEN,
+        avatar: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
-        budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
+        budget: BudgetLevel | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Create a new agent"""
