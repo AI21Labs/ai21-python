@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Awaitable, Callable, List, Dict, Any, Union
+from typing import Awaitable, Callable, List, Dict, Any
 
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
@@ -121,26 +121,20 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         self,
         agent_id: str,
         *,
-        name: Union[str, NotGiven] = NOT_GIVEN,
-        description: Union[str, NotGiven] = NOT_GIVEN,
-        optimization: Union[str, NotGiven] = NOT_GIVEN,
-        avatar: Union[str, NotGiven] = NOT_GIVEN,
-        is_archived: Union[bool, NotGiven] = NOT_GIVEN,
+        name: str | NotGiven = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
-        budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
-        visibility: Union[Visibility, NotGiven] = NOT_GIVEN,
+        budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        visibility: Visibility | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Modify an existing agent"""
         body = self._modify_body(
             name=name,
             description=description,
-            optimization=optimization,
-            avatar=avatar,
-            is_archived=is_archived,
             models=models,
             tools=tools,
             tool_resources=tool_resources,
