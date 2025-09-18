@@ -14,7 +14,6 @@ async def test_agents_create_and_delete():
         name="Test Agent for Integration",
         description="This is a test agent created by integration tests",
         budget=BudgetLevel.LOW,
-        agent_type=AgentType.DEFAULT,
     )
 
     # Verify agent was created
