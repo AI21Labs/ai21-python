@@ -1,4 +1,5 @@
 from __future__ import annotations
+
 from typing import Callable, List, Dict, Any, Union
 
 from ai21.clients.common.agents.agents import BaseAgents
@@ -30,7 +31,7 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: Union[str, List[MaestroMessage]],
+        input: str | List[MaestroMessage],
         **kwargs,
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
@@ -53,7 +54,7 @@ class AgentRuns(BaseAgentRun):
         self,
         agent_id: str,
         *,
-        input: Union[str, List[MaestroMessage]],
+        input: str | List[MaestroMessage],
         poll_interval_sec: float = DEFAULT_RUN_POLL_INTERVAL,
         poll_timeout_sec: float = DEFAULT_RUN_POLL_TIMEOUT,
         **kwargs,
