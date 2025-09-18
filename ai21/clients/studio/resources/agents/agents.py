@@ -11,7 +11,7 @@ from ai21.models.agents import (
     BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,
-    Requirement,
+    AgentRequirement,
     Visibility,
 )
 from ai21.models.agents.agent import ResponseLanguage
@@ -35,8 +35,6 @@ class AgentRuns(BaseAgentRun):
     ) -> RunResponse:
         """Create an agent run using maestro client with agent configuration"""
         agent = self._get_agent(agent_id)
-        print(agent)
-
         return self._maestro_runs.create(
             input=input,
             **self.convert_agent_to_maestro_run_payload(agent),
@@ -85,7 +83,7 @@ class Agents(StudioResource, BaseAgents):
         models: Union[List[str], NotGiven] = NOT_GIVEN,
         tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
         tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        requirements: Union[List[AgentRequirement], NotGiven] = NOT_GIVEN,
         budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
         response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
         **kwargs,
@@ -122,7 +120,7 @@ class Agents(StudioResource, BaseAgents):
         models: Union[List[str], NotGiven] = NOT_GIVEN,
         tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
         tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        requirements: Union[List[Requirement], NotGiven] = NOT_GIVEN,
+        requirements: Union[List[AgentRequirement], NotGiven] = NOT_GIVEN,
         budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
         visibility: Union[Visibility, NotGiven] = NOT_GIVEN,
         response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,

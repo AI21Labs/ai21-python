@@ -12,7 +12,7 @@ from ai21.models.agents import (
     BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,
-    Requirement,
+    AgentRequirement,
     Visibility,
 )
 from ai21.models.maestro.run import DEFAULT_RUN_POLL_INTERVAL, DEFAULT_RUN_POLL_TIMEOUT, MaestroMessage, RunResponse
@@ -89,7 +89,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
@@ -129,7 +129,7 @@ class AsyncAgents(AsyncStudioResource, BaseAgents):
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
-        requirements: List[Requirement] | NotGiven = NOT_GIVEN,
+        requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
         visibility: Union[Visibility, NotGiven] = NOT_GIVEN,
         **kwargs,

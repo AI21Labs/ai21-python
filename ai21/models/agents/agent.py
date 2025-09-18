@@ -39,7 +39,7 @@ class ResponseLanguage(str, Enum):
     UNSET = "unset"
 
 
-class Requirement(AI21BaseModel):
+class AgentRequirement(AI21BaseModel):
     id: Optional[str] = None
     title: Optional[str] = None
     description: Optional[str] = None
@@ -55,7 +55,7 @@ class Agent(AI21BaseModel):
     models: Optional[List[str]] = None
     tools: Optional[List[ToolDefinition]] = None
     tool_resources: Optional[ToolResources] = None
-    requirements: Optional[List[Requirement]] = None
+    requirements: Optional[List[AgentRequirement]] = None
     budget: Optional[Budget] = None
     visibility: Optional[Visibility] = None
     assistant_type: Optional[AgentType] = None

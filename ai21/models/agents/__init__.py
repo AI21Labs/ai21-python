@@ -4,7 +4,7 @@ from ai21.models.agents.agent import (
     BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,
-    Requirement,
+    AgentRequirement,
     Visibility,
 )
 
@@ -14,6 +14,6 @@ __all__ = [
     "BudgetLevel",
     "DeleteAgentResponse",
     "ListAgentsResponse",
-    "Requirement",
+    "AgentRequirement",
     "Visibility",
 ]

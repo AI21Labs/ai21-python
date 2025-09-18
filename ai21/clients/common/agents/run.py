@@ -1,12 +1,14 @@
 from abc import ABC
+from typing import List
 
 from ai21.models.agents import Agent
+from ai21.models.agents.agent import AgentRequirement
 from ai21.models.maestro.run import Requirement
 from ai21.utils.typing import remove_not_given
 
 
 class BaseAgentRun(ABC):
-    def _convert_requirements(self, requirements):
+    def _convert_requirements(self, requirements: List[AgentRequirement]):
         """Convert agent requirements to maestro requirements, filtering out invalid ones."""
         if not requirements:
             return None
@@ -22,7 +24,7 @@ class BaseAgentRun(ABC):
                     )
                 )
 
-        return converted_requirements if converted_requirements else None
+        return converted_requirements or None
 
     def convert_agent_to_maestro_run_payload(
         self,
@@ -30,13 +32,13 @@ class BaseAgentRun(ABC):
         **kwargs,
     ):
         return remove_not_given(
-            dict(
-                models=agent.models,
-                tools=agent.tools,
-                tool_resources=agent.tool_resources,
-                requirements=self._convert_requirements(agent.requirements),
-                budget=agent.budget,
-                response_language=agent.response_language,
+            {
+                "models": agent.models,
+                "tools": agent.tools,
+                "tool_resources": agent.tool_resources,
+                "requirements": self._convert_requirements(agent.requirements),
+                "budget": agent.budget,
+                "response_language": agent.response_language,
                 **kwargs,
-            )
+            }
         )
