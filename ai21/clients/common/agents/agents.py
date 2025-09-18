@@ -5,7 +5,6 @@ from typing import List, Dict, Any
 
 from ai21.models.agents import (
     Agent,
-    AgentType,
     BudgetLevel,
     DeleteAgentResponse,
     ListAgentsResponse,
