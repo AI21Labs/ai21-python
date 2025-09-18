@@ -79,7 +79,7 @@ class Agents(StudioResource, BaseAgents):
         self,
         *,
         name: str,
-        description: Union[str, NotGiven] = NOT_GIVEN,
+        description: str | NotGiven = NOT_GIVEN,
         models: Union[List[str], NotGiven] = NOT_GIVEN,
         tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
         tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
