@@ -127,9 +127,14 @@ class DataSources(TypedDict, total=False):
     web_search: Optional[List[WebSearchResult]]
 
 
+class RunError(TypedDict, total=False):
+    message: str
+
+
 class RunResponse(AI21BaseModel):
     id: str
     status: RunStatus
     result: Any
     data_sources: Optional[DataSources] = None
     requirements_result: Optional[RequirementsResult] = None
+    error: Optional[RunError] = None
