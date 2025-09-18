@@ -127,7 +127,7 @@ class DataSources(TypedDict, total=False):
     web_search: Optional[List[WebSearchResult]]
 
 
-class RunError(TypedDict, total=False):
+class RunError(TypedDict):
     message: str
 
 
