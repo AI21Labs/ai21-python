@@ -80,12 +80,12 @@ class Agents(StudioResource, BaseAgents):
         *,
         name: str,
         description: str | NotGiven = NOT_GIVEN,
-        models: Union[List[str], NotGiven] = NOT_GIVEN,
-        tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
-        tool_resources: Union[Dict[str, Any], NotGiven] = NOT_GIVEN,
-        requirements: Union[List[AgentRequirement], NotGiven] = NOT_GIVEN,
-        budget: Union[BudgetLevel, NotGiven] = NOT_GIVEN,
-        response_language: Union[ResponseLanguage, NotGiven] = NOT_GIVEN,
+        models: List[str] | NotGiven = NOT_GIVEN,
+        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
+        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
+        requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
+        budget: BudgetLevel | NotGiven = NOT_GIVEN,
+        response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
         **kwargs,
     ) -> Agent:
         """Create a new agent"""
