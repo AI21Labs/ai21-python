@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from typing import Callable, List, Dict, Any, Union
+from typing import Callable, List, Dict, Any
 
 from ai21.clients.common.agents.agents import BaseAgents
 from ai21.clients.common.agents.run import BaseAgentRun
@@ -119,7 +119,7 @@ class Agents(StudioResource, BaseAgents):
         name: str | NotGiven = NOT_GIVEN,
         description: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
-        tools: Union[List[Dict[str, Any]], NotGiven] = NOT_GIVEN,
+        tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
         tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
