@@ -73,6 +73,9 @@ class FileSearch(TypedDict, total=False):
 class WebSearch(TypedDict, total=False):
     type: Literal["web_search"]
     urls: Optional[List[str]]
+    query_suffix: Optional[str]
+    rephrase_query: Optional[bool]
+    use_cached_pages: Optional[bool]
 
 
 class ToolResources(TypedDict, total=False):
