@@ -129,8 +129,8 @@ class ToolCallResult(TypedDict, total=False):
     tool_name: str
     tool_type: Literal["mcp", "http"]
     server_label: Optional[str]
-    parameters: dict[str, Any]
-    response: dict[str, Any]
+    parameters: Dict[str, Any]
+    response: Dict[str, Any]
     status: Literal["success", "failure"]
 
 
