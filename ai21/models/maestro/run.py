@@ -125,9 +125,19 @@ class WebSearchResult(TypedDict, total=False):
     score: float
 
 
+class ToolCallResult(TypedDict, total=False):
+    tool_name: str
+    tool_type: Literal["mcp", "http"]
+    server_label: Optional[str]
+    parameters: Dict[str, Any]
+    response: Dict[str, Any]
+    status: Literal["success", "failure"]
+
+
 class DataSources(TypedDict, total=False):
     file_search: Optional[List[FileSearchResult]]
     web_search: Optional[List[WebSearchResult]]
+    tool_calls: Optional[List[ToolCallResult]]
 
 
 class RunError(TypedDict):
