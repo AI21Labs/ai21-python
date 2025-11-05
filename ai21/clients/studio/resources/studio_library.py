@@ -49,7 +49,7 @@ class LibraryFiles(StudioResource):
         )
 
         if body.get("batch_id"):
-            body["upload_mode"] = UploadMode.BATCH
+            body["upload_mode"] = UploadMode.BATCH.value
 
         raw_response = self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
@@ -127,7 +127,7 @@ class AsyncLibraryFiles(AsyncStudioResource):
         )
 
         if body.get("batch_id"):
-            body["upload_mode"] = UploadMode.BATCH
+            body["upload_mode"] = UploadMode.BATCH.value
 
         raw_response = await self._post(path=f"/{self._module_name}", files=files, body=body, response_cls=dict)
 
