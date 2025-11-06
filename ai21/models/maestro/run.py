@@ -5,7 +5,7 @@ from pydantic import BaseModel, Field
 from ai21.models.ai21_base_model import AI21BaseModel
 
 Budget = Literal["low", "medium", "high"]
-Role = Literal["user", "assistant"]
+Role = Literal["user", "assistant", "system"]
 RunStatus = Literal["completed", "failed", "in_progress", "requires_action"]
 OutputOptions = Literal["data_sources", "requirements_result"]
 PrimitiveTypes = Union[Type[str], Type[int], Type[float], Type[bool]]
