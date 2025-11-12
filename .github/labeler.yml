@@ -32,3 +32,9 @@ vertex:
   - changed-files:
       - any-glob-to-any-file:
           - ai21/clients/vertex/*
+
+maestro:
+  - changed-files:
+      - any-glob-to-any-file:
+          - ai21/clients/studio/resources/maestro/*
+          - ai21/models/maestro/*

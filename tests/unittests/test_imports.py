@@ -3,6 +3,7 @@
 from ai21 import *  # noqa: F403
 from ai21 import __all__
 
+
 EXPECTED_ALL = [
     "AI21EnvConfig",
     "AI21Client",
@@ -20,6 +21,8 @@ EXPECTED_ALL = [
     "AsyncAI21BedrockClient",
     "AI21VertexClient",
     "AsyncAI21VertexClient",
+    "AI21LaunchpadClient",
+    "AsyncAI21LaunchpadClient",
 ]
 
 

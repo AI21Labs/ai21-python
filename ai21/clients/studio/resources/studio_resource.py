@@ -129,6 +129,12 @@ class StudioResource(ABC):
         response = self._client.execute_http_request(method="PUT", path=path, body=body or {})
         return _cast_response(response=response, response_cls=response_cls)
 
+    def _patch(
+        self, path: str, response_cls: Optional[ResponseT] = None, body: Optional[Dict[str, Any]] = None
+    ) -> ResponseT | StreamT:
+        response = self._client.execute_http_request(method="PATCH", path=path, body=body or {})
+        return _cast_response(response=response, response_cls=response_cls)
+
     def _delete(self, path: str, response_cls: Optional[ResponseT] = None) -> ResponseT | StreamT:
         response = self._client.execute_http_request(
             method="DELETE",
@@ -178,6 +184,12 @@ class AsyncStudioResource(ABC):
         self, path: str, response_cls: Optional[ResponseT] = None, body: Dict[str, Any] = None
     ) -> ResponseT | AsyncStreamT:
         response = await self._client.execute_http_request(method="PUT", path=path, body=body or {})
+        return _cast_response(response=response, response_cls=response_cls)
+
+    async def _patch(
+        self, path: str, response_cls: Optional[ResponseT] = None, body: Optional[Dict[str, Any]] = None
+    ) -> ResponseT | AsyncStreamT:
+        response = await self._client.execute_http_request(method="PATCH", path=path, body=body or {})
         return _cast_response(response=response, response_cls=response_cls)
 
     async def _delete(self, path: str, response_cls: Optional[ResponseT] = None) -> ResponseT | AsyncStreamT:

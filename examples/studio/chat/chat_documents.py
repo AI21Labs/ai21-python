@@ -42,7 +42,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-mini-1.6-2025-03",
+    model="jamba-mini",
     documents=documents,
 )
 

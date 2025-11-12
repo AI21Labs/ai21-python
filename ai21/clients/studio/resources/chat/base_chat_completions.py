@@ -15,9 +15,9 @@ from ai21.utils.typing import remove_not_given
 
 
 _MODEL_DEPRECATION_WARNING = """
-The 'jamba-1.5-mini' and 'jamba-1.5-large' models are deprecated and will
+The 'jamba-mini-1.6' and 'jamba-large-1.6' models are deprecated and will
 be removed in a future version.
-Please use jamba-mini-1.6-2025-03 or jamba-large-1.6-2025-03 instead.
+Please use jamba-mini or jamba-large instead.
 """
 
 
@@ -28,7 +28,7 @@ class BaseChatCompletions(ABC):
         if not model:
             raise ValueError("model should be provided 'create' method call")
 
-        if model in ["jamba-1.5-mini", "jamba-1.5-large"]:
+        if model in ["jamba-mini-1.6", "jamba-large-1.6"]:
             warnings.warn(
                 _MODEL_DEPRECATION_WARNING,
                 DeprecationWarning,

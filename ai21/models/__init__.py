@@ -8,16 +8,7 @@ from ai21.models.responses.conversational_rag_response import (
     ConversationalRagSource,
 )
 from ai21.models.responses.file_response import FileResponse
-from ai21.models.maestro.run import (
-    Requirement,
-    Budget,
-    Tool,
-    ToolResources,
-    DataSources,
-    FileSearchResult,
-    WebSearchResult,
-    OutputOptions,
-)
+from ai21.models.upload_mode import BatchStatusResponse
 
 __all__ = [
     "ChatMessage",
@@ -30,12 +21,5 @@ __all__ = [
     "FileResponse",
     "ConversationalRagResponse",
     "ConversationalRagSource",
-    "Requirement",
-    "Budget",
-    "Tool",
-    "ToolResources",
-    "DataSources",
-    "FileSearchResult",
-    "WebSearchResult",
-    "OutputOptions",
+    "BatchStatusResponse",
 ]

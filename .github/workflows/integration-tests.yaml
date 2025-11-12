@@ -4,12 +4,6 @@ on:
   push:
     branches:
       - main
-  workflow_dispatch:
-    inputs:
-      commit-to-test:
-        description: "Commit SHA to test"
-        required: true
-        type: string
 
 env:
   POETRY_VERSION: "1.8"
@@ -26,21 +20,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3
-        with:
-          ref: ${{ inputs.commit-to-test }}
-      - name: Set status to pending
-        if: ${{ github.event_name == 'workflow_dispatch' }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: '${{ inputs.commit-to-test }}',
-              state: 'pending',
-              context: 'Integration Tests',
-              description: 'Integration tests are in progress'
-            })
       - name: Install Poetry
         run: |
           pipx install poetry==1.8
@@ -81,29 +60,3 @@ jobs:
           path: junit/test-results-${{ matrix.python-version }}.xml
         # Use always() to always run this step to publish test results when there are test failures
         if: ${{ always() }}
-      - name: Set status to success
-        if: ${{ github.event_name == 'workflow_dispatch' && success() }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: '${{ inputs.commit-to-test }}',
-              state: 'success',
-              context: 'Integration Tests',
-              description: 'Integration tests passed'
-            })
-      - name: Set status to failure
-        if: ${{ github.event_name == 'workflow_dispatch' && failure() }}
-        uses: actions/github-script@v7
-        with:
-          script: |
-            github.rest.repos.createCommitStatus({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              sha: '${{ inputs.commit-to-test }}',
-              state: 'failure',
-              context: 'Integration Tests',
-              description: 'Integration tests failed'
-            })

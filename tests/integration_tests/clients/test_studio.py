@@ -19,9 +19,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
 @pytest.mark.parametrize(
     argnames=["test_file_name"],
     argvalues=[
-        ("tokenization.py",),
         ("chat/chat_completions.py",),
-        ("chat/chat_completions_jamba_instruct.py",),
         ("chat/stream_chat_completions.py",),
         ("chat/chat_documents.py",),
         ("chat/chat_function_calling.py",),
@@ -29,9 +27,7 @@ STUDIO_PATH = Path(__file__).parent.parent.parent.parent / "examples" / "studio"
         ("chat/chat_response_format.py",),
     ],
     ids=[
-        "when_tokenization__should_return_ok",
         "when_chat_completions__should_return_ok",
-        "when_chat_completions_jamba_instruct__should_return_ok",
         "when_stream_chat_completions__should_return_ok",
         "when_chat_completions_with_documents__should_return_ok",
         "when_chat_completions_with_function_calling__should_return_ok",
@@ -58,6 +54,9 @@ def test_studio(test_file_name: str):
         ("conversational_rag/async_conversational_rag.py",),
         ("maestro/run.py",),
         ("maestro/async_run.py",),
+        ("agents/agent_crud.py",),
+        ("agents/agent_run.py",),
+        ("agents/async_agent_run.py",),
     ],
     ids=[
         "when_chat_completions__should_return_ok",
@@ -66,6 +65,9 @@ def test_studio(test_file_name: str):
         "when_async_conversational_rag__should_return_ok",
         "when_maestro_runs__should_return_ok",
         "when_maestro_async_runs__should_return_ok",
+        "when_agent_crud__should_return_ok",
+        "when_agent_run__should_return_ok",
+        "when_async_agent_run__should_return_ok",
     ],
 )
 async def test_async_studio(test_file_name: str):

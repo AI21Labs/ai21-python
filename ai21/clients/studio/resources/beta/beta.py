@@ -1,3 +1,4 @@
+from ai21.clients.studio.resources.agents.agents import Agents
 from ai21.clients.studio.resources.batch.batches import Batches
 from ai21.clients.studio.resources.maestro.maestro import Maestro
 from ai21.clients.studio.resources.studio_conversational_rag import (
@@ -11,6 +12,7 @@ class Beta(StudioResource):
     def __init__(self, client: AI21HTTPClient):
         super().__init__(client)
 
-        self.conversational_rag = StudioConversationalRag(client)
         self.maestro = Maestro(client)
+        self.agents = Agents(client, self.maestro)
+        self.conversational_rag = StudioConversationalRag(client)
         self.batches = Batches(client)

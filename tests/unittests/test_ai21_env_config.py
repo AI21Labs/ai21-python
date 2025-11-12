@@ -4,7 +4,6 @@ from contextlib import contextmanager
 from ai21 import AI21Client
 
 _FAKE_API_KEY = "fake-key"
-os.environ["AI21_API_KEY"] = _FAKE_API_KEY
 
 
 @contextmanager
@@ -15,6 +14,7 @@ def set_env_var(key: str, value: str):
 
 
 def test_env_config__when_set_via_init_and_env__should_be_taken_from_init():
+    os.environ["AI21_API_KEY"] = _FAKE_API_KEY
     client = AI21Client()
     assert client._api_key == _FAKE_API_KEY
 
@@ -25,6 +25,7 @@ def test_env_config__when_set_via_init_and_env__should_be_taken_from_init():
 
 
 def test_env_config__when_set_twice__should_be_updated():
+    os.environ["AI21_API_KEY"] = _FAKE_API_KEY
     client = AI21Client()
 
     assert client._api_key == _FAKE_API_KEY

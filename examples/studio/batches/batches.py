@@ -13,7 +13,7 @@ batch_requests = [
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            "model": "jamba-1.5",
+            "model": "jamba-mini",
             "messages": [{"role": "user", "content": "What is your favorite color?"}],
         },
     },
@@ -22,7 +22,7 @@ batch_requests = [
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            "model": "jamba-1.5",
+            "model": "jamba-mini",
             "messages": [{"role": "user", "content": "Tell me about your hobbies."}],
         },
     },
@@ -31,7 +31,7 @@ batch_requests = [
         "method": "POST",
         "url": "/v1/chat/completions",
         "body": {
-            "model": "jamba-1.5",
+            "model": "jamba-mini",
             "messages": [{"role": "user", "content": "Tell me about your favorite food."}],
         },
     },

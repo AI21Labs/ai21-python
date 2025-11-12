@@ -25,11 +25,11 @@
 - [Installation](#Installation) 💿
 - [Usage - Chat Completions](#Usage)
 - [Maestro](#Maestro)
+- [Agents (Beta)](#Agents-Beta)
 - [Conversational RAG (Beta)](#Conversational-RAG-Beta)
 - [Older Models Support Usage](#Older-Models-Support-Usage)
 - [More Models](#More-Models)
   - [Streaming](#Streaming)
-- [Token Counting](#Token-Counting)
 - [Environment Variables](#Environment-Variables)
 - [Error Handling](#Error-Handling)
 - [Cloud Providers](#Cloud-Providers) ☁️
@@ -82,7 +82,7 @@ messages = [
 
 chat_completions = client.chat.completions.create(
     messages=messages,
-    model="jamba-mini-1.6-2025-03",
+    model="jamba-mini",
 )
 ```
 
@@ -112,7 +112,7 @@ client = AsyncAI21Client(
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-mini-1.6-2025-03",
+        model="jamba-mini",
     )
 
     print(response)
@@ -180,7 +180,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct",
+    model="jamba-large",
     max_tokens=100,
     temperature=0.7,
     top_p=1.0,
@@ -190,7 +190,7 @@ response = client.chat.completions.create(
 print(response)
 ```
 
-Note that jamba-instruct supports async and streaming as well.
+Note that jamba-large supports async and streaming as well.
 
 </details>
 
@@ -212,7 +212,7 @@ client = AI21Client()
 
 response = client.chat.completions.create(
     messages=messages,
-    model="jamba-instruct",
+    model="jamba-large",
     stream=True,
 )
 for chunk in response:
@@ -236,7 +236,7 @@ client = AsyncAI21Client()
 async def main():
     response = await client.chat.completions.create(
         messages=messages,
-        model="jamba-mini-1.6-2025-03",
+        model="jamba-mini",
         stream=True,
     )
     async for chunk in response:
@@ -277,6 +277,61 @@ print()
 ```
 
 For a more detailed example, see maestro [sync](examples/studio/maestro/run.py) and [async](examples/studio/maestro/async_run.py) examples.
+
+---
+
+### Agents (Beta)
+
+AI21 Agents provide a comprehensive way to create, manage, and run your Agents.
+
+```python
+from ai21 import AI21Client
+from ai21.models.agents import BudgetLevel, AgentType
+
+client = AI21Client()
+
+# Run the agent
+run_response = client.beta.agents.runs.create_and_poll(
+    agent_id=agent.id,
+    input=[{"role": "user", "content": "What is 2+2?"}],
+    poll_timeout_sec=120,
+)
+
+print(f"Result: {run_response.result}")
+
+```
+
+#### Agent CRUD Operations
+
+```python
+from ai21 import AI21Client
+from ai21.models.agents import BudgetLevel, AgentType
+
+client = AI21Client()
+
+# Create
+agent = client.beta.agents.create(
+    name="Research Assistant",
+    description="Specialized in research tasks",
+    budget=BudgetLevel.HIGH,
+)
+
+# Read
+retrieved_agent = client.beta.agents.get(agent.id)
+agents_list = client.beta.agents.list()
+
+# Update
+modified_agent = client.beta.agents.modify(
+    agent.id,
+    name="Enhanced Research Assistant",
+    description="Updated with enhanced capabilities",
+)
+
+# Delete
+delete_response = client.beta.agents.delete(agent.id)
+```
+
+For more detailed examples, see agent [CRUD operations](examples/studio/agents/agent_crud.py), [basic runs](examples/studio/agents/agent_run.py), and [async operations](examples/studio/agents/async_agent_run.py) examples.
 
 ---
 
@@ -326,39 +381,6 @@ file_id = client.library.files.create(
 uploaded_file = client.library.files.get(file_id)
 ```
 
-## Token Counting
-
----
-
-By using the `count_tokens` method, you can estimate the billing for a given request.
-
-```python
-from ai21.tokenizers import get_tokenizer
-
-tokenizer = get_tokenizer(name="jamba-tokenizer")
-total_tokens = tokenizer.count_tokens(text="some text")  # returns int
-print(total_tokens)
-```
-
-### Async Usage
-
-```python
-from ai21.tokenizers import get_async_tokenizer
-
-## Your async function code
-#...
-tokenizer = await get_async_tokenizer(name="jamba-tokenizer")
-total_tokens = await tokenizer.count_tokens(text="some text")  # returns int
-print(total_tokens)
-```
-
-Available tokenizers are:
-
-- `jamba-tokenizer`
-- `j2-tokenizer`
-
-For more information on AI21 Tokenizers, see the [documentation](https://github.com/AI21Labs/ai21-tokenizer).
-
 ## Environment Variables
 
 ---
@@ -379,7 +401,7 @@ $ export AI21_LOG_LEVEL=debug
 
 - `AI21_API_KEY` - Your API key. If not set, you must pass it to the client constructor.
 - `AI21_API_VERSION` - The API version. Defaults to `v1`.
-- `AI21_API_HOST` - The API host. Defaults to `https://api.ai21.com/v1/`.
+- `AI21_API_HOST` - The API host. Defaults to `https://api.ai21.com/studio/v1/`.
 - `AI21_TIMEOUT_SEC` - The timeout for API requests.
 - `AI21_NUM_RETRIES` - The maximum number of retries for API requests. Defaults to `3` retries.
 - `AI21_AWS_REGION` - The AWS region to use for AWS clients. Defaults to `us-east-1`.
@@ -609,7 +631,7 @@ and `AsyncAI21AzureClient` clients.
 
 The following models are supported on Azure:
 
-- `jamba-instruct`
+- `jamba-large`
 
 ```python
 from ai21 import AI21AzureClient
@@ -626,7 +648,7 @@ messages = [
 ]
 
 response = client.chat.completions.create(
-  model="jamba-mini-1.6-2025-03",
+  model="jamba-mini",
   messages=messages,
 )
 ```
@@ -650,7 +672,7 @@ messages = [
 
 async def main():
   response = await client.chat.completions.create(
-    model="jamba-instruct",
+    model="jamba-large",
     messages=messages,
   )
 

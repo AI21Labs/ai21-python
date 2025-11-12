@@ -1,6 +1,151 @@
 # CHANGELOG
 
 
+## v4.0.3 (2025-06-16)
+
+### Bug Fixes
+
+- :wrench: introduce `MaestroMessage` ([#298](https://github.com/AI21Labs/ai21-python/pull/298),
+  [`2202f61`](https://github.com/AI21Labs/ai21-python/commit/2202f611332653e399ac710d572b93445be4262a))
+
+* refactor: reorganize imports by moving maestro models to their own module
+
+* refactor: update input type in maestro run methods to use MaestroMessage instead of ChatMessage
+
+* test: add parameterized tests for Maestro input formats in maestro.py
+
+* feat: add async example for multi-message processing
+
+* feat: update async example to handle multi-message input for business proposal
+
+* feat: include requirements result in README example for Maestro runs
+
+* fix: update content formatting in async_run_multi_messages.py for improved readability
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+Co-authored-by: Asaf Joseph Gardin <39553475+Josephasafg@users.noreply.github.com>
+
+### Continuous Integration
+
+- Added masestro labeler ([#299](https://github.com/AI21Labs/ai21-python/pull/299),
+  [`fc872d5`](https://github.com/AI21Labs/ai21-python/commit/fc872d566921b7dce84b0b21fd1b2da32d2b3ec0))
+
+
+## v4.0.2 (2025-06-16)
+
+### Bug Fixes
+
+- :bug: handle maestro input as a list of `ChatMessage`s
+  ([#297](https://github.com/AI21Labs/ai21-python/pull/297),
+  [`3c63bd0`](https://github.com/AI21Labs/ai21-python/commit/3c63bd06ff4bcd02bebfbcba994d78981ce89860))
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
+## v4.0.1 (2025-06-16)
+
+### Bug Fixes
+
+- Raise error when poll_timeout_sec is reached
+  ([#296](https://github.com/AI21Labs/ai21-python/pull/296),
+  [`cd8bc03`](https://github.com/AI21Labs/ai21-python/commit/cd8bc036d4e354846cd28229bea334d1325282f1))
+
+* fix: raise error when poll_timeout_sec is reached
+
+* chore: handle timeout errors in async_run and run examples
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+
+## v4.0.0 (2025-06-11)
+
+### Bug Fixes
+
+- Incomplete URL logging on exception ([#211](https://github.com/AI21Labs/ai21-python/pull/211),
+  [`fd422a5`](https://github.com/AI21Labs/ai21-python/commit/fd422a5aa45c91622c7739a06bc5adee077209a7))
+
+* fix: Incomplete URL logging on exception
+
+* fix: tests
+
+- ♻️ expose poll_for_status function ([#291](https://github.com/AI21Labs/ai21-python/pull/291),
+  [`81f4209`](https://github.com/AI21Labs/ai21-python/commit/81f4209aaf14babe8086f321ef60b5e850ad0791))
+
+* fix: :recycle: expose `poll_for_status` function
+
+* refactor: :recycle: update `poll_for_status` method parameters to use consistent naming convention
+
+* chore: :wrench: update CI configuration to use ubuntu-latest
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+### Refactoring
+
+- Removed ai21-tokenizer dependency ([#294](https://github.com/AI21Labs/ai21-python/pull/294),
+  [`1c80f12`](https://github.com/AI21Labs/ai21-python/commit/1c80f12d77330ac328a40091706446e1e4944955))
+
+* refactor: Removed ai21-tokenizer dependency
+
+* fix: Removed unused test
+
+
+## v3.3.0 (2025-05-25)
+
+### Bug Fixes
+
+- Remove optional `context` parameter from maestro requests
+  ([#288](https://github.com/AI21Labs/ai21-python/pull/288),
+  [`8fbfc9d`](https://github.com/AI21Labs/ai21-python/commit/8fbfc9daa9d856ca7b367bd502b20661aadfc493))
+
+* fix: remove optional parameter from maestro requests
+
+* fix: remove jamba instruct tests
+
+### Documentation
+
+- Update README.md ([#287](https://github.com/AI21Labs/ai21-python/pull/287),
+  [`c0939c4`](https://github.com/AI21Labs/ai21-python/commit/c0939c4fdab19e66526144f2630f534bf7c284bc))
+
+### Features
+
+- :sparkles: Enhance Requirement and Output Options in Maestro
+  ([#289](https://github.com/AI21Labs/ai21-python/pull/289),
+  [`329379f`](https://github.com/AI21Labs/ai21-python/commit/329379ff9f295f0d1f05a962ea19868b490a7544))
+
+* feat: :sparkles: Enhance Requirement and Output Options in Maestro
+
+* chore: :wrench: Include Requirements Result in Maestro Async and Sync Runs examples
+
+* fix: :label: requirements typings
+
+---------
+
+Co-authored-by: benshuk <bens@ai21.com>
+
+- Added launchpad client ([#285](https://github.com/AI21Labs/ai21-python/pull/285),
+  [`08a5b41`](https://github.com/AI21Labs/ai21-python/commit/08a5b4103de9cf61e337b6eb7c9a531c7420894d))
+
+* feat: Added launchpad client
+
+* test: Added imports to test
+
+### Refactoring
+
+- Remove client url creation ([#286](https://github.com/AI21Labs/ai21-python/pull/286),
+  [`05b2e0d`](https://github.com/AI21Labs/ai21-python/commit/05b2e0d9dd792713963891b9c508813217bfce2a))
+
+* refactor: Remove client url creation
+
+* fix: tests
+
+
 ## v3.2.0 (2025-04-28)
 
 ### Bug Fixes

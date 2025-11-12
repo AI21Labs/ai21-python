@@ -100,9 +100,7 @@ class AsyncAI21HTTPClient(BaseHttpClient[httpx.AsyncClient, AsyncStream[Any]]):
             raise exception
 
         if response.status_code != httpx.codes.OK:
-            logger.error(
-                f"Calling {method} {self._base_url} failed with a non-200 response code: {response.status_code}"
-            )
+            logger.error(f"Calling {method} {response.url} failed with a non-200 response code: {response.status_code}")
 
             if stream:
                 details = self._extract_streaming_error_details(response)

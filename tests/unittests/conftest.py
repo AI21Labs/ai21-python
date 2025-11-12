@@ -1,11 +1,12 @@
 import boto3
-import pytest
 import httpx
+import pytest
+
 from google.auth.credentials import Credentials
 from google.auth.transport.requests import Request
 
+from ai21.clients.common.auth.gcp_authorization import GCPAuthorization
 from ai21.clients.vertex.ai21_vertex_client import AI21VertexClient
-from ai21.clients.vertex.gcp_authorization import GCPAuthorization
 
 
 @pytest.fixture

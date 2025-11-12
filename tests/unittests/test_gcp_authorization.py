@@ -2,10 +2,12 @@ from unittest.mock import Mock, patch
 
 import google.auth.exceptions
 import pytest
+
 from google.auth.transport.requests import Request
 
-from ai21.clients.vertex.gcp_authorization import GCPAuthorization
+from ai21.clients.common.auth.gcp_authorization import GCPAuthorization
 from ai21.errors import CredentialsError
+
 
 _TEST_PROJECT_ID = "test-project"
 

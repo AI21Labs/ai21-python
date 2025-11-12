@@ -1,5 +1,4 @@
 from abc import ABC
-
 from ai21.clients.common.maestro.run import BaseMaestroRun
 
 
