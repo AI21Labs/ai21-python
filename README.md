@@ -259,18 +259,22 @@ from ai21 import AI21Client
 client = AI21Client()
 
 run_result = client.beta.maestro.runs.create_and_poll(
-    input="Write a poem about the ocean",
+    input="Tell me about AI21 Maestro",
     requirements=[
         {
             "name": "length requirement",
-            "description": "The length of the poem should be less than 1000 characters",
+            "description": "The length of the response should be less than 2000 characters",
         },
         {
-            "name": "rhyme requirement",
-            "description": "The poem should rhyme",
+            "name": "source requirement",
+            "description": (
+                "Should rely on information from these websites: "
+                "https://www.ai21.com/, https://www.ai21.com/maestro/, "
+                "https://docs.ai21.com/home"
+            ),
         },
     ],
-    include=["requirements_result"]
+    include=["requirements_result"]  # Include additional fields in the result
 )
 ```
 
