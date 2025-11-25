@@ -276,6 +276,8 @@ run_result = client.beta.maestro.runs.create_and_poll(
     ],
     include=["requirements_result"]  # Include additional fields in the result
 )
+
+print(run_result)
 ```
 
 For a more detailed example, see maestro [sync](examples/studio/maestro/run.py) and [async](examples/studio/maestro/async_run.py) examples.
