@@ -78,11 +78,6 @@ class WebSearch(TypedDict, total=False):
     use_cached_pages: Optional[bool]
 
 
-class ToolResources(TypedDict, total=False):
-    file_search: Optional[FileSearch]
-    web_search: Optional[WebSearch]
-
-
 ToolDefinition = Annotated[
     Union[
         HttpTool,

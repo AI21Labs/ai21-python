@@ -1,3 +1,4 @@
+import warnings
 from typing import Any, Dict, get_args, cast
 
 from ai21.types import NotGiven
@@ -30,3 +31,13 @@ def extract_type(type_to_extract: Any) -> type:
         raise RuntimeError(
             f"Expected type {type_to_extract} to have a type argument at index 0 but it did not"
         ) from err
+
+
+def warn_if_tool_resources_in_kwargs(kwargs: Dict[str, Any], stacklevel: int = 3) -> None:
+    if "tool_resources" in kwargs:
+        warnings.warn(
+            "The 'tool_resources' parameter is deprecated and will be removed in a future version. "
+            "Use the 'tools' parameter instead.",
+            DeprecationWarning,
+            stacklevel=stacklevel,
+        )
