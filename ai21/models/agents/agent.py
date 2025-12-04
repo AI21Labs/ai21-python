@@ -5,7 +5,7 @@ from enum import Enum
 from typing import List, Optional
 
 from ai21.models.ai21_base_model import AI21BaseModel
-from ai21.models.maestro.run import Budget, ToolDefinition, ToolResources
+from ai21.models.maestro.run import Budget, ToolDefinition
 
 
 class BudgetLevel(str, Enum):
@@ -54,7 +54,6 @@ class Agent(AI21BaseModel):
     user_id: str
     models: Optional[List[str]] = None
     tools: Optional[List[ToolDefinition]] = None
-    tool_resources: Optional[ToolResources] = None
     requirements: Optional[List[AgentRequirement]] = None
     budget: Optional[Budget] = None
     visibility: Optional[Visibility] = None

@@ -4,7 +4,7 @@ from typing import List
 from ai21.models.agents import Agent
 from ai21.models.agents.agent import AgentRequirement
 from ai21.models.maestro.run import Requirement
-from ai21.utils.typing import remove_not_given
+from ai21.utils.typing import remove_not_given, warn_if_tool_resources_in_kwargs
 
 
 class BaseAgentRun(ABC):
@@ -31,11 +31,12 @@ class BaseAgentRun(ABC):
         agent: Agent,
         **kwargs,
     ):
+        warn_if_tool_resources_in_kwargs(kwargs)
+
         return remove_not_given(
             {
                 "models": agent.models,
                 "tools": agent.tools,
-                "tool_resources": agent.tool_resources,
                 "requirements": self._convert_requirements(agent.requirements),
                 "budget": agent.budget,
                 "response_language": agent.response_language,

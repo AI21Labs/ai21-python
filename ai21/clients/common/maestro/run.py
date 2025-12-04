@@ -11,11 +11,10 @@ from ai21.models.maestro.run import (
     OutputOptions,
     Requirement,
     RunResponse,
-    ToolResources,
     ToolDefinition,
 )
 from ai21.types import NOT_GIVEN, NotGiven
-from ai21.utils.typing import remove_not_given
+from ai21.utils.typing import remove_not_given, warn_if_tool_resources_in_kwargs
 
 
 class BaseMaestroRun(ABC):
@@ -27,19 +26,19 @@ class BaseMaestroRun(ABC):
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven,
         tools: List[ToolDefinition] | NotGiven,
-        tool_resources: ToolResources | NotGiven,
         requirements: List[Requirement] | NotGiven,
         budget: Budget | NotGiven,
         include: List[OutputOptions] | NotGiven,
         response_language: str | NotGiven,
         **kwargs,
     ) -> dict:
+        warn_if_tool_resources_in_kwargs(kwargs)
+
         return remove_not_given(
             {
                 "input": input,
                 "models": models,
                 "tools": tools,
-                "tool_resources": tool_resources,
                 "requirements": requirements,
                 "budget": budget,
                 "include": include,
@@ -55,7 +54,6 @@ class BaseMaestroRun(ABC):
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,
@@ -79,7 +77,6 @@ class BaseMaestroRun(ABC):
         input: str | List[MaestroMessage],
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[ToolDefinition] | NotGiven = NOT_GIVEN,
-        tool_resources: ToolResources | NotGiven = NOT_GIVEN,
         requirements: List[Requirement] | NotGiven = NOT_GIVEN,
         budget: Budget | NotGiven = NOT_GIVEN,
         include: List[OutputOptions] | NotGiven = NOT_GIVEN,

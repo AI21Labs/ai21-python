@@ -13,7 +13,7 @@ from ai21.models.agents import (
 )
 from ai21.models.agents.agent import ResponseLanguage
 from ai21.types import NOT_GIVEN, NotGiven
-from ai21.utils.typing import remove_not_given
+from ai21.utils.typing import remove_not_given, warn_if_tool_resources_in_kwargs
 
 
 class BaseAgents(ABC):
@@ -26,19 +26,19 @@ class BaseAgents(ABC):
         description: str | NotGiven,
         models: List[str] | NotGiven,
         tools: List[Dict[str, Any]] | NotGiven,
-        tool_resources: Dict[str, Any] | NotGiven,
         requirements: List[AgentRequirement] | NotGiven,
         budget: BudgetLevel | NotGiven,
         response_language: ResponseLanguage | NotGiven,
         **kwargs,
     ) -> dict:
+        warn_if_tool_resources_in_kwargs(kwargs)
+
         return remove_not_given(
             {
                 "name": name,
                 "description": description,
                 "models": models,
                 "tools": tools,
-                "tool_resources": tool_resources,
                 "requirements": requirements,
                 "budget": budget,
                 "response_language": response_language,
@@ -53,20 +53,20 @@ class BaseAgents(ABC):
         description: str | NotGiven,
         models: List[str] | NotGiven,
         tools: List[Dict[str, Any]] | NotGiven,
-        tool_resources: Dict[str, Any] | NotGiven,
         requirements: List[AgentRequirement] | NotGiven,
         budget: BudgetLevel | NotGiven,
         visibility: Visibility | NotGiven,
         response_language: ResponseLanguage | NotGiven,
         **kwargs,
     ) -> dict:
+        warn_if_tool_resources_in_kwargs(kwargs)
+
         return remove_not_given(
             {
                 "name": name,
                 "description": description,
                 "models": models,
                 "tools": tools,
-                "tool_resources": tool_resources,
                 "requirements": requirements,
                 "budget": budget,
                 "visibility": visibility,
@@ -85,7 +85,6 @@ class BaseAgents(ABC):
         avatar: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
-        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
         response_language: ResponseLanguage | NotGiven = NOT_GIVEN,
@@ -110,7 +109,6 @@ class BaseAgents(ABC):
         description: str | NotGiven = NOT_GIVEN,
         models: List[str] | NotGiven = NOT_GIVEN,
         tools: List[Dict[str, Any]] | NotGiven = NOT_GIVEN,
-        tool_resources: Dict[str, Any] | NotGiven = NOT_GIVEN,
         requirements: List[AgentRequirement] | NotGiven = NOT_GIVEN,
         budget: BudgetLevel | NotGiven = NOT_GIVEN,
         visibility: Visibility | NotGiven = NOT_GIVEN,
