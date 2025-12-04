@@ -25,7 +25,7 @@ async def main():
             ],
             include=["requirements_result"],
         )
-        print(run_result.result)
+        print(run_result)
     except TimeoutError:
         print("The run timed out")
 
